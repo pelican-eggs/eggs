@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-12T22:24:19-05:00",
+    "exported_at": "2018-02-13T11:13:28-05:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "The FiveM multiplayer server on Pterodactyl.",
@@ -25,7 +25,7 @@
     "variables": [
         {
             "name": "fivem license",
-            "description": "required to start the service.",
+            "description": "Required to start the service. Get your keys at https:\/\/keymaster.fivem.net\/",
             "env_variable": "FIVEM_LICENSE",
             "default_value": "",
             "user_viewable": 1,
