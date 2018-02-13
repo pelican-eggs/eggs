@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-12T22:18:35-05:00",
+    "exported_at": "2018-02-12T22:24:19-05:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "The FiveM multiplayer server on Pterodactyl.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\napk add openssl tar xz curl git --no-cache\r\n\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/446-8a058b67e5f11677c380a330f677e768e2b2a705\/fx.tar.xz\r\n\r\ntar xf fx.tar.xz alpine\/opt\/\r\n\r\nmv alpine\/opt\/cfx-server\/ .\/\r\n\r\nchmod +x .\/cfx-server\/FXServer\r\n\r\nrm -rf fx.tar.xz alpine\/\r\n\r\ncurl https:\/\/hastebin.com\/raw\/lawubemuhe >> server.cfg",
+            "script": "#!\/bin\/ash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\napk add openssl tar xz curl git --no-cache\r\n\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/446-8a058b67e5f11677c380a330f677e768e2b2a705\/fx.tar.xz\r\n\r\ntar xf fx.tar.xz alpine\/opt\/\r\n\r\nmv alpine\/opt\/cfx-server\/ .\/\r\n\r\nchmod +x .\/cfx-server\/FXServer\r\n\r\nrm -rf fx.tar.xz alpine\/\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/GTA\/FiveM\/server.cfg >> server.cfg",
             "container": "alpine:3.7",
             "entrypoint": "ash"
         }
