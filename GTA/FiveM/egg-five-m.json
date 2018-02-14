@@ -27,7 +27,7 @@
             "name": "Server License Key",
             "description": "Key is required to start the service.",
             "env_variable": "FIVEM_LICENSE",
-            "default_value": "null",
+            "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:32"
