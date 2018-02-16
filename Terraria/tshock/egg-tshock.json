@@ -3,10 +3,10 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-16T01:54:29-05:00",
-    "name": "tShock",
+    "exported_at": "2018-02-16T01:48:02-05:00",
+    "name": "tshock",
     "author": "parker@parkervcp.com",
-    "description": "The tShock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
+    "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
     "image": "quay.io\/pterodactyl\/core:mono",
     "startup": "mono TerrariaServer.exe -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -world {{WORLD_NAME}}.wld -autocreate {{WORLD_SIZE}}",
     "config": {
