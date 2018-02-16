@@ -4,7 +4,7 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2018-02-13T23:23:06-05:00",
-    "name": "FXServer Vanilla",
+    "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "The FiveM multiplayer server on Pterodactyl.",
     "image": "quay.io\/pterodactyl\/core:glibc",
