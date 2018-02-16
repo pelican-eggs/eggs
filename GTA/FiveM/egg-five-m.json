@@ -25,7 +25,7 @@
     "variables": [
         {
             "name": "Server License Key",
-            "description": "Key is required to start the service.",
+            "description": "Key is required to start the service. Get your keys at https://keymaster.fivem.net",
             "env_variable": "FIVEM_LICENSE",
             "default_value": "",
             "user_viewable": 1,
