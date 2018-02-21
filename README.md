@@ -24,3 +24,7 @@ The [tShock](https://tshock.co) modded server
 #### Spigot
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.
 (It's noted that building the jar is intensive and time consuming)
+
+### Squad
+#### Squad
+The [Squad](https://joinsquad.com/) dedicated server
