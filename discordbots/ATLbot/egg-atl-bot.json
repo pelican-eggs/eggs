@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-02-20T20:34:53-05:00",
+    "name": "AtlBot",
+    "author": "jfeldt19@gmail.com",
+    "description": "ATLbot in ptero",
+    "image": "aaronstar\/npm",
+    "startup": "npm run start",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"I am ready!\"\r\n}",
+        "logs": "{}",
+        "stop": "^c"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt-get update\r\napt-get install -y unzip\r\nmkdir \/app\r\ncd \/app\r\nwget https:\/\/github.com\/ATLauncher\/discord-bot\/archive\/master.zip\r\nunzip master.zip\r\nrm \/app\/master.zip\r\ncd \/app\/discord-bot-master\/\r\n\/usr\/local\/bin\/npm install --production\r\n\/usr\/local\/bin\/npm run build\r\ncp -r \/app\/discord-bot-master\/. \/mnt\/server",
+            "container": "node:8",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
