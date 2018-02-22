@@ -6,7 +6,7 @@
     "exported_at": "2018-02-20T20:34:53-05:00",
     "name": "AtlBot",
     "author": "jfeldt19@gmail.com",
-    "description": "ATLbot in ptero",
+    "description": "ATLbot in pterodactyl, this is based off https://github.com/ATLauncher/discord-bot made by RyantheAllmighty",
     "image": "aaronstar\/npm",
     "startup": "npm run start",
     "config": {
