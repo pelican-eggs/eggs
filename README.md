@@ -12,7 +12,7 @@ If you are submitting PR's try and keep names and titles the same.
 
 #### Please read the HOWTO.md as it container important information.
 
-## Current Game Eggs
+## Game Eggs
 ### GTA
 #### FiveM
 The [FiveM](https://fivem.net/) GTA 5 dedicated server
@@ -29,3 +29,8 @@ The [tShock](https://tshock.co) modded server
 #### Spigot
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.
 (It's noted that building the jar is intensive and time consuming)
+
+## Bot Eggs
+### Discord
+#### ATLBot
+The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
