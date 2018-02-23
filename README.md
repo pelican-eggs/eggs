@@ -27,8 +27,12 @@ The [tShock](https://tshock.co) modded server
 
 ### Minecraft
 #### Spigot
-This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.
-(It's noted that building the jar is intensive and time consuming)
+This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
+- (It's noted that building the jar is intensive and time consuming)
+
+### Xonotic
+#### xonotic
+The [xonotic](http://www.xonotic.org/) dedicated server.
 
 ## Bot Eggs
 ### Discord
