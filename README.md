@@ -23,7 +23,8 @@ The [Factorio](https://factorio.com/) dedicated server
 
 ### Terraria
 #### tShock
-The [tShock](https://tshock.co) modded server
+The [tShock](https://tshock.co) modded server.
+- This requires a minimum of 1g (1024m) to actually create a map. This will get OOM if you have less.
 
 ### Minecraft
 #### Spigot
@@ -33,6 +34,7 @@ This is a direct fork of the default spigot service with the added benefit of be
 ### Xonotic
 #### xonotic
 The [xonotic](http://www.xonotic.org/) dedicated server.
+- Disk space needs to be
 
 ## Bot Eggs
 ### Discord
