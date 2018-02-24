@@ -28,3 +28,14 @@ This is a direct fork of the default spigot service with the added benefit of be
 ### Squad
 #### Squad
 The [Squad](https://joinsquad.com/) dedicated server
+
+
+### Xonotic
+#### xonotic
+The [xonotic](http://www.xonotic.org/) dedicated server.
+- Disk space needs to be
+
+## Bot Eggs
+### Discord
+#### ATLBot
+The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
