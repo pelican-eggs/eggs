@@ -7,7 +7,12 @@ With that I am also accepting PR's for new service and also updates to the curre
 If you are submitting PR's try and keep names and titles the same.
 
 
-## Current Game Eggs
+## Please read the HOWTO.md before submitting PRs
+
+
+#### Please read the HOWTO.md as it container important information.
+
+## Game Eggs
 ### GTA
 #### FiveM
 The [FiveM](https://fivem.net/) GTA 5 dedicated server
@@ -18,17 +23,13 @@ The [Factorio](https://factorio.com/) dedicated server
 
 ### Terraria
 #### tShock
-The [tShock](https://tshock.co) modded server
+The [tShock](https://tshock.co) modded server.
+- This requires a minimum of 1g (1024m) to actually create a map. This will get OOM if you have less.
 
 ### Minecraft
 #### Spigot
-This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.
-(It's noted that building the jar is intensive and time consuming)
-
-### Squad
-#### Squad
-The [Squad](https://joinsquad.com/) dedicated server
-
+This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
+- (It's noted that building the jar is intensive and time consuming)
 
 ### Xonotic
 #### xonotic
@@ -39,3 +40,7 @@ The [xonotic](http://www.xonotic.org/) dedicated server.
 ### Discord
 #### ATLBot
 The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
+
+### Squad
+#### Squad
+The [Squad](https://joinsquad.com/) dedicated server
