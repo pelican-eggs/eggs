@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-02-17T01:01:02+01:00",
+    "name": "cply.cf : Open TTD",
+    "author": "pj@cply.cf",
+    "description": "OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe.",
+    "image": "quay.io\/cply\/container:openttd",
+    "startup": ".\/openttd -D {{LATEST_SAVE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"dbg: [net] starting listeners for clients\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
