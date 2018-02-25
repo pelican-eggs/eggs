@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-25T18:35:25+02:00",
+    "exported_at": "2018-02-25T21:32:57+02:00",
     "name": "SA-MP",
     "author": "bl4ckspr4y@protonmail.com",
     "description": "SA-MP is a free Massively Multiplayer Online game mod for the PC version of Rockstar Games Grand Theft Auto: San Andreas (tm).",
-    "image": "registry.gitlab.com\/bl4ckspr4y\/pterodactyl_sa-mp:latest",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:samp",
     "startup": ".\/samp03svr",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port {{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
