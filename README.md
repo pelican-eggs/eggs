@@ -36,6 +36,10 @@ This is a direct fork of the default spigot service with the added benefit of be
 This is a direct fork of the default forge service
 - Has a version detection fix for "latest"
 
+#### FTB Packs
+##### FTB Revelation
+[FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)
+
 #### Tekkit Packs
 ##### Hexxit 
 [Hexxit](https://www.technicpack.net/modpack/hexxit.552552)
