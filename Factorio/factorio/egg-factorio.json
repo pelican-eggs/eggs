@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-23T19:59:22-05:00",
+    "exported_at": "2018-02-26T23:08:58-05:00",
     "name": "Factorio",
     "author": "parker@parkervcp.com",
     "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache curl tar xz\r\n\r\nlatest_stable=`curl https:\/\/updater.factorio.com\/get-available-versions | grep stable | grep -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\nlatest_experimental=`curl https:\/\/www.factorio.com\/download-headless\/experimental | grep -m 1 -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\n\r\nif [ -z \"${FACTORIO_VERSION}\" ] || [ \"${FACTORIO_VERSION}\" == \"latest\" ]; then\r\n  DL_VERSION=$latest_stable\r\nelif [ \"${FACTORIO_VERSION}\" == \"experimental\"]; then\r\n  DL_VERSION=$latest_experimental\r\nelse\r\n  DL_VERSION=${FACTORIO_VERSION}\r\nfi\r\n\r\necho \"\\n running 'curl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz' \\n\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz\r\n\r\ntar -xf factorio-${DL_VERSION}.tar.gz --strip-components=1 -C \/mnt\/server\r\n\r\nrm factorio-${DL_VERSION}.tar.gz\r\n\r\nmv data\/map-gen-settings.example.json data\/map-gen-settings.json\r\nmv data\/server-settings.example.json data\/server-settings.json\r\n\r\n.\/bin\/x64\/factorio --create ${SAVE_NAME}",
+            "script": "#!\/bin\/ash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache curl tar xz\r\n\r\nlatest_stable=`curl https:\/\/updater.factorio.com\/get-available-versions | grep stable | grep -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\nlatest_experimental=`curl https:\/\/www.factorio.com\/download-headless\/experimental | grep -m 1 -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\n\r\nif [ -z \"${FACTORIO_VERSION}\" ] || [ \"${FACTORIO_VERSION}\" == \"latest\" ]; then\r\n  DL_VERSION=$latest_stable\r\nelif [ \"${FACTORIO_VERSION}\" == \"experimental\" ]; then\r\n  DL_VERSION=$latest_experimental\r\nelse\r\n  DL_VERSION=${FACTORIO_VERSION}\r\nfi\r\n\r\necho \"\\n running 'curl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz' \\n\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz\r\n\r\ntar -xf factorio-${DL_VERSION}.tar.gz --strip-components=1 -C \/mnt\/server\r\n\r\nrm factorio-${DL_VERSION}.tar.gz\r\n\r\nmv data\/map-gen-settings.example.json data\/map-gen-settings.json\r\nmv data\/server-settings.example.json data\/server-settings.json\r\n\r\n.\/bin\/x64\/factorio --create ${SAVE_NAME}",
             "container": "frolvlad\/alpine-glibc",
             "entrypoint": "ash"
         }
