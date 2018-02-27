@@ -18,6 +18,9 @@ If you are submitting PR's try and keep names and titles the same.
 #### FiveM
 The [FiveM](https://fivem.net/) GTA 5 dedicated server
 
+#### SA:MP
+The [SA:MP](https://www.sa-mp.com/) GTA San Andreas dedicated server
+
 ### Factorio
 #### factorio
 The [Factorio](https://factorio.com/) dedicated server
