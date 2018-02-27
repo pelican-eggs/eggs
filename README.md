@@ -13,6 +13,7 @@ If you are submitting PR's try and keep names and titles the same.
 #### Please read the HOWTO.md as it container important information.
 
 ## Game Eggs
+
 ### GTA
 #### FiveM
 The [FiveM](https://fivem.net/) GTA 5 dedicated server
@@ -27,13 +28,33 @@ The [tShock](https://tshock.co) modded server.
 - This requires a minimum of 1g (1024m) to actually create a map. This will get OOM if you have less.
 
 ### Minecraft
-#### Spigot
+#### Spigot Enhanced
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
 - (It's noted that building the jar is intensive and time consuming)
 
+#### Forge Enhanced
+This is a direct fork of the default forge service
+- Has a version detection fix for "latest"
+
+#### Tekkit Packs
+##### Hexxit 
+[Hexxit](https://www.technicpack.net/modpack/hexxit.552552)
+##### Blightcraft 
+[Blightcraft](https://www.technicpack.net/modpack/blightfall.592618)
+##### Tekkit-Legends 
+[Tekkit Legends](https://www.technicpack.net/modpack/tekkit-legends.735902)
+
+### Minecraft PE
+#### Nukkit
+The [Nukkit](https://nukkit.io/) Minecraft PE server
+
+### Squad
+#### Squad Dedicated
+The [Squad](https://joinsquad.com/) official dedicated server
+
 ### Xonotic
 #### xonotic
-The [xonotic](http://www.xonotic.org/) dedicated server.
+The [xonotic](http://www.xonotic.org/) official dedicated server.
 - Disk space needs to be
 
 ## Bot Eggs
