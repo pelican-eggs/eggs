@@ -40,6 +40,13 @@ This is a direct fork of the default forge service
 - Has a version detection fix for "latest"
 
 #### FTB Packs
+##### Feed The Beast - generic
+[FTB](https://www.feed-the-beast.com/modpacks)
+Generic egg to handle any standard FTB modpack.
+Supply values to 2 variables to use
+- MODPACK_URL:  from the url to the pack https://www.feed-the-beast.com/projects/{MODPACK_URL}
+- MODPACK_VERSION: version of the modpack to install
+
 ##### FTB Revelation
 [FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)
 
