@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-02-28T01:01:31-06:00",
+    "name": "TacoSpigot (PaperSpigot Fork)",
+    "author": "hostmaster@waterfallgaming.net",
+    "description": "A even-higher higher performance PaperSpigot fork that adds new features.",
+    "image": "quay.io\/pterodactyl\/core:java-glibc",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": null,
+        "startup": null,
+        "logs": null,
+        "stop": null
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Bungeecord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSucessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.techcable.net\/job\/TacoSpigot\/${DL_VERSION}\/artifact\/build\/TacoSpigot.jar",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "TacoSpigot Version",
+            "description": "The version of TacoSpigot to download, Use \"latest\" for latest.",
+            "env_variable": "DL_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|between:3,7"
+        }
+    ]
+}
