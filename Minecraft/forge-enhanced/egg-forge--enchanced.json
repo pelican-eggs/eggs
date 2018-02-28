@@ -3,8 +3,8 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-26T14:15:27-05:00",
-    "name": "Forge-Enchanced",
+    "exported_at": "2018-02-27T18:47:17-06:00",
+    "name": "Forge-Enhanced",
     "author": "parker@parkervcp.com",
     "description": "Minecraft Forge Server. Minecraft Forge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other.",
     "image": "quay.io\/pterodactyl\/core:java",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\nGET_VERSIONS=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A1 Latest | grep  -o -e '[1]\\.[0-9][0-9]\\.[0-9] - [0-9][0-9]\\.[0-9][0-9]\\.[0-9]\\.[0-9][0-9][0-9][0-9]')\r\nLATEST_VERSION=$(echo $GET_VERSIONS | sed 's\/ \/\/g')\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$LATEST_VERSION\/forge-$LATEST_VERSION-installer.jar -o installer.jar\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$LATEST_VERSION\/forge-$LATEST_VERSION-universal.jar -o server.jar\r\n\r\njava -jar installer.jar --installServer\r\nrm -rf installer.jar",
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\nGET_VERSIONS=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A1 Latest | grep  -o -e '[1]\\.[0-9][0-9]]\\?\\.\\?[0-9]\\?[0-9] - [0-9][0-9]\\.[0-9][0-9]\\.[0-9]\\?[0-9]\\.[0-9][0-9][0-9][0-9]')\r\nLATEST_VERSION=$(echo $GET_VERSIONS | sed 's\/ \/\/g')\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$LATEST_VERSION\/forge-$LATEST_VERSION-installer.jar -o installer.jar\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$LATEST_VERSION\/forge-$LATEST_VERSION-universal.jar -o server.jar\r\n\r\njava -jar installer.jar --installServer\r\nrm -rf installer.jar",
             "container": "frolvlad\/alpine-oraclejdk8:cleaned",
             "entrypoint": "ash"
         }
