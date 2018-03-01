@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-01T08:35:50-05:00",
+    "exported_at": "2018-03-01T17:26:17-05:00",
     "name": "7 Days to Die",
     "author": "brycea@rapidnetworks.org",
     "description": "Set in a brutally unforgiving post-apocalyptic world overrun by the undead, 7 Days to Die is an open-world game that is a unique combination of first person shooter, survival horror, tower defense, and role-playing games.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login ${steam_user} ${steam_pass} +force_install_dir \/mnt\/server +app_update 320850 +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so",
+            "script": "apt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 294420 +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
