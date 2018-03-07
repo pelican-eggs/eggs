@@ -75,3 +75,7 @@ The [xonotic](http://www.xonotic.org/) official dedicated server.
 ### Discord
 #### ATLBot
 The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
+
+#### parkertron
+My own stupid chat bot [parkertron](https://github.com/parkervcp/parkertron)
+ - Currently runs as the SupportBot in the pterodactyl discord server.
