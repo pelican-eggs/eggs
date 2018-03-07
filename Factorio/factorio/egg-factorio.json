@@ -3,21 +3,21 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-26T23:08:58-05:00",
+    "exported_at": "2018-03-07T00:13:07-05:00",
     "name": "Factorio",
     "author": "parker@parkervcp.com",
     "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
     "image": "quay.io\/pterodactyl\/core:glibc",
     "startup": ".\/bin\/x64\/factorio --port {{SERVER_PORT}} --start-server {{SAVE_NAME}}.zip",
     "config": {
-        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"game_password\": \"{{server.build.env.SERVER_PASS}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
+        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"password\": \"{{server.build.env.SERVER_PASS}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Type changing state from(CreatingGame) to(InGame)\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"factorio-current.log\"\r\n}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache curl tar xz\r\n\r\nlatest_stable=`curl https:\/\/updater.factorio.com\/get-available-versions | grep stable | grep -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\nlatest_experimental=`curl https:\/\/www.factorio.com\/download-headless\/experimental | grep -m 1 -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\n\r\nif [ -z \"${FACTORIO_VERSION}\" ] || [ \"${FACTORIO_VERSION}\" == \"latest\" ]; then\r\n  DL_VERSION=$latest_stable\r\nelif [ \"${FACTORIO_VERSION}\" == \"experimental\" ]; then\r\n  DL_VERSION=$latest_experimental\r\nelse\r\n  DL_VERSION=${FACTORIO_VERSION}\r\nfi\r\n\r\necho \"\\n running 'curl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz' \\n\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz\r\n\r\ntar -xf factorio-${DL_VERSION}.tar.gz --strip-components=1 -C \/mnt\/server\r\n\r\nrm factorio-${DL_VERSION}.tar.gz\r\n\r\nmv data\/map-gen-settings.example.json data\/map-gen-settings.json\r\nmv data\/server-settings.example.json data\/server-settings.json\r\n\r\n.\/bin\/x64\/factorio --create ${SAVE_NAME}",
+            "script": "#!\/bin\/ash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache curl tar xz\r\n\r\nlatest_stable=`curl https:\/\/updater.factorio.com\/get-available-versions | grep stable | grep -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\nlatest_experimental=`curl https:\/\/www.factorio.com\/download-headless\/experimental | grep -m 1 -o -E '([0-9]\\.[0-9][0-9]\\.[0-9][0-9]|[0-9]\\.[0-9][0-9]\\.[0-9])'`\r\n\r\nif [ -z \"${FACTORIO_VERSION}\" ] || [ \"${FACTORIO_VERSION}\" == \"latest\" ]; then\r\n  DL_VERSION=$latest_stable\r\nelif [ \"${FACTORIO_VERSION}\" == \"experimental\" ]; then\r\n  DL_VERSION=$latest_experimental\r\nelse\r\n  DL_VERSION=${FACTORIO_VERSION}\r\nfi\r\n\r\necho -e \"\\n running 'curl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz' \\n\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}.tar.gz\r\n\r\ntar -xf factorio-${DL_VERSION}.tar.gz --strip-components=1 -C \/mnt\/server\r\n\r\nrm factorio-${DL_VERSION}.tar.gz\r\n\r\nif [ -e data\/map-gen-settings.json ]; then\r\n    echo \"map-gen exists\"\r\nelse\r\n    echo \"copying map-gen default settings\"\r\n    mv data\/map-gen-settings.example.json data\/map-gen-settings.json\r\nfi\r\n\r\nif [ -e data\/server-settings.json ]; then\r\n    echo \"server settings exists\"\r\nelse\r\n    echo \"copying server default settings\"\r\n    mv data\/server-settings.example.json data\/server-settings.json\r\nfi\r\n\r\nif [ -e map-settings.json ]; then\r\n    echo \"map settings exists\"\r\nelse\r\n    echo \"copying map default settings\"\r\n    mv data\/map-settings.example.json data\/map-settings.json\r\nfi\r\n\r\nif [ -e ${SAVE_NAME}.zip ]; then\r\n    echo \"save file exists\"\r\nelse\r\n    .\/bin\/x64\/factorio --create ${SAVE_NAME}\r\n    chmod o+w ${SAVE_NAME}.zip\r\nfi",
             "container": "frolvlad\/alpine-glibc",
             "entrypoint": "ash"
         }
