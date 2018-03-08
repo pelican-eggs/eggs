@@ -3,8 +3,8 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-28T00:49:00-06:00",
-    "name": "Waterfall (Bungeecord Fork)",
+    "exported_at": "2018-03-08T01:14:39-06:00",
+    "name": "Waterfall",
     "author": "hostmaster@waterfallgaming.net",
     "description": "Waterfall is a fork of the well-known BungeeCord server teleportation suite.",
     "image": "quay.io\/pterodactyl\/core:java",
