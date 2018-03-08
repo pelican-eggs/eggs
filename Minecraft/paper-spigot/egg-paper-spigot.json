@@ -3,10 +3,10 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-28T00:49:31-06:00",
-    "name": "PaperSpigot (Spigot Fork)",
+    "exported_at": "2018-03-08T01:20:41-06:00",
+    "name": "Paper Spigot",
     "author": "hostmaster@waterfallgaming.net",
-    "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.\r\n\r\nSpigot is the most widely-used modded Minecraft server software in the world. It powers many of the top Minecraft server networks around to ensure they can cope with their huge player base and ensure the satisfaction of their players. Spigot works by reducing and eliminating many causes of lag, as well as adding in handy features and settings that help make your job of server administration easier.",
+    "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
     "image": "quay.io\/pterodactyl\/core:java-glibc",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Bungeecord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSucessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.destroystokyo.com\/job\/Paper\/${DL_VERSION}\/artifact\/paperclip.jar",
+            "script": "#!\/bin\/ash\r\n# Paper Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSucessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.destroystokyo.com\/job\/Paper\/${DL_VERSION}\/artifact\/paperclip.jar",
             "container": "alpine:3.4",
             "entrypoint": "ash"
         }
