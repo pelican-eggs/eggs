@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-08T01:16:59-06:00",
+    "exported_at": "2018-03-08T01:18:25-06:00",
     "name": "Taco Spigot",
     "author": "hostmaster@waterfallgaming.net",
     "description": "A even-higher higher performance PaperSpigot fork that adds new features.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Bungeecord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSucessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.techcable.net\/job\/TacoSpigot\/${DL_VERSION}\/artifact\/build\/TacoSpigot.jar",
+            "script": "#!\/bin\/ash\r\n# Taco Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSucessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.techcable.net\/job\/TacoSpigot\/${DL_VERSION}\/artifact\/build\/TacoSpigot.jar",
             "container": "alpine:3.4",
             "entrypoint": "ash"
         }
