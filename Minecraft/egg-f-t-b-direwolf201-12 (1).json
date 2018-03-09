@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-03-09T16:17:33-05:00",
+    "name": "FTB Direwolf20 1.12",
+    "author": "fabrizio@lamanna.tech",
+    "description": "Direwold20 is a general all-purpose pack that is designed for solo play as well as small and medium population servers. This pack contains a mix of magic, tech and exploration mods, and is the largest pack ever built and released by the Feed The Beast Team.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl --no-cache\r\n\r\nBASEURL=https:\/\/www.feed-the-beast.com\/projects\/ftb-presents-direwolf20-1-12\/files\r\nPATTERN=\"(projects\\\/ftb-presents-direwolf20-1-12\\\/files\\\/\\d{7,})\"\r\nID=`curl -sl ${BASEURL}| grep -A2 ${MODPACK_VERSION} | grep -oE \"${PATTERN}\"`\r\nSECONDURL=https:\/\/www.feed-the-beast.com\/${ID}\r\nGOOD_ID=`curl -sl ${SECONDURL} | grep -B2 ${MODPACK_VERSION}-Server.zip | grep -oE \"${PATTERN}\"`\r\n\r\nDL_URL=https:\/\/www.feed-the-beast.com\/${GOOD_ID}\/download\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L ${DL_URL} -o FTB+Presents+Direwolf20+1.12-1.12.2-${MODPACK_VERSION}-Server.zip\r\n\r\nunzip -o FTB+Presents+Direwolf20+1.12-1.12.2-${MODPACK_VERSION}-Server.zip\r\n\r\nrm -rf FTB+Presents+Direwolf20+1.12-1.12.2-${MODPACK_VERSION}-Server.zip\r\n\r\nmv FTBserver-*.jar server.jar\r\n\r\nsh .\/FTBInstall.sh",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack Version",
+            "description": "",
+            "env_variable": "MODPACK_VERSION",
+            "default_value": "1.9.0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Jar File",
+            "description": "",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        }
+    ]
+}

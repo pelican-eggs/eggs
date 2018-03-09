@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-03-09T16:17:26-05:00",
+    "name": "FTB SkyFactory 3",
+    "author": "fabrizio@lamanna.tech",
+    "description": "It's skyblock like you've never seen it before! High tech mods and  full automation! Sky Factory starts the player in the void with nothing but a tree and a *single* piece of dirt between you and certain death! Version 3 adds a variety of new mods to the pack and gives the player much more choice than ever before.  Pick up your achievement book today and start your journey!",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl --no-cache\r\n\r\nBASEURL=https:\/\/www.feed-the-beast.com\/projects\/ftb-presents-skyfactory-3\/files\r\nPATTERN=\"(projects\\\/ftb-presents-skyfactory-3\\\/files\\\/\\d{7,})\"\r\nID=`curl -sl ${BASEURL}| grep -A2 ${MODPACK_VERSION} | grep -oE \"${PATTERN}\"`\r\nSECONDURL=https:\/\/www.feed-the-beast.com\/${ID}\r\nGOOD_ID=`curl -sl ${SECONDURL} | grep -B2 Server_${MODPACK_VERSION}.zip | grep -oE \"${PATTERN}\"`\r\n\r\nDL_URL=https:\/\/www.feed-the-beast.com\/${GOOD_ID}\/download\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L ${DL_URL} -o FTBPresentsSkyfactory3Server_${MODPACK_VERSION}.zip\r\n\r\nunzip -o FTBPresentsSkyfactory3Server_${MODPACK_VERSION}.zip\r\n\r\nrm -rf FTBPresentsSkyfactory3Server_${MODPACK_VERSION}.zip\r\n\r\nmv FTBserver-*.jar server.jar\r\n\r\nsh .\/FTBInstall.sh",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack Version",
+            "description": "",
+            "env_variable": "MODPACK_VERSION",
+            "default_value": "3.0.15",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Jar File",
+            "description": "",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        }
+    ]
+}

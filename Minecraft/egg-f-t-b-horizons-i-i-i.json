@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-03-09T16:17:23-05:00",
+    "name": "FTB Horizons III",
+    "author": "fabrizio@lamanna.tech",
+    "description": "Horizons III is the sequel to the original Horizons and Horizons: Daybreaker, but updated and remastered for 1.12.2. The Horizons series is created to showcase some lesser-known mods in the Minecraft world that don\u2019t often get put into larger FTB packs. It aims to show off new mods to the realm of FTB, such as Astral Sorcery, Cyclic, EvilCraft, Integrated Dynamics, Silent Gems and The Lost Cities, just to name a few. Other commonly used mods are added in to fill content gaps where needed to better round out the player experience. The mods are left as default as possible to match resources and information found online to help you along the way.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl --no-cache\r\n\r\nBASEURL=https:\/\/www.feed-the-beast.com\/projects\/ftb-horizons-iii\/files\r\nPATTERN=\"(projects\\\/ftb-horizons-iii\\\/files\\\/\\d{7,})\"\r\nID=`curl -sl ${BASEURL}| grep -A2 ${MODPACK_VERSION} | grep -oE \"${PATTERN}\"`\r\nSECONDURL=https:\/\/www.feed-the-beast.com\/${ID}\r\nGOOD_ID=`curl -sl ${SECONDURL} | grep -B2 Server_${MODPACK_VERSION}.zip | grep -oE \"${PATTERN}\"`\r\n\r\nDL_URL=https:\/\/www.feed-the-beast.com\/${GOOD_ID}\/download\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L ${DL_URL} -o FTBHorizonsIIIServer_${MODPACK_VERSION}.zip\r\n\r\nunzip -o FTBHorizonsIIIServer_${MODPACK_VERSION}.zip\r\n\r\nrm -rf FTBHorizonsIIIServer_${MODPACK_VERSION}.zip\r\n\r\nmv FTBserver-*.jar server.jar\r\n\r\nsh .\/FTBInstall.sh",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack Version",
+            "description": "",
+            "env_variable": "MODPACK_VERSION",
+            "default_value": "1.0.9",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Jar File",
+            "description": "",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        }
+    ]
+}
