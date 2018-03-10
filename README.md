@@ -53,8 +53,8 @@ Supply values to 2 variables to use
 #### Tekkit Packs
 ##### Hexxit 
 [Hexxit](https://www.technicpack.net/modpack/hexxit.552552)
-##### Blightcraft 
-[Blightcraft](https://www.technicpack.net/modpack/blightfall.592618)
+##### Blightfall 
+[Blightfall](https://www.technicpack.net/modpack/blightfall.592618)
 ##### Tekkit-Legends 
 [Tekkit Legends](https://www.technicpack.net/modpack/tekkit-legends.735902)
 
@@ -75,3 +75,7 @@ The [xonotic](http://www.xonotic.org/) official dedicated server.
 ### Discord
 #### ATLBot
 The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
+
+#### parkertron
+My own stupid chat bot [parkertron](https://github.com/parkervcp/parkertron)
+ - Currently runs as the SupportBot in the pterodactyl discord server.
