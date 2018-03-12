@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-07T00:13:07-05:00",
+    "exported_at": "2018-03-11T23:34:09-04:00",
     "name": "Factorio",
     "author": "parker@parkervcp.com",
     "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
     "image": "quay.io\/pterodactyl\/core:glibc",
     "startup": ".\/bin\/x64\/factorio --port {{SERVER_PORT}} --start-server {{SAVE_NAME}}.zip",
     "config": {
-        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"password\": \"{{server.build.env.SERVER_PASS}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"game_password\": \"{{server.build.env.SERVER_PASS}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type changing state from(CreatingGame) to(InGame)\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"factorio-current.log\"\r\n}",
         "stop": "^C"
