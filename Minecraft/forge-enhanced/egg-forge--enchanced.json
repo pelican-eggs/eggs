@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-27T18:47:17-06:00",
-    "name": "Forge-Enhanced",
-    "author": "parker@parkervcp.com",
+    "exported_at": "2018-03-13T02:25:09-05:00",
+    "name": "Forge Minecraft",
+    "author": "support@pterodactyl.io",
     "description": "Minecraft Forge Server. Minecraft Forge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other.",
-    "image": "quay.io\/pterodactyl\/core:java",
+    "image": "quay.io\/pterodactyl\/core:java-glibc",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
@@ -17,8 +17,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\nGET_VERSIONS=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A1 Latest | grep  -o -e '[1]\\.[0-9][0-9]]\\?\\.\\?[0-9]\\?[0-9] - [0-9][0-9]\\.[0-9][0-9]\\.[0-9]\\?[0-9]\\.[0-9][0-9][0-9][0-9]')\r\nLATEST_VERSION=$(echo $GET_VERSIONS | sed 's\/ \/\/g')\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$LATEST_VERSION\/forge-$LATEST_VERSION-installer.jar -o installer.jar\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$LATEST_VERSION\/forge-$LATEST_VERSION-universal.jar -o server.jar\r\n\r\njava -jar installer.jar --installServer\r\nrm -rf installer.jar",
-            "container": "frolvlad\/alpine-oraclejdk8:cleaned",
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${FORGE_VERSION}\" ] || [ \"${FORGE_VERSION}\" == \"latest\" ] || [ \"${FORGE_VERSION}\" == \"recommended\" ]; then\r\n    apk add pcre\r\n    VERSION=$(curl -SsLo - http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/promotions_slim.json | grep -Po '\"${MINECRAFT_VERSION}-${FORGE-VERSION}\": *\\K\"[^\"]*\"' | tr -d \\\")\r\nelse \r\n    VERSION=${FORGE_VERSION}\r\nfi\r\n\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$VERSION\/forge-${MINECRAFT_VERSION}-$VERSION-installer.jar -o installer.jar\r\ncurl -sS http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$VERSION\/forge-${MINECRAFT_VERSION}-$VERSION-universal.jar -o server.jar\r\n\r\njava -jar installer.jar --installServer\r\nrm -rf installer.jar",
+            "container": "openjdk:apline",
             "entrypoint": "ash"
         }
     },
@@ -31,6 +31,24 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Minecraft Version",
+            "description": "The version of Minecraft the forge install should be for.\r\n\r\nEX: \"1.12.2\" or \"1.10\"",
+            "env_variable": "MINECRAFT_VERSION",
+            "default_value": "1.12.2",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:(\\d(?:\\.?))|max:8"
+        },
+        {
+            "name": "Forge Version",
+            "description": "Forge version to install. This can be an explicit version OR latest\/recommended. \r\n\r\nWarning: Not all Minecraft Versions have a latest or recommended. \r\n\r\nCheck Here: http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/promotions_slim.json",
+            "env_variable": "FORGE_VERSION",
+            "default_value": "recommended",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:40"
         }
     ]
 }
