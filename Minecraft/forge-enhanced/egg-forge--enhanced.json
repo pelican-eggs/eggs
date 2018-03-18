@@ -5,7 +5,7 @@
     },
     "exported_at": "2018-03-13T02:25:09-05:00",
     "name": "Forge Minecraft",
-    "author": "support@pterodactyl.io",
+    "author": "hostmaster@waterfallgaming.net",
     "description": "Minecraft Forge Server. Minecraft Forge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other.",
     "image": "quay.io\/pterodactyl\/core:java-glibc",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
