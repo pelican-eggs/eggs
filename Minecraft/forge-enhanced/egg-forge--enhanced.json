@@ -4,7 +4,7 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2018-03-19T01:01:29-04:00",
-    "name": "Forge-Enchanced",
+    "name": "Forge-Enhanced",
     "author": "parker@parkervcp.com",
     "description": "Minecraft Forge Server. Minecraft Forge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other.",
     "image": "quay.io\/pterodactyl\/core:java",
