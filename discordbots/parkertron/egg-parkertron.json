@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-07T08:53:21-05:00",
+    "exported_at": "2018-03-21T23:58:08-04:00",
     "name": "parkertron",
     "author": "parker@parkervcp.com",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# parkertron Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nexport GOPATH=$HOME\/go\r\nexport PATH=$GOROOT\/bin:$GOPATH\/bin:$PATH\r\n\r\ncd\r\n\r\nmkdir -p go\/bin go\/src\r\n\r\napk add --no-cache --update go git curl lua-stdlib lua musl-dev g++ libc-dev tesseract-ocr tesseract-ocr-dev\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/golang\/dep\/master\/install.sh | sh\r\n\r\ncd go\/src\/\r\n\r\ngit clone -b pterodactyl https:\/\/github.com\/parkervcp\/parkertron.git\r\n\r\ncd parkertron\/\r\n\r\ndep ensure\r\n\r\ngo build \r\n\r\ncp parkertron \/mnt\/server\/\r\ncp -r configs\/ \/mnt\/server\/",
+            "script": "#!\/bin\/ash\r\n# parkertron Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nexport GOPATH=$HOME\/go\r\nexport PATH=$GOROOT\/bin:$GOPATH\/bin:$PATH\r\n\r\ncd\r\n\r\nmkdir -p go\/bin go\/src\r\n\r\napk add --no-cache --update go git curl lua-stdlib lua musl-dev g++ libc-dev tesseract-ocr tesseract-ocr-dev\r\n\r\necho \"installing dep for golang dependancies\"\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/golang\/dep\/master\/install.sh | sh\r\n\r\ncd go\/src\/\r\n\r\necho \"pulling the parkertron pterodactyl branch\"\r\n\r\ngit clone -b pterodactyl https:\/\/github.com\/parkervcp\/parkertron.git\r\n\r\ncd parkertron\/\r\n\r\ndep ensure\r\n\r\necho \"building parkertron\"\r\n\r\ngo build \r\n\r\necho \"build complete copying parkertron and example configs over\"\r\n\r\ncp parkertron \/mnt\/server\/\r\ncp -r configs\/ \/mnt\/server\/\r\n\r\necho \"Install complete. If you watched this. Congrats.\"",
             "container": "alpine:3.7",
             "entrypoint": "ash"
         }
