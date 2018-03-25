@@ -25,6 +25,10 @@ The [SA:MP](https://www.sa-mp.com/) GTA San Andreas dedicated server
 #### factorio
 The [Factorio](https://factorio.com/) dedicated server
 
+### RVR4
+#### Arma 3
+The [Arma 3](https://arma3.com/) dedicated server
+
 ### Terraria
 #### tShock
 The [tShock](https://tshock.co) modded server.
