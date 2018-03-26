@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-14T15:06:47-04:00",
+    "exported_at": "2018-03-26T13:04:05-04:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "The FiveM multiplayer server on Pterodactyl.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\napk add openssl tar xz curl git --no-cache\r\n\r\necho \"cloning citizenfx files\"\r\n\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading the fivem server files\"\r\n\r\nwget https:\/\/m-84g4dtu6fd76.runkit.sh\/?q=linux -O fx.tar.xz\r\n\r\necho \"Extracting fivem files\"\r\n\r\ntar xf fx.tar.xz alpine\/opt\/\r\n\r\nmv alpine\/opt\/cfx-server\/ .\/\r\n\r\nchmod +x .\/cfx-server\/FXServer\r\n\r\nrm -rf fx.tar.xz alpine\/\r\n\r\necho \"Downloading default fivem config\"\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/GTA\/FiveM\/server.cfg >> server.cfg",
+            "script": "#!\/bin\/ash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\napk add openssl tar xz curl git --no-cache\r\n\r\necho \"cloning citizenfx files\"\r\n\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading the latest fivem server files\"\r\nlatest_fivem_url=`curl https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/ | tail -3 | head -1 | cut -d'\"' -f2`\r\n\r\necho -e \"pulling files from https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\"\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\r\n\r\necho \"Extracting fivem files\"\r\n\r\ntar xf fx.tar.xz alpine\/opt\/\r\n\r\nmv alpine\/opt\/cfx-server\/ .\/\r\n\r\nchmod +x .\/cfx-server\/FXServer\r\n\r\nrm -rf fx.tar.xz alpine\/\r\n\r\necho \"Downloading default fivem config\"\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/GTA\/FiveM\/server.cfg >> server.cfg",
             "container": "alpine:3.7",
             "entrypoint": "ash"
         }
