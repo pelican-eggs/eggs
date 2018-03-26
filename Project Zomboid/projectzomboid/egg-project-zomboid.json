@@ -1,0 +1,117 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-03-26T10:32:40-05:00",
+    "name": "Project Zomboid",
+    "author": "support@pterodactyl.io",
+    "description": "The vanilla Project Zomboid dedicated server. After installation, your game server will need to be restarted once after starting for the first time. This will ensure it correctly updates config files as needed.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/start-server.sh -servername {{SERVER_NAME}} -adminusername {{ADMIN_USER}} -adminpassword {{ADMIN_PASSWORD}} -cachedir=\/home\/container\/pzserver\/",
+    "config": {
+        "files": "{\r\n    \"pzserver\/Server\/YourServer.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"PVP\": \"{{server.build.env.PVP}}\",\r\n            \"DefaultPort\": \"{{server.build.default.port}}\",\r\n            \"Mods\": \"{{server.build.env.MOD_NAMES}}\",\r\n            \"WorkshopItems\": \"{{server.build.env.MOD_IDS}}\",\r\n            \"Public\": \"true\",\r\n            \"PublicName\": \"{{server.build.env.PUBLIC_NAME}}\",\r\n            \"PublicDescription\": \"{{server.build.env.PUBLIC_DESC}}\",\r\n            \"ServerWelcomeMessage\": \"{{server.build.env.MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server Steam ID\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates rng-tools\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\nmkdir \/home\/container\/pzserver\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/home\/container +app_update ${SRCDS_APPID} +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "380870",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Server File Name",
+            "description": "Title of the server. Changing this will change how it show's in the server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "YourServer",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Admin Password",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "admin",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Admin Username",
+            "description": "Admin username for managing the server from within the game.",
+            "env_variable": "ADMIN_USER",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:25"
+        },
+        {
+            "name": "Public Server Name",
+            "description": "Public name of the server, as seen in the MOTD and server browser.",
+            "env_variable": "PUBLIC_NAME",
+            "default_value": "Name",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Public Server Description",
+            "description": "Server description as seen in the motd and server browser.",
+            "env_variable": "PUBLIC_DESC",
+            "default_value": "Description",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "MOTD",
+            "description": "Server welcome message",
+            "env_variable": "MOTD",
+            "default_value": "Welcome to the server!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:250"
+        },
+        {
+            "name": "Mod Names",
+            "description": "The full name (With capitalization) of any mods you want the server to load.\r\n - Multiple mods should be separated by a comma ONLY. \r\n - Leave as \"null\" if you are using no mods.",
+            "env_variable": "MOD_NAMES",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|max:60"
+        },
+        {
+            "name": "Mod Workshop ID's",
+            "description": "These are the mods you want to have the server download so they can be loaded via the \"Mod Name\" variable.\r\nIf you want the mod to load, both  variables must have the related mod information in it. Order does not matter.\r\n - Multiple mods should be separated by a comma ONLY. \r\n - Leave as \"null\" if you are using no mods.",
+            "env_variable": "MOD_IDS",
+            "default_value": "null",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|max:60"
+        },
+        {
+            "name": "PVP Allowed?",
+            "description": "Do you want to allow for PVP on the server? True or False only.",
+            "env_variable": "PVP",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
