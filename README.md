@@ -73,6 +73,7 @@ The [xonotic](http://www.xonotic.org/) official dedicated server.
 
 ## Bot Eggs
 ### Discord
+
 #### ATLBot
 The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
 
@@ -83,3 +84,6 @@ My own stupid chat bot [parkertron](https://github.com/parkervcp/parkertron)
 #### pixel-bot
 [pixel-bot](https://github.com/Ispira/pixel-bot)
  - More of a reason/way to test a python container.
+
+#### Sinusbot
+TS3 and Discord music bot. [sinusbot](https://www.sinusbot.com/)
