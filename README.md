@@ -69,7 +69,7 @@ The [Squad](https://joinsquad.com/) official dedicated server
 ### Xonotic
 #### xonotic
 The [xonotic](http://www.xonotic.org/) official dedicated server.
-- Disk space needs to be
+- Disk space needs to be at least 1 gig for the full package.
 
 ## Bot Eggs
 ### Discord
@@ -79,3 +79,7 @@ The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
 #### parkertron
 My own stupid chat bot [parkertron](https://github.com/parkervcp/parkertron)
  - Currently runs as the SupportBot in the pterodactyl discord server.
+
+#### pixel-bot
+[pixel-bot](https://github.com/Ispira/pixel-bot)
+ - More of a reason/way to test a python container.
