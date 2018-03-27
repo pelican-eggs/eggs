@@ -3,15 +3,15 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-04T21:25:08+01:00",
+    "exported_at": "2018-03-27T15:39:54+02:00",
     "name": "Sinusbot",
     "author": "ki2007@damw.eu",
     "description": "Musicbot for Discord and Teamspeak.",
-    "image": "quay.io\/ki2007\/pterodactyl-images:sinusbot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:sinusbot",
     "startup": ".\/sinusbot --override-password=\"${OVERRIDE_PASSWORD}\"",
     "config": {
         "files": "{\r\n    \"config.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ListenPort\": \"ListenPort = {{server.build.default.port}}\",\r\n            \"ListenHost\": \"ListenHost = \\\"0.0.0.0\\\"\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"NOTICE You may now configure and launch the bots from the webinterface\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Initialization complete\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
     },
