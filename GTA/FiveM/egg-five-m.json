@@ -3,52 +3,34 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-13T23:23:06-05:00",
+    "exported_at": "2018-03-26T13:04:05-04:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "The FiveM multiplayer server on Pterodactyl.",
     "image": "quay.io\/pterodactyl\/core:glibc",
     "startup": ".\/cfx-server\/FXServer +exec server.cfg +set sv_licenseKey {{FIVEM_LICENSE}} +set citizen_dir \/home\/container\/cfx-server\/citizen",
     "config": {
-        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.HOSTNAME}}\\\"\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_CLIENTS}}\",\r\n            \"sv_licenseKey\": \"sv_licenseKey {{server.build.env.FIVEM_LICENSE}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"server_data\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server license key authentication succeeded. Welcome!\"\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\napk add openssl tar xz curl git --no-cache\r\n\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/446-8a058b67e5f11677c380a330f677e768e2b2a705\/fx.tar.xz\r\n\r\ntar xf fx.tar.xz alpine\/opt\/\r\n\r\nmv alpine\/opt\/cfx-server\/ .\/\r\n\r\nchmod +x .\/cfx-server\/FXServer\r\n\r\nrm -rf fx.tar.xz alpine\/\r\n\r\ncurl https:\/\/hastebin.com\/raw\/lawubemuhe >> server.cfg",
+            "script": "#!\/bin\/ash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\napk add openssl tar xz curl git --no-cache\r\n\r\necho \"cloning citizenfx files\"\r\n\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/mnt\/server\/\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading the latest fivem server files\"\r\nlatest_fivem_url=`curl https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/ | tail -3 | head -1 | cut -d'\"' -f2`\r\n\r\necho -e \"pulling files from https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\"\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\r\n\r\necho \"Extracting fivem files\"\r\n\r\ntar xf fx.tar.xz alpine\/opt\/\r\n\r\nmv alpine\/opt\/cfx-server\/ .\/\r\n\r\nchmod +x .\/cfx-server\/FXServer\r\n\r\nrm -rf fx.tar.xz alpine\/\r\n\r\necho \"Downloading default fivem config\"\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/GTA\/FiveM\/server.cfg >> server.cfg",
             "container": "alpine:3.7",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "Server License Key",
-            "description": "Key is required to start the service. Get your keys at https://keymaster.fivem.net",
+            "name": "fivem license",
+            "description": "Required to start the service. Get your keys at https:\/\/keymaster.fivem.net\/",
             "env_variable": "FIVEM_LICENSE",
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:32"
-        },
-        {
-            "name": "Hostname",
-            "description": "The name of your server as it appears in the server list.",
-            "env_variable": "HOSTNAME",
-            "default_value": "My FX Server",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:64"
-        },
-        {
-            "name": "Max Players",
-            "description": "Maximum amount of players at one time.",
-            "env_variable": "MAX_CLIENTS",
-            "default_value": "31",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|numeric|max:31"
         }
     ]
 }

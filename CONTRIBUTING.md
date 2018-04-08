@@ -2,12 +2,12 @@
 
 ## General rules
 
-1. Keep it simple.
+1. Keep it simple.  
     We don't need 8 miles of install script
-2. Keep it Small.
+2. Keep it Small.  
     Only use what is absolutely needed.
-3. Try to stay in the stock containers.
-    If you need something in a container PR it to [my container repo](https://github.com/parkervcp/Containers) where I can review and pull up to the main repo.
+3. Try to stay in the stock containers.  
+    If you need something in a container PR it to [my image repo](https://github.com/parkervcp/images) where I can review and pull up to the main repo.
 
 ## Step 1.
 #### Be aware of the pterodactyl install process.
