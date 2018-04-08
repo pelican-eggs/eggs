@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-04-08T03:01:49-04:00",
+    "exported_at": "2018-04-08T03:09:47-04:00",
     "name": "Hurtworld",
     "author": "brycea@rapidnetworks.org",
     "description": "Hurtworld is a hardcore multiplayer survival FPS with a focus on deep survival progression that doesn't become trivial once you establish some basic needs. Built for hardcore gamers, Hurtworld aims to punish.",
@@ -11,7 +11,7 @@
     "startup": ".\/Hurtworld.x86_64 -batchmode -nographics -exec \"host {{SERVER_PORT}};queryport {{QUERY_PORT}};maxplayers {{MAX_PLAYERS}};servername {{HOSTNAME}}\" -logfile output.txt",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Mono config path = '\/home\/container\/Hurtworld_Data\/Mono\/etc'\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Found path: \/home\/container\/Hurtworld.x86_64\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
     },
