@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-27T14:57:10+01:00",
+    "exported_at": "2018-04-21T23:00:00+01:00",
     "name": "Arma 3",
     "author": "daave@aaathats3as.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
@@ -25,7 +25,7 @@
     "variables": [
         {
             "name": "Update Server",
-            "description": "Set to 1 to update the server, otherwise keep at 0",
+            "description": "Set this to `1` to update the server, otherwise, keep at `0`.",
             "env_variable": "UPDATE",
             "default_value": "0",
             "user_viewable": 1,
@@ -93,7 +93,7 @@
             "default_value": "",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|string"
+            "rules": "nullable|string"
         },
         {
             "name": "STEAM_PASS",
@@ -102,7 +102,7 @@
             "default_value": "",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|string"
+            "rules": "nullable|string"
         }
     ]
 }
