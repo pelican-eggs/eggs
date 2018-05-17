@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-05-17T14:33:08+02:00",
+    "exported_at": "2018-05-17T14:49:19+02:00",
     "name": "PixARK",
     "author": "hello@venatus.digital",
     "description": "A simple Docker container with Wine to run PixARK using Pterodactyl Panel",
@@ -74,6 +74,15 @@
             "env_variable": "CUBEPORT",
             "default_value": "",
             "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,4"
+        },
+        {
+            "name": "App ID",
+            "description": "PixARK Source App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "824360",
+            "user_viewable": 0,
             "user_editable": 0,
             "rules": "required|numeric|digits_between:1,4"
         }
