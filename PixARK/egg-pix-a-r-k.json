@@ -7,7 +7,7 @@
     "name": "PixARK",
     "author": "hello@venatus.digital",
     "description": "A simple Docker container with Wine to run PixARK using Pterodactyl Panel",
-    "image": "venatusdigital\/pterodactyl-pixark",
+    "image": "venatusdigital\/pterodactyl-pixark:latest",
     "startup": "wine64 .\/ShooterGame\/Binaries\/Win64\/PixARKServer.exe CubeWorld_Light?listen?MaxPlayers={{MAX_PLAYERS}}?Port={{SERVER_PORT}}?QueryPort={{QPORT}}?RCONPort={{RCPORT}}?ServerPassword={{ARK_PASSWORD}}?ServerAdminPassword={{ARK_ADMIN_PASSWORD}}?CULTUREFORCOOKING=en -NoBattlEye -CubePort={{CUBEPORT}} -cubeworld=world -nosteamclient -NoHangDetection -game -server -log",
     "config": {
         "files": "{}",
@@ -57,7 +57,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|numeric|digits_between:1,4"
+            "rules": "required|numeric|digits_between:1,5"
         },
         {
             "name": "RCON Port",
@@ -66,7 +66,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|numeric|digits_between:1,4"
+            "rules": "required|numeric|digits_between:1,5"
         },
         {
             "name": "Cube Port",
@@ -75,7 +75,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|numeric|digits_between:1,4"
+            "rules": "required|numeric|digits_between:1,5"
         },
         {
             "name": "App ID",
@@ -84,7 +84,7 @@
             "default_value": "824360",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|numeric|digits_between:1,4"
+            "rules": "required|numeric"
         }
     ]
 }
