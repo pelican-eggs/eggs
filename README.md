@@ -15,8 +15,9 @@ If you are submitting PR's try and keep names and titles the same.
 ## Game Eggs
 
 ### GTA
-#### FiveM
+#### FiveM 
 The [FiveM](https://fivem.net/) GTA 5 dedicated server
+- Only installs latest version versions are no selectable.
 
 #### SA:MP
 The [SA:MP](https://www.sa-mp.com/) GTA San Andreas dedicated server
@@ -74,14 +75,15 @@ The [xonotic](http://www.xonotic.org/) official dedicated server.
 ## Bot Eggs
 ### Discord
 
-#### ATLBot
+#### ATLBot - NodeJS
 The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
 
-#### parkertron
-My own stupid chat bot [parkertron](https://github.com/parkervcp/parkertron)
+#### parkertron - Golang (custom image)
+My own chat bot [parkertron](https://github.com/parkervcp/parkertron)
  - Currently runs as the SupportBot in the pterodactyl discord server.
+ - Requires you to set up the yaml fils before it can start properly.
 
-#### pixel-bot
+#### pixel-bot - Python
 [pixel-bot](https://github.com/Ispira/pixel-bot)
  - More of a reason/way to test a python container.
 
