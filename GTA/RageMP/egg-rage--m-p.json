@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-05-12T21:29:00+02:00",
+    "name": "Rage.MP",
+    "author": "noreply.waypointhosting@gmail.com",
+    "description": "https:\/\/rage.mp\/",
+    "image": "quay.io\/pterodactyl\/core:glibc",
+    "startup": ".\/server",
+    "config": {
+        "files": "{\r\n    \"conf.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt -y install curl tar libstdc++6\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o ragemp-srv.tar.gz https:\/\/cdn.rage.mp\/lin\/ragemp-srv.tar.gz\r\n\r\ntar -xzvf ragemp-srv.tar.gz --strip 1 -C \/mnt\/server\r\nrm ragemp-srv.tar.gz\r\nchmod +x .\/server\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/LordDamionDevil\/ragemppterodactyl\/master\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
