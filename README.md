@@ -70,6 +70,12 @@ Supply values to 2 variables to use
 #### Nukkit
 The [Nukkit](https://nukkit.io/) Minecraft PE server
 
+### PixARK
+#### PixARK
+The [PixARK](https://store.steampowered.com/app/593600/PixARK/) dedicated server  
+More info at [gamepedia](https://pixark.gamepedia.com/Pixark)
+- As a note this uses the new wine-source image and may not perform up to standard
+
 ### Squad
 #### Squad Dedicated
 The [Squad](https://joinsquad.com/) official dedicated server
