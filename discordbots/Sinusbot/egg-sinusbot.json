@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-27T15:39:54+02:00",
+    "exported_at": "2018-05-23T22:18:13+02:00",
     "name": "Sinusbot",
     "author": "ki2007@damw.eu",
     "description": "Musicbot for Discord and Teamspeak.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Sinusbot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install ca-certificates bzip2 wget tar\r\napt -q clean all\r\n\r\n#Create needed directories\r\nmkdir -p \/mnt\/server\/TeamSpeak3-Client-linux_amd64\/plugins\r\nmkdir \/mnt\/server\/youtube-dl\r\n\r\ncd \/mnt\/server\r\n\r\n#Download Sinusbot\r\nwget -qO - https:\/\/www.sinusbot.com\/pre\/sinusbot-0.13.37-f7e9ece.tar.bz2 | tar xj\r\n\r\n#Install Sinusbot\r\nchmod +x sinusbot\r\ncp config.ini.dist config.ini\r\nsed -i \"s|^TS3Path.*|TS3Path = \\\"\/home\/container\/TeamSpeak3-Client-linux_amd64\/ts3client_linux_amd64\\\"|g\" config.ini\r\necho 'YoutubeDLPath = \"\/home\/container\/youtube-dl\/youtube-dl\"' >> config.ini\r\n#cp scripts scripts_org\r\n\r\n#Install Sinusbot plugin\r\ncp plugin\/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64\/plugins\r\n\r\n#Download TeamSpeak Client\r\nTSVERSION=$(wget -q -O - http:\/\/dl.4players.de\/ts\/releases\/ | grep -Po '(?<=href=\")[0-9]+(\\.[0-9]+){2,3}(?=\/\")' | sort -Vr | head -1)\r\nwget -q \"http:\/\/dl.4players.de\/ts\/releases\/$TSVERSION\/TeamSpeak3-Client-linux_amd64-$TSVERSION.run\"\r\n\r\n# Install TeamSpeak Client\r\nchmod +x TeamSpeak3-Client-linux_amd64-$TSVERSION.run\r\n.\/TeamSpeak3-Client-linux_amd64-$TSVERSION.run --tar xfv -C TeamSpeak3-Client-linux_amd64\r\nrm TeamSpeak3-Client-linux_amd64-$TSVERSION.run\r\n# Remove glx-integration lib\r\nrm TeamSpeak3-Client-linux_amd64\/xcbglintegrations\/libqxcb-glx-integration.so\r\n\r\n#Download youtube-dl\r\ncd \/mnt\/server\/youtube-dl\r\nwget -q https:\/\/yt-dl.org\/downloads\/latest\/youtube-dl\r\nchmod a+rx youtube-dl",
+            "script": "#!\/bin\/bash\r\n# Sinusbot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install ca-certificates bzip2 wget tar\r\napt -q clean all\r\n\r\n#Create needed directories\r\nmkdir -p \/mnt\/server\/TeamSpeak3-Client-linux_amd64\/plugins\r\nmkdir \/mnt\/server\/youtube-dl\r\n\r\ncd \/mnt\/server\r\n\r\n#Download Sinusbot\r\nwget -qO - https:\/\/www.sinusbot.com\/pre\/sinusbot-0.13.37-f7e9ece.tar.bz2 | tar xj\r\n\r\n#Install Sinusbot\r\nchmod +x sinusbot\r\ncp config.ini.dist config.ini\r\nsed -i \"s|^TS3Path.*|TS3Path = \\\"\/home\/container\/TeamSpeak3-Client-linux_amd64\/ts3client_linux_amd64\\\"|g\" config.ini\r\necho 'YoutubeDLPath = \"\/home\/container\/youtube-dl\/youtube-dl\"' >> config.ini\r\n#cp scripts scripts_org\r\n\r\n#Install Sinusbot plugin\r\ncp plugin\/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64\/plugins\r\n\r\n#Download TeamSpeak Client\r\nif [ \"_$TSVERSION\" == \"_latest\" ]; then\r\n  TSVERSION=$(wget -q -O - http:\/\/dl.4players.de\/ts\/releases\/ | grep -Po '(?<=href=\")[0-9]+(\\.[0-9]+){2,3}(?=\/\")' | sort -Vr | head -1)\r\nfi\r\nwget -q \"http:\/\/dl.4players.de\/ts\/releases\/$TSVERSION\/TeamSpeak3-Client-linux_amd64-$TSVERSION.run\"\r\n\r\n# Install TeamSpeak Client\r\nchmod +x TeamSpeak3-Client-linux_amd64-$TSVERSION.run\r\n.\/TeamSpeak3-Client-linux_amd64-$TSVERSION.run --tar xfv -C TeamSpeak3-Client-linux_amd64\r\nrm TeamSpeak3-Client-linux_amd64-$TSVERSION.run\r\n# Remove glx-integration lib\r\nrm TeamSpeak3-Client-linux_amd64\/xcbglintegrations\/libqxcb-glx-integration.so\r\n\r\n#Download youtube-dl\r\ncd \/mnt\/server\/youtube-dl\r\nwget -q https:\/\/yt-dl.org\/downloads\/latest\/youtube-dl\r\nchmod a+rx youtube-dl",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
@@ -28,6 +28,15 @@
             "description": "Password for admin account.",
             "env_variable": "OVERRIDE_PASSWORD",
             "default_value": "CHANGEME",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:256"
+        },
+        {
+            "name": "TeamSpeak Client Version",
+            "description": "Version of the TeamSpeak Client.",
+            "env_variable": "TSVERSION",
+            "default_value": "latest",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:20"

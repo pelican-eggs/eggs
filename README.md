@@ -15,8 +15,16 @@ If you are submitting PR's try and keep names and titles the same.
 ## Game Eggs
 
 ### GTA
-#### FiveM
+#### GTA V
+
+#### FiveM 
 The [FiveM](https://fivem.net/) GTA 5 dedicated server
+- Only installs latest version versions are no selectable.
+
+#### Rage-MP
+The [Rage-MP](https://rage.mp/) GTA 5 dedicated server
+
+#### San Andreas
 
 #### SA:MP
 The [SA:MP](https://www.sa-mp.com/) GTA San Andreas dedicated server
@@ -62,6 +70,12 @@ Supply values to 2 variables to use
 #### Nukkit
 The [Nukkit](https://nukkit.io/) Minecraft PE server
 
+### PixARK
+#### PixARK
+The [PixARK](https://store.steampowered.com/app/593600/PixARK/) dedicated server  
+More info at [gamepedia](https://pixark.gamepedia.com/Pixark)
+- As a note this uses the new wine-source image and may not perform up to standard
+
 ### Squad
 #### Squad Dedicated
 The [Squad](https://joinsquad.com/) official dedicated server
@@ -74,14 +88,15 @@ The [xonotic](http://www.xonotic.org/) official dedicated server.
 ## Bot Eggs
 ### Discord
 
-#### ATLBot
+#### ATLBot - NodeJS
 The [ATLauncher Bot](https://github.com/ATLauncher/discord-bot/)
 
-#### parkertron
-My own stupid chat bot [parkertron](https://github.com/parkervcp/parkertron)
+#### parkertron - Golang (custom image)
+My own chat bot [parkertron](https://github.com/parkervcp/parkertron)
  - Currently runs as the SupportBot in the pterodactyl discord server.
+ - Requires you to set up the yaml fils before it can start properly.
 
-#### pixel-bot
+#### pixel-bot - Python
 [pixel-bot](https://github.com/Ispira/pixel-bot)
  - More of a reason/way to test a python container.
 
