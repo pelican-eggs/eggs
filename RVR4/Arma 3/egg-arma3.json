@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-04-21T23:01:51+01:00",
+    "exported_at": "2018-06-17T00:41:46+01:00",
     "name": "Arma 3",
     "author": "daave@aaathats3as.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
@@ -17,9 +17,9 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# steamcmd: Installation Script\r\n# \r\napk update\r\napk add tar curl\r\n\r\ncd \/tmp\r\n\r\ncurl -sSLO http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" && mkdir -p \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\nmkdir -p \/mnt\/server\/server\/logs\r\ntouch mnt\/server\/latest.log\r\ntar -xzvf steamcmd_linux.tar.gz -C \/mnt\/server\/steamcmd\r\n\/mnt\/server\/steamcmd\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/home\/container\/server +app_update ${APP_ID} validate +quit",
-            "container": "alpine:3.4",
-            "entrypoint": "ash"
+            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl\r\napt -y --no-install-recommends install lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSLO http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\ntouch \/mnt\/server\/latest.log\r\nchown -R root:root \/mnt\r\n\r\ntar -xzvf \/tmp\/steamcmd_linux.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nexport HOME=\/mnt\/server\r\n\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${APP_ID} validate +quit",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
         }
     },
     "variables": [
