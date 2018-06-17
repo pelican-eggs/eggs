@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-06-02T03:22:00-04:00",
+    "exported_at": "2018-06-17T10:06:12-04:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "A new FiveM egg for the latest builds due to recent changes in FiveM",
@@ -48,7 +48,7 @@
             "default_value": "My new FXServer!",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:32"
+            "rules": "required|string|max:64"
         }
     ]
 }
