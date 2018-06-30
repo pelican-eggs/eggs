@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-06-24T00:46:38+02:00",
+    "name": "PocketmineMP",
+    "author": "info@swisscrafting.ch",
+    "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
+    "image": "quay.io\/onekintaro\/pocketmine-mp:latest",
+    "startup": ".\/start.sh --no-wizard --disable-ansi",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"server.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\n\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o PocketMine-MP.phar https:\/\/jenkins.pmmp.io\/job\/PocketMine-MP\/lastStableBuild\/artifact\/PocketMine-MP.phar\r\ncurl -sSL -o start.sh https:\/\/raw.githubusercontent.com\/pmmp\/PocketMine-MP\/master\/start.sh\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-7.2-Aggregate\/6\/artifact\/PHP-7.2-Linux-x86_64.tar.gz\r\ntar -xzvf php.binary.tar.gz\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\ntouch \/mnt\/server\/banned-ips.txt\r\ntouch \/mnt\/server\/banned-players.txt\r\ntouch \/mnt\/server\/ops.txt\r\nmkdir -p \/mnt\/server\/players\r\ntouch \/mnt\/server\/white-list.txt\r\nmkdir -p \/mnt\/server\/worlds\r\nmkdir -p \/mnt\/server\/plugins\r\nmkdir -p \/mnt\/server\/resource_packs\r\ntouch \/mnt\/server\/server.log\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server",
+            "container": "ubuntu:latest",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
