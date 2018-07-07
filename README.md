@@ -42,6 +42,10 @@ The [tShock](https://tshock.co) modded server.
 #### RocketMod
 The [RocketMod](https://rocketmod.net/) unturned server.
 
+### 7 Days To Die
+#### 7 Days To Die
+The Vanilla [7 Days To Die](https://7daystodie.com) server
+
 ### Minecraft
 #### Spigot Enhanced
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
