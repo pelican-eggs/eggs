@@ -7,10 +7,10 @@ With that I am also accepting PR's for new service and also updates to the curre
 If you are submitting PR's try and keep names and titles the same.
 
 
-## Please read the HOWTO.md before submitting PRs
+## Please read the CONTRIBUTING.md before submitting PRs
 
 
-#### Please read the HOWTO.md as it container important information.
+#### Please read the CONTRIBUTING.md as it container important information.
 
 ## Game Eggs
 
