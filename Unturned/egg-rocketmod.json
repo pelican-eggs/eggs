@@ -10,7 +10,7 @@
     "image": "tenten8401\/pterodactyl-unturned",
     "startup": "mono RocketLauncher.exe unturned",
     "config": {
-        "files": "{\r\n     \"Servers\/unturned\/Server\/Commands.dat\": {\r\n    \"parser\": \"file\",\r\n    \"find\": {\r\n    \"Port\": \"Port{{server.build.default.port}}\"\r\n    }\r\n}\r\n}",
+        "files": "{\r\n     \"Servers\/unturned\/Server\/Commands.dat\": {\r\n    \"parser\": \"file\",\r\n    \"find\": {\r\n    \"Port\": \"Port {{server.build.default.port}}\"\r\n    }\r\n}\r\n}",
         "startup": "{\r\n    \"done\": \"Loading level: 100%\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
         "stop": "shutdown"
