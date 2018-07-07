@@ -38,6 +38,10 @@ The [Factorio](https://factorio.com/) dedicated server
 The [tShock](https://tshock.co) modded server.
 - This requires a minimum of 1g (1024m) to actually create a map. This will get OOM if you have less.
 
+### Unturned
+#### RocketMod
+The [RocketMod](https://rocketmod.net/) unturned server.
+
 ### Minecraft
 #### Spigot Enhanced
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
