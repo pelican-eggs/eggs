@@ -19,24 +19,24 @@ If you are submitting PR's try and keep names and titles the same.
 ## Game Eggs
 
 [Factorio](/factorio/factorio/)  
-[Grand Theft Auto](/gta/)
+[Grand Theft Auto](/gta/)  
 * [FiveM](/gta/fivem/)  
 * [RageMP](/gta/ragemp/)  
 
 [Minecraft](/minecraft/)
-* [Forge](/minecraft/forge/)
-* [Feed The Beast](/minecraft/ftb/)
-* [Spigot](/minecraft/pigot/)
-* [Technic](/minecraft/technic/)
+* [Forge](/minecraft/forge/)  
+* [Feed The Beast](/minecraft/ftb/)  
+* [Spigot](/minecraft/pigot/)  
+* [Technic](/minecraft/technic/)  
 
-[MinecraftPE](/minecraft_pe/)
-* [Nukkit](/minecraft_pe/nukkit/)
-* [PocketMine MP](/minecraft_pe/pocketmine_mp/)
+[MinecraftPE](/minecraft_pe/)  
+* [Nukkit](/minecraft_pe/nukkit/)  
+* [PocketMine MP](/minecraft_pe/pocketmine_mp/)  
 
-[Minecraft Proxies](/minecraft_proxy/)
-* [Watterfall](/minecraft_proxy/waterfall/)
+[Minecraft Proxies](/minecraft_proxy/)  
+* [Watterfall](/minecraft_proxy/waterfall/)  
 
-[Source](/source_servers/)
+[Source](/source_servers/)  
 * [7 Days to Die](/source_servers/7dtd/)  
 * [PixARK](/source_servers/pixark/)  
 
@@ -44,5 +44,5 @@ If you are submitting PR's try and keep names and titles the same.
 [Terraria](/terraria/)  
 * [tshock](/terraria/tshock/)  
 [Unturned](/unturned/)  
-* [RocketMod](/unturned/rockermod/)
+* [RocketMod](/unturned/rockermod/)  
 [Xonotic](/xonotic/)  
