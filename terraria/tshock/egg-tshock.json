@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-02-16T01:48:02-05:00",
+    "name": "tshock",
+    "author": "parker@parkervcp.com",
+    "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
+    "image": "quay.io\/pterodactyl\/core:mono",
+    "startup": "mono TerrariaServer.exe -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -world {{WORLD_NAME}}.wld -autocreate {{WORLD_SIZE}}",
+    "config": {
+        "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"ServerLog.txt\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Vanilla T-shock Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading and installing ${TSHOCK_VERSION}\"\r\n\r\necho -e \"running wget https:\/\/github.com\/Pryaxis\/TShock\/releases\/download\/v${TSHOCK_VERSION}\/tshock_${TSHOCK_VERSION}.zip\"\r\nwget https:\/\/github.com\/Pryaxis\/TShock\/releases\/download\/v${TSHOCK_VERSION}\/tshock_${TSHOCK_VERSION}.zip\r\n\r\nunzip tshock_${TSHOCK_VERSION}.zip",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "The maximum number of players a server will hold.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "8",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "World Size",
+            "description": "Defines the worlds size. 3 sizes 1 (small), 2 (medium), 3 (large).",
+            "env_variable": "WORLD_SIZE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "World Name",
+            "description": "The name for the world file.",
+            "env_variable": "WORLD_NAME",
+            "default_value": "world",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Tshock Version",
+            "description": "The version on tshock that will be installed.",
+            "env_variable": "TSHOCK_VERSION",
+            "default_value": "4.3.25",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
