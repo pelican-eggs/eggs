@@ -6,6 +6,10 @@ With that I am also accepting PR's for new service and also updates to the curre
 
 If you are submitting PR's try and keep names and titles the same.
 
+
+# You must restart your daemon after importing an egg.
+
+
 ## Please read the CONTRIBUTING.md before submitting PRs
 
 ## Bot Eggs
