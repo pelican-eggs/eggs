@@ -18,7 +18,7 @@ If you are submitting PR's try and keep names and titles the same.
 * [ATL Bot](/bots/discord/atlbot)  
 * [parkertron](/bots/discord/parkertron/)  
 * [pixel-bot](/bots/discord/pixelbot/)  
-* [Sinusbot](/bots/discord/)  
+* [Sinusbot](/bots/discord/sinusbot/)  
 
 ## Game Eggs
 
