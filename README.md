@@ -18,7 +18,7 @@ If you are submitting PR's try and keep names and titles the same.
 * [ATL Bot](/bots/discord/atlbot)  
 * [parkertron](/bots/discord/parkertron/)  
 * [pixel-bot](/bots/discord/pixelbot/)  
-* [sinuxbot](/bots/discord/)  
+* [Sinusbot](/bots/discord/)  
 
 ## Game Eggs
 
@@ -47,6 +47,8 @@ If you are submitting PR's try and keep names and titles the same.
 [Squad](/squad/)  
 [Terraria](/terraria/)  
 * [tshock](/terraria/tshock/)  
+
 [Unturned](/unturned/)  
 * [RocketMod](/unturned/rockermod/)  
+
 [Xonotic](/xonotic/)  
