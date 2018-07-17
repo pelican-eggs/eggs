@@ -30,7 +30,7 @@ If you are submitting PR's try and keep names and titles the same.
 [Minecraft](/minecraft/)
 * [Forge](/minecraft/forge/)  
 * [Feed The Beast](/minecraft/ftb/)  
-* [Spigot](/minecraft/pigot/)  
+* [Spigot](/minecraft/spigot/)  
 * [Technic](/minecraft/technic/)  
 
 [MinecraftPE](/minecraft_pe/)  
@@ -41,7 +41,7 @@ If you are submitting PR's try and keep names and titles the same.
 * [Watterfall](/minecraft_proxy/waterfall/)  
 
 [Source](/source_servers/)  
-* [7 Days to Die](/source_servers/7dtd/)  
+* [7 Days to Die](/source_servers/7_days_to_die/)  
 * [PixARK](/source_servers/pixark/)  
 
 [Squad](/squad/)  
@@ -49,6 +49,6 @@ If you are submitting PR's try and keep names and titles the same.
 * [tshock](/terraria/tshock/)  
 
 [Unturned](/unturned/)  
-* [RocketMod](/unturned/rockermod/)  
+* [RocketMod](/unturned/rocketmod/)  
 
 [Xonotic](/xonotic/)  
