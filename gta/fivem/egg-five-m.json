@@ -39,7 +39,7 @@
             "default_value": "30",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|integer|between:1,31"
+            "rules": "required|integer|between:1,32"
         },
         {
             "name": "Server Hostname",
@@ -48,7 +48,7 @@
             "default_value": "My new FXServer!",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:64"
+            "rules": "required|string"
         }
     ]
 }
