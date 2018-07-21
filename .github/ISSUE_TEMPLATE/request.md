@@ -1,6 +1,6 @@
 ---
 name: "\U0001F3AE Game Request"
-about: Suggest an game to build an egg for
+about: Suggest a server to build an egg for
 
 ---
 

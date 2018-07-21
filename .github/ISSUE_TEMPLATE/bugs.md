@@ -1,6 +1,6 @@
 ---
 name: "\U0001F41B Bug Report"
-about: Create a report for an egg
+about: Report an issue for an egg
 
 ---
 
