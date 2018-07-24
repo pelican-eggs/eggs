@@ -1,6 +1,6 @@
 # Discord Bots
 
-### Some of these bots support other services but are primarily Discord bot
+### Some of these bots support other services but are primarily Discord bots
 
 #### ATLauncher Discord Bot
 [ATLauncher/discord-bot](https://github.com/ATLauncher/discord-bot)  

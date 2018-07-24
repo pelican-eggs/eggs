@@ -1,28 +1,42 @@
 # Minecraft
 
-#### Spigot Enhanced
+## Spigot
+A collection of spigot and forked spigot eggs.
+
+[Spigot](https://www.spigotmc.org/)  
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
 - (It's noted that building the jar is intensive and time consuming)
 
-#### Forge Enhanced
-This is a direct fork of the default forge service
-- Has a version detection fix for "latest"
+[PaperMC GitHub](https://github.com/PaperMC/Paper)  
+High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
 
-#### FTB Packs
-##### Feed The Beast - generic
-[FTB](https://www.feed-the-beast.com/modpacks)
-Generic egg to handle any standard FTB modpack.
-Supply values to 2 variables to use
-- MODPACK_URL:  from the url to the pack https://www.feed-the-beast.com/projects/{MODPACK_URL}
-- MODPACK_VERSION: version of the modpack to install
+[Taco Spigot GitHub](https://github.com/TacoSpigot/TacoSpigot)  
+An even-higher higher performance PaperSpigot fork that adds new features.  
 
-##### FTB Revelation
-[FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)
+## Forge 
+[Forge MC](https://files.minecraftforge.net/)  
+This is a direct fork of the default forge service  
+- Has a version detection fix for "latest"  
 
-#### Tekkit Packs
-##### Hexxit 
-[Hexxit](https://www.technicpack.net/modpack/hexxit.552552)
-##### Blightfall 
-[Blightfall](https://www.technicpack.net/modpack/blightfall.592618)
-##### Tekkit-Legends 
-[Tekkit Legends](https://www.technicpack.net/modpack/tekkit-legends.735902)
+[Curse Generic](https://www.curseforge.com/)  
+A generic service to pull forge mod packs from the curseforge site.  
+
+## FTB Packs
+[FTB](https://www.feed-the-beast.com/modpacks)  
+A generic service to pull forge mod packs from the FTB site.  
+Supply values to 2 variables to use  
+- MODPACK_URL:  from the url to the pack https://www.feed-the-beast.com/projects/{MODPACK_URL}  
+- MODPACK_VERSION: version of the modpack to install  
+
+[FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)  
+Revelation is a general all-purpose modpack with optimal FPS, server performance and stability.  
+
+#### Technic Packs
+[Hexxit](https://www.technicpack.net/modpack/hexxit)  
+Gear up and set forth on a campaign worthy of legend, for Hexxit has been unearthed!  
+
+[Blightfall](https://www.technicpack.net/modpack/blightfall)  
+Blightfall is a combination modpack and adventure map about surviving on an alien planet.  
+
+[Tekkit Legends](https://www.technicpack.net/modpack/tekkit-legends)  
+The ancient power of Tekkits past return in this legendary pack!  
