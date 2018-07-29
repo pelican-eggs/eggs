@@ -3,17 +3,17 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-06-30T19:21:02+01:00",
+    "exported_at": "2018-07-29T02:28:44-04:00",
     "name": "Factorio",
     "author": "parker@parkervcp.com",
     "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
     "image": "quay.io\/pterodactyl\/core:glibc",
     "startup": ".\/bin\/x64\/factorio --port {{SERVER_PORT}} --server-settings data\/server-settings.json --start-server {{SAVE_NAME}}.zip",
     "config": {
-        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"description\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\",\r\n            \"username\": \"{{server.build.env.SERVER_USERNAME}}\",\r\n            \"token\": \"{{server.build.env.SERVER_TOKEN}}\",\r\n            \"autosave_interval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"autosave_slots\": \"{{server.build.env.SAVE_SLOTS}}\",\r\n            \"afk_autokick_interval\": \"{{server.build.env.AFK_KICK}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"InGame\",\r\n    \"userInteraction\": []\r\n}",
+        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"description\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\",\r\n            \"game_password\": \"{{server.build.env.SERVER_PASS}}\",\r\n            \"username\": \"{{server.build.env.SERVER_USERNAME}}\",\r\n            \"token\": \"{{server.build.env.SERVER_TOKEN}}\",\r\n            \"autosave_interval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"autosave_slots\": \"{{server.build.env.SAVE_SLOTS}}\",\r\n            \"afk_autokick_interval\": \"{{server.build.env.AFK_KICK}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Hosting game at IP ADDR\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"factorio-current.log\"\r\n}",
-        "stop": "^C"
+        "stop": "\/quit"
     },
     "scripts": {
         "installation": {
@@ -112,6 +112,15 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password to join the server, Blank is none.",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "string|max:30"
         }
     ]
 }
