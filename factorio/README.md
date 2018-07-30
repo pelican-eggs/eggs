@@ -14,3 +14,7 @@ The game is very stable and optimized for building massive factories. You can cr
 Factorio has been in development since the spring of 2012. So far over 1,400,000 people have bought the game. You can get it from [Steam](https://store.steampowered.com/app/427520/), [GOG](https://www.gog.com/game/factorio), or directly from their [shop](https://factorio.com/buy).
 
 New to the game? Make sure to checkout their [starter page](https://factorio.com/starter-page).
+
+### Server Ports
+Factorio requires a single port  
+game port (default 34197)
