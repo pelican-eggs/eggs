@@ -1,5 +1,12 @@
 # Minecraft
 
+It’s a game about placing blocks and going on adventures
+
+It’s set in infinitely-generated worlds of wide open terrain - icy mountains, swampy bayous, vast pastures and much more - filled with secrets, wonders and peril!
+
+## Server Ports
+The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
+
 ## Spigot
 A collection of spigot and forked spigot eggs.
 
