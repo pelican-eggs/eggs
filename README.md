@@ -40,6 +40,8 @@ If you are submitting PR's try and keep names and titles the same.
 [Minecraft Proxies](/minecraft_proxy/)  
 * [Watterfall](/minecraft_proxy/waterfall/)  
 
+[Mount & Blade Warband](/mb_warband/)
+
 [Source](/source_servers/)  
 * [7 Days to Die](/source_servers/7_days_to_die/)  
 * [PixARK](/source_servers/pixark/)  
