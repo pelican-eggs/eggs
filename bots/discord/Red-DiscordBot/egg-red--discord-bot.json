@@ -7,7 +7,7 @@
     "name": "Red-DiscordBot",
     "author": "friesi@srvb.at",
     "description": "Red is a fully modular bot \u2013 meaning all features and commands can be enabled\/disabled to your liking, making it completely customizable.\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
-    "image": "friesi\/eggs:discordbot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:red-discordbot",
     "startup": "python3 red.py",
     "config": {
         "files": "{\r\n    \"Red-DiscordBot\/data\/red\/settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"PREFIXES\": \"{{server.build.env.PREFIX}}\",\r\n            \"TOKEN\": \"{{server.build.env.TOKEN}}\",\r\n            \"default.ADMIN_ROLE\": \"{{server.build.env.ADMIN_ROLE}}\",\r\n            \"default.MOD_ROLE\": \"{{server.build.env.MOD_ROLE}}\"\r\n        }\r\n    }\r\n}",
