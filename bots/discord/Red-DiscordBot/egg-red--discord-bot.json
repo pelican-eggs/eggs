@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-08-13T20:21:03+02:00",
+    "name": "Red-DiscordBot",
+    "author": "friesi@srvb.at",
+    "description": "Red is a fully modular bot \u2013 meaning all features and commands can be enabled\/disabled to your liking, making it completely customizable.\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:red-discordbot",
+    "startup": "python3 red.py",
+    "config": {
+        "files": "{\r\n    \"Red-DiscordBot\/data\/red\/settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"PREFIXES\": \"{{server.build.env.PREFIX}}\",\r\n            \"TOKEN\": \"{{server.build.env.TOKEN}}\",\r\n            \"default.ADMIN_ROLE\": \"{{server.build.env.ADMIN_ROLE}}\",\r\n            \"default.MOD_ROLE\": \"{{server.build.env.MOD_ROLE}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Login successful.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n#Config generator\r\n\r\napk add --no-cache git wget\r\ncd \/mnt\/server\r\n\r\necho \"\\nDownload Red-DiscordBot\\n\"\r\ngit clone -b develop --single-branch https:\/\/github.com\/Twentysix26\/Red-DiscordBot.git\r\n\r\necho \"\\nCreate default config\\n\"\r\nmkdir -p \/mnt\/server\/Red-DiscordBot\/data\/red\/\r\ncd \/mnt\/server\/Red-DiscordBot\/data\/red\/\r\necho \"\"\"{\r\n    \"EMAIL\" : null,\r\n    \"OWNER\" : null,\r\n    \"PASSWORD\" : null,\r\n    \"PREFIXES\" : [],\r\n    \"TOKEN\" : null,\r\n    \"default\" : {\r\n        \"ADMIN_ROLE\" : \"null\",\r\n        \"MOD_ROLE\" : \"null\",\r\n        \"PREFIXES\" : []\r\n    }\r\n}\"\"\" > settings.json",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Token",
+            "description": "Create an application and get the bot token:\r\nhttps:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "TOKEN",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:80"
+        },
+        {
+            "name": "Prefix",
+            "description": "",
+            "env_variable": "PREFIX",
+            "default_value": "!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:2"
+        },
+        {
+            "name": "Moderator Role",
+            "description": "",
+            "env_variable": "MOD_ROLE",
+            "default_value": "Mod",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Admin Role",
+            "description": "",
+            "env_variable": "ADMIN_ROLE",
+            "default_value": "Admin",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
