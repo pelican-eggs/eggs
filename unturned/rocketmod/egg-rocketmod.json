@@ -30,7 +30,7 @@
             "default_value": "",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|alpha_num"
+            "rules": "required"
         },
         {
             "name": "Account Password",
