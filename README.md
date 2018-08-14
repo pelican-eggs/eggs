@@ -38,7 +38,7 @@ If you are submitting PR's try and keep names and titles the same.
 * [PocketMine MP](/minecraft_pe/pocketmine_mp/)  
 
 [Minecraft Proxies](/minecraft_proxy/)  
-* [Watterfall](/minecraft_proxy/waterfall/)  
+* [Waterfall](/minecraft_proxy/waterfall/)  
 
 [Mount & Blade Warband](/mb_warband/)
 
