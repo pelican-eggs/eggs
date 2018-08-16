@@ -6,6 +6,10 @@ Mount & Blade: Warband is a stand alone expansion pack for the game that brought
 
 Warband requires a single port (default 7240)
 
+| Port    | default |
+|---------|---------|
+| Game    | 7240    |
+
 ### Other Notes
 
 * The server can only use the main IP address of the node due to limitations in the way Warband's server reporting system operates, no alias or secondary IP addresses can be used.

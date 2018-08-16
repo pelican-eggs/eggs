@@ -8,3 +8,9 @@ Set in a brutally unforgiving post-apocalyptic world overrun by the undead, 7 Da
 game ports (default 26900-26902)
 remote control (default 8080, 8081)
 allocs webmap (default 8082)
+
+| Port    | default       |
+|---------|---------------|
+| Game    | 26900 - 26902 |
+| RCON    | 8080 - 8081   |
+| webmap  | 8082          |
