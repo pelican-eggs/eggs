@@ -8,7 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "This is for the default xonotic setup.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/xonotic-linux64-dedicated +log_file latest.log +net_address 0.0.0.0 +port {{DEFAULT_PORT}} +maxplayers {{MAX_PLAYERS}}",
+    "startup": ".\/xonotic-linux64-dedicated +log_file latest.log +net_address 0.0.0.0 +port {{SERVER_PORT}} +maxplayers {{MAX_PLAYERS}}",
     "config": {
         "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server listening on address 0.0.0.0:\",\r\n    \"userInteraction\": []\r\n}",
