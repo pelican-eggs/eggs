@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-07-17T10:59:42-04:00",
+    "name": "FiveM",
+    "author": "parker@parkervcp.com",
+    "description": "A new FiveM egg for the latest builds due to recent changes in FiveM",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:alpine",
+    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set sv_maxplayers {{MAX_PLAYERS}} +exec server.cfg",
+    "config": {
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_HOSTNAME}}\\\"\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server license key authentication succeeded. Welcome!\"\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash \r\n\r\napk add openssl tar xz curl wget git --no-cache\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir resources\r\n\r\necho \"updating citizenfx resource files\"\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/tmp\r\ncp -Rf \/tmp\/resources\/* resources\/ \r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading the latest fivem server files\"\r\nlatest_fivem_url=`curl https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/ | tail -4 | head -1 | cut -d'\"' -f2`\r\n\r\necho -e \"pulling files from https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\"\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\r\n\r\necho \"Extracting fivem files\"\r\n\r\ntar xf fx.tar.xz\r\n\r\nrm -rf fx.tar.xz run.sh\r\n\r\nif [ -e server.cfg ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default fivem config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/gta\/fivem\/server.cfg >> server.cfg\r\nfi\r\n\r\nmkdir logs\/\r\n\r\necho \"install complete\"",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "fivem license",
+            "description": "Required to start the service. Get your keys at https:\/\/keymaster.fivem.net\/",
+            "env_variable": "FIVEM_LICENSE",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Max Players",
+            "description": "Set the fivem max play count",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "30",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer|between:1,32"
+        },
+        {
+            "name": "Server Hostname",
+            "description": "The name that shows up in the server browser",
+            "env_variable": "SERVER_HOSTNAME",
+            "default_value": "My new FXServer!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}
