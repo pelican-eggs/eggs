@@ -120,7 +120,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:30"
+            "rules": "required|string|max:30"
         }
     ]
 }
