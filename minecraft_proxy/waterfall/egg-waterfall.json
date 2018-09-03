@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Waterfall Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${WATERFALL_VERSION}\" ] || [ \"${WATERFALL_VERSION}\" == \"latest\" ]; then\r\n    WATERFALL_VERSION=\"lastStableBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.destroystokyo.com\/job\/Waterfall\/${WATERFALL_VERSION}\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterfall.jar",
+            "script": "#!\/bin\/ash\r\n# Waterfall Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${WATERFALL_VERSION}\" ] || [ \"${WATERFALL_VERSION}\" == \"latest\" ]; then\r\n    WATERFALL_VERSION=\"lastStableBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/destroystokyo.com\/ci\/job\/Waterfall\/${WATERFALL_VERSION}\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterfall.jar",
             "container": "alpine:3.4",
             "entrypoint": "ash"
         }
