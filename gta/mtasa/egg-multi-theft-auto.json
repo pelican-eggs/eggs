@@ -30,7 +30,7 @@
             "default_value": "22005",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|numeric|min:22005|max:22205"
+            "rules": "required|numeric"
         }
     ]
 }
