@@ -14,10 +14,10 @@ If you are submitting PR's try and keep names and titles the same.
 
 ## Bot Eggs
 
-[Discord](/bots/discord/)  
-* [ATL Bot](/bots/discord/atlbot)  
-* [parkertron](/bots/discord/parkertron/)  
-* [pixel-bot](/bots/discord/pixelbot/)  
+[Discord](/bots/discord/)   
+* [ATL Bot](/bots/discord/atlbot) NodeJS  
+* [parkertron](/bots/discord/parkertron/) Golang  
+* [pixel-bot](/bots/discord/pixelbot/) Python  
 * [Sinusbot](/bots/discord/sinusbot/)  
 
 ## Game Eggs
