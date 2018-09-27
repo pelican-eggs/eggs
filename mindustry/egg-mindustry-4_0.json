@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-09-27T14:48:15+02:00",
+    "exported_at": "2018-09-27T15:53:35+02:00",
     "name": "Mindustry",
     "author": "sysadmin@whiteshield.ch",
     "description": "Mindustry Server 4.0",
-    "image": "quay.io\/pterodactyl\/core:java-glibc",
+    "image": "quay.io\/pterodactyl\/core:java",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar Mindustry-server-4.0-alpha-56.jar",
     "config": {
         "files": "{}",
