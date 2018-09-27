@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-09-27T14:48:15+02:00",
+    "name": "Mindustry",
+    "author": "sysadmin@whiteshield.ch",
+    "description": "Mindustry Server 4.0",
+    "image": "quay.io\/pterodactyl\/core:java-glibc",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar Mindustry-server-4.0-alpha-56.jar",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server loaded.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Mindustry v4.0 Server Egg\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\n\r\ncd \/mnt\/server\r\n\r\nwget http:\/\/whiteshield.ch\/dl\/Mindustry-server-4.0-alpha-56.jar",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": []
+}
