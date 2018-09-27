@@ -41,7 +41,12 @@ If you are submitting PR's try and keep names and titles the same.
 [Minecraft Proxies](/minecraft_proxy/)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
 
+## Bot Eggs
+### Discord
+=======
 [Mount & Blade Warband](/mb_warband/)
+
+[Mindustry](/mindustry/) 
 
 [Source](/source_servers/)  
 * [7 Days to Die](/source_servers/7_days_to_die/)  
