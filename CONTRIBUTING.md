@@ -3,9 +3,11 @@
 ## General rules
 
 1. Keep it simple.  
-    We don't need 8 miles of install script
+    We don't need 8 miles of install script.  
+
 2. Keep it Small.  
-    Only use what is absolutely needed.
+    Only use what is absolutely needed.  
+
 3. Try to stay in the stock containers.  
     If you need something in a container PR it to [my image repo](https://github.com/parkervcp/images) where I can review and pull up to the main repo.
 
