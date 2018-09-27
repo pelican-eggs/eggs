@@ -33,6 +33,8 @@ If you are submitting PR's try and keep names and titles the same.
 * [Spigot](/minecraft/spigot/)  
 * [Technic](/minecraft/technic/)  
 
+[Mindustry](/mindustry/)  
+
 [MinecraftPE](/minecraft_pe/)  
 * [Bedrock](/minecraft_pe/bedrock/)  
 * [Nukkit](/minecraft_pe/nukkit/)  
