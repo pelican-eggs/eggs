@@ -88,6 +88,10 @@ The [Squad](https://joinsquad.com/) official dedicated server
 The [xonotic](http://www.xonotic.org/) official dedicated server.
 - Disk space needs to be at least 1 gig for the full package.
 
+### Mindustry
+#### Mindustry 4.0 game server
+The [Mindustry](https://anuke.itch.io/mindustry) dedicated server
+
 ## Bot Eggs
 ### Discord
 
