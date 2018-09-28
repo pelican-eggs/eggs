@@ -27,13 +27,13 @@ If you are submitting PR's try and keep names and titles the same.
 * [FiveM](/gta/fivem/)  
 * [RageMP](/gta/ragemp/)  
 
-[Minecraft](/minecraft_java/)
+[Minecraft Java](/minecraft_java/)
 * [Forge](/minecraft_java/forge/)  
 * [Feed The Beast](/minecraft_java/ftb/)  
 * [Spigot](/minecraft_java/spigot/)  
 * [Technic](/minecraft_java/technic/)  
 
-[MinecraftPE](/minecraft_bedrock/)  
+[Minecraft Bedrock](/minecraft_bedrock/)  
 * [Bedrock](/minecraft_bedrock/bedrock/)  
 * [Nukkit](/minecraft_bedrock/nukkit/)  
 * [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
