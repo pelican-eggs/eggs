@@ -15,7 +15,7 @@ If you are submitting PR's try and keep names and titles the same.
 ## Bot Eggs
 
 [Discord](/bots/discord/)   
-* [ATL Bot](/bots/discord/atlbot) NodeJS  
+* [ATL Bot](/bots/discord/atlbot) Node JS  
 * [parkertron](/bots/discord/parkertron/) Golang  
 * [pixel-bot](/bots/discord/pixelbot/) Python  
 * [Sinusbot](/bots/discord/sinusbot/)  
@@ -27,16 +27,16 @@ If you are submitting PR's try and keep names and titles the same.
 * [FiveM](/gta/fivem/)  
 * [RageMP](/gta/ragemp/)  
 
-[Minecraft](/minecraft/)
-* [Forge](/minecraft/forge/)  
-* [Feed The Beast](/minecraft/ftb/)  
-* [Spigot](/minecraft/spigot/)  
-* [Technic](/minecraft/technic/)  
+[Minecraft](/minecraft_java/)
+* [Forge](/minecraft_java/forge/)  
+* [Feed The Beast](/minecraft_java/ftb/)  
+* [Spigot](/minecraft_java/spigot/)  
+* [Technic](/minecraft_java/technic/)  
 
-[MinecraftPE](/minecraft_pe/)  
-* [Bedrock](/minecraft_pe/bedrock/)  
-* [Nukkit](/minecraft_pe/nukkit/)  
-* [PocketMine MP](/minecraft_pe/pocketmine_mp/)  
+[MinecraftPE](/minecraft_bedrock/)  
+* [Bedrock](/minecraft_bedrock/bedrock/)  
+* [Nukkit](/minecraft_bedrock/nukkit/)  
+* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
 
 [Minecraft Proxies](/minecraft_proxy/)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
