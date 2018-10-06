@@ -48,7 +48,9 @@ If you are submitting PR's try and keep names and titles the same.
 * [PixARK](/source_servers/pixark/)  
 
 [Squad](/squad/)  
+
 [Terraria](/terraria/)  
+* [tmodloader](/terraria/tmodloader)  
 * [tshock](/terraria/tshock/)  
 
 [Unturned](/unturned/)  
