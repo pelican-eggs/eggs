@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-06-17T00:41:46+01:00",
+    "exported_at": "2018-10-07T18:03:58-04:00",
     "name": "Arma 3",
     "author": "daave@aaathats3as.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
-    "image": "quay.io\/daave\/containers:rvr4",
-    "startup": ".\/arma3server -netlog -ip=0.0.0.0 -port={{SERVER_PORT}} -cfg={{CFG}} -config={{CONFIG}} {{CUSTOM}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\"",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:source",
+    "startup": ".\/arma3server -ip=0.0.0.0 -port={{SERVER_PORT}} -cfg={{CFG}} -config={{CONFIG}} {{CUSTOM}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\" -maxMem={{SERVER_MEMORY}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connected to Steam servers\",\r\n    \"userInteraction\": []\r\n}",
