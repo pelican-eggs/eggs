@@ -22,6 +22,9 @@ If you are submitting PR's try and keep names and titles the same.
 
 ## Game Eggs
 
+[Arma](/arma/)  
+* [Arma 3](/arma/arma3/)  
+
 [Don't Starve](/dont_starve/dont_starve)
 
 [Factorio](/factorio/factorio/)  
