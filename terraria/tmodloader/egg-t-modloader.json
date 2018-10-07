@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-10-07T10:01:51-04:00",
+    "name": "tModloader",
+    "author": "parker@parkervcp.com",
+    "description": "tModLoader is essentially a mod that provides a way to load your own mods without having to work directly with Terraria's source code itself. This means you can easily make mods that are compatible with other people's mods, save yourself the trouble of having to decompile and recompile Terraria.exe, and escape from having to understand all of the obscure \"intricacies\" of Terraria's source code. It is made to work for Terraria 1.3+.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu",
+    "startup": ".\/tModLoaderServer.bin.x86_64 -ip 0.0.0.0 -port ${SERVER_PORT} -maxplayers ${MAX_PLAYERS} -world ~\/saves\/Worlds\/${WORLD_NAME}.wld -worldname ${WORLD_NAME} -autocreate ${WORLD_SIZE} -savedirectory ~\/ -tmlsavedirectory ~\/saves -modpath ~\/mods",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Vanilla T-shock Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading tModloader\"\r\nwget https:\/\/github.com\/blushiemagic\/tModLoader\/releases\/download\/${TMODLOADER_VERSION}\/tModLoader.Linux.${TMODLOADER_VERSION}.zip\r\n\r\necho -e \"Unpacking mod loader files\"\r\nunzip tModLoader.Linux.${TMODLOADER_VERSION}.zip\r\n\r\nCLEAN_VERSION=$(echo ${TERRARIA_VERSION} | sed 's\/\\.\/\/g')\r\n\r\necho -e \"Downloading terraria server files\"\r\nwget http:\/\/terraria.org\/server\/terraria-server-${CLEAN_VERSION}.zip\r\n\r\necho -e \"Unpacking server files\"\r\nunzip terraria-server-$(echo ${CLEAN_VERSION} | sed 's\/\\.\/\/g').zip\r\ncp -R ${CLEAN_VERSION}\/Linux\/* .\/\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${CLEAN_VERSION}\r\n\r\nchmod +x .\/tModLoaderServer.bin.x86_64",
+            "container": "alpine:3.8",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "tModloader Version",
+            "description": "The version of tModloader that is to be used.",
+            "env_variable": "TMODLOADER_VERSION",
+            "default_value": "v0.10.1.5",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Terraria version",
+            "description": "the version of Terraria that is to be used.\r\n\r\nYou can use the full version number or the file number. (ex. 1.3.5.3 or 1353)\r\n\r\nGet version numbers here - https:\/\/terraria.gamepedia.com\/Server#Downloads",
+            "env_variable": "TERRARIA_VERSION",
+            "default_value": "1.3.5.3",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "The name for the world file.",
+            "env_variable": "WORLD_NAME",
+            "default_value": "world",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum number of players a server will hold.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "8",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "World Size",
+            "description": "Defines the worlds size. 3 sizes 1 (small), 2 (medium), 3 (large).",
+            "env_variable": "WORLD_SIZE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|digits_between:1,3"
+        }
+    ]
+}

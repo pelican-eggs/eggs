@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-10T00:36:18-06:00",
+    "exported_at": "2018-09-26T12:40:31-04:00",
     "name": "Waterfall",
     "author": "hostmaster@waterfallgaming.net",
     "description": "Waterfall is a fork of the well-known BungeeCord server teleportation suite.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Waterfall Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${WATERFALL_VERSION}\" ] || [ \"${WATERFALL_VERSION}\" == \"latest\" ]; then\r\n    WATERFALL_VERSION=\"lastStableBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.destroystokyo.com\/job\/Waterfall\/${WATERFALL_VERSION}\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterfall.jar",
+            "script": "#!\/bin\/ash\r\n# Waterfall Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${WATERFALL_VERSION}\" ] || [ \"${WATERFALL_VERSION}\" == \"latest\" ]; then\r\n    WATERFALL_VERSION=\"lastStableBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/papermc.io\/ci\/job\/Waterfall\/${WATERFALL_VERSION}\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterfall.jar",
             "container": "alpine:3.4",
             "entrypoint": "ash"
         }

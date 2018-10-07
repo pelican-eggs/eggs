@@ -14,31 +14,34 @@ If you are submitting PR's try and keep names and titles the same.
 
 ## Bot Eggs
 
-[Discord](/bots/discord/)  
-* [ATL Bot](/bots/discord/atlbot)  
-* [parkertron](/bots/discord/parkertron/)  
-* [pixel-bot](/bots/discord/pixelbot/)  
+[Discord](/bots/discord/)   
+* [ATL Bot](/bots/discord/atlbot) Node JS  
+* [parkertron](/bots/discord/parkertron/) Golang  
+* [pixel-bot](/bots/discord/pixelbot/) Python  
 * [Sinusbot](/bots/discord/sinusbot/)  
 
 ## Game Eggs
 
-[Real Virtuality 4 Engine](/RVR4/)  
-* [Arma 3](/RVR4/Arma 3/)  
+[Arma](/arma/)  
+* [Arma 3](/arma/arma3/)  
+
+[Don't Starve](/dont_starve/dont_starve)
 
 [Factorio](/factorio/factorio/)  
 [Grand Theft Auto](/gta/)  
 * [FiveM](/gta/fivem/)  
 * [RageMP](/gta/ragemp/)  
 
-[Minecraft](/minecraft/)
-* [Forge](/minecraft/forge/)  
-* [Feed The Beast](/minecraft/ftb/)  
-* [Spigot](/minecraft/spigot/)  
-* [Technic](/minecraft/technic/)  
+[Minecraft Java](/minecraft_java/)
+* [Forge](/minecraft_java/forge/)  
+* [Feed The Beast](/minecraft_java/ftb/)  
+* [Spigot](/minecraft_java/spigot/)  
+* [Technic](/minecraft_java/technic/)  
 
-[MinecraftPE](/minecraft_pe/)  
-* [Nukkit](/minecraft_pe/nukkit/)  
-* [PocketMine MP](/minecraft_pe/pocketmine_mp/)  
+[Minecraft Bedrock](/minecraft_bedrock/)  
+* [Bedrock](/minecraft_bedrock/bedrock/)  
+* [Nukkit](/minecraft_bedrock/nukkit/)  
+* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
 
 [Minecraft Proxies](/minecraft_proxy/)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
@@ -50,7 +53,9 @@ If you are submitting PR's try and keep names and titles the same.
 * [PixARK](/source_servers/pixark/)  
 
 [Squad](/squad/)  
+
 [Terraria](/terraria/)  
+* [tmodloader](/terraria/tmodloader)  
 * [tshock](/terraria/tshock/)  
 
 [Unturned](/unturned/)  
