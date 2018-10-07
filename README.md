@@ -22,6 +22,8 @@ If you are submitting PR's try and keep names and titles the same.
 
 ## Game Eggs
 
+[Don't Starve](/dont_starve/dont_starve)
+
 [Factorio](/factorio/factorio/)  
 [Grand Theft Auto](/gta/)  
 * [FiveM](/gta/fivem/)  
