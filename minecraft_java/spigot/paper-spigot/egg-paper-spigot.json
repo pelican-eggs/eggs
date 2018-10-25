@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Paper Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSuccessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.destroystokyo.com\/job\/Paper\/${DL_VERSION}\/artifact\/paperclip.jar",
+            "script": "#!\/bin\/ash\r\n# Paper Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DL_VERSION=\"lastSuccessfulBuild\"\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/papermc.io\/ci\/job\/Paper\/${DL_VERSION}\/artifact\/paperclip.jar",
             "container": "alpine:3.4",
             "entrypoint": "ash"
         }
