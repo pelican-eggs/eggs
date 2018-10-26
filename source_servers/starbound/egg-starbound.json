@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-08-14T10:11:29-05:00",
+    "name": "Starbound",
+    "author": "hostmaster@watefallnetwork.net",
+    "description": "Starbound takes place in a two-dimensional, procedurally generated universe which the player is able to explore in order to obtain new weapons, armor, and items, and to visit towns and villages inhabited by various intelligent lifeforms.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/starbound_server",
+    "config": {
+        "files": "{\r\n    \"storage\/starbound_server.config\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"gameServerPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Starting UniverseServer\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} validate +quit\r\n\r\nmv \/mnt\/server\/linux\/* \/mnt\/server\/\r\nrm -rf \/mnt\/server\/linux\r\nsed -i -e 's\/\\.\\.\/\\.\/g' \/mnt\/server\/sbinit.config\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\nmkdir \/mnt\/server\/storage\r\n\r\ncat <<EOF >> \/mnt\/server\/storage\/starbound_server.config\r\n{\r\n  \"allowAdminCommands\" : true,\r\n  \"allowAdminCommandsFromAnyone\" : false,\r\n  \"allowAnonymousConnections\" : true,\r\n  \"allowAssetsMismatch\" : true,\r\n  \"anonymousConnectionsAreAdmin\" : false,\r\n  \"bannedIPs\" : [],\r\n  \"bannedUuids\" : [],\r\n  \"checkAssetsDigest\" : false,\r\n  \"clearPlayerFiles\" : false,\r\n  \"clearUniverseFiles\" : false,\r\n  \"clientIPJoinable\" : false,\r\n  \"clientP2PJoinable\" : true,\r\n  \"configurationVersion\" : {\r\n    \"basic\" : 2,\r\n    \"server\" : 4\r\n  },\r\n  \"crafting\" : {\r\n    \"filterHaveMaterials\" : false\r\n  },\r\n  \"gameServerBind\" : \"::\",\r\n  \"gameServerPort\" : 21025,\r\n  \"interactiveHighlight\" : true,\r\n  \"inventory\" : {\r\n    \"pickupToActionBar\" : true\r\n  },\r\n  \"maxPlayers\" : 8,\r\n  \"maxTeamSize\" : 4,\r\n  \"monochromeLighting\" : false,\r\n  \"playerBackupFileCount\" : 3,\r\n  \"queryServerBind\" : \"::\",\r\n  \"queryServerPort\" : 21025,\r\n  \"rconServerBind\" : \"::\",\r\n  \"rconServerPassword\" : \"\",\r\n  \"rconServerPort\" : 21026,\r\n  \"rconServerTimeout\" : 1000,\r\n  \"runQueryServer\" : false,\r\n  \"runRconServer\" : false,\r\n  \"safeScripts\" : true,\r\n  \"scriptInstructionLimit\" : 10000000,\r\n  \"scriptInstructionMeasureInterval\" : 10000,\r\n  \"scriptProfilingEnabled\" : false,\r\n  \"scriptRecursionLimit\" : 100,\r\n  \"serverFidelity\" : \"automatic\",\r\n  \"serverName\" : \"A Starbound Server\",\r\n  \"serverOverrideAssetsDigest\" : null,\r\n  \"serverUsers\" : {\r\n  },\r\n  \"tutorialMessages\" : true\r\n}\r\nEOF",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam User",
+            "description": "Admin only",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "211820",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "string"
+        }
+    ]
+}
