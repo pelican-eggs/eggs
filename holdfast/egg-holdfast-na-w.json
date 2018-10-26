@@ -1,0 +1,126 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-10-19T16:15:02-04:00",
+    "name": "Holdfast NaW",
+    "author": "mason@rowe.sh",
+    "description": "Holdfast: Nations at War",
+    "image": "masonr\/pterodactyl-images:holdfast",
+    "startup": "WINEDEBUG=\"fixme-all\" DISPLAY=:0 wine \"\/home\/container\/Holdfast\\ NaW.exe\" -startserver -batchmode -screen-width 640 -screen-height 480 -screen-quality Fastest -framerate 60 -servercarbonplayers 0 -serverConfigFilePath \/home\/container\/serverconfig.txt -logFile \/home\/container\/logs_output\/outputlog_server.txt -logArchivesDirectory \/home\/container\/logs_archive -s {{SERVER_IP}} -p {{SERVER_PORT}} -l \"94.130.66.231\" -o 7101",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Loading player data\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Holdfast Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y install wget ca-certificates bsdtar\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nwget -qO- http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz | tar xvz\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\n\r\ncd \/mnt\/server\r\nwget -qO- https:\/\/www.dropbox.com\/sh\/ppkfny3r9kcnz8x\/AADiIXOrlAWPh-XbhPpimw0ja?dl=1 | bsdtar -xvf-\r\ncp serverconfig_server1_armybattlefield.txt serverconfig.txt\r\nchmod 755 \/mnt\/server\/*",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name of the game server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Welcome Message",
+            "description": "Welcome Message \/ MOTD",
+            "env_variable": "MOTD",
+            "default_value": "Welcome!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:500"
+        },
+        {
+            "name": "Server Region",
+            "description": "Region of the world the server is located in. Options:\r\neurope \/ usa \/ australia \/ brazil \/ china \/ japan \/ russia \/ southkorea",
+            "env_variable": "REGION",
+            "default_value": "europe",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password for Admin Login",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "ChangeMe123",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password for the server.\r\nLeave blank to keep server unlocked.",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:50"
+        },
+        {
+            "name": "Game App ID",
+            "description": "Steam CMD App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "589290",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Steam User",
+            "description": "Steam User that owns Holdfast: NaW",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Password for Steam User's Account. If left blank, console will prompt for password on server (re)start.",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:50"
+        },
+        {
+            "name": "Server Communications Port",
+            "description": "Server Communications Port",
+            "env_variable": "SERVER_COMM_PORT",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer|min:8700|max:8900"
+        },
+        {
+            "name": "Steam Query Port",
+            "description": "Steam Query Port",
+            "env_variable": "SERVER_QUERY_PORT",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer|min:27000|max:29000"
+        },
+        {
+            "name": "Player Count",
+            "description": "Number of players",
+            "env_variable": "PLAYERS",
+            "default_value": "150",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer|max:150"
+        }
+    ]
+}
