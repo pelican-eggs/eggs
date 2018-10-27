@@ -14,7 +14,7 @@ Ports required to run the server in a table format.
 
 | Port    | default |
 |---------|---------|
-| Game    | 2302-2304    |
+| Game    | 2302-2306    |
 | BattleEye    | 2344-2345    |
 
 #### Mods/Plugins may require ports to be added to the server.
