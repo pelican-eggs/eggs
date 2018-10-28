@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-10-27T09:58:26-04:00",
+    "exported_at": "2018-10-27T22:53:48-04:00",
     "name": "PocketmineMP",
     "author": "info@swisscrafting.ch",
     "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
@@ -17,10 +17,20 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"\\n downloading latest pocketmine MP build\"\r\ncurl -sSL -o PocketMine-MP.phar https:\/\/jenkins.pmmp.io\/job\/PocketMine-MP\/Stable\/artifact\/PocketMine-MP.phar\r\n\r\necho -e \"\\n downloading latest php7 build from pocketmine\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-7.2-Linux-x86_64\/lastSuccessfulBuild\/artifact\/PHP_Linux-x86_64.tar.gz\r\n\r\necho -e \"\\n getting default server.properties\"\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/Minecraft%20PE\/PocketmineMP\/server.properties > server.properties\r\necho -e \"\\n unpacking php7 binaries\"\r\ntar -xzvf php.binary.tar.gz\r\necho -e \"\\n removing pvp7 packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.tx banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs",
+            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"\\n downloading pocketmine MP build ${PMMP_VERSION}\"\r\nif [ -z \"$PMMP_VERSION\" ] || [ \"$PMMP_VERSION\" == \"latest\" ]; then\r\n    curl -sSL -o PocketMine-MP.phar  https:\/\/jenkins.pmmp.io\/job\/PocketMine-MP\/Stable\/artifact\/PocketMine-MP.phar\r\nelse \r\n    curl -sSL -o PocketMine-MP.phar  https:\/\/jenkins.pmmp.io\/job\/PocketMine-MP\/${PMMP_VERSION}\/artifact\/PocketMine-MP.phar\r\nfi\r\n\r\necho -e \"\\n downloading latest php7 build from pocketmine\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-7.2-Linux-x86_64\/lastSuccessfulBuild\/artifact\/PHP_Linux-x86_64.tar.gz\r\n\r\necho -e \"\\n getting default server.properties\"\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/Minecraft%20PE\/PocketmineMP\/server.properties > server.properties\r\necho -e \"\\n unpacking php7 binaries\"\r\ntar -xzvf php.binary.tar.gz\r\necho -e \"\\n removing pvp7 packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.tx banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs",
             "container": "alpine:3.8",
             "entrypoint": "ash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "PocketmineMP Version",
+            "description": "The build to pull and install. (Ex. 1604)\r\n\r\nThis is the build number on https:\/\/jenkins.pmmp.io",
+            "env_variable": "PMMP_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
 }
