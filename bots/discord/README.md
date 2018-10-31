@@ -6,6 +6,10 @@
 [ATLauncher/discord-bot](https://github.com/ATLauncher/discord-bot)  
 Their github has all the info you need  
 
+#### Bastion
+[TheBastionBot/Bastion](https://github.com/TheBastionBot/Bastion)  
+Give awesome perks to your Discord server!
+
 #### parkertron
 [parkervcp/parkertron](https://github.com/parkervcp/parkertron)  
 The bot that runs as the pterodactyl `@Support Bot`  
