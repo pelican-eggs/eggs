@@ -1,0 +1,20 @@
+GAME SETTINGS:
+minimum_MTF_time_to_spawn = 350;
+maximum_MTF_time_to_spawn = 470;
+ci_respawn_percent = 30;
+ci_on_start_percent = 10;
+team_respawn_queue = 40143140314414041340;
+server_forced_class = -1; (-1 = random)
+map_seed = -1; (-1 = random)
+intercom_cooldown = 60;
+intercom_max_speech_time = 60;
+auto_round_restart_time = 15;
+friendly_fire = true;
+
+///////////////////////////////////
+
+THESE SETTINGS REQUIRES THE GAME TO RESTART:
+server_ip = auto;
+server_name = SERVER NAME
+administrator_password = verysecretpassword_imnotusingthisactually_soyoudontneedtopointyoutomethatishouldchangethiskthxbye
+port_queue = 7777;
