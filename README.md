@@ -64,3 +64,6 @@ If you are submitting PR's try and keep names and titles the same.
 * [RocketMod](/unturned/rocketmod/)  
 
 [Xonotic](/xonotic/)  
+
+[Rigs of Rods](/rigs_of_rods/)
+* [RoRNet238](/rigs_of_rods/rornet238)
