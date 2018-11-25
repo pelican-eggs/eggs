@@ -17,9 +17,9 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# RoRNet 2.38 for Rigs of Rods 0.4.7.0 Installation Script\r\n\r\necho \"RoRNet 2.38 for Rigs of Rods 0.4.7.0 Installation Script\"\r\n\r\necho \"RoR|installed required services.\"\r\napt -y update\r\napt -y --no-install-recommends install zip unzip wget\r\n\r\nmkdir -p \/mnt\/server && cd \/mnt\/server\r\necho \"RoR|created directory for installation.\"\r\n\r\nwget http:\/\/files.rigsofrods.org\/rorserver-rornet238-linux.zip --no-check-certificate\r\necho \"RoR|retrived files from server.\"\r\n\r\nunzip rorserver-rornet238-linux.zip\r\nrm -rf rorserver-rornet238-linux.zip\r\necho \"RoR|unzipped files.\"\r\n\r\nmv \/mnt\/server\/rorserver-rornet238-linux\/* \/mnt\/server\/\r\nrm -rf \/mnt\/server\/rorserver-rornet238-linux\r\necho \"RoR|cleaned up.\"\r\n\r\nchmod +x rorserver\r\necho \"RoR|permissions assigned.\"",
-            "container": "ubuntu:18.04",
-            "entrypoint": "bash"
+            "script": "#!\/bin\/ash\r\n# RoRNet 2.38 for Rigs of Rods 0.4.7.0 Installation Script\r\n\r\necho \"RoRNet 2.38 for Rigs of Rods 0.4.7.0 Installation Script\"\r\n\r\necho \"RoR|installed required services.\"\r\napt -y update\r\napt -y --no-install-recommends install zip unzip wget\r\n\r\nmkdir -p \/mnt\/server && cd \/mnt\/server\r\necho \"RoR|created directory for installation.\"\r\n\r\nwget http:\/\/files.rigsofrods.org\/rorserver-rornet238-linux.zip --no-check-certificate\r\necho \"RoR|retrived files from server.\"\r\n\r\nunzip rorserver-rornet238-linux.zip\r\nrm -rf rorserver-rornet238-linux.zip\r\necho \"RoR|unzipped files.\"\r\n\r\nmv \/mnt\/server\/rorserver-rornet238-linux\/* \/mnt\/server\/\r\nrm -rf \/mnt\/server\/rorserver-rornet238-linux\r\necho \"RoR|cleaned up.\"\r\n\r\nchmod +x rorserver\r\necho \"RoR|permissions assigned.\"",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
         }
     },
     "variables": [
