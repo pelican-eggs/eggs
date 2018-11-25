@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-11-24T18:20:35-06:00",
+    "name": "RoRNet 2.38",
+    "author": "admin@rigsofrods.org",
+    "description": "RoRNet 2.38 is for Rigs of Rods. It is compatible with 0.4.7.0 only clients.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/rorserver -c config.cfg",
+    "config": {
+        "files": "{\r\n    \"config.cfg\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"name\": \"{{env.name}}\",\r\n            \"ip\": \"0.0.0.0\",\r\n            \"mode\": \"inet\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"terrain\": \"{{env.terrain}}\",\r\n            \"slots\": \"{{env.slots}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"INFO|server started in\",\r\n    \"userInteraction\": [\r\n        \"INFO| Registration failed\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": true\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# RoRNet 2.38 for Rigs of Rods 0.4.7.0 Installation Script\r\n\r\necho \"RoRNet 2.38 for Rigs of Rods 0.4.7.0 Installation Script\"\r\n\r\necho \"RoR|installed required services.\"\r\napt -y update\r\napt -y --no-install-recommends install zip unzip wget\r\n\r\nmkdir -p \/mnt\/server && cd \/mnt\/server\r\necho \"RoR|created directory for installation.\"\r\n\r\nwget http:\/\/files.rigsofrods.org\/rorserver-rornet238-linux.zip --no-check-certificate\r\necho \"RoR|retrived files from server.\"\r\n\r\nunzip rorserver-rornet238-linux.zip\r\nrm -rf rorserver-rornet238-linux.zip\r\necho \"RoR|unzipped files.\"\r\n\r\nmv \/mnt\/server\/rorserver-rornet238-linux\/* \/mnt\/server\/\r\nrm -rf \/mnt\/server\/rorserver-rornet238-linux\r\necho \"RoR|cleaned up.\"\r\n\r\nchmod +x rorserver\r\necho \"RoR|permissions assigned.\"",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "Amount of players that can connect.",
+            "env_variable": "slots",
+            "default_value": "8",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|max:20"
+        },
+        {
+            "name": "Terrain",
+            "description": "Default Terrain of the server. Changing to \"any\" allows the player to select.",
+            "env_variable": "terrain",
+            "default_value": "any",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Name",
+            "description": "The server name that will be displayed to players.",
+            "env_variable": "name",
+            "default_value": "Private Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
