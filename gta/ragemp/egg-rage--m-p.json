@@ -45,7 +45,7 @@
             "name": "Announce",
             "description": "Announce to the master server so people can see you in their server browser.",
             "env_variable": "ANNOUNCE",
-            "default_value": "false",
+            "default_value": "true",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|boolean"
