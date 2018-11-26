@@ -1,5 +1,5 @@
 {
-    "announce": false,
+    "announce": true,
     "bind": "0.0.0.0",
     "gamemode": "freeroam",
     "name": "RAGE:MP Unofficial server",
