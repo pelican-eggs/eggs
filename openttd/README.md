@@ -4,5 +4,6 @@ OpenTTD is a business simulation game in which players try to earn money via tra
 
 ## Server Ports
 
-OpenTTD requires one port to play, Defualt port is 3979 \
-Other ports can be added for rcon, but needs to be reflected in the openttd.cfg
+| Port    | Default |
+|---------|---------|
+| Game    | 3797    |
