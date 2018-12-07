@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-12-07T01:20:53-05:00",
+    "name": "OpenTTD Server",
+    "author": "admin@justmyrandomstuff.com",
+    "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
+    "image": "areyouscared\/ptero:openttd",
+    "startup": ".\/openttd -D",
+    "config": {
+        "files": "{\r\n    \"openttd.cfg\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"network.server_port\": \"{{server.build.default.port}}\",\r\n            \"network.server_name\": \"{{server.build.env.srv_name}}\",\r\n            \"network.server_password\": \"{{server.build.env.srv_pass}}\",\r\n            \"network.lan_internet\": 0,\r\n            \"network.server_advertise\": \"{{server.build.env.srv_advertise}}\",\r\n            \"network.admin_password\": \"{{server.build.env.srv_adminpass}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[net] Map generated, starting game\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\napt -y update\r\napt -y --no-install-recommends install wget tar unzip ca-certificates curl\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n## Download game\r\nwget https:\/\/binaries.openttd.org\/releases\/1.8.0\/openttd-1.8.0-linux-generic-amd64.tar.gz \r\ntar xf \/mnt\/server\/openttd-1.8.0-linux-generic-amd64.tar.gz\r\nmv openttd-1.8.0-linux-generic-amd64\/* .\r\nchmod +x openttd\r\n\r\n## Get opensoruce gfx\r\ncd \/mnt\/server\r\nwget https:\/\/binaries.openttd.org\/extra\/opengfx\/0.5.2\/opengfx-0.5.2-all.zip\r\nunzip opengfx-0.5.2-all.zip\r\ntar -xvf opengfx-0.5.2.tar\r\ncd opengfx-0.5.2\r\nmv -t \/mnt\/server\/baseset ogfx1_base.grf  ogfxc_arctic.grf  ogfxe_extra.grf  ogfxh_tropical.grf  ogfxi_logos.grf  ogfxt_toyland.grf  opengfx.obg\r\n\r\n## Remove excess files\r\ncd \/mnt\/server\r\nrm opengfx-0.5.2-all.zip opengfx-0.5.2.tar openttd-1.8.0-linux-generic-amd64.tar.gz\r\nrm -r opengfx-0.5.2-all openttd-1.8.0-linux-generic-amd64\r\ncurl https:\/\/justmyrandomstuff.com\/img\/nFBT6S7.cfg >> openttd.cfg",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The name shown in the serverlist",
+            "env_variable": "srv_name",
+            "default_value": "OpenTTD Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Password",
+            "description": "The password required to join the server",
+            "env_variable": "srv_pass",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Show in masterlist?",
+            "description": "Show the server in the serverlist on the client, true or false",
+            "env_variable": "srv_advertise",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password to access admin controls in-game",
+            "env_variable": "srv_adminpass",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
