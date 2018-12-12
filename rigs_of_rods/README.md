@@ -3,7 +3,7 @@
 The Rigs of Rods Server is a game server for [Rigs of Rods](https://www.rigsofrods.org/). It is compatible with RoR clients version 0.4.7.0. 
 
 ### Install notes
-By default, if neither `-lan` nor `-inet` is used the server will try to register at the master server and fall back to LAN mode in case it fails. See [Multiplayer server setup](http://docs.rigsofrods.org/gameplay/multiplayer-server-setup/).
+By default, if neither `-lan` nor `-inet` is used the server will try to register at the master server and fall back to LAN mode in case it fails. See [Multiplayer server setup](https://docs.rigsofrods.org/gameplay/multiplayer-server-setup/).
 
 ### Bandwidth used by the server
 The RoR server uses large amounts of bandwidth. The general formula to compute bandwidth is:
