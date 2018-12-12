@@ -5,7 +5,7 @@
     },
     "exported_at": "2018-11-24T18:20:35-06:00",
     "name": "RoRNet 2.38",
-    "author": "admin@rigsofrods.org",
+    "author": "contact@rigsofrods.org",
     "description": "RoRNet 2.38 is for Rigs of Rods. It is compatible with 0.4.7.0 only clients.",
     "image": "quay.io\/pterodactyl\/core:source",
     "startup": ".\/rorserver -c config.cfg",
