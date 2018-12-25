@@ -1,0 +1,9 @@
+{
+    "announce": true,
+    "bind": "0.0.0.0",
+    "gamemode": "freeroam",
+    "name": "RAGE:MP Unofficial server",
+    "maxplayers": 100,
+    "port": 26011,
+    "streamdistance": 500
+}

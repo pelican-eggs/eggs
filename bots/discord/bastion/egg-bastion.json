@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-10-30T23:15:12-04:00",
+    "name": "Bastion",
+    "author": "parker@parkervcp.com",
+    "description": "Bastion is an all-in-one multipurpose Discord bot that can do a whole bunch of things and its features are expanding daily. Bastion does everything most people will ever need it to do. Check out some feature highlights below to get a peek into the vast feature list of Bastion. And if you think Bastion lacks some feature, please send a suggestion and we will add it to Bastion as soon as possible.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_bastion",
+    "startup": "node bastion.js",
+    "config": {
+        "files": "{\r\n    \"settings\/credentials.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"botId\": \"{{server.build.env.BOT_ID}}\",\r\n            \"token\": \"{{server.build.env.BOT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"I'm ready to roll!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Bastion Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Install Requirements\r\napk --no-cache add python g++ make git\r\n\r\n## Move to install folder\r\ncd \/mnt\/server\/\r\n\r\n## Clone repo\r\ngit clone -b stable -q --depth 1 https:\/\/github.com\/TheBastionBot\/Bastion.git .\/\r\n\r\n## Install node_modules\r\nnpm install --only=production\r\n\r\n## Move config files.\r\nmv settings\/credentials_example.json settings\/credentials.json\r\nmv settings\/config_example.json settings\/config.json",
+            "container": "node:8-alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Bot ID",
+            "description": "The Bot ID you get from https:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "BOT_ID",
+            "default_value": "GETABOTID",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Bot Token",
+            "description": "The Bot ID you get from https:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "BOT_TOKEN",
+            "default_value": "GETABOTTOKEN",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        }
+    ]
+}

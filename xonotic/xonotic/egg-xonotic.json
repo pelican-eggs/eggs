@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-02-23T15:46:08-05:00",
+    "name": "Xonotic",
+    "author": "parker@parkervcp.com",
+    "description": "This is for the default xonotic setup.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/xonotic-linux64-dedicated +log_file latest.log +net_address 0.0.0.0 +port {{SERVER_PORT}} +maxplayers {{MAX_PLAYERS}}",
+    "config": {
+        "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server listening on address 0.0.0.0:\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Vanilla Xonotic Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add rsync --no-cache\r\n\r\ncd \/mnt\/server\r\n\r\nwget http:\/\/dl.xonotic.org\/xonotic-0.8.2.zip\r\n\r\nunzip xonotic-0.8.2.zip\r\n\r\nmv Xonotic\/* .\/\r\n\r\n.\/misc\/tools\/rsync-updater\/update-to-autobuild.sh\r\n\r\nrm -rf COPYING Makefile *glx* *glx *sdl* *sdl *linux32* *exe *.app *.sh bin* GPL* Docs\/ gmqcc\/ source\/ misc\/ Xonotic\/ xonotic-0.8.2.zip",
+            "container": "alpine:3.7",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "Max players allowed on the server",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,3"
+        }
+    ]
+}
