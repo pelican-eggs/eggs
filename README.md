@@ -25,9 +25,12 @@ If you are submitting PR's try and keep names and titles the same.
 [Arma](/arma/)  
 * [Arma 3](/arma/arma3/)  
 
+[Conan Exiles](/conan_exiles/conan_exiles)
+
 [Don't Starve](/dont_starve/dont_starve)
 
 [Factorio](/factorio/factorio/)  
+
 [Grand Theft Auto](/gta/)  
 * [FiveM](/gta/fivem/)  
 * [RageMP](/gta/ragemp/)  
