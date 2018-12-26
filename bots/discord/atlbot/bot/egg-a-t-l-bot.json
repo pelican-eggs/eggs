@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-11-24T19:11:07-05:00",
+    "exported_at": "2018-12-25T21:12:00-05:00",
     "name": "ATLBot",
     "author": "jfeldt19@gmail.com",
     "description": "ATLbot in ptero\r\n\r\nhttps:\/\/github.com\/ATLauncher\/discord-bot\/",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apk add --no-cache openssl git\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/github.com\/ATLauncher\/discord-bot\/archive\/master.zip\r\n\r\nunzip master.zip\r\n\r\nrm master.zip\r\n\r\nmv discord-bot-master\/* .\/\r\n\r\nmv config\/config.json.example config\/config.json\r\n\r\n\/usr\/local\/bin\/npm install --production\r\n\r\n\/usr\/local\/bin\/npm run build",
+            "script": "apk add --no-cache openssl git\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/github.com\/ATLauncher\/discord-bot\/archive\/master.zip\r\n\r\nunzip master.zip\r\n\r\nrm master.zip\r\n\r\nmv discord-bot-master\/* .\/\r\n\r\nmv config\/config.json.example config\/config.json\r\n\r\nrm package-lock.json\r\nnpm install\r\n\r\nrm -r discord-bot-master\/\r\nrm Dockerfile\r\nrm CONTRIBUTING.md\r\nrm README.md\r\nrm \/config\/.gitignore\r\nrm CODE_OF_CONDUCT.md",
             "container": "node:10-alpine",
             "entrypoint": "ash"
         }
