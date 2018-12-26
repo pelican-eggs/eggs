@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-06-02T17:05:28-04:00",
+    "exported_at": "2018-12-25T20:34:11-05:00",
     "name": "Conan Exiles",
     "author": "brycea@rapidnetworks.org",
     "description": "Conan Exiles is an open-world survival game set in the brutal lands of Conan the Barbarian. Survive in a savage world, build your kingdom, and dominate your enemies in brutal combat and epic warfare.",
-    "image": "quay.io\/exonical\/pterodactyl-containers:conanexiles",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:wine-source",
     "startup": "wine ConanSandboxServer.exe -log",
     "config": {
         "files": "{}",
