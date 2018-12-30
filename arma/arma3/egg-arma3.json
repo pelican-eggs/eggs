@@ -97,7 +97,7 @@
         },
         {
             "name": "Steam Auth Code",
-            "description": "Steam Auth Code only when your using Steam Auth",
+            "description": "Steam Auth Code only when you're using Steam Auth",
             "env_variable": "STEAM_AUTH",
             "default_value": "",
             "user_viewable": 0,
