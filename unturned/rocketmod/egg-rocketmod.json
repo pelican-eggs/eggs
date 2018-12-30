@@ -25,12 +25,12 @@
     "variables": [
         {
             "name": "Steam User",
-            "description": "A Steam username w\/ Unturned on the account.",
+            "description": "A Steam username with Unturned on the account.",
             "env_variable": "STEAM_USER",
-            "default_value": "",
+            "default_value": "anonymous",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "nullable|string"
+            "rules": "required|string"
         },
         {
             "name": "Steam Password",
@@ -49,6 +49,6 @@
             "user_viewable": 0,
             "user_editable": 0,
             "rules": "nullable|string"
-        },
+        }
     ]
 }

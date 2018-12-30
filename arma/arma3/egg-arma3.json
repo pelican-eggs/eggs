@@ -79,16 +79,16 @@
         },
         {
             "name": "Steam User",
-            "description": "Admin only",
+            "description": "A Steam username with Arma3 on the account.",
             "env_variable": "STEAM_USER",
-            "default_value": "",
+            "default_value": "anonymous",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "nullable|string"
+            "rules": "required|string"
         },
         {
-            "name": "STEAM_PASS",
-            "description": "STEAM_PASS",
+            "name": "Steam Password",
+            "description": "Steam User Password",
             "env_variable": "STEAM_PASS",
             "default_value": "",
             "user_viewable": 0,
