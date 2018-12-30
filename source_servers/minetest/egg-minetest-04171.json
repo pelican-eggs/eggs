@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-12-30T16:55:42+01:00",
+    "exported_at": "2018-12-30T19:46:35+01:00",
     "name": "Minetest 0.4.17.1",
     "author": "support@pterodactyl.io",
     "description": "An open source voxel game engine. Play one of our many games, mod a game to your liking, make your own game, or play on a multiplayer server.",
     "image": "tuxifan\/pterodactyl-minetest:latest",
-    "startup": ".\/bin\/minetestserver",
+    "startup": ".\/bin\/minetestserver --port {{SERVER_PORT}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \" listening on \",\r\n    \"userInteraction\": []\r\n}",
