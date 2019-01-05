@@ -24,7 +24,7 @@
     },
     "variables": [
         {
-            "name": "FiveM License",
+            "name": "fivem license",
             "description": "Required to start the service. Get your keys at https:\/\/keymaster.fivem.net\/",
             "env_variable": "FIVEM_LICENSE",
             "default_value": "",
