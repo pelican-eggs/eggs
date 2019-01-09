@@ -29,7 +29,7 @@
             "env_variable": "MTVERSION",
             "default_value": "0.4.17.1",
             "user_viewable": 0,
-            "user_editable": 0,
+            "user_editable": 1,
             "rules": "required|string|max:10"
         }
     ]
