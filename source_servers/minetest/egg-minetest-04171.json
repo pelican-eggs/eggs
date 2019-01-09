@@ -3,8 +3,8 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-12-30T19:46:35+01:00",
-    "name": "Minetest 0.4.17.1",
+    "exported_at": "2019-01-09T19:21:16+01:00",
+    "name": "Minetest",
     "author": "support@pterodactyl.io",
     "description": "An open source voxel game engine. Play one of our many games, mod a game to your liking, make your own game, or play on a multiplayer server.",
     "image": "tuxifan\/pterodactyl-minetest:latest",
@@ -17,10 +17,20 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Minetest Installation Script\r\ncd \/mnt\/server &&\r\n\r\n# Install installation dependencies\r\napt update &&\r\napt -y install unzip wget build-essential libirrlicht-dev cmake libbz2-dev libjpeg-dev libxxf86vm-dev libsqlite3-dev libopenal-dev libcurl4-gnutls-dev libfreetype6-dev zlib1g-dev libgmp-dev libjsoncpp-dev luajit libncurses5-dev &&\r\n#touch test &&\r\n\r\n# Download, compile and prepare the engine\r\nwget -Osrc.zip https:\/\/github.com\/minetest\/minetest\/archive\/0.4.17.1.zip &&\r\nunzip .\/src.zip &&\r\nrm .\/src.zip &&\r\ncd .\/minetest-0.4.17.1 &&\r\ncmake . -DRUN_IN_PLACE=TRUE -DBUILD_CLIENT=FALSE -DBUILD_SERVER=TRUE -DENABLE_GLES=OFF -DENABLE_POSTGRESQL=OFF -DENABLE_REDIS=OFF -DENABLE_SOUND=OFF -DENABLE_LEVELDB=OFF -DENABLE_SPATIAL=OFF &&\r\nmake -j$(nproc) &&\r\nmake package &&\r\nmv .\/minetest-0.4.17.1-linux.tar.gz ..\/ &&\r\ncd .. &&\r\nrm -rf .\/minetest-0.4.17.1 &&\r\ntar xfz .\/minetest-0.4.17.1-linux.tar.gz &&\r\nrm minetest-0.4.17.1-linux.tar.gz &&\r\nmv .\/minetest-0.4.17.1-linux\/* .\/ &&\r\nrm -rf minetest-0.4.17.1-linux &&\r\ntouch .\/minetest.conf &&\r\n\r\n# Download and prepare the game\r\ncd .\/games &&\r\nwget -Ominetest_game.zip https:\/\/github.com\/minetest\/minetest_game\/archive\/0.4.17.1.zip &&\r\nunzip minetest_game.zip &&\r\n#rm minetest_game.zip &&\r\nmv minetest_game-0.4.17.1 minetest_game &&\r\ncd .. &&\r\n\r\n# Clean up a bit\r\nrm -rf clientmods unix doc client fonts textures &&\r\n\r\n# Done!\r\necho \"Installation was successfully completed!\"",
+            "script": "#!\/bin\/bash\r\n# Minetest Installation Script\r\ncd \/mnt\/server &&\r\n\r\n# Install installation dependencies\r\napt update &&\r\napt -y install unzip wget build-essential libirrlicht-dev cmake libbz2-dev libjpeg-dev libxxf86vm-dev libsqlite3-dev libopenal-dev libcurl4-gnutls-dev libfreetype6-dev zlib1g-dev libgmp-dev libjsoncpp-dev luajit libncurses5-dev &&\r\n#touch test &&\r\n\r\n# Download, compile and prepare the engine\r\nwget -Osrc.zip https:\/\/github.com\/minetest\/minetest\/archive\/\"${MTVERSION}\".zip &&\r\nunzip .\/src.zip &&\r\nrm .\/src.zip &&\r\ncd .\/minetest-\"${MTVERSION}\" &&\r\ncmake . -DRUN_IN_PLACE=TRUE -DBUILD_CLIENT=FALSE -DBUILD_SERVER=TRUE -DENABLE_GLES=OFF -DENABLE_POSTGRESQL=OFF -DENABLE_REDIS=OFF -DENABLE_SOUND=OFF -DENABLE_LEVELDB=OFF -DENABLE_SPATIAL=OFF &&\r\nmake -j$(nproc) &&\r\nmake package &&\r\nmv .\/minetest-\"${MTVERSION}\"-linux.tar.gz ..\/ &&\r\ncd .. &&\r\nrm -rf .\/minetest-\"${MTVERSION}\" &&\r\ntar xfz .\/minetest-\"${MTVERSION}\"-linux.tar.gz &&\r\nrm minetest-\"${MTVERSION}\"-linux.tar.gz &&\r\nmv .\/minetest-\"${MTVERSION}\"-linux\/* .\/ &&\r\nrm -rf minetest-\"${MTVERSION}\"-linux &&\r\ntouch .\/minetest.conf &&\r\n\r\n# Download and prepare the game\r\ncd .\/games &&\r\nwget -Ominetest_game.zip https:\/\/github.com\/minetest\/minetest_game\/archive\/\"${MTVERSION}\".zip &&\r\nunzip minetest_game.zip &&\r\n#rm minetest_game.zip &&\r\nmv minetest_game-\"${MTVERSION}\" minetest_game &&\r\ncd .. &&\r\n\r\n# Clean up a bit\r\nrm -rf clientmods unix doc client fonts textures &&\r\n\r\n# Done!\r\necho \"Installation was successfully completed!\"",
             "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "Version",
+            "description": "The version of MT to install. Only releases will work!",
+            "env_variable": "MTVERSION",
+            "default_value": "0.4.17.1",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:10"
+        }
+    ]
 }
