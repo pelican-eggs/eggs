@@ -50,6 +50,8 @@ If you are submitting PR's try and keep names and titles the same.
 [Minecraft Proxies](/minecraft_proxy/)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
 
+[Minetest](/source_servers/minetest)
+
 [Mount & Blade Warband](/mb_warband/)
 
 [OpenTTD](/openttd/)
