@@ -1,6 +1,6 @@
-# PixARK
+# PMinetest
 
-Welcome to PixARK, a vast, wild world filled with vicious dinosaurs, magical creatures and endless adventure! To survive in this mysterious land, you must tame creatures both ferocious and cuddly, craft high tech and magical tools, and build your own base out of cubes.
+An open source voxel game engine. Play one of our many games, mod a game to your liking, make your own game, or play on a multiplayer server.
 
 ### Server Ports
 Minetest requires just 1 port
