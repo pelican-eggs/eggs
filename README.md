@@ -20,6 +20,9 @@ If you are submitting PR's try and keep names and titles the same.
 * [pixel-bot](/bots/discord/pixelbot/) Python  
 * [Sinusbot](/bots/discord/sinusbot/)  
 
+[TeamSpeak3](bots/teamspeak3)
+* [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
+
 ## Game Eggs
 
 [Arma](/arma/)  
