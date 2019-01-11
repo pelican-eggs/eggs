@@ -3,21 +3,21 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-10-19T16:15:02-04:00",
+    "exported_at": "2019-01-11T13:47:44-05:00",
     "name": "Holdfast NaW",
     "author": "mason@rowe.sh",
     "description": "Holdfast: Nations at War",
     "image": "masonr\/pterodactyl-images:holdfast",
-    "startup": "WINEDEBUG=\"fixme-all\" DISPLAY=:0 wine \"\/home\/container\/Holdfast\\ NaW.exe\" -startserver -batchmode -screen-width 640 -screen-height 480 -screen-quality Fastest -framerate 60 -servercarbonplayers 0 -serverConfigFilePath \/home\/container\/serverconfig.txt -logFile \/home\/container\/logs_output\/outputlog_server.txt -logArchivesDirectory \/home\/container\/logs_archive -s {{SERVER_IP}} -p {{SERVER_PORT}} -l \"94.130.66.231\" -o 7101",
+    "startup": "wine \".\/Holdfast\\ NaW.exe\" -startserver -batchmode -screen-width 640 -screen-height 480 -screen-quality Fastest -framerate 60 -servercarbonplayers 0 -serverConfigFilePath serverconfig.txt -logFile logs_output\/outputlog_server.txt -logArchivesDirectory logs_archive -s {{SERVER_IP}} -p {{SERVER_PORT}} -l \"94.130.66.231\" -o 7101",
     "config": {
-        "files": "{}",
-        "startup": "{\r\n    \"done\": \"Loading player data\",\r\n    \"userInteraction\": []\r\n}",
+        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"server_name\": \"server_name {{server.build.env.SERVER_NAME}}\",\r\n            \"maximum_players\": \"maximum_players {{server.build.env.PLAYERS}}\",\r\n            \"server_welcome_message\": \"server_welcome_message {{server.build.env.MOTD}}\",\r\n            \"server_region\": \"server_region {{server.build.env.REGION}}\",\r\n            \"server_admin_password\": \"server_admin_password {{server.build.env.ADMIN_PASS}}\",\r\n            \"server_password\": \"server_password {{server.build.env.SERVER_PASS}}\",\r\n            \"server_port\": \"server_port {{server.build.default.port}}\",\r\n            \"steam_communications_port\": \"steam_communications_port {{server.build.env.SERVER_COMM_PORT}}\",\r\n            \"steam_query_port\": \"steam_query_port {{server.build.env.SERVER_QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Mono config path\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/\"\r\n}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Holdfast Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y install wget ca-certificates bsdtar\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nwget -qO- http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz | tar xvz\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\n\r\ncd \/mnt\/server\r\nwget -qO- https:\/\/www.dropbox.com\/sh\/ppkfny3r9kcnz8x\/AADiIXOrlAWPh-XbhPpimw0ja?dl=1 | bsdtar -xvf-\r\ncp serverconfig_server1_armybattlefield.txt serverconfig.txt\r\nchmod 755 \/mnt\/server\/*",
+            "script": "#!\/bin\/bash\r\n# Holdfast Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y install wget ca-certificates unzip\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nwget -qO- http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz | tar xvz\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\n\r\ncd \/mnt\/server\r\nwget -O holdfast_naw_public_servers.zip https:\/\/www.dropbox.com\/sh\/ppkfny3r9kcnz8x\/AADiIXOrlAWPh-XbhPpimw0ja?dl=1\r\nunzip holdfast_naw_public_servers.zip\r\nrm holdfast_naw_public_servers.zip\r\ncp serverconfig_server1_armybattlefield.txt serverconfig.txt\r\nchmod 755 \/mnt\/server\/*",
             "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }
@@ -121,6 +121,24 @@
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|integer|max:150"
+        },
+        {
+            "name": "Wine Debug Env",
+            "description": "Wine Debug Environment Variable - Suppresses wine error messages in log",
+            "env_variable": "WINEDEBUG",
+            "default_value": "fixme-all",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Display Env",
+            "description": "Display Environment Variable - Assigns server gui to virtual frame buffer",
+            "env_variable": "DISPLAY",
+            "default_value": ":0",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
         }
     ]
 }
