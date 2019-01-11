@@ -57,6 +57,7 @@ If you are submitting PR's try and keep names and titles the same.
 [Source](/source_servers/)  These eggs use steamcmd to install  
 * [7 Days to Die](/source_servers/7_days_to_die/)  
 * [PixARK](/source_servers/pixark/)  
+* [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
 
 [Squad](/squad/)  
