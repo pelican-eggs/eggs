@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-01-22T20:48:31+01:00",
+    "exported_at": "2019-01-22T20:55:12+01:00",
     "name": "Left 4 Dead 2",
     "author": "teamwuffy@gmail.com",
     "description": "Config folder:\r\n\/left4dead2\/cfg\/server.cfg\r\n\r\nDefault Config:\r\nhttps:\/\/raw.githubusercontent.com\/linode\/docs-scripts\/master\/hosted_scripts\/left-4-dead-2-multiplayer-server-installation\/basic-server.cfg\r\n\r\nDetailed Config:\r\nhttps:\/\/github.com\/linode\/docs-scripts\/blob\/master\/hosted_scripts\/left-4-dead-2-multiplayer-server-installation\/detailed-server.cfg",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/srcds_run -console -game left4dead2 +port {{SERVER_PORT}} +maxplayers {{SERVER_PLAYER_COUNT}} +exec server.cfg +map {{SRCDS_MAP}} +hostname {{SERVER_HOSTNAME}}",
+    "startup": ".\/srcds_run -console -game left4dead2 +port {{SERVER_PORT}} +maxplayers {{SERVER_PLAYER_COUNT}} +exec server.cfg +map {{SRCDS_MAP}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Writing cfg\/banned_user.cfg.\",\r\n    \"userInteraction\": []\r\n}",
@@ -40,15 +40,6 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string"
-        },
-        {
-            "name": "Hostname",
-            "description": "",
-            "env_variable": "SERVER_HOSTNAME",
-            "default_value": "Your Server Name Here",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:200"
         }
     ]
 }
