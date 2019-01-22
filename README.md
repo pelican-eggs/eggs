@@ -59,6 +59,7 @@ If you are submitting PR's try and keep names and titles the same.
 * [PixARK](/source_servers/pixark/)  
 * [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
+* [Left 4 Dead 2](/source_servers/left_4_dead_2)
 
 [Squad](/squad/)  
 

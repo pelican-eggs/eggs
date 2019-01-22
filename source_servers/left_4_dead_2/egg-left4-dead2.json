@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-01-22T20:48:31+01:00",
+    "name": "Left 4 Dead 2",
+    "author": "teamwuffy@gmail.com",
+    "description": "Config folder:\r\n\/left4dead2\/cfg\/server.cfg\r\n\r\nDefault Config:\r\nhttps:\/\/raw.githubusercontent.com\/linode\/docs-scripts\/master\/hosted_scripts\/left-4-dead-2-multiplayer-server-installation\/basic-server.cfg\r\n\r\nDetailed Config:\r\nhttps:\/\/github.com\/linode\/docs-scripts\/blob\/master\/hosted_scripts\/left-4-dead-2-multiplayer-server-installation\/detailed-server.cfg",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/srcds_run -console -game left4dead2 +port {{SERVER_PORT}} +maxplayers {{SERVER_PLAYER_COUNT}} +exec server.cfg +map {{SRCDS_MAP}} +hostname {{SERVER_HOSTNAME}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Writing cfg\/banned_user.cfg.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Left 4 Dead 2 Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ndpkg --add-architecture i386\r\n\r\napt -y update && apt -y upgrade\r\n\r\napt -y install lib32gcc1 lib32stdc++6 libc6-i386 libcurl4-gnutls-dev:i386 curl wget ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 222860 +quit +validate\r\n\r\nmkdir -p \/mnt\/server\/left4dead2\/cfg\r\ncat <<EOF >> \/mnt\/server\/left4dead2\/cfg\/server.cfg\r\n\/\/ You should change these\r\nhostname \"Your Server Name Here\"\r\nrcon_password yourpass\r\n\r\n\/\/ This states how players should contact you.  Use your email or website\r\n\/\/sv_contact your@gmail.com\r\n\r\n\/\/ Number of rounds to play (only versus)\r\nmp_roundlimit 2\r\n\r\n\/\/ If you want to use a search key to find the server in the lobby, uncomment and edit this line\r\n\/\/sv_search_key \"\"\r\n\/\/sv_tags \"\"\r\n\r\n\/\/ STEAM GROUP\r\n\/\/sv_steamgroup GROUPIDHERE\r\n\r\n\/\/MASTERSERVERS\r\n\r\n\/\/FRIENDLY FIRE\r\nsurvivor_friendly_fire_factor_easy 0\r\nsurvivor_friendly_fire_factor_expert 0\r\nsurvivor_friendly_fire_factor_hard 1\r\nsurvivor_friendly_fire_factor_normal 1\r\n\r\n\/\/ CHEAT\/CONFIG\r\nsv_lan 0\r\nsv_cheats 0\r\nsv_consistency 1\r\nsv_maxcmdrate 101\r\nsv_maxrate 30000\r\n\r\nsm_cvar sv_disable_glow_survivors 0\r\nsm_cvar sv_disable_glow_faritems 0\r\nsm_cvar sv_rescue_disabled 0\r\n\r\n\/\/ADVERTRISMENTS\r\nsm_advertisements_enabled 1\r\nsm_advertisements_interval 480\r\n\r\n\/\/MOTD\r\nmotd_enabled 1\r\n\r\n\/\/GAME MODE\r\nsv_gametypes \"coop, versus, mutation\"\r\nsm_cvar mp_gamemode coop\r\n\r\n\/\/DIFFICULTY\r\nz_difficulty Impossible\r\n\r\n\/\/LOBBY CONNECT\r\nsv_allow_lobby_connect_only 0\r\n\r\n\/\/BEBOP\r\nl4d_maxplayers \"8\"\r\nsv_maxplayers \"8\"\r\nsm_cvar l4d_maxplayers \"8\"\r\nsv_visiblemaxplayers \"-1\"\r\nsm_cvar l4d_survivor_limit \"8\"\r\nsm_cvar sv_removehumanlimit \"1\"\r\n\r\n\/\/PIPE-BOMB DURATION\r\nsm_cvar pipe_bomb_timer_duration \"10\"\r\n\r\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\r\n\/\/Game Settings\r\n\/\/\/\/\/\/\/\/\/\/\/\/\r\nmp_disable_autokick 1         \/\/(command)prevents a userid from being auto-kicked (Usage mp_diable_autokick )\r\nsv_allow_wait_command 0        \/\/default 1; Allow or disalow the wait command on clients connected to this server.\r\nsv_alternateticks 0        \/\/defulat 0; (singleplayer)If set, server only simulates entities on even numbered ticks.\r\nsv_clearhinthistory 0        \/\/(command)Clear memory of server side hint displayed to the player.\r\nsv_consistency 0        \/\/default 1; Whether the server enforces file consistency for critical files\r\nsv_pausable 0            \/\/default 0; is the server pausable\r\nsv_forcepreload 1        \/\/default 0; Force server side preloading\r\nsv_pure_kick_clients 0        \/\/default 1; If set to 1, the server will kick clients with mismatchng files. Otherwise, it will issue a warning to the client.\r\nsv_pure 0            \/\/If set to 1, server will force all client files execpt whitelisted ones (in pure_server_whitelist.txt) to match server's files.\r\n\/\/If set to 2, the server will force all client files to come from steam and not load pure_server_whilelist.txt. Set to 0 for disabled.\r\n\r\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\r\n\/\/communication\r\n\/\/\/\/\/\/\/\/\/\/\/\/\r\nsv_voiceenable 1        \/\/default 1; enable\/disable voice comm\r\nsv_alltalk 1            \/\/default 0; Players can hear all other players' voice communication, no team restrictions\r\n\r\n\r\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\r\n\/\/LOGGING\r\n\/\/\/\/\/\/\/\/\/\/\/\/\r\nlog on            \/\/Creates a logfile (on | off)\r\nsv_logecho 0            \/\/default 0; Echo log information to the console.\r\nsv_logfile 1        \/\/default 1; Log server information in the log file.\r\nsv_log_onefile 0    \/\/default 0; Log server information to only one file.\r\nsv_logbans 1        \/\/default 0;Log server bans in the server logs.\r\nsv_logflush 0        \/\/default 0; Flush the log files to disk on each write (slow).\r\nsv_logsdir logs        \/\/Folder in the game directory where server logs will be stored.\r\n\r\n\r\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\r\n\/\/Bans\r\n\/\/  execute banned.cfgs at server start. Optimally at launch commandline.\r\n\/\/  Put writeip\/wrtieid commands in the bottom of server.cfg AFTER banned.cfgs have loaded.\r\n\/\/\/\/\/\/\/\/\/\/\/\/\r\nexec banned_user.cfg    \/\/loads banned users' ids\r\nexec banned_ip.cfg    \/\/loads banned users' ips\r\nwriteip          \/\/Save the ban list to banned_ip.cfg.\r\nwriteid          \/\/Wrties a list of permanently-banned user IDs to banned_user.cfg.\r\n\r\n\r\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\r\n\/\/Network Tweaks - Increase network performance\r\n\/\/\/\/\/\/\/\/\/\/\/\/\r\nrate 10000        \/\/default 10000; Max bytes\/sec the host can recieve data\r\nsv_minrate 15000       \/\/default \"5000\"; Min bandwidth rate allowed on server, 0 = unlimited\r\nsv_maxrate 30000    \/\/default \"0\";  Max bandwidth rate allowed on server, 0 = unlimited\r\nsv_mincmdrate 20    \/\/default 0; This sets the minimum value for cl_cmdrate. 0 = unlimited [cevo=67]\r\nsv_maxcmdrate 33    \/\/default 40; (If sv_mincmdrate is > 0), this sets the maximum value for cl_cmdrate. [cevo=101]\r\nEOF",
+            "container": "ubuntu:18.10",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Player Count",
+            "description": "",
+            "env_variable": "SERVER_PLAYER_COUNT",
+            "default_value": "8",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Map",
+            "description": "",
+            "env_variable": "SRCDS_MAP",
+            "default_value": "c2m1_highway",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Hostname",
+            "description": "",
+            "env_variable": "SERVER_HOSTNAME",
+            "default_value": "Your Server Name Here",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:200"
+        }
+    ]
+}
