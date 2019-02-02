@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\r\n    INSTALLER_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A50 Recommended | grep installer.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\n    UNIVERSAL_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A50 Recommended | grep universal.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\nelse\r\n    INSTALLER_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/index_$MC_VERSION.html | grep -A50 Recommended | grep installer.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\n    UNIVERSAL_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/index_$MC_VERSION.html | grep -A50 Recommended | grep universal.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting installer from $INSTALLER_JAR\"\r\ncurl -Sl $INSTALLER_JAR -o installer.jar\r\n\r\necho -e \"getting universal jar from $UNIVERSAL_JAR\"\r\ncurl -Sl $UNIVERSAL_JAR -o server.jar\r\n\r\njava -jar installer.jar --installServer\r\nrm -rf installer.jar\r\n\r\necho \"Install complete\"",
-            "container": "frolvlad\/alpine-oraclejdk8:cleaned",
+            "container": "openjdk:8-alpine",
             "entrypoint": "ash"
         }
     },
