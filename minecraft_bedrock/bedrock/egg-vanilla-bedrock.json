@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n\r\napk add --no-cache zip unzip wget curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading files from https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\"\r\n\r\nif [ -z \"${BEDROCK_VERSION}\" ] || [ \"${BEDROCK_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest Bedrock server\"\r\n    DOWNLOAD_URL=$(curl https:\/\/minecraft.net\/en-us\/download\/server\/bedrock\/ | grep azureedge | grep linux | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\")\r\n    BEDROCK_ZIP=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\nelse \r\n    echo -e \"\\n Downloading ${BEDROCK_VERSION} Bedrock server\"\r\n    DOWNLOAD_URL=https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\r\n    BEDROCK_ZIP=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\nfi\r\n\r\nwget ${DOWNLOAD_URL}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip -o $BEDROCK_ZIP\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm $BEDROCK_ZIP\r\n\r\necho -e \"Done\"",
-            "container": "alpine:3.8",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },
