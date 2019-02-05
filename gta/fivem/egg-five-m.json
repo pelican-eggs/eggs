@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash \r\n\r\napk add openssl tar xz curl wget git --no-cache\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir resources\r\n\r\necho \"updating citizenfx resource files\"\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/tmp\r\ncp -Rf \/tmp\/resources\/* resources\/ \r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading the latest fivem server files\"\r\nlatest_fivem_url=`curl https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/ | grep -Eo 'href=\".*\/\"' | grep -Eo '\".*\"' | grep -Eo 'href=\".*\/\"' | grep -Eo '\".*\"' | sed 's\/\\\"\/\/g'`\r\n\r\necho -e \"pulling files from https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\"\r\nwget https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${latest_fivem_url}fx.tar.xz\r\n\r\necho \"Extracting fivem files\"\r\n\r\ntar xf fx.tar.xz\r\n\r\nrm -rf fx.tar.xz run.sh\r\n\r\nif [ -e server.cfg ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default fivem config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/gta\/fivem\/server.cfg >> server.cfg\r\nfi\r\n\r\nmkdir logs\/\r\n\r\necho \"install complete\"",
-            "container": "alpine:3.7",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },
