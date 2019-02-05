@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Vanilla T-shock Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading tModloader\"\r\nwget https:\/\/github.com\/blushiemagic\/tModLoader\/releases\/download\/${TMODLOADER_VERSION}\/tModLoader.Linux.${TMODLOADER_VERSION}.zip\r\n\r\necho -e \"Unpacking mod loader files\"\r\nunzip tModLoader.Linux.${TMODLOADER_VERSION}.zip\r\n\r\nCLEAN_VERSION=$(echo ${TERRARIA_VERSION} | sed 's\/\\.\/\/g')\r\n\r\necho -e \"Downloading terraria server files\"\r\nwget http:\/\/terraria.org\/server\/terraria-server-${CLEAN_VERSION}.zip\r\n\r\necho -e \"Unpacking server files\"\r\nunzip terraria-server-$(echo ${CLEAN_VERSION} | sed 's\/\\.\/\/g').zip\r\ncp -R ${CLEAN_VERSION}\/Linux\/* .\/\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${CLEAN_VERSION}\r\n\r\nchmod +x .\/tModLoaderServer.bin.x86_64",
-            "container": "alpine:3.8",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },
