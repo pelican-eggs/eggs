@@ -12,6 +12,8 @@ If you are submitting PR's try and keep names and titles the same.
 
 ## Please read the CONTRIBUTING.md before submitting PRs
 
+If you submit a PR without filling out the template I will deny it. This is for all PR's moving forward (after Feb 5th, 2019)
+
 ## Bot Eggs
 
 [Discord](/bots/discord/)   
