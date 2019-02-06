@@ -9,5 +9,5 @@ The official Minecraft Bedrock (Formerly Minecraft Pocket Edition) server.
 Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition  
 
 #### PocketMine MP
-[PockletMine MP](https://github.com/pmmp/PocketMine-MP)  
+[PocketMine MP](https://github.com/pmmp/PocketMine-MP)  
 A server software for Minecraft: Bedrock Edition in PHP  
