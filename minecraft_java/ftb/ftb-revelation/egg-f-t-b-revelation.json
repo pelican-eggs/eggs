@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl --no-cache\r\n\r\nBASEURL=https:\/\/www.feed-the-beast.com\/projects\/ftb-revelation\/files\r\nPATTERN=\"(projects\\\/ftb-revelation\\\/files\\\/\\d{7,})\"\r\nID=`curl -sl ${BASEURL}| grep -A2 ${MODPACK_VERSION} | grep -oE \"${PATTERN}\"`\r\nSECONDURL=https:\/\/www.feed-the-beast.com\/${ID}\r\nGOOD_ID=`curl -sl ${SECONDURL} | grep -B2 Server_${MODPACK_VERSION}.zip | grep -oE \"${PATTERN}\"`\r\n\r\nDL_URL=https:\/\/www.feed-the-beast.com\/${GOOD_ID}\/download\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -L ${DL_URL} -o ftbrevelations-${MODPACK_VERSION}.zip\r\n\r\nunzip ftbrevelations-${MODPACK_VERSION}.zip\r\n\r\nrm -rf ftbrevelations-${MODPACK_VERSION}.zip\r\n\r\nsh .\/FTBInstall.sh",
-            "container": "alpine:3.7",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },

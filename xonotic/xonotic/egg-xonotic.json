@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Vanilla Xonotic Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add rsync --no-cache\r\n\r\ncd \/mnt\/server\r\n\r\nwget http:\/\/dl.xonotic.org\/xonotic-0.8.2.zip\r\n\r\nunzip xonotic-0.8.2.zip\r\n\r\nmv Xonotic\/* .\/\r\n\r\n.\/misc\/tools\/rsync-updater\/update-to-autobuild.sh\r\n\r\nrm -rf COPYING Makefile *glx* *glx *sdl* *sdl *linux32* *exe *.app *.sh bin* GPL* Docs\/ gmqcc\/ source\/ misc\/ Xonotic\/ xonotic-0.8.2.zip",
-            "container": "alpine:3.7",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },
