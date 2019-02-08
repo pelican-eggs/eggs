@@ -3,8 +3,8 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-08-02T16:56:12-04:00",
-    "name": "Forge-Enhanced",
+    "exported_at": "2019-02-04T20:22:22+01:00",
+    "name": "Forge Enhanced",
     "author": "parker@parkervcp.com",
     "description": "Minecraft Forge Server. Minecraft Forge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other.",
     "image": "quay.io\/pterodactyl\/core:java",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\r\n    INSTALLER_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A50 Recommended | grep installer.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\n    UNIVERSAL_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A50 Recommended | grep universal.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\nelse\r\n    INSTALLER_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/index_$MC_VERSION.html | grep -A50 Recommended | grep installer.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\n    UNIVERSAL_JAR=$(curl -sl http:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/index_$MC_VERSION.html | grep -A50 Recommended | grep universal.jar | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\" | tail -1)\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting installer from $INSTALLER_JAR\"\r\ncurl -Sl $INSTALLER_JAR -o installer.jar\r\n\r\necho -e \"getting universal jar from $UNIVERSAL_JAR\"\r\ncurl -Sl $UNIVERSAL_JAR -o server.jar\r\n\r\njava -jar installer.jar --installServer\r\nrm -rf installer.jar\r\n\r\necho \"Install complete\"",
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\r\n  FORGE_VERSION=$(curl -sl https:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/ | grep -A1 Latest | grep  -o -e '[1]\\.[0-9][0-9]\\?\\.\\?[0-9]\\?[0-9] - [0-9][0-9]\\.[0-9][0-9]\\.[0-9]\\?[0-9]\\.[0-9][0-9][0-9][0-9]' | sed 's\/ \/\/g')\r\nelse if [[ ! $FORGE_VERSION = *\"-\"* ]]; then\r\n  FORGE_VERSION=$(curl -sl https:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/index_$MC_VERSION.html | grep -A1 Latest | grep  -o -e '[1]\\.[0-9][0-9]\\?\\.\\?[0-9]\\?[0-9] - [0-9][0-9]\\.[0-9][0-9]\\.[0-9]\\?[0-9]\\.[0-9][0-9][0-9][0-9]' | sed 's\/ \/\/g')\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading forge version \\\"$FORGE_VERSION\\\"\\n\"\r\ncurl -sS https:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$FORGE_VERSION\/forge-$FORGE_VERSION-installer.jar -o installer.jar\r\ncurl -sS https:\/\/files.minecraftforge.net\/maven\/net\/minecraftforge\/forge\/$FORGE_VERSION\/forge-$FORGE_VERSION-universal.jar -o $SERVER_JARFILE\r\n\r\nif [ ! -f .\/installer.jar ]; then\r\n    echo \"!!! Invalide forge version \\\"$FORGE_VERSION\\\" !!!\\n\"\r\nfi\r\n\r\necho -e \"Installing forge server.\\n\"\r\njava -jar installer.jar --installServer\r\n\r\necho -e \"Deleting installer.jar file.\\n\"\r\nrm -rf installer.jar",
             "container": "openjdk:8-alpine",
             "entrypoint": "ash"
         }
@@ -33,8 +33,8 @@
             "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
         },
         {
-            "name": "Forge Version",
-            "description": "The version of minecraft you want to download forge for.\r\n\r\nExample 1.7.10",
+            "name": "Forge version",
+            "description": "The version of forge that you want to run.\r\nExamples:\r\n- 1.12.2\r\n- 1.12.2-14.23.5.2810",
             "env_variable": "MC_VERSION",
             "default_value": "latest",
             "user_viewable": 1,
