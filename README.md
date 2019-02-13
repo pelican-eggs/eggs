@@ -73,4 +73,4 @@ If you submit a PR without filling out the template I will deny it. This is for 
 
 [Xonotic](/xonotic/)  
 
-[Wurm Unlimited](/wurm_unlimited/)
+[Wurm Unlimited](/wurm_unlimited/wurm_unlimited/)
