@@ -72,3 +72,5 @@ If you submit a PR without filling out the template I will deny it. This is for 
 * [RocketMod](/unturned/rocketmod/)  
 
 [Xonotic](/xonotic/)  
+
+[Wurm Unlimited](/wurm_unlimited/)
