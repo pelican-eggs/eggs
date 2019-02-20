@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-02-20T15:35:38-05:00",
+    "name": "Paper",
+    "author": "parker@pterodactyl.io",
+    "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Paper Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache --update curl jq\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z $MINECRAFT_VERSION ] || [ $MINECRAFT_VERSION == \"latest\" ]; then\r\n    $MC_VERSION=$(curl https:\/\/launchermeta.mojang.com\/mc\/game\/version_manifest.json | jq -r '.latest.release' | grep -o [0-9]*.[0-9]* | head -1)\r\n    if [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n        DL_VERSION=\"lastSuccessfulBuild\"\r\n        curl -o ${SERVER_JARFILE} https:\/\/papermc.io\/ci\/job\/Paper-1.13\/${DL_VERSION}\/artifact\/paperclip.jar\r\n    fi\r\nelif [ $LEGACY_VERSION == \"legacy\" ]; then\r\n    if [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n        DL_VERSION=\"lastSuccessfulBuild\"\r\n    fi\r\n\r\n    if [ \"${DL_VERSION}\" == \"443\" ]; then\r\n        DL_NAME=\"Paperclip\"\r\n    else\r\n        DL_NAME=\"paperclip\"\r\n    fi\r\n\r\n    curl -o ${SERVER_JARFILE} https:\/\/papermc.io\/ci\/job\/Paper\/${DL_VERSION}\/artifact\/${DL_NAME}.jar\r\nfi",
+            "container": "alpine:3.8",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Minecraft Version",
+            "description": "The version of minecraft to download. \r\nFrom 1.13 and forward paper is making individual folders for major MC versions\r\n\r\n1.13 and then legacy are the only things supported. leave blank for latest.",
+            "env_variable": "MINECRAFT_VERSION",
+            "default_value": "latest",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Build Number",
+            "description": "The Paper build number. Ex 513\r\n\r\nDefault is \"latest\" which will grab the \"last sucessful build\" from the site. Leave blank for \"latest\"",
+            "env_variable": "BUILD_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
