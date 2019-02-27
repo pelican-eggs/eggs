@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-02-20T15:35:38-05:00",
+    "exported_at": "2019-02-27T15:21:19-05:00",
     "name": "Paper",
     "author": "parker@pterodactyl.io",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
@@ -17,28 +17,19 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Paper Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache --update curl jq\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z $MINECRAFT_VERSION ] || [ $MINECRAFT_VERSION == \"latest\" ]; then\r\n    $MC_VERSION=$(curl https:\/\/launchermeta.mojang.com\/mc\/game\/version_manifest.json | jq -r '.latest.release' | grep -o [0-9]*.[0-9]* | head -1)\r\n    if [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n        DL_VERSION=\"lastSuccessfulBuild\"\r\n        curl -o ${SERVER_JARFILE} https:\/\/papermc.io\/ci\/job\/Paper-1.13\/${DL_VERSION}\/artifact\/paperclip.jar\r\n    fi\r\nelif [ $LEGACY_VERSION == \"legacy\" ]; then\r\n    if [ -z \"${DL_VERSION}\" ] || [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n        DL_VERSION=\"lastSuccessfulBuild\"\r\n    fi\r\n\r\n    if [ \"${DL_VERSION}\" == \"443\" ]; then\r\n        DL_NAME=\"Paperclip\"\r\n    else\r\n        DL_NAME=\"paperclip\"\r\n    fi\r\n\r\n    curl -o ${SERVER_JARFILE} https:\/\/papermc.io\/ci\/job\/Paper\/${DL_VERSION}\/artifact\/${DL_NAME}.jar\r\nfi",
-            "container": "alpine:3.8",
+            "script": "#!\/bin\/ash\r\n# Paper Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache --update curl jq\r\n\r\nif [ -n \"${DL_PATH}\" ]; then\r\n    echo -e \"using supplied download url\"\r\n    DOWNLOAD_URL=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\nelse\r\n    VER_EXISTS=`curl -s https:\/\/papermc.io\/api\/v1\/paper | jq -r --arg VERSION $MINECRAFT_VERSION '.versions[] | IN($VERSION)' | grep true`\r\n    LATEST_PAPER_VERSION=`curl -s https:\/\/papermc.io\/api\/v1\/paper | jq -r '.versions' | jq -r '.[0]'`\r\n    \r\n    if [ \"${VER_EXISTS}\" == \"true\" ]; then\r\n        echo -e \"Version is valid. Using version ${MINECRAFT_VERSION}\"\r\n    else\r\n        echo -e \"Using the latest paper version\"\r\n        MINECRAFT_VERSION=${LATEST_PAPER_VERSION}\r\n    fi\r\n    \r\n    BUILD_EXISTS=`curl -s https:\/\/papermc.io\/api\/v1\/paper\/${MINECRAFT_VERSION} | jq -r --arg BUILD ${BUILD_NUMBER} '.builds.all[] | IN($BUILD)' | grep true`\r\n    LATEST_PAPER_BUILD=`curl -s https:\/\/papermc.io\/api\/v1\/paper\/${MINECRAFT_VERSION} | jq -r '.builds.latest'`\r\n    \r\n    if [ \"${BUILD_EXISTS}\" == \"true\" ] || [ ${BUILD_NUMBER} == \"latest\" ]; then\r\n        echo -e \"Build is valid. Using version ${BUILD_NUMBER}\"\r\n    else\r\n        echo -e \"Using the latest paper build\"\r\n        BUILD_NUMBER=${LATEST_PAPER_BUILD}\r\n    fi\r\n    \r\n    echo \"Version being downloaded\"\r\n    echo -e \"MC Version: ${MINECRAFT_VERSION}\"\r\n    echo -e \"Build: ${BUILD_NUMBER}\"\r\n    DOWNLOAD_URL=https:\/\/papermc.io\/api\/v1\/paper\/${MINECRAFT_VERSION}\/${BUILD_NUMBER}\/download \r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"running curl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\"\r\n\r\ncurl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\r\n\r\necho -e \"Downloading MC server.properties\"\r\ncurl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft_java\/server.properties",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
             "name": "Minecraft Version",
-            "description": "The version of minecraft to download. \r\nFrom 1.13 and forward paper is making individual folders for major MC versions\r\n\r\n1.13 and then legacy are the only things supported. leave blank for latest.",
+            "description": "The version of minecraft to download. \r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.",
             "env_variable": "MINECRAFT_VERSION",
             "default_value": "latest",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "nullable|string|max:20"
-        },
-        {
-            "name": "Build Number",
-            "description": "The Paper build number. Ex 513\r\n\r\nDefault is \"latest\" which will grab the \"last sucessful build\" from the site. Leave blank for \"latest\"",
-            "env_variable": "BUILD_VERSION",
-            "default_value": "latest",
             "user_viewable": 1,
-            "user_editable": 1,
+            "user_editable": 0,
             "rules": "nullable|string|max:20"
         },
         {
@@ -48,6 +39,24 @@
             "default_value": "server.jar",
             "user_viewable": 1,
             "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Download Path",
+            "description": "A URL to use to download a server.jar rather than the ones in the install script. This is not user viewable.",
+            "env_variable": "DL_PATH",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Build Number",
+            "description": "The build number for the paper release.\r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.",
+            "env_variable": "BUILD_NUMBER",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 0,
             "rules": "required|string|max:20"
         }
     ]
