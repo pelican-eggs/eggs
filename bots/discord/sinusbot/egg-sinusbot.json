@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-10-28T12:24:35-04:00",
+    "exported_at": "2019-02-28T12:38:22-05:00",
     "name": "Sinusbot",
     "author": "support@pterodactyl.io",
     "description": "Musicbot for Discord and Teamspeak.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:sinusbot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_sinusbot",
     "startup": ".\/sinusbot --override-password=\"${OVERRIDE_PASSWORD}\"",
     "config": {
         "files": "{\r\n    \"config.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ListenPort\": \"ListenPort = {{server.build.default.port}}\",\r\n            \"ListenHost\": \"ListenHost = \\\"0.0.0.0\\\"\"\r\n        }\r\n    }\r\n}",
