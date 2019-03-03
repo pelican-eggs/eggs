@@ -1,0 +1,3 @@
+listeners:
+- query_port: 25573
+  host: 0.0.0.0:25573
