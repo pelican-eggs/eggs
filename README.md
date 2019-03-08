@@ -73,6 +73,7 @@ If you submit a PR without filling out the template I will deny it. This is for 
 * [PixARK](/source_servers/pixark/)  
 * [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
+* [Sven Co-op](/source_servers/svencoop)
 
 [Squad](/squad/)  
 
