@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-02-01T13:25:30+01:00",
+    "exported_at": "2019-03-10T15:23:54+01:00",
     "name": "Multi Theft Auto",
     "author": "info@six-gaming.com",
     "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
-    "image": "quay.io\/bl4ckspr4y\/pterodactyl-images:mtasa",
+    "image": "quay.io\/shirobaka\/mtasa",
     "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} -n",
     "config": {
         "files": "{}",
@@ -25,7 +25,7 @@
     "variables": [
         {
             "name": "SERVER_WEBPORT",
-            "description": "The http port for web resource",
+            "description": "The http port for web resource.\r\nThis Port needs to be the {{SERVER_PORT}}+3.",
             "env_variable": "SERVER_WEBPORT",
             "default_value": "22005",
             "user_viewable": 1,
