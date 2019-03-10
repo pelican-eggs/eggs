@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-03-10T15:23:54+01:00",
+    "exported_at": "2019-03-10T15:39:00+01:00",
     "name": "Multi Theft Auto",
     "author": "info@six-gaming.com",
     "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
-    "image": "quay.io\/shirobaka\/mtasa",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
     "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} -n",
     "config": {
         "files": "{}",
