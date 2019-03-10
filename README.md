@@ -43,11 +43,14 @@ If you submit a PR without filling out the template I will deny it. This is for 
 
 [Don't Starve](/dont_starve/dont_starve)
 
+[ET: Legacy](/etlegacy/etlegacy/)
+
 [Factorio](/factorio/factorio/)  
 
 [Grand Theft Auto](/gta/)  
 * [FiveM](/gta/fivem/)  
 * [RageMP](/gta/ragemp/)  
+* [Multi Theft Auto](/gta/mtasa/)
 
 [Minecraft Java](/minecraft_java/)
 * [Forge](/minecraft_java/forge/)  
@@ -65,6 +68,7 @@ If you submit a PR without filling out the template I will deny it. This is for 
 * [Waterfall](/minecraft_proxy/waterfall/)  
 
 [Mount & Blade Warband](/mb_warband/)
+
 
 [OpenTTD](/openttd/)
 
