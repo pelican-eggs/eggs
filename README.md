@@ -69,7 +69,6 @@ If you submit a PR without filling out the template I will deny it. This is for 
 
 [Mount & Blade Warband](/mb_warband/)
 
-
 [OpenTTD](/openttd/)
 
 [Source](/source_servers/)  These eggs use steamcmd to install  
