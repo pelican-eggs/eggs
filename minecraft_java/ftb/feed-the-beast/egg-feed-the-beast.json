@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-04-02T17:20:55-04:00",
+    "exported_at": "2019-03-15T16:25:38+00:00",
     "name": "Feed the Beast",
     "author": "aevum@decess.us",
     "description": "Egg to handle all official FTB Modpacks",
     "image": "quay.io\/pterodactyl\/core:java",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar FTBserver-*.jar",
     "config": {
-        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\",\r\n            \"level-name\": \"{{server.build.env.LEVEL_NAME}}\",\r\n            \"level-seed\": \"{{server.build.env.LEVEL_SEED}}\",\r\n            \"max-players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\",\r\n            \"level-name\": \"{{server.build.env.LEVEL_NAME}}\",\r\n            \"level-seed\": \"{{server.build.env.LEVEL_SEED}}\",\r\n            \"max-players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.MOTD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "stop"
