@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-10-27T23:29:53-04:00",
+    "exported_at": "2019-03-14T22:10:44-04:00",
     "name": "Vanilla Bedrock",
     "author": "parker@parkervcp.com",
     "description": "Bedrock Edition (also known as the Bedrock Version, Bedrock Codebase, Bedrock Engine or just Bedrock) refers to the multi-platform family of editions of Minecraft developed by Mojang AB, Microsoft Studios, 4J Studios, and SkyBox Labs. Prior to this term, as the engine originated with Pocket Edition, this entire product family was referred to as \"Pocket Edition\", \"MCPE\", or \"Pocket\/Windows 10 Edition\".",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache zip unzip wget curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading files from https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\"\r\n\r\nif [ -z \"${BEDROCK_VERSION}\" ] || [ \"${BEDROCK_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest Bedrock server\"\r\n    DOWNLOAD_URL=$(curl https:\/\/minecraft.net\/en-us\/download\/server\/bedrock\/ | grep azureedge | grep linux | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\")\r\n    BEDROCK_ZIP=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\nelse \r\n    echo -e \"\\n Downloading ${BEDROCK_VERSION} Bedrock server\"\r\n    DOWNLOAD_URL=https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\r\n    BEDROCK_ZIP=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\nfi\r\n\r\nwget ${DOWNLOAD_URL}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip -o $BEDROCK_ZIP\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm $BEDROCK_ZIP\r\n\r\necho -e \"Done\"",
+            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache zip unzip wget curl\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${BEDROCK_VERSION}\" ] || [ \"${BEDROCK_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest Bedrock server\"\r\n    DOWNLOAD_URL=$(curl https:\/\/www.minecraft.net\/en-us\/download\/server\/bedrock\/ | grep azureedge | grep linux | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\")\r\n    BEDROCK_ZIP=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\nelse \r\n    echo -e \"\\n Downloading ${BEDROCK_VERSION} Bedrock server\"\r\n    DOWNLOAD_URL=https:\/\/www.minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\r\n    BEDROCK_ZIP=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\nfi\r\n\r\necho -e \"Downloading files from https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\"\r\n\r\nwget ${DOWNLOAD_URL}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip -o $BEDROCK_ZIP\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm $BEDROCK_ZIP\r\n\r\necho -e \"Done\"",
             "container": "alpine:3.9",
             "entrypoint": "ash"
         }
