@@ -8,7 +8,7 @@
     "author": "daave@aaathats3as.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:game_arma3",
-    "startup": ".\/arma3server -ip=0.0.0.0 -port={{SERVER_PORT}} -cfg={{CFG}} -config={{CONFIG}} {{CUSTOM}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\"",
+    "startup": ".\/arma3server -ip=0.0.0.0 -port={{SERVER_PORT}} -cfg={{BASIC}} -config={{CONFIG}} {{CUSTOM}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connected to Steam servers\",\r\n    \"userInteraction\": []\r\n}",
@@ -33,19 +33,19 @@
             "rules": "required|alpha_dash|between:1,100"
         },
         {
-            "name": "Config CFG",
-            "description": "Config CFG",
-            "env_variable": "CFG",
-            "default_value": "cfg.cfg",
+            "name": "Basic",
+            "description": "Basic network config",
+            "env_variable": "BASIC",
+            "default_value": "basic.cfg",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "string|nullable"
         },
         {
             "name": "Config",
-            "description": "Config",
+            "description": "Server config",
             "env_variable": "CONFIG",
-            "default_value": "config.cfg",
+            "default_value": "server.cfg",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "string|nullable"
