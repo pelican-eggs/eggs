@@ -72,6 +72,8 @@ If you submit a PR without filling out the template I will deny it. This is for 
 
 [OpenTTD](/openttd/)
 
+[SCP: Secret Laboratory](/scp_secret_laboratory/scp_secret_laboratory/)
+
 [Source](/source_servers/)  These eggs use steamcmd to install  
 * [7 Days to Die](/source_servers/7_days_to_die/)  
 * [PixARK](/source_servers/pixark/)  
