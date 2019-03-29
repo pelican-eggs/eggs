@@ -11,6 +11,12 @@ Deep within the SCP Foundation during a containment breach, many of the anomalie
 - [ServerMod2](https://github.com/Grover-c13/Smod2/) - ServerMod2 is a server side plugin system with a bunch of additional configuration options, bug fixes, security patches and some optimisations built in. [SMOD Wiki](https://github.com/Grover-c13/Smod2/wiki)
 
 Both modifications download the latest versions of themselves directly from GitHub whenever the server is installed.
+
+### Configuration File Locations:
+Under servers/server/ there are 3 configuration files, all set to their default values:
+- config_gameplay.txt
+- config_remoteadmin.txt
+- scp_multiadmin.cfg
 ### Server Ports
 | Port    | default |
 |---------|---------|
