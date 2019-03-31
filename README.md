@@ -38,7 +38,6 @@ If you submit a PR without filling out the template I will deny it. This is for 
 
 [Arma](/arma/)  
 * [Arma 3](/arma/arma3/)  
-* [Arma 3 HC](/arma/arma3_headless_client/)  
 
 [Conan Exiles](/conan_exiles/conan_exiles)
 
