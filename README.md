@@ -29,10 +29,12 @@ If you submit a PR without filling out the template I will deny it. This is for 
 ## Bot Eggs
 
 [Discord](/bots/discord/)   
-* [ATL Bot](/bots/discord/atlbot) Node JS  
+* [ATL Bot](/bots/discord/atlbot/) Node JS  
 * [parkertron](/bots/discord/parkertron/) Golang  
 * [pixel-bot](/bots/discord/pixelbot/) Python  
+* [discord.js](bots/discord/discord.js/)
 * [Sinusbot](/bots/discord/sinusbot/)  
+* [Bastion](/bots/discord/bastion/)
 
 ## Game Eggs
 
