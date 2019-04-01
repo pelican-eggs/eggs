@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-04-01T09:21:41-04:00",
+    "exported_at": "2019-04-01T15:16:34-04:00",
     "name": "discord.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
@@ -30,7 +30,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|string|max:128"
+            "rules": "nullable|string|max:128"
         },
         {
             "name": "Install Branch",
