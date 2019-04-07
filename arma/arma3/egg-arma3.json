@@ -8,7 +8,7 @@
     "author": "daave@aaathats3as.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:game_arma3",
-    "startup": ".\/arma3server -ip=0.0.0.0 -port={{SERVER_PORT}} -cfg={{CFG}} -config={{CONFIG}} {{CUSTOM}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\"",
+    "startup": ".\/arma3server -ip=0.0.0.0 -port={{SERVER_PORT}} -cfg={{BASIC}} -config={{CONFIG}} {{CUSTOM}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connected to Steam servers\",\r\n    \"userInteraction\": []\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl\r\napt -y --no-install-recommends install lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSLO http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\ntouch \/mnt\/server\/latest.log\r\nchown -R root:root \/mnt\r\n\r\ntar -xzvf \/tmp\/steamcmd_linux.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nexport HOME=\/mnt\/server\r\n\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${APP_ID} validate +quit",
+            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl\r\napt -y --no-install-recommends install lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSLO http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\ntouch \/mnt\/server\/latest.log\r\nchown -R root:root \/mnt\r\n\r\ntar -xzvf \/tmp\/steamcmd_linux.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nexport HOME=\/mnt\/server\r\n\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${APP_ID} validate +quit\r\n\r\ncd \/mnt\/server\/\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/arma\/arma3\/egg-arma3-config\/server.cfg",
             "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }
@@ -33,19 +33,19 @@
             "rules": "required|alpha_dash|between:1,100"
         },
         {
-            "name": "Config CFG",
-            "description": "Config CFG",
-            "env_variable": "CFG",
-            "default_value": "cfg.cfg",
+            "name": "Basic",
+            "description": "Basic network config",
+            "env_variable": "BASIC",
+            "default_value": "basic.cfg",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "string|nullable"
         },
         {
             "name": "Config",
-            "description": "Config",
+            "description": "Server config",
             "env_variable": "CONFIG",
-            "default_value": "config.cfg",
+            "default_value": "server.cfg",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "string|nullable"
