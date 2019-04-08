@@ -6,7 +6,7 @@ What is a Headless Client (HC) used for?
 * The server doesn't allow arbitrary connections from headless clients if you do not define the headless clients IPs in the server.cfg,
 
 ### But why?
-If you host an Arma 3 Server with lots of AI in it, the Server FPS will drop pretty fast. 
+If you host an Arma 3 Server with lots of AI in it, the Server FPS will drop fast.
 Since the server files are only 32 Bit you will need some kind of magical assistant to prevent slow AI.
 
 ### Minimum RAM warning
