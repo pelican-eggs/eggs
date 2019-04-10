@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-12-25T20:36:01-05:00",
+    "exported_at": "2019-04-09T22:59:20-04:00",
     "name": "OpenTTD Server",
     "author": "admin@justmyrandomstuff.com",
     "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apk add --no-cache sdl-dev fontconfig curl\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -LSs https:\/\/binaries.openttd.org\/releases\/1.8.0\/openttd-1.8.0-linux-generic-amd64.tar.gz -o openttd.tar.gz\r\n\r\ntar --strip-components=1 -xzvf  openttd.tar.gz \r\n\r\nchmod +x openttd\r\n\r\ncurl -LSs https:\/\/binaries.openttd.org\/extra\/opengfx\/0.5.2\/opengfx-0.5.2-all.zip -o opengfx.zip\r\n\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\n\r\nrm open*zip open*tar open*gz\r\n\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/openttd\/openttd\/openttd.cfg > openttd.cfg",
+            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache curl binutils xz\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting file from: https:\/\/proxy.binaries.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-ubuntu-bionic-amd64.deb\"\r\n\r\ncurl -LSs https:\/\/proxy.binaries.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-ubuntu-bionic-amd64.deb -o openttd.deb\r\n\r\nar -x  openttd.deb\r\n\r\ntar -xvf data.tar.xz\r\n\r\nmv usr\/share\/games\/openttd\/* .\/\r\n\r\nmv usr\/games\/openttd .\/\r\n\r\nchmod +x openttd\r\n\r\ncurl -LSs https:\/\/binaries.openttd.org\/extra\/opengfx\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip -o opengfx.zip\r\n\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\n\r\nrm open*zip open*tar open*gz debian-binary open*deb\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/openttd\/openttd\/openttd.cfg > openttd.cfg",
             "container": "alpine:3.9",
             "entrypoint": "ash"
         }
@@ -57,6 +57,24 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "OpenTTD Version",
+            "description": "The version of OpenTTD i.e. 1.9.1",
+            "env_variable": "OPENTTD_VERSION",
+            "default_value": "1.9.1",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "OpenGFX Version",
+            "description": "The OpenGFX Version i.e. 0.5.5",
+            "env_variable": "OPENGFX_VERSION",
+            "default_value": "0.5.5",
+            "user_viewable": 1,
+            "user_editable": 0,
             "rules": "required|string|max:20"
         }
     ]
