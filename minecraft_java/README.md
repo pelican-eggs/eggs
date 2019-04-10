@@ -7,19 +7,6 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 ## Server Ports
 The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
 
-## Spigot
-A collection of spigot and forked spigot eggs.
-
-[Spigot](https://www.spigotmc.org/)  
-This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
-- (It's noted that building the jar is intensive and time consuming)
-
-[PaperMC GitHub](https://github.com/PaperMC/Paper)  
-High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
-
-[Taco Spigot GitHub](https://github.com/TacoSpigot/TacoSpigot)  
-An even-higher higher performance PaperSpigot fork that adds new features.  
-
 ## Forge 
 [Forge MC](https://files.minecraftforge.net/)  
 This is a direct fork of the default forge service  
@@ -37,6 +24,19 @@ Supply values to 2 variables to use
 
 [FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)  
 Revelation is a general all-purpose modpack with optimal FPS, server performance and stability.  
+
+## Paper
+Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
+
+## Spigot
+A collection of spigot and forked spigot eggs.
+
+[Spigot](https://www.spigotmc.org/)  
+This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
+- (It's noted that building the jar is intensive and time consuming)
+
+[PaperMC GitHub](https://github.com/PaperMC/Paper)  
+High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
 
 #### Technic Packs
 [Hexxit](https://www.technicpack.net/modpack/hexxit)  
