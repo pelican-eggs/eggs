@@ -115,9 +115,9 @@
         },
         {
             "name": "Server Password",
-            "description": "Password to join the server, Blank is none.",
+            "description": "Password to join the server, \"\" is none",
             "env_variable": "SERVER_PASS",
-            "default_value": "",
+            "default_value": "\"\"",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "nullable|string|max:30"
