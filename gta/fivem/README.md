@@ -12,6 +12,6 @@ Ports required to run the server in a table format.
 | Port    | default |
 |---------|---------|
 | Game    | 30210   |
-|         |         |
+|---------|---------|
 | Game+1  | 30211   |
-|         |         |
+|---------|---------|
