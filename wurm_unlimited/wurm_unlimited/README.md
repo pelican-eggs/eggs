@@ -8,8 +8,6 @@ it is now one of the most deep and feature packed true sandbox experiences avail
 
 ### Server Ports
 game port (default 8907) (externalport)
-rmiport (default unknown)
-rmiregport (default unknown)
 
 | Port    | default |
 |---------|---------|

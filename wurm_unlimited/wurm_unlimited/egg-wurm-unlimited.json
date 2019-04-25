@@ -3,34 +3,43 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-02-13T23:41:53+01:00",
+    "exported_at": "2019-04-26T00:43:40+00:00",
     "name": "Wurm Unlimited",
     "author": "teamwuffy@gmail.com",
-    "description": "Wurm Unlimited\r\n\r\nCommand Line Arguments\r\n\r\nThe server launcher accepts the following command line arguments:\r\n\r\nadminpwd=<password>\r\n    Unlocks the admin commands from within the game, that can be used to change the gameplay settings of the server, such as skill gain rate and field growth time. \r\n\r\nepicsettings=<true\/false>\r\n    If true the server will follow the rules from the Epic servers in Wurm Online. For instance it will use the skill curve. \r\n\r\nexternalport=<port>\r\n    Used to set the port which the client connects through (Default 3724 TCP) \r\n\r\nhomeserver=<true\/false>\r\n    If the server is a home server ( belongs to a single kingdom ). \r\n\r\nhomekingdom=<id>\r\n    The kingdom the server belongs to. \r\n\r\nip=<ip address>\r\n    The ip the server will bind to. \r\n\r\nloginserver=<true\/false>\r\n    Defaults to true, should only be set to false if the server is intended to be connected with another server that is going to act as a loginserver. \r\n\r\nmaxplayers=<number>\r\n    Sets the max number of players allowed on the server, if this is set through this command line option then the internal game commands to change the player limit will not work. \r\n\r\npvp=<true\/false>\r\n    Toggles PvP on or off on the server. \r\n\r\nqueryport=<port>\r\n    Used to set the steam query port (27016-27030 UDP) \r\n\r\nrmiport<port>\r\n    Used for server to server communication. \r\n\r\nrmiregport=<port>\r\n    Used for server to server communication. \r\n\r\nservername=<name>\r\n    The name of the server that will be visible in server browsers. If the name contains spaces, surround it with \"\". For example servername=\"my private server\" \r\n\r\nserverpassword=<password>\r\n    Sets the password that is used when trying to connect to the server. \r\n\r\nstart=<name>\r\n    Starts the launcher with the configuration and world data from the subdirectory specified in <name>.",
-    "image": "quay.io\/teamwuffy\/lgsm:ubuntu-libswt_gtk_3_java-xvfb",
-    "startup": ".\/WurmServerLauncher ip={{SERVER_IP}} externalport={{SERVER_PORT}} start={{SERVER_NAME}}",
+    "description": "Wurm Unlimited\r\n\r\nStartParams:\r\nadminpwd=<password> | Unlocks the admin commands from within the game, that can be used to change the gameplay settings of the server, such as skill gain rate and field growth time. \r\n\r\nepicsettings=<true\/false> | If true the server will follow the rules from the Epic servers in Wurm Online. For instance it will use the skill curve. \r\n\r\nexternalport=<port> | Used to set the port which the client connects through (Default 3724 TCP) \r\n\r\nhomeserver=<true\/false> | If the server is a home server ( belongs to a single kingdom ). \r\n\r\nhomekingdom=<id> | The kingdom the server belongs to. \r\n\r\nip=<ip address> | The ip the server will bind to. \r\n\r\nloginserver=<true\/false> | Defaults to true, should only be set to false if the server is intended to be connected with another server that is going to act as a loginserver. \r\n\r\nmaxplayers=<number> | Sets the max number of players allowed on the server, if this is set through this command line option then the internal game commands to change the player limit will not work. \r\n\r\npvp=<true\/false> | oggles PvP on or off on the server. \r\n\r\nqueryport=<port> | Used to set the steam query port (27016-27030 UDP) \r\n\r\nrmiport<port> | Used for server to server communication. \r\n\r\nrmiregport=<port> | Used for server to server communication. \r\n\r\nservername=<name> | The name of the server that will be visible in server browsers. If the name contains spaces, surround it with \"\". For example servername=\"my private server\" \r\n\r\nserverpassword=<password> | Sets the password that is used when trying to connect to the server. \r\n\r\nstart=<name> | Starts the launcher with the configuration and world data from the subdirectory specified in <name>. \r\n\r\nLinks:\r\nServer help: https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)\r\nSteam: https:\/\/store.steampowered.com\/app\/366220\/Wurm_Unlimited\/",
+    "image": "quay.io\/teamwuffy\/images:wurm-unlimited",
+    "startup": "ip=0.0.0.0 externalport={{SERVER_PORT}} start=dist\/{{SERVER_START}} maxplayerst={{SERVER_MAX_PLAYERS}} servername={{SERVER_MAX_PLAYERS}}",
     "config": {
-        "files": "{\r\n    \"LaunchConfig.ini\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"MaxHeapSize\": \"{{server.build.env.SERVER_MEMORY}}m\",\r\n            \"CleanLogsOnStart\": \"{{server.build.env.SERVER_CLEAN_LOGS_ON_START}}\"\r\n        }\r\n    },\r\n    \"Adventure\/wurm.ini\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {}\r\n    }\r\n}",
+        "files": "{\r\n    \"LaunchConfig.ini\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"MaxHeapSize\": \"{{server.build.env.SERVER_MEMORY}}m\",\r\n            \"CleanLogsOnStart\": \"{{server.build.env.SERVER_CLEAN_LOGS_ON_START}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Wurm Server launcher finished at\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
-        "stop": "^C"
+        "stop": "shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Wurm Unlimited Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --install-recommends install curl wget software-properties-common ca-certificates lib32gcc1\r\napt -y update && apt -y upgrade\r\n\r\nadd-apt-repository -y ppa:webupd8team\/java\r\napt -y update\r\necho \"oracle-java8-installer shared\/accepted-oracle-license-v1-1 select true\" | debconf-set-selections\r\napt -y install oracle-java8-set-default libswt-gtk-3-java xvfb\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 402370 validate +quit\r\n\r\ncp \/mnt\/server\/linux64\/steamclient.so \/mnt\/server\/nativelibs\r\ncp -a \/usr\/lib\/jvm\/java-8-oracle\/ \/mnt\/server\/runtime\/\r\n\r\ncat <<EOF >> \/mnt\/server\/LaunchConfig.ini\r\n[Runtime]\r\nOverrideDefaultJavaPath=true\r\nJavaPath=\/mnt\/server\/runtime\/java-8-oracle\/jre\/lib\/amd64\/server\/\r\n[Memory]\r\nInitialHeap=512m\r\nMaxHeapSize=2048m\r\n[Utility]\r\nCleanLogsOnStart=true\r\n[VMParams]\r\nJvmParam0=-XX:+AggressiveOpts\r\nEOF",
+            "script": "#!\/bin\/ash\r\n# Wurm Unlimited Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## Install Wurm Unlimited\r\n\r\n# Downloading steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Installing Wurst Unlimited\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 402370 validate +quit\r\n\r\n# Copy steamclient.io\r\nmkdir -p \/mnt\/server\/nativelibs\r\ncp -v linux64\/steamclient.so \/mnt\/server\/nativelibs\r\n\r\n# Copy Adventure into template\r\nmkdir -p \/mnt\/server\/template\/\r\ncp -rf \/mnt\/server\/dist\/Adventure\/* \/mnt\/server\/template\/\r\n\r\n## Install WurmModLoader\r\n\r\n# Checking is WurmModLoader requested\r\nif [ ! -z \"$WML_VERSION\" ]; then\r\n    apt install -y --no-install-recommends unzip\r\n\r\n    # Requesting latest WML version\r\n    if [ \"$WML_VERSION\" == \"latest\" ]; then\r\n        WML_VERSION=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/ago1024\/WurmServerModLauncher\/releases\/latest | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/' | sed -e 's\/[^0-9,\\.]*\/\/g')\r\n    fi\r\n\r\n    # Downloading latest WML version\r\n    cd \/tmp\r\n    curl -sSL -o server-modlauncher.zip https:\/\/github.com\/ago1024\/WurmServerModLauncher\/releases\/download\/v${WML_VERSION}\/server-modlauncher-${WML_VERSION}.zip\r\n    unzip server-modlauncher.zip -d \/mnt\/server\r\n\r\n    # Installing WML\r\n    cd \/mnt\/server\r\n    chmod +x patcher.sh\r\n    .\/patcher.sh\r\nfi",
             "container": "ubuntu:18.10",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "CleanLogsOnStart",
-            "description": "",
-            "env_variable": "SERVER_CLEAN_LOGS_ON_START",
-            "default_value": "true",
+            "name": "Servername",
+            "description": "The name of the server that will be visible in server browsers. If the name contains spaces, surround it with \"\". For example servername=\"my private server\"",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My Private Server",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:5"
+            "rules": "required|string|max:512"
+        },
+        {
+            "name": "Map (Start)",
+            "description": "Notice that 2 default maps exist! (Adventure and Creative (!!! Pay attention to capital and lower case !!!))\r\nStarts the launcher with the configuration and world data from the subdirectory specified in <name>.",
+            "env_variable": "SERVER_START",
+            "default_value": "Creative",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:200"
         },
         {
             "name": "Max Players",
@@ -42,22 +51,31 @@
             "rules": "required|integer|max:524"
         },
         {
-            "name": "Query Port",
-            "description": "Used to set the steam query port (27016-27030 UDP)",
-            "env_variable": "SERVER_QUERY_PORT",
-            "default_value": "27016",
+            "name": "CleanLogsOnStart",
+            "description": "Delete all logs when the server is starting",
+            "env_variable": "SERVER_CLEAN_LOGS_ON_START",
+            "default_value": "true",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|integer|max:999999"
+            "rules": "required|string|max:5"
         },
         {
-            "name": "Start",
-            "description": "Starts the launcher with the configuration and world data from the subdirectory specified in <name>.",
-            "env_variable": "SERVER_NAME",
-            "default_value": "Creative",
+            "name": "ModLoaderVersion",
+            "description": "To disable this use \"none\" and for the latest build use \"latest\" or a version number like \"0.43\". You can see all version numbers here: https:\/\/github.com\/ago1024\/WurmServerModLauncher\/releases\/",
+            "env_variable": "WML_VERSION",
+            "default_value": "none",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:200"
+            "rules": "string|max:20"
+        },
+        {
+            "name": "Auto Update Server",
+            "description": "Auto update when true",
+            "env_variable": "SERVER_AUTO_UPDATE",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
         }
     ]
 }
