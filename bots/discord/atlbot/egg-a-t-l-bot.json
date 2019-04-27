@@ -10,14 +10,14 @@
     "image": "quay.io\/parkervcp\/pterodactyl-images:alpine_nodejs-10",
     "startup": "npm run start",
     "config": {
-        "files": "{\r\n    \"config\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"client_token\": \"{{server.build.env.CLIENT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config\/local.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"client_token\": \"{{server.build.env.CLIENT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"I am ready!\",\r\n    \"userInteraction\": [\r\n        \"Request to use token, but token was unavailable\"\r\n    ]\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "apk add --no-cache openssl git\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/github.com\/ATLauncher\/discord-bot\/archive\/master.zip\r\n\r\nunzip master.zip\r\n\r\nrm master.zip\r\n\r\nmv discord-bot-master\/* .\/\r\n\r\nmv config\/config.json.example config\/config.json\r\n\r\nrm package-lock.json\r\nnpm install\r\n\r\nrm -r discord-bot-master\/\r\nrm Dockerfile\r\nrm CONTRIBUTING.md\r\nrm README.md\r\nrm \/config\/.gitignore\r\nrm CODE_OF_CONDUCT.md",
+            "script": "apk add --no-cache openssl git\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/github.com\/ATLauncher\/discord-bot\/archive\/master.zip\r\n\r\nunzip master.zip\r\n\r\nrm master.zip\r\n\r\nmv discord-bot-master\/* .\/\r\n\r\nmv config\/default.json config\/local.json\r\n\r\nrm package-lock.json\r\nnpm install\r\n\r\nrm -r discord-bot-master\/\r\nrm Dockerfile\r\nrm CONTRIBUTING.md\r\nrm README.md\r\nrm \/config\/.gitignore\r\nrm CODE_OF_CONDUCT.md",
             "container": "node:10-alpine",
             "entrypoint": "ash"
         }
