@@ -34,6 +34,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Sinusbot](/bots/discord/sinusbot/)  
 * [Bastion](/bots/discord/bastion/)
 
+[TeamSpeak3](bots/teamspeak3)
+* [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
+
 ## Game Eggs
 
 [Arma](/arma/)  
