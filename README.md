@@ -78,6 +78,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [PixARK](/source_servers/pixark/)  
 * [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
+* [Killing Floor 2](/source_servers/killingfloor2)
 
 [Unreal Engine](/unreal_engine)
 * [Tower Unit](/unreal_engine/tower_unit/)
