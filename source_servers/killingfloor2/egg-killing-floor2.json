@@ -1,0 +1,90 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-05-04T21:31:28-05:00",
+    "name": "Killing Floor 2",
+    "author": "chazx",
+    "description": "Killing Floor 2 Egg\r\n\r\n2 IPs required , 1 optional (for web admin interface), can use the web interface to set other options, or edit ini's in KFGame\/Config\/",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/Binaries\/Win64\/KFGameSteamServer.bin.x86_64 kf-bioticslab?AdminName={{WEB_ADMIN_NAME}}?AdminPassword={{WEB_ADMIN_PASSWORD}}?Difficulty={{GAME_DIFFICULTY}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -WebAdminPort={{WEB_ADMIN_PORT}} -QueryPort={{STEAM_QUERY_PORT}}",
+    "config": {
+        "files": "{\r\n    \"KFGame\/Config\/KFWeb.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"IpDrv.WebServer.bEnabled\": \"true\",\r\n            \"IpDrv.WebServer.ListenPort\": \"{{server.build.env.WEB_ADMIN_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"DevOnline: Server data\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Killing Floor 2 Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\nmkdir -p \/mnt\/server\/KFGame\/Cache\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 232130 +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "Maximum Players",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "12",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:12"
+        },
+        {
+            "name": "Difficulty",
+            "description": "0 = Normal, 1 = Hard, 2 = Suicidal, 3 = Hell on Earth",
+            "env_variable": "GAME_DIFFICULTY",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:3"
+        },
+        {
+            "name": "Source APP ID",
+            "description": "Steam APP ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "232130",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Web Admin Port",
+            "description": "Pass an allocated port to access the web interface",
+            "env_variable": "WEB_ADMIN_PORT",
+            "default_value": "8080",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Steam Query Port",
+            "description": "Steam Query Port",
+            "env_variable": "STEAM_QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Admin Name",
+            "description": "Admin Name for Web Portal",
+            "env_variable": "WEB_ADMIN_NAME",
+            "default_value": "admin",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Web Admin Password",
+            "description": "Web admin password",
+            "env_variable": "WEB_ADMIN_PASSWORD",
+            "default_value": "password",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        }
+    ]
+}
