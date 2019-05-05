@@ -48,6 +48,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Don't Starve](/dont_starve/dont_starve)
 
+[ET Legacy](/enemy_territory/etlegacy/)
+
 [Factorio](/factorio/factorio/)  
 
 [Grand Theft Auto](/gta/)  
