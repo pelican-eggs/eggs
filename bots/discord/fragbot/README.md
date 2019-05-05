@@ -5,4 +5,4 @@ The golang based discord bot for fragforce.
 Runs the fragforce `@fragbot`
 
 ### Server Ports
-There are no ports required for parkertron
+There are no ports required for fragbot

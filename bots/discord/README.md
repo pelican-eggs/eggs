@@ -14,6 +14,14 @@ Their github has all the info you need
 [TheBastionBot/Bastion](https://github.com/TheBastionBot/Bastion)  
 Give awesome perks to your Discord server!
 
+#### DiscordJS
+[discord.js](https://discord.js.org/)  
+A generic discord.js egg for running discord bots.
+
+#### fragbot
+[fragforce/fragbot](https://github.com/fragforce/fragbot)  
+The bot that runs as the fragforce `@Fragbot` offering looking-for-group services for now  
+
 #### parkertron
 [parkervcp/parkertron](https://github.com/parkervcp/parkertron)  
 The bot that runs as the pterodactyl `@Support Bot`  
