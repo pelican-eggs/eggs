@@ -2,6 +2,8 @@
 
 * [ ] Have you followed the guidelines in our Contributing document?
 * [ ] Have you checked to ensure there aren't other open [Pull Requests](../../pulls) for the same update/change?
+* [ ] Did you branch your changes and PR from that branch and not from your master branch?
+  * If not, why?:
 
 <!-- You can erase any parts of this template not applicable to your Pull Request. -->
 
