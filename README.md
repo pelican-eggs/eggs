@@ -85,6 +85,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [PixARK](/source_servers/pixark/)  
 * [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
+* [Mordhau](/source_servers/mordhau)
 
 [Squad](/squad/)  
 
