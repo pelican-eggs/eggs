@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-05-06T14:52:22-04:00",
+    "exported_at": "2019-05-08T07:52:52-04:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre",
-    "startup": "java -Djavax.accessibility.assistive_technologies=\" \" -jar JMusicBot.jar",
+    "startup": "java -Djavax.accessibility.assistive_technologies=\" \" -Dnogui=true -jar JMusicBot.jar",
     "config": {
         "files": "{\r\n    \"config.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"token =\": \"token = \\\"{{env.BOT_TOKEN}}\\\"\",\r\n            \"prefix =\": \"prefix = \\\"{{env.BOT_PREFIX}}\\\"\",\r\n            \"owner =\": \"owner = \\\"{{env.BOT_OWNER}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"\"\r\n}",
