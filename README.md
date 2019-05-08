@@ -31,6 +31,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Bastion](/bots/discord/bastion/)  
 * [discord.js](bots/discord/discord.js/) Node JS generic  
 * [fragbot](/bots/discord/fragbot/) Golang  
+* [jmusicbot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron/) Golang  
 * [pixel-bot](/bots/discord/pixelbot/) Python  
 * [Sinusbot](/bots/discord/sinusbot/)  
