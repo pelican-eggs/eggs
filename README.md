@@ -70,13 +70,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Forge](/minecraft_java/forge/)  
 * [Feed The Beast](/minecraft_java/ftb/)  
 * [Spigot](/minecraft_java/spigot/)
-* [PaperSpigot (Legacy)](/minecraft_java/spigot/paper-legacy)
+* [Paper](/minecraft_java/paper)
 * [Technic](/minecraft_java/technic/)  
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
 
-[Mount & Blade Warband](/mb_warband/)
+[Mount & Blade Warband](/mount_and_blade/warband/)
 
 [OpenTTD](/openttd/)
 
@@ -90,7 +90,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Squad](/squad/)  
 
 [Unreal Engine](/unreal_engine)
-* [Tower Unit](/unreal_engine/tower_unit/)
+* [Tower Unite](/unreal_engine/tower_unite/)
 
 [Terraria](/terraria/)  
 * [tmodloader](/terraria/tmodloader)  
