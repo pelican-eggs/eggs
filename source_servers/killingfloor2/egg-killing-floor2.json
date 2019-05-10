@@ -5,7 +5,7 @@
     },
     "exported_at": "2019-05-04T21:31:28-05:00",
     "name": "Killing Floor 2",
-    "author": "chazx",
+    "author": "trey@chazx.cc",
     "description": "Killing Floor 2 Egg\r\n\r\n2 IPs required , 1 optional (for web admin interface), can use the web interface to set other options, or edit ini's in KFGame\/Config\/",
     "image": "quay.io\/pterodactyl\/core:source",
     "startup": ".\/Binaries\/Win64\/KFGameSteamServer.bin.x86_64 kf-bioticslab?AdminName={{WEB_ADMIN_NAME}}?AdminPassword={{WEB_ADMIN_PASSWORD}}?Difficulty={{GAME_DIFFICULTY}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -WebAdminPort={{WEB_ADMIN_PORT}} -QueryPort={{STEAM_QUERY_PORT}}",
