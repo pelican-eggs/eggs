@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-05-04T21:54:08-05:00",
+    "exported_at": "2019-05-09T22:22:13-05:00",
     "name": "Mordhau",
     "author": "trey@chazx.cc",
     "description": "Mordhau is a multiplayer medieval hack 'n slash video game, developed by Slovenian independent studio Triternion, with a prominent aspect of skill-based competitive play and customization.",
     "image": "chasx003\/mordhau",
-    "startup": ".\/MordhauServer.sh \/Game\/Mordhau\/Maps\/{{DEFAULT_MAP}}?MaxSlots={{MAX_PLAYERS}}? -USEALLAVAILABLECORES -Port={{SERVER_PORT}} -queryport={{QUERY_PORT}}",
+    "startup": ".\/MordhauServer.sh \/Game\/Mordhau\/Maps\/{{DEFAULT_MAP}}?MaxSlots={{MAX_PLAYERS}}? -USEALLAVAILABLECORES -Port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -beaconport={{BEACON_PORT}}",
     "config": {
         "files": "{\r\n    \"Mordhau\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AdminPassword=\": \"AdminPassword={{server.build.env.ADMIN_PASSWORD}}\",\r\n            \"ServerName=\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"ServerPassword=\": \"ServerPassword={{server.build.env.GAME_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Session GameSession successfully created\",\r\n    \"userInteraction\": []\r\n}",
@@ -85,6 +85,15 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:40"
+        },
+        {
+            "name": "Beacon Port",
+            "description": "Beacon Port required",
+            "env_variable": "BEACON_PORT",
+            "default_value": "15000",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
         }
     ]
 }
