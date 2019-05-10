@@ -5,7 +5,7 @@
     },
     "exported_at": "2019-05-04T21:54:08-05:00",
     "name": "Mordhau",
-    "author": "chasx003",
+    "author": "trey@chazx.cc",
     "description": "Mordhau is a multiplayer medieval hack 'n slash video game, developed by Slovenian independent studio Triternion, with a prominent aspect of skill-based competitive play and customization.",
     "image": "chasx003\/mordhau",
     "startup": ".\/MordhauServer.sh \/Game\/Mordhau\/Maps\/{{DEFAULT_MAP}}?MaxSlots={{MAX_PLAYERS}}? -USEALLAVAILABLECORES -Port={{SERVER_PORT}} -queryport={{QUERY_PORT}}",
