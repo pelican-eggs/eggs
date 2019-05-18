@@ -4,11 +4,11 @@ MORDHAU is a medieval first & third person multiplayer slasher. Enter a hectic b
 
 
 ### Server Ports
-Mordhau requires 2 ports
+Mordhau requires 3 ports
 
 game port (default 7777)
 query port (default 27015)
-web admin (default 8080)
+Beacon (default 15000)
 
 | Port    | default       |
 |---------|---------------|
