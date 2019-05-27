@@ -2,4 +2,4 @@
 
 A patch for vanilla servers to work with BungeeCord's ip_forward setting.
 
-[Details](https://www.spigotmc.org/resources/vanillacord.952/)
+This uses [ME1312's fork](https://github.com/ME1312/VanillaCord) of VanillaCord which has been updated for modern Minecraft.
