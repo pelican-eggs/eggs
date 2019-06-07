@@ -72,6 +72,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Spigot](/minecraft_java/spigot/)
 * [Paper](/minecraft_java/paper)
 * [Technic](/minecraft_java/technic/)  
+* [VanillaCord](/minecraft_java/vanillacord/)
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
