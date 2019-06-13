@@ -17,14 +17,14 @@
 # Remember to edit /etc/mysql/debian.cnf when changing the socket location.
 [client]
 port		= 3306
-socket		= /home/container/run/mysqld/mysqld.sock
+socket		= /mnt/server/run/mysqld/mysqld.sock
 
 # Here is entries for some specific programs
 # The following values assume you have at least 32M ram
 
 # This was formally known as [safe_mysqld]. Both versions are currently parsed.
 [mysqld_safe]
-socket		= /home/container/run/mysqld/mysqld.sock
+socket		= /mnt/server/run/mysqld/mysqld.sock
 nice		= 0
 
 [mysqld]
@@ -32,11 +32,11 @@ nice		= 0
 # * Basic Settings
 #
 #user		= mysql
-pid-file	= /home/container/run/mysqld/mysqld.pid
-socket		= /home/container/run/mysqld/mysqld.sock
+pid-file	= /mnt/server/run/mysqld/mysqld.pid
+socket		= /mnt/server/run/mysqld/mysqld.sock
 port		= 3306
 basedir		= /usr
-datadir		= /home/container/mysql
+datadir		= /mnt/server/mysql
 tmpdir		= /tmp
 lc_messages_dir	= /usr/share/mysql
 lc_messages	= en_US
@@ -83,7 +83,7 @@ query_cache_size		= 64M
 # Both location gets rotated by the cronjob.
 # Be aware that this log type is a performance killer.
 # As of 5.1 you can enable the log at runtime!
-general_log_file        = /home/container/log/mysql/mysql.log
+general_log_file        = /mnt/server/log/mysql/mysql.log
 #general_log             = 1
 #
 # Error logging goes to syslog due to /etc/mysql/conf.d/mysqld_safe_syslog.cnf.
@@ -93,7 +93,7 @@ general_log_file        = /home/container/log/mysql/mysql.log
 #
 # Enable the slow query log to see queries with especially long duration
 #slow_query_log[={0|1}]
-slow_query_log_file	= /home/container/log/mysql/mariadb-slow.log
+slow_query_log_file	= /mnt/server/log/mysql/mariadb-slow.log
 long_query_time = 10
 #log_slow_rate_limit	= 1000
 #log_slow_verbosity	= query_plan
