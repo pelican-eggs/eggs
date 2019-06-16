@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-06-13T10:40:57-04:00",
+    "exported_at": "2019-06-16T11:06:52-04:00",
     "name": "discord.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:bot_discordjs",
-    "startup": "if [[ -d .git ]] && [[ ${AUTO_UPDATE} == \"1\" ]]; then git pull; fi && \/usr\/local\/bin\/npm install --production && \/usr\/local\/bin\/node \/home\/container\/index.js",
+    "startup": "`if [[ -d .git ]] && [[ ${AUTO_UPDATE} == \"1\" ]]; then git pull; fi && \/usr\/local\/bin\/npm install --production && \/usr\/local\/bin\/node \/home\/container\/index.js`",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
@@ -54,7 +54,7 @@
             "name": "Auto Update",
             "description": "When using a git repo pull the latest files on startup.",
             "env_variable": "AUTO_UPDATE",
-            "default_value": "false",
+            "default_value": "0",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|boolean"
