@@ -10,7 +10,7 @@
     "image": "quay.io\/pterodactyl\/core:source",
     "startup": ".\/starbound_server",
     "config": {
-        "files": "{\r\n    \"storage\/starbound_server.config\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"gameServerPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"storage\/starbound_server.config\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"gameServerPort\": \"{{server.build.default.port}}\",\r\n            \"queryServerPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Starting UniverseServer\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
