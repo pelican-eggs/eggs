@@ -60,6 +60,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA SA
   * [Multi Theft Auto](/gta/mtasa/)
   * [SA-MP](/gta/samp/)
+  
+[ManiaPlanets](/maniaplanets/)  
+  * [Trackmania Stadium 2](/maniaplanets/trackmania_stadium_2/)
 
 [Minecraft Bedrock](/minecraft_bedrock/)  
 * [Bedrock](/minecraft_bedrock/bedrock/)  
