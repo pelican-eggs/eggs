@@ -5,11 +5,11 @@ TrackMania² Stadium is the return of the popular Stadium environment enjoyed by
 
 ### Server Ports
 
-| Port  | default |
-|-------|---------|
-| Game  | 7777   |
-| Query | 27015   |
-| Raw UDP  | 7778   |
+| Port  | default | type |
+|-------|---------|---------|
+| Game  | 2350   | TCP & UDP |
+| P2P | 3450   | TCP & UDP |
+| XML-RPC  | 5000   | TCP |
 
 ### Additional Server Docs
 
