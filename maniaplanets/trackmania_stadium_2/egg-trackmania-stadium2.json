@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-06-27T23:15:15+02:00",
+    "name": "Trackmania Stadium 2",
+    "author": "dev@shepper.fr",
+    "description": "Trackmania Stadium 2 game server from maniaplanet platform",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "startup": ".\/ManiaPlanetServer \/nodaemon \/dedicated_cfg=dedicated_cfg.txt \/game_settings=MatchSettings\/matchsettings.txt",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"...Play\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# TM2 Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt-get update\r\napt-get -y install wget curl zip unzip\r\n\r\ncd \/mnt\/server\r\nwget http:\/\/files.v04.maniaplanet.com\/server\/ManiaplanetServer_Latest.zip\r\nunzip ManiaplanetServer_Latest.zip\r\ncd Packs\r\nwget https:\/\/maniaplanet.com\/ingame\/public\/titles\/download\/TMStadium@nadeo.Title.Pack.gbx\r\ncp \/mnt\/server\/UserData\/Config\/dedicated_cfg.default.txt \/mnt\/server\/UserData\/Config\/dedicated_cfg.txt",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
