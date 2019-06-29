@@ -9,3 +9,4 @@ game ports (default 27015 )
 | Port    | default |
 |---------|---------|
 | Game    |  27015  |
+| VAC     |  26900  |
