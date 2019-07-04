@@ -45,6 +45,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Arma 3](/arma/arma3/)  
 * [Arma 3 HC](/arma/arma3_headless_client/)  
 
+[Assetto Corsa](/assetto-corsa/)
+
 [Conan Exiles](/conan_exiles/conan_exiles)
 
 [Don't Starve](/dont_starve/dont_starve)
