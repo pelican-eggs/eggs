@@ -10,7 +10,7 @@ If you are submitting PR's try and keep names and titles the same.
 
 If you are reading this it looks like you are looking to add an egg to your server.
 
-1. Download any of the json files located in the folders below. 
+1. Download any of the json files located in the folders below.
    1. It's easiest to right click the `raw` button and save as.
 2. In your panel go to the `Nests` section in the admin part of the panel
 3. Click the green `Import Egg` button
@@ -90,7 +90,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Starbound](/source_servers/starbound)
 * [Sven Co-op](/source_servers/svencoop)
 
-[Squad](/squad/)  
+[Squad](/squad/)
+[SCP:Secret Laboratory](/scpsl/)  
 
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite/)
