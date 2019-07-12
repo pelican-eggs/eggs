@@ -89,6 +89,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
 * [Sven Co-op](/source_servers/svencoop)
+* [Mordhau](/source_servers/mordhau)
 
 [Squad](/squad/)  
 
