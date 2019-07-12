@@ -31,6 +31,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Bastion](/bots/discord/bastion/)  
 * [discord.js](bots/discord/discord.js/) Node JS generic  
 * [fragbot](/bots/discord/fragbot/) Golang  
+* [jmusicbot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron/) Golang  
 * [pixel-bot](/bots/discord/pixelbot/) Python  
 * [Sinusbot](/bots/discord/sinusbot/)  
@@ -69,28 +70,31 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Forge](/minecraft_java/forge/)  
 * [Feed The Beast](/minecraft_java/ftb/)  
 * [Spigot](/minecraft_java/spigot/)
-* [PaperSpigot (Legacy)](/minecraft_java/spigot/paper-legacy)
+* [Paper](/minecraft_java/paper)
 * [Technic](/minecraft_java/technic/)  
+* [VanillaCord](/minecraft_java/vanillacord/)
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
 
-[Mount & Blade Warband](/mb_warband/)
+[Mount & Blade Warband](/mount_and_blade/warband/)
 
 [OpenTTD](/openttd/)
 
 [Source](/source_servers/)  These eggs use steamcmd to install  
 * [7 Days to Die](/source_servers/7_days_to_die/)  
 * [ARK Survival Evolved](/source_servers/ark_survival_evolved/)
+* [HLDS server](/source_servers/hlds_server)
 * [PixARK](/source_servers/pixark/)  
 * [Rust Staging Branch](/source_servers/rust-staging/)
 * [Starbound](/source_servers/starbound)
+* [Sven Co-op](/source_servers/svencoop)
 * [Mordhau](/source_servers/mordhau)
 
 [Squad](/squad/)  
 
 [Unreal Engine](/unreal_engine)
-* [Tower Unit](/unreal_engine/tower_unit/)
+* [Tower Unite](/unreal_engine/tower_unite/)
 
 [Terraria](/terraria/)  
 * [tmodloader](/terraria/tmodloader)  
