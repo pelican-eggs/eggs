@@ -4,7 +4,7 @@
         "version": "PTDL_v1"
     },
     "exported_at": "2018-04-27T21:30:05+00:00",
-    "name": "RocketMod",
+    "name": "RocketMod Old",
     "author": "isaac@isaacs.site",
     "description": "The RocketMod server mod for Unturned.",
     "image": "registry.gitlab.com\/tenten8401\/pterodactyl-unturned",
