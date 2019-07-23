@@ -8,7 +8,7 @@
     "author": "info@six-gaming.com",
     "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
-    "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} -n",
+    "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} --maxplayers {{MAX_PLAYERS}} -n",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server started and is ready to accept connections\"\r\n}",
@@ -31,6 +31,15 @@
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|numeric"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum amount of players that can connect to the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "50",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,3"
         }
     ]
 }
