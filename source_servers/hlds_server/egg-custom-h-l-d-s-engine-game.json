@@ -8,7 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "This option allows modifying the startup arguments and other details to run a custom HLDS based game on the panel.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
-    "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
+    "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +maxplayers {{MAX_PLAYERS}} +ip 0.0.0.0 -strictportbind -norestart",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\",\r\n    \"userInteraction\": []\r\n}",
@@ -58,6 +58,15 @@
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|numeric|digits_between:1,5"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum amount of players that can connect to the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "18",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,2"
         }
     ]
 }
