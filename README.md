@@ -76,6 +76,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)  
 * [Waterfall](/minecraft_proxy/waterfall/)  
+* [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
 [Mount & Blade Warband](/mount_and_blade/warband/)
