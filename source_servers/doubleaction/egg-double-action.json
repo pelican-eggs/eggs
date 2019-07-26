@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-07-26T16:17:44+02:00",
-    "name": "Double action: Boogaloo",
+    "exported_at": "2019-07-26T17:54:50+02:00",
+    "name": "Double Action: Boogaloo",
     "author": "kevin@kevinswebsite.nl",
     "description": "Double Action is a free stylish multiplayer game about diving, flipping, and sliding your way into action movie mayhem.",
     "image": "quay.io\/pterodactyl\/core:source",
     "startup": ".\/srcds_run -game dab -port {{DAB_PORT}} +maxplayers {{DAB_PLAYERS}} +map {{DAB_MAP}} +sv_password {{DAB_PASSWORD}} -insecure",
     "config": {
-        "files": "{\r\n    \"dab\/cfg\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"hostname\": \"hostname\\\"{{env.DAB_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"dab\/cfg\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"hostname\": \"hostname\\\"{{env.DAB_NAME}}\\\"\",\r\n            \"bot_quota\": \"bot_quota {{env.DAB_BOTCOUNT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful.\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "quit"
@@ -42,7 +42,7 @@
             "rules": "required|numeric|between:2,32"
         },
         {
-            "name": "Password",
+            "name": "Server Password",
             "description": "Password required to join the server. Leave blank to disable.",
             "env_variable": "DAB_PASSWORD",
             "default_value": "",
@@ -52,7 +52,7 @@
         },
         {
             "name": "Server Name",
-            "description": "Name to display in the server list",
+            "description": "Name to display in the server list.",
             "env_variable": "DAB_NAME",
             "default_value": "My Doubleaction Server",
             "user_viewable": 1,
@@ -61,12 +61,21 @@
         },
         {
             "name": "Port",
-            "description": "The port to run this server on",
+            "description": "The port to run this server on.",
             "env_variable": "DAB_PORT",
             "default_value": "27015",
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|numeric"
+        },
+        {
+            "name": "Bot count",
+            "description": "Determines the maximum amount of bots in the server (The server won't always use all slots).",
+            "env_variable": "DAB_BOTCOUNT",
+            "default_value": "2",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|between:0,31"
         }
     ]
 }
