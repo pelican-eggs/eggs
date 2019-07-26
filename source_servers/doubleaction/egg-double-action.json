@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-07-26T17:54:50+02:00",
+    "exported_at": "2019-07-26T18:16:14+02:00",
     "name": "Double Action: Boogaloo",
     "author": "kevin@kevinswebsite.nl",
     "description": "Double Action is a free stylish multiplayer game about diving, flipping, and sliding your way into action movie mayhem.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/srcds_run -game dab -port {{DAB_PORT}} +maxplayers {{DAB_PLAYERS}} +map {{DAB_MAP}} +sv_password {{DAB_PASSWORD}} -insecure",
+    "startup": ".\/srcds_run -game dab -port {{SERVER_PORT}} +maxplayers {{DAB_PLAYERS}} +map {{DAB_MAP}} +sv_password {{DAB_PASSWORD}} -insecure",
     "config": {
         "files": "{\r\n    \"dab\/cfg\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"hostname\": \"hostname\\\"{{env.DAB_NAME}}\\\"\",\r\n            \"bot_quota\": \"bot_quota {{env.DAB_BOTCOUNT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful.\",\r\n    \"userInteraction\": []\r\n}",
@@ -58,15 +58,6 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:35"
-        },
-        {
-            "name": "Port",
-            "description": "The port to run this server on.",
-            "env_variable": "DAB_PORT",
-            "default_value": "27015",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|numeric"
         },
         {
             "name": "Bot count",
