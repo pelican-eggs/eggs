@@ -92,6 +92,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Starbound](/source_servers/starbound)
 * [Sven Co-op](/source_servers/svencoop)
 * [Mordhau](/source_servers/mordhau)
+* [Insurgency](/source_servers/insurgency)
 
 [Squad](/squad/)  
 
