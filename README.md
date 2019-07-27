@@ -105,4 +105,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Unturned](/unturned/)  
 * [RocketMod](/unturned/rocketmod/)  
 
-[Xonotic](/xonotic/)  
+[Xonotic](/xonotic/)
+
+[Starmade](/starmade/)
