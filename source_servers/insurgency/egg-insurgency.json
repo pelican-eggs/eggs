@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-07-27T15:06:34+02:00",
+    "exported_at": "2019-07-27T15:19:53+02:00",
     "name": "Insurgency",
     "author": "kevin@kevinswebsite.nl",
     "description": "Take to the streets for intense close quarters combat, where a team's survival depends upon securing crucial strongholds and destroying enemy supply in this multiplayer and cooperative Source Engine based experience.",
@@ -26,7 +26,7 @@
         {
             "name": "Server Name",
             "description": "The name your server will appear as on the in Sven Co-op in-game server list.",
-            "env_variable": "INSURGENCY_NAME",
+            "env_variable": "INSURGENCY_HOSTNAME",
             "default_value": "My Insurgency Server",
             "user_viewable": 1,
             "user_editable": 1,
