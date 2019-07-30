@@ -8,7 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "A generic egg for a forge modpack",
     "image": "quay.io\/pterodactyl\/core:java",
-    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M {{JAVA_PARAMETERS}} -jar server.jar",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
@@ -40,15 +40,6 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:20"
-        },
-        {
-            "name": "Java Parameters",
-            "description": "java parameters that are loaded in specific modpack",
-            "env_variable": "JAVA_PARAMETERS",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "string|max:280|nullable"
         }
     ]
 }
