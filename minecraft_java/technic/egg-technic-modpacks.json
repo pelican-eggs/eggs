@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-08-04T09:42:47+00:00",
+    "name": "Technic Modpacks",
+    "author": "admin@peachy.host",
+    "description": "Install any of our flagship modpacks with one simple click or choose from thousands of community-made modpacks available on the Technic Platform. It doesn't get easier than this.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JAR}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\ncd \/mnt\/server\r\ncurl -LsS https:\/\/api.paz.yt\/technicpack\/server\/?url=$MODPACKURL -o modpack.zip\r\nunzip modpack.zip\r\nrm -rf modpack.zip\r\nif [ \"$(find . -mindepth 1 -maxdepth 1 -type d | wc -l)\" == \"1\" ]\r\nthen\r\n    mv \".\/$(find * -maxdepth 0 -type d)\/\"* .\/\r\nfi",
+            "container": "alpine:3.9",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack URL",
+            "description": "The URL of the modpack when browsed from technicpack.net",
+            "env_variable": "MODPACKURL",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:240"
+        },
+        {
+            "name": "Server Jar",
+            "description": "The file to run when you start your server.",
+            "env_variable": "SERVER_JAR",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        }
+    ]
+}
