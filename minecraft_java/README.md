@@ -38,7 +38,11 @@ This is a direct fork of the default spigot service with the added benefit of be
 [PaperMC GitHub](https://github.com/PaperMC/Paper)  
 High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
 
-#### Technic Packs
+## Technic Packs
+[Technic Modpacks](https://technicpack.net/modpacks)  
+A generic service to pull forge mod packs from the Technic Pack site.
+- MODPACK_URL:  from the url to the pack https://technicpack.net/modpack/{MODPACK_URL}  
+
 [Hexxit](https://www.technicpack.net/modpack/hexxit)  
 Gear up and set forth on a campaign worthy of legend, for Hexxit has been unearthed!  
 
