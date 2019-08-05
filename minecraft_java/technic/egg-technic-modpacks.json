@@ -34,12 +34,12 @@
         },
         {
             "name": "Server Jar",
-            "description": "The file to run when you start your server.",
+            "description": "The name of the server jarfile to run the server with.",
             "env_variable": "SERVER_JAR",
             "default_value": "server.jar",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|regex:/^([\w\d._-]+)(\.jar)$/"
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
         }
     ]
 }
