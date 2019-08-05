@@ -39,7 +39,7 @@
             "default_value": "server.jar",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:32"
+            "rules": "required|regex:/^([\w\d._-]+)(\.jar)$/"
         }
     ]
 }
