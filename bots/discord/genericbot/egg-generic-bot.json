@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-08-10T09:22:45-04:00",
+    "name": "GenericBot",
+    "author": "itznya10@gmail.com",
+    "description": "NodeJS Java Python",
+    "image": "lazarsn\/universal-bot",
+    "startup": "${STARTUP_CMD}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y install wget unzip\r\nmkdir -p \/mnt\/server\/\r\nchown -R root:root \/mnt",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Startup CMD",
+            "description": "Command to start bot!",
+            "env_variable": "STARTUP_CMD",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:200"
+        }
+    ]
+}

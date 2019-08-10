@@ -38,3 +38,6 @@ Was used to test python services.
 #### SinusBot
 [SinusBot](https://www.sinusbot.com/)  
 Please Check their site for an in depth on the bot.
+
+####GenericBot
+Java NodeJS  Python
