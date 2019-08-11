@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-08-10T09:22:45-04:00",
+    "exported_at": "2019-08-11T00:39:24-04:00",
     "name": "GenericBot",
     "author": "itznya10@gmail.com",
     "description": "NodeJS Java Python",
-    "image": "lazarsn\/universal-bot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_genericbot",
     "startup": "${STARTUP_CMD}",
     "config": {
         "files": "{}",
