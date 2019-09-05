@@ -5,9 +5,9 @@ Eco is a community-based game; the players develop laws, government, and an econ
 ### Server Ports
 Eco requires up to 2 ports
 
-game ports (default 26900-26902)
-remote control (default 8080, 8081)
-allocs webmap (default 8082)
+game port (default 3000)
+web port (default 3001)
+
 
 | Port    | default       |
 |---------|---------------|
