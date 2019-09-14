@@ -28,6 +28,9 @@ Revelation is a general all-purpose modpack with optimal FPS, server performance
 ## Paper
 Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
 
+[PaperMC GitHub](https://github.com/PaperMC/Paper)  
+High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
+
 ## Spigot
 A collection of spigot and forked spigot eggs.
 
@@ -35,10 +38,12 @@ A collection of spigot and forked spigot eggs.
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
 - (It's noted that building the jar is intensive and time consuming)
 
-[PaperMC GitHub](https://github.com/PaperMC/Paper)  
-High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
+## Sponge
 
-#### Technic Packs
+[SpongeVanilla](https://www.spongepowered.org/)
+A community-driven open source Minecraft: Java Edition modding platform.
+
+## Technic Packs
 [Hexxit](https://www.technicpack.net/modpack/hexxit)  
 Gear up and set forth on a campaign worthy of legend, for Hexxit has been unearthed!  
 
