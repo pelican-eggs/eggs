@@ -69,8 +69,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Minecraft Java](/minecraft_java/)
 * [Forge](/minecraft_java/forge/)  
 * [Feed The Beast](/minecraft_java/ftb/)  
-* [Spigot](/minecraft_java/spigot/)
 * [Paper](/minecraft_java/paper)
+* [Spigot](/minecraft_java/spigot/)
+* [spongeforge](/minecraft_java/spongeforge/)
 * [Technic](/minecraft_java/technic/)  
 * [VanillaCord](/minecraft_java/vanillacord/)
 
