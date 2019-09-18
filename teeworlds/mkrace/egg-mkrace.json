@@ -6,7 +6,7 @@
     "exported_at": "2019-09-18T06:16:19-04:00",
     "name": "DDRace",
     "author": "admin@primhosting.com",
-    "description": "DDRace server modification of Teeworlds.\r\nA Teeworlds modification with a unique cooperative gameplay. Help each other play through custom maps with up to 64 players,",
+    "description": "mkRace server modification of Teeworlds.\r\nA Teeworlds modification with a unique cooperative gameplay. Help each other play through custom maps with up to 64 players.",
     "image": "quay.io\/matiasmunk\/teeworlds:ddrace",
     "startup": "\/home\/container\/build\/teeworlds_srv",
     "config": {
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Installation Script for mkRace w\/ source.\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt-get update\r\napt -y install git\r\ncd \/mnt\/server\/\r\ngit clone https:\/\/github.com\/Jason54\/DDRace --recurse-submodules .\r\nmkdir -p build\r\n\r\ncd build\/\r\necho -e '#Name of the servser\\nsv_name \"Untitled Server\"\\n\\n#Message of the day\\nsv_motd Welcome to my server\\n\\n#Server port\\nsv_port 8303\\n\\n#Server password proteted? Leave blank for no\\npassword \"\"\\n\\n#Server console password (Admin password)\\nsv_rcon_password \"ChangeMe\"\\n\\n#Whether to register on the master serverlist (1 for yes, 0 for no)\\nsv_register 1\\n\\n#Max amount of clients that can connect (Maximum 64)\\nsv_max_clients 16\\n\\n#Max amounts of clients per ip\\nsv_max_clients_per_ip 4\\n\\n#Gametype (dm = deathmatch, tdm = team deathmatch, ctf = capture the flag)\\nsv_gametype ctf\\n\\nsv_map ctf2\\n\\n#Score to reach to win the game\\nsv_scorelimit 20\\n\\n#Limit game by time (Set to 0 for no time limit)\\nsv_timelimit 0\\n\\n#Allow team damage? (0 for false, 1 for true)\\nsv_teamdamage 0\\n\\n#Is the server in tournament? (0 for no, 1 for yes)\\nsv_tournament_mode 0' > autoexec.cfg",
+            "script": "#!\/bin\/bash\r\n# Installation Script for mkRace w\/ source.\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt-get update\r\napt -y install git\r\ncd \/mnt\/server\/\r\ngit clone https:\/\/github.com\/SNSnoop\/mkRace --recurse-submodules .\r\nmkdir -p build\r\n\r\ncd build\/\r\necho -e '#Name of the servser\\nsv_name \"Untitled Server\"\\n\\n#Message of the day\\nsv_motd Welcome to my server\\n\\n#Server port\\nsv_port 8303\\n\\n#Server password proteted? Leave blank for no\\npassword \"\"\\n\\n#Server console password (Admin password)\\nsv_rcon_password \"ChangeMe\"\\n\\n#Whether to register on the master serverlist (1 for yes, 0 for no)\\nsv_register 1\\n\\n#Max amount of clients that can connect (Maximum 64)\\nsv_max_clients 16\\n\\n#Max amounts of clients per ip\\nsv_max_clients_per_ip 4\\n\\n#Gametype (dm = deathmatch, tdm = team deathmatch, ctf = capture the flag)\\nsv_gametype ctf\\n\\nsv_map ctf2\\n\\n#Score to reach to win the game\\nsv_scorelimit 20\\n\\n#Limit game by time (Set to 0 for no time limit)\\nsv_timelimit 0\\n\\n#Allow team damage? (0 for false, 1 for true)\\nsv_teamdamage 0\\n\\n#Is the server in tournament? (0 for no, 1 for yes)\\nsv_tournament_mode 0' > autoexec.cfg",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
