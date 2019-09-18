@@ -98,6 +98,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite/)
 
+[Teeworlds](/teeworlds/)   
+* [instagib](/teeworlds/instashield)  
+* [mkRace](/teeworlds/mkrace)  
+* [vanilla](/teeworlds/vanilla) 
+
 [Terraria](/terraria/)  
 * [tmodloader](/terraria/tmodloader)  
 * [tshock](/terraria/tshock/)  
