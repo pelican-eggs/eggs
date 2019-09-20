@@ -1,4 +1,4 @@
-### 
+### Teeworlds
 Teeworlds is a free online multiplayer game, available for all major operating systems.
 Battle with up to 16-64 players in a variety of game modes, including Team Deathmatch
 and Capture The Flag, or other gamemodes provided the desired server modification.
