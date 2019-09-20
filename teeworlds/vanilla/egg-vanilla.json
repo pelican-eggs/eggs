@@ -7,7 +7,7 @@
     "name": "Vanilla",
     "author": "admin@primhosting.com",
     "description": "Original Vanilla Teeworlds, includes Team Deathmatch, Deathmatch and Capture The Flag.",
-    "image": "quay.io\/matiasmunk\/teeworlds:vanilla",
+    "image": "quay.io\/matiasmunk\/teeworlds:core",
     "startup": "\/home\/container\/build\/teeworlds_srv",
     "config": {
         "files": "{\r\n    \"build\/autoexec.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_port\": \"sv_port {{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
