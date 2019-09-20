@@ -7,7 +7,7 @@
     "name": "Instagib",
     "author": "admin@primhosting.com",
     "description": "Instagib server modification of Teeworlds.\r\nA Teeworlds modification with a instant kill gameplay. Battle with foes on large maps, become the champion with your laser.",
-    "image": "quay.io\/matiasmunk\/teeworlds:instagib",
+    "image": "quay.io\/matiasmunk\/teeworlds:core",
     "startup": "\/home\/container\/build\/teeworlds_srv",
     "config": {
         "files": "{\r\n    \"build\/autoexec.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_port\": \"sv_port {{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
