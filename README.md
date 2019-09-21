@@ -72,6 +72,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Paper](/minecraft_java/paper)
 * [Spigot](/minecraft_java/spigot/)
 * [spongeforge](/minecraft_java/spongeforge/)
+* [SpongeVanilla](/minecraft_java/spongevanilla/)
 * [Technic](/minecraft_java/technic/)  
 * [VanillaCord](/minecraft_java/vanillacord/)
 
