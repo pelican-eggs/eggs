@@ -1,0 +1,21 @@
+# Use an official Ubuntu image as parent image
+FROM ubuntu:18.04
+
+# Install any needed packages specified in the requirements.txt
+RUN     apt-get update && apt-get -y install software-properties-common \
+        && add-apt-repository ppa:ubuntu-toolchain-r/test -y \
+        && apt-get upgrade -y \
+        && apt-get -y install wget build-essential gcc-8 g++-8 libfreetype6-dev libsdl2-dev libpnglite-dev libwavpack-dev python3 \
+        && useradd -m -d /home/container container
+RUN     mkdir tempcmake && cd tempcmake && wget https://github.com/Kitware/CMake/releases/download/v3.15.3/cmake-3.15.3.tar.gz && tar -xzvf cmake-3.15.3.tar.gz && cd cmake-3.15.3/ && ./bootstrap && make && make install
+
+RUN LD_LIBRARY_PATH=/usr/lib
+
+USER    container
+ENV     HOME /home/container
+WORKDIR /home/container
+
+COPY    ./entrypoint.sh /entrypoint.sh
+
+# Compile and run ./teeworlds-srv when the container launches
+CMD ["/bin/bash", "/entrypoint.sh"]

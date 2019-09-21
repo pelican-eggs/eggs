@@ -1,0 +1,19 @@
+# Use an official Ubuntu image as parent image
+FROM ubuntu:16.04
+
+# Install any needed packages specified in the requirements.txt
+RUN     apt-get update \
+        && apt-get upgrade -y \
+        && apt-get -y install build-essential cmake libfreetype6-dev libsdl2-dev libpnglite-dev libwavpack-dev python3 \
+        && useradd -m -d /home/container container
+
+RUN LD_LIBRARY_PATH=/usr/lib
+
+USER    container
+ENV     HOME /home/container
+WORKDIR /home/container
+
+COPY    ./entrypoint.sh /entrypoint.sh
+
+# Compile and run ./teeworlds-srv when the container launches
+CMD ["/bin/bash", "/entrypoint.sh"]

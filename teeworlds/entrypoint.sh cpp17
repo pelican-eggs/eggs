@@ -1,0 +1,13 @@
+#!/bin/bash
+cd /home/container
+
+cd build
+cmake -DCMAKE_CXX_FLAGS=-std=c++17 -DCMAKE_CC_COMPILER=gcc-8.30 -DCLIENT=OFF ..
+make
+
+# Replace Startup Variables
+MODIFIED_STARTUP=`eval echo $(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')`
+echo ":/home/container$ ${MODIFIED_STARTUP}"
+
+# Run the Server
+eval ${MODIFIED_STARTUP}
