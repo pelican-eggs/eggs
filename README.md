@@ -88,6 +88,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [steamcmd servers](/steamcmd_servers/)  These eggs use steamcmd to install  
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)  
 * [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)
+* [Avorion](/steamcmd_servers/avorion/)
 * [HLDS server](/steamcmd_servers/hlds_server)
 * [PixARK](/steamcmd_servers/pixark/)  
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)

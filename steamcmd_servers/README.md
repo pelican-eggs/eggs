@@ -8,6 +8,9 @@ This is a collection of servers that use steamcmd to install.
 ## ARK
 [ark](ark_survival_evolved/)
 
+## Avorion
+[avorion](avorion/)
+
 ## HLDS Server
 [hlds](hlds_server/)
 
