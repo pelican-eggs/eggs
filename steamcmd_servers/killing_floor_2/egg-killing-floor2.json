@@ -1,0 +1,126 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-09-28T17:47:57+02:00",
+    "name": "Killing Floor 2",
+    "author": "sartharon@hotmail.com",
+    "description": "Killing Floor 2 Server Egg",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": "\/home\/container\/Binaries\/Win64\/KFGameSteamServer.bin.x86_64 {{MAP}}?Game=KFGameContent.KFGameInfo_Survival?Difficulty={{Difficulty}}?AdminPassword={{AdminPassword}}?AdminName={{AdminName}}?MaxPlayers={{MaxPlayers}} -Port={{GamePort}}-WebAdminPort={{WebAdminPort}}-QueryPort={{QueryPort}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"DevOnline: Refreshing published game settings...\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Killing Floor 2 Installation Script\r\n# by Sartharon\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 232130 +quit\r\n\r\n#Fix for missing cache folder\r\nmkdir -p \/mnt\/server\/KFGame\/Cache\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Source AppID",
+            "description": "Required for game to update on server restart. Do not modify this.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "232130",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Map",
+            "description": "The default map for the server.",
+            "env_variable": "MAP",
+            "default_value": "KF-Airship",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "GamePort",
+            "description": "Killing Floor 2 main Port",
+            "env_variable": "GamePort",
+            "default_value": "7777",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "WebAdminPort",
+            "description": "Killing Floor 2 Admin\/Web interface Port",
+            "env_variable": "WebAdminPort",
+            "default_value": "8081",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "QueryPort",
+            "description": "Port to communicate with the Steam Master Server",
+            "env_variable": "QueryPort",
+            "default_value": "27015",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "AdminPassword",
+            "description": "Killing Floor 2 Admin\/Web interface Password\r\nStandart username is: admin",
+            "env_variable": "AdminPassword",
+            "default_value": "CHANGEPASSWORD",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam Port",
+            "env_variable": "SteamPort",
+            "default_value": "20560",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "NTP Port",
+            "description": "NTP Port (Internet time lookup) required for Weekly Outbrakes",
+            "env_variable": "NTPPort",
+            "default_value": "123",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Game difficulty 0-3 (0=Normal, 3=Hell on Earth)",
+            "env_variable": "Difficulty",
+            "default_value": "0",
+            "user_viewable": 0,
+            "user_editable": 1,
+            "rules": "required|string|max:1"
+        },
+        {
+            "name": "AdminName",
+            "description": "Killing Floor 2 Admin\/Web interface username",
+            "env_variable": "AdminName",
+            "default_value": "admin",
+            "user_viewable": 0,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "MaxPlayers",
+            "description": "Maximum players allowed in game",
+            "env_variable": "MaxPlayers",
+            "default_value": "6",
+            "user_viewable": 0,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
