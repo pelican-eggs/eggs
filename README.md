@@ -81,6 +81,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
+[Minetest](/minetest/) (including MTG)
+
 [Mount & Blade Warband](/mount_and_blade/warband/)
 
 [OpenTTD](/openttd/)
