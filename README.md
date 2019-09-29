@@ -94,6 +94,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Starbound](/steamcmd_servers/starbound)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Mordhau](/steamcmd_servers/mordhau)
+* [Left 4 Dead 2] (/steamcmd_servers/left_4_dead_2)
 
 [Squad](/squad/)  
 
