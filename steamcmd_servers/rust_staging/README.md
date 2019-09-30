@@ -15,9 +15,9 @@ Wulf (Community Admin on Oxidemod/uMod):
 ### Server Ports
 Ports required to run the server.
 
-| Port    | default |
-|---------|---------|
-| Game and Quary | 28015 UDP |
-| RCON | 28016 TCP |
+| Port         | Default   |
+|--------------|-----------|
+| Game + Quary | 28015 UDP |
+| RCON         | 28016 TCP |
 
 ### Information about server updates can be found [here](https://steamdb.info/app/258550/depots/?branch=staging)

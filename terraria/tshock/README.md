@@ -8,7 +8,7 @@ TShock is a toolbox for Terraria servers and communities. That toolbox is jam pa
 ### Server Ports
 TShock, like Terraria, only requires a single port to run. The default is 7777
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 7777    |
 

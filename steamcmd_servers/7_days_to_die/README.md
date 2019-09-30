@@ -9,7 +9,7 @@ game ports (default 26900-26902)
 remote control (default 8080, 8081)
 allocs webmap (default 8082)
 
-| Port    | default       |
+| Port    | Default       |
 |---------|---------------|
 | Game    | 26900 - 26902 |
 | RCON    | 8080 - 8081   |

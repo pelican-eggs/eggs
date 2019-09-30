@@ -8,7 +8,7 @@ This is an alpha release server from the mojang team.
 
 Bedrock requires a single port (default 19132)
 
-| Port    | default  |
+| Port    | Default  |
 |---------|----------|
 | Game    | 19132    |
 

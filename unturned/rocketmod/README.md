@@ -11,7 +11,7 @@ Rocketmod requires 2 ports to run properly.
 game port (default 8907)  
 game +1  (default 8908)
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 8907    |
 | Game +1 | 8908    |

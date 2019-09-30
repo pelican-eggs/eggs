@@ -13,7 +13,7 @@ Minimum required memory to run the server.
 ### Server Ports
 Ports required to run the server in a table format.
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 25565   |
 

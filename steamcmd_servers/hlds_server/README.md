@@ -5,7 +5,7 @@ This is for older games like CS 1.6 (default game) and other servers that still 
 ### Server Ports
 HLDS servers require up to 6 ports
 
-| Port      | default |
+| Port      | Default |
 |-----------|---------|
 | Game/rcon | 27015   |
 | HLTV      | 27020   |

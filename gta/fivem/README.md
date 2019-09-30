@@ -17,7 +17,7 @@ FiveM is a modification for Grand Theft Auto V enabling you to play multiplayer 
 ### Server Ports
 Ports required to run the server in a table format.
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 30210   |
 | Game+1  | 30211   |

@@ -6,7 +6,7 @@ Sven co-op requires a single port to be opened
 
 game ports (default 27015 )
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    |  27015  |
 | VAC     |  26900  |

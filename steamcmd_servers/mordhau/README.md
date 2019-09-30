@@ -10,12 +10,11 @@ game port (default 7777)
 query port (default 27015)
 Beacon (default 15000)
 
-| Port    | default       |
-|---------|---------------|
-| Game    | 7777          |
-| Query   | 27015         |
-| Beacon   | 15000         |
-
+| Port    | Default |
+|---------|---------|
+| Game    | 7777    |
+| Query   | 27015   |
+| Beacon  | 15000   |
 
 
 ### Map Rotation / Change Config

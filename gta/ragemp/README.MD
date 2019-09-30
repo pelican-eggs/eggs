@@ -6,7 +6,7 @@ RAGE Multiplayer is an multiplayer modification for Grand Theft Auto V that is a
 
 Warband requires a 2 ports (default 22005, 22006)
 
-| Port    | default  |
+| Port    | Default  |
 |---------|----------|
 | Game    | 22005    |
 | http    | 22006    |

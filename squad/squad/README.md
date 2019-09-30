@@ -5,9 +5,9 @@ Squad is an online multiplayer first-person shooter that aims to capture combat 
 ### Server Ports
 Squad requires 4 ports
 
-| Port     | default |
+| Port     | Default |
 |----------|---------|
 | Game     | 7787    |
-| game +1  | 7788    |
+| Game +1  | 7788    |
 | Query    | 27165   |
 | Query +1 | 27166   |

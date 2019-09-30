@@ -18,6 +18,6 @@ New to the game? Make sure to checkout their [starter page](https://factorio.com
 ### Server Ports
 Factorio requires a single port  
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 34197   |

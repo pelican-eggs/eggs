@@ -6,7 +6,7 @@ Mount & Blade: Warband is a stand alone expansion pack for the game that brought
 
 Warband requires a single port (default 7240)
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 7240    |
 

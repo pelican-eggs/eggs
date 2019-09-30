@@ -5,9 +5,9 @@ Welcome to PixARK, a vast, wild world filled with vicious dinosaurs, magical cre
 ### Server Ports
 PixARK requires 4 ports
 
-| Port  | default |
+| Port  | Default |
 |-------|---------|
 | Game  | 27015   |
 | Query | 27016   |
 | RCON  | 27017   |
-| cube  | 27018   |
+| Cube  | 27018   |

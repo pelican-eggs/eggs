@@ -7,7 +7,7 @@ Mumble is an open source, low-latency, high quality voice chat software primaril
 ## Required Server Ports
 Mumble only requires a single port to run. The default is 64738
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 64738   |
 
@@ -20,7 +20,7 @@ Teamspeak 3 only requires a single port to run. The default is 9987
 
 Other ports for ServerQuery and File Transfers are required for specific things.
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Server  | 9987    |
 | Query   | 10011   |

@@ -7,6 +7,6 @@ Starbound requires a single port to be oepened
 
 game ports (default 21025 )
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    |  21025  |

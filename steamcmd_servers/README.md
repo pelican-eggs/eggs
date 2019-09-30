@@ -21,4 +21,4 @@ This is a collection of servers that use steamcmd to install.
 [starbound](starbound/)
 
 ## Sven coop
-[svencoop](svencoop)
+[svencoop](svencoop/)
