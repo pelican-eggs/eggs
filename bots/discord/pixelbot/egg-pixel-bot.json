@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache git gcc g++ libffi-dev make\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/Ispira\/pixel-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target $(pwd) discord imgurpython xkcd pynacl",
+            "script": "#!\/bin\/ash\r\n# Pixel Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache git gcc g++ libffi-dev make\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/Ispira\/pixel-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target $(pwd) discord imgurpython xkcd pynacl",
             "container": "python:3.6-alpine3.7",
             "entrypoint": "ash"
         }
