@@ -1,5 +1,5 @@
 # tModLoader
-### From their [GitHub](https://github.com/blushiemagic/tModLoader)
+### From their [GitHub](https://github.com/tModLoader/tModLoader)
 tModLoader is essentially a mod that provides a way to load your own mods without having to work directly with Terraria's source code itself. This means you can easily make mods that are compatible with other people's mods, save yourself the trouble of having to decompile and recompile Terraria.exe, and escape from having to understand all of the obscure "intricacies" of Terraria's source code. It is made to work for Terraria 1.3+.
 
 ### Install notes
