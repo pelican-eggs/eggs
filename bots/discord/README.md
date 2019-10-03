@@ -38,3 +38,7 @@ Was used to test python services.
 #### SinusBot
 [SinusBot](https://www.sinusbot.com/)  
 Please Check their site for an in depth on the bot.
+
+#### Lavalink Server
+[Lavalink]()
+Standalone audio sending node based on Lavaplayer and JDA-Audio. Allows for sending audio without it ever reaching any of your shards. Used by many JDA Bots.

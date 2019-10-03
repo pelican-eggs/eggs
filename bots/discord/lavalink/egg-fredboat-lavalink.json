@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-10-03T10:52:58-07:00",
+    "name": "Fredboat\/Lavalink",
+    "author": "kashalldev@gmail.com",
+    "description": "Standalone audio sending node based on Lavaplayer and JDA-Audio. Allows for sending audio without it ever reaching any of your shards.\r\n\r\nBeing used in production by FredBoat, Dyno, Rythm, LewdBot, and more.\r\n\r\nPowered by Lavaplayer, Minimal CPU\/memory footprint, Twitch\/YouTube stream support, Event system, Seeking, Volume control, REST API for resolving lavaplayer tracks (used for non-JVM clients), Statistics (good for load balancing), Basic authentication, Prometheus metrics.\r\n\r\nhttps:\/\/github.com\/Frederikam\/Lavalink",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"application.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Started Launcher\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Lavalink Installation Script\r\n#\r\n# Server Files : \/mnt\/server\r\napk update\r\napk add curl\r\ncd \/mnt\/server\r\ncurl -sSL https:\/\/ci.fredboat.com\/repository\/download\/Lavalink_Build\/7107:id\/Lavalink.jar?guest=1 -o ${SERVER_JARFILE}\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/Frederikam\/Lavalink\/master\/LavalinkServer\/application.yml.example -o application.yml",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Password",
+            "description": "The password the lavalink server should use for authentication.",
+            "env_variable": "password",
+            "default_value": "youshallnotpass",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "Lavalink.jar",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        }
+    ]
+}
