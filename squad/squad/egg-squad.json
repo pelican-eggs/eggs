@@ -3,15 +3,15 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-21T13:00:36-05:00",
+    "exported_at": "2019-10-03T21:02:54-04:00",
     "name": "Squad",
     "author": "brycea@rapidnetworks.org",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/SquadServer.sh Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
+    "startup": ".\/SquadGameServer.sh Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
     "config": {
-        "files": "{}",
-        "startup": "{\r\n    \"done\": \"LogInit:Display: Starting Game.\",\r\n    \"userInteraction\": []\r\n}",
+        "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.servername}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.maxplayers}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.allowteamchange}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.advertise}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.reservedslots}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.ptciu}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.teambal}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.recorddemos}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Engine Initialization\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
         "stop": "^C"
     },
@@ -31,6 +31,78 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|numeric"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name for the server in the server list",
+            "env_variable": "servername",
+            "default_value": "Squad Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:30"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the maximum number of players.",
+            "env_variable": "maxplayers",
+            "default_value": "80",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required"
+        },
+        {
+            "name": "Allow Team Change",
+            "description": "Allow players to change teams ( true \/ false )",
+            "env_variable": "allowteamchange",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Advertise Server",
+            "description": "Have the server report to the public server list ( true \/ false )",
+            "env_variable": "advertise",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Reserved Slows",
+            "description": "The number of reserved slots for admins \/ mods",
+            "env_variable": "reservedslots",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Prevent Team Change If Unbalanced",
+            "description": "This will prevent players from changing teams if they're already unbalanced ( true \/ false )",
+            "env_variable": "ptciu",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Enforce Team Balance",
+            "description": "This will FORCE team balance if the teams are too uneven ( true \/ false )",
+            "env_variable": "teambal",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Record Demos",
+            "description": "This will record demos of the players ( true \/ false )",
+            "env_variable": "recorddemos",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
         }
     ]
 }
