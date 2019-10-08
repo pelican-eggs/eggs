@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-10-06T00:29:04-04:00",
+    "exported_at": "2019-10-08T08:47:08-04:00",
     "name": "Squad",
     "author": "brycea@rapidnetworks.org",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/SquadGameServer.sh Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
+    "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
     "config": {
         "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.servername}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.maxplayers}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.allowteamchange}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.advertise}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.reservedslots}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.ptciu}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.teambal}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.recorddemos}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\",\r\n    \"userInteraction\": []\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n## install required packages to install squad\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\n\r\n## install steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\n\r\n## needs to be used for steamcmd to operate correctly\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install squad\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${{SRCDS_APPID}} +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\n\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\nchmod +x \/mnt\/server\/SquadGame\/Binaries\/Linux\/SquadGameServer",
+            "script": "#!\/bin\/bash\r\n## install required packages to install squad\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\n\r\n## install steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\n\r\n## needs to be used for steamcmd to operate correctly\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install squad\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\n\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\nchmod +x \/mnt\/server\/SquadGame\/Binaries\/Linux\/SquadGameServer",
             "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }
@@ -31,6 +31,24 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|numeric"
+        },
+        {
+            "name": "ld lib path",
+            "description": "this is needed for some reason",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": "\/home\/container\/linux64\/",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "403240",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
         },
         {
             "name": "Server Name",
@@ -103,24 +121,6 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string"
-        },
-        {
-            "name": "ld lib path",
-            "description": "this is needed for some reason",
-            "env_variable": "LD_LIBRARY_PATH",
-            "default_value": "\/home\/container\/linux64\/",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "required|string"
-        },
-        {
-            "name": "Game ID",
-            "description": "The ID corresponding to the game to download and run using SRCDS.",
-            "env_variable": "SRCDS_APPID",
-            "default_value": "403240",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "required|string|max:20"
         }
     ]
 }
