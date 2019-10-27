@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-10-24T21:42:51+03:00",
+    "exported_at": "2019-10-26T16:59:57+03:00",
     "name": "Wreckfest",
     "author": "wgos@wgos.org",
     "description": "Wreckfest is a demolition derby themed racing game with soft-body damage modeling, sophisticated driving dynamics and in-depth vehicle upgrading, featuring both demolition derbies and more traditional track races. It's all about fun, breakneck racing and over-the-top crashes",
-    "image": "wgos\/pteroq-images:wreckfest",
+    "image": "wgos\/pteroq-images:wine-4.0",
     "startup": "wine server\/Wreckfest.exe -s server_config={{CONFIG_PATH}} -server_set game_port={{SERVER_PORT}} -server_set query_port={{QUERY_PORT}} -server_set steam_port={{STEAM_PORT}}",
     "config": {
         "files": "{}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${APPID} +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
@@ -44,9 +44,9 @@
         {
             "name": "Application ID",
             "description": "Application ID in Steam",
-            "env_variable": "APPID",
+            "env_variable": "SRCDS_APPID",
             "default_value": "361580",
-            "user_viewable": 1,
+            "user_viewable": 0,
             "user_editable": 0,
             "rules": "required|regex:\/^(361580)$\/"
         },
@@ -58,6 +58,24 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:512"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Automatically update game on startup. 1 = update \/ 0 = do not update",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Winetricks Install",
+            "description": "Specify what dlls\/settings\/apps\/etc. going to be installed.\r\nUse space as separator",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "gecko mono",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
         }
     ]
 }
