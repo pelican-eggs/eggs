@@ -39,6 +39,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [TeamSpeak3](bots/teamspeak3)
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
+## Database Eggs
+[MariaDB](/database/mariadb/)
+
 ## Game Eggs
 
 [Arma](/arma/)  
