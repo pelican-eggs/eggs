@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-03-08T22:46:21+01:00",
+    "exported_at": "2019-11-14T21:43:14+01:00",
     "name": "Sven Co-op",
     "author": "pteroducktyl@yildri.nl",
     "description": "Sven Co-op is a co-operative game originally based around Valve Software's Half-Life. In this game players must work together against computer controlled enemies and solve puzzles as a team.",
@@ -67,6 +67,15 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|numeric|between:-1,255"
+        },
+        {
+            "name": "Source AppID",
+            "description": "Required for game to update on server restart. Do not modify this.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "276060",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
         }
     ]
 }
