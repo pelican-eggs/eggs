@@ -92,11 +92,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)  
 * [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)
 * [HLDS server](/steamcmd_servers/hlds_server)
+* [Mordhau](/steamcmd_servers/mordhau)
+* [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)  
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [Starbound](/steamcmd_servers/starbound)
 * [Sven Co-op](/steamcmd_servers/svencoop)
-* [Mordhau](/steamcmd_servers/mordhau)
 
 [Squad](/squad/)  
 
