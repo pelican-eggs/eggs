@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-06-19T07:46:06-04:00",
+    "exported_at": "2019-12-13T15:42:55+01:00",
     "name": "Counter-Strike: Global Offensive",
     "author": "support@pterodactyl.io",
     "description": "Counter-Strike: Global Offensive is a multiplayer first-person shooter video game developed by Hidden Path Entertainment and Valve Corporation.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/srcds_run -game csgo -console -port {{SERVER_PORT}} +ip 0.0.0.0 +map {{SRCDS_MAP}} -strictportbind -norestart +sv_setsteamaccount {{STEAM_ACC}}",
+    "startup": ".\/srcds_run -game csgo -console -usercon -port {{SERVER_PORT}} +ip 0.0.0.0 +game_type {{GAMETYPE}} +game_mode {{GAMEMODE}} +map {{SRCDS_MAP}} -maxplayers_override {{MAXPLAYERS}} -tickrate {{TICK}} -strictportbind -norestart +sv_setsteamaccount {{STEAM_ACC}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\",\r\n    \"userInteraction\": []\r\n}",
@@ -39,7 +39,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|alpha_num|size:32"
+            "rules": "nullable|string|alpha_num|size:32"
         },
         {
             "name": "Source AppID",
@@ -49,6 +49,42 @@
             "user_viewable": 0,
             "user_editable": 0,
             "rules": "required|string|max:20"
+        },
+        {
+            "name": "Tick",
+            "description": "Server Tickrate",
+            "env_variable": "TICK",
+            "default_value": "64",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Game Type",
+            "description": "https:\/\/developer.valvesoftware.com\/wiki\/CSGO_Game_Mode_Commands",
+            "env_variable": "GAMETYPE",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:1"
+        },
+        {
+            "name": "Game Mode",
+            "description": "https:\/\/developer.valvesoftware.com\/wiki\/CSGO_Game_Mode_Commands",
+            "env_variable": "GAMEMODE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:1"
+        },
+        {
+            "name": "Max Players",
+            "description": "Max Players allowed to connect",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "10",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer"
         }
     ]
 }
