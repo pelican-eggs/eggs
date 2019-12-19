@@ -44,14 +44,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Game Eggs
 
-[Arma](/arma/)  
-* [Arma 3](/arma/arma3/)  
-* [Arma 3 HC](/arma/arma3_headless_client/)  
-
-[Conan Exiles](/conan_exiles/conan_exiles)
-
-[Don't Starve](/dont_starve/dont_starve)
-
 [ET Legacy](/enemy_territory/etlegacy/)
 
 [Factorio](/factorio/factorio/)  
@@ -64,13 +56,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Multi Theft Auto](/gta/mtasa/)
   * [SA-MP](/gta/samp/)
 
-[Minecraft Bedrock](/minecraft_bedrock/)  
+[Minecraft Bedrock](/minecraft_bedrock/) Servers for Bedrock Minecraft  
 * [Bedrock](/minecraft_bedrock/bedrock/)  
 * [Nukkit](/minecraft_bedrock/nukkit/)  
 * [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
 
-[Minecraft Java](/minecraft_java/)
-* [Cuberite]/minecraft_java/cuberite/)
+[Minecraft Java](/minecraft_java/) Servers for Java Minecraft  
+* [Cuberite](/minecraft_java/cuberite/)
 * [Forge](/minecraft_java/forge/)  
 * [Feed The Beast](/minecraft_java/ftb/)  
 * [Paper](/minecraft_java/paper)
@@ -85,22 +77,27 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
-[Mount & Blade Warband](/mount_and_blade/warband/)
-
-[OpenTTD](/openttd/)
+[Tycoon Games](/tycoon_games/)
+* [OpenTTD](/tycoon_games/openttd/)
 
 [steamcmd servers](/steamcmd_servers/)  These eggs use steamcmd to install  
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)  
-* [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)
-* [HLDS server](/steamcmd_servers/hlds_server)
-* [Mordhau](/steamcmd_servers/mordhau)
-* [Onset](/steamcmd_servers/onset)
+* [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)  
+* [Arma](/arma/)  
+  * [Arma 3](/arma/arma3/)  
+  * [Arma 3 HC](/arma/arma3_headless_client/)  
+* [Conan Exiles](/steamcmd_servers/conan_exiles)  
+* [Don't Starve](/steamcmd_servers/dont_starve)  
+* [HLDS server](/steamcmd_servers/hlds_server)  
+* [Mordhau](/steamcmd_servers/mordhau)  
+* [Onset](/steamcmd_servers/onset)  
 * [PixARK](/steamcmd_servers/pixark/)  
-* [Rust Staging Branch](/steamcmd_servers/rust_staging/)
-* [Starbound](/steamcmd_servers/starbound)
-* [Sven Co-op](/steamcmd_servers/svencoop)
-
-[Squad](/squad/)  
+* [Rust Staging Branch](/steamcmd_servers/rust_staging/)  
+* [Starbound](/steamcmd_servers/starbound)  
+* [Sven Co-op](/steamcmd_servers/svencoop)  
+* [Squad](/steamcmd_servers/squad/)  
+* [Unturned](/unturned/)  
+  * [RocketMod](/unturned/rocketmod/)  
 
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite/)
@@ -109,7 +106,4 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [tmodloader](/terraria/tmodloader)  
 * [tshock](/terraria/tshock/)  
 
-[Unturned](/unturned/)  
-* [RocketMod](/unturned/rocketmod/)  
-
-[Xonotic](/xonotic/)  
+[Xonotic](/xonotic/xonotic/)  
