@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-12-23T12:28:53-04:00",
+    "exported_at": "2019-12-23T13:10:08-04:00",
     "name": "Waterfall",
     "author": "hostmaster@waterfallgaming.net",
     "description": "Waterfall is a fork of the well-known BungeeCord server teleportation suite.",
     "image": "quay.io\/pterodactyl\/core:java",
-    "startup": "java -Xms{{SERVER_MEMORY}}M -Xmx{{SERVER_MEMORY}}M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:G1MixedGCLiveThresholdPercent=35 -XX:+AlwaysPreTouch -XX:+ParallelRefProcEnabled -Dusing.aikars.flags=mcflags.emc.gs -jar {{SERVER_JARFILE}}",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Listening on \",\r\n    \"userInteraction\": [\r\n        \"Listening on \/0.0.0.0:\"\r\n    ]\r\n}",
