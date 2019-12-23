@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-10-26T16:59:57+03:00",
+    "exported_at": "2019-12-23T20:07:06+03:00",
     "name": "Wreckfest",
     "author": "wgos@wgos.org",
     "description": "Wreckfest is a demolition derby themed racing game with soft-body damage modeling, sophisticated driving dynamics and in-depth vehicle upgrading, featuring both demolition derbies and more traditional track races. It's all about fun, breakneck racing and over-the-top crashes",
-    "image": "wgos\/pteroq-images:wine-4.0",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_wine-4",
     "startup": "wine server\/Wreckfest.exe -s server_config={{CONFIG_PATH}} -server_set game_port={{SERVER_PORT}} -server_set query_port={{QUERY_PORT}} -server_set steam_port={{STEAM_PORT}}",
     "config": {
         "files": "{}",
