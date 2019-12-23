@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-02-08T01:46:57+01:00",
+    "name": "Tower Unite",
+    "author": "teamwuffy@gmail.com",
+    "description": "Tower Unite\r\n\r\nDefault Port: 7778\r\nDefault Query Port: 27016\r\n\r\nConfig Path: Tower\/Saved\/Config\/TowerServer.ini",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/Tower\/Binaries\/Linux\/TowerServer-Linux-Shipping -log -Port={{SERVER_PORT}} -MULTIHOME=0.0.0.0 -TowerServerINI=..\/..\/Saved\/Config\/TowerServer.ini",
+    "config": {
+        "files": "{\r\n    \"Tower\/Saved\/Config\/TowerServer.ini\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"{{server.build.env.SERVER_MAX_PLAYER}}\",\r\n            \"ServerTitle\": \"{{server.build.env.SERVER_TITLE}}\",\r\n            \"SteamLoginToken\": \"{{server.build.env.STEAM_LOGIN_TOKEN}}\",\r\n            \"AdminSteamID\": \"{{server.build.env.STEAM_ADMIN_ID}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Match State Changed from EnteringMap to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Tower Unite Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --install-recommends install curl ca-certificates lib32gcc1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\n\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 439660 validate +quit\r\n\r\ncd mnt\/server\r\n\r\nmkdir -p Tower\/Saved\/Config\r\nmkdir -p Tower\/Binaries\/Linux\r\n\r\nmv \/mnt\/server\/steamcmd\/linux64\/steamclient.so \/mnt\/server\/Tower\/Binaries\/Linux\r\n\r\ncat <<EOF >> Tower\/Saved\/Config\/TowerServer.ini\r\n[\/script\/towernetworking.dedicatedserveroptions]\r\nMaxPlayers=$SERVER_MAX_PLAYER\r\nServerTitle=$SERVER_TITLE\r\nSteamLoginToken=$STEAM_LOGIN_TOKEN\r\n\r\n[Administration]\r\nAdminSteamID=$STEAM_ADMIN_ID\r\nEOF",
+            "container": "ubuntu:18.10",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam Login Token",
+            "description": "Login and generate a token for the app-id: 394690\r\nhttps:\/\/steamcommunity.com\/dev\/managegameservers",
+            "env_variable": "STEAM_LOGIN_TOKEN",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Steam Admin ID",
+            "description": "Note that your admin id is only a number!",
+            "env_variable": "STEAM_ADMIN_ID",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:76561202255233023"
+        },
+        {
+            "name": "Server Title",
+            "description": "",
+            "env_variable": "SERVER_TITLE",
+            "default_value": "Tower Unite Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:512"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "SERVER_MAX_PLAYER",
+            "default_value": "40",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|integer|max:512"
+        }
+    ]
+}
