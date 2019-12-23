@@ -22,6 +22,9 @@ This is a collection of servers that use steamcmd to install.
 ## HLDS Server
 [hlds](hlds_server/)
 
+## Insurgency: Sandstorm
+[insurgency_sandstorm](insurgency_sandstorm/)
+
 ## Mordhau
 [mordhau](mordhau/)
 

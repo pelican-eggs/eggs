@@ -89,6 +89,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
 * [Don't Starve](/steamcmd_servers/dont_starve)
 * [HLDS server](/steamcmd_servers/hlds_server)
+* [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
