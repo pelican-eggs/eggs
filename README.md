@@ -26,87 +26,86 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Bot Eggs
 
-[Discord](/bots/discord/)   
+[Discord](/bots/discord/) 
 * [ATL Bot](/bots/discord/atlbot/) Node JS
-* [Bastion](/bots/discord/bastion/)  
-* [discord.js](bots/discord/discord.js/) Node JS generic  
-* [fragbot](/bots/discord/fragbot/) Golang  
+* [Bastion](/bots/discord/bastion/)
+* [discord.js](bots/discord/discord.js/) Node JS generic
+* [fragbot](/bots/discord/fragbot/) Golang
 * [jmusicbot](/bots/discord/jmusicbot) Java
-* [parkertron](/bots/discord/parkertron/) Golang  
-* [pixel-bot](/bots/discord/pixelbot/) Python  
-* [Sinusbot](/bots/discord/sinusbot/)  
+* [parkertron](/bots/discord/parkertron/) Golang
+* [pixel-bot](/bots/discord/pixelbot/) Python
+* [Sinusbot](/bots/discord/sinusbot/)
 
 [TeamSpeak3](bots/teamspeak3)
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
+## Database Eggs
+[MariaDB](/database/mariadb/)
+
 ## Game Eggs
-
-[Arma](/arma/)  
-* [Arma 3](/arma/arma3/)  
-* [Arma 3 HC](/arma/arma3_headless_client/)  
-
-[Conan Exiles](/conan_exiles/conan_exiles)
-
-[Don't Starve](/dont_starve/dont_starve)
 
 [ET Legacy](/enemy_territory/etlegacy/)
 
-[Factorio](/factorio/factorio/)  
+[Factorio](/factorio/factorio/)
 
-[Grand Theft Auto](/gta/)  
+[Grand Theft Auto](/gta/)
 * GTA V
-  * [FiveM](/gta/fivem/)  
-  * [RageMP](/gta/ragemp/)  
+  * [FiveM](/gta/fivem/)
+  * [RageMP](/gta/ragemp/)
 * GTA SA
   * [Multi Theft Auto](/gta/mtasa/)
   * [SA-MP](/gta/samp/)
 
-[Minecraft Bedrock](/minecraft_bedrock/)  
-* [Bedrock](/minecraft_bedrock/bedrock/)  
-* [Nukkit](/minecraft_bedrock/nukkit/)  
-* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
+[Minecraft Bedrock](/minecraft_bedrock/) Servers for Bedrock Minecraft
+* [Bedrock](/minecraft_bedrock/bedrock/)
+* [Nukkit](/minecraft_bedrock/nukkit/)
+* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)
 
-[Minecraft Java](/minecraft_java/)
-* [Forge](/minecraft_java/forge/)  
-* [Feed The Beast](/minecraft_java/ftb/)  
+[Minecraft Java](/minecraft_java/) Servers for Java Minecraft
+* [Cuberite](/minecraft_java/cuberite/)
+* [Forge](/minecraft_java/forge/)
+* [Feed The Beast](/minecraft_java/ftb/)
 * [Paper](/minecraft_java/paper)
 * [Spigot](/minecraft_java/spigot/)
 * [spongeforge](/minecraft_java/spongeforge/)
 * [SpongeVanilla](/minecraft_java/spongevanilla/)
-* [Technic](/minecraft_java/technic/)  
+* [Technic](/minecraft_java/technic/)
 * [VanillaCord](/minecraft_java/vanillacord/)
 
-[Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)  
-* [Waterfall](/minecraft_proxy/waterfall/)  
+[Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)
+* [Waterfall](/minecraft_proxy/waterfall/)
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
-[Mount & Blade Warband](/mount_and_blade/warband/)
+[Tycoon Games](/tycoon_games/)
+* [OpenTTD](/tycoon_games/openttd/)
 
-[OpenTTD](/openttd/)
-
-[steamcmd servers](/steamcmd_servers/)  These eggs use steamcmd to install  
-* [7 Days to Die](/steamcmd_servers/7_days_to_die/)  
+[steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
+* [7 Days to Die](/steamcmd_servers/7_days_to_die/)
 * [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)
+* [Arma](/steamcmd_servers/arma/)
+  * [Arma 3](/steamcmd_servers/arma/arma3/)
+  * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client/)
+* [Conan Exiles](/steamcmd_servers/conan_exiles)
+* [Don't Starve](/steamcmd_servers/dont_starve)
 * [HLDS server](/steamcmd_servers/hlds_server)
-* [PixARK](/steamcmd_servers/pixark/)  
+* [Mordhau](/steamcmd_servers/mordhau)
+* [Onset](/steamcmd_servers/onset)
+* [PixARK](/steamcmd_servers/pixark/)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [Starbound](/steamcmd_servers/starbound)
 * [Sven Co-op](/steamcmd_servers/svencoop)
-* [Mordhau](/steamcmd_servers/mordhau)
-
-[Squad](/squad/)  
+* [Squad](/steamcmd_servers/squad/)
+* [Unturned](/unturned/)
+  * [RocketMod](/unturned/rocketmod/)
 
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite/)
 
-[Terraria](/terraria/)  
-* [tmodloader](/terraria/tmodloader)  
-* [tshock](/terraria/tshock/)  
+[Terraria](/terraria/)
+* [tmodloader](/terraria/tmodloader)
+* [tshock](/terraria/tshock/)
 
-[Unturned](/unturned/)  
-* [RocketMod](/unturned/rocketmod/)  
-
-[Xonotic](/xonotic/)  
+[Xonotic](/xonotic/xonotic/)
 
 [Wreckfest](/wreckfest/)

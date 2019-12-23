@@ -3,17 +3,17 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-12-08T10:58:48-05:00",
-    "name": "Team Fortress 2",
-    "author": "support@pterodactyl.io",
-    "description": "Team Fortress 2 is a team-based first-person shooter multiplayer video game developed and published by Valve Corporation. It is the sequel to the 1996 mod Team Fortress for Quake and its 1999 remake.",
-    "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/srcds_run -game {{SRCDS_GAME}} -console -port {{SERVER_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
+    "exported_at": "2019-12-12T18:56:28-05:00",
+    "name": "Onset",
+    "author": "parker@parkervcp.com",
+    "description": "Onset is an open world multiplayer sandbox without predefined goals. Create and host your very own experience in Onset using scripting functions. Whether that is Roleplay, Cops and Robbers or classic Freeroam. Or just enjoy the different gamemodes created by other players.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "startup": ".\/OnsetServer",
     "config": {
-        "files": "{}",
-        "startup": "{\r\n    \"done\": \"gameserver Steam ID\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
-        "stop": "quit"
+        "files": "{\r\n    \"server_config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ipaddress\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"servername\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"password\":\"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Entering simulation\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
@@ -24,31 +24,31 @@
     },
     "variables": [
         {
-            "name": "Game ID",
-            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "name": "App ID",
+            "description": "ARK steam app id for auto updates. Leave blank to avoid auto update.",
             "env_variable": "SRCDS_APPID",
-            "default_value": "232250",
+            "default_value": "1204170",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|regex:\/^(232250)$\/"
+            "rules": "required|string|max:20"
         },
         {
-            "name": "Game Name",
-            "description": "The name corresponding to the game to download and run using SRCDS.",
-            "env_variable": "SRCDS_GAME",
-            "default_value": "tf",
-            "user_viewable": 1,
+            "name": "ld lib path",
+            "description": "required to load server libraries.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".",
+            "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|regex:\/^(tf)$\/"
+            "rules": "required|string|max:20"
         },
         {
-            "name": "Default Map",
-            "description": "The default map to use when starting the server.",
-            "env_variable": "SRCDS_MAP",
-            "default_value": "cp_dustbowl",
+            "name": "Auto Update Server",
+            "description": "This flag will auto update the server on restart. (default is 1) \r\n\r\nSet to 1 to update\r\nSet to 0 to no update",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|regex:\/^(\\w{1,20})$\/"
+            "rules": "required|string|max:20"
         }
     ]
 }
