@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-03-13T18:40:40-04:00",
+    "exported_at": "2019-12-26T15:50:38-05:00",
     "name": "Arma 3",
     "author": "daave@aaathats3as.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
@@ -17,8 +17,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl\r\napt -y --no-install-recommends install lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSLO http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\ntouch \/mnt\/server\/latest.log\r\nchown -R root:root \/mnt\r\n\r\ntar -xzvf \/tmp\/steamcmd_linux.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nexport HOME=\/mnt\/server\r\n\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${APP_ID} validate +quit\r\n\r\ncd \/mnt\/server\/\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/arma\/arma3\/egg-arma3-config\/server.cfg",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## ARMA III specific setup\r\ncd \/mnt\/server\/\r\n\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/server.cfg",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
@@ -26,20 +26,11 @@
         {
             "name": "Game App ID",
             "description": "Steam CMD App ID.",
-            "env_variable": "APP_ID",
+            "env_variable": "SRCDS_APPID",
             "default_value": "233780",
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|alpha_dash|between:1,100"
-        },
-        {
-            "name": "Basic",
-            "description": "Basic network config",
-            "env_variable": "BASIC",
-            "default_value": "basic.cfg",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "string|nullable"
         },
         {
             "name": "Config",
@@ -94,6 +85,15 @@
             "user_viewable": 0,
             "user_editable": 0,
             "rules": "nullable|string"
+        },
+        {
+            "name": "Basic",
+            "description": "Basic network config",
+            "env_variable": "BASIC",
+            "default_value": "basic.cfg",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "string|nullable"
         },
         {
             "name": "Steam Auth Code",
