@@ -98,6 +98,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/unturned/)
   * [RocketMod](/unturned/rocketmod/)
+* [Wurm Unlimited](/steamcmd_servers/wurm_unlimited)
 
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite/)
