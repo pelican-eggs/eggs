@@ -5,7 +5,7 @@
     },
     "exported_at": "2019-12-28T13:59:35-06:00",
     "name": "Wurm Unlimited",
-    "author": "not@happening.com",
+    "author": "iamtehguy@gmail.com",
     "description": "WU Headless",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre",
     "startup": "{{SERVER_EXEC}} ip=0.0.0.0 externalport={{SERVER_PORT}} start={{SERVER_WORLD}} maxplayers={{SERVER_MAX_PLAYERS}} servername={{SERVER_NAME}} adminpwd={{SERVER_ADMIN_PWD}} serverpassword={{SERVER_PASSWORD}}",
