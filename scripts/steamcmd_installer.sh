@@ -2,7 +2,7 @@
 # steamcmd Base Installation Script
 #
 # Server Files: /mnt/server
-# Image to install with is 'ubuntu:18.04'
+# Image to install with is 'debian:buster-slim'
 apt -y update
 apt -y --no-install-recommends install curl lib32gcc1 ca-certificates
 
