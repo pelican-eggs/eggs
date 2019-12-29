@@ -3,10 +3,10 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-12-28T16:37:09+01:00",
+    "exported_at": "2019-12-29T10:25:38+01:00",
     "name": "Eco",
-    "author": "parker@parkervcp.com",
-    "description": "Eco is a community-based game",
+    "author": "info@goover.de",
+    "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete",
     "startup": "\/usr\/bin\/mono .\/EcoServer.exe -nogui",
     "config": {
