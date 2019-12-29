@@ -39,3 +39,6 @@ This is a collection of servers that use steamcmd to install.
 
 ## Sven coop
 [svencoop](svencoop)
+
+## Wurm Unlimited
+[wurm unlimited](wurm_unlimited)
