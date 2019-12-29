@@ -21,7 +21,7 @@ function download_ml {
 ## Installing the Mod Launcher
 
 # Checking if ML is wanted
-if [ ! -z "$SERVER_MODLOADER_VERSION" ]; then
+if [ "$SERVER_MODLOADER_VERSION" != "none" ]; then
 	
 	# See if we've got it installed already
 	if [ ! -f "/home/container/WU-Launcher.version" ]; then
