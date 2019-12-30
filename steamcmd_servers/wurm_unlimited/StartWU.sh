@@ -3,9 +3,9 @@
 function download_ml {
 	echo "Downloading and Extracting Mod Launcher"
 	# Grabbing latest Mod Launcher tag, if desired
-	#if [ "$SERVER_MODLOADER_VERSION" == "latest"]; then
-	#    SERVER_MODLOADER_VERSION=$(curl -L -s -H 'Accept: application/json' https://github.com/ago1024/WurmServerModLauncher/releases/latest | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/' | sed -e 's/[^0-9,\.]*//g')
-	#fi
+	if [ "$SERVER_MODLOADER_VERSION" == "latest" ]; then
+	    SERVER_MODLOADER_VERSION=$(curl -L -s -H 'Accept: application/json' https://github.com/ago1024/WurmServerModLauncher/releases/latest | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/' | sed -e 's/[^0-9,\.]*//g')
+	fi
 	
 	# Downloading the Mod Launcher
 	cd /home/container
@@ -54,5 +54,10 @@ if [ "$SERVER_MODLOADER_VERSION" != "none" ]; then
 	./WurmServerLauncher-patched "$@"
 else
 	cd /home/container
+	
+	# Make sure we are using the unpatched binary
+	rm ./WurmServerLauncher
+	cp ./backup/WurmServerLauncher ./
+	
 	./WurmServerLauncher "$@"
 fi
