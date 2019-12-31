@@ -2,11 +2,7 @@
 
 function download_ml {
 	echo "Downloading and Extracting Mod Launcher"
-	# Grabbing latest Mod Launcher tag, if desired
-	if [ "$SERVER_MODLOADER_VERSION" == "latest" ]; then
-	    SERVER_MODLOADER_VERSION=$(curl -L -s -H 'Accept: application/json' https://github.com/ago1024/WurmServerModLauncher/releases/latest | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/' | sed -e 's/[^0-9,\.]*//g')
-	fi
-	
+
 	# Downloading the Mod Launcher
 	cd /home/container
 	mkdir -p ./downloads
@@ -33,10 +29,18 @@ function download_ml {
 	fi
 }
 
+## Checking for updates
+
+if [ "$SERVER_AUTO_UPDATE" == "true" ] || [ "$SERVER_AUTO_UPDATE" == "1" ]; then
+	cd /home/container/steamcmd
+	export HOME=/home/container
+	./steamcmd.sh +login anonymous +force_install_dir /home/container +app_update 402370 validate +quit
+fi
+
 ## Installing the Mod Launcher
 
 # Checking if ML is wanted
-if [ "$SERVER_MODLOADER_VERSION" != "none" ]; then
+if [ "$SERVER_MODLOADER_VERSION" != "0" ]; then
 	
 	# See if we've got it installed already
 	if [ ! -f "/home/container/WU-Launcher.version" ]; then
@@ -46,6 +50,10 @@ if [ "$SERVER_MODLOADER_VERSION" != "none" ]; then
 		current_ml=$(</home/container/WU-Launcher.version)
 		
 		if [ "$SERVER_MODLOADER_VERSION" != "$current_ml" ]; then
+			if [ -f "/home/container/WurmServerLauncher-patched" ]; then
+				rm /home/container/WurmServerLauncher-patched
+			fi
+			
 			download_ml
 		fi
 	fi

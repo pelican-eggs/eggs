@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-12-30T17:22:09-06:00",
+    "exported_at": "2019-12-31T12:18:16-06:00",
     "name": "Wurm Unlimited",
     "author": "iamtehguy@gmail.com",
     "description": "WU Headless",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n#\r\n# Installation script for Wurm Unlimited\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\n# Headless setup as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Linux_Headless\r\napt -y install libswt-gtk3-java xvfb x11vnc\r\n\r\nXvfb :99 &\r\nexport DISPLAY=:99\r\n\r\n## Installing Wurm Unlimited Dedicated Server\r\n\r\n# Download and set up SteamCMD as per https:\/\/developer.valvesoftware.com\/wiki\/SteamCMD#Linux\r\nadd-apt-repository multiverse\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y install lib32gcc1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\n\r\n# Installing Wurm Unlimited\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 402370 validate +quit\r\n\r\n# Copying steamclient.so as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Headless\r\nmkdir -p \/mnt\/server\/nativelibs\r\ncp -v linux64\/steamclient.so \/mnt\/server\/nativelibs\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o StartWU.sh https:\/\/raw.githubusercontent.com\/tehguy\/eggs\/add\/wurm-unlimited\/steamcmd_servers\/wurm_unlimited\/StartWU.sh\r\nchmod +x StartWU.sh\r\n\r\nmkdir -p .\/backup\r\ncp .\/WurmServerLauncher .\/backup\/",
+            "script": "#!\/bin\/bash\r\n#\r\n# Installation script for Wurm Unlimited\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\n# Headless setup as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Linux_Headless\r\napt -y install libswt-gtk3-java xvfb x11vnc\r\n\r\nXvfb :99 &\r\nexport DISPLAY=:99\r\n\r\n## Installing Wurm Unlimited Dedicated Server\r\n\r\n# Download and set up SteamCMD as per https:\/\/developer.valvesoftware.com\/wiki\/SteamCMD#Linux\r\nadd-apt-repository multiverse\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y install lib32gcc1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\n\r\n# Installing Wurm Unlimited\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 402370 validate +quit\r\n\r\n# Copying steamclient.so as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Headless\r\nmkdir -p \/mnt\/server\/nativelibs\r\ncp -v linux64\/steamclient.so \/mnt\/server\/nativelibs\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o StartWU.sh https:\/\/raw.githubusercontent.com\/tehguy\/eggs\/add\/wurm-unlimited\/steamcmd_servers\/wurm_unlimited\/StartWU.sh\r\nchmod +x StartWU.sh\r\n\r\nmkdir -p .\/backup\r\ncp .\/WurmServerLauncher .\/backup\/\r\ncp -r .\/dist\/Advendure .\/backup\/\r\ncp -r .\/dist\/Creative .\/backup\/",
             "container": "ubuntu:18.10",
             "entrypoint": "bash"
         }
@@ -36,19 +36,19 @@
             "name": "Max Players",
             "description": "Maximum amount of people allowed to join the server",
             "env_variable": "SERVER_MAX_PLAYERS",
-            "default_value": "32",
+            "default_value": "100",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "integer|max:128"
+            "rules": "required|integer|max:128"
         },
         {
             "name": "Admin Password",
-            "description": "Unlocks the admin commands from within the game, that can be used to change the gameplay settings of the server, such as skill gain rate and field growth time.\r\n\r\nSet to \"\" for no password",
+            "description": "Unlocks the admin commands from within the game, that can be used to change the gameplay settings of the server, such as skill gain rate and field growth time. Leave blank to disable.",
             "env_variable": "SERVER_ADMIN_PWD",
-            "default_value": "\"\"",
+            "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:128"
+            "rules": "nullable|string|max:128"
         },
         {
             "name": "Server Name",
@@ -70,21 +70,30 @@
         },
         {
             "name": "Server Password",
-            "description": "Sets the password that is used when trying to connect to the server.\r\n\r\nSet to \"\" for no password",
+            "description": "Sets the password that is used when trying to connect to the server. Leave blank to disable.",
             "env_variable": "SERVER_PASSWORD",
-            "default_value": "\"\"",
+            "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:128"
+            "rules": "nullable|string|max:128"
         },
         {
             "name": "Mod Launcher Version",
-            "description": "Version of the mod launcher to download. To disable this, use \"none\"; to grab the latest release, use \"latest\". For a list of version numbers, refer to https:\/\/github.com\/ago1024\/WurmServerModLauncher\/releases",
+            "description": "Version of the mod launcher to download. To disable this, use \"0\". For a list of version numbers, refer to https:\/\/github.com\/ago1024\/WurmServerModLauncher\/releases",
             "env_variable": "SERVER_MODLOADER_VERSION",
-            "default_value": "none",
+            "default_value": "0",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:20"
+            "rules": "required|regex:\/\\d(.[\\d]+)?$\/"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Set whether or not the server checks for and installs updates on startup. 1 for on, 0 for off",
+            "env_variable": "SERVER_AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean"
         }
     ]
 }
