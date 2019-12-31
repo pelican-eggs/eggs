@@ -3,10 +3,10 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-12-31T12:18:16-06:00",
+    "exported_at": "2019-12-31T13:32:11-06:00",
     "name": "Wurm Unlimited",
     "author": "iamtehguy@gmail.com",
-    "description": "WU Headless",
+    "description": "Wurm Unlimited is the standalone version of the fantasy sandbox world Wurm Online, the MMORPG where the players are in charge! A pioneer in the ideas of player influence, crafting and adventure, it is now one of the most deep and feature packed true sandbox experiences available.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre",
     "startup": ".\/StartWU.sh ip=0.0.0.0 externalport={{SERVER_PORT}} start={{SERVER_WORLD}} maxplayers={{SERVER_MAX_PLAYERS}} servername={{SERVER_NAME}} adminpwd={{SERVER_ADMIN_PWD}} serverpassword={{SERVER_PASSWORD}}",
     "config": {
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n#\r\n# Installation script for Wurm Unlimited\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\n# Headless setup as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Linux_Headless\r\napt -y install libswt-gtk3-java xvfb x11vnc\r\n\r\nXvfb :99 &\r\nexport DISPLAY=:99\r\n\r\n## Installing Wurm Unlimited Dedicated Server\r\n\r\n# Download and set up SteamCMD as per https:\/\/developer.valvesoftware.com\/wiki\/SteamCMD#Linux\r\nadd-apt-repository multiverse\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y install lib32gcc1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\n\r\n# Installing Wurm Unlimited\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 402370 validate +quit\r\n\r\n# Copying steamclient.so as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Headless\r\nmkdir -p \/mnt\/server\/nativelibs\r\ncp -v linux64\/steamclient.so \/mnt\/server\/nativelibs\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o StartWU.sh https:\/\/raw.githubusercontent.com\/tehguy\/eggs\/add\/wurm-unlimited\/steamcmd_servers\/wurm_unlimited\/StartWU.sh\r\nchmod +x StartWU.sh\r\n\r\nmkdir -p .\/backup\r\ncp .\/WurmServerLauncher .\/backup\/\r\ncp -r .\/dist\/Advendure .\/backup\/\r\ncp -r .\/dist\/Creative .\/backup\/",
+            "script": "#!\/bin\/bash\r\n#\r\n# Installation script for Wurm Unlimited\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install curl ca-certificates\r\n\r\n## Installing Wurm Unlimited Dedicated Server\r\n\r\n# Download and set up SteamCMD as per https:\/\/developer.valvesoftware.com\/wiki\/SteamCMD#Linux\r\nadd-apt-repository multiverse\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y install lib32gcc1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\n\r\n# Installing Wurm Unlimited\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 402370 validate +quit\r\n\r\n# Copying steamclient.so as per https:\/\/www.wurmpedia.com\/index.php\/Server_administration_(Wurm_Unlimited)#Headless\r\nmkdir -p \/mnt\/server\/nativelibs\r\ncp -v linux64\/steamclient.so \/mnt\/server\/nativelibs\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o StartWU.sh https:\/\/raw.githubusercontent.com\/tehguy\/eggs\/add\/wurm-unlimited\/steamcmd_servers\/wurm_unlimited\/StartWU.sh\r\nchmod +x StartWU.sh\r\n\r\nmkdir -p .\/backup\r\ncp .\/WurmServerLauncher .\/backup\/\r\ncp -r .\/dist\/Adventure .\/backup\/\r\ncp -r .\/dist\/Creative .\/backup\/",
             "container": "ubuntu:18.10",
             "entrypoint": "bash"
         }
