@@ -19,7 +19,7 @@ Ports required to run the server in a table format.
 
 The server must be verified to be visible in the Server Browser.
 
-Before requesting verification make sure your server follows the Verified Server Rules.
+Before requesting verification make sure your server follows the [Verified Server Rules](https://scpslgame.com/Verified_server_rules.pdf).
 
 #### Requesting Verification
 Once ready send an email to server.verification@scpslgame.com with the following info:
