@@ -1,10 +1,8 @@
 # SCP: Secret Laboratory
-### From their [Github](https://github.com/parkervcp/eggs)
-A link to the site that you download game files from.  
-The description of the server usually provided by the game/server maker.  
+SCP: Secret Laboratory Dedicated Linux Server AddID: [996560](https://steamdb.info/app/996560/)
 
-### Install notes
-Due to rate limiting the console on the panel cannot keep up with the game console and the build will complete before the panel console may show it. Reloading the console will load it to the latest part of the log.
+This Server is NOT compatible with ServerMod2 or MultiAdmin
+
 
 ### Minimum RAM warning
 Minimum required memory to run the server: 3096 MB
@@ -15,6 +13,19 @@ Ports required to run the server in a table format.
 
 | Port    | default |
 |---------|---------|
-| Game    | 25565   |
+| Game    | 7777   |
+
+### Verification
+
+The server must be verified to be visible in the Server Browser.
+
+Before requesting verification make sure your server follows the Verified Server Rules.
+
+#### Requesting Verification
+Once ready send an email to server.verification@scpslgame.com with the following info:
+
+* The server's external IPv4 address
+* The port used by the server
+* If the server IP is static or dynamic
 
 #### Mods/Plugins may require ports to be added to the server.
