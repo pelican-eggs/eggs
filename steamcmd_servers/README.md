@@ -19,6 +19,9 @@ This is a collection of servers that use steamcmd to install.
 ## Don't Starve
 [dont_starve](dont_starve/)
 
+## ECO
+[ECO](eco/)
+
 ## HLDS Server
 [hlds](hlds_server/)
 
