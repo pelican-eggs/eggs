@@ -18,6 +18,10 @@ Give awesome perks to your Discord server!
 [discord.js](https://discord.js.org/)  
 A generic discord.js egg for running discord bots.
 
+#### Discord RSS
+[discord_rss](https://github.com/synzen/Discord.RSS)  
+Discord RSS bot with customizable feeds 
+
 #### fragbot
 [jagrosh/MusicBot](https://github.com/jagrosh/MusicBot)  
 A Discord music bot that's easy to set up and run yourself!  
