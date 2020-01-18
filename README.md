@@ -98,11 +98,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Starbound](/steamcmd_servers/starbound)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
+* [Tower Unite](/unreal_engine/tower_unite/)
 * [Unturned](/unturned/)
   * [RocketMod](/unturned/rocketmod/)
-
-[Unreal Engine](/unreal_engine)
-* [Tower Unite](/unreal_engine/tower_unite/)
+  * [Unturned](/unturned/unturned/)
 
 [Terraria](/terraria/)
 * [tmodloader](/terraria/tmodloader)
