@@ -54,7 +54,7 @@
             "name": "Server Name",
             "description": "The name that your server will show up as in Onset.",
             "env_variable": "SERVER_NAME",
-            "default_value": "New Server | Neptr Servers",
+            "default_value": "New Pterodactyl Server",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required"
