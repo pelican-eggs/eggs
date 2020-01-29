@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-01-01T11:55:32+01:00",
+    "exported_at": "2020-01-29T19:49:19+01:00",
     "name": "SCP:SL",
     "author": "info@goover.de",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server",
@@ -11,7 +11,7 @@
     "startup": ".\/LocalAdmin {{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config_gameplay.txt\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server_ip\": \"0.0.0.0\",\r\n            \"forward_ports\": \"false\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Waiting for players\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Nickname of is now \",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
     },
