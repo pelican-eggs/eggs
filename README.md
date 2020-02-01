@@ -78,8 +78,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
-[Tycoon Games](/tycoon_games/)
-* [OpenTTD](/tycoon_games/openttd/)
+[Red Dead Redemption](/rdr/)
+* [RedM](/rdr/redm/)
 
 [steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)
@@ -100,6 +100,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/unturned/)
   * [RocketMod](/unturned/rocketmod/)
+
+[Tycoon Games](/tycoon_games/)
+* [OpenTTD](/tycoon_games/openttd/)
 
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite/)
