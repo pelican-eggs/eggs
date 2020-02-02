@@ -78,8 +78,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
-[Tycoon Games](/tycoon_games/)
-* [OpenTTD](/tycoon_games/openttd/)
+[Starmade](/starmade/starmade/)
 
 [steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)
@@ -106,5 +105,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Terraria](/terraria/)
 * [tmodloader](/terraria/tmodloader)
 * [tshock](/terraria/tshock/)
+
+[Tycoon Games](/tycoon_games/)
+* [OpenTTD](/tycoon_games/openttd/)
 
 [Xonotic](/xonotic/xonotic/)
