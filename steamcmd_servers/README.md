@@ -34,6 +34,9 @@ This is a collection of servers that use steamcmd to install.
 ## Rust Staging
 [rust staging](rust_staging/)
 
+## SCP: Secret Laboratory
+[SCP: Secret Laboratory](/scpsl/)
+
 ## Squad
 [squad](squad/)
 
