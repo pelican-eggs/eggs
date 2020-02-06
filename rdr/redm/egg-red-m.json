@@ -8,7 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "A new RedM egg for the latest builds due to recent changes in RedM",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
-    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{CFX_LICENSE}} +set sv_maxplayers {{MAX_PLAYERS}} +exec server.cfg gamename rdr3",
+    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{CFX_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +exec server.cfg +set gamename rdr3",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_HOSTNAME}}\\\"\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"succeeded. Welcome!\"\r\n}",
@@ -24,10 +24,19 @@
     },
     "variables": [
         {
-            "name": "fivem license",
+            "name": "CFX license",
             "description": "Required to start the service. Get your keys at https:\/\/keymaster.fivem.net\/",
             "env_variable": "CFX_LICENSE",
             "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Steam Web Api Key",
+            "description": "Use your Steam WebApiKey or set to 'none'. Get your key at https:\/\/steamcommunity.com\/dev\/apikey\/",
+            "env_variable": "STEAM_WEBAPIKEY",
+            "default_value": "none",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string"
@@ -51,8 +60,8 @@
             "rules": "required|string"
         },
         {
-            "name": "fivem version",
-            "description": "The fivem version that is to be installed.\r\n\r\nan example is `1383-e5ea040353ce1b8bc86e37982bf5d888938e3096`\r\n\r\nYou can the latest version from here - https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/",
+            "name": "CFX version",
+            "description": "The CFX Server version that is to be installed.\r\n\r\nan example is `1383-e5ea040353ce1b8bc86e37982bf5d888938e3096`\r\n\r\nYou can the latest version from here - https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/",
             "env_variable": "CFX_VERSION",
             "default_value": "latest",
             "user_viewable": 1,
@@ -61,7 +70,7 @@
         },
         {
             "name": "Download Link",
-            "description": "This is the link to download fivem from. This is only used in the install script.\r\n\r\nThe file you link to needs to be an fx.tar.zx file.\r\n\r\nExample:\r\nhttps:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/1626-8c06e8bc3ed7e6690c6c2d9e0b90e29df65b3ea6\/fx.tar.xz",
+            "description": "This is the link to download redm from. This is only used in the install script.\r\n\r\nThe file you link to needs to be an fx.tar.zx file.\r\n\r\nExample:\r\nhttps:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/1626-8c06e8bc3ed7e6690c6c2d9e0b90e29df65b3ea6\/fx.tar.xz",
             "env_variable": "DOWNLOAD_URL",
             "default_value": "",
             "user_viewable": 0,
