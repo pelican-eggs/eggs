@@ -8,7 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "A new RedM egg for the latest builds due to recent changes in RedM",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
-    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{CFX_LICENSE}} +set sv_maxplayers {{MAX_PLAYERS}} +exec server.cfg +set gamename rdr3",
+    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{CFX_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +exec server.cfg +set gamename rdr3",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_HOSTNAME}}\\\"\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"succeeded. Welcome!\"\r\n}",
@@ -28,6 +28,15 @@
             "description": "Required to start the service. Get your keys at https:\/\/keymaster.fivem.net\/",
             "env_variable": "CFX_LICENSE",
             "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Steam Web Api Key",
+            "description": "Use your Steam WebApiKey or set to 'none'. Get your key at https:\/\/steamcommunity.com\/dev\/apikey\/",
+            "env_variable": "STEAM_WEBAPIKEY",
+            "default_value": "none",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string"
