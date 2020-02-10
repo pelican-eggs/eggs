@@ -14,6 +14,6 @@ Does this expand an already existing service: Y/N
 
 Link to game: (Ex. minecraft.net/factorio.com/etc)
 
-Links for server downloads: This needs to be an official link and not one that is hosted on somf forum page or a personal github page.
+Links for server downloads: This needs to be an official link and not one that is hosted on some forum page or a personal github page.
 
 Links for install steps/docs:
