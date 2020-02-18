@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-02-16T12:14:52+00:00",
+    "name": "Urban Terror 4.3",
+    "author": "seanbarr1988",
+    "description": "Urban Terror started as a realism based \"total conversion\" mod for Quake III Arena. Nowadays, Urban Terror is played using the free, stand-alone, ioquake3 engine modified, which doesn't require Quake III Arena, in addition to being an add-on to id Software's Quake III Arena.",
+    "image": "quay.io\/pterodactyl\/core:glibc",
+    "startup": ".\/Quake3-UrT-Ded.{{EXE}}  +exec \"server.cfg\" +set fs_game \"q3ut4\" +set fs_basepath \"\/home\/container\" +set fs_homepath \"\/home\/container\" +set dedicated \"2\" +set com_hunkmegs \"{{HUNKMEGS}}\" +set net_port \"{{SERVER_PORT}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"------- Game Initialization -------\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"\/home\/container\/q3ut4\/games.log\"\r\n}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\ncd \/tmp\/\r\n\r\necho \"Downloading Urban Terror 4.3\"\r\nwget http:\/\/cdn.urbanterror.info\/urt\/43\/releases\/zips\/UrbanTerror434_full.zip\r\n\r\necho \"Unpacking Urban Terror 4.3\"\r\nunzip UrbanTerror434_full.zip\r\ncp -r UrbanTerror43\/* \/mnt\/server\/\r\n\r\necho \"Setting up default configs\"\r\nmv \/mnt\/server\/q3ut4\/server_example.cfg \/mnt\/server\/q3ut4\/server.cfg\r\nmv \/mnt\/server\/q3ut4\/mapcycle_example.txt \/mnt\/server\/q3ut4\/mapcycle.txt\r\n\r\n# prevent unnecessary file creation by the game server\r\nmkdir \/mnt\/server\/.q3a && chmod 000 \/mnt\/server\/.q3a\r\ntouch \/mnt\/server\/q3ut4\/q3config.cfg && chmod 000 \/mnt\/server\/q3ut4\/q3config.cfg\r\ntouch \/mnt\/server\/q3ut4\/default.cfg && chmod 000 \/mnt\/server\/q3ut4\/default.cfg\r\nchmod 744 \/mnt\/server\/Quake3-UrT-Ded.x86_64\r\nchmod 744 \/mnt\/server\/Quake3-UrT-Ded.i386\r\n\r\n# Remove files that are not required\r\nrm -rf \/mnt\/server\/Quake3-UrT.*\r\nrm -rf \/mnt\/server\/*.exe\r\nrm -rf \/mnt\/server\/q3ut4\/*.doc\r\nrm -rf \/mnt\/server\/q3ut4\/readme*\r\nrm -rf \/mnt\/server\/q3ut4\/auto*",
+            "container": "alpine:3.9",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "32bit \/ 64bit server version. it is recommended to use the 64bit server, unless you are experiencing issues.",
+            "env_variable": "EXE",
+            "default_value": "x86_64",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|in:x86_64,i386"
+        },
+        {
+            "name": "Hunkmegs",
+            "description": "How much memory is allocated during server start up.\r\n\r\nAvailable options:  128, 160, 192, 256 MB",
+            "env_variable": "HUNKMEGS",
+            "default_value": "128",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|in:128,160,192,256"
+        }
+    ]
+}
