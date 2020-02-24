@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Vanilla T-shock Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading and installing ${TSHOCK_VERSION}\"\r\n\r\necho -e \"running wget https:\/\/github.com\/Pryaxis\/TShock\/releases\/download\/v${TSHOCK_VERSION}\/tshock_${TSHOCK_VERSION}.zip\"\r\nwget https:\/\/github.com\/Pryaxis\/TShock\/releases\/download\/v${TSHOCK_VERSION}\/tshock_${TSHOCK_VERSION}.zip\r\n\r\nunzip tshock_${TSHOCK_VERSION}.zip",
-            "container": "alpine:3.7",
+            "container": "alpine:3.9",
             "entrypoint": "ash"
         }
     },

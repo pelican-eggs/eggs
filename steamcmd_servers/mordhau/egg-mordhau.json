@@ -1,0 +1,99 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-09-07T20:08:55-04:00",
+    "name": "Mordhau",
+    "author": "trey@chazx.cc",
+    "description": "Mordhau is a multiplayer medieval hack 'n slash video game, developed by Slovenian independent studio Triternion, with a prominent aspect of skill-based competitive play and customization.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:game_mordhau",
+    "startup": ".\/MordhauServer.sh \/Game\/Mordhau\/Maps\/{{DEFAULT_MAP}}?MaxSlots={{MAX_PLAYERS}}? -USEALLAVAILABLECORES -Port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -beaconport={{BEACON_PORT}}",
+    "config": {
+        "files": "{\r\n    \"Mordhau\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"AdminPassword=\": \"AdminPassword={{server.build.env.ADMIN_PASSWORD}}\",\r\n            \"ServerName=\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"ServerPassword=\": \"ServerPassword={{server.build.env.GAME_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Session GameSession successfully created\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Mordhau Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\n\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\n\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\n\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 629800 +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\n\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "Max Players",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "48",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Source APP ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "629800",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password for managing server from in game",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "password123",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name to show up in server Browser",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password to get on the server",
+            "env_variable": "GAME_PASSWORD",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "DEFAULT_MAP",
+            "description": "First map to load.  Format Expected is \"MAPNAME\/TYPE_NAME\".  Examples in Readme",
+            "env_variable": "DEFAULT_MAP",
+            "default_value": "Grad\/FL_Grad",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Beacon Port",
+            "description": "Beacon Port required",
+            "env_variable": "BEACON_PORT",
+            "default_value": "15000",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

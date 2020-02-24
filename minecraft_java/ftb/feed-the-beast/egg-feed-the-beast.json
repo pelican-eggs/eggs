@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-04-03T08:08:25-04:00",
+    "name": "Feed the Beast",
+    "author": "aevum@decess.us",
+    "description": "Egg to handle all official FTB Modpacks",
+    "image": "quay.io\/pterodactyl\/core:java-glibc",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar FTBserv*.jar",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\",\r\n            \"level-name\": \"{{server.build.env.LEVEL_NAME}}\",\r\n            \"level-seed\": \"{{server.build.env.LEVEL_SEED}}\",\r\n            \"max-players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Generic FTB Server Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# MODPACK_VERSION = version of the modpack, set in variables\r\n# i.e MODPACK_VERSION=1.5.0\r\n# MODPACK_URL = url base of the pack, set in variables, hardcoded\r\n# i.e https:\/\/www.feed-the-beast.com\/projects\/ftb-revelation\/files\r\n# MODPACK_URL=ftb-revelation\r\n\r\napk add curl --no-cache\r\n\r\n## Correcting for bad variables\r\nGETPACK=$(echo ${MODPACK_URL} | cut -d \"\/\" -f 5 )\r\necho -e \"\\n The pack being downloaded is $GETPACK \\n\"\r\n\r\n## Getting the Base URL\r\nBASEURL=https:\/\/www.feed-the-beast.com\/projects\/${GETPACK}\/files\r\necho \"The base URL is ${BASEURL}\"\r\n\r\n## This is meant to get the pack ID that is unique and not exactly clear \r\n\r\n\r\nif [ -z \"${MODPACK_VERSION}\" ] || [ \"${MODPACK_VERSION}\" == \"latest\" ]; then\r\n    ID=`curl -sl ${BASEURL} | grep -i -A9 'title=\"release\"' | grep -i -o 'href=\".*\"' |  cut -d \"\/\" -f5 | sed s\/\\\"\/\/g`\r\n    echo \"ID: ${ID}\"\r\nelse \r\n    ID=`curl -sl ${BASEURL} | grep -i -A9 \"${MODPACK_VERSION}\" | grep -m1 -oE 'href=\"[^\\\"]+\"' | cut -d \"\/\" -f5 | grep -oE [0-9]+`\r\n    echo \"ID: ${ID}\"\r\nfi\r\n\r\nSECONDURL=${BASEURL}\/${ID}\r\necho \"SECONDURL: ${SECONDURL}\"\r\n\r\nGOOD_ID=`curl -sl ${SECONDURL} | grep -i server | grep -Eo 'href=\"[^\\\"]+\"' | grep -o -E \"[0-9]+\" | tail -1`\r\necho \"GOOD_ID: ${GOOD_ID}\"\r\n\r\nDL_URL=${BASEURL}\/${GOOD_ID}\/download\r\necho \"Download_URL: ${DL_URL}\"\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Executing curl -L ${DL_URL} -o $GETPACK.zip\"\r\ncurl -L ${DL_URL} -o $GETPACK.zip\r\n\r\nunzip ${GETPACK}.zip\r\n\r\nrm -rf ${GETPACK}.zip\r\n\r\necho \"Running FTBInstall.sh\"\r\nif [ -f .\/FTBInstall.sh ]; then\r\n    sh .\/FTBInstall.sh\r\nelse\r\n    echo -e \"No FTBInstall script found. Assumeing it's not needed.\"\r\nfi",
+            "container": "alpine:3.9",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack URL Name",
+            "description": "Name of the modpack as referenced in URL's on feed-the-beast.com\r\ni.e\r\nhttps:\/\/www.feed-the-beast.com\/projects\/<MODPACK_URL>",
+            "env_variable": "MODPACK_URL",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|regex:([a-z-0-9]+$)"
+        },
+        {
+            "name": "Modpack Version",
+            "description": "Version of the modpack to use.",
+            "env_variable": "MODPACK_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Level Seed",
+            "description": "Optional specified level seed for map generation",
+            "env_variable": "LEVEL_SEED",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:40"
+        },
+        {
+            "name": "Max Players",
+            "description": "Max # of players on the server",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "20",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:100"
+        },
+        {
+            "name": "Level Name",
+            "description": "Name of the world save",
+            "env_variable": "LEVEL_NAME",
+            "default_value": "world",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|alpha_dash|max:20"
+        },
+        {
+            "name": "MOTD",
+            "description": "Message to appear when viewing the server in browser and on login",
+            "env_variable": "MOTD",
+            "default_value": "A Minecraft Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

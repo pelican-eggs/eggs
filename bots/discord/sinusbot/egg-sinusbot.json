@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-07-10T00:15:54-04:00",
+    "exported_at": "2019-07-25T10:48:45-04:00",
     "name": "Sinusbot",
-    "author": "ki2007@damw.eu",
+    "author": "support@pterodactyl.io",
     "description": "Musicbot for Discord and Teamspeak.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:sinusbot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_sinusbot",
     "startup": ".\/sinusbot --override-password=\"${OVERRIDE_PASSWORD}\"",
     "config": {
         "files": "{\r\n    \"config.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ListenPort\": \"ListenPort = {{server.build.default.port}}\",\r\n            \"ListenHost\": \"ListenHost = \\\"0.0.0.0\\\"\"\r\n        }\r\n    }\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Sinusbot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install ca-certificates bzip2 wget tar curl\r\napt -q clean all\r\n\r\n#Create needed directories\r\nmkdir -p \/mnt\/server\/TeamSpeak3-Client-linux_amd64\/plugins\r\nmkdir \/mnt\/server\/youtube-dl\r\n\r\ncd \/mnt\/server\r\n\r\n#Download Sinusbot\r\nwget -qO - https:\/\/www.sinusbot.com\/dl\/sinusbot.current.tar.bz2 | tar xj\r\n\r\n#Install Sinusbot\r\nchmod +x sinusbot\r\ncp config.ini.dist config.ini\r\nsed -i \"s|^TS3Path.*|TS3Path = \\\"\/home\/container\/TeamSpeak3-Client-linux_amd64\/ts3client_linux_amd64\\\"|g\" config.ini\r\necho 'YoutubeDLPath = \"\/home\/container\/youtube-dl\/youtube-dl\"' >> config.ini\r\n#cp scripts scripts_org\r\n\r\n#Install Sinusbot plugin\r\ncp plugin\/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64\/plugins\r\n\r\n#Download TeamSpeak Client\r\nwget -q `curl https:\/\/www.teamspeak.com\/en\/downloads#client | grep Client-linux_amd64 | grep option | grep 4Net | cut -d'\"' -f2`\r\n\r\n# Install TeamSpeak Client\r\nchmod 0755 TeamSpeak3-Client-linux_amd64*.run\r\n.\/TeamSpeak3-Client-linux_amd64*.run --tar xfv -C TeamSpeak3-Client-linux_amd64\r\nrm TeamSpeak3-Client-linux_amd64*.run\r\n# Remove glx-integration lib\r\nrm TeamSpeak3-Client-linux_amd64\/xcbglintegrations\/libqxcb-glx-integration.so\r\n\r\n#Download youtube-dl\r\ncd \/mnt\/server\/youtube-dl\r\nwget -q https:\/\/yt-dl.org\/downloads\/latest\/youtube-dl\r\nchmod a+rx youtube-dl",
+            "script": "#!\/bin\/bash\r\n# Sinusbot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install ca-certificates bzip2 wget tar curl jq\r\napt -q clean all\r\n\r\n#Create needed directories\r\nmkdir -p \/mnt\/server\/TeamSpeak3-Client-linux_amd64\/plugins\r\nmkdir \/mnt\/server\/youtube-dl\r\n\r\ncd \/mnt\/server\r\n\r\n#Download Sinusbot\r\nwget -qO - https:\/\/www.sinusbot.com\/dl\/sinusbot.current.tar.bz2 | tar xj\r\n\r\n#Download Latest TeamSpeak Client\r\nTS_VERSION=$(curl https:\/\/teamspeak.com\/versions\/client.json | jq -r '.linux.x86_64.version')\r\nTS_DL_LINK=$(curl https:\/\/teamspeak.com\/versions\/client.json | jq -r '.linux.x86_64.mirrors.\"teamspeak.com\"')\r\n\r\necho -e \"downloading teamspeak version ${TS_VERSION}\"\r\necho -e \"running 'wget ${TS_DL_LINK}'\"\r\n\r\nwget ${TS_DL_LINK}\r\n\r\n# Install TeamSpeak Client\r\nchmod 0755 TeamSpeak3-Client-linux_amd64*.run\r\n.\/TeamSpeak3-Client-linux_amd64*.run --tar xfv -C TeamSpeak3-Client-linux_amd64\r\n\r\n## Cleaning up \r\n\r\nrm TeamSpeak3-Client-linux_amd64*.run\r\n# Remove glx-integration lib\r\nrm TeamSpeak3-Client-linux_amd64\/xcbglintegrations\/libqxcb-glx-integration.so\r\n\r\n#Install Sinusbot\r\nchmod +x sinusbot\r\ncp config.ini.dist config.ini\r\nsed -i \"s|^TS3Path.*|TS3Path = \\\"\/home\/container\/TeamSpeak3-Client-linux_amd64\/ts3client_linux_amd64\\\"|g\" config.ini\r\necho 'YoutubeDLPath = \"\/home\/container\/youtube-dl\/youtube-dl\"' >> config.ini\r\n\r\n#Install Sinusbot plugin\r\ncp plugin\/libsoundbot_plugin.so TeamSpeak3-Client-linux_amd64\/plugins\r\n\r\n#Download youtube-dl\r\ncd \/mnt\/server\/youtube-dl\r\nwget -q https:\/\/yt-dl.org\/downloads\/latest\/youtube-dl\r\nchmod a+rx youtube-dl",
             "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }

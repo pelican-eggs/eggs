@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-03-15T16:25:38+00:00",
+    "name": "Hexxit",
+    "author": "aevum@decess.us",
+    "description": "Gear up and set forth on a campaign worthy of legend, for Hexxit has been unearthed! Dark dungeons, towering spires, weathered ruins and musty tomes lay before you. Lay claim to riches or create your own artifacts, tame beasts and carve out your own story in endless wonder. Alone or with friends, adventure awaits in Hexxit.\r\n\r\nHexxit is a new collection of mods for Minecraft that put adventure above all else, in the style of old Dungeons and Dragons campaigns. Exploration is interesting, the dangers are greater and the sense of satisfaction of clearing out a dungeon is intense. The modlist is full of quality content from some very talented individuals. Be sure to head over to the donate page and show your appreciation!\r\n\r\nhttps:\/\/www.technicpack.net\/modpack\/hexxit.552552",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar Hexxit.jar",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS http:\/\/servers.technicpack.net\/Technic\/servers\/hexxit\/Hexxit_Server_v$MODPACK_VERSION.zip -o Hexxit_$MODPACK_VERSION.zip\r\n\r\nunzip Hexxit_$MODPACK_VERSION.zip\r\n\r\nrm -rf Hexxit_$MODPACK_VERSION.zip",
+            "container": "alpine:3.9",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack Version",
+            "description": "Version of the modpack to use",
+            "env_variable": "MODPACK_VERSION",
+            "default_value": "1.0.10",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-06-06T09:33:27-04:00",
+    "name": "VanillaCord",
+    "author": "support@pterodactyl.io",
+    "description": "Minecraft is a game about placing blocks and going on adventures. Explore randomly generated worlds and build amazing things from the simplest of homes to the grandest of castles. Play in Creative Mode with unlimited resources or mine deep in Survival Mode, crafting weapons and armor to fend off dangerous mobs. Do all this alone or with friends.\r\n\r\nVanillaCord adds support for BungeeCord's ip_forward setting.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n\r\napk --no-cache --update add curl jq\r\n\r\ncd \/mnt\/server\r\n\r\necho $VANILLA_VERSION\r\n\r\nLATEST_VERSION=`curl https:\/\/launchermeta.mojang.com\/mc\/game\/version_manifest.json | jq -r '.latest.release'`\r\n\r\nif { [ -z \"$VANILLA_VERSION\" ] || [ \"$VANILLA_VERSION\" == \"latest\" ]; } then\r\n  INSTALLING_VERSION=$LATEST_VERSION\r\nelse\r\n  INSTALLING_VERSION=$VANILLA_VERSION\r\nfi\r\n\r\nMAJOR_VERSION=$(echo $INSTALLING_VERSION | sed -En 's\/^([0-9]*)\\.[0-9]*\\.[0-9]*$\/\\1\/p')\r\nMINOR_VERSION=$(echo $INSTALLING_VERSION | sed -En 's\/^[0-9]*\\.([0-9]*)\\.[0-9]*$\/\\1\/p')\r\nPATCH_VERSION=$(echo $INSTALLING_VERSION | sed -En 's\/^[0-9]*\\.[0-9]*\\.([0-9]*)$\/\\1\/p')\r\n\r\nVANILLACORD_URL=https:\/\/src.me1312.net\/jenkins\/job\/VanillaCord\/job\/1.12\/lastSuccessfulBuild\/artifact\/artifacts\/VanillaCord.jar\r\nif [ $MAJOR_VERSION -eq 1 ] && [ $MINOR_VERSION -lt 12 ]; then\r\n  VANILLACORD_URL=https:\/\/src.me1312.net\/jenkins\/job\/VanillaCord\/job\/1.7.10\/lastSuccessfulBuild\/artifact\/artifacts\/VanillaCord.jar\r\nfi\r\n\r\nif { [ $MAJOR_VERSION -eq 1 ] && [ $MINOR_VERSION -eq 7 ] && [ $PATCH_VERSION -lt 10 ]; } || { [ $MAJOR_VERSION -eq 1 ] && [ $MINOR_VERSION -lt 7 ]; } then\r\n  echo \"VanillaCord is only supported on Minecraft 1.7.10 or higher! You cannot use it with $INSTALLING_VERSION.\"\r\n  exit 1\r\nfi\r\n\r\ncurl -o vanillacord.jar $VANILLACORD_URL\r\njava -jar vanillacord.jar $INSTALLING_VERSION\r\n\r\nrm -f vanillacord.jar\r\nrm -rf in\r\nmv out\/*.jar $SERVER_JARFILE\r\nrm -rf out",
+            "container": "openjdk:8-jre-alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Server Version",
+            "description": "The version of Minecraft Vanilla to install. Use \"latest\" to install the latest version.",
+            "env_variable": "VANILLA_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|between:3,15"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-04-27T21:33:33-04:00",
+    "name": "fragbot",
+    "author": "parker@parkervcp.com",
+    "description": "The fragforce discord bot.\r\n\r\nlocated at https:\/\/github.com\/fragforce\/fragbot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
+    "startup": ".\/fragbot",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"token\": \"{{server.build.env.DISCORD_TOKEN}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Bot is now running\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# fragbot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nexport GOPATH=$HOME\/go\r\nexport PATH=$GOROOT\/bin:$GOPATH\/bin:$PATH\r\n\r\ncd\r\n\r\napk add --no-cache --update git\r\n\r\necho \"pulling the fragbot repo\"\r\n\r\ngit clone https:\/\/github.com\/fragforce\/fragbot.git\r\n\r\ncd fragbot\/\r\n\r\ngo mod download\r\n\r\necho \"building fragbot\"\r\n\r\ngo build \r\n\r\necho \"build complete copying parkertron and example configs over\"\r\n\r\ncp fragbot \/mnt\/server\/\r\n\r\nif [ -f \/mnt\/server\/config.json ]; then\r\n    echo \"config file exists already\"\r\nelse\r\n    cp -r \/root\/fragbot\/config.example.json \/mnt\/server\/config.json\r\nfi\r\n\r\necho \"Install complete. If you watched this. Congrats.\"",
+            "container": "golang:1.12-alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Token",
+            "description": "The token that is to be used for the bot.",
+            "env_variable": "DISCORD_TOKEN",
+            "default_value": "ThisNeedsToBeChanged",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        }
+    ]
+}
