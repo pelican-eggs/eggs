@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-05-08T07:52:52-04:00",
+    "exported_at": "2020-02-21T13:00:39-05:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
@@ -17,9 +17,9 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\napk add --no-cache curl\r\n\r\nget_latest_release() {\r\n  curl --silent \"https:\/\/api.github.com\/repos\/$1\/releases\/latest\" |\r\n  grep '\"tag_name\":' |\r\n  sed -E 's\/.*\"([^\"]+)\".*\/\\1\/'\r\n}\r\n\r\nPACKAGE=\"jagrosh\/MusicBot\"\r\nVERSION=`get_latest_release \"${PACKAGE}\"`\r\necho \"Latest version=${VERSION}\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -Lo JMusicBot.jar https:\/\/github.com\/jagrosh\/MusicBot\/releases\/download\/${VERSION}\/JMusicBot-${VERSION}.jar\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"config found\"\r\nelse\r\n    echo -e \"config not found getting default\"\r\n    curl -Lo config.txt https:\/\/github.com\/jagrosh\/MusicBot\/releases\/download\/${VERSION}\/config.txt\r\nfi\r\n\r\necho \"Job's Done\"",
-            "container": "alpine:3.9",
-            "entrypoint": "ash"
+            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (match is to match the filename in some way)\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\r\napt update\r\napt install -y jq curl\r\n\r\nGITHUB_PACKAGE=\"jagrosh\/MusicBot\"\r\nMATCH=\"All\"\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n    CONFIG_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i config)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i config)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n        CONFIG_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    fi\r\nfi\r\n\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -f JMusicBot.jar ]; then\r\n    mv -f JMusicBot.jar JMusicBot.jar-old\r\nfi\r\n\r\ncurl -Lo JMusicBot.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"config found\"\r\nelse\r\n    echo -e \"config not found getting default\"\r\n    curl -Lo config.txt ${CONFIG_LINK}\r\nfi\r\n\r\necho \"Job's Done\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "\/bin\/bash"
         }
     },
     "variables": [

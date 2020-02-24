@@ -8,10 +8,9 @@ You're one of the few not yet turned zombie. Keeping it that way will be a chall
 
 ### Server Ports
 Rocketmod requires 2 ports to run properly.  
-game port (default 8907)  
-game +1  (default 8908)
 
 | Port    | default |
 |---------|---------|
-| Game    | 8907    |
-| Game +1 | 8908    |
+| Game    | 27015   |
+| Game +1 | 27016   |
+| Game +2 | 27017   |

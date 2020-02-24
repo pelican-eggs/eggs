@@ -34,6 +34,9 @@ This is a collection of servers that use steamcmd to install.
 ## Rust Staging
 [rust staging](rust_staging/)
 
+## SCP: Secret Laboratory
+[SCP: Secret Laboratory](/scpsl/)
+
 ## Squad
 [squad](squad/)
 
@@ -42,3 +45,10 @@ This is a collection of servers that use steamcmd to install.
 
 ## Sven coop
 [svencoop](svencoop)
+
+## Tower Unite
+[Tower Unite](tower_unite)
+
+## Unturned
+  * [RocketMod](rocketmod)
+  * [Unturned](unturned)
