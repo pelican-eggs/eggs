@@ -78,7 +78,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
-[Starmade](/starmade/starmade/)
+
+[Red Dead Redemption](/rdr/)
+* [RedM](/rdr/redm/)
 
 [steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)
@@ -98,10 +100,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Starbound](/steamcmd_servers/starbound)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
-* [Tower Unite](/steamcmd_servers/tower_unite/)
 * [Unturned](/steamcmd_servers/unturned/)
   * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
+
+[Tycoon Games](/tycoon_games/)
+* [OpenTTD](/tycoon_games/openttd/)
+
+[Unreal Engine](/unreal_engine)
+* [Tower Unite](/unreal_engine/tower_unite/)
+* [Tower Unite](/steamcmd_servers/tower_unite/)
 
 [Terraria](/terraria/)
 * [tmodloader](/terraria/tmodloader)
