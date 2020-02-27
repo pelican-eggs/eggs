@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-02-27T01:53:00+01:00",
+    "exported_at": "2020-02-27T02:46:01+01:00",
     "name": "Vintage Story",
     "author": "mail@wuffy.eu",
     "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
-    "startup": "mono VintagestoryServer.exe --dataPath .\/data {{OPTIONS}}",
+    "startup": "mono VintagestoryServer.exe --dataPath .\/data --port={{SERVER_PORT}} --maxclients={{MAX_CLIENTS}} {{OPTIONS}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Dedicated Server now running on Port \",\r\n    \"userInteraction\": []\r\n}",
@@ -40,6 +40,15 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Clients",
+            "description": "",
+            "env_variable": "MAX_CLIENTS",
+            "default_value": "16",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:2000"
         }
     ]
 }
