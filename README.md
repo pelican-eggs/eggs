@@ -111,13 +111,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](/unreal_engine/tower_unite/)
 * [Tower Unite](/steamcmd_servers/tower_unite/)
 
-[Vintage Story](/vintage_story/vintage_story/)
-
 [Terraria](/terraria/)
 * [tmodloader](/terraria/tmodloader)
 * [tshock](/terraria/tshock/)
 
 [Tycoon Games](/tycoon_games/)
 * [OpenTTD](/tycoon_games/openttd/)
+
+[Vintage Story](/vintage_story/vintage_story/)
 
 [Xonotic](/xonotic/xonotic/)
