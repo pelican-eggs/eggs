@@ -104,19 +104,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
 
-[Tycoon Games](/tycoon_games/)
-* [OpenTTD](/tycoon_games/openttd/)
-
-[Unreal Engine](/unreal_engine)
-* [Tower Unite](/unreal_engine/tower_unite/)
-* [Tower Unite](/steamcmd_servers/tower_unite/)
-
 [Terraria](/terraria/)
 * [tmodloader](/terraria/tmodloader)
 * [tshock](/terraria/tshock/)
 
 [Tycoon Games](/tycoon_games/)
 * [OpenTTD](/tycoon_games/openttd/)
+
+[Unreal Engine](/unreal_engine)
+* [Tower Unite](/unreal_engine/tower_unite/)
+* [Tower Unite](/steamcmd_servers/tower_unite/)
 
 [Vintage Story](/vintage_story/vintage_story/)
 
