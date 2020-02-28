@@ -57,10 +57,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Multi Theft Auto](/gta/mtasa/)
   * [SA-MP](/gta/samp/)
 
-[Minecraft Bedrock](/minecraft_bedrock/) Servers for Bedrock Minecraft
-* [Bedrock](/minecraft_bedrock/bedrock/)
-* [Nukkit](/minecraft_bedrock/nukkit/)
-* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)
+[Mindusrty](/mindustry/)
+
+[Minecraft Bedrock](/minecraft_bedrock/)  
+* [Bedrock](/minecraft_bedrock/bedrock/)  
+* [Nukkit](/minecraft_bedrock/nukkit/)  
+* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
 
 [Minecraft Java](/minecraft_java/) Servers for Java Minecraft
 * [Cuberite](/minecraft_java/cuberite/)
