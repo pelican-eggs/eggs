@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-02-27T02:46:01+01:00",
+    "exported_at": "2020-02-28T20:02:42+01:00",
     "name": "Vintage Story",
     "author": "mail@wuffy.eu",
     "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y screen wget curl\r\n\r\ncd mnt\/server\r\n\r\ncurl -o vs_server.tar.gz https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${VERSION}.tar.gz\r\ntar -xzf vs_server.tar.gz",
+            "script": "#!\/bin\/ash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y screen wget curl\r\n\r\n# Fetching last github release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Using latest release version\"\r\n        LATEST=`curl -s4 https:\/\/account.vintagestory.at\/files\/stable\/ | awk -F 'vs_server' '{print $2}' | sed -r '\/^\\s*$\/d' | sed -r 's\/_\/\/' | sed -r 's\/\"\/\/' | sed -r 's\/>\/\/' | grep \".tar.gz$\" | sort --version-sort | tail -n 1`;\r\n        DOWNLOAD_URL=https:\/\/account.vintagestory.at\/files\/stable\/vs_server_${LATEST}\r\nelse\r\n    echo -e \"Using custom release version\"\r\n    DOWNLOAD_URL=https:\/\/account.vintagestory.at\/files\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\ncurl -o vs_server.tar.gz ${DOWNLOAD_URL}\r\ntar -xzf vs_server.tar.gz\r\n\r\nrm vs_server.tar.gz",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
@@ -35,8 +35,8 @@
         {
             "name": "Version",
             "description": "",
-            "env_variable": "VERSION",
-            "default_value": "1.12.5",
+            "env_variable": "RELEASE_VERSION",
+            "default_value": "latest",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:20"
