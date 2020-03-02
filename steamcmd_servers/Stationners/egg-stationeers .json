@@ -8,7 +8,7 @@
     "author": "sysadmin@whiteshield.ch",
     "description": "Stationeers Server\r\n\r\ndefault.ini will be created once you start game. Command parameters override default.ini parameters\r\nDon't forget to change the RCON Password !!\r\n\r\nRemote Administrator:\r\nYou can send commands on web browser.\r\nLink : http:\/\/[dedicated server address]:[GamePort]\r\n\r\nDedicated Server Wiki ==> https:\/\/stationeers-wiki.com\/Dedicated_Server_Guide\r\n\r\nStopping the server don't save the game, for manual save use the Remote Administrator.",
     "image": "quay.io\/pterodactyl\/core:source",
-    "startup": ".\/rocketstation_DedicatedServer.x86_64 -batchmode -nographics -autostart -autosaveinterval={{SAVE_INTERVAL}} -clearallinterval={{CLEAR_INTERVAL}} -worldtype={{SERVER_MAP}} -worldname={{SAVE_NAME}} -loadworld={{SAVE_NAME}} -basedirectory=\/home\/container -updateport={{UPDATE_PORT}} -gameport={{GAME_PORT}} -servername=\"{{HOSTNAME}}\"",
+    "startup": ".\/rocketstation_DedicatedServer.x86_64 -batchmode -nographics -autostart -autosaveinterval={{SAVE_INTERVAL}} -clearallinterval={{CLEAR_INTERVAL}} -worldtype={{SERVER_MAP}} -worldname={{SAVE_NAME}} -loadworld={{SAVE_NAME}} -basedirectory=\/home\/container -updateport={{UPDATE_PORT}} -gameport={{GAME_PORT}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Dedicated Server Started\",\r\n    \"userInteraction\": []\r\n}",
@@ -25,7 +25,7 @@
     "variables": [
         {
             "name": "Server Map",
-            "description": "Available Maps: Moon, Mars, Europa, Vulkcain, Space, Mimas, Loulan",
+            "description": "Available Maps: Moon, Mars, Europa, Vulcan, Space, Mimas, Loulan",
             "env_variable": "SERVER_MAP",
             "default_value": "Moon",
             "user_viewable": 1,
@@ -45,7 +45,7 @@
             "name": "Auto Clear Disconnected Player",
             "description": "Clear disconnected player interval in seconds",
             "env_variable": "CLEAR_INTERVAL",
-            "default_value": "900",
+            "default_value": "86400",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|integer"
@@ -76,15 +76,6 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|integer"
-        },
-        {
-            "name": "Server Name",
-            "description": "The name of your server in the public server list.",
-            "env_variable": "HOSTNAME",
-            "default_value": "Stationeers Pterodactyl Server",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:30"
         }
     ]
 }
