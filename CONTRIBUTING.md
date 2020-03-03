@@ -36,11 +36,11 @@ The Pterodactyl install process is fairly simple once you know.
 
 Make sure your install process is rock solid as I will be testing eggs before they ever hit my repo.
 
-I will make sugestions and changes at will.  
+I will make suggestions and changes at will.  
 This is to maintain a clean repo that others can pull and be fully aware of what is being done.
 
 
 ## Step 3.
 #### Make a branch and do your work in there.
 
-I have been getting messy PR's due to people always PRing from their master branch. Please make a branch and PR from there,
+I have been getting messy PR's due to people always PRing from their master branch. Please make a branch and PR from there.
