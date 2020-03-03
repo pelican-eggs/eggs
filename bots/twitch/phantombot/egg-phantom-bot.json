@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-03-03T02:01:35+01:00",
+    "exported_at": "2020-03-03T02:42:59+01:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
@@ -13,7 +13,7 @@
         "files": "{\r\n    \"config\/botlogin.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"baseport\": \"{{server.build.default.port}}\",\r\n            \"channel\": \"{{server.build.env.CHANNEL_NAME}}\",\r\n            \"owner\": \"{{server.build.env.CHANNEL_OWNER}}\",\r\n            \"apioauth\": \"{{server.build.env.USER_OAUTH_TOKEN}}\",\r\n            \"oauth\": \"{{server.build.env.BOT_OAUTH_TOKEN}}\",\r\n            \"paneluser\": \"{{server.build.env.WEBPANEL_USERNAME}}\",\r\n            \"panelpassword\": \"{{server.build.env.WEBPANEL_PASSWORD}}\",\r\n            \"user\": \"{{server.build.env.BOT_TWITCH_USERNAME}}\",\r\n            \"youtubekey\": \"{{server.build.env.YOUTUBE_API_KEY}}\",\r\n            \"discord_token\": \"{{server.build.env.DISCORD_BOT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Connecting to Twitch WS-IRC Server\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
-        "stop": "^C"
+        "stop": "exit"
     },
     "scripts": {
         "installation": {
