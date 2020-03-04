@@ -41,7 +41,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Database Eggs
 [MariaDB](/database/mariadb/)
-
+[Redis](/database/redis/)
 ## Game Eggs
 
 [ET Legacy](/enemy_territory/etlegacy/)

@@ -2,8 +2,11 @@
 
 ## sql DBs
 
-### [mariadb](/database/mariadb/)
+### [mariadb](/mariadb/)
     https://mariadb.org/
 
-### [postgres](/database/postgres/)
+### [postgres](/postgres/)
     https://www.postgresql.org/
+
+### [redis](/redis/)
+    https://redis.io/
