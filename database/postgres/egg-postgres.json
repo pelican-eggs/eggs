@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-03-02T18:46:11-05:00",
+    "exported_at": "2020-03-04T09:53:34-05:00",
     "name": "Postgres",
     "author": "parker@parkervcp.com",
     "description": "A default Postgres install that is not really editable.",
@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#! \/bin\/ash\r\nadduser -D -h \/home\/container container\r\n\r\necho $POSTGRES_PASSWORD > .passwd\r\n\r\nchown -R container: \/mnt\/server\/\r\n\r\ncat .passwd\r\n\r\nsu container -c 'initdb -D \/mnt\/server\/postgres_db\/ -A md5 -U container --pwfile .passwd'\r\n\r\nmkdir -p \/mnt\/server\/postgres_db\/run\/\r\n\r\necho -e \"Done\"",
-            "container": "postgres:11-alpine",
+            "container": "postgres:12.2-alpine",
             "entrypoint": "ash"
         }
     },
