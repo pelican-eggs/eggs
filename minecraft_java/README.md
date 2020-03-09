@@ -29,6 +29,10 @@ Supply values to 2 variables to use
 [FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)  
 Revelation is a general all-purpose modpack with optimal FPS, server performance and stability.  
 
+## Magma
+[Magma](https://magmafoundation.org/)
+Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.
+
 ## Paper
 Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
 
