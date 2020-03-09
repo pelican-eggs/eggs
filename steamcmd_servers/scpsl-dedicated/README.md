@@ -1,31 +1,29 @@
 # SCP: Secret Laboratory
-SCP: Secret Laboratory Dedicated Linux Server AddID: [996560](https://steamdb.info/app/996560/)
+SCP: Secret Laboratory Pterodactyl egg. Works with MP2. Steam AppID: [996560](https://steamdb.info/app/996560/)
 
-This Server is NOT compatible with ServerMod2 or MultiAdmin
+This server is **NOT** compatible with SMod2 due to it not being updated for MP2.
 
-
-### Minimum RAM warning
-Minimum required memory to run the server: 3096 MB
+This server is **NOT** compatible with LocalAdmin due to server input causing it to crash. MultiAdmin with a config option is used instead.
 
 
-### Server Ports
-Ports required to run the server in a table format.
+### Minimum RAM
+Minimum memory required to run the server: 3096 MB
 
-| Port    | default |
+
+### Server Port
+Default port required to run the server.
+
+| Port    | Default |
 |---------|---------|
 | Game    | 7777   |
 
+
 ### Verification
 
-The server must be verified to be visible in the Server Browser.
+The server must be verified with the SCP:SL developers in order for it to be visible in the server browser.
 
-Before requesting verification make sure your server follows the [Verified Server Rules](https://scpslgame.com/Verified_server_rules.pdf).
-
-#### Requesting Verification
-Once ready send an email to server.verification@scpslgame.com with the following info:
-
-* The server's external IPv4 address
-* The port used by the server
-* If the server IP is static or dynamic
-
-#### Mods/Plugins may require ports to be added to the server.
+Instructions are as follows:
+* Make sure your server complies with the [Verified Server Rules](https://scpslgame.com/Verified_server_rules.pdf).
+* Send an email to `server.verification@scpslgame.com` from your configured contact email with the following information:
+  1. The **public** IPv4 address of your server, with port. e.g. `69.69.69.69:7777`
+  2. If the server's IP is static or dynamic.
