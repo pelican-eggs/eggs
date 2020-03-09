@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-10-04T11:53:24-04:00",
+    "exported_at": "2020-03-08T20:22:10-04:00",
     "name": "Feather",
     "author": "parker@parkervcp.com",
     "description": "An experimental Minecraft server implementation written in Rust.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/usr\/bin\/env bash\r\napt update\r\napt install -y curl\r\n\r\nget_latest_release() {\r\n  curl --silent \"https:\/\/api.github.com\/repos\/$1\/releases\/latest\" |\r\n  grep '\"tag_name\":' |\r\n  sed -E 's\/.*\"([^\"]+)\".*\/\\1\/'\r\n}\r\n\r\nPACKAGE=\"caelunshun\/feather\"\r\nVERSION=`get_latest_release \"${PACKAGE}\"`\r\necho \"Latest version=${VERSION}\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -SLo feather.tar.gz https:\/\/github.com\/caelunshun\/feather\/releases\/download\/${VERSION}\/feather-${VERSION}-linux.tar.gz\r\n\r\ntar --strip-components=1 -xzvf feather.tar.gz\r\n\r\nrm feather.tar.gz",
+            "script": "#!\/usr\/bin\/env bash\r\napt update\r\napt install -y curl\r\n\r\nget_latest_release() {\r\n  curl -sSL \"https:\/\/api.github.com\/repos\/$1\/releases\/latest\" |\r\n  grep '\"tag_name\":' |\r\n  sed -E 's\/.*\"([^\"]+)\".*\/\\1\/'\r\n}\r\n\r\nPACKAGE=\"caelunshun\/feather\"\r\nVERSION=`get_latest_release \"${PACKAGE}\"`\r\necho \"Latest version=${VERSION}\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sSLo feather.tar.gz https:\/\/github.com\/caelunshun\/feather\/releases\/download\/${VERSION}\/feather-${VERSION}-linux.tar.gz\r\n\r\ntar --strip-components=1 -xzvf feather.tar.gz\r\n\r\nrm feather.tar.gz",
             "container": "debian:stable-slim",
             "entrypoint": "bash"
         }
