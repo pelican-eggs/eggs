@@ -27,7 +27,7 @@
             "name": "Version",
             "description": "The version of MT to install. Releases only",
             "env_variable": "MTVERSION",
-            "default_value": "5.0.1",
+            "default_value": "5.1.1",
             "user_viewable": 0,
             "user_editable": 1,
             "rules": "required|string|max:10"
