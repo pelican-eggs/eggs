@@ -12,7 +12,7 @@
 1. [ ] Does your submission pass tests (server is connectable)?
 2. [ ] Does your server use a custom docker image?
     * [ ] Have you tried to use a generic image?
-    * [ ] Did you PR the nesessary changes to make it work?
+    * [ ] Did you PR the necessary changes to make it work?
 3. [ ] Have you added the server to the main README.md?
 4. [ ] Have you added a unique README.md for the server you are adding?
 

@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-09-30T04:56:49-04:00",
+    "name": "Mindustry",
+    "author": "unknown@unknown.com",
+    "description": "Mindustry is a hybrid tower-defense sandbox factory game. Create elaborate supply chains of conveyor belts to feed ammo into your turrets, produce materials to use for building, and defend your structures from waves of enemies.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -jar server-release.jar",
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Mindustry Install Script\r\n\r\napk add --no-cache --update curl\r\n\r\nURL=https:\/\/github.com\/Anuken\/Mindustry\/releases\/download\/${VERSION}\/server-release.jar\r\ncd \/mnt\/server\r\necho -e \"Downloading Version ${VERSION}, From ${URL}\"\r\ncurl -L -o server-release.jar ${URL}",
+            "container": "alpine:3.9",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "The version to download, Example \"v96\" NOT \"4.0v96\"\r\n\r\nThis would also be the github tag for the release",
+            "env_variable": "VERSION",
+            "default_value": "v96",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required"
+        }
+    ]
+}

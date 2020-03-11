@@ -7,6 +7,10 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 ## Server Ports
 The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
 
+## Cuberite
+A lightweight, fast and extensible game server for Minecraft
+[Cuberite](https://cuberite.org/)
+
 ## Forge 
 [Forge MC](https://files.minecraftforge.net/)  
 This is a direct fork of the default forge service  

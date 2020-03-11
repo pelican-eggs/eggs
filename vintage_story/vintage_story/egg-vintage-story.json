@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-02-28T20:02:42+01:00",
+    "name": "Vintage Story",
+    "author": "mail@wuffy.eu",
+    "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
+    "startup": "mono VintagestoryServer.exe --dataPath .\/data --port={{SERVER_PORT}} --maxclients={{MAX_CLIENTS}} {{OPTIONS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Dedicated Server now running on Port \",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \".\/data\/Logs\/server-debug.txt\"\r\n}",
+        "stop": "\/stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y screen wget curl\r\n\r\n# Fetching last github release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Using latest release version\"\r\n        LATEST=`curl -s4 https:\/\/account.vintagestory.at\/files\/stable\/ | awk -F 'vs_server' '{print $2}' | sed -r '\/^\\s*$\/d' | sed -r 's\/_\/\/' | sed -r 's\/\"\/\/' | sed -r 's\/>\/\/' | grep \".tar.gz$\" | sort --version-sort | tail -n 1`;\r\n        DOWNLOAD_URL=https:\/\/account.vintagestory.at\/files\/stable\/vs_server_${LATEST}\r\nelse\r\n    echo -e \"Using custom release version\"\r\n    DOWNLOAD_URL=https:\/\/account.vintagestory.at\/files\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\ncurl -o vs_server.tar.gz ${DOWNLOAD_URL}\r\ntar -xzf vs_server.tar.gz\r\n\r\nrm vs_server.tar.gz",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Start Options",
+            "description": "",
+            "env_variable": "OPTIONS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "max:200"
+        },
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "RELEASE_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Clients",
+            "description": "",
+            "env_variable": "MAX_CLIENTS",
+            "default_value": "16",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:2000"
+        }
+    ]
+}

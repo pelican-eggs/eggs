@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-06-07T12:39:45-04:00",
+    "exported_at": "2019-10-24T00:00:15-04:00",
     "name": "PixARK",
     "author": "hello@venatus.digital",
     "description": "A simple Docker container with Wine to run PixARK using Pterodactyl Panel",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# PixARK: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\n\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\/mnt\/server\/steamcmd\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +force_install_dir \/home\/container +app_update {{SRCDS_APPID}} +quit",
+            "script": "#!\/bin\/bash\r\n# PixARK: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\n\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\/mnt\/server\/steamcmd\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +force_install_dir \/mnt\/server +app_update {{SRCDS_APPID}} +quit",
             "container": "ubuntu:latest",
             "entrypoint": "bash"
         }
