@@ -7,7 +7,7 @@ You're one of the few not yet turned zombie. Keeping it that way will be a chall
 - Confront and learn to counter special abilities ranging from invisibility to fire breathing to lightning attacks.  
 
 ### Server Ports
-Rocketmod requires 2 ports to run properly.  
+Rocketmod requires 3 ports to run properly.  
 
 | Port    | default |
 |---------|---------|
