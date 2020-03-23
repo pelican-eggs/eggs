@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-11-03T20:45:20-05:00",
-    "name": "FiveM",
+    "exported_at": "2020-03-23T22:12:24+01:00",
+    "name": "FiveM_v2",
     "author": "parker@parkervcp.com",
     "description": "A new FiveM egg for the latest builds due to recent changes in FiveM",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
-    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +exec server.cfg",
+    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +set onesync_enabled {{ONESYNC}} +exec server.cfg",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_HOSTNAME}}\\\"\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"succeeded. Welcome!\"\r\n}",
@@ -48,7 +48,7 @@
             "default_value": "32",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|integer|between:1,32"
+            "rules": "required|integer|between:1,128"
         },
         {
             "name": "Server Hostname",
@@ -76,6 +76,15 @@
             "user_viewable": 0,
             "user_editable": 0,
             "rules": "string|nullable"
+        },
+        {
+            "name": "OneSync",
+            "description": "Do you want to enable OneSync?\r\nPlease use 0 (false) or 1 (true) to enable or disable it.",
+            "env_variable": "ONESYNC",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean|digits_between:0,1"
         }
     ]
 }
