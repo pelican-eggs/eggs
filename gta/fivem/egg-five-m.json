@@ -43,7 +43,7 @@
         },
         {
             "name": "Max Players",
-            "description": "Set the fivem max play count",
+            "description": "Set the fivem max play count\r\n\r\n*At this moment OneSync and +32 players is still a payed option. Please go to this URL (https://forum.cfx.re/t/the-onesync-eap-and-you) for more information.",
             "env_variable": "MAX_PLAYERS",
             "default_value": "32",
             "user_viewable": 1,
@@ -79,7 +79,7 @@
         },
         {
             "name": "OneSync",
-            "description": "Do you want to enable OneSync?\r\nPlease use 0 (false) or 1 (true) to enable or disable it.",
+            "description": "Do you want to enable OneSync?\r\nPlease use 0 (false) or 1 (true) to enable or disable it.\r\n\r\n*At this moment OneSync is still a payed option. Please go to this URL (https://forum.cfx.re/t/the-onesync-eap-and-you) for more information.",
             "env_variable": "ONESYNC",
             "default_value": "0",
             "user_viewable": 1,
