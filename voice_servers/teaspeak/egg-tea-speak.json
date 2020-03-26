@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-03-26T11:44:42-04:00",
+    "exported_at": "2020-03-26T12:00:56-04:00",
     "name": "TeaSpeak",
     "author": "parker@parkervcp.com",
     "description": "TeaSpeak is a free to use client and server software for VoIP communication.\r\n\r\nIts the ideal deal software for everyone who is annoyed about limits and restrictions.",
@@ -57,7 +57,7 @@
             "default_value": ".\/libs\/",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|string|max:20"
+            "rules": "required|string"
         },
         {
             "name": "ld preload",
@@ -66,7 +66,7 @@
             "default_value": ".\/libs\/libjemalloc.so.2",
             "user_viewable": 0,
             "user_editable": 0,
-            "rules": "required|string|max:20"
+            "rules": "required|string"
         },
         {
             "name": "Teaspeak Version",
