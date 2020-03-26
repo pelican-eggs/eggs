@@ -36,6 +36,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [pixel-bot](/bots/discord/pixelbot/) Python
 * [Sinusbot](/bots/discord/sinusbot/)
 
+[Twitch](/bots/twitch)
+* [PhantomBot](/bots/twitch/phantombot/)
+
 [TeamSpeak3](bots/teamspeak3)
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
@@ -79,7 +82,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Waterfall](/minecraft_proxy/waterfall/)
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
-
 
 [Red Dead Redemption](/rdr/)
 * [RedM](/rdr/redm/)
