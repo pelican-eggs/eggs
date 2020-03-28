@@ -40,10 +40,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
 ## Database Eggs
+### SQL Databases
 [MariaDB](/database/mariadb/)
-[Redis](/database/redis/)
-## Game Eggs
 
+### In-Memory Databases
+[Redis](/database/redis/)
+
+## Game Eggs
 [ET Legacy](/enemy_territory/etlegacy/)
 
 [Factorio](/factorio/factorio/)
