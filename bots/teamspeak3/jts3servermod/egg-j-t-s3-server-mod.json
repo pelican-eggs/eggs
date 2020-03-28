@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# JTS3ServerMod\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y install wget unzip\r\n\r\ncd \/tmp\r\n\r\nif [ -z \"$SERVER_VERSION\" ] || [ \"$SERVER_VERSION\" == \"latest\" ]; then\r\n  wget -q -O JTS3ServerMod.zip 'https:\/\/www.stefan1200.de\/dlrequest.php?file=jts3servermod&type=.zip'\r\nelse\r\n  wget -q -O JTS3ServerMod.zip 'https:\/\/www.stefan1200.de\/downloads\/JTS3ServerMod_$SERVER_VERSION.zip'\r\nfi\r\n\r\nunzip JTS3ServerMod.zip\r\n\r\nmkdir -p \/mnt\/server\r\nexport HOME=\/mnt\/server\r\n\r\nmv \/tmp\/JTS3ServerMod\/* \/mnt\/server\/",
-            "container": "ubuntu:18.10",
+            "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }
     },
