@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-03-26T12:00:56-04:00",
+    "exported_at": "2020-03-28T13:50:13-04:00",
     "name": "TeaSpeak",
     "author": "parker@parkervcp.com",
     "description": "TeaSpeak is a free to use client and server software for VoIP communication.\r\n\r\nIts the ideal deal software for everyone who is annoyed about limits and restrictions.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
-    "startup": ".\/TeaSpeakServer --property:binding.query.port={{server.build.env.QUERY_PORT}} --property:binding.file.port={{server.build.env.FILE_PORT}} --property:voice.default_port={{server.build.default.port}}",
+    "startup": ".\/TeaSpeakServer --property:binding.query.port={{QUERY_PORT}} --property:binding.file.port={{FILE_PORT}} --property:voice.default_port={{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"voice.default_port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"file.port\": \"{{server.build.env.FILE_PORT}}\",\r\n            \"query.motd\": \"\\\"{{server.build.env.SERVER_MOTD}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Started server on \"\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n \r\n## install required packages\r\napt update\r\napt upgrade -y\r\napt install curl -y\r\n\r\n## make and change to directory\r\nmkdir \/mnt\/server\r\ncd \/mnt\/server\/\r\n\r\n## get download link\r\nif [ \"${VERSION}\" == \"\" ] || [ \"${VERSION}\" == \"latest\"]; then\r\n    DOWNLOAD_URL=$(echo \"https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/TeaSpeak-$(curl -sSLk https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/latest).tar.gz\")\r\nelse\r\n    DOWNLOAD_URL=$(echo \"https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/TeaSpeak-${VERSION}.tar.gz\")\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o teaspeak.tar.gz ${DOWNLOAD_LINK}\"\r\ncurl -sSL -o teaspeak.tar.gz ${DOWNLOAD_LINK}\r\n\r\n## unpack files\r\necho -e \"unpacking files\"\r\ntar xzvf teaspeak.tar.gz\r\n\r\necho -e \"install complete\"",
+            "script": "#!\/bin\/bash\r\n \r\n## install required packages\r\napt update\r\napt upgrade -y\r\napt install curl -y\r\n\r\n## make and change to directory\r\nmkdir \/mnt\/server\r\ncd \/mnt\/server\/\r\n\r\n## get download link\r\nif [ \"${VERSION}\" == \"\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo \"https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/TeaSpeak-$(curl -sSLk https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/latest).tar.gz\")\r\nelse\r\n    DOWNLOAD_URL=$(echo \"https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/TeaSpeak-${VERSION}.tar.gz\")\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o teaspeak.tar.gz ${DOWNLOAD_LINK}\"\r\ncurl -sSL -o teaspeak.tar.gz ${DOWNLOAD_LINK}\r\n\r\n## unpack files\r\necho -e \"unpacking files\"\r\ntar xzvf teaspeak.tar.gz\r\n\r\necho -e \"install complete\"",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
