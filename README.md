@@ -71,6 +71,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Cuberite](/minecraft_java/cuberite/)
 * [Forge](/minecraft_java/forge/)
 * [Feed The Beast](/minecraft_java/ftb/)
+* [Magma](/minecraft/magma/)
 * [Paper](/minecraft_java/paper)
 * [Spigot](/minecraft_java/spigot/)
 * [spongeforge](/minecraft_java/spongeforge/)
