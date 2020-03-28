@@ -77,6 +77,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [SpongeVanilla](/minecraft_java/spongevanilla/)
 * [Technic](/minecraft_java/technic/)
 * [VanillaCord](/minecraft_java/vanillacord/)
+* [Tuinity](/minecraft_java/tuinity/) 
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)
 * [Waterfall](/minecraft_proxy/waterfall/)
