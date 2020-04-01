@@ -54,7 +54,7 @@
             "name": "Tshock Version",
             "description": "The version on tshock that will be installed.",
             "env_variable": "TSHOCK_VERSION",
-            "default_value": "4.3.25",
+            "default_value": "4.3.26",
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|string|max:20"
