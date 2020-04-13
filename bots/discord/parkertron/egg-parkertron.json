@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-02-17T12:34:32-05:00",
+    "exported_at": "2020-04-03T12:50:58-04:00",
     "name": "parkertron",
     "author": "parker@parkervcp.com",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
@@ -13,12 +13,12 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Bot is now running\"\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
-        "stop": "^C"
+        "stop": "shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# parkertron Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nexport GOPATH=$HOME\/go\r\nexport PATH=$GOROOT\/bin:$GOPATH\/bin:$PATH\r\n\r\ncd\r\n\r\napk add --no-cache --update git curl lua-stdlib lua musl-dev g++ libc-dev tesseract-ocr tesseract-ocr-dev\r\n\r\necho \"pulling the parkertron pterodactyl branch\"\r\n\r\ngit clone https:\/\/github.com\/parkervcp\/parkertron.git\r\n\r\ncd parkertron\/\r\n\r\necho \"building parkertron\"\r\n\r\ngo build \r\n\r\necho \"build complete copying parkertron and example configs over\"\r\n\r\ncp parkertron \/mnt\/server\/\r\n\r\nif [ -d \"$DIRECTORY\" ]; then\r\n    echo \"Files exist already\"\r\nelse\r\n    cp configs\/ \/mnt\/server\/\r\nfi\r\n\r\necho \"Install complete. If you watched this. Congrats.\"",
-            "container": "golang:1.11-alpine",
+            "script": "#!\/bin\/ash\r\n# parkertron Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nexport GOPATH=$HOME\/go\r\nexport PATH=$GOROOT\/bin:$GOPATH\/bin:$PATH\r\n\r\ncd\r\n\r\napk add --no-cache --update git curl lua-stdlib lua musl-dev g++ libc-dev tesseract-ocr tesseract-ocr-dev\r\n\r\necho \"pulling the parkertron pterodactyl branch\"\r\n\r\ngit clone https:\/\/github.com\/parkervcp\/parkertron.git\r\n\r\ncd parkertron\/\r\n\r\ngo mod download\r\n\r\necho \"building parkertron\"\r\n\r\ngo build \r\n\r\necho \"build complete copying parkertron and example configs over\"\r\n\r\ncp parkertron \/mnt\/server\/\r\n\r\nif [ -d \/mnt\/server\/configs ]; then\r\n    echo \"Files exist already\"\r\nelse\r\n    cp -r \/root\/parkertron\/configs\/ \/mnt\/server\/\r\nfi\r\n\r\necho \"Install complete. If you watched this. Congrats.\"",
+            "container": "golang:1.14-alpine",
             "entrypoint": "ash"
         }
     },
