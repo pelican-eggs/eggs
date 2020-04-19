@@ -20,4 +20,5 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hexxit](/minecraft_java/technic/hexxit/)  
 * [Tekkit Legends](/minecraft_java/technic/tekkit-legends/)
 * [Attack of the B-Team](/minecraft_java/technic/attack-of-the-bteam/)
+* [The 1.7.10 Pack](/minecraft_java/technic/the-1-7-10-pack/)
 * [Tekkit Classic](/minecraft_java/technic/tekkit-classic/)
