@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-19T09:46:14+02:00",
+    "name": "SogeBot",
+    "author": "panel@mgc4you.de",
+    "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+    "startup": "npm start",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"WebPanel is available at\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^c"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#\/bin\/ash\r\napk update\r\napk add --no-cache git make gcc g++ python autoconf automake nasm build-base zlib zlib-dev libtool ca-certificates curl unzip sqlite gettext\r\nexport NODE_OPTIONS=--max-old-space-size=8192\r\n\r\ncd \/mnt\/server\r\n\r\nif   [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/sogehige\/sogeBot\/releases\/latest\" | awk -F '\"' '\/tag_name\/{print $4}')\r\n        DOWNLOAD_URL=https:\/\/github.com\/sogehige\/sogeBot\/releases\/download\/${RELEASE_VERSION}\/sogeBot-${RELEASE_VERSION}.zip\r\n        curl -L -o sogebot.zip ${DOWNLOAD_URL}\r\n        unzip -o sogebot.zip\r\n        rm sogebot.zip\r\n        \r\nelif [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n        git clone https:\/\/github.com\/sogehige\/sogeBot.git .\r\n        cp src\/bot\/data\/.* .\r\n        mv .env.sqlite .env   \r\n    \r\nelse\r\n        DOWNLOAD_URL=https:\/\/github.com\/sogehige\/sogeBot\/releases\/download\/${RELEASE_VERSION}\/sogeBot-${RELEASE_VERSION}.zip\r\n        curl -L -o sogebot.zip ${DOWNLOAD_URL}\r\n        unzip -o sogebot.zip\r\n        rm sogebot.zip\r\nfi\r\n\r\nnpm install -g npm@latest\r\n\r\n#\/usr\/local\/bin\/npm install sqlite3 --save\r\n#\/usr\/local\/bin\/npm install --save-dev electron-rebuild\r\n\r\nif [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n    echo -e \"## Compiling SourceCode with make && Downloading npm components\"\r\n    make\r\nelse\r\n    echo -e \"## Downloading npm components\"\r\n    \/usr\/local\/bin\/npm ci\r\nfi\r\n\r\nexit 0",
+            "container": "node:12-alpine3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "Use: \"latest\" => latest official Version of SogeBot | \"master\" => Latest master branch Version |\"10.x.x\"  other Version",
+            "env_variable": "RELEASE_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "max:9"
+        },
+        {
+            "name": "Webinterface Port",
+            "description": "Webinterface Port [example: 20000 => 0.0.0.0:20000]",
+            "env_variable": "WEB_PORT",
+            "default_value": "20000",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
+        }
+    ]
+}
