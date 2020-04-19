@@ -5,7 +5,7 @@
     },
     "exported_at": "2020-04-19T09:46:14+02:00",
     "name": "SogeBot",
-    "author": "panel@mgc4you.de",
+    "author": "info@goover.de",
     "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
     "startup": "npm start",
