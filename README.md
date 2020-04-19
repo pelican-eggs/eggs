@@ -38,6 +38,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Twitch](/bots/twitch)
 * [PhantomBot](/bots/twitch/phantombot/)
+* [sogeBot](/bots/twitch/sogeBot/)
 
 [TeamSpeak3](bots/teamspeak3)
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
@@ -81,7 +82,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [SpongeVanilla](/minecraft_java/spongevanilla/)
 * [Technic](/minecraft_java/technic/)
 * [VanillaCord](/minecraft_java/vanillacord/)
-* [Tuinity](/minecraft_java/tuinity/) 
+* [Tuinity](/minecraft_java/tuinity/)
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)
 * [Waterfall](/minecraft_proxy/waterfall/)

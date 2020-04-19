@@ -9,3 +9,7 @@ allowing you to focus on what matters the most to you - your game and your viewe
 | Port                | default |
 |---------------------|---------|
 | Game (HTTP Server)  | 20000   |
+
+#NOTES
+
+The installation take a long time, because a lot of things must be compiled. It can take 5 or more minutes !!!
