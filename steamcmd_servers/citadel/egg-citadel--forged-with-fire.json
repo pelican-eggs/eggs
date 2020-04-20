@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-04-20T08:38:47+02:00",
+    "exported_at": "2020-04-20T08:58:00+02:00",
     "name": "Citadel: Forged with Fire",
     "author": "info@goover.de",
     "description": "Citadel: Forged With Fire is a massive online sandbox RPG set in the mystical world of Ignus. Featuring magic, spellcasting, building, exploring and crafting as you fight to make a name for yourself and achieve notoriety across the land.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
     "startup": ".\/CitadelServer.sh",
     "config": {
-        "files": "{\r\n    \"Citadel\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ConnectionPort=\": \"ConnectionPort={{server.build.default.port}}\",\r\n            \"QueryPort=\": \"QueryPort={{server.build.env.QPORT}}\",\r\n            \"Password=\": \"Password={{server.build.env.ADMIN_PASSWD}}\",\r\n            \"WorldCreationSettings=\": \"WorldCreationSettings=({{server.build.env.WORLD_CREATION_SETTINGS}})\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"Citadel\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ConnectionPort=\": \"ConnectionPort={{server.build.env.CPORT}}\",\r\n            \"QueryPort=\": \"QueryPort={{server.build.default.port}}\",\r\n            \"Password=\": \"Password={{server.build.env.ADMIN_PASSWD}}\",\r\n            \"WorldCreationSettings=\": \"WorldCreationSettings=({{server.build.env.WORLD_CREATION_SETTINGS}})\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Steam Server initialized and registered with UWorks\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
@@ -33,9 +33,9 @@
             "rules": "required|numeric|digits_between:1,6"
         },
         {
-            "name": "Query Port",
+            "name": "Connection Port",
             "description": "Query Port",
-            "env_variable": "QPORT",
+            "env_variable": "CPORT",
             "default_value": "7777",
             "user_viewable": 1,
             "user_editable": 1,
