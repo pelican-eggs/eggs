@@ -101,6 +101,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Don't Starve](/steamcmd_servers/dont_starve)
 * [ECO](/steamcmd_servers/eco/)
 * [HLDS server](/steamcmd_servers/hlds_server)
+* [Hurtworld](/steamcmd_servers/hurtworld)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
