@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-04-20T08:03:00+02:00",
+    "exported_at": "2020-04-20T08:14:02+02:00",
     "name": "Citadel: Forged with Fire",
     "author": "info@goover.de",
     "description": "Citadel: Forged With Fire is a massive online sandbox RPG set in the mystical world of Ignus. Featuring magic, spellcasting, building, exploring and crafting as you fight to make a name for yourself and achieve notoriety across the land.",
@@ -36,7 +36,7 @@
             "name": "Connection Port",
             "description": "port",
             "env_variable": "CON_PORT",
-            "default_value": "7777",
+            "default_value": "27105",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:5"
@@ -45,7 +45,7 @@
             "name": "Query Port",
             "description": "Query Port",
             "env_variable": "QUERY_PORT",
-            "default_value": "27015",
+            "default_value": "7777",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:5"
@@ -63,7 +63,7 @@
             "name": "World Creation Settings",
             "description": "Pls define SERVERNAME, PASSWORT to join Server, MAX PLAYERS and SERVER MODE !!!",
             "env_variable": "WORLD_CREATION_SETTINGS",
-            "default_value": "WorldCreationSettings=(ServerName=\"My Private Server\",Password=\"\",ServerType=PVP,PlayerLimit=40,bPrivate=true,ExperienceMultiplier=1.000000,InventoryCapacityMultipler=1.000000,KnowledgePointEarnedMultiplier=1.000000,CharacterPointEarnedMultiplier=1.000000,bUnlimitedResources=false,PlayerDamageMultiplier=1.000000,ArmorMultiplier=1.000000,BaseManaRegen=1.000000,bInventoryWeightRestrictions=true,MagicFindMultiplier=1.000000,CraftingMagicFindChanceMultiplier=1.000000,FlyingCostMultiplier=1.000000,FlyingSpeedMultiplier=1.000000,ResourceCollectionMultiplier=1.000000,StructureDamageMultiplier=1.000000,bRespectNoBuildZones=true,MagicStructureManaRegenerationMultiplier=1.000000,MagicStructureManaConsumptionMultiplier=0.000000,bFreeBuildMode=false,TimeOfDayLock=Auto,NPCPopulationMultiplier=1.000000)",
+            "default_value": "WorldCreationSettings=(ServerName=\"My Private Server\",Password=\"\",ServerType=PVP,PlayerLimit=40,bPrivate=false,ExperienceMultiplier=1.000000,InventoryCapacityMultipler=1.000000,KnowledgePointEarnedMultiplier=1.000000,CharacterPointEarnedMultiplier=1.000000,bUnlimitedResources=false,PlayerDamageMultiplier=1.000000,ArmorMultiplier=1.000000,BaseManaRegen=1.000000,bInventoryWeightRestrictions=true,MagicFindMultiplier=1.000000,CraftingMagicFindChanceMultiplier=1.000000,FlyingCostMultiplier=1.000000,FlyingSpeedMultiplier=1.000000,ResourceCollectionMultiplier=1.000000,StructureDamageMultiplier=1.000000,bRespectNoBuildZones=true,MagicStructureManaRegenerationMultiplier=1.000000,MagicStructureManaConsumptionMultiplier=0.000000,bFreeBuildMode=false,TimeOfDayLock=Auto,NPCPopulationMultiplier=1.000000)",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required"
