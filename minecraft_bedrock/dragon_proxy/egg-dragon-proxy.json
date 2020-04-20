@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-20T12:13:53+02:00",
+    "name": "DragonProxy",
+    "author": "info@goover.de",
+    "description": "A proxy made to allow Minecraft: Bedrock Edition clients to connect to Minecraft: Java Edition servers.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar DragonProxy.jar",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"bind-port:\": \"bind-port: {{server.build.default.port}}\",\r\n            \"max-players:\": \"max-players: {{server.build.env.MAX_PLAYERS}}\",\r\n            \"remote-port:\": \"remote-port: {{server.build.env.RPORT}}\",\r\n            \"remote-auth:\": \"remote-auth: {{server.build.env.REMOTE_AUTH}}\",\r\n            \"xbox-auth:\": \"xbox-auth: {{server.build.env.XBOX_AUTH}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Done\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "[]",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apk update\r\napk --no-cache --update add curl jq wget\r\n\r\ncd \/mnt\/server\r\nrm -rf DragonProxy.jar\r\nwget https:\/\/ci.codemc.io\/job\/DragonetMC\/job\/DragonProxy\/lastBuild\/artifact\/bootstrap\/standalone\/target\/DragonProxy.jar\r\n\r\nrm -rf \/mnt\/server\/config.yml\r\ncat <<EOT > \/mnt\/server\/config.yml\r\n# -----------------------------------------------\r\n#   DragonProxy Configuration (25\/03\/20)\r\n#   https:\/\/github.com\/DragonetMC\/DragonProxy\r\n# -----------------------------------------------\r\n# DO NOT CHANGE THIS VARIABLE!!!!!!\r\nconfig-version: 2\r\n# DO NOT CHANGE THIS VARIABLE!!!!!!\r\n\r\nlocale: 'EN'\r\n\r\n# The IP and port the proxy will listen for connections on\r\n# '0.0.0.0' will bind to all IP addresses available on your device\r\nbind-address: '0.0.0.0'\r\nbind-port: 19132\r\n\r\n# The MOTD that will be shown on the MCPE server list\r\nmotd: 'DragonProxy'\r\nmotd2: 'https:\/\/github.com\/DragonetMC\/DragonProxy'\r\n\r\n# The maximum amount of players that can join the proxy\r\nmax-players: 1\r\n\r\n# The IP and port of the remote server to connect to\r\nremote-address: '127.0.0.1'\r\nremote-port: 25565\r\n\r\n# The authentication method used for connecting to the remote server.\r\n# Accepted values:\r\n#   credentials   : This will display a form when you join the proxy asking you to enter your Mojang credentials\r\n#   offline       :  No authentication, cant join premium servers such as Hypixel\r\nremote-auth: credentials\r\n\r\n# Whether or not Bedrock clients should be authenticated with xbox live\r\nxbox-auth: false\r\n\r\n# Whether or not to use the motd and player count of the primary remote server\r\nping-passthrough: true\r\n\r\n# Player gameplay related settings\r\nplayer-settings:\r\n  # Whether or not to translate commands sent from the remote server and display\r\n  # them on the Bedrock client. This is currently experimental.\r\n  enable-commands: false\r\n\r\n  # Whether or not to enable auto jump\r\n  auto-jump: true\r\n\r\n  # Whether or not to fetch skins from Mojang's servers\r\n  fetch-skins: true\r\n\r\nmetrics:\r\n  enabled: true\r\n  # DO NOT CHANGE\r\n  server-uuid: donotchange_serveruuid\r\n\r\n# The amount of threads that will be used.\r\n# Only change if you know what you are doing\r\nthread-pool-size: 8\r\nEOT",
+            "container": "openjdk:8-jre-alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Remote Port",
+            "description": "",
+            "env_variable": "RPORT",
+            "default_value": "25565",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Remote Auth",
+            "description": "The authentication method used for connecting to the remote server.\r\nAccepted values:\r\ncredentials   : This will display a form when you join the proxy asking you to enter your Mojang credentials\r\noffline       :  No authentication, cant join premium servers such as Hypixel",
+            "env_variable": "REMOTE_AUTH",
+            "default_value": "credentials",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "XBox Auth",
+            "description": "Whether or not Bedrock clients should be authenticated with xbox live\r\n\r\nTRUE or FALSE",
+            "env_variable": "XBOX_AUTH",
+            "default_value": "false",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum amount of players that can join the proxy",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

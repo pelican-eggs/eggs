@@ -66,7 +66,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Mindusrty](/mindustry/)
 
 [Minecraft Bedrock](/minecraft_bedrock/)  
-* [Bedrock](/minecraft_bedrock/bedrock/)  
+* [Bedrock](/minecraft_bedrock/bedrock/)
+* [DragonProxy](/minecraft_bedrock/dragonproxy/)  
 * [Nukkit](/minecraft_bedrock/nukkit/)  
 * [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
 
@@ -81,7 +82,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [SpongeVanilla](/minecraft_java/spongevanilla/)
 * [Technic](/minecraft_java/technic/)
 * [VanillaCord](/minecraft_java/vanillacord/)
-* [Tuinity](/minecraft_java/tuinity/) 
+* [Tuinity](/minecraft_java/tuinity/)
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)
 * [Waterfall](/minecraft_proxy/waterfall/)
