@@ -5,5 +5,5 @@ Citadel: Forged With Fire is a massive online sandbox RPG set in the mystical wo
 
 | Port  | default |
 |-------|---------|
-| Game  | 27015   |
-| Query | 7777   |
+| Game  | 7777    |
+| Query | 27015   |
