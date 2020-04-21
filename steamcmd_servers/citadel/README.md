@@ -7,3 +7,10 @@ Citadel: Forged With Fire is a massive online sandbox RPG set in the mystical wo
 |-------|---------|
 | Game  | 7777    |
 | Query | 27015   |
+
+## Notes
+
+You need to setup the Config of the Server in
+/Config/Game.ini
+
+-> WorldCreationSettings
