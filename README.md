@@ -34,6 +34,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [jmusicbot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron/) Golang
 * [pixel-bot](/bots/discord/pixelbot/) Python
+* [Red](/bots/discord/redbot/) Python
 * [Sinusbot](/bots/discord/sinusbot/)
 
 [Twitch](/bots/twitch)
