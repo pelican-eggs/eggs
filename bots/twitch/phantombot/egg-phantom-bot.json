@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-03-03T02:51:46+01:00",
+    "exported_at": "2020-04-22T15:12:03+02:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# PhantomBot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\ncd \/tmp\r\n\r\n# Fetching last github release\r\nif [ -n \"${DOWNLOAD_PATH}\" ]; then\r\n    echo -e \"Using download url\"\r\n    DOWNLOAD_URL=`eval echo $(echo ${DOWNLOAD_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\nelse\r\n    if [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        echo -e \"Using latest release version\"\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/latest\" | grep -o '[0-9].[0-9].[0-9]')\r\n    else\r\n        echo -e \"Using custom release version\"\r\n    fi\r\n\r\n#    DOWNLOAD_URL=https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/download\/v${RELEASE_VERSION}\/PhantomBot-${RELEASE_VERSION}.zip\r\n    DOWNLOAD_URL=https:\/\/raw.githubusercontent.com\/PhantomBot\/nightly-build\/master\/PhantomBot-nightly-lin.zip\r\nfi\r\n\r\n# Downloading\r\ncurl -LJO ${DOWNLOAD_URL}\r\nunzip -o PhantomBot-*.zip\r\n\r\n# Moveing unziped files into the server folder\r\ncp -f -r .\/PhantomBot-*\/* \/mnt\/server\/\r\n\r\n# Creating default config\r\nif [ ! -f \/mnt\/server\/config\/botlogin.txt ]; then\r\n    echo -e \"Creating config\/botlogin.txt\"\r\n    cat << EOF > \/mnt\/server\/config\/botlogin.txt\r\n    #PhantomBot Configuration File\r\n    #\r\n    # Here is a list wiht all config values:\r\n    # https:\/\/community.phantom.bot\/t\/settings-for-botlogin-txt\/78\r\n    #\r\n    apioauth=\r\n    baseport=\r\n    channel=\r\n    oauth=\r\n    owner=\r\n    panelpassword=\r\n    paneluser=\r\n    user=\r\n    youtubekey=\r\n    discord_token=\r\nEOF\r\nfi",
+            "script": "#!\/bin\/bash\r\n# PhantomBot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\ncd \/tmp\r\n\r\n# Fetching last github release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n        echo -e \"Using latest Github Master version\"\r\n        DOWNLOAD_URL=https:\/\/raw.githubusercontent.com\/PhantomBot\/nightly-build\/master\/PhantomBot-nightly-lin.zip\r\nelse\r\n    if [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        echo -e \"Using latest release version\"\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/latest\" | grep -o '[0-9].[0-9].[0-9]')\r\n    fi\r\n    DOWNLOAD_URL=https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/download\/v${RELEASE_VERSION}\/PhantomBot-${RELEASE_VERSION}.zip\r\nfi\r\n\r\n# Downloading\r\ncurl -LJO ${DOWNLOAD_URL}\r\nunzip -o PhantomBot-*.zip\r\n\r\n# Moveing unziped files into the server folder\r\ncp -f -r .\/PhantomBot-*\/* \/mnt\/server\/\r\n\r\n# Creating default config\r\nif [ ! -f \/mnt\/server\/config\/botlogin.txt ]; then\r\n    echo -e \"Creating config\/botlogin.txt\"\r\n    cat << EOF > \/mnt\/server\/config\/botlogin.txt\r\n    #PhantomBot Configuration File\r\n    #\r\n    # Here is a list wiht all config values:\r\n    # https:\/\/community.phantom.bot\/t\/settings-for-botlogin-txt\/78\r\n    #\r\n    apioauth=\r\n    baseport=\r\n    channel=\r\n    oauth=\r\n    owner=\r\n    panelpassword=\r\n    paneluser=\r\n    user=\r\n    youtubekey=\r\n    discord_token=\r\nEOF\r\nfi",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
@@ -25,21 +25,12 @@
     "variables": [
         {
             "name": "Version",
-            "description": "",
+            "description": "latest = Latest Stable\r\nmaster = latest Github",
             "env_variable": "RELEASE_VERSION",
             "default_value": "latest",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "max:9"
-        },
-        {
-            "name": "Download Path",
-            "description": "Using the latest nightly build:\r\nhttps:\/\/raw.githubusercontent.com\/PhantomBot\/nightly-build\/master\/PhantomBot-nightly-lin.zip\r\n\r\nWhen you use the latest nightly build you need to change the docker image to:\r\nquay.io\/parkervcp\/pterodactyl-images:debian_openjdk-13",
-            "env_variable": "DOWNLOAD_PATH",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "max:512"
         },
         {
             "name": "Twitch Channel Name",
@@ -48,7 +39,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:26"
+            "rules": "string|max:26"
         },
         {
             "name": "Channel Owner",
@@ -57,7 +48,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:26"
+            "rules": "string|max:26"
         },
         {
             "name": "Bot OAuth Token",
@@ -66,7 +57,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:64"
+            "rules": "string|max:64"
         },
         {
             "name": "Your OAuth Token",
@@ -75,7 +66,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:64"
+            "rules": "string|max:64"
         },
         {
             "name": "Bot Twitch Username",
@@ -84,7 +75,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:26"
+            "rules": "string|max:26"
         },
         {
             "name": "Webpanel Username",
@@ -93,7 +84,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:64"
+            "rules": "string|max:64"
         },
         {
             "name": "Webpanel Password",
@@ -102,7 +93,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string|max:2000"
+            "rules": "string|max:2000"
         },
         {
             "name": "Youtube API Key",
