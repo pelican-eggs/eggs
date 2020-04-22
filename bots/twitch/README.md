@@ -16,4 +16,4 @@ PhantomBot is an actively developed open source interactive Twitch bot with a vi
 
 
 ### Notes
-Token fields are set to not required. Bot will NOT start, when Token fields are emty
+Token fields are set to not required. Bot will NOT start, when Token fields are empty
