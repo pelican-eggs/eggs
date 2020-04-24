@@ -109,6 +109,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [PixARK](/steamcmd_servers/pixark/)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
+* [SSoldat](/steamcmd_servers/soldat/)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/Stationeers/)
 * [Sven Co-op](/steamcmd_servers/svencoop)
