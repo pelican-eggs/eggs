@@ -47,6 +47,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## Database Eggs
 ### SQL Databases
 [MariaDB](/database/mariadb/)
+[PostgreSQL](/database/postgres/)
 
 ### In-Memory Databases
 [Redis](/database/redis/)
