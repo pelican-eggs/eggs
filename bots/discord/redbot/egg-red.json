@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-20T23:06:14-04:00",
+    "name": "Red",
+    "author": "parker@parkervcp.com",
+    "description": "A multifunction Discord bot \r\n\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_red",
+    "startup": "PATH=$PATH:\/home\/container\/.local\/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Invite URL:\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# red-discordbot install script\r\n\r\n## install deps\r\nmkdir -p \/usr\/share\/man\/man1\r\napt update\r\napt -y install git ca-certificates dnsutils iproute2 make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libgdbm-dev uuid-dev git openjdk-11-jre\r\n\r\n## config folder layouts\r\necho -e \"generating config folder layout\"\r\nmkdir -p \/mnt\/server\/.config\/{Red-DiscordBot,share}\/ \/mnt\/server\/.local\/share\/Red-DiscordBot\/data\/pterodactyl\/\r\ncd \/mnt\/server\/\r\nln -s .local\/share\/Red-DiscordBot\/data\/pterodactyl\/ .\/configs\r\n\r\n## install red\r\necho -e \"add container user to install\"\r\nln -s \/mnt\/server\/ \/home\/container\r\nuseradd -m -d \/home\/container container\r\nchown -R container \/mnt\/server\/\r\necho -e \"install red locally as user\"\r\nsu - container -c 'pip install -U Red-DiscordBot'\r\n\r\n## ensure the config is in place if it doesn't exist\r\nif [ ! -f \/mnt\/server\/.config\/Red-DiscordBot\/config.json ]; then\r\n    curl https:\/\/gist.githubusercontent.com\/parkervcp\/4a5a68aec5a26b35e4315b22dd6d6748\/raw\/a776b1610949dd242ff8ce5cdc8ad7d43e4f7dad\/config.json -o \/mnt\/server\/.config\/Red-DiscordBot\/config.json\r\nfi\r\n\r\necho -e \"install finished\"",
+            "container": "python:3.8-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Token",
+            "description": "Get your own token here - https:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "TOKEN",
+            "default_value": "GET_YOUR_OWN",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Command Prefix",
+            "description": "The prefix for commands from the bot.",
+            "env_variable": "PREFIX",
+            "default_value": ".",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}
