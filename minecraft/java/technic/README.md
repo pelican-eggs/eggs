@@ -15,8 +15,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Technic Eggs
 
-[Technic](/minecraft_java/technic/)   
-* [Blightfall](/minecraft_java/technic/blightfall/)
-* [Hexxit](/minecraft_java/technic/hexxit/)  
-* [Tekkit Legends](/minecraft_java/technic/tekkit-legends/)
-* [Attack of the B-Team](/minecraft_java/technic/attack-of-the-bteam/)
+[Technic](/minecraft/java/technic/)   
+* [Blightfall](/minecraft/java/technic/blightfall/)
+* [Hexxit](/minecraft/java/technic/hexxit/)  
+* [Tekkit Legends](/minecraft/java/technic/tekkit-legends/)
+* [Attack of the B-Team](/minecraft/java/technic/attack-of-the-bteam/)
