@@ -18,7 +18,7 @@ Give awesome perks to your Discord server!
 [discord.js](https://discord.js.org/)  
 A generic discord.js egg for running discord bots.
 
-#### fragbot
+#### MusicBot
 [jagrosh/MusicBot](https://github.com/jagrosh/MusicBot)  
 A Discord music bot that's easy to set up and run yourself!  
 
