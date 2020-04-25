@@ -3,10 +3,10 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-09-04T17:31:10-04:00",
+    "exported_at": "2020-04-22T09:18:34-04:00",
     "name": "Rage.MP",
     "author": "noreply.waypointhosting@gmail.com",
-    "description": "https:\/\/rage.mp\/\r\n\r\nThis server requires 2 ports to be added for the server. the main port and the next (port+1) as ports for the server.",
+    "description": "https:\/\/rage.mp\/\r\n\r\nModified to work with the latest version of RAGE:MP\r\nWill automatically install linux bridge.\r\n**This server requires 2 ports to be added for the server. the main port and the next (port+1) as ports for the server.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
     "startup": ".\/server",
     "config": {
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt -y install curl tar\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o ragemp-srv.tar.gz https:\/\/cdn.rage.mp\/lin\/ragemp-srv.tar.gz\r\n\r\ntar -xzvf ragemp-srv.tar.gz --strip 1 -C \/mnt\/server\r\n\r\nrm ragemp-srv.tar.gz\r\n\r\nchmod +x .\/server\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/GTA\/RageMP\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
+            "script": "apt update\r\napt -y install curl tar\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o ragemp-srv-037.tar.gz https:\/\/cdn.rage.mp\/lin\/ragemp-srv-037.tar.gz\r\ncurl -sSL -o bridge-linux-037.tar.gz https:\/\/cdn.rage.mp\/lin\/bridge-linux-037.tar.gz\r\n\r\ntar -xzvf ragemp-srv-037.tar.gz --strip 1 -C \/mnt\/server\r\ntar -xzvf bridge-linux-037.tar.gz --strip 1 -C \/mnt\/server\r\n\r\nrm ragemp-srv-037.tar.gz\r\nrm bridge-linux-037.tar.gz\r\n\r\nchmod +x .\/server\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/gta\/ragemp\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
             "container": "debian:stable-slim",
             "entrypoint": "bash"
         }
