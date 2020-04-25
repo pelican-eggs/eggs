@@ -43,6 +43,9 @@ This is a collection of servers that use steamcmd to install.
 ## SCP: Secret Laboratory
 [SCP: Secret Laboratory](/scpsl/)
 
+## Soldat
+[soldat](soldat/)
+
 ## Squad
 [squad](squad/)
 
