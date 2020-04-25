@@ -1,0 +1,47 @@
+# Configuration for the Feather server.
+
+# Most of the options here are unimplented and have no effect.
+# Those that are unimplemted have been labeled so.
+
+[io]
+# Packets with a size more than or equal to this value will be sent compressed.
+# Compressing packets reduces bandwidth usage but increases CPU activity.
+compression_threshold = 256
+# The number of worker threads used for asynchronous IO.
+# Set to the number of cores on your CPU for optimal performance.
+io_worker_threads = 8
+
+[proxy]
+# IP forwarding using either "bungee" (BungeeCord/Waterfall/Travertine) or "velocity" (Velocity)
+proxy_mode = "none" # Unimplemented
+
+[server]
+online_mode = true
+motd = "A Feather server"
+max_players = 16
+default_gamemode = "survival"
+difficulty = "none" # Unimplemented
+view_distance = 6
+address = "127.0.0.1"
+port = 25565
+
+[gameplay]
+monster_spawning = true # Unimplemented
+animal_spawning = true # Unimplemented
+pvp = true # Unimplemented
+nerf_spawner_mobs = false # Unimplemented
+# Either "classic" for 1.8 PvP or "new" for 1.9
+pvp_style = "classic" # Unimplemented
+
+[log]
+# If you prefer less verbose logs, switch this to "info."
+# If you want to hurt your eyes while looking at the
+# server console, set it to "trace."
+level = "debug"
+
+[resource_pack]
+# Server resource pack which is sent to players
+# upon joining. Set this to an empty string to disable.
+url = ""
+# Optional SHA1 hash of the resource pack file.
+hash = ""
