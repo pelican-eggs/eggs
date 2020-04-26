@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-04-22T15:12:03+02:00",
+    "exported_at": "2020-04-26T14:11:30+02:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
@@ -30,7 +30,7 @@
             "default_value": "latest",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "max:9"
+            "rules": "required|string|max:9"
         },
         {
             "name": "Twitch Channel Name",
@@ -39,7 +39,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:26"
+            "rules": "required|string|max:26"
         },
         {
             "name": "Channel Owner",
@@ -48,7 +48,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:26"
+            "rules": "required|string|max:26"
         },
         {
             "name": "Bot OAuth Token",
@@ -57,7 +57,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:64"
+            "rules": "required|string|max:64"
         },
         {
             "name": "Your OAuth Token",
@@ -66,7 +66,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:64"
+            "rules": "required|string|max:64"
         },
         {
             "name": "Bot Twitch Username",
@@ -75,7 +75,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:26"
+            "rules": "required|string|max:26"
         },
         {
             "name": "Webpanel Username",
@@ -84,7 +84,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:64"
+            "rules": "required|string|max:64"
         },
         {
             "name": "Webpanel Password",
@@ -93,7 +93,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "string|max:2000"
+            "rules": "required|string|max:2000"
         },
         {
             "name": "Youtube API Key",
