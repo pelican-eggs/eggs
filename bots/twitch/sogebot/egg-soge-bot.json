@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-04-20T10:08:40+02:00",
+    "exported_at": "2020-05-01T11:41:48+02:00",
     "name": "SogeBot",
     "author": "panel@mgc4you.de",
     "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
@@ -13,7 +13,7 @@
         "files": "{\r\n    \".env\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"PORT=\": \"PORT={{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"WebPanel is available at\"\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
-        "stop": "^c"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
