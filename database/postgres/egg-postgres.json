@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-03-04T09:53:34-05:00",
+    "name": "Postgres",
+    "author": "parker@parkervcp.com",
+    "description": "A default Postgres install that is not really editable.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:db_postgres",
+    "startup": "postgres  -D \/home\/container\/postgres_db\/",
+    "config": {
+        "files": "{\r\n    \"postgres_db\/postgresql.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n\t\t    \"#port =\": \"port = {{server.build.default.port}}\",\r\n            \"#external_pid_file =\": \"external_pid_file = '\/home\/container\/postgres_db\/run\/postgres.pid'\",\r\n            \"#unix_socket_directories =\": \"unix_socket_directories = '\/home\/container\/postgres_db\/run\/'\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"database system is ready to accept connections\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#! \/bin\/ash\r\nadduser -D -h \/home\/container container\r\n\r\necho $POSTGRES_PASSWORD > .passwd\r\n\r\nchown -R container: \/mnt\/server\/\r\n\r\ncat .passwd\r\n\r\nsu container -c 'initdb -D \/mnt\/server\/postgres_db\/ -A md5 -U container --pwfile .passwd'\r\n\r\nmkdir -p \/mnt\/server\/postgres_db\/run\/\r\n\r\necho -e \"Done\"",
+            "container": "postgres:12.2-alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Database Password",
+            "description": "The Postgres user password that can be changed and should change on server restart.",
+            "env_variable": "PGPASSWORD",
+            "default_value": "P@55word",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "SuperUser Password",
+            "description": "The postgres super user password with a strong default.\r\nYou should be generating new ones for each server.\r\nIf you don't then users can hit other users DB's",
+            "env_variable": "PGROOT",
+            "default_value": "ZPWgpMN4hETqjXAV",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Postgres User",
+            "description": "The user for the postgres database",
+            "env_variable": "PGUSER",
+            "default_value": "pterodactyl",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Postgres Database",
+            "description": "The postgres databas the user will have access too.",
+            "env_variable": "PGDATABASE",
+            "default_value": "pterodactyl",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

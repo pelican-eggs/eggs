@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-21T09:35:15+02:00",
+    "name": "Citadel: Forged with Fire",
+    "author": "info@goover.de",
+    "description": "Citadel: Forged With Fire is a massive online sandbox RPG set in the mystical world of Ignus. Featuring magic, spellcasting, building, exploring and crafting as you fight to make a name for yourself and achieve notoriety across the land.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/CitadelServer.sh",
+    "config": {
+        "files": "{\r\n    \"Config\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ConnectionPort=\": \"ConnectionPort={{server.build.default.port}}\",\r\n            \"QueryPort=\": \"QueryPort={{server.build.env.QPORT}}\",\r\n            \"Password\": \"Password={{server.build.env.ADMIN_PASSWD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Steam Server initialized and registered with UWorks\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:18.04'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n##Copy steamclient.so to correct Dir\r\nmkdir -p $HOME\/Citadel\/Plugins\/UWorks\/Source\/ThirdParty\/Linux\r\nchmod -R a+w,a+x $HOME\/Citadel\/Plugins\/UWorks\/Source\/ThirdParty\/Linux\r\nif [[ ! -f $HOME\/Citadel\/Plugins\/UWorks\/Source\/ThirdParty\/Linux\/steamclient.so ]]; then \r\n\tln -s ..\/..\/..\/..\/..\/..\/linux64\/steamclient.so $HOME\/Citadel\/Plugins\/UWorks\/Source\/ThirdParty\/Linux\/steamclient.so\r\n\r\nfi\r\n\r\n## Create Game.ini\r\nmkdir $HOME\/Config\r\n\r\nif [[ -d $HOME\/Citadel\/Saved\/Config\/LinuxServer ]]; then \r\n\trm -rf $HOME\/Citadel\/Saved\/Config\/LinuxServer\r\nfi\r\n\r\nif [[ -d $HOME\/Engine\/Saved\/Config\/LinuxServer ]]; then \r\n\trm -rf $HOME\/Engine\/Saved\/Config\/LinuxServer\r\nfi\r\n\r\nmkdir -p $HOME\/Citadel\/Saved\/Config\r\nmkdir -p $HOME\/Engine\/Saved\/Config\r\n\r\nln -s ..\/..\/..\/Config $HOME\/Citadel\/Saved\/Config\/LinuxServer\r\nln -s ..\/..\/..\/Config $HOME\/Engine\/Saved\/Config\/LinuxServer\r\n\r\n#rm -fR $HOME\/Citadel\/Saved\/Config\/LinuxServer\/Game.ini\r\ncat <<EOT > $HOME\/Config\/Game.ini\r\n[UWorks]\r\nConnectionPort=7777\r\nQueryPort=27015\r\n\r\n[\/Script\/Citadel.SocialManager]\r\nPassword=changeme\r\n\r\n[\/Script\/Citadel.CitadelGameInstance]\r\nWorldCreationSettings=(ServerName=\"CitadelServer\",Password=\"YourServerPassword\",ServerType=PVP,PlayerLimit=20,bPrivate=true,ExperienceMultiplier=1.000000,InventoryCapacityMultipler=1.000000,KnowledgePointEarnedMultiplier=1.000000,CharacterPointEarnedMultiplier=1.000000,bUnlimitedResources=false,PlayerDamageMultiplier=1.000000,ArmorMultiplier=1.000000,BaseManaRegen=1.000000,bInventoryWeightRestrictions=true,MagicFindMultiplier=1.000000,CraftingMagicFindChanceMultiplier=1.000000,FlyingCostMultiplier=1.000000,FlyingSpeedMultiplier=1.000000,ResourceCollectionMultiplier=1.000000,StructureDamageMultiplier=1.000000,bRespectNoBuildZones=true,MagicStructureManaRegenerationMultiplier=1.000000,MagicStructureManaConsumptionMultiplier=0.000000,bFreeBuildMode=false,TimeOfDayLock=Auto,NPCPopulationMultiplier=1.000000,StructureDecayMultiplier=2.000000,bThronesDecay=true)\r\nEOT\r\n\r\nchmod +x $HOME\/CitadelServer.sh",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "489650",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Query Port",
+            "description": "port",
+            "env_variable": "QPORT",
+            "default_value": "27015",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Admin Password",
+            "description": "",
+            "env_variable": "ADMIN_PASSWD",
+            "default_value": "changeme",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:100"
+        }
+    ]
+}

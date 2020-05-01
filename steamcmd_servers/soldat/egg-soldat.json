@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-24T16:03:28+02:00",
+    "name": "Soldat",
+    "author": "info@goover.de",
+    "description": "Soldat is a unique 2D (side-view) multiplayer action game. It has been influenced by the best of games such as Liero, Worms, Quake, and Counter-Strike and provides a fast-paced gaming experience with tons of blood and flesh. Soldiers fight against each other in 2D battle arenas using a deadly arsenal of military weapons, across 7 default game modes. It features 18 different weapons and 60 maps to frag away on, with full support for user created content.\r\n\r\nSteam: https:\/\/store.steampowered.com\/app\/638490\/Soldat\/",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/soldatserver",
+    "config": {
+        "files": "{\r\n    \"soldat.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Port=\": \"Port={{server.build.default.port}}\",\r\n            \"Max_Players=\": \"Max_Players={{server.build.env.MAX_PLAYERS}}\",\r\n            \"Game_Password=\": \"Game_Password={{server.build.env.SRV_PWD}}\",\r\n            \"Admin_Password=\": \"Admin_Password={{server.build.env.ADMIN_PASSWD}}\",\r\n            \"Server_Name=\": \"Server_Name={{server.build.env.SRV_NAME}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Done\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates libstdc++6 lib32stdc++6 util-linux\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\ncd \/mnt\/server\r\nchmod +x soldatserver",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Admin Passwort",
+            "description": "Admin Password for the Server",
+            "env_variable": "ADMIN_PASSWD",
+            "default_value": "changeme",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password to join Server",
+            "env_variable": "SRV_PWD",
+            "default_value": "chageme",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the Server",
+            "env_variable": "SRV_NAME",
+            "default_value": "MySoldatServer",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Max Players",
+            "description": "Max Players can join",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "ADD IP",
+            "description": "Steam APP ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "638500",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

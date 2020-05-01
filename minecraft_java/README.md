@@ -11,6 +11,10 @@ The minecraft server requires a single port for access (default 25565) but plugi
 A lightweight, fast and extensible game server for Minecraft
 [Cuberite](https://cuberite.org/)
 
+## Feather
+[Feather](https://github.com/feather-rs/feather)  
+An experimental Minecraft server implementation in Rust 
+
 ## Forge 
 [Forge MC](https://files.minecraftforge.net/)  
 This is a direct fork of the default forge service  

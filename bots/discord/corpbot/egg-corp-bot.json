@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-25T10:31:48-04:00",
+    "name": "CorpBot",
+    "author": "parker@parkervcp.com",
+    "description": "A very clumsy python bot for discord \r\n\r\nhttps:\/\/github.com\/corpnewt\/CorpBot.py",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_python-3.8",
+    "startup": "python Main.py",
+    "config": {
+        "files": "{\r\n    \"settings_dict.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"token\": \"{{server.build.env.TOKEN}}\",\r\n            \"prefix\": \"{{server.build.env.PREFIX}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Logged in as\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# CoprBot Install Script\r\n#\r\n## create dir is it doesn't exist\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\n## move to directory\r\ncd \/mnt\/server\/\r\n\r\n## install deps\r\napt update\r\napt install -y git gcc curl\r\n\r\n## git clone \r\ngit clone https:\/\/github.com\/corpnewt\/CorpBot.py.git .\r\n\r\n## Modify Install.py to work properly in egg format\r\nmv Install.py Install.py.orig\r\nsed -n '\/press enter to exit\/q;p' Install.py.orig > Install.py\r\nsed -i 's\/\"-U\"\/\"-U\", \"--target\", \"\\\/mnt\\\/server\\\/\"\/g' Install.py\r\n\r\n## run Install.py script\r\npython Install.py\r\n\r\n## get config during install\r\nif [ ! -f \/mnt\/server\/settings_dict.json ]; then\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/corpbot\/settings_dict.json -o settings_dict.json\r\nfi",
+            "container": "python:3.8-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Token",
+            "description": "Get your own token here - https:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "TOKEN",
+            "default_value": "GET_YOUR_OWN",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Command Prefix",
+            "description": "The prefix for commands from the bot.",
+            "env_variable": "PREFIX",
+            "default_value": ".",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}
