@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-05-01T11:41:48+02:00",
+    "name": "SogeBot",
+    "author": "panel@mgc4you.de",
+    "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+    "startup": "npm start",
+    "config": {
+        "files": "{\r\n    \".env\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"PORT=\": \"PORT={{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"WebPanel is available at\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#\/bin\/ash\r\napk update\r\napk add --no-cache git make gcc g++ python autoconf automake nasm build-base zlib zlib-dev libtool ca-certificates curl unzip sqlite gettext\r\nexport NODE_OPTIONS=--max-old-space-size=8192\r\n\r\ncd \/mnt\/server\r\n\r\nif   [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/sogehige\/sogeBot\/releases\/latest\" | awk -F '\"' '\/tag_name\/{print $4}')\r\n        DOWNLOAD_URL=https:\/\/github.com\/sogehige\/sogeBot\/releases\/download\/${RELEASE_VERSION}\/sogeBot-${RELEASE_VERSION}.zip\r\n        curl -L -o sogebot.zip ${DOWNLOAD_URL}\r\n        unzip -o sogebot.zip\r\n        rm sogebot.zip\r\n        \r\nrm -rf \/mnt\/server\/.env\r\ncat <<EOT > \/mnt\/server\/.env\r\nTYPEORM_CONNECTION=sqlite\r\nTYPEORM_DATABASE=.\/sogebot.db\r\nPORT=20000\r\n\r\n# DON'T CHANGE ANYTHING BELOW THIS LINE\r\nTYPEORM_ENTITIES=dest\/database\/entity\/*.js\r\nTYPEORM_MIGRATIONS=dest\/database\/migration\/sqlite\/*.js\r\nTYPEORM_SUBSCRIBERS=dest\/database\/entity\/*.js\r\n\r\nTYPEORM_ENTITIES_DIR=src\/bot\/database\/entity\r\nTYPEORM_MIGRATIONS_DIR=src\/bot\/database\/migration\/sqlite\r\nTYPEORM_SUBSCRIBERS_DIR=src\/bot\/database\/entity\r\nEOT\r\n        \r\nelif [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n        git clone https:\/\/github.com\/sogehige\/sogeBot.git .\r\n        cp src\/bot\/data\/.* .\r\n        \r\nrm -rf \/mnt\/server\/.env\r\ncat <<EOT > \/mnt\/server\/.env\r\nTYPEORM_CONNECTION=sqlite\r\nTYPEORM_DATABASE=.\/sogebot.db\r\nPORT=20000\r\n        \r\n# DON'T CHANGE ANYTHING BELOW THIS LINE\r\nTYPEORM_ENTITIES=dest\/database\/entity\/*.js\r\nTYPEORM_MIGRATIONS=dest\/database\/migration\/sqlite\/*.js\r\nTYPEORM_SUBSCRIBERS=dest\/database\/entity\/*.js\r\n\r\nTYPEORM_ENTITIES_DIR=src\/bot\/database\/entity\r\nTYPEORM_MIGRATIONS_DIR=src\/bot\/database\/migration\/sqlite\r\nTYPEORM_SUBSCRIBERS_DIR=src\/bot\/database\/entity\r\nEOT\r\n    \r\nelse\r\n        DOWNLOAD_URL=https:\/\/github.com\/sogehige\/sogeBot\/releases\/download\/${RELEASE_VERSION}\/sogeBot-${RELEASE_VERSION}.zip\r\n        curl -L -o sogebot.zip ${DOWNLOAD_URL}\r\n        unzip -o sogebot.zip\r\n        rm sogebot.zip\r\n        \r\nrm -rf \/mnt\/server\/.env\r\ncat <<EOT > \/mnt\/server\/.env\r\nTYPEORM_CONNECTION=sqlite\r\nTYPEORM_DATABASE=.\/sogebot.db\r\nPORT=20000\r\n        \r\n# DON'T CHANGE ANYTHING BELOW THIS LINE\r\nTYPEORM_ENTITIES=dest\/database\/entity\/*.js\r\nTYPEORM_MIGRATIONS=dest\/database\/migration\/sqlite\/*.js\r\nTYPEORM_SUBSCRIBERS=dest\/database\/entity\/*.js\r\n\r\nTYPEORM_ENTITIES_DIR=src\/bot\/database\/entity\r\nTYPEORM_MIGRATIONS_DIR=src\/bot\/database\/migration\/sqlite\r\nTYPEORM_SUBSCRIBERS_DIR=src\/bot\/database\/entity\r\nEOT\r\n\r\nfi\r\n\r\nnpm install -g npm@latest\r\n\r\n#\/usr\/local\/bin\/npm install sqlite3 --save\r\n#\/usr\/local\/bin\/npm install --save-dev electron-rebuild\r\n\r\nif [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n    echo -e \"## Compiling SourceCode with make && Downloading npm components\"\r\n    make\r\nelse\r\n    echo -e \"## Downloading npm components\"\r\n    \/usr\/local\/bin\/npm ci\r\nfi\r\n\r\nexit 0",
+            "container": "node:12-alpine3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "Use: \"latest\" => latest official Version of SogeBot | \"master\" => Latest master branch Version |\"10.x.x\"  other Version",
+            "env_variable": "RELEASE_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "max:9"
+        }
+    ]
+}
