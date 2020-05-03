@@ -65,7 +65,7 @@ Blightfall is a combination modpack and adventure map about surviving on an alie
 [Tekkit Legends](https://www.technicpack.net/modpack/tekkit-legends)  
 The ancient power of Tekkits past return in this legendary pack!
 
-[Tekkit Classic](https://www.technicpack.net/modpack/tekkit-legends)
+[Tekkit Classic](https://www.technicpack.net/modpack/tekkit-classic)
 The official Tekkit Classic modpack. Build factories, automate crafting!  
 
 ## Tuinity
