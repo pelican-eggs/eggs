@@ -1,7 +1,7 @@
 # Mindustry
 
 **PLEASE READ** 
-Due to Mindustry not accepting command line arguments you MUST set the port once you start the game, buy using the command `port <port>`. 
+Due to Mindustry not accepting command line arguments you MUST set the port once you start the game, by using the command `port <port>`. 
 
 This only has to be done once.
 
