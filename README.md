@@ -126,6 +126,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Unturned](/steamcmd_servers/unturned/unturned/)
 
 [Terraria](/terraria/)
+* [vanilla](/terraria/vanilla)
 * [tmodloader](/terraria/tmodloader)
 * [tshock](/terraria/tshock/)
 
