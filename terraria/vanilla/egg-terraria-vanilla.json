@@ -10,7 +10,7 @@
     "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu",
     "startup": ".\/TerrariaServer.bin.x86_64 -config serverconfig.txt",
     "config": {
-        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{}",
         "stop": "exit"
