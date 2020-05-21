@@ -37,6 +37,9 @@ This is a collection of servers that use steamcmd to install.
 ## Onset
 [onset](onset/)
 
+## Rising World
+[rising_world](rising_world/)
+
 ## Rust Staging
 [rust staging](rust_staging/)
 
