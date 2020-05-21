@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-05-16T21:37:18-07:00",
+    "exported_at": "2020-05-20T19:18:41-07:00",
     "name": "Terraria Vanilla",
     "author": "iamkubi@gmail.com",
     "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Vanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update && apt install -y curl wget file unzip\r\nCLEAN_VERSION=$(echo ${TERRARIA_VERSION} | sed 's\/\\.\/\/g')\r\necho -e \"Downloading terraria server files\"\r\ncd \/mnt\/server\r\nif [[ ${CLEAN_VERSION} -lt 1402 ]] ; then\r\nwget http:\/\/terraria.org\/server\/terraria-server-${CLEAN_VERSION}.zip\r\nelif [[ ${CLEAN_VERSION} -eq 1402 ]] ; then\r\nwget https:\/\/terraria.org\/system\/dedicated_servers\/archives\/000\/000\/036\/original\/terraria-server-1402.zip?1589675482 -O terraria-server-1402.zip\r\nelse\r\necho -e \"Detected version ${CLEAN_VERSION} which is not yet supported.\"\r\nfi\r\necho -e \"Unpacking server files\"\r\nunzip terraria-server-$(echo ${CLEAN_VERSION} | sed 's\/\\.\/\/g').zip*\r\ncp -R ${CLEAN_VERSION}\/Linux\/* .\/\r\nchmod +x TerrariaServer.bin.x86_64\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${CLEAN_VERSION}\r\necho -e \"Generating config file\"\r\ncat <<EOF > serverconfig.txt\r\nworldpath=\/home\/container\/saves\/Worlds\r\nworldname=default\r\nworld=\/home\/container\/saves\/Worlds\/default.wld\r\ndifficulty=3\r\nautocreate=1\r\nport=7777\r\nmaxplayers=8\r\nEOF\r\nmkdir -p \/mnt\/server\/saves\/Worlds\r\necho -e \"Install complete\"",
+            "script": "#!\/bin\/bash\r\n# Vanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update && apt install -y curl wget file unzip\r\nCLEAN_VERSION=$(echo ${TERRARIA_VERSION} | sed 's\/\\.\/\/g')\r\necho -e \"Downloading terraria server files\"\r\ncd \/mnt\/server\r\nwget $(curl https:\/\/terraria.gamepedia.com\/Server#Downloads | grep '>Terraria Server ' | grep -Eoi '<a [^>]+>' | grep -Eo 'href=\\\"[^\\\\\\\"]+\\\"' | grep -Eo '(http|https):\\\/\\\/[^\\\"]+' | grep \"${CLEAN_VERSION}\") -O terraria-server-${CLEAN_VERSION}.zip\r\necho -e \"Unpacking server files\"\r\nunzip terraria-server-${CLEAN_VERSION}.zip\r\ncp -R ${CLEAN_VERSION}\/Linux\/* .\/\r\nchmod +x TerrariaServer.bin.x86_64\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${CLEAN_VERSION}\r\necho -e \"Generating config file\"\r\ncat <<EOF > serverconfig.txt\r\nworldpath=\/home\/container\/saves\/Worlds\r\nworldname=default\r\nworld=\/home\/container\/saves\/Worlds\/default.wld\r\ndifficulty=3\r\nautocreate=1\r\nport=7777\r\nmaxplayers=8\r\nEOF\r\nmkdir -p \/mnt\/server\/saves\/Worlds\r\necho -e \"Install complete\"",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
