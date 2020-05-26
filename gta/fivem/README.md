@@ -2,11 +2,11 @@
 
 # Notice
 
-This is to inform all users that the4 fivem team has enabled cloudflare ddos protection and the install script is now broken due to this.
+`DOWNLOAD_URL` should be filled with the link of the `fx.tar.xz` file for your fivem version. Link can be found [here](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)
 
-You will need to have a self hosted version of the server files to curl in the install script.
 
-I have added a `DOWNLOAD_URL` variable that needs to point to a `fx.tar.xz` file as I am too lazy to update the entire script.
+## Warning
+This egg is only compatible with `2417` version and above
 
 ### From the [FiveM](https://fivem.net/) Site
 FiveM is a modification for Grand Theft Auto V enabling you to play multiplayer on customized dedicated servers.
@@ -20,4 +20,4 @@ Ports required to run the server in a table format.
 | Port    | default |
 |---------|---------|
 | Game    | 30210   |
-| Game+1  | 30211   |
+| TxAdmin | 40120   |
