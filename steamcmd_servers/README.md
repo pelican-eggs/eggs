@@ -53,7 +53,7 @@ This is a collection of servers that use steamcmd to install.
 [starbound](starbound/)
 
 ## Stationeers
-[Stationeers](/steamcmd_servers/Stationeers/)
+[Stationeers](/steamcmd_servers/stationeers/)
 
 ## Sven coop
 [svencoop](svencoop)
