@@ -118,7 +118,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin/)
 * [SSoldat](/steamcmd_servers/soldat/)
 * [Starbound](/steamcmd_servers/starbound)
-* [Stationeers](/steamcmd_servers/Stationeers/)
+* [Stationeers](/steamcmd_servers/stationeers/)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/steamcmd_servers/unturned/)
