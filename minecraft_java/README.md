@@ -63,7 +63,10 @@ Gear up and set forth on a campaign worthy of legend, for Hexxit has been uneart
 Blightfall is a combination modpack and adventure map about surviving on an alien planet.  
 
 [Tekkit Legends](https://www.technicpack.net/modpack/tekkit-legends)  
-The ancient power of Tekkits past return in this legendary pack!  
+The ancient power of Tekkits past return in this legendary pack!
+
+[Tekkit Classic](https://www.technicpack.net/modpack/tekkit.552560)
+The official Tekkit Classic modpack. Build factories, automate crafting!  
 
 ## Tuinity
 Fork of Paper aimed at improving server performance at high playercounts.
