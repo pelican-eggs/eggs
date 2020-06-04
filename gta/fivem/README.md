@@ -11,6 +11,11 @@ The `FIVEM_VERSION` variable.
 
 The `DOWNLOAD_URL` only needs to be used if they turn on ddos protection. The variable needs to point to a `fx.tar.xz` file as I am too lazy to update the entire script.
 
+# txAdmin
+The last update to the egg changes the server to use txadmin to run. All starting and stopping of the server is now managed via txadmin. On first startup it will print a key to use to sign into the txadmin panel.
+
+### Your server will not go online until it's started from txadmin.
+
 ## Server Ports
 Ports required to run the server in a table format.
 
@@ -18,3 +23,4 @@ Ports required to run the server in a table format.
 |---------|---------|
 | Game    | 30110   |
 | Game+1  | 30120   |
+| txAdmin | 40120   |
