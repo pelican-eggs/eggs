@@ -37,6 +37,9 @@ This is a collection of servers that use steamcmd to install.
 ## Onset
 [onset](onset/)
 
+## Project Zomboid
+[project_zomboid](project_zomboid/)
+
 ## Rust Staging
 [rust staging](rust_staging/)
 

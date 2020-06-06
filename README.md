@@ -112,6 +112,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
+* [Project Zomboid](/steamcmd_servers/project_zomboid/)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
   * [dedicated](/steamcmd_servers/scpsl/dedicated/)
