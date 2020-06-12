@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-03-10T15:39:00+01:00",
+    "name": "Multi Theft Auto",
+    "author": "info@six-gaming.com",
+    "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} -n",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server started and is ready to accept connections\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o multitheftauto_linux_x64.tar.gz https:\/\/linux.mtasa.com\/dl\/multitheftauto_linux_x64.tar.gz\r\ncurl -sSL -o mta-baseconfig.tar.gz https:\/\/linux.mtasa.com\/dl\/baseconfig.tar.gz\r\ncurl -sSL -o mtasa-resources-latest.zip http:\/\/mirror.mtasa.com\/mtasa\/resources\/mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf multitheftauto_linux_x64.tar.gz -C \/mnt\/server\/\r\ncp -r \/mnt\/server\/multitheftauto_linux_x64\/* \/mnt\/server\r\nrm -rf \/mnt\/server\/multitheftauto_linux_x64\/\r\n\r\nmkdir -p \/mnt\/server\/mods\/deathmatch\/resources\r\nunzip -d \/mnt\/server\/mods\/deathmatch\/resources mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server-conf\r\ntar -xzvf mta-baseconfig.tar.gz -C \/mnt\/server-conf\r\ncp -r \/mnt\/server-conf\/baseconfig\/* \/mnt\/server\/mods\/deathmatch\r\nrm -rf \/mnt\/server-conf\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SERVER_WEBPORT",
+            "description": "The http port for web resource.\r\nThis Port needs to be the {{SERVER_PORT}}+3.",
+            "env_variable": "SERVER_WEBPORT",
+            "default_value": "22005",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric"
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-12-26T15:50:34-05:00",
+    "name": "Arma 3 Headless Client",
+    "author": "brainp4in@blueberry-hood-clan.de",
+    "description": "Headless Clients are used to offload AI calculations from the Arma 3 Server.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:game_arma3",
+    "startup": ".\/arma3server -client -connect={{SERVERIP}} -port={{SERVERPORT}} {{CUSTOM}} -mod=\"{{MODS}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Client connected\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## ARMA III specific setup\r\ncd \/mnt\/server\/\r\n\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/server.cfg",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game App ID",
+            "description": "Steam CMD App ID.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "233780",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|alpha_dash|between:1,100"
+        },
+        {
+            "name": "Server IP",
+            "description": "IP address of the Arma 3 server that should be supported by the Headless Client.",
+            "env_variable": "SERVERIP",
+            "default_value": "127.0.0.1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:30"
+        },
+        {
+            "name": "Server Port",
+            "description": "Port of the Arma 3 server that should be supported by the Headless Client.",
+            "env_variable": "SERVERPORT",
+            "default_value": "2302",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
+        },
+        {
+            "name": "Custom Command Line Option.",
+            "description": "Put -autoinit or related things in here :)",
+            "env_variable": "CUSTOM",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "Mods",
+            "description": "This is where you put mods that go along with the -mods startup option",
+            "env_variable": "MODS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "Steam User",
+            "description": "A Steam username with Arma3 on the account.",
+            "env_variable": "STEAM_USER",
+            "default_value": "anonymous",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Auth Code",
+            "description": "Steam Auth Code only when you're using Steam Auth",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        }
+    ]
+}

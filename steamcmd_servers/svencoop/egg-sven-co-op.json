@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-11-14T21:43:14+01:00",
+    "name": "Sven Co-op",
+    "author": "pteroducktyl@yildri.nl",
+    "description": "Sven Co-op is a co-operative game originally based around Valve Software's Half-Life. In this game players must work together against computer controlled enemies and solve puzzles as a team.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/svends_run -console -port {{SERVER_PORT}} +maxplayers {{SC_PLAYERS}} +map {{SC_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
+    "config": {
+        "files": "{\r\n    \"svencoop\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"hostname\": \"hostname \\\"{{env.SC_NAME}}\\\"\",\r\n            \"sv_password\": \"sv_password \\\"{{env.SC_PASSWORD}}\\\"\",\r\n            \"\/\/sv_password\": \"sv_password \\\"{{env.SC_PASSWORD}}\\\"\",\r\n            \"sv_region\": \"sv_region {{env.SC_REGION}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Connection to Steam servers successful.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Sven co-op Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 276060 validate +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Default Map",
+            "description": "The default map for the server.",
+            "env_variable": "SC_MAP",
+            "default_value": "svencoop1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum amount of players that can play on the server at once.",
+            "env_variable": "SC_PLAYERS",
+            "default_value": "12",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|between:2,32"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name your server will appear as on the in Sven Co-op in-game server list.",
+            "env_variable": "SC_NAME",
+            "default_value": "Sven Co-op server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Password",
+            "description": "Password required to join the server. Leave blank to disable.",
+            "env_variable": "SC_PASSWORD",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Region",
+            "description": "The region your server is in. This is used in Steam's server browser, so players can look for servers near by. This does not restrict players from connecting to your server.\r\n\r\n-1: Do not list server in the server browser.\r\n0: USA east coast.\r\n1: USA west coast.\r\n2: South America (continent)\r\n3: Europe.\r\n4: Asia.\r\n5: Australia (continent, aka Oceania)\r\n6: Middle East.\r\n7: Africa.\r\n255: International.",
+            "env_variable": "SC_REGION",
+            "default_value": "255",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|between:-1,255"
+        },
+        {
+            "name": "Source AppID",
+            "description": "Required for game to update on server restart. Do not modify this.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "276060",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-01-29T19:54:33+01:00",
+    "name": "SCP:SL",
+    "author": "info@goover.de",
+    "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete",
+    "startup": ".\/LocalAdmin {{SERVER_PORT}}",
+    "config": {
+        "files": "{\r\n    \"config_gameplay.txt\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server_ip\": \"0.0.0.0\",\r\n            \"forward_ports\": \"false\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Waiting for players..\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n#echo 'gamedir_for_configs: true' >> \/mnt\/server\/hoster_policy.txt\r\n#chmod +x \/mnt\/server\/hoster_policy.txt\r\n\r\n#URL=$(curl https:\/\/api.github.com\/repos\/Grover-c13\/MultiAdmin\/releases\/latest | grep browser_download_url | cut -d '\"' -f 4)\r\n#wget -P \/mnt\/server\/ $URL\r\n#chmod +x \/mnt\/server\/MultiAdmin.exe\r\n\r\n#SmodVersion=$(curl https:\/\/api.github.com\/repos\/Grover-c13\/Smod2\/releases\/latest | grep tag_name | cut -d '\"' -f 4)\r\n#AssemblyURL=\"https:\/\/github.com\/Grover-c13\/Smod2\/releases\/download\/${SmodVersion}\/Assembly-CSharp.dll\"\r\n#SmodURL=\"https:\/\/github.com\/Grover-c13\/Smod2\/releases\/download\/${SmodVersion}\/Smod2.dll\"\r\n#wget -O \/mnt\/server\/SCPSL_Data\/Managed\/Smod2.dll $SmodURL\r\n#wget -O \/mnt\/server\/SCPSL_Data\/Managed\/Assembly-CSharp.dll $AssemblyURL\r\n#chmod +x \/mnt\/server\/SCPSL_Data\/Managed\/Smod2.dll\r\n#chmod +x \/mnt\/server\/SCPSL_Data\/Managed\/Assembly-CSharp.dll",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "996560",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-03-20T23:54:00+01:00",
+    "name": "Vintage Story",
+    "author": "mail@wuffy.eu",
+    "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
+    "startup": "mono VintagestoryServer.exe --dataPath .\/data --port={{SERVER_PORT}} --maxclients={{MAX_CLIENTS}} {{OPTIONS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Dedicated Server now running on Port \",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \".\/data\/Logs\/server-debug.txt\"\r\n}",
+        "stop": "\/stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y screen wget curl jq\r\n\r\n# Fetching latest stable server release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=`curl -s 'http:\/\/api.vintagestory.at\/stable.json' | jq -r '[.[]] | .[0].server.urls.cdn'`;\r\n# Use specified server release\r\nelse\r\n    DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\ncurl -o vs_server.tar.gz ${DOWNLOAD_URL}\r\ntar -xzf vs_server.tar.gz\r\n\r\nrm vs_server.tar.gz",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Start Options",
+            "description": "",
+            "env_variable": "OPTIONS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "max:200"
+        },
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "RELEASE_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Clients",
+            "description": "",
+            "env_variable": "MAX_CLIENTS",
+            "default_value": "16",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:2000"
+        }
+    ]
+}

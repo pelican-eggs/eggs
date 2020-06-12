@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-06-06T11:23:23-07:00",
+    "name": "Project Zomboid",
+    "author": "iamkubi@gmail.com",
+    "description": "Project Zomboid is an open world survival horror video game in alpha stage development by British and Canadian independent developer, The Indie Stone. The game is set in a post apocalyptic, zombie infested world where the player is challenged to survive for as long as possible before inevitably dying.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -steamport1 {{STEAM_PORT}} -servername \\\"{{SERVER_NAME}}\\\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"SERVER STARTED\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 380870 +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Project Zomboid Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Admin Username",
+            "description": "Username for the admin account",
+            "env_variable": "ADMIN_USER",
+            "default_value": "admin",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password for the admin account",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "password",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "SteamPort",
+            "description": "Sets the SteamPort1 option",
+            "env_variable": "STEAM_PORT",
+            "default_value": "8766",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum players to allow",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

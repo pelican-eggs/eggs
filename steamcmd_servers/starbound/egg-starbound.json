@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-12-17T08:01:28+01:00",
+    "name": "Starbound",
+    "author": "parker@parkervcp.com",
+    "description": "Starbound takes place in a two-dimensional, procedurally generated universe which the player is able to explore in order to obtain new weapons, armor, and items, and to visit towns and villages inhabited by various intelligent lifeforms.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "startup": ".\/starbound_server",
+    "config": {
+        "files": "{\r\n    \"storage\/starbound_server.config\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"gameServerPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Starting UniverseServer\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:18.04'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Starbound specific setup.\r\ncd \/mnt\/server\/\r\n\r\n\r\n## edit sbinit config\r\nmv \/mnt\/server\/linux\/* \/mnt\/server\/\r\nrm -rf \/mnt\/server\/linux\r\nsed -i -e 's\/\\.\\.\/\\.\/g' \/mnt\/server\/sbinit.config\r\n\r\n## pull starbound_server.config\r\nmkdir -p \/mnt\/server\/storage\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/starbound\/starbound_server.config > \/mnt\/server\/storage\/starbound_server.config\r\n\r\n## use Worksop content\r\nif [ \"${WORKSHOP}\" == \"1\" ]; then\r\n    for dir in \/mnt\/server\/steamapps\/workshop\/content\/211820\/*\/\r\n    do\r\n     dir=${dir%*\/}\r\n     echo Sym-linking mod ${dir##*\/} into the mods folder\r\n     ln -r -s \/mnt\/server\/steamapps\/workshop\/content\/211820\/${dir##*\/}\/contents.pak \/mnt\/server\/mods\/${dir##*\/}.pak\r\n    done\r\nfi",
+            "container": "ubuntu:18.04",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam User",
+            "description": "This is a required setting and cannot be set to anonymous.",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "211820",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "string"
+        },
+        {
+            "name": "Steam Auth",
+            "description": "Steam account auth code. Required if you have 2fa enabled.",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:5"
+        },
+        {
+            "name": "Auto Update Server",
+            "description": "This is to auto-update the game server.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|bool"
+        },
+        {
+            "name": "Use Workshop content",
+            "description": "Set to true if you want to use your subscribed Workshop content",
+            "env_variable": "WORKSHOP",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|bool"
+        }
+    ]
+}

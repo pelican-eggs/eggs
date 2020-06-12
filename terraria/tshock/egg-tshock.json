@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-02-16T01:48:02-05:00",
+    "exported_at": "2020-05-18T21:16:19-04:00",
     "name": "tshock",
     "author": "parker@parkervcp.com",
     "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
@@ -13,13 +13,13 @@
         "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"ServerLog.txt\"\r\n}",
-        "stop": "stop"
+        "stop": "exit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Vanilla T-shock Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"Downloading and installing ${TSHOCK_VERSION}\"\r\n\r\necho -e \"running wget https:\/\/github.com\/Pryaxis\/TShock\/releases\/download\/v${TSHOCK_VERSION}\/tshock_${TSHOCK_VERSION}.zip\"\r\nwget https:\/\/github.com\/Pryaxis\/TShock\/releases\/download\/v${TSHOCK_VERSION}\/tshock_${TSHOCK_VERSION}.zip\r\n\r\nunzip tshock_${TSHOCK_VERSION}.zip",
-            "container": "alpine:3.7",
-            "entrypoint": "ash"
+            "script": "#!\/bin\/bash\r\n# Vanilla tModloader Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y curl wget jq file unzip\r\n\r\nGITHUB_PACKAGE=Pryaxis\/TShock\r\n\r\nif [ -z \"$GITHUB_USER\" ] && [ -z \"$GITHUB_OAUTH_TOKEN\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u $GITHUB_USER:$GITHUB_OAUTH_TOKEN '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/$GITHUB_PACKAGE\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/$GITHUB_PACKAGE\/releases\")\r\n\r\nif [ -z \"$TSHOCK_VERSION\" ] || [ \"$TSHOCK_VERSION\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url)\r\nelse\r\n    VERSION_CHECK=$(echo $RELEASES | jq -r --arg VERSION \"$TSHOCK_VERSION\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"$TSHOCK_VERSION\" == \"$VERSION_CHECK\" ]; then\r\n        DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$TSHOCK_VERSION\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url')\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n## mkdir and cd to \/mnt\/server\/\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\n## download release\r\necho -e \"running: wget $DOWNLOAD_LINK\"\r\nwget $DOWNLOAD_LINK\r\n\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exeting\"\r\n    exit 2 \r\nfi\r\n\r\necho -e \"install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "\/bin\/bash"
         }
     },
     "variables": [
@@ -52,9 +52,9 @@
         },
         {
             "name": "Tshock Version",
-            "description": "The version on tshock that will be installed.",
+            "description": "The version on tshock that will be installed. default is latest non-pre-release",
             "env_variable": "TSHOCK_VERSION",
-            "default_value": "4.3.25",
+            "default_value": "latest",
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|string|max:20"

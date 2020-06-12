@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-01-11T00:40:33+01:00",
+    "name": "JTS3ServerMod",
+    "author": "teamwuffy@gmail.com",
+    "description": "Setup:\r\n- Install the latest version\r\n- Go into config\/server1 and edit JTS3ServerMod_server.cfg\r\n- Save and start the server\r\n\r\nAuthor: https:\/\/www.stefan1200.de\/forum\/index.php?topic=2.0",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar .\/JTS3ServerMod.jar",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Successful connected to \",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# JTS3ServerMod\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y install wget unzip\r\n\r\ncd \/tmp\r\n\r\nif [ -z \"$SERVER_VERSION\" ] || [ \"$SERVER_VERSION\" == \"latest\" ]; then\r\n  wget -q -O JTS3ServerMod.zip 'https:\/\/www.stefan1200.de\/dlrequest.php?file=jts3servermod&type=.zip'\r\nelse\r\n  wget -q -O JTS3ServerMod.zip 'https:\/\/www.stefan1200.de\/downloads\/JTS3ServerMod_$SERVER_VERSION.zip'\r\nfi\r\n\r\nunzip JTS3ServerMod.zip\r\n\r\nmkdir -p \/mnt\/server\r\nexport HOME=\/mnt\/server\r\n\r\nmv \/tmp\/JTS3ServerMod\/* \/mnt\/server\/",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "SERVER_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+} 

@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-03-28T14:53:55-04:00",
+    "name": "Magma",
+    "author": "support@pterodactyl.io",
+    "description": "Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (match is to match the filename in some way)\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\r\napk add --no-cache curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n## get latest download link\r\necho -e \"Set to download the ${BUILD} build\"\r\nif [ \"${BUILD}\" == \"dev\" ]; then\r\n    echo -e \"dev tag is ${tag}\"\r\nfi\r\n\r\ncase ${BUILD} in\r\n\r\n  \"recommended\" | \"stable\" | \"latest\")\r\n    DOWNLOAD_URL=\"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/${VANILLA_VERSION}\/stable\/latest\/download\"\r\n    ;;\r\n\r\n  \"dev\")\r\n    DOWNLOAD_URL=\"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/${VANILLA_VERSION}\/dev\/${TAG}\/download\"\r\n    ;;\r\n\r\n  *)\r\n    DOWNLOAD_URL=\"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/${VANILLA_VERSION}\/stable\/latest\/download\"\r\n    ;;\r\nesac\r\n\r\necho -e \"Download URL is ${DOWNLOAD_URL}\"\r\n\r\n## validate download link\r\nif [ ! -z \"${DOWNLOAD_URL}\" ] ; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n# Adding '.jar' if it isn't part of the file name\r\nif [[ ${SERVER_JARFILE} == *\\.jar ]]; then\r\n    echo -e \"adding.jar to server file name\"\r\n    SERVER_JARFILE=\"${SERVER_JARFILE}.jar\"\r\nfi\r\n\r\n## mv old server files\r\nif [ -f ${SERVER_JARFILE} ]; then\r\n    echo -e \"moving old server.jar\"\r\n    mv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\"\r\ncurl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\r\n\r\necho -e \"Install Complete\"",
+            "container": "alpine:3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Server Version",
+            "description": "The version of Minecraft Vanilla to install.\r\n\r\nOnly version currently supported is 1.12.2 as that is all there are builds for.",
+            "env_variable": "VANILLA_VERSION",
+            "default_value": "1.12.2",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|between:3,15"
+        },
+        {
+            "name": "Magma Build",
+            "description": "What version of magma to download.\r\n\r\nrecommended, stable, latest = current stable\r\ndev = latest dev build",
+            "env_variable": "BUILD",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Magma Dev Tag",
+            "description": "The dev tagged version to download. default is latest.",
+            "env_variable": "TAG",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -11,6 +11,9 @@
 3. Try to stay in the stock containers.  
     If you need something in a container PR it to [my image repo](https://github.com/parkervcp/images) where I can review and pull up to the main repo.
 
+4. Don't be afraid to submit PR's to the egg repo.  
+    I don't bite. I will work with you on the egg and the required things to run it.
+
 ## Step 1.
 #### Be aware of the pterodactyl install process.
 
@@ -33,11 +36,11 @@ The Pterodactyl install process is fairly simple once you know.
 
 Make sure your install process is rock solid as I will be testing eggs before they ever hit my repo.
 
-I will make sugestions and changes at will.  
+I will make suggestions and changes at will.  
 This is to maintain a clean repo that others can pull and be fully aware of what is being done.
 
 
 ## Step 3.
-#### Don't be afraid to submit PR's to the egg repo.
+#### Make a branch and do your work in there.
 
-I dont bite. I will work with you on the egg and the required things to run it.
+I have been getting messy PR's due to people always PRing from their master branch. Please make a seperate branch and PR from there.
