@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-06-02T20:14:32-04:00",
+    "exported_at": "2020-06-16T20:54:01-04:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "A new FiveM egg for the latest builds due to recent changes in FiveM",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
-    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{TXADMIN_PORT}}",
+    "startup": "$(pwd)\/alpine\/opt\/cfx-server\/ld-musl-x86_64.so.1 --library-path \"$(pwd)\/alpine\/usr\/lib\/v8\/:$(pwd)\/alpine\/lib\/:$(pwd)\/alpine\/usr\/lib\/\" -- $(pwd)\/alpine\/opt\/cfx-server\/FXServer +set citizen_dir $(pwd)\/alpine\/opt\/cfx-server\/citizen\/ +set sv_licenseKey {{FIVEM_LICENSE}} +set steam_webApiKey {{STEAM_WEBAPIKEY}} +set sv_maxplayers {{MAX_PLAYERS}} +set serverProfile default +set txAdminPort {{TXADMIN_PORT}} $( (( TXADMIN_ENABLE == 1 )) || printf %s '+exec server.cfg' )",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"endpoint_add_tcp\": \"endpoint_add_tcp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"endpoint_add_udp\": \"endpoint_add_udp \\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_HOSTNAME}}\\\"\",\r\n            \"set sv_licenseKey\": \"set sv_licenseKey {{server.build.env.FIVEM_LICENSE}}\",\r\n            \"set steam_webApiKey\": \"set steam_webApiKey {{server.build.env.STEAM_WEBAPIKEY}}\",\r\n            \"sv_maxclients\": \"sv_maxclients {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"succeeded. Welcome!\"\r\n}",
@@ -85,6 +85,15 @@
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|string|max:20"
+        },
+        {
+            "name": "Enable txadmin",
+            "description": "Enables txadmin.\r\n\r\nset to 1 to enable. (default is 0 for false)",
+            "env_variable": "TXADMIN_ENABLE",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|bool"
         }
     ]
 }
