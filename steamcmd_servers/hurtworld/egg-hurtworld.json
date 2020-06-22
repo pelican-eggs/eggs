@@ -5,7 +5,7 @@
     },
     "exported_at": "2020-04-16T20:41:27-04:00",
     "name": "Hurtworld",
-    "author": "brycea@rapidnetworks.org",
+    "author": "brycea@terrahost.cloud",
     "description": "Hurtworld is a hardcore multiplayer survival FPS with a focus on deep survival progression that doesn't become trivial once you establish some basic needs. Built for hardcore gamers, Hurtworld aims to punish.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_source",
     "startup": ".\/Hurtworld.x86_64 -batchmode -nographics -exec \"host {{SERVER_PORT}};queryport {{QUERY_PORT}};maxplayers {{MAX_PLAYERS}};servername {{HOSTNAME}};creativemode ${CREATIVE_MODE};${ADMINS}\" -logfile $1",

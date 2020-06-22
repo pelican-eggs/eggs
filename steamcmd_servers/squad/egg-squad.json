@@ -5,7 +5,7 @@
     },
     "exported_at": "2019-10-08T08:47:08-04:00",
     "name": "Squad",
-    "author": "brycea@rapidnetworks.org",
+    "author": "brycea@terrahost.cloud",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
     "image": "quay.io\/pterodactyl\/core:source",
     "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
