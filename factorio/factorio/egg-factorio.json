@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-06-26T12:06:19-04:00",
+    "exported_at": "2020-06-26T12:07:47-04:00",
     "name": "Factorio",
     "author": "parker@parkervcp.com",
     "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
-    "image": "~debian:base",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
     "startup": ".\/bin\/x64\/factorio --port {{SERVER_PORT}} --server-settings data\/server-settings.json --start-server {{SAVE_NAME}}.zip",
     "config": {
         "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"description\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\",\r\n            \"username\": \"{{server.build.env.SERVER_USERNAME}}\",\r\n            \"token\": \"{{server.build.env.SERVER_TOKEN}}\",\r\n            \"autosave_interval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"autosave_slots\": \"{{server.build.env.SAVE_SLOTS}}\",\r\n            \"afk_autokick_interval\": \"{{server.build.env.AFK_KICK}}\"\r\n        }\r\n    }\r\n}",
