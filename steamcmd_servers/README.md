@@ -67,3 +67,6 @@ This is a collection of servers that use steamcmd to install.
 ## Unturned
   * [RocketMod](rocketmod)
   * [Unturned](unturned)
+
+## Insurgency: Sandstorm
+[Insurgency: Sandstorm](insurgency_sandstorm/)
