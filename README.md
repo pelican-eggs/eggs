@@ -125,6 +125,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Unturned](/steamcmd_servers/unturned/)
   * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
+* [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 
 [Terraria](/terraria/)
 * [vanilla](/terraria/vanilla)
