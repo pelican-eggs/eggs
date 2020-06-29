@@ -18,6 +18,10 @@ Give awesome perks to your Discord server!
 [discord.js](https://discord.js.org/)  
 A generic discord.js egg for running discord bots.
 
+#### DiscordPY
+[discord.py](https://discordpy.readthedocs.io/en/latest/)  
+A generic discord.py egg for running discord bots.
+
 #### MusicBot
 [jagrosh/MusicBot](https://github.com/jagrosh/MusicBot)  
 A Discord music bot that's easy to set up and run yourself!  
