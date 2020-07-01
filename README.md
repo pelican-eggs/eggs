@@ -109,6 +109,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ECO](/steamcmd_servers/eco/)
 * [HLDS server](/steamcmd_servers/hlds_server)
 * [Hurtworld](/steamcmd_servers/hurtworld)
+* [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
@@ -125,7 +126,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Unturned](/steamcmd_servers/unturned/)
   * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
-* [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 
 [Terraria](/terraria/)
 * [vanilla](/terraria/vanilla)
