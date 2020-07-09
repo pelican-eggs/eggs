@@ -31,6 +31,9 @@ This is a collection of servers that use steamcmd to install.
 ## Hurtworld
 [hurtworld](hurtworld/)
 
+## Insurgency: Sandstorm
+[Insurgency: Sandstorm](insurgency_sandstorm/)
+
 ## Mordhau
 [mordhau](mordhau/)
 
