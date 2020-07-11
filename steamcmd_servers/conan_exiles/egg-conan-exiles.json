@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-07-11T06:15:20-04:00",
+    "exported_at": "2020-07-11T07:38:20-04:00",
     "name": "Conan Exiles",
     "author": "brycea@terrahost.cloud",
     "description": "Conan Exiles is an open-world survival game set in the brutal lands of Conan the Barbarian. Survive in a savage world, build your kingdom, and dominate your enemies in brutal combat and epic warfare.",
-    "image": "quay.io\/terrahost\/pterodactyl-images:debian_wine-5",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5",
     "startup": ".\/start_conan.sh",
     "config": {
         "files": "{}",
