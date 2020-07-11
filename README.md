@@ -52,6 +52,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ### In-Memory Databases
 [Redis](/database/redis/)
+* [Redis 5](/database/redis/redis-5)
+* [Redis 6](/database/redis/redis-6)
 
 ## Game Eggs
 [ET Legacy](/enemy_territory/etlegacy/)
