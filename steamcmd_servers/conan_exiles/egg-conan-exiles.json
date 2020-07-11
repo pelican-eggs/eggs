@@ -60,7 +60,7 @@
             "rules": "required|numeric"
         },
         {
-            "name": "XVFB Bit Deph",
+            "name": "XVFB Bit Depth",
             "description": "",
             "env_variable": "DISPLAY_DEPTH",
             "default_value": "32",
