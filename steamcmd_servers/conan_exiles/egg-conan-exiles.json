@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-07-11T07:54:09-04:00",
+    "exported_at": "2020-07-11T08:34:24-04:00",
     "name": "Conan Exiles",
     "author": "brycea@terrahost.cloud",
     "description": "Conan Exiles is an open-world survival game set in the brutal lands of Conan the Barbarian. Survive in a savage world, build your kingdom, and dominate your enemies in brutal combat and epic warfare.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5",
-    "startup": "wine \/home\/container\/ConanSandboxServer.exe -console -log",
+    "startup": "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine \/home\/container\/ConanSandboxServer.exe -console -log",
     "config": {
         "files": "{}",
         "startup": "{}",
@@ -31,6 +31,42 @@
             "user_viewable": 1,
             "user_editable": 0,
             "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "XVFB Enable",
+            "description": "1 or 0",
+            "env_variable": "XVFB",
+            "default_value": "1",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|numeric|min:0|max:1"
+        },
+        {
+            "name": "XVFB Display Width",
+            "description": "",
+            "env_variable": "DISPLAY_WIDTH",
+            "default_value": "640",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "XVFB Display Height",
+            "description": "",
+            "env_variable": "DISPLAY_HEIGHT",
+            "default_value": "480",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "XVFB Bit Deph",
+            "description": "",
+            "env_variable": "DISPLAY_DEPTH",
+            "default_value": "32",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|numeric"
         }
     ]
 }
