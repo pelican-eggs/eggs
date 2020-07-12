@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-01-18T18:06:35-05:00",
+    "exported_at": "2020-07-12T16:38:09-04:00",
     "name": "Unturned",
     "author": "parker@parkervcp.com",
-    "description": "The RocketMod server mod for Unturned.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
-    "startup": "wget https:\/\/github.com\/RocketMod\/Rocket.Unturned\/releases\/download\/4.9.3.0\/Rocket.Unturned.zip && unzip -o Rocket.Unturned.zip && .\/Unturned_Headless.x86_64 -batchmode -nographics -bind 0.0.0.0 -port {{SERVER_PORT}}",
+    "description": "Vanilla Unturned with the included RockerMod.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_source",
+    "startup": ".\/Unturned_Headless.x86_64 -batchmode -nographics -bind 0.0.0.0 -port {{SERVER_PORT}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Loading level: 100%\",\r\n    \"userInteraction\": []\r\n}",
