@@ -24,7 +24,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Please read the CONTRIBUTING.md before submitting PRs
 
-## Bot Eggs
+## [Bots](/bots/)
 
 [Discord](/bots/discord/)
 * [ATL Bot](/bots/discord/atlbot/) Node JS
@@ -39,16 +39,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Red](/bots/discord/redbot/) Python
 * [Sinusbot](/bots/discord/sinusbot/)
 
-[Twitch](/bots/twitch)
-* [PhantomBot](/bots/twitch/phantombot/)
+* [Twitch](/bots/twitch)
+  * [PhantomBot](/bots/twitch/phantombot/)
 
-[TeamSpeak3](bots/teamspeak3)
-* [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
+* [TeamSpeak3](bots/teamspeak3)
+  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
-## Database Eggs
-### SQL Databases
-[MariaDB](/database/mariadb/)
-[PostgreSQL](/database/postgres/)
+## [Database](/database/)
+### [SQL] Databases
+* [MariaDB](/database/sql/mariadb/)
+* [PostgreSQL](/database/sql/postgres/)
 
 ### In-Memory Databases
 [Redis](/database/redis/)
@@ -71,31 +71,31 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Mindusrty](/mindustry/)
 
-[Minecraft Bedrock](/minecraft_bedrock/)  
-* [Bedrock](/minecraft_bedrock/bedrock/)
-* [DragonProxy](/minecraft_bedrock/dragonproxy/)  
-* [Nukkit](/minecraft_bedrock/nukkit/)  
-* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
+[Minecraft](/minecraft/)
+* [Bedrock](/minecraft/bedrock/)  
+  * [Bedrock](/minecraft/bedrock/bedrock/)
+  * [DragonProxy](/minecraft/bedrock/dragonproxy/)  
+  * [Nukkit](/minecraft/bedrock/nukkit/)  
+  * [PocketMine MP](/minecraft/bedrock/pocketmine_mp/)  
 
-[Minecraft Java](/minecraft_java/) Servers for Java Minecraft
-* [Cuberite](/minecraft_java/cuberite/)
-* [feather](/minecraft/feather/)  
-* [Feed The Beast](/minecraft_java/ftb/)  
-* [Forge](/minecraft_java/forge/)  
-* [Magma](/minecraft_java/magma/)
+* [Java](/minecraft/java/) Servers for Java Minecraft
+  * [Cuberite](/minecraft/java/cuberite/)
+  * [feather](/minecraft/feather/)  
+  * [Feed The Beast](/minecraft/java/ftb/)  
+  * [Forge](/minecraft/java/forge/)  
+  * [Magma](/minecraft/java/magma/)
+  * [Paper](/minecraft/java/paper)
+  * [Spigot](/minecraft/java/spigot/)
+  * [spongeforge](/minecraft/java/spongeforge/)
+  * [SpongeVanilla](/minecraft/java/spongevanilla/)
+  * [Technic](/minecraft/java/technic/)
+  * [Tuinity](/minecraft/java/tuinity/)
+  * [VanillaCord](/minecraft/java/vanillacord/)
 
-* [Paper](/minecraft_java/paper)
-* [Spigot](/minecraft_java/spigot/)
-* [spongeforge](/minecraft_java/spongeforge/)
-* [SpongeVanilla](/minecraft_java/spongevanilla/)
-* [Technic](/minecraft_java/technic/)
-* [VanillaCord](/minecraft_java/vanillacord/)
-* [Tuinity](/minecraft_java/tuinity/)
-
-[Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)
-* [Waterfall](/minecraft_proxy/waterfall/)
-* [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
-* [Velocity](/minecraft_proxy/velocity/)
+* [Proxies](/minecraft/proxy/) (these are for the java version of minecraft)
+  * [Waterfall](/minecraft/proxy/waterfall/)
+  * [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/)
+  * [Velocity](/minecraft/proxy/velocity/)
 
 [Red Dead Redemption](/rdr/)
 * [RedM](/rdr/redm/)
