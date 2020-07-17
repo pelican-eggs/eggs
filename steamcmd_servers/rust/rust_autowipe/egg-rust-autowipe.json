@@ -142,7 +142,7 @@
         },
         {
             "name": "Regen Server",
-            "description": "If the server should have it's files removed and regenerate the server seed.",
+            "description": "If the server should have its files removed and regenerate the server seed.",
             "env_variable": "REGEN_SERVER",
             "default_value": "0",
             "user_viewable": 1,
