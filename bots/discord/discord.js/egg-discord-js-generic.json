@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-06-29T17:10:31-04:00",
+    "exported_at": "2020-07-18T23:13:34-04:00",
     "name": "discord.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then  \/usr\/local\/bin\/npm install --production; fi; \/usr\/local\/bin\/node \/home\/container\/{{BOT_JS_FILE}}",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then  \/usr\/local\/bin\/npm install --production; fi; \/usr\/local\/bin\/node\/home\/container\/{{BOT_JS_FILE}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
@@ -75,7 +75,7 @@
             "default_value": "",
             "user_viewable": 1,
             "user_editable": 1,
-            "rules": "required|string"
+            "rules": "nullable|string"
         }
     ]
 }
