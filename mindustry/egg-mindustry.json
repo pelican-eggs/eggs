@@ -5,7 +5,7 @@
     },
     "exported_at": "2020-07-22T18:01:10+02:00",
     "name": "Mindustry",
-    "author": "liotino.yoan@gmail.com",
+    "author": "unknown@unknown.com",
     "description": "Mindustry is a hybrid tower-defense sandbox factory game. Create elaborate supply chains of conveyor belts to feed ammo into your turrets, produce materials to use for building, and defend your structures from waves of enemies.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server-release.jar port {{SERVER_PORT}},name {{SERVER_NAME}},host {{MAPNAME}}",
