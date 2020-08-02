@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Tuinity Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl\r\ncd \/mnt\/server\r\n\r\nif [ ! -f server.properties ]; then\r\ncurl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft_java\/server.properties\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.codemc.io\/job\/Spottedleaf\/job\/Tuinity\/lastStableBuild\/artifact\/tuinity-paperclip.jar",
+            "script": "#!\/bin\/bash\r\n# Tuinity Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl\r\ncd \/mnt\/server\r\n\r\nif [ ! -f server.properties ]; then\r\ncurl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/java\/server.properties\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} https:\/\/ci.codemc.io\/job\/Spottedleaf\/job\/Tuinity\/lastStableBuild\/artifact\/tuinity-paperclip.jar",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
