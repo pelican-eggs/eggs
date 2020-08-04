@@ -6,13 +6,13 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 
 [Bedrock](/minecraft/bedrock/) Servers for Bedrock Minecraft (Windows 10, mobile, console)
 * [Bedrock](/minecraft/bedrock/bedrock/)
-* [DragonProxy](/minecraft/bedrock/dragonproxy/)  
+* [DragonProxy](/minecraft/bedrock/dragon_proxy/)  
 * [Nukkit](/minecraft/bedrock/nukkit/)  
 * [PocketMine MP](/minecraft/bedrock/pocketmine_mp/)  
 
 [Java](/minecraft/java/) Servers for Java Minecraft
 * [Cuberite](/minecraft/java/cuberite/)
-* [feather](/minecraft/feather/)  
+* [Feather](/minecraft/java/feather/)  
 * [Feed The Beast](/minecraft/java/ftb/)  
 * [Forge](/minecraft/java/forge/)  
 * [Magma](/minecraft/java/magma/)
