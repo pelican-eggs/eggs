@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-02-24T18:48:49+01:00",
+    "exported_at": "2020-08-04T20:01:04-07:00",
     "name": "Stationeers",
     "author": "sysadmin@whiteshield.ch",
     "description": "Stationeers Server\r\n\r\ndefault.ini will be created once you start game. Command parameters override default.ini parameters\r\nDon't forget to change the RCON Password !!\r\n\r\nRemote Administrator:\r\nYou can send commands on web browser.\r\nLink : http:\/\/[dedicated server address]:[GamePort]\r\n\r\nDedicated Server Wiki ==> https:\/\/stationeers-wiki.com\/Dedicated_Server_Guide\r\n\r\nStopping the server don't save the game, for manual save use the Remote Administrator.",
@@ -17,8 +17,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Stationeers: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\n\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\n\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 600760 -beta public +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
-            "container": "ubuntu:16.04",
+            "script": "#!\/bin\/bash\r\n# Stationeers: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} -beta public +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
@@ -76,6 +76,15 @@
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|integer"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "Required for automatic updates.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "600760",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
         }
     ]
 }
