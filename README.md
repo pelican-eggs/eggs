@@ -69,7 +69,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Multi Theft Auto](/gta/mtasa/)
   * [SA-MP](/gta/samp/)
 
-[Mindusrty](/mindustry/)
+[Mindustry](/mindustry/)
 
 [Minecraft](/minecraft/)
 * [Bedrock](/minecraft/bedrock/)  
