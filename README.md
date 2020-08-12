@@ -95,6 +95,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Proxies](/minecraft/proxy/) (these are for the java version of minecraft)
   * [Waterfall](/minecraft/proxy/waterfall/)
   * [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/)
+  * [Travertine](/minecraft/proxy/travertine/) Java
   * [Velocity](/minecraft/proxy/velocity/)
 
 [Red Dead Redemption](/rdr/)
