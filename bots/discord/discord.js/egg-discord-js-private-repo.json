@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [[ ! https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git = *\\.git ]]; then\r\n  INSTALL_REPO=$(echo -e https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git | sed 's:\/*$::')\r\n  INSTALL_REPO=\"https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git.git\"\r\nfi\r\n\r\necho -e \"working on installing a discord.js bot from https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git\"\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n\techo -e \"assuming user knows what they are doing have a good day.\"\r\n\texit 0\r\nelse\r\n\tif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n\t\techo -e \"\/mnt\/server directory is not empty.\"\r\n\t     if [ -d .git ]; then\r\n\t\t\techo -e \".git directory exists\" \r\n\t\t\tif [ -f .git\/config ]; then\r\n\t\t\t\techo -e \"loading info from git config\"\r\n\t\t\t\tORIGIN=$(git config --get remote.origin.url)\r\n\t\t\telse\r\n\t\t\t\techo -e \"files found with no git config\"\r\n\t\t\t\techo -e \"closing out without touching things to not break anything\"\r\n\t\t\t\texit 10\r\n\t\t\tfi\r\n\t\tfi\r\n\t\tif [ \"${ORIGIN}\" == \"https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git\" ]; then\r\n\t\t\techo \"pulling latest from github\"\r\n\t\t\tgit pull \r\n\t\tfi\r\n\telse\r\n    \techo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n\t\tif [ -z ${INSTALL_BRANCH} ]; then\r\n\t\t\techo -e \"assuming master branch\"\r\n\t\t\tINSTALL_BRANCH=master\r\n\t\tfi\r\n        \r\n\t\techo -e \"running 'git clone https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git .'\"\r\n\t\tgit clone https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git .\r\n\tfi\r\nfi \r\n\r\necho \"Installing python requirements into folder\"\r\nif [[ ! -z ${NODE_PACKAGES} ]]; then\r\n    \/usr\/local\/bin\/npm install ${NODE_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/npm install --production\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [[ ! https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git = *\\.git ]]; then\r\n  INSTALL_REPO=$(echo -e https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git | sed 's:\/*$::')\r\n  INSTALL_REPO=\"https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git.git\"\r\nfi\r\n\r\necho -e \"working on installing a discord.js bot from https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git\"\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n\techo -e \"assuming user knows what they are doing have a good day.\"\r\n\texit 0\r\nelse\r\n\tif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n\t\techo -e \"\/mnt\/server directory is not empty.\"\r\n\t     if [ -d .git ]; then\r\n\t\t\techo -e \".git directory exists\" \r\n\t\t\tif [ -f .git\/config ]; then\r\n\t\t\t\techo -e \"loading info from git config\"\r\n\t\t\t\tORIGIN=$(git config --get remote.origin.url)\r\n\t\t\telse\r\n\t\t\t\techo -e \"files found with no git config\"\r\n\t\t\t\techo -e \"closing out without touching things to not break anything\"\r\n\t\t\t\texit 10\r\n\t\t\tfi\r\n\t\tfi\r\n\t\tif [ \"${ORIGIN}\" == \"https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git\" ]; then\r\n\t\t\techo \"pulling latest from github\"\r\n\t\t\tgit pull \r\n\t\tfi\r\n\telse\r\n    \techo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n\t\tif [ -z ${INSTALL_BRANCH} ]; then\r\n\t\t\techo -e \"assuming master branch\"\r\n\t\t\tINSTALL_BRANCH=master\r\n\t\tfi\r\n        \r\n\t\techo -e \"running 'git clone --single-branch --branch ${INSTALL_BRANCH} https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git .'\"\r\n\t\tgit clone --single-branch --branch ${INSTALL_BRANCH} https://${USERNAME}:${PASSWORD}@github.com/${INSTALL_REPO}.git .\r\n\tfi\r\nfi \r\n\r\necho \"Installing python requirements into folder\"\r\nif [[ ! -z ${NODE_PACKAGES} ]]; then\r\n    \/usr\/local\/bin\/npm install ${NODE_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/npm install --production\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
             "container": "node:12-buster-slim",
             "entrypoint": "bash"
         }
@@ -56,7 +56,7 @@
             "env_variable": "INSTALL_BRANCH",
             "default_value": "",
             "user_viewable": 1,
-            "user_editable": 0,
+            "user_editable": 1,
             "rules": "nullable|string|max:32"
         },
         {
@@ -65,7 +65,7 @@
             "env_variable": "USER_UPLOAD",
             "default_value": "0",
             "user_viewable": 1,
-            "user_editable": 0,
+            "user_editable": 1,
             "rules": "required|bool"
         },
         {
