@@ -25,7 +25,7 @@
     "variables": [
         {
             "name": "Install Repo",
-            "description": "The git repo to clone and install the discord js bot from",
+            "description": "The git repo to clone and install the discord py bot from",
             "env_variable": "INSTALL_REPO",
             "default_value": "",
             "user_viewable": 1,
