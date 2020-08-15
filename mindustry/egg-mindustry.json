@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-22T18:01:10+02:00",
+    "name": "Mindustry",
+    "author": "unknown@unknown.com",
+    "description": "Mindustry is a hybrid tower-defense sandbox factory game. Create elaborate supply chains of conveyor belts to feed ammo into your turrets, produce materials to use for building, and defend your structures from waves of enemies.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server-release.jar port {{SERVER_PORT}},name {{SERVER_NAME}},host {{MAPNAME}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server loaded. \"\r\n}",
+        "logs": "{}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl jq wget\r\n\r\nGITHUB_PACKAGE=Anuken\/Mindustry\r\nMATCH=server-release.jar\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z ${DOWNLOAD_LINK} ]; then\r\n    if [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        echo -e \"user and oauth token set\"\r\n        alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\n    fi\r\n\r\n    ## get release info and download links\r\n    LATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\n    RELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\n    if [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq -r '.assets | .[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n        if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n            DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n        else\r\n            echo -e \"defaulting to latest release\"\r\n            DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n        fi\r\n    fi\r\nelse\r\n    echo -e \"Checking supplied download link\"\r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n    else\r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\necho -e \"running: wget ${DOWNLOAD_LINK}\"\r\nwget ${DOWNLOAD_LINK}",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "The version to download. Example \"v96\" NOT \"4.0v96\" (default is latest)\r\n\r\nThis would also be the github tag for the release",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required"
+        },
+        {
+            "name": "Server Name",
+            "description": "The server name that shows up in the server list\r\n\r\n(Default: Pterodactyl Testing Server)",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl Hosted Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Map Name",
+            "description": "Default Maps Available: Ancient Caldera, Fork, Fortress, Glacier, Islands, Labyrinth, Maze, Shattered, Tendrils, Triad, Veins, Wasteland.\r\n\r\n(Default: Tendrils)",
+            "env_variable": "MAPNAME",
+            "default_value": "Tendrils",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}

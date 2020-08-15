@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-06-27T05:17:21-04:00",
+    "name": "Insurgency: Sandstorm",
+    "author": "brycea@terrahost.cloud",
+    "description": "Insurgency: Sandstorm is a team-based, tactical FPS based on lethal close quarters combat and objective-oriented multiplayer gameplay. Experience the intensity of modern combat where skill is rewarded, and teamwork wins the fight.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"LogGameState: Match State Changed from LoadingAssets to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n## install required packages to install insurgency: sandstorm\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\n## install steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\n## needs to be used for steamcmd to operate correctly\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n## install insurgency: sandstorm\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\nchmod +x \/mnt\/server\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "App ID",
+            "description": "The ID corresponding to the game to download and run. Leave blank to avoid auto update.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "581330",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "nullable|numeric"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name to appear in the server in the server list.",
+            "env_variable": "HOSTNAME",
+            "default_value": "My Insurgency Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query port for your Insurgency server.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27131",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the maximum number of players.",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "28",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Default Map",
+            "description": "Default map to run when starting the server. Scenario must be available with the provided map.",
+            "env_variable": "MAP_NAME",
+            "default_value": "Canyon",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Scenario Name",
+            "description": "By default, a server will cycle through all Versus (PVP) scenarios available.",
+            "env_variable": "SCENARIO",
+            "default_value": "Scenario_Crossing_Checkpoint_Insurgents",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}

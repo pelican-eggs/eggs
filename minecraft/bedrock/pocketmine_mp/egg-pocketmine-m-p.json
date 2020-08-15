@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-14T22:15:06-04:00",
+    "name": "PocketmineMP",
+    "author": "info@swisscrafting.ch",
+    "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_ubuntu",
+    "startup": ".\/bin\/php7\/bin\/php .\/PocketMine-MP.phar --no-wizard --disable-ansi",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"server.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"\\n downloading pocketmine MP build ${PMMP_VERSION}\"\r\nif [ -z \"$PMMP_VERSION\" ] || [ \"$PMMP_VERSION\" == \"latest\" ]; then\r\n    curl -sSL -o PocketMine-MP.phar  https:\/\/jenkins.pmmp.io\/job\/PocketMine-MP\/Stable\/artifact\/PocketMine-MP.phar\r\nelse \r\n    curl -sSL -o PocketMine-MP.phar  https:\/\/jenkins.pmmp.io\/job\/PocketMine-MP\/${PMMP_VERSION}\/artifact\/PocketMine-MP.phar\r\nfi\r\n\r\necho -e \"\\n downloading latest php7.3 build from pocketmine\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-7.3-Linux-x86_64\/lastSuccessfulBuild\/artifact\/PHP_Linux-x86_64.tar.gz\r\n\r\necho -e \"\\n getting default server.properties\"\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/bedrock\/pocketmine_mp\/server.properties > server.properties\r\n\r\necho -e \"\\n unpacking php7 binaries\"\r\ntar -xzvf php.binary.tar.gz\r\n\r\necho -e \"\\n removing pvp7 packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.tx banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "PocketmineMP Version",
+            "description": "The build to pull and install. (Ex. 1604)\r\n\r\nThis is the build number on https:\/\/jenkins.pmmp.io",
+            "env_variable": "PMMP_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

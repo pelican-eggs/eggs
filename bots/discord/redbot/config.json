@@ -1,0 +1,9 @@
+{
+    "pterodactyl": {
+        "DATA_PATH": "/home/container/.local/share/Red-DiscordBot/data/pterodactyl",
+        "COG_PATH_APPEND": "cogs",
+        "CORE_PATH_APPEND": "core",
+        "STORAGE_TYPE": "JSON",
+        "STORAGE_DETAILS": {}
+    }
+}

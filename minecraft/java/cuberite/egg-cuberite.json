@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-12-14T12:24:30-05:00",
+    "name": "Cuberite",
+    "author": "parker@parkervcp.com",
+    "description": "A lightweight, fast and extensible game server for Minecraft",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/Cuberite",
+    "config": {
+        "files": "{\r\n    \"settings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"Server.Ports\": \"{{server.build.default.port}}\",\r\n            \"Server.Description\": \"{{server.build.env.SERV_DESC}}\"\r\n        }\r\n    },\r\n    \"webadmin.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"User:admin.Password\": \"{{server.build.env.ADMIN_PASS}}\",\r\n            \"WebAdmin.Ports\":\"{{server.build.env.WEB_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Startup complete \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Cuberite\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/download.cuberite.org\/linux-x86_64\/Cuberite.tar.gz\r\n\r\ntar --strip-components=1 -xf Cuberite.tar.gz",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Description",
+            "description": "Server Description",
+            "env_variable": "SERV_DESC",
+            "default_value": "Cuberite on Pterodactyl!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Admin Password",
+            "description": "The password for the webadmin panel 'admin' user",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "ChangeMe",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "WebAdmin Port",
+            "description": "Port for the cuberite webadmin panel.",
+            "env_variable": "WEB_PORT",
+            "default_value": "8080",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer|between:1,65535"
+        }
+    ]
+}

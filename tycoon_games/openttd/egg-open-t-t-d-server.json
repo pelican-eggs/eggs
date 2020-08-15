@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-01-30T20:47:45-05:00",
+    "name": "OpenTTD Server",
+    "author": "admin@justmyrandomstuff.com",
+    "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_ubuntu",
+    "startup": ".\/openttd -D",
+    "config": {
+        "files": "{\r\n    \"openttd.cfg\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"network.server_port\": \"{{server.build.default.port}}\",\r\n            \"network.server_name\": \"{{server.build.env.srv_name}}\",\r\n            \"network.lan_internet\": 0,\r\n            \"network.server_advertise\": \"{{server.build.env.srv_advertise}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[net] Map generated, starting game\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache wget binutils xz curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting file from: https:\/\/proxy.binaries.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-ubuntu-bionic-amd64.deb\"\r\n\r\nwget https:\/\/proxy.binaries.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-ubuntu-bionic-amd64.deb -O openttd.deb\r\n\r\nar -x  openttd.deb\r\n\r\ntar -xvf data.tar.xz\r\n\r\nmv usr\/share\/games\/openttd\/* .\/\r\n\r\nmv usr\/games\/openttd .\/\r\n\r\nchmod +x openttd\r\n\r\nwget https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip -O opengfx.zip\r\n\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\n\r\nrm open*zip open*tar open*gz debian-binary open*deb\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/tycoon_games\/openttd\/openttd.cfg > openttd.cfg",
+            "container": "alpine:3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The name shown in the serverlist",
+            "env_variable": "srv_name",
+            "default_value": "OpenTTD Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Show in masterlist?",
+            "description": "Show the server in the serverlist on the client, true or false",
+            "env_variable": "srv_advertise",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:5"
+        },
+        {
+            "name": "OpenTTD Version",
+            "description": "The version of OpenTTD i.e. 1.10.1",
+            "env_variable": "OPENTTD_VERSION",
+            "default_value": "1.10.1",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "OpenGFX Version",
+            "description": "The OpenGFX Version i.e. 0.6.0",
+            "env_variable": "OPENGFX_VERSION",
+            "default_value": "0.6.0",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

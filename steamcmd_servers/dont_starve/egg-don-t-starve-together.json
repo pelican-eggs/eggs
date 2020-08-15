@@ -1,0 +1,108 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-10T10:48:40-04:00",
+    "name": "Don't Starve Together",
+    "author": "parker@parkervcp.com",
+    "description": "Don\u2019t Starve Together is an uncompromising wilderness survival game full of science and magic.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_source",
+    "startup": "cd bin && coproc caves ( .\/dontstarve_dedicated_server_nullrenderer -console -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Caves ); .\/dontstarve_dedicated_server_nullrenderer -bind_ip 0.0.0.0 -port 10999 -console -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Master && echo 'c_shutdown()' >&\"${caves[1]}\"",
+    "config": {
+        "files": "{\r\n    \"DoNotStarveTogether\/config\/server\/cluster.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"GAMEPLAY.game_mode\": \"{{server.build.env.GAME_MODE}}\",\r\n            \"GAMEPLAY.max_players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"NETWORK.cluster_name\": \"{{server.build.env.CLUSTER_NAME}}\",\r\n            \"NETWORK.cluster_description\": \"{{server.build.env.CLUSTER_DESC}}\",\r\n            \"SHARD.shard_enabled\": \"true\",\r\n            \"SHARD.bind_ip\": \"127.0.0.1\",\r\n            \"SHARD.master_ip\": \"127.0.0.1\",\r\n            \"SHARD.master_port\": \"11001\"\r\n        }\r\n    },\r\n    \"DoNotStarveTogether\/config\/server\/Master\/server.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.server_port\": \"{{server.build.default.port}}\",\r\n            \"SHARD.is_master\": \"true\"\r\n        }\r\n    },\r\n    \"DoNotStarveTogether\/config\/server\/Caves\/server.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.server_port\": \"11000\",\r\n            \"SHARD.is_master\": \"false\",\r\n            \"SHARD.name\": \"Caves\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "c_shutdown()"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## DST specific\r\n## cluster token file\r\necho -e \"getting cluster configs\"\r\nmkdir -p \/mnt\/server\/DoNotStarveTogether\/config\/server\/\r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster_token.txt ]; then\r\n    echo \"${SERVER_TOKEN}\" >> \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster_token.txt\r\nfi\r\n\r\n## cluster configs \r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster.ini ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/dont_starve\/server.cluster.ini -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/cluster.ini\r\nfi\r\n\r\n## master configs\r\necho -e \"getting master configs\"\r\nmkdir -p \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/\r\n## master ini\r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/server.ini ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/dont_starve\/server.master.ini -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/server.ini\r\nfi\r\n\r\n## master worldgen override\r\nif [ ! -z ${MASTER_WORLDGEN}  ] && [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/worldgenoverride.lua ]; then\r\n    curl -sSL ${MASTER_WORLDGEN} -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Master\/worldgenoverride.lua\r\nfi\r\n\r\n## caves configs\r\necho -e \"getting cave configs\"\r\nmkdir -p \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/\r\n## caves ini\r\nif [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/server.ini ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/dont_starve\/server.caves.ini -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/server.ini\r\nfi\r\n\r\n## caves worldgen override\r\nif [ ! -z ${CAVES_WORLDGEN} ] && [ ! -f \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/worldgenoverride.lua ]; then\r\n    curl -sSL ${CAVES_WORLDGEN} -o \/mnt\/server\/DoNotStarveTogether\/config\/server\/Caves\/worldgenoverride.lua\r\nfi\r\n\r\necho -e \"install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Max Players",
+            "description": "Set the maximum number of players that will be allowed to join the game. This option overrides the [GAMEPLAY] \/ max_players setting in cluster.ini.\r\n\r\ndefault is 16",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|integer|between:1,31"
+        },
+        {
+            "name": "Server Token",
+            "description": "Required to run a public server. This needs to be generated from in game.\r\n\r\nGet your token here:\r\nhttps:\/\/accounts.klei.com\/account\/game\/servers?game=DontStarveTogether",
+            "env_variable": "SERVER_TOKEN",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "App ID",
+            "description": "Steam Server App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "343050",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Auto-update server",
+            "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 0. Set to 1 to update",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Game mode",
+            "description": "Valid values are survival, endless or wilderness",
+            "env_variable": "GAME_MODE",
+            "default_value": "survival",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Cluster Name",
+            "description": "This is the name that will show up in server browser.",
+            "env_variable": "CLUSTER_NAME",
+            "default_value": "A Pterodactyl Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Cluster Description",
+            "description": "This will show up in the server details area on the \u201cBrowse Games\u201d screen.",
+            "env_variable": "CLUSTER_DESC",
+            "default_value": "A Pterodactyl Hosted Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Master Worldgen Override",
+            "description": "Link to the lua file used to generate the master server map. Only used during the install phase.",
+            "env_variable": "MASTER_WORLDGEN",
+            "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/dont_starve\/worldgenoverride.master.lua",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Master Worldgen Override",
+            "description": "Link to the lua file used to generate the caves server map. Only used during the install phase.\r\n\r\nDefault generates a cave map",
+            "env_variable": "CAVES_WORLDGEN",
+            "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/dont_starve\/worldgenoverride.caves.lua",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        }
+    ]
+}

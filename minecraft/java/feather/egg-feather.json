@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-03-08T20:35:40-04:00",
+    "name": "Feather",
+    "author": "parker@parkervcp.com",
+    "description": "An experimental Minecraft server implementation written in Rust.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/feather-server",
+    "config": {
+        "files": "{\r\n    \"feather.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"address\": \"address = \\\"0.0.0.0\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/usr\/bin\/env bash\r\napt update\r\napt install -y curl\r\n\r\nget_latest_release() {\r\n  curl -sSL \"https:\/\/api.github.com\/repos\/$1\/releases\/latest\" |\r\n  grep '\"tag_name\":' |\r\n  sed -E 's\/.*\"([^\"]+)\".*\/\\1\/'\r\n}\r\n\r\nPACKAGE=\"feather-rs\/feather\"\r\nVERSION=`get_latest_release \"${PACKAGE}\"`\r\necho \"Latest version=${VERSION}\"\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sSLo feather.tar.gz https:\/\/github.com\/caelunshun\/feather\/releases\/download\/${VERSION}\/feather-${VERSION}-linux.tar.gz\r\n\r\ntar --strip-components=1 -xzvf feather.tar.gz\r\n\r\nrm feather.tar.gz",
+            "container": "debian:stable-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Generate World",
+            "description": "Do you want the installer to generate a world you you?",
+            "env_variable": "GEN_WORLD",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean"
+        }
+    ]
+}

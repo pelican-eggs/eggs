@@ -1,0 +1,90 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-08-04T20:01:04-07:00",
+    "name": "Stationeers",
+    "author": "sysadmin@whiteshield.ch",
+    "description": "Stationeers Server\r\n\r\ndefault.ini will be created once you start game. Command parameters override default.ini parameters\r\nDon't forget to change the RCON Password !!\r\n\r\nRemote Administrator:\r\nYou can send commands on web browser.\r\nLink : http:\/\/[dedicated server address]:[GamePort]\r\n\r\nDedicated Server Wiki ==> https:\/\/stationeers-wiki.com\/Dedicated_Server_Guide\r\n\r\nStopping the server don't save the game, for manual save use the Remote Administrator.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/rocketstation_DedicatedServer.x86_64 -batchmode -nographics -autostart -autosaveinterval={{SAVE_INTERVAL}} -clearallinterval={{CLEAR_INTERVAL}} -worldtype={{SERVER_MAP}} -worldname={{SAVE_NAME}} -loadworld={{SAVE_NAME}} -basedirectory=\/home\/container -updateport={{UPDATE_PORT}} -gameport={{GAME_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Dedicated Server Started\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Stationeers: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} -beta public +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Map",
+            "description": "Available Maps: Moon, Mars, Europa, Vulcan, Space, Mimas, Loulan",
+            "env_variable": "SERVER_MAP",
+            "default_value": "Moon",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Save Interval",
+            "description": "Sets the server\u2019s auto-save interval in seconds.",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "300",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Auto Clear Disconnected Player",
+            "description": "Clear disconnected player interval in seconds",
+            "env_variable": "CLEAR_INTERVAL",
+            "default_value": "86400",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Save Name",
+            "description": "Name of the save of your world.\r\nAuto save & auto load worlds on server startup.",
+            "env_variable": "SAVE_NAME",
+            "default_value": "stationeers_1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Gameport",
+            "description": "UDP port for game. Avoid to set 27015-27020. It's steam's local server query ports.",
+            "env_variable": "GAME_PORT",
+            "default_value": "27500",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Update Port",
+            "description": "UDP port for steam query must be between 27015-27020.",
+            "env_variable": "UPDATE_PORT",
+            "default_value": "27015",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "Required for automatic updates.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "600760",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

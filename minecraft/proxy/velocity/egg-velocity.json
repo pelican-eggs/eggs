@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-07-14T20:36:29-04:00",
+    "name": "Velocity",
+    "author": "parker@parkervcp.com",
+    "description": "Velocity is a Minecraft server proxy with unparalleled server support, scalability, and flexibility.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"velocity.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"bind = \": \"bind = \\\"0.0.0.0:{{server.build.default.port}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Done (\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z ${VELOCITY_VERSION} ] || [ ${VELOCITY_VERSION} == \"latest\" ]; then\r\n\tVELOCITY_VERSION=\/lastStableBuild\r\nfi\r\n\r\necho -e \"Getting download link\"\r\nDOWNLOAD_ENDPOINT=$(curl https:\/\/ci.velocitypowered.com\/job\/velocity\/${VELOCITY_VERSION}\/ | grep -Eo 'href=\"[^\\\"]+\"' | grep -vE \"view|fingerprint\" | grep \".jar\" | sed -n 's\/.*href=\"\\([^\"]*\\).*\/\\1\/p')\r\nDOWNLOAD_LINK=https:\/\/ci.velocitypowered.com\/job\/velocity\/lastStableBuild\/${DOWNLOAD_ENDPOINT}\r\n\r\necho -e \"Downloading ${DOWNLOAD_LINK}\"\r\ncurl ${DOWNLOAD_LINK} -o ${SERVER_JARFILE}\r\n\r\nif [ -f velocity.toml ]; then\r\n    echo -e \"velocity config file exists\"\r\nelse\r\n    echo -e \"downloading velocity config file.\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/proxy\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\n\r\necho -e \"install complete\"",
+            "container": "alpine:3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Velocity Version",
+            "description": "The Velocity Proxy version to download.\r\n\r\nset to 'latest ' the download the last stable build.",
+            "env_variable": "VELOCITY_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Jar File",
+            "description": "Server Jar File name",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "velocity.jar",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-06-15T17:43:44-04:00",
+    "name": "JMusicBot",
+    "author": "parker@parkervcp.com",
+    "description": "A Discord music bot that's easy to set up and run yourself!",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre",
+    "startup": "java -Djavax.accessibility.assistive_technologies=\" \" -Dnogui=true -jar JMusicBot.jar",
+    "config": {
+        "files": "{\r\n    \"config.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"token =\": \"token = \\\"{{env.BOT_TOKEN}}\\\"\",\r\n            \"prefix =\": \"prefix = \\\"{{env.BOT_PREFIX}}\\\"\",\r\n            \"owner =\": \"owner = \\\"{{env.BOT_OWNER}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (match is to match the filename in some way)\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\r\napt update\r\napt install -y jq curl\r\n\r\nGITHUB_PACKAGE=\"jagrosh\/MusicBot\"\r\nMATCH=\"Linux\"\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n    CONFIG_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i config)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i config)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n        CONFIG_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    fi\r\nfi\r\n\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -f JMusicBot.jar ]; then\r\n    mv -f JMusicBot.jar JMusicBot.jar-old\r\nfi\r\n\r\ncurl -Lo JMusicBot.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"config found\"\r\nelse\r\n    echo -e \"config not found getting default\"\r\n    curl -Lo config.txt ${CONFIG_LINK}\r\nfi\r\n\r\necho \"Job's Done\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Bot Token",
+            "description": "The token for the discord bot.\r\n\r\nhttps:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "BOT_TOKEN",
+            "default_value": "You need to get a token",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Bot Prefix",
+            "description": "Thew prefix for the bot.\r\n\r\nDefault is it @mention the bot.",
+            "env_variable": "BOT_PREFIX",
+            "default_value": "@mention",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Bot Owner ID",
+            "description": "This is the user ID of the bot owner.",
+            "env_variable": "BOT_OWNER",
+            "default_value": "changethistoyourdiscordid",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        }
+    ]
+}

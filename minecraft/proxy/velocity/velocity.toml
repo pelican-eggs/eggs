@@ -1,0 +1,106 @@
+# Config version. Do not change this
+config-version = "1.0"
+
+# What port should the proxy be bound to? By default, we'll bind to all addresses on port 25577.
+bind = "0.0.0.0:25577"
+
+# What should be the MOTD? This gets displayed when the player adds your server to
+# their server list. Legacy color codes and JSON are accepted.
+motd = "&3A Velocity Server"
+
+# What should we display for the maximum number of players? (Velocity does not support a cap
+# on the number of players online.)
+show-max-players = 500
+
+# Should we authenticate players with Mojang? By default, this is on.
+online-mode = true
+
+# Should we forward IP addresses and other data to backend servers?
+# Available options:
+# - "none":   No forwarding will be done. All players will appear to be connecting from the
+#             proxy and will have offline-mode UUIDs.
+# - "legacy": Forward player IPs and UUIDs in a BungeeCord-compatible format. Use this if
+#             you run servers using Minecraft 1.12 or lower.
+# - "modern": Forward player IPs and UUIDs as part of the login process using Velocity's 
+#             native forwarding. Only applicable for Minecraft 1.13 or higher.
+player-info-forwarding-mode = "NONE"
+
+# If you are using modern IP forwarding, configure an unique secret here.
+forwarding-secret = "FrP42MxySW6Y"
+
+# Announce whether or not your server supports Forge. If you run a modded server, we
+# suggest turning this on.
+announce-forge = false
+
+[servers]
+# Configure your servers here. Each key represents the server's name, and the value
+# represents the IP address of the server to connect to.
+lobby = "127.0.0.1:30066"
+minigames = "127.0.0.1:30068"
+factions = "127.0.0.1:30067"
+
+# In what order we should try servers when a player logs in or is kicked from aserver.
+try = [
+  "lobby"
+]
+
+[forced-hosts]
+# Configure your forced hosts here.
+"minigames.example.com" = [
+  "minigames"
+]
+"lobby.example.com" = [
+  "lobby"
+]
+"factions.example.com" = [
+  "factions"
+]
+
+[advanced]
+# How large a Minecraft packet has to be before we compress it. Setting this to zero will
+# compress all packets, and setting it to -1 will disable compression entirely.
+compression-threshold = 256
+
+# How much compression should be done (from 0-9). The default is -1, which uses the
+# default level of 6.
+compression-level = -1
+
+# How fast (in milliseconds) are clients allowed to connect after the last connection? By
+# default, this is three seconds. Disable this by setting this to 0.
+login-ratelimit = 3000
+
+# Specify a custom timeout for connection timeouts here. The default is five seconds.
+connection-timeout = 5000
+
+# Specify a read timeout for connections here. The default is 30 seconds.
+read-timeout = 30000
+
+# Enables compatibility with HAProxy.
+proxy-protocol = false
+
+[query]
+# Whether to enable responding to GameSpy 4 query responses or not.
+enabled = false
+
+# If query is enabled, on what port should the query protocol listen on?
+port = 25577
+
+# This is the map name that is reported to the query services.
+map = "Velocity"
+
+# Whether plugins should be shown in query response by default or not
+show-plugins = false
+
+[metrics]
+# Whether metrics will be reported to bStats (https://bstats.org).
+# bStats collects some basic information, like how many people use Velocity and their
+# player count. We recommend keeping bStats enabled, but if you're not comfortable with
+# this, you can turn this setting off. There is no performance penalty associated with
+# having metrics enabled, and data sent to bStats can't identify your server.
+enabled = true
+
+# A unique, anonymous ID to identify this proxy with.
+id = "b12f2e77-133c-4a5f-b288-d8833be3dc4d"
+
+log-failure = false
+

@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2018-03-27T08:57:41-04:00",
+    "exported_at": "2020-01-19T11:11:24-05:00",
     "name": "pixel-bot",
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:python3",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:alpine_python-3",
     "startup": "python bot.py",
     "config": {
         "files": "{\r\n    \"config\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"owner\": \"{{server.build.env.OWNER_UID}}\",\r\n            \"token\": \"{{server.build.env.BOT_TOKEN}}\",\r\n            \"bot_name\": \"{{server.build.env.BOT_NAME}}\",\r\n            \"log_file\": \"latest.log\"\r\n        }\r\n    },\r\n    \"plugins\/settings\/imgur.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"client_id\": \"{{server.build.env.IMGUR_KEY}}\",\r\n            \"client_secret\": \"{{server.build.env.IMGUR_SECRET}}\"\r\n        }\r\n    }\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache git gcc g++ libffi-dev make\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/Ispira\/pixel-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target $(pwd) discord imgurpython xkcd pynacl",
+            "script": "#!\/bin\/ash\r\n# Pixel Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache git gcc g++ libffi-dev make\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/Ispira\/pixel-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target $(pwd) discord imgurpython xkcd pynacl",
             "container": "python:3.6-alpine3.7",
             "entrypoint": "ash"
         }

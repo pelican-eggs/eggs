@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-11-06T18:52:33-05:00",
+    "name": "MariaDB",
+    "author": "parker@parkervcp.com",
+    "description": "One of the most popular database servers. Made by the original developers of MySQL. Guaranteed to stay open source.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:db_mariadb",
+    "startup": "{ \/usr\/sbin\/mysqld & } && sleep 5 && mysql -u root",
+    "config": {
+        "files": "{\r\n    \".my.cnf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"bind-address\": \"bind-address=0.0.0.0\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"mysqld: ready for connections\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown; exit;"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# MariaDB Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nset -x\r\n\r\necho -e \"installing dependencies\"\r\napt-get -y update\r\napt-get -y install curl\r\n\r\n## add user\r\necho -e \"adding container user\"\r\nuseradd -d \/home\/container -m container -s \/bin\/bash\r\n\r\n## own server to container user\r\nchown container: \/mnt\/server\/\r\n\r\n## run install script as user\r\necho -e \"getting my.conf\"\r\nif [ -f \/mnt\/server\/.my.cnf ]; then\r\n    echo -e \"moving current config for install\"\r\n    mv \/mnt\/server\/.my.cnf \/mnt\/server\/custom.my.cnf\r\n    runuser -l container -c 'curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/database\/sql\/mariadb\/install.my.cnf > \/mnt\/server\/.my.cnf'\r\nelse\r\n    runuser -l container -c 'curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/database\/sql\/mariadb\/install.my.cnf > \/mnt\/server\/.my.cnf'\r\nfi\r\n\r\n## mkdir and install db\r\necho -e \"installing mysql database\"\r\nrunuser -l container -c 'mkdir -p \/mnt\/server\/run\/mysqld'\r\nrunuser -l container -c 'mkdir -p \/mnt\/server\/log\/mysql'\r\nrunuser -l container -c 'mkdir \/mnt\/server\/mysql'\r\n\r\nrunuser -l container -c 'mysql_install_db --defaults-file=\/mnt\/server\/.my.cnf'\r\n\r\nif [ -f \/mnt\/server\/custom.my.cnf ]; then\r\n    echo -e \"moving current config back in place\"\r\n    mv \/mnt\/server\/custom.my.cnf \/mnt\/server\/.my.cnf\r\nelse\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/database\/sql\/mariadb\/my.cnf > \/mnt\/server\/.my.cnf\r\nfi\r\n\r\necho -e \"install complete\"\r\n\r\nexit",
+            "container": "mariadb:10.3",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}

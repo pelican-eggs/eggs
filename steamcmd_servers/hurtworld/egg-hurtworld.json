@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-04-16T20:41:27-04:00",
+    "name": "Hurtworld",
+    "author": "brycea@terrahost.cloud",
+    "description": "Hurtworld is a hardcore multiplayer survival FPS with a focus on deep survival progression that doesn't become trivial once you establish some basic needs. Built for hardcore gamers, Hurtworld aims to punish.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_source",
+    "startup": ".\/Hurtworld.x86_64 -batchmode -nographics -exec \"host {{SERVER_PORT}};queryport {{QUERY_PORT}};maxplayers {{MAX_PLAYERS}};servername {{HOSTNAME}};creativemode ${CREATIVE_MODE};${ADMINS}\" -logfile $1",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"orphaned items\"\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "405100",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|regex:\/^(405100)$\/"
+        },
+        {
+            "name": "Query Port",
+            "description": "Server Query Default Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "13871",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "Max Players",
+            "description": "Max players allowed on the server at one time.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "60",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:60"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name of your server in the public server list.",
+            "env_variable": "HOSTNAME",
+            "default_value": "A Hurtworld Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:50"
+        }
+    ]
+}

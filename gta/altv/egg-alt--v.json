@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-02-19T21:48:36-05:00",
+    "name": "alt:V",
+    "author": "parker@parkervcp.com",
+    "description": "alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V",
+    "image": "quay.io/parkervcp/pterodactyl-images:debian_dotnet",
+    "startup": "sleep 2 && ./altv-server",
+    "config": {
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"host:\": \"host: 0.0.0.0\",\r\n            \"port:\": \"port: {{server.build.default.port}}\",\r\n            \"password:\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"description:\": \"description: {{server.build.env.SERVER_DESC}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\r\n# AltV Install Script\r\n#\r\n# Server Files: /mnt/server\r\n# BUILD=stable ## this should be an egg variable.\r\nBASE_URL=\"https://cdn.altv.mp/\" ## Where the files are stored.\r\n\r\n## install required dependancies.\r\nfunction install_deps () {\r\n    apt update\r\n    apt install -y libatomic1 zip unzip jq curl wget\r\n    echo -e \"deps installed\"\r\n    echo -e\r\n}\r\n\r\n## check the has on files and compare to a remote source.\r\n## usage 'check_hash \"file\" \"remote_hash_source\"'\r\nfunction check_hash () {\r\n    echo -e \"Checking for file ${1}\"\r\n    echo -e \"running: curl -sSL ${2} | jq -r --arg FILENAME \\\"${3}\\\" '.hashList | .[\\$FILENAME]'\"\r\n    hash=$(curl -sSL ${2} | jq -r --arg FILENAME ${3} '.hashList | .[$FILENAME]')\r\n    echo -e \"hash: $hash\"\r\n\r\n    if [ -f ${2} ]; then\r\n\r\n        echo -e \"hash is $(sha1sum ${1} | awk '{ print $1 }')\"\r\n        echo -e \"current has is ${hash}\"\r\n\r\n        if [ \"$(sha1sum ${2} | awk '{ print $1 }')\" == \"${hash}\" ]; then\r\n            echo -e \"Hash matched\"\r\n            echo -e \"No need to download new file.\"\r\n            return 0\r\n        else\r\n            echo -e \"Hash didn't match\"\r\n            echo -e \"Need to download the correct version\"\r\n            return 1\r\n        fi\r\n    else\r\n        echo \"No file found\"\r\n        return 1\r\n    fi\r\n}\r\n\r\n## makes sure a download link is valid.\r\nfunction validate_download () {\r\n    DOWNLOAD_URL=${1}\r\n\r\n    echo -e \"Download url is ${DOWNLOAD_URL}\"\r\n\r\n    if [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n        if curl --output /dev/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n            echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n            DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n        else        \r\n            echo -e \"link is invalid closing out\"\r\n            exit 2\r\n        fi\r\n    fi\r\n\r\n}\r\n\r\nfunction download_files () {\r\n    ## validate download link and get files\r\n    validate_download ${1}\r\n    echo -e \"running wget ${DOWNLOAD_URL} -O ${2}\"\r\n    wget ${DOWNLOAD_URL} -O ${2}\r\n}\r\n\r\n## This is a file array for files to get downloaded.\r\n## They are all comma separated lists.\r\n## remote folder (0), json file with hashes (1), file name in json file (2), file name (3), file folder (4), extra commands (5)\r\nfile_array=( \\\r\n\"server/${BUILD}/x64_linux/\",\"update.json\",\"altv-server\",\"altv-server\",/mnt/server/,execute \\\r\n\"server/${BUILD}/x64_linux/\",\"update.json\",\"data/vehmodels.bin\",\"vehmodels.bin\",/mnt/server/data/ \\\r\n\"server/${BUILD}/x64_linux/\",\"update.json\",\"data/vehmods.bin\",\"vehmods.bin\",/mnt/server/data/ \\\r\n\"others/\",,\"server.cfg\",server.cfg,/mnt/server/ \\\r\n\"node-module/${BUILD}/x64_linux/\",\"update.json\",\"libnode.so.72\",\"libnode.so.72\",/mnt/server/ \\\r\n\"node-module/${BUILD}/x64_linux/\",\"update.json\",\"modules/libnode-module.so\",\"libnode-module.so\",/mnt/server/modules/ \\\r\n\"coreclr-module/${BUILD}/x64_linux/\",,\"AltV.Net.Host.dll\",\"AltV.Net.Host.dll\",/mnt/server/ \\\r\n\"coreclr-module/${BUILD}/x64_linux/\",,\"AltV.Net.Host.runtimeconfig.json\",\"AltV.Net.Host.runtimeconfig.json\",/mnt/server/ \\\r\n\"coreclr-module/stable/x64_linux/\",\"update.json\",\"modules/libcsharp-module.so\",\"libcsharp-module.so\",/mnt/server/modules/ \\\r\n\"samples/\",,\"resources.zip\",\"resources.zip\",/mnt/server/,unzip \\\r\n)\r\n\r\ninstall_deps\r\n\r\n## this goes through each value in the array and then checks the hash\r\nfor EACH in ${file_array[@]}\r\ndo\r\n    ## this needs to be here to break apart the arrays.\r\n    IFS=',' read -r -a array <<< \"$EACH\"\r\n\r\n    if [ ! -z \"${array[1]}\" ]; then\r\n        ## check hash on 'folder/file' with 'remote file base url/remote folder/ json file' 'json file name' \r\n        if check_hash \"${array[4]}${array[3]}\" \"${BASE_URL}${array[0]}${array[1]}\" \"${array[2]}\"; then\r\n            echo -e \"file up to date\"\r\n        else\r\n            echo -e \"downloading most recent file\"\r\n        fi\r\n            ## make the directory if it doesn't exist.\r\n            if [ ! -d ${array[4]} ]; then\r\n                mkdir ${array[4]}\r\n            fi\r\n            download_files \"${BASE_URL}${array[0]}${array[2]}\" \"${array[4]}${array[3]}\"\r\n    else\r\n        ## make the directory if it doesn't exist.\r\n        if [ ! -d ${array[4]} ]; then\r\n            mkdir ${array[4]}\r\n        fi\r\n        download_files \"${BASE_URL}${array[0]}${array[2]}\" \"${array[4]}${array[3]}\"\r\n    fi\r\n\r\n    ## run extra commands if needed.\r\n    case ${array[5]} in\r\n    unzip)\r\n        cd ${array[4]}\r\n        unzip -o ${array[3]}\r\n        rm ${array[3]}\r\n        ;;\r\n    execute)\r\n        chmod +x ${array[4]}${array[3]}\r\n        ;;\r\n    esac\r\n\r\n#    echo -e \"HashFile: ${BASE_URL}${array[0]}${array[1]}\"\r\n#    echo -e \"Download URL ${BASE_URL}${array[0]}${array[2]}\"\r\n#    echo -e \"Filename ${array[3]}\"\r\n#    echo -e \"File Folder ${array[4]}\"\r\n#    echo -e \"commands to run ${array[5]}\"\r\n#    echo -e\r\ndone\r\n\r\necho -e \"install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "ld lib path",
+            "description": "Needed to load modules correctly.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Which alt:V build to download",
+            "description": "The supported versions are release, rc, dev (default: release).\r\n\r\nIf you don't know what you are doing leave it on stable",
+            "env_variable": "BUILD",
+            "default_value": "release",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Password",
+            "description": "The password to join the server",
+            "env_variable": "PASSWORD",
+            "default_value": "ChangeMe",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|min:6"
+        },
+        {
+            "name": "Server Description",
+            "description": "Description for the server.",
+            "env_variable": "SERVER_DESC",
+            "default_value": "A Pterodactyl Hosted Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}

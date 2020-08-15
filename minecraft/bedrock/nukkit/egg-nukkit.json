@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-11-02T22:11:25-04:00",
+    "name": "Nukkit",
+    "author": "parker@parkervcp.com",
+    "description": "Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition\r\n\r\nhttps:\/\/nukkit.io\/",
+    "image": "quay.io\/pterodactyl\/core:java-glibc",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Nukkit Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache curl openssl\r\n\r\ncd \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\nif [ ! -z \"${DL_PATH}\" ]; then\r\n    MODIFIED_DOWNLOAD=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\n    wget ${MODIFIED_DOWNLOAD} -O ${SERVER_JARFILE}\r\nelif [ -z \"${NUKKIT_VERSION}\" ] || [ \"${NUKKIT_VERSION}\" == \"latest\" ]; then\r\n    wget https:\/\/ci.nukkitx.com\/job\/NukkitX\/job\/Nukkit\/job\/master\/lastSuccessfulBuild\/artifact\/target\/nukkit-1.0-SNAPSHOT.jar -O ${SERVER_JARFILE}\r\nelse\r\n    wget https:\/\/ci.nukkitx.com\/job\/NukkitX\/job\/Nukkit\/job\/master\/${NUKKIT_VERSION}\/artifact\/target\/nukkit-1.0-SNAPSHOT.jar -O ${SERVER_JARFILE}\r\nfi\r\n\r\nif [ ! -f nukkit.yml ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/bedrock\/nukkit\/nukkit.yml\r\nfi\r\n\r\nif [ ! -f nukkit.yml ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/bedrock\/nukkit\/server.properties\r\nfi",
+            "container": "alpine:3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Download Path",
+            "description": "A URL to use to download Spigot rather than building it on the server. This is not user viewable. Use <code>{{DL_VERSION}}<\/code> in the URL to automatically insert the assigned version into the URL. If you do not enter a URL Spigot will build directly in the container (this will fail on low memory containers).",
+            "env_variable": "DL_PATH",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "nukkit version",
+            "description": "The version of Nukkitt to download (using the --rev tag). Use \"latest\" for latest.",
+            "env_variable": "NUKKIT_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
