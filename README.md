@@ -129,7 +129,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/steamcmd_servers/unturned/)
-  * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
 
 [Terraria](/terraria/)
