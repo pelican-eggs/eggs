@@ -1,0 +1,14 @@
+{
+        "Servername": "My Server",
+        "MaxPlayers": 3,
+        "Tags": "",
+        "Password": "",
+        "MOTD": "Welcome to my server",
+        "Seed": 0,
+        "FirstPersonOnly": false,
+        "IsHardcore": false,
+        "MaxPlayerClaims": 3,
+        "MaxZombieCount": 2048,
+        "MaxAnimalCount": 1024,
+        "MaxBanditCount": 256
+}

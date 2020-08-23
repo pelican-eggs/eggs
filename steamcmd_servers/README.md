@@ -19,6 +19,9 @@ This is a collection of servers that use steamcmd to install.
 ## Conan Exiles
 [conan_exiles](conan_exiles/)
 
+## Dead Matter
+[dead_matter](dead_matter/)
+
 ## Don't Starve
 [dont_starve](dont_starve/)
 

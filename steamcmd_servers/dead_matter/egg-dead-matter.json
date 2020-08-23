@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-08-23T00:39:51-07:00",
+    "name": "Dead Matter",
+    "author": "iamkubi@gmail.com",
+    "description": "Dead Matter, by indie company Quantum Integrity Software Inc., is a zombie survival rogue-lite set in a near future, post-apocalyptic Alberta. Bringing together various, handpicked elements of the open-world survival genre, along with our own original touches, Dead Matter aims to quench the community\u2019s thirst for a title to properly balance survival mechanics with fulfilling gameplay.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/deadmatterServer.sh",
+    "config": {
+        "files": "{\r\n    \"deadmatter\/ServerConfig.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Servername\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${APPID} validate +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steamcmd\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/deadmatter\/ServerConfig.json --output \/mnt\/server\/deadmatter\/ServerConfig.json",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "App ID",
+            "description": "Steam App ID",
+            "env_variable": "APPID",
+            "default_value": "1110990",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Steam User",
+            "description": "A Steam username with Dead Matter on the account",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam Auth Code",
+            "description": "Steam Auth Code when Steam Auth is enabled",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "3",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name that appears in the server list",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        }
+    ]
+}
