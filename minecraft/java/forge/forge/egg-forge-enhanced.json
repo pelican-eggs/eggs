@@ -33,7 +33,7 @@
             "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
         },
         {
-            "name": "Forge version",
+            "name": "Minecraft version",
             "description": "The version of minecraft you want to install for.\r\n\r\nLeaving latest will install the latest recommended version.",
             "env_variable": "MC_VERSION",
             "default_value": "latest",
