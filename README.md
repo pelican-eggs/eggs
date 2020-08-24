@@ -1,4 +1,4 @@
-# Parkers Pterodactyl eggs repo
+# Pempkin's Pterodactyl eggs repo <- A fork of Parker's egg repo intended for personal use but available to all
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
