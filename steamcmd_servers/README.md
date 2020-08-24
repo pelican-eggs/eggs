@@ -68,5 +68,4 @@ This is a collection of servers that use steamcmd to install.
 [Tower Unite](tower_unite)
 
 ## Unturned
-  * [RocketMod](rocketmod)
   * [Unturned](unturned)

@@ -114,6 +114,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [HLDS server](/steamcmd_servers/hlds_server)
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
+* [Killing Floor 2](/steamcmd_servers/killingfloor2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
@@ -128,7 +129,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/steamcmd_servers/unturned/)
-  * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
 
 [Terraria](/terraria/)
