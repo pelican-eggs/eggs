@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS http:\/\/solder.endermedia.com\/repository\/downloads\/the-1122-pack\/the-1122-pack_$MODPACK_VERSION.zip -o the-1122-pack_$MODPACK_VERSION.zip\r\n\r\nunzip the-1122-pack_$MODPACK_VERSION.zip\r\n\r\nrm -rf the-1122-pack_$MODPACK_VERSION.zip",
-            "container": "alpine:3.9",
+            "container": "alpine:3.12",
             "entrypoint": "ash"
         }
     },
