@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-09-03T12:10:30+02:00",
+    "exported_at": "2020-09-03T12:17:04+02:00",
     "name": "SogeBot",
     "author": "info@goover.de",
     "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#\/bin\/ash\r\napt -y update\r\napt -y upgrade\r\napt install -y curl unzip sqlite\r\n#export NODE_OPTIONS=--max-old-space-size=8192\r\n\r\ncd \/mnt\/server\r\n\r\n## Download latest Stable Version\r\nRELEASE_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/sogehige\/sogeBot\/releases\/latest\" | awk -F '\"' '\/tag_name\/{print $4}')\r\nDOWNLOAD_URL=https:\/\/github.com\/sogehige\/sogeBot\/releases\/download\/${RELEASE_VERSION}\/sogeBot-${RELEASE_VERSION}.zip\r\ncurl -L -o sogebot.zip ${DOWNLOAD_URL}\r\nunzip -o sogebot.zip\r\nrm sogebot.zip\r\n\r\nnpm install -g npm@latest\r\n\/usr\/local\/bin\/npm ci\r\n\r\nexit 0",
+            "script": "#\/bin\/bash\r\napt -y update\r\napt -y upgrade\r\napt install -y curl unzip sqlite\r\n#export NODE_OPTIONS=--max-old-space-size=8192\r\n\r\ncd \/mnt\/server\r\n\r\n## Download latest Stable Version\r\nRELEASE_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/sogehige\/sogeBot\/releases\/latest\" | awk -F '\"' '\/tag_name\/{print $4}')\r\nDOWNLOAD_URL=https:\/\/github.com\/sogehige\/sogeBot\/releases\/download\/${RELEASE_VERSION}\/sogeBot-${RELEASE_VERSION}.zip\r\ncurl -L -o sogebot.zip ${DOWNLOAD_URL}\r\nunzip -o sogebot.zip\r\nrm sogebot.zip\r\n\r\nnpm install -g npm@latest\r\n\/usr\/local\/bin\/npm ci\r\n\r\nexit 0",
             "container": "node:12-buster-slim",
             "entrypoint": "bash"
         }
