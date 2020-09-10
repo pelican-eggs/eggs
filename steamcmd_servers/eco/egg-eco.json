@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-09-10T08:30:43+02:00",
+    "exported_at": "2020-09-10T08:47:17+02:00",
     "name": "Eco",
     "author": "info@goover.de",
     "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
     "startup": "export DOTNET_BUNDLE_EXTRACT_BASE_DIR=.\/dotnet-bundle && .\/EcoServer",
     "config": {
-        "files": "{\r\n    \"Configs\/Network.eco\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"GameServerPort\": \"{{server.build.default.port}}\",\r\n            \"WebServerPort\": \"{{server.build.env.WEB_PORT}}\",\r\n            \"PublicServer\": \"{{server.build.env.PUB_SRV}}\",\r\n            \"Password\": \"{{server.build.env.SRV_PWD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"Configs\/Network.eco\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"GameServerPort\": \"{{server.build.default.port}}\",\r\n            \"WebServerPort\": \"{{server.build.env.WEB_PORT}}\",\r\n            \"PublicServer\": \"{{server.build.env.PUB_SRV}}\",\r\n            \"Password\": \"{{server.build.env.SRV_PWD}}\",\r\n            \"UPnPEnabled\": \"{{server.build.env.UPNP}}\",\r\n            \"Description\": \"{{server.build.env.SRV_DES}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[Server Initialization]... Finished in\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "exit"
@@ -58,6 +58,24 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Server Description",
+            "description": "Server Description",
+            "env_variable": "SRV_DES",
+            "default_value": "Hosted by Pterodactyl",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "UPNP",
+            "description": "UPNP OFF",
+            "env_variable": "UPNP",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
         }
     ]
 }
