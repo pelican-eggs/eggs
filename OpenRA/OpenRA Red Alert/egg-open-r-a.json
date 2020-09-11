@@ -1,0 +1,99 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-09-11T16:47:07+02:00",
+    "name": "OpenRA",
+    "author": "patz.michael@gmail.com",
+    "description": "OpenRA is a project that recreates and modernizes the classic Command & Conquer real time strategy games. We have developed a flexible open source game engine (the OpenRA engine) that provides a common platform for rebuilding and reimagining classic 2D and 2.5D RTS games (the OpenRA mods).",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
+    "startup": ".\/squashfs-root\/AppRun --server Server.Name=\"{{SERVER_NAME}}\" Server.ListenPort={{PORT}} Server.AdvertiseOnline={{PUBLIC}} Server.EnableSingleplayer={{SINGLEPLAYER}} Server.Password=\"{{PASSWORD}}\" Server.EnableGeoIP={{GEOIP}} Server.ShareAnonymizedIPs={{ANONYMOUS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Master server communication established.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Vanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y curl wget file \r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\/\r\n\r\nwget https:\/\/github.com\/OpenRA\/OpenRA\/releases\/download\/release-20200503\/OpenRA-Red-Alert-x86_64.AppImage\r\nchmod +x OpenRA-Red-Alert-x86_64.AppImage\r\n.\/OpenRA-Red-Alert-x86_64.AppImage --appimage-extract\r\nrm OpenRA-Red-Alert-x86_64.AppImage\r\ncd squashfs-root\r\nchmod +x AppRun",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The Name of the Server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "OpenRAServer",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Port",
+            "description": "The Port the server should listen on",
+            "env_variable": "PORT",
+            "default_value": "5500",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Public Server",
+            "description": "Shall this server be public",
+            "env_variable": "PUBLIC",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Enable Singleplayer",
+            "description": "Enable Singleplayer ?",
+            "env_variable": "SINGLEPLAYER",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Require Authentification",
+            "description": "Enable Authentification",
+            "env_variable": "AUTH",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "PASSWORD",
+            "description": "Server Password",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable:string"
+        },
+        {
+            "name": "GEOIP",
+            "description": "Enable GEOIP",
+            "env_variable": "GEOIP",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20"
+        },
+        {
+            "name": "Anonymized IPs",
+            "description": "Hide IPs",
+            "env_variable": "ANONYMOUS",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20"
+        }
+    ]
+}
