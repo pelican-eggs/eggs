@@ -39,7 +39,7 @@
             "default_value": "32",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|integer|between:1,32"
+            "rules": "required|integer|between:1,1024"
         },
         {
             "name": "Server Hostname",
