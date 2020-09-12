@@ -99,7 +99,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Velocity](/minecraft/proxy/velocity/)
 
 [OpenRA](/openra/)
-* [OpenRA - Red Alert] (/openra/openra_red_alert)
+* [OpenRA Red Alert] (/openra/openra_red_alert)
 
 [Red Dead Redemption](/rdr/)
 * [RedM](/rdr/redm/)
