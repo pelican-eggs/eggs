@@ -3,21 +3,21 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-09-10T11:03:53+02:00",
+    "exported_at": "2020-09-12T10:46:57+02:00",
     "name": "CryoFall",
     "author": "contact@zennodes.dk",
     "description": "NOTE: For now you have to change SettingsServer.xml under CryoFall_Server_v(Version)_NetCore\/Data\/SettingsServer.xml\r\n\r\nCryoFall is a sci-fi multiplayer colony simulation survival game set on a forgotten planet in a distant future.\r\n\r\nJoin the vast world of CryoFall together with other survivors to rebuild your civilization from scratch. Start with primitive technology and simple tools and use them to progress towards modern industrial might and even beyond, eventually reaching space-age technology only seen in science fiction.\r\n\r\nCryoFall can be played either as a relaxed PvE experience with no competition or as a brutal and unforgiving PvP. Make your choice and join one of many available servers with different game modes or host your own and invite your friends to join you!\r\n\r\nBuild your house or a large base together with other players. Dig wells and create farms to sustain basic needs. Build vehicles to explore the world faster. Establish basics of science, all the way from medicine and chemistry to fuel creation and even lithium extraction to create electronic devices. Cook food or prepare drinks to sell them from vending machines in your store.\r\n\r\nBuild factories to produce on an industrial scale: Weapons and defense systems, bionic implants to augment yourself, even large war machines and artillery guns to use against the biggest of opponents",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
-    "startup": "dotnet CryoFall_Server_v0.27.7.30_NetCore\/Binaries\/Server\/CryoFall_Server.dll loadOrNew",
+    "startup": "dotnet Binaries\/Server\/CryoFall_Server.dll loadOrNew",
     "config": {
         "files": "{}",
-        "startup": "{}",
+        "startup": "{\r\n    \"done\": \"[IMP] UDPServer: Socket-server listening on \"\r\n}",
         "logs": "{}",
-        "stop": "stop 60"
+        "stop": "stop 10 stopping server"
     },
     "scripts": {
         "installation": {
-            "script": "#Server Files: \/mnt\/server\r\napk update\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS https:\/\/atomictorch.com\/Files\/CryoFall_Server_v${VERSION}_NetCore.zip -o Cryofall_server_v${VERSION}.zip\r\n\r\nunzip Cryofall_server_v${VERSION}.zip\r\n\r\nrm -rf Cryofall_server_v${VERSION}.zip",
+            "script": "#Server Files: \/mnt\/server\r\nrm -rf \/mnt\/server\r\n\r\napk update\r\n\r\napk add curl\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sS https:\/\/atomictorch.com\/Files\/CryoFall_Server_v${VERSION}_NetCore.zip -o Cryofall_server_v${VERSION}.zip\r\n\r\nunzip Cryofall_server_v${VERSION}.zip\r\n\r\ncp -a CryoFall_Server_v${VERSION}_NetCore\/. \/mnt\/server\r\n\r\nrm -rf CryoFall_Server_v${VERSION}_NetCore\r\n\r\nrm -rf Cryofall_server_v${VERSION}.zip",
             "container": "alpine:3.9",
             "entrypoint": "ash"
         }
