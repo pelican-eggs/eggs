@@ -99,9 +99,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Velocity](/minecraft/proxy/velocity/)
 
 [OpenRA](/openra/)
-* [OpenRA Dune2000](/openra/openra dune2000)
-* [OpenRA Red Alert](/openra/openra red alert)
-* [OpenRA Tiberian Dawn](/openra/openra tiberian dawn)
+* [OpenRA Dune2000](/openra/openra_dune2000)
+* [OpenRA Red Alert](/openra/openra_red_alert)
+* [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn)
 
 
 [Red Dead Redemption](/rdr/)
