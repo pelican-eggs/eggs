@@ -98,6 +98,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Travertine](/minecraft/proxy/travertine/) Java
   * [Velocity](/minecraft/proxy/velocity/)
 
+[OpenRA](/openra/)
+* [OpenRA Dune2000](/openra/openra_dune2000)
+* [OpenRA Red Alert](/openra/openra_red_alert)
+* [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn)
+
+
 [Red Dead Redemption](/rdr/)
 * [RedM](/rdr/redm/)
 
