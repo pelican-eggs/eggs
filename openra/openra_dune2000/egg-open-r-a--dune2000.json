@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-09-13T12:43:08+02:00",
+    "exported_at": "2020-09-13T17:40:31+02:00",
     "name": "OpenRA - Dune2000",
     "author": "patz.michael@gmail.com",
     "description": "OpenRA is a project that recreates and modernizes the classic Command & Conquer real time strategy games. We have developed a flexible open source game engine (the OpenRA engine) that provides a common platform for rebuilding and reimagining classic 2D and 2.5D RTS games (the OpenRA mods).",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
-    "startup": ".\/squashfs-root\/AppRun --server Server.Name=\"{{SERVER_NAME}}\" Server.ListenPort={{PORT}} Server.AdvertiseOnline={{PUBLIC}} Server.EnableSingleplayer={{SINGLEPLAYER}} Server.Password=\"{{PASSWORD}}\" Server.EnableGeoIP={{GEOIP}} Server.ShareAnonymizedIPs={{ANONYMOUS}}",
+    "startup": ".\/squashfs-root\/AppRun --server Server.Name=\"{{SERVER_NAME}}\" Server.ListenPort={{SERVER_PORT}} Server.AdvertiseOnline={{PUBLIC}} Server.EnableSingleplayer={{SINGLEPLAYER}} Server.Password=\"{{PASSWORD}}\" Server.EnableGeoIP={{GEOIP}} Server.ShareAnonymizedIPs={{ANONYMOUS}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Master server communication established.\",\r\n    \"userInteraction\": []\r\n}",
@@ -30,16 +30,7 @@
             "default_value": "OpenRAServer",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
-        },
-        {
-            "name": "Port",
-            "description": "The Port the server should listen on",
-            "env_variable": "PORT",
-            "default_value": "5500",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|numeric"
+            "rules": "required|string"
         },
         {
             "name": "Public Server",
