@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-09-12T07:12:29+02:00",
+    "exported_at": "2020-09-15T15:37:08+02:00",
     "name": "Eco",
     "author": "info@goover.de",
     "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
-    "image": "quay.io\/goover\/ptero_images:game_eco",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
     "startup": "export DOTNET_BUNDLE_EXTRACT_BASE_DIR=.\/dotnet-bundle &&  .\/EcoServer",
     "config": {
         "files": "{\r\n    \"Configs\/Network.eco\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"GameServerPort\": \"{{server.build.default.port}}\",\r\n            \"WebServerPort\": \"{{server.build.env.WEB_PORT}}\",\r\n            \"PublicServer\": \"{{server.build.env.PUB_SRV}}\",\r\n            \"Password\": \"{{server.build.env.SRV_PWD}}\",\r\n            \"UPnPEnabled\": \"{{server.build.env.UPNP}}\",\r\n            \"Description\": \"{{server.build.env.SRV_DES}}\"\r\n        }\r\n    }\r\n}",
