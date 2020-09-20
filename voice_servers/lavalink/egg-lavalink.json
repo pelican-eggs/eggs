@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl openjdk-11-jre-headless openjdk-11-jdk-headless\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -L -o Lavalink.jar https:\/\/github.com\/frederikam\/Lavalink\/releases\/latest\/download\/Lavalink.jar\r\n\r\ncurl -L -o application.yml https:\/\/raw.githubusercontent.com\/Frederikam\/Lavalink\/master\/LavalinkServer\/application.yml.example\r\n\r\necho -e \"install complete\"\r\nexit 0",
-            "container": "node:12-buster-slim",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
