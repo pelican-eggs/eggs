@@ -57,6 +57,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Voice Servers
 * [Lavalink](/voice_servers/lavalink)
+* [teaspeak](/voice_servers/teaspeak)
 
 ## Game Eggs
 [ET Legacy](/enemy_territory/etlegacy/)
