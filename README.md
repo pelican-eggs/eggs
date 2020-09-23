@@ -41,6 +41,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Twitch](/bots/twitch)
   * [PhantomBot](/bots/twitch/phantombot/)
+  * [sogeBot](/bots/twitch/sogebot/)
 
 * [TeamSpeak3](bots/teamspeak3)
   * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
