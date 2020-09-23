@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-09-22T02:49:15+02:00",
+    "exported_at": "2020-09-23T19:22:59+02:00",
     "name": "ArchiSteamFarm",
     "author": "mail@wuffy.eu",
     "description": "ASF is a C# application with primary purpose of idling Steam cards from multiple accounts simultaneously. Unlike Idle Master which works only for one account at given time, while requiring Steam client running in the background and launching additional processes imitating \"game playing\" status, ASF doesn't require any Steam client running in the background, doesn't launch any additional processes and is made to handle unlimited Steam accounts at once. In addition to that, it's meant to be run on servers or other desktop-less machines, and features full cross-OS support, which makes it possible to launch on any operating system with .NET Core runtime, such as Windows, Linux and OS X. ASF is possible thanks to gigantic amount of work done in marvelous SteamKit2 library.",
-    "image": "quay.io\/ngloader\/images:debian_dotnet-aspnet",
-    "startup": ".\/ArchiSteamFarm-Service.sh",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
+    "startup": ".\/ArchiSteamFarm-Service.sh \"--cryptkey={{ASF_CRYPT_KEY}}\"",
     "config": {
         "files": "{\r\n    \"config\/IPC.config\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Kestrel.Endpoints.Http.Url\": \"http:\/\/0.0.0.0:{{server.build.default.port}}\"\r\n        }\r\n    },\r\n    \"config\/ASF.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"s_SteamOwnerID\": \"{{server.build.env.ASF_STEAM_OWNER_ID}}\",\r\n            \"IPCPassword\": \"{{server.build.env.ASF_IPC_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Start() IPC server ready!\",\r\n    \"userInteraction\": []\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update -y\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\n# Deleting old tmp\r\nif [ -d \/mnt\/server\/.tmp ]; then\r\n    echo -e \"Deleting .tmp folder\"\r\n    rm -r \/mnt\/server\/.tmp\r\nfi\r\n\r\n# Getting latest version\r\nRELEASE_VERSION=$(curl -s \"https:\/\/github.com\/JustArchiNET\/ArchiSteamFarm\/releases\/latest\" | grep -o '[0-9].[0-9].[0-9].[0-9]')\r\nDOWNLOAD_URL=https:\/\/github.com\/JustArchiNET\/ArchiSteamFarm\/releases\/download\/${RELEASE_VERSION}\/ASF-linux-x64.zip\r\n\r\n# Downloading\r\necho -e \"Downloading\"\r\ncd \/tmp\r\ncurl -LJO ${DOWNLOAD_URL}\r\nunzip -d \/mnt\/server -o ASF-linux-x64.zip\r\n\r\n# Permission\r\ncd \/mnt\/server\r\nchmod +x ArchiSteamFarm\r\nchmod +x ArchiSteamFarm-Service.sh\r\n\r\n# Creating default configs\r\nif [ ! -f \/mnt\/server\/config\/ASF.json ]; then\r\n    echo -e \"Creating config\/ASF.json\"\r\n    cat << EOF > \/mnt\/server\/config\/ASF.json\r\n{\r\n  \"s_SteamOwnerID\": \"$ASF_STEAM_OWNER_ID\",\r\n  \"Headless\": false,\r\n  \"IPC\": true,\r\n  \"IPCPassword\": \"$ASF_IPC_PASSWORD\"\r\n}\r\nEOF\r\nfi\r\nif [ ! -f \/mnt\/server\/config\/IPC.config ]; then\r\n    echo -e \"Creating config\/IPC.config\"\r\n    cat << EOF > \/mnt\/server\/config\/IPC.config\r\n{\r\n  \"Kestrel\": {\r\n    \"Endpoints\": {\r\n      \"Http\": {\r\n        \"Url\": \"http:\/\/0.0.0.0:1242\"\r\n      }\r\n    }\r\n  }\r\n}\r\nEOF\r\nfi\r\n\r\necho -e \"Setup finished\"",
+            "script": "apt update -y\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\n# Deleting old tmp\r\nTMP_DIRECTORY=$(echo $DOTNET_BUNDLE_EXTRACT_BASE_DIR | sed \"s|home\/container|mnt\/server|\")\r\necho -e \"Checking $TMP_DIRECTORY\"\r\ncd \/\r\nif [ -d $TMP_DIRECTORY ]; then\r\n    echo -e \"Deleting $TMP_DIRECTORY folder\"\r\n    rm -r $TMP_DIRECTORY\r\nfi\r\n\r\n# Getting latest version\r\nRELEASE_VERSION=$(curl -s \"https:\/\/github.com\/JustArchiNET\/ArchiSteamFarm\/releases\/latest\" | grep -o '[0-9].[0-9].[0-9].[0-9]')\r\nDOWNLOAD_URL=https:\/\/github.com\/JustArchiNET\/ArchiSteamFarm\/releases\/download\/${RELEASE_VERSION}\/ASF-linux-x64.zip\r\n\r\n# Downloading\r\necho -e \"Downloading\"\r\ncd \/tmp\r\ncurl -LJO ${DOWNLOAD_URL}\r\nunzip -d \/mnt\/server -o ASF-linux-x64.zip\r\n\r\n# Permission\r\ncd \/mnt\/server\r\nchmod +x ArchiSteamFarm\r\nchmod +x ArchiSteamFarm-Service.sh\r\n\r\n# Creating default configs\r\nif [ ! -f \/mnt\/server\/config\/ASF.json ]; then\r\n    echo -e \"Creating config\/ASF.json\"\r\n    cat << EOF > \/mnt\/server\/config\/ASF.json\r\n{\r\n  \"s_SteamOwnerID\": \"$ASF_STEAM_OWNER_ID\",\r\n  \"Headless\": false,\r\n  \"IPC\": true,\r\n  \"IPCPassword\": \"$ASF_IPC_PASSWORD\"\r\n}\r\nEOF\r\nfi\r\nif [ ! -f \/mnt\/server\/config\/IPC.config ]; then\r\n    echo -e \"Creating config\/IPC.config\"\r\n    cat << EOF > \/mnt\/server\/config\/IPC.config\r\n{\r\n  \"Kestrel\": {\r\n    \"Endpoints\": {\r\n      \"Http\": {\r\n        \"Url\": \"http:\/\/0.0.0.0:1242\"\r\n      }\r\n    }\r\n  }\r\n}\r\nEOF\r\nfi\r\n\r\necho -e \"Setup finished\"",
             "container": "ubuntu:16.04",
             "entrypoint": "bash"
         }
@@ -40,6 +40,24 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string"
+        },
+        {
+            "name": "CryptKey",
+            "description": "Considered secure by today standards, AES way of storing the password is defined as PasswordFormat of 1. ASF expects SteamPassword property to be a base64-encoded sequence of characters resulting in AES-encrypted byte array after translation, which then should be decrypted using included initialization vector and ASF encryption key.",
+            "env_variable": "ASF_CRYPT_KEY",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:200"
+        },
+        {
+            "name": "Tmp Folder",
+            "description": "",
+            "env_variable": "DOTNET_BUNDLE_EXTRACT_BASE_DIR",
+            "default_value": "\/home\/container\/.tmp",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200"
         }
     ]
 }
