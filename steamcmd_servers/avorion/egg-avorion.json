@@ -1,0 +1,171 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-04T11:49:22-07:00",
+    "name": "Avorion",
+    "author": "iamkubi@gmail.com",
+    "description": "A procedural co-op space sandbox where players can build their own space ships out of dynamically scalable blocks. Fight epic space battles, explore, mine, trade, wage wars and build your own empire to save your galaxy from being torn apart by an unknown enemy.",
+    "image": "quay.io\/pterodactyl\/core:source",
+    "startup": ".\/server.sh --galaxy-name \\\"{{GALAXY_NAME}}\\\" --admin {{ADMIN_ID}} --datapath galaxy --port {{SERVER_PORT}} --query-port {{QUERY_PORT}} --steam-master-port {{STEAM_MASTER_PORT}} --steam-query-port {{STEAM_QUERY_PORT}} --max-players {{MAX_PLAYERS}} --difficulty {{DIFFICULTY}} --collision-damage {{COLLISION_DMG}} --save-interval {{SAVE_INTERVAL}} --same-start-sector {{SAME_START_SECTOR}} --server-name \\\"{{SERVER_NAME}}\\\" --threads {{GAME_THREADS}} --listed {{SERVER_LISTED}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server startup complete\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "\/stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Avorion Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n[[ \"$SERVER_BETA\" == \"true\" ]] && beta_arg=\"beta\" || beta_arg=\"NONE\"\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${APP_ID} -beta \"$beta_arg\" validate +exit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/steamclient.so\r\nmkdir -p \/mnt\/server\/backups\r\nmkdir -p \/mnt\/server\/galaxy\/\"${GALAXY_NAME}\"\r\ncurl https:\/\/raw.githubusercontent.com\/iamkubi\/eggs\/master\/avorion\/server.ini --output \/mnt\/server\/galaxy\/\"${GALAXY_NAME}\"\/server.ini",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Galaxy Name",
+            "description": "Name of the Galaxy to create",
+            "env_variable": "GALAXY_NAME",
+            "default_value": "Avorion",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name of the server, shown in the server list.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Avorion Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Admin ID",
+            "description": "Steam64 ID for the player to make Server Admin",
+            "env_variable": "ADMIN_ID",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players allowed",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|int|max:64"
+        },
+        {
+            "name": "Game Difficulty",
+            "description": "Difficulty of the server, allowed values are: -3, -2, -1, 0, 1, 2, 3 Default: 0",
+            "env_variable": "DIFFICULTY",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:3|min:-3"
+        },
+        {
+            "name": "Collision Damage",
+            "description": "A multiplier for damage to colliding objects. Accepts floating-point numbers, e.g. 0.5 is 50% collision damage. 0: no damage, 1: full damage. default: 1",
+            "env_variable": "COLLISION_DMG",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Save Interval",
+            "description": "Time between automatic saves in seconds.  Defaults to 300 (5 minutes).",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "300",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Same Start Sector",
+            "description": "Indicates if all players should start in the same sector. If false, a random empty sector on the outer rim is populated and used as the home sector for each new player.",
+            "env_variable": "SAME_START_SECTOR",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Threads",
+            "description": "Number of concurrent threads that are used to update sectors. (Identical to the 'Threads' setting ingame.)",
+            "env_variable": "GAME_THREADS",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|max:20"
+        },
+        {
+            "name": "List Publicly",
+            "description": "Privacy setting. If enabled together with useSteam, the server will show up in public server lists. (Same as the ingame setting 'List Publicly')",
+            "env_variable": "SERVER_LISTED",
+            "default_value": "true",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Enable Beta",
+            "description": "Set to true to enable beta, false for stable.",
+            "env_variable": "SERVER_BETA",
+            "default_value": "false",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "",
+            "env_variable": "APP_ID",
+            "default_value": "565060",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "LD Library Path",
+            "description": "",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/linux64",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Steam Master Port",
+            "description": "",
+            "env_variable": "STEAM_MASTER_PORT",
+            "default_value": "27021",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Steam Query Port",
+            "description": "",
+            "env_variable": "STEAM_QUERY_PORT",
+            "default_value": "27020",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27003",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
