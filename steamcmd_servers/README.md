@@ -13,6 +13,9 @@ This is a collection of servers that use steamcmd to install.
 * [arma 3](arma/arma3/)
 * [arma 3 headless](arma/arma3_headless_client/)
 
+## Avorion
+[avorion](avorion/)
+
 ## Citadel: Forged with Fire
 [citadel](citadel/)
 
