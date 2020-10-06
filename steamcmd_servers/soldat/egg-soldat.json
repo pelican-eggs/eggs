@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-04-24T16:03:28+02:00",
+    "exported_at": "2020-10-06T16:59:53+02:00",
     "name": "Soldat",
     "author": "info@goover.de",
     "description": "Soldat is a unique 2D (side-view) multiplayer action game. It has been influenced by the best of games such as Liero, Worms, Quake, and Counter-Strike and provides a fast-paced gaming experience with tons of blood and flesh. Soldiers fight against each other in 2D battle arenas using a deadly arsenal of military weapons, across 7 default game modes. It features 18 different weapons and 60 maps to frag away on, with full support for user created content.\r\n\r\nSteam: https:\/\/store.steampowered.com\/app\/638490\/Soldat\/",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
     "startup": ".\/soldatserver",
     "config": {
-        "files": "{\r\n    \"soldat.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Port=\": \"Port={{server.build.default.port}}\",\r\n            \"Max_Players=\": \"Max_Players={{server.build.env.MAX_PLAYERS}}\",\r\n            \"Game_Password=\": \"Game_Password={{server.build.env.SRV_PWD}}\",\r\n            \"Admin_Password=\": \"Admin_Password={{server.build.env.ADMIN_PASSWD}}\",\r\n            \"Server_Name=\": \"Server_Name={{server.build.env.SRV_NAME}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"soldat.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.Port\": \"{{server.build.default.port}}\",\r\n            \"NETWORK.Max_Players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"NETWORK.Game_Password\": \"{{server.build.env.SRV_PWD}}\",\r\n            \"NETWORK.Admin_Password\": \"{{server.build.env.ADMIN_PASSWD}}\",\r\n            \"NETWORK.Server_Name\": \"{{server.build.env.SRV_NAME}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Done\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
@@ -28,17 +28,17 @@
             "description": "Admin Password for the Server",
             "env_variable": "ADMIN_PASSWD",
             "default_value": "changeme",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
             "name": "Server Password",
             "description": "Password to join Server",
             "env_variable": "SRV_PWD",
-            "default_value": "chageme",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "default_value": "changeme",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
@@ -46,8 +46,8 @@
             "description": "Name of the Server",
             "env_variable": "SRV_NAME",
             "default_value": "MySoldatServer",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:100"
         },
         {
@@ -55,8 +55,8 @@
             "description": "Max Players can join",
             "env_variable": "MAX_PLAYERS",
             "default_value": "10",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
@@ -64,8 +64,8 @@
             "description": "Steam APP ID",
             "env_variable": "SRCDS_APPID",
             "default_value": "638500",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|string|max:20"
         }
     ]
