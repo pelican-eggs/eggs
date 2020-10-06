@@ -47,14 +47,17 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
 ## [Database](/database/)
-### [SQL] Databases
-* [MariaDB](/database/sql/mariadb/)
-* [PostgreSQL](/database/sql/postgres/)
-
 ### In-Memory Databases
 [Redis](/database/redis/)
 * [Redis 5](/database/redis/redis-5)
 * [Redis 6](/database/redis/redis-6)
+
+[noSQL](/database/nosql/)
+* [mongoDB](/database/nosql/mongodb)
+
+### [SQL] Databases
+* [MariaDB](/database/sql/mariadb/)
+* [PostgreSQL](/database/sql/postgres/)
 
 ## Game Eggs
 [ET Legacy](/enemy_territory/etlegacy/)
