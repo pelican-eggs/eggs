@@ -22,6 +22,10 @@ A generic discord.js egg for running discord bots.
 [discord.py](https://discordpy.readthedocs.io/en/latest/)  
 A generic discord.py egg for running discord bots.
 
+#### discordgo
+[discordgo](https://github.com/bwmarrin/discordgo)
+A generic go application egg.
+
 #### FragBot
 [fragforce/fragbot](https://github.com/fragforce/fragbot)  
 The bot that runs as the fragforce `@Fragbot` offering looking-for-group services for now  

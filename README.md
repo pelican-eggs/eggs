@@ -32,6 +32,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [CorpBot](/bots/discord/corpbot/) Python
 * [discord.js](bots/discord/discord.js/) Node JS generic
 * [discord.py](bots/discord/discord.py/) Python generic
+* [discordgo](bots/discord/discordgo/) golang generic
 * [fragbot](/bots/discord/fragbot/) Golang
 * [jmusicbot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron/) Golang
