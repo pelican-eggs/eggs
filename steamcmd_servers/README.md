@@ -1,4 +1,4 @@
-# steamcmd servers
+﻿# steamcmd servers
 
 This is a collection of servers that use steamcmd to install.
 
@@ -45,6 +45,9 @@ This is a collection of servers that use steamcmd to install.
 
 ## Project Zomboid
 [project_zomboid](project_zomboid/)
+
+## Rising World
+[rising_world](rising_world/)
 
 ## Rust Staging
 [rust staging](rust_staging/)

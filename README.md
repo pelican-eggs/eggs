@@ -1,4 +1,4 @@
-# Parkers Pterodactyl eggs repo
+﻿# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
@@ -135,11 +135,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
 * [Project Zomboid](/steamcmd_servers/project_zomboid/)
+* [Rising World](/steamcmd_servers/rising_world)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
   * [dedicated](/steamcmd_servers/scpsl/dedicated/)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin/)
-* [SSoldat](/steamcmd_servers/soldat/)
+* [Soldat](/steamcmd_servers/soldat/)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/stationeers/)
 * [Sven Co-op](/steamcmd_servers/svencoop)
