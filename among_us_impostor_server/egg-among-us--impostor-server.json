@@ -3,14 +3,14 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-10-10T16:43:18+02:00",
+    "exported_at": "2020-10-11T07:18:29+02:00",
     "name": "Among Us - Impostor Server",
     "author": "info@goover.de",
     "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThe latest version supported is 2020.9.22, both desktop and mobile.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
     "startup": ".\/Impostor.Server",
     "config": {
-        "files": "{\r\n    \"config.ini\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"PublicPort\": \" {{server.build.default.port}}\",\r\n            \"ListenPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Server.PublicIp\":\"{{server.build.env.SERVER_IP}}\",\r\n            \"Server.PublicPort\": \"{{server.build.default.port}}\",\r\n            \"Server.ListenPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Matchmaker is listening on\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{}",
         "stop": "^C"
