@@ -1,4 +1,4 @@
-﻿# Parkers Pterodactyl eggs repo
+# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
@@ -41,34 +41,25 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Twitch](/bots/twitch)
   * [PhantomBot](/bots/twitch/phantombot/)
-  * [sogeBot](/bots/twitch/sogebot/)
-  
-[Other](/bots/other/)
-* [Big Brother Bot](/bots/other/bigbrotherbot)
 
 * [TeamSpeak3](bots/teamspeak3)
   * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
 ## [Database](/database/)
+### [SQL] Databases
+* [MariaDB](/database/sql/mariadb/)
+* [PostgreSQL](/database/sql/postgres/)
+
 ### In-Memory Databases
 [Redis](/database/redis/)
 * [Redis 5](/database/redis/redis-5)
 * [Redis 6](/database/redis/redis-6)
-
-[noSQL](/database/nosql/)
-* [mongoDB](/database/nosql/mongodb)
-
-### [SQL] Databases
-* [MariaDB](/database/sql/mariadb/)
-* [PostgreSQL](/database/sql/postgres/)
 
 ## Voice Servers
 * [Lavalink](/voice_servers/lavalink)
 * [teaspeak](/voice_servers/teaspeak)
 
 ## Game Eggs
-[Among Us Impostor Server (/among_us_impostor_server)
-
 [ET Legacy](/enemy_territory/etlegacy/)
 
 [Factorio](/factorio/factorio/)
@@ -126,7 +117,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Arma](/steamcmd_servers/arma/)
   * [Arma 3](/steamcmd_servers/arma/arma3/)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client/)
-* [Avorion](/steamcmd_servers/avorion/)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
 * [Don't Starve](/steamcmd_servers/dont_starve)
@@ -139,21 +129,17 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
 * [Project Zomboid](/steamcmd_servers/project_zomboid/)
-* [Rising World](/steamcmd_servers/rising_world)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
   * [dedicated](/steamcmd_servers/scpsl/dedicated/)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin/)
-* [Soldat](/steamcmd_servers/soldat/)
+* [SSoldat](/steamcmd_servers/soldat/)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/stationeers/)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/steamcmd_servers/unturned/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
-
-[Teeworlds](/teeworlds/)
-* [teeworlds](/teeworlds/teeworlds/)
 
 [Terraria](/terraria/)
 * [vanilla](/terraria/vanilla)
