@@ -1,0 +1,90 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-11T07:16:29+02:00",
+    "name": "Rising World",
+    "author": "info@goover.de",
+    "description": "Rising World is a voxel based open-world sandbox game, featuring a procedurally generated world, playable in single and multi-player.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xmx{{SERVER_MEMORY}}M -jar server.jar +maxplayer={{MAX_PLAYERS}} +serverport={{SERVER_PORT}} +servername=\\\"{{SERVER_NAME}}\\\" +rconport {{RCON_PORT}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"rcon_enabled\": \"true\",\r\n            \"rcon_password\": \"{{server.build.env.RCON_PASSWORD}}\",\r\n            \"server_password\": \"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"RISING WORLD SERVER STARTED\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\nmkdir -p \/mnt\/server\/linux64\r\ncp -v linux64\/steamclient.so ..\/linux64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Rising World Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum player count for the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|max:64"
+        },
+        {
+            "name": "RCON Port",
+            "description": "Overrides the default RCON Port",
+            "env_variable": "RCON_PORT",
+            "default_value": "4253",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "RCON Password",
+            "description": "",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "changeme",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "LD Library Path",
+            "description": "",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": "..\/linux64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "339010",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
