@@ -70,6 +70,9 @@ This is a collection of servers that use steamcmd to install.
 ## Sven coop
 [svencoop](svencoop)
 
+## Team Fortress 2 Classic
+[Team Fortress 2 Classic](team_fortress_2_classic)
+
 ## Tower Unite
 [Tower Unite](tower_unite)
 
