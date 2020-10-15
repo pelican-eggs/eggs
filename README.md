@@ -103,10 +103,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [VanillaCord](/minecraft/java/vanillacord/)
 
 * [Proxies](/minecraft/proxy/) (these are for the java version of minecraft)
-  * [Waterfall](/minecraft/proxy/waterfall/)
   * [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/)
   * [Travertine](/minecraft/proxy/travertine/) Java
   * [Velocity](/minecraft/proxy/velocity/)
+  * [Waterdog](/minecraft/proxy/waterdog/) Java/Bedrock
+  * [Waterfall](/minecraft/proxy/waterfall/)
 
 [OpenRA](/openra/)
 * [OpenRA Dune2000](/openra/openra_dune2000)

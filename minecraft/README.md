@@ -25,7 +25,8 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [VanillaCord](/minecraft/java/vanillacord/)
 
 [Proxies](/minecraft/proxy/) Minecraft Server Proxies
-* [Waterfall](/minecraft/proxy/waterfall/) Java
 * [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/) Java
 * [Travertine](/minecraft/proxy/travertine/) Java
 * [Velocity](/minecraft/proxy/velocity/) Java
+* [Waterdog](/minecraft/proxy/waterdog/) Java/Bedrock
+* [Waterfall](/minecraft/proxy/waterfall/) Java
