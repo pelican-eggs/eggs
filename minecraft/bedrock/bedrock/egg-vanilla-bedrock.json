@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-10-15T18:53:33+11:00",
+    "exported_at": "2020-10-16T15:10:46+00:00",
     "name": "Vanilla Bedrock",
     "author": "parker@parkervcp.com",
     "description": "Bedrock Edition (also known as the Bedrock Version, Bedrock Codebase, Bedrock Engine or just Bedrock) refers to the multi-platform family of editions of Minecraft developed by Mojang AB, Microsoft Studios, 4J Studios, and SkyBox Labs. Prior to this term, as the engine originated with Pocket Edition, this entire product family was referred to as \"Pocket Edition\", \"MCPE\", or \"Pocket\/Windows 10 Edition\".",
@@ -57,7 +57,7 @@
             "default_value": "survival",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:9"
+            "rules": "required|string|in:survival,creative,adventure"
         },
         {
             "name": "Difficulty",
@@ -66,7 +66,7 @@
             "default_value": "easy",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:8"
+            "rules": "required|string|in:peaceful,easy,normal,hard"
         },
         {
             "name": "Allow cheats",
@@ -75,7 +75,7 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:5"
+            "rules": "required|string|in:true,false"
         }
     ]
 }
