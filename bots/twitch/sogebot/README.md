@@ -1,4 +1,4 @@
-# PhantomBot
+# SogeBot
 ### Their [Site](https://www.sogebot.xyz)
 sogBot is an actively developed open source interactive Twitch bot that provides entertainment and moderation for your channel,
 allowing you to focus on what matters the most to you - your game and your viewers.
