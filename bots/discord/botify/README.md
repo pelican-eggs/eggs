@@ -1,4 +1,4 @@
-# ATLBot
+# Botify
 ### Their [Github](https://github.com/robinfriedli/botify)
 Check their github for updated versions and the configuration guide.
 
