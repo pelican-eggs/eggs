@@ -50,3 +50,7 @@ A multifunction Discord bot
 #### SinusBot
 [SinusBot](https://www.sinusbot.com/)  
 Please Check their site for an in depth on the bot.
+
+#### Botify
+[Botify](https://github.com/robinfriedli/botify)  
+Discord bot that plays Spotify tracks and YouTube videos or any URL including Soundcloud links and Twitch streams.

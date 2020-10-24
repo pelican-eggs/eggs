@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-24T16:11:08-03:00",
+    "name": "Botify",
+    "author": "joaquin@rciag.tech",
+    "description": "Discord bot that plays Spotify tracks and YouTube videos or plays any URL including Soundcloud links and Twitch streams.\r\n\r\nTo configure please read: https:\/\/github.com\/robinfriedli\/botify\r\nSteps  1 to 5\r\n\r\nNOTE: YOU NEED A WORKING DATABASE, OTHERWISE IT WONT WORK\r\n\r\nNOTE 2: If you need an updated version you can go to https:\/\/github.com\/robinfriedli\/botify and use those files instead, but you would need to run \"mvn clean install\" as the startup command first and change it back to the original.",
+    "image": "docker.io\/joaquinv98\/maven-pterodactyl:0.0.6",
+    "startup": "mvn exec:java -Dexec.mainClass=net.robinfriedli.botify.boot.Launcher",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Botify Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\n\r\n# Download needed software.\r\nfunction install_required {\r\n    \r\n    apt update\r\n    apt install -y curl unzip jq dos2unix\r\n    \r\n}\r\n\r\nfunction get_download {\r\n    \r\n    cd \/mnt\/server\r\n    curl -L http:\/\/rciag.tech\/extras\/images\/botify.zip -o botify.zip\r\n    cd \/mnt\/server\r\n    unzip botify.zip\r\n    mvn clean install\r\n\r\n}\r\n\r\nfunction cleanup {\r\n    \r\n    rm -rf base.zip\r\n    \r\n}\r\n\r\ninstall_required\r\nget_download\r\ncleanup",
+            "container": "maven:3.6.3-openjdk-11-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
