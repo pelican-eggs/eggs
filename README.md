@@ -64,7 +64,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [PostgreSQL](/database/sql/postgres/)
 
 ## Game Eggs
-[Among Us Impostor Server](/among_us_impostor_server)
+[Among Us Impostor Server](/among_us/impostor_server)
 
 [ET Legacy](/enemy_territory/etlegacy/)
 
