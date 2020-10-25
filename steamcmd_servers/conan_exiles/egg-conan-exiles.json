@@ -3,15 +3,15 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-10-09T08:53:02-04:00",
+    "exported_at": "2020-10-24T11:25:01+00:00",
     "name": "Conan Exiles",
     "author": "brycea@terrahost.cloud",
     "description": "Conan Exiles is an open-world survival game set in the brutal lands of Conan the Barbarian. Survive in a savage world, build your kingdom, and dominate your enemies in brutal combat and epic warfare.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5",
-    "startup": "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine \/home\/container\/ConanSandboxServer.exe -console -log",
+    "startup": "xvfb-run --auto-servernum wine \/home\/container\/ConanSandboxServer.exe -console -log -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}}",
     "config": {
         "files": "{}",
-        "startup": "{}",
+        "startup": "{\r\n    \"done\":\"Started SourceServerQueries\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -28,54 +28,45 @@
             "description": "The ID corresponding to the game to download.",
             "env_variable": "SRCDS_APPID",
             "default_value": "443030",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|numeric|digits_between:1,6"
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,7"
         },
         {
             "name": "XVFB Enable",
             "description": "1 or 0",
             "env_variable": "XVFB",
             "default_value": "1",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|numeric|min:0|max:1"
         },
         {
-            "name": "XVFB Display Width",
-            "description": "",
-            "env_variable": "DISPLAY_WIDTH",
-            "default_value": "640",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "required|numeric"
-        },
-        {
-            "name": "XVFB Display Height",
-            "description": "",
-            "env_variable": "DISPLAY_HEIGHT",
-            "default_value": "480",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "required|numeric"
-        },
-        {
-            "name": "XVFB Bit Depth",
-            "description": "",
-            "env_variable": "DISPLAY_DEPTH",
-            "default_value": "32",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "required|numeric"
-        },
-        {
             "name": "Windows install variable",
-            "description": "Required for windows applications to install with steam.",
+            "description": "Required for windows applications to install with steam.\r\n\r\n1 to enable auto-updates",
             "env_variable": "WINDOWS_INSTALL",
             "default_value": "1",
-            "user_viewable": 0,
-            "user_editable": 0,
-            "rules": "required|string|max:20"
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Decide if you want to update your server",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Query Port",
+            "description": "Server Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|max:65535"
         }
     ]
 }
