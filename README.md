@@ -56,12 +56,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Redis 5](/database/redis/redis-5)
 * [Redis 6](/database/redis/redis-6)
 
-[noSQL](/database/nosql/)
+### noSQL
 * [mongoDB](/database/nosql/mongodb)
 
-### [SQL] Databases
+### SQL Databases
 * [MariaDB](/database/sql/mariadb/)
 * [PostgreSQL](/database/sql/postgres/)
+
+## Voice Servers
+* [Lavalink](/voice_servers/lavalink)
+* [teaspeak](/voice_servers/teaspeak)
 
 ## Game Eggs
 [Among Us Impostor Server](/among_us/impostor_server)
