@@ -1,4 +1,4 @@
-# steamcmd servers
+﻿# steamcmd servers
 
 This is a collection of servers that use steamcmd to install.
 
@@ -12,6 +12,9 @@ This is a collection of servers that use steamcmd to install.
 [arma](arma/)
 * [arma 3](arma/arma3/)
 * [arma 3 headless](arma/arma3_headless_client/)
+
+## Avorion
+[avorion](avorion/)
 
 ## Citadel: Forged with Fire
 [citadel](citadel/)
@@ -42,6 +45,9 @@ This is a collection of servers that use steamcmd to install.
 
 ## Project Zomboid
 [project_zomboid](project_zomboid/)
+
+## Rising World
+[rising_world](rising_world/)
 
 ## Rust Staging
 [rust staging](rust_staging/)

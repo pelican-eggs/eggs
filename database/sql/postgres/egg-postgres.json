@@ -52,7 +52,7 @@
         },
         {
             "name": "Postgres Database",
-            "description": "The postgres databas the user will have access too.",
+            "description": "The postgres database the user will have access too.",
             "env_variable": "PGDATABASE",
             "default_value": "pterodactyl",
             "user_viewable": 1,
