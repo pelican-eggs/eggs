@@ -34,7 +34,7 @@
         },
         {
             "name": "Version",
-            "description": "choose Version, you want to install. Defaul: Latest",
+            "description": "Choose Version, you want to install. Default: Latest",
             "env_variable": "VERSION",
             "default_value": "latest",
             "user_viewable": true,
