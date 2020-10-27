@@ -67,6 +67,9 @@ This is a collection of servers that use steamcmd to install.
 ## Stationeers
 [Stationeers](/steamcmd_servers/stationeers/)
 
+## Stormworks: Build and Rescue
+[Stormworks](/steamcmd_servers/stormworks/)
+
 ## Sven coop
 [svencoop](svencoop)
 
