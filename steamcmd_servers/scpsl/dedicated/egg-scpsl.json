@@ -8,7 +8,7 @@
     "author": "info@goover.de",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete",
-    "startup": ".\/LocalAdmin {{SERVER_PORT}}",
+    "startup": "export DOTNET_BUNDLE_EXTRACT_BASE_DIR=.\/dotnet-bundle && .\/LocalAdmin {{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config_gameplay.txt\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server_ip\": \"0.0.0.0\",\r\n            \"forward_ports\": \"false\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Waiting for players..\",\r\n    \"userInteraction\": []\r\n}",
