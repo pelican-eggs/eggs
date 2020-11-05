@@ -3,12 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-01-29T19:54:33+01:00",
+    "exported_at": "2020-11-05T01:08:38+01:00",
     "name": "SCP:SL",
     "author": "info@goover.de",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete",
-    "startup": "export DOTNET_BUNDLE_EXTRACT_BASE_DIR=.\/dotnet-bundle && .\/LocalAdmin {{SERVER_PORT}}",
+    "startup": ".\/LocalAdmin {{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config_gameplay.txt\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server_ip\": \"0.0.0.0\",\r\n            \"forward_ports\": \"false\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Waiting for players..\",\r\n    \"userInteraction\": []\r\n}",
@@ -28,9 +28,18 @@
             "description": "",
             "env_variable": "SRCDS_APPID",
             "default_value": "996560",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|string|max:20"
+        },
+        {
+            "name": "Dotnet Bundle",
+            "description": "Only used for EXILED Framework Updater.",
+            "env_variable": "DOTNET_BUNDLE_EXTRACT_BASE_DIR",
+            "default_value": ".\/dotnet-bundle",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
         }
     ]
 }
