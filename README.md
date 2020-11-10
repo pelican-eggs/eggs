@@ -70,6 +70,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## Game Eggs
 [Among Us Impostor Server](/among_us/impostor_server)
 
+[Cryofall](/cryofall/)
+
 [ET Legacy](/enemy_territory/etlegacy/)
 
 [Factorio](/factorio/factorio/)
@@ -84,6 +86,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [SA-MP](/gta/samp/)
 
 [Mindustry](/mindustry/)
+
+[LeagueSandbox](/leaguesandbox)
 
 [Minecraft](/minecraft/)
 * [Bedrock](/minecraft/bedrock/)  
@@ -173,5 +177,3 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Vintage Story](/vintage_story/vintage_story/)
 
 [Xonotic](/xonotic/xonotic/)
-
-[Cryofall](/cryofall/)
