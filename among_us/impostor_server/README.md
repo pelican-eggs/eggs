@@ -7,11 +7,13 @@ There are no special features at this moment, the goal is aiming to be as close 
 
 ### Install notes
 
-You MUST use Port 22023, else you can't connect
+You MUST use Port 22023, else you can't connect (below Among Us v2020.9.22)
+v2020.9.22 support Custom Ports
 
 ### Server Ports
 Ports required to run the server in a table format.
 
 | Port    | default |
 |---------|---------|
-| Game    | 22023   |
+| Game (below v2020.9.22)    | 22023   |
+| Game (v2020.9.22)    | Any   |
