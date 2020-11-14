@@ -16,6 +16,9 @@ This is a collection of servers that use steamcmd to install.
 ## Avorion
 [avorion](avorion/)
 
+## Barotrauma
+[barotrauma](barotrauma/)
+
 ## Citadel: Forged with Fire
 [citadel](citadel/)
 
