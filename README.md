@@ -124,6 +124,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)
+* [ATLAS](/steamcmd_servers/atlas)
 * [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)
 * [Arma](/steamcmd_servers/arma/)
   * [Arma 3](/steamcmd_servers/arma/arma3/)

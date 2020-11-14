@@ -8,6 +8,9 @@ This is a collection of servers that use steamcmd to install.
 ## ARK
 [ark](ark_survival_evolved/)
 
+## ATLAS
+[atlas](atlas1/)
+
 ## ARMA
 [arma](arma/)
 * [arma 3](arma/arma3/)
