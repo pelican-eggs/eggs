@@ -1,0 +1,98 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-11-15T00:44:40+00:00",
+    "name": "Barotrauma",
+    "author": "admin@softwarenoob.com",
+    "description": "Barotrauma is a 2D co-op survival horror submarine simulator, inspired by games like FTL: Faster Than Light, Rimworld, Dwarf Fortress and Space Station 13. It\u2019s a Sci-Fi game that combines ragdoll physics and alien sea monsters with teamwork and existential fear.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "startup": ".\/DedicatedServer -batchmode",
+    "config": {
+        "files": "{\r\n    \"serversettings.xml\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"name\": \"\\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"public\": \"\\\"{{server.build.env.PUBLIC_MODE}}\\\"\",\r\n            \"password\": \"\\\"{{server.build.env.SERV_PASSWORD}}\\\"\",\r\n            \"port\": \"\\\"{{server.build.env.GAME_PORT}}\\\"\",\r\n            \"queryport\": \"\\\"{{server.build.env.QUERY_PORT}}\\\"\",\r\n            \"maxplayers\": \"\\\"{{server.build.env.MAX_PLAYERS}}\\\"\",\r\n            \"ServerMessage\": \"\\\"{{server.build.env.SERVER_MESSAGE}}\\\"\",\r\n            \"startwhenclientsready\": \"True\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "^C",
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\nSRCDS_APPID=1026340\r\n\r\n## just in case someone removed the defaults.\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\n\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The name of the server that will be displayed in the server browser",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My own server",
+            "tickable": false,
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27016",
+            "tickable": false,
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Max Players",
+            "description": "The max amount of players that can join the server",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "tickable": false,
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|max:16"
+        },
+        {
+            "name": "Server Port",
+            "description": "Server Port",
+            "env_variable": "GAME_PORT",
+            "default_value": "27015",
+            "tickable": false,
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Message",
+            "description": "Sets the text displayed in the server infobox",
+            "env_variable": "SERVER_MESSAGE",
+            "default_value": "",
+            "tickable": false,
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:40"
+        },
+        {
+            "name": "Password",
+            "description": "Sets password required to enter the server, leave empty for no password",
+            "env_variable": "SERV_PASSWORD",
+            "default_value": "",
+            "tickable": false,
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Public",
+            "description": "if the server should be shown in the server browser, by default set to false = private. The server is always joinable through IP unless a password is set.",
+            "env_variable": "PUBLIC_MODE",
+            "default_value": "false",
+            "tickable": false,
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|in:true,false"
+        }
+    ],
+    "mods": []
+}
