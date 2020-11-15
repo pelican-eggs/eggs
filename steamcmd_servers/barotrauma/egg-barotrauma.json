@@ -13,7 +13,7 @@
         "files": "{\r\n    \"serversettings.xml\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"name\": \"\\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"public\": \"\\\"{{server.build.env.PUBLIC_MODE}}\\\"\",\r\n            \"password\": \"\\\"{{server.build.env.SERV_PASSWORD}}\\\"\",\r\n            \"port\": \"\\\"{{server.build.env.GAME_PORT}}\\\"\",\r\n            \"queryport\": \"\\\"{{server.build.env.QUERY_PORT}}\\\"\",\r\n            \"maxplayers\": \"\\\"{{server.build.env.MAX_PLAYERS}}\\\"\",\r\n            \"ServerMessage\": \"\\\"{{server.build.env.SERVER_MESSAGE}}\\\"\",\r\n            \"startwhenclientsready\": \"True\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
-        "stop": "^C",
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
