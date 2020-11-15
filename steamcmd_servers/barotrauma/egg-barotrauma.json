@@ -28,7 +28,6 @@
             "description": "The name of the server that will be displayed in the server browser",
             "env_variable": "SERVER_NAME",
             "default_value": "My own server",
-            "tickable": false,
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:40"
@@ -38,7 +37,6 @@
             "description": "Query Port",
             "env_variable": "QUERY_PORT",
             "default_value": "27016",
-            "tickable": false,
             "user_viewable": 0,
             "user_editable": 0,
             "rules": "required|integer"
@@ -48,7 +46,6 @@
             "description": "The max amount of players that can join the server",
             "env_variable": "MAX_PLAYERS",
             "default_value": "10",
-            "tickable": false,
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|numeric|max:16"
@@ -58,7 +55,6 @@
             "description": "Server Port",
             "env_variable": "GAME_PORT",
             "default_value": "27015",
-            "tickable": false,
             "user_viewable": 0,
             "user_editable": 0,
             "rules": "required|string|max:20"
@@ -68,7 +64,6 @@
             "description": "Sets the text displayed in the server infobox",
             "env_variable": "SERVER_MESSAGE",
             "default_value": "",
-            "tickable": false,
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "nullable|string|max:40"
@@ -78,7 +73,6 @@
             "description": "Sets password required to enter the server, leave empty for no password",
             "env_variable": "SERV_PASSWORD",
             "default_value": "",
-            "tickable": false,
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "nullable|string|max:20"
@@ -88,11 +82,9 @@
             "description": "if the server should be shown in the server browser, by default set to false = private. The server is always joinable through IP unless a password is set.",
             "env_variable": "PUBLIC_MODE",
             "default_value": "false",
-            "tickable": false,
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|in:true,false"
         }
-    ],
-    "mods": []
+    ]
 }
