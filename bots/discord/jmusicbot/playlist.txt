@@ -1,0 +1,31 @@
+# THIS IS AN EXAMPLE PLAYLIST, EDIT TI TO YOUR OWN REQUIREMENTS
+# jagrosh's playlist
+# lots of formats are supported, as shown below
+# JustSomeBots playlist format is supported as well
+
+# This next line (the word "shuffle" on a comment line) makes it so that the playlist is always shuffled when loaded.
+
+# shuffle
+
+
+# examples of searches on youtube
+ytsearch:juicy fruit williams
+ytsearch:gorillaz dare audio
+
+# examples of searches on soundcloud
+scsearch:lights metrognome
+
+# examples of specific youtube videos
+https://www.youtube.com/watch?v=x7ogV49WGco
+
+# examples of youtube playlists
+PLUib4KwT0DMJaPgg_nr1ia8FY5JcXksvb
+
+
+# Lots of formats are supported
+# #############################
+# Links (to youtube videos, soundcloud, radio, streams, etc)
+# Searches (prefixed with ytsearch or scsearch as shown above)
+# Youtube video or playlist IDs
+# Youtube playlist links (https://github.com/jagrosh/MusicBot/wiki/Playlists)
+# Local files (/home/container/music/mysong.mp3)
