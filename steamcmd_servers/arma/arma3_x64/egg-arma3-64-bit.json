@@ -8,7 +8,7 @@
     "author": "brycea@terrahost.cloud",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
     "features": null,
-    "image": "quay.io\/terrahost\/pterodactyl-images:game_arma3_x64",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:game_arma3_x64",
     "startup": ".\/arma3server_x64 -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/profiles -bepath=.\/battleye -cfg={{BASIC}} -config={{CONFIG}} {{CUSTOM}} -mod={{MODS}} -serverMod={{SERVERMODS}}",
     "config": {
         "files": "{}",
