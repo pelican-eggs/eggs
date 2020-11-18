@@ -29,21 +29,30 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Discord](/bots/discord/)
 * [ATL Bot](/bots/discord/atlbot/) Node JS
 * [Bastion](/bots/discord/bastion/)
+* [CorpBot](/bots/discord/corpbot/) Python
 * [discord.js](bots/discord/discord.js/) Node JS generic
 * [fragbot](/bots/discord/fragbot/) Golang
 * [jmusicbot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron/) Golang
 * [pixel-bot](/bots/discord/pixelbot/) Python
+* [Red](/bots/discord/redbot/) Python
 * [Sinusbot](/bots/discord/sinusbot/)
+
+[Twitch](/bots/twitch)
+* [PhantomBot](/bots/twitch/phantombot/)
 
 [TeamSpeak3](bots/teamspeak3)
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
 
 ## Database Eggs
+### SQL Databases
 [MariaDB](/database/mariadb/)
+[PostgreSQL](/database/postgres/)
+
+### In-Memory Databases
+[Redis](/database/redis/)
 
 ## Game Eggs
-
 [ET Legacy](/enemy_territory/etlegacy/)
 
 [Factorio](/factorio/factorio/)
@@ -57,28 +66,36 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Multi Theft Auto](/gta/mtasa/)
   * [SA-MP](/gta/samp/)
 
-[Minecraft Bedrock](/minecraft_bedrock/) Servers for Bedrock Minecraft
+[Mindusrty](/mindustry/)
+
+[Minecraft Bedrock](/minecraft_bedrock/)  
 * [Bedrock](/minecraft_bedrock/bedrock/)
-* [Nukkit](/minecraft_bedrock/nukkit/)
-* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)
+* [DragonProxy](/minecraft_bedrock/dragonproxy/)  
+* [Nukkit](/minecraft_bedrock/nukkit/)  
+* [PocketMine MP](/minecraft_bedrock/pocketmine_mp/)  
 
 [Minecraft Java](/minecraft_java/) Servers for Java Minecraft
 * [Cuberite](/minecraft_java/cuberite/)
-* [Forge](/minecraft_java/forge/)
-* [Feed The Beast](/minecraft_java/ftb/)
+* [feather](/minecraft/feather/)  
+* [Feed The Beast](/minecraft_java/ftb/)  
+* [Forge](/minecraft_java/forge/)  
+* [Magma](/minecraft_java/magma/)
+
 * [Paper](/minecraft_java/paper)
 * [Spigot](/minecraft_java/spigot/)
 * [spongeforge](/minecraft_java/spongeforge/)
 * [SpongeVanilla](/minecraft_java/spongevanilla/)
 * [Technic](/minecraft_java/technic/)
 * [VanillaCord](/minecraft_java/vanillacord/)
+* [Tuinity](/minecraft_java/tuinity/)
 
 [Minecraft Proxies](/minecraft_proxy/) (these are for the java version of minecraft)
 * [Waterfall](/minecraft_proxy/waterfall/)
 * [TyphoonLimbo](/minecraft_proxy/typhoonlimbo/)
 * [Velocity](/minecraft_proxy/velocity/)
 
-[Starmade](/starmade/starmade/)
+[Red Dead Redemption](/rdr/)
+* [RedM](/rdr/redm/)
 
 [steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die/)
@@ -86,28 +103,41 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Arma](/steamcmd_servers/arma/)
   * [Arma 3](/steamcmd_servers/arma/arma3/)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client/)
+* [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
 * [Don't Starve](/steamcmd_servers/dont_starve)
 * [ECO](/steamcmd_servers/eco/)
 * [HLDS server](/steamcmd_servers/hlds_server)
+* [Hurtworld](/steamcmd_servers/hurtworld)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
+* [Project Zomboid](/steamcmd_servers/project_zomboid/)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
+  * [dedicated](/steamcmd_servers/scpsl/dedicated/)
+  * [multiadmin](/steamcmd_servers/scpsl/multiadmin/)
+* [SSoldat](/steamcmd_servers/soldat/)
 * [Starbound](/steamcmd_servers/starbound)
+* [Stationeers](/steamcmd_servers/stationeers/)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
-* [Tower Unite](/steamcmd_servers/tower_unite/)
 * [Unturned](/steamcmd_servers/unturned/)
   * [RocketMod](/steamcmd_servers/unturned/rocketmod/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
 
 [Terraria](/terraria/)
+* [vanilla](/terraria/vanilla)
 * [tmodloader](/terraria/tmodloader)
 * [tshock](/terraria/tshock/)
 
 [Tycoon Games](/tycoon_games/)
 * [OpenTTD](/tycoon_games/openttd/)
+
+[Unreal Engine](/unreal_engine)
+* [Tower Unite](/unreal_engine/tower_unite/)
+* [Tower Unite](/steamcmd_servers/tower_unite/)
+
+[Vintage Story](/vintage_story/vintage_story/)
 
 [Xonotic](/xonotic/xonotic/)

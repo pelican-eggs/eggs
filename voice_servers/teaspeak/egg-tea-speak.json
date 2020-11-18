@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-03-28T13:50:13-04:00",
+    "name": "TeaSpeak",
+    "author": "parker@parkervcp.com",
+    "description": "TeaSpeak is a free to use client and server software for VoIP communication.\r\n\r\nIts the ideal deal software for everyone who is annoyed about limits and restrictions.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/TeaSpeakServer --property:binding.query.port={{QUERY_PORT}} --property:binding.file.port={{FILE_PORT}} --property:voice.default_port={{SERVER_PORT}}",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"voice.default_port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"file.port\": \"{{server.build.env.FILE_PORT}}\",\r\n            \"query.motd\": \"\\\"{{server.build.env.SERVER_MOTD}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Started server on \"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown now"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n \r\n## install required packages\r\napt update\r\napt upgrade -y\r\napt install curl -y\r\n\r\n## make and change to directory\r\nmkdir \/mnt\/server\r\ncd \/mnt\/server\/\r\n\r\n## get download link\r\nif [ \"${VERSION}\" == \"\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo \"https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/TeaSpeak-$(curl -sSLk https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/latest).tar.gz\")\r\nelse\r\n    DOWNLOAD_URL=$(echo \"https:\/\/repo.teaspeak.de\/server\/linux\/amd64\/TeaSpeak-${VERSION}.tar.gz\")\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o teaspeak.tar.gz ${DOWNLOAD_LINK}\"\r\ncurl -sSL -o teaspeak.tar.gz ${DOWNLOAD_LINK}\r\n\r\n## unpack files\r\necho -e \"unpacking files\"\r\ntar xzvf teaspeak.tar.gz\r\n\r\necho -e \"install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Query Port",
+            "description": "The query port for TeaSpeak",
+            "env_variable": "QUERY_PORT",
+            "default_value": "10101",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "File Transfer Port",
+            "description": "The TeaSpeak File Transfer Port",
+            "env_variable": "FILE_PORT",
+            "default_value": "30303",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "Server MOTD",
+            "description": "The TeaSpeak Server MOTD",
+            "env_variable": "SERVER_MOTD",
+            "default_value": "TeaSpeak\\n\\rHosted on pterodactyl!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:128"
+        },
+        {
+            "name": "ld library path",
+            "description": "Don't touch this if you want the server to start",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/libs\/",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "ld preload",
+            "description": "Don't touch this if you want the server to start",
+            "env_variable": "LD_PRELOAD",
+            "default_value": ".\/libs\/libjemalloc.so.2",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "Teaspeak Version",
+            "description": "What version of teaspeak to install",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

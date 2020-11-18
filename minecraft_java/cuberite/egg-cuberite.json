@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Cuberite\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/builds.cuberite.org\/job\/Cuberite%20Linux%20x64%20Master\/lastSuccessfulBuild\/artifact\/Cuberite.tar.gz\r\n\r\ntar --strip-components=1 -xf Cuberite.tar.gz",
+            "script": "#!\/bin\/ash\r\n# Cuberite\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/download.cuberite.org\/linux-x86_64\/Cuberite.tar.gz\r\n\r\ntar --strip-components=1 -xf Cuberite.tar.gz",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }

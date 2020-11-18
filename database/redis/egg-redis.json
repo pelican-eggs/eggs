@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-03-04T11:05:29-05:00",
+    "name": "Redis",
+    "author": "parker@parkervcp.com",
+    "description": "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:db_redis",
+    "startup": "redis-server --bind 0.0.0.0 --port {{SERVER_PORT}} --requirepass {{SERVER_PASSWORD}} --maxmemory {{SERVER_MEMORY}}mb --daemonize yes && redis-cli -p {{SERVER_PORT}} -a {{SERVER_PASSWORD}} && redis-cli -p {{SERVER_PORT}} -a {{SERVER_PASSWORD}} shutdown save",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Configuration loaded\"\r\n}",
+        "logs": "{}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Redis Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nsleep 5\r\necho -e \"Install complete. Made this to not have issues.\"",
+            "container": "alpine:3.10",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Redis Password",
+            "description": "The password redis should use to secure the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "P@55w0rd",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        }
+    ]
+}

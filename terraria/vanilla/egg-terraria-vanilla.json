@@ -1,0 +1,81 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-05-21T09:11:45-04:00",
+    "name": "Terraria Vanilla",
+    "author": "iamkubi@gmail.com",
+    "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu",
+    "startup": ".\/TerrariaServer.bin.x86_64 -config serverconfig.txt",
+    "config": {
+        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Vanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y curl wget file unzip\r\n\r\nDOWNLOAD_LINK=invalid\r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\/\r\n\r\nif [ \"${TERRARIA_VERSION}\" == \"latest\" ] || [ \"${TERRARIA_VERSION}\" == \"\" ] ; then\r\n    DOWNLOAD_LINK=$(curl -sSL https:\/\/terraria.gamepedia.com\/Server#Downloads | grep '>Terraria Server ' | grep -Eoi '<a [^>]+>' | grep -Eo 'href=\\\"[^\\\\\\\"]+\\\"' | grep -Eo '(http|https):\\\/\\\/[^\\\"]+' | tail -1 | cut -d'?' -f1)\r\nelse\r\n    CLEAN_VERSION=$(echo ${TERRARIA_VERSION} | sed 's\/\\.\/\/g')\r\n    echo -e \"Downloading terraria server files\"\r\n    DOWNLOAD_LINK=$(curl -sSL https:\/\/terraria.gamepedia.com\/Server#Downloads | grep '>Terraria Server ' | grep -Eoi '<a [^>]+>' | grep -Eo 'href=\\\"[^\\\\\\\"]+\\\"' | grep -Eo '(http|https):\\\/\\\/[^\\\"]+' | grep \"${CLEAN_VERSION}\" | cut -d'?' -f1)\r\nfi \r\n\r\n## this is a simple script to validate a download url actaully exists\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid.\"\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\nCLEAN_VERSION=$(echo ${DOWNLOAD_LINK##*\/} | cut -d'-' -f3 | cut -d'.' -f1)\r\n\r\necho -e \"running 'curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}'\" \r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip ${DOWNLOAD_LINK##*\/}\r\n\r\necho -e \"\"\r\ncp -R ${CLEAN_VERSION}\/Linux\/* .\/\r\nchmod +x TerrariaServer.bin.x86_64\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${CLEAN_VERSION}\r\n\r\necho -e \"Generating config file\"\r\ncat <<EOF > serverconfig.txt\r\nworldpath=\/home\/container\/saves\/Worlds\r\nworldname=default\r\nworld=\/home\/container\/saves\/Worlds\/default.wld\r\ndifficulty=3\r\nautocreate=1\r\nport=7777\r\nmaxplayers=8\r\nEOF\r\n\r\nmkdir -p \/mnt\/server\/saves\/Worlds\r\n\r\necho -e \"Install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Terraria version",
+            "description": "the version of Terraria that is to be used.\r\n\r\nYou can use the full version number or the file number. (ex. 1.3.5.3 or 1353)\r\n\r\nGet version numbers here - https:\/\/terraria.gamepedia.com\/Server#Downloads",
+            "env_variable": "TERRARIA_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "The name for the world file.",
+            "env_variable": "WORLD_NAME",
+            "default_value": "world",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum number of players a server will hold.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "8",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "World Size",
+            "description": "Defines the worlds size. 3 sizes 1 (small), 2 (medium), 3 (large).",
+            "env_variable": "WORLD_SIZE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "Difficulty",
+            "description": "World Difficulty\r\n\r\nOptions: 0(normal), 1(expert), 2(master), 3(journey)",
+            "env_variable": "WORLD_DIFFICULTY",
+            "default_value": "3",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "MOTD",
+            "description": "Server MOTD",
+            "env_variable": "SERVER_MOTD",
+            "default_value": "Welcome!",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:128"
+        }
+    ]
+}

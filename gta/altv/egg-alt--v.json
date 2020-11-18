@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-01-02T15:11:11-05:00",
+    "exported_at": "2020-02-19T21:48:36-05:00",
     "name": "alt:V",
     "author": "parker@parkervcp.com",
     "description": "alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V",
@@ -34,9 +34,9 @@
         },
         {
             "name": "Which alt:V build to download",
-            "description": "The supported versions are alpha, beta, stable (default).\r\n\r\nIf you don't know what you are doing leave it on stable",
+            "description": "The supported versions are release, rc, dev (default: release).\r\n\r\nIf you don't know what you are doing leave it on stable",
             "env_variable": "BUILD",
-            "default_value": "stable",
+            "default_value": "release",
             "user_viewable": 1,
             "user_editable": 1,
             "rules": "required|string|max:20"
