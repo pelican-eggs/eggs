@@ -1,0 +1,109 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-11-18T10:58:51-05:00",
+    "name": "Arma 3 (64-bit)",
+    "author": "brycea@terrahost.cloud",
+    "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
+    "features": null,
+    "image": "quay.io\/terrahost\/pterodactyl-images:game_arma3_x64",
+    "startup": ".\/arma3server_x64 -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/profiles -bepath=.\/battleye -cfg={{BASIC}} -config={{CONFIG}} {{CUSTOM}} -mod={{MODS}} -serverMod={{SERVERMODS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Connected to Steam servers\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n## install required packages to install arma\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\n## install steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\n## needs to be used for steamcmd to operate correctly\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n## install arma\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n# 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\nchmod +x \/mnt\/server\/arma3server_x64\r\n# doesn't actually work with current 64 bit wrapper\r\nchmod +x \/mnt\/server\/arma3server",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game AppID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "233780",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Steam Username",
+            "description": "Used for installation",
+            "env_variable": "STEAM_USER",
+            "default_value": "anonymous",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Steam Password",
+            "description": "",
+            "env_variable": "STEAM_PASS",
+            "default_value": "!xNfMpAN*Lr3iMsJ",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Server Configuration File",
+            "description": "https:\/\/community.bistudio.com\/wiki\/server.cfg",
+            "env_variable": "CONFIG",
+            "default_value": "server.cfg",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "Basic Network Config",
+            "description": "Network Configuration",
+            "env_variable": "BASIC",
+            "default_value": "basic.cfg",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "Check for Updates",
+            "description": "Check for updates on server start.\r\n1 True | 0 False",
+            "env_variable": "UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|numeric"
+        },
+        {
+            "name": "Mods",
+            "description": "Client mods with the -mods startup option",
+            "env_variable": "MODS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Server Mods",
+            "description": "Server-sided mods with the -serverMods startup option.",
+            "env_variable": "SERVERMODS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Extra Flags for SteamCMD",
+            "description": "Typically used for grabbing beta builds.\r\nExample: -beta profiling -betapassword CautionSpecialProfilingAndTestingBranchArma3",
+            "env_variable": "EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|string"
+        }
+    ]
+}
