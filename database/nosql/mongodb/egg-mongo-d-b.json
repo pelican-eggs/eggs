@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-30T13:01:44+00:00",
+    "name": "MongoDB",
+    "author": "parker@parkervcp.com",
+    "description": "MongoDB is a general purpose, document-based, distributed database built for modern application developers and for my butt era.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:db_mongo-4",
+    "startup": "mongod --fork --dbpath \/home\/container\/mongodb\/ --port ${SERVER_PORT} --bind_ip 0.0.0.0 --logpath \/home\/container\/logs\/mongo.log; until nc -z -v -w5 127.0.0.1 ${SERVER_PORT}; do echo 'Waiting for mongodb connection...'; sleep 5; done && mongo 127.0.0.1:${SERVER_PORT} && mongo --eval \"db.getSiblingDB('admin').shutdownServer()\" 127.0.0.1:${SERVER_PORT}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"child process started successfully\"\r\n}",
+        "logs": "{}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash \r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\ncp \/etc\/mongod.conf.orig \/mnt\/server\/mongod.conf\r\n\r\nmkdir mongodb logs\r\n\r\nmongod --port 27017 --dbpath \/mnt\/server\/mongodb\/ --logpath \/mnt\/server\/logs\/mongo.log --fork\r\n\r\nmongo --eval \"db.getSiblingDB('admin').createUser({user: '${MONGO_USER}', pwd: '${MONGO_USER_PASS}', roles: ['root']})\"\r\n\r\nmongo --eval \"db.getSiblingDB('admin').shutdownServer()\"",
+            "container": "mongo:4-bionic",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Mongo Admin Username",
+            "description": "The MongoDB Admin user",
+            "env_variable": "MONGO_USER",
+            "default_value": "admin",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Mongo Admin Password",
+            "description": "",
+            "env_variable": "MONGO_USER_PASS",
+            "default_value": "aP@55word",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        }
+    ]
+}

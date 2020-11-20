@@ -1,0 +1,55 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-11-20T15:01:04+01:00",
+    "name": "Among Us - Impostor Server",
+    "author": "info@goover.de",
+    "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThe latest version supported is 2020.9.22, both desktop and mobile.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5",
+    "startup": ".\/Impostor.Server",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Server.PublicPort\": \"{{server.build.default.port}}\",\r\n            \"Server.ListenPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Matchmaker is listening on\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install wget curl jq unzip tar redis-server file ca-certificates apt-utils\r\n\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/$LATEST_VERSION\/$MATCH\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/$MATCH\"\r\nfi\r\n\r\necho $DOWNLOAD_LINK\r\nwget $DOWNLOAD_LINK\r\n\r\nunzip -o Impostor-Server-linux-x64.zip\r\nrm -fR Impostor-Server-linux-x64.zip \r\nchmod +x Impostor.Server",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "GITHUB_PACKAGE",
+            "description": "GITHUB_PACKAGE",
+            "env_variable": "GITHUB_PACKAGE",
+            "default_value": "Impostor\/Impostor",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required"
+        },
+        {
+            "name": "MATCH",
+            "description": "Filename to Match",
+            "env_variable": "MATCH",
+            "default_value": "Impostor-Server-linux-x64.zip",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required"
+        },
+        {
+            "name": "Version",
+            "description": "Version to Download.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:30"
+        }
+    ]
+}

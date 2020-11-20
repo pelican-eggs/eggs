@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-07-11T00:34:47-04:00",
+    "exported_at": "2020-09-28T21:07:40-04:00",
     "name": "Redis-6",
     "author": "parker@parkervcp.com",
     "description": "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams.",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Redis Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ ! -d \/mnt\/server\/redis.conf ]; then\r\n    curl https:\/\/raw.githubusercontent.com\/redis\/redis\/6.0\/redis.conf -o redis.conf\r\nfi\r\n\r\nsleep 5\r\necho -e \"Install complete. Made this to not have issues.\"",
+            "script": "#!\/bin\/ash\r\n# Redis Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ ! -d \/mnt\/server\/redis.conf ]; then\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/database\/redis\/redis-6\/redis.conf -o redis.conf\r\nfi\r\n\r\nsleep 5\r\necho -e \"Install complete. Made this to not have issues.\"",
             "container": "alpine:3.10",
             "entrypoint": "ash"
         }

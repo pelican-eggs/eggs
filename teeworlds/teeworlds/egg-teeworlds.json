@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-01T22:39:40-04:00",
+    "name": "Teeworlds",
+    "author": "parker@parkervcp.com",
+    "description": "Teeworlds is a free online multiplayer game, available for all major operating systems. Battle with up to 16 players in a variety of game modes, including Team Deathmatch and Capture The Flag. You can even design your own maps!",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/teeworlds_srv",
+    "config": {
+        "files": "{\r\n    \"autoexec.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"bindaddr\": \"bindaddr 0.0.0.0\",\r\n            \"sv_port\": \"sv_port {{server.build.default.port}}\",\r\n            \"sv_name\": \"sv_name {{server.build.env.SERVER_NAME}}\",\r\n            \"sv_motd\": \"sv_motd {{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"as master, sending heartbeats\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "## teeworlds pterodactyl installer\r\napt update\r\napt upgrade -y\r\napt install -y curl jq file\r\n\r\nGITHUB_PACKAGE=\"teeworlds\/teeworlds\"\r\nMATCH=\"linux_x86_64\"\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\"]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## setting variable names for later\r\nFILE_NAME=${DOWNLOAD_LINK##*\/}\r\nFOLDER_NAME=${FILE_NAME%.tar.gz}\r\n\r\necho -e \"running 'curl -sSL ${DOWNLOAD_LINK} -o ${FILE_NAME}'\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${FILE_NAME}\r\n\r\nFILETYPE=$(file -F ',' ${FILE_NAME} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${FILE_NAME}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${FILE_NAME}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n    tar xvf ${FILE_NAME}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    # exit 2 \r\nfi\r\n\r\n## cleanup old files\r\nmv ${FOLDER_NAME}\/* .\/\r\n\r\nrm -rf ${FILE_NAME} ${FOLDER_NAME}\r\n\r\n## download default config\r\nif [ ! -f \/mnt\/server\/autoexec.cfg ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/teeworlds\/teeworlds\/autoexec.cfg > \/mnt\/server\/autoexec.cfg\r\nfi\r\n\r\n## download safe storage file\r\n## overwrites any that exists.\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/teeworlds\/teeworlds\/storage.cfg > \/mnt\/server\/storage.cfg\r\n\r\necho -e \"Install complete.\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The Display Name for the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl Hosted Teeworlds Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Server MotD",
+            "description": "Server Message of the Day displayed to all users.",
+            "env_variable": "SERVER_MOTD",
+            "default_value": "A Pterodactyl Hosted Teeworlds Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        }
+    ]
+}

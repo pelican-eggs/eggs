@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-03-10T15:39:00+01:00",
+    "exported_at": "2020-10-17T02:19:36+00:00",
     "name": "Multi Theft Auto",
     "author": "info@six-gaming.com",
     "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
@@ -17,8 +17,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o multitheftauto_linux_x64.tar.gz https:\/\/linux.mtasa.com\/dl\/multitheftauto_linux_x64.tar.gz\r\ncurl -sSL -o mta-baseconfig.tar.gz https:\/\/linux.mtasa.com\/dl\/baseconfig.tar.gz\r\ncurl -sSL -o mtasa-resources-latest.zip http:\/\/mirror.mtasa.com\/mtasa\/resources\/mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf multitheftauto_linux_x64.tar.gz -C \/mnt\/server\/\r\ncp -r \/mnt\/server\/multitheftauto_linux_x64\/* \/mnt\/server\r\nrm -rf \/mnt\/server\/multitheftauto_linux_x64\/\r\n\r\nmkdir -p \/mnt\/server\/mods\/deathmatch\/resources\r\nunzip -d \/mnt\/server\/mods\/deathmatch\/resources mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server-conf\r\ntar -xzvf mta-baseconfig.tar.gz -C \/mnt\/server-conf\r\ncp -r \/mnt\/server-conf\/baseconfig\/* \/mnt\/server\/mods\/deathmatch\r\nrm -rf \/mnt\/server-conf\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server",
-            "container": "ubuntu:16.04",
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -L -o multitheftauto_linux_x64.tar.gz https:\/\/linux.mtasa.com\/dl\/multitheftauto_linux_x64.tar.gz\r\ncurl -L -o mta-baseconfig.tar.gz https:\/\/linux.mtasa.com\/dl\/baseconfig.tar.gz\r\ncurl -L -o mtasa-resources-latest.zip http:\/\/mirror.mtasa.com\/mtasa\/resources\/mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf multitheftauto_linux_x64.tar.gz\r\ncp -rf multitheftauto_linux_x64\/* \/mnt\/server\r\n\r\nif [ ! -f \/mnt\/server\/x64\/libmysqlclient.so.16 ]; then\r\n    curl -L http:\/\/nightly.mtasa.com\/files\/libmysqlclient.so.16 -o \/mnt\/server\/x64\/libmysqlclient.so.16\r\nfi\r\n\r\nmkdir -p \/mnt\/server\/mods\/deathmatch\/resources\r\nunzip -o -d \/mnt\/server\/mods\/deathmatch\/resources mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server-conf\r\ntar -xzvf mta-baseconfig.tar.gz\r\ncp -rf baseconfig\/* \/mnt\/server\/mods\/deathmatch\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server",
+            "container": "ubuntu:18.04",
             "entrypoint": "bash"
         }
     },
@@ -28,8 +28,8 @@
             "description": "The http port for web resource.\r\nThis Port needs to be the {{SERVER_PORT}}+3.",
             "env_variable": "SERVER_WEBPORT",
             "default_value": "22005",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|numeric"
         }
     ]

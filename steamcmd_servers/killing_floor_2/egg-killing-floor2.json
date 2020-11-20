@@ -6,7 +6,7 @@
     "exported_at": "2020-07-12T20:06:39-04:00",
     "name": "Killing Floor 2",
     "author": "parker@parkervcp.com",
-    "description": "n KILLING FLOOR 2, players descend into continental Europe after it has been overrun by horrific, murderous clones called Zeds that were created by the corporation Horzine. The Zed outbreak caused by Horzine Biotech\u2019s failed experiments has quickly spread with unstoppable momentum, paralyzing the European Union. Only a month ago, the first Zed outbreak from the original KILLING FLOOR ripped through London; now the specimen clones are everywhere.",
+    "description": "In KILLING FLOOR 2, players descend into continental Europe after it has been overrun by horrific, murderous clones called Zeds that were created by the corporation Horzine. The Zed outbreak caused by Horzine Biotech\u2019s failed experiments has quickly spread with unstoppable momentum, paralyzing the European Union. Only a month ago, the first Zed outbreak from the original KILLING FLOOR ripped through London; now the specimen clones are everywhere.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_source",
     "startup": "\/home\/container\/Binaries\/Win64\/KFGameSteamServer.bin.x86_64 {{MAP_NAME}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?AdminPassword={{ADMIN_PASS}}?Difficulty={{DIFFICULTY}}$( [ \"$WEB_ADMIN\" == \"true\" ] || printf %s '??WebAdminPort={{WEB_ADMIN_PORT}}' )",
     "config": {
