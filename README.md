@@ -141,6 +141,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark/)
 * [Project Zomboid](/steamcmd_servers/project_zomboid/)
+* [Quake Live](/steamcmd_servers/quake_live/)
 * [Rising World](/steamcmd_servers/rising_world)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
@@ -154,7 +155,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Squad](/steamcmd_servers/squad/)
 * [Unturned](/steamcmd_servers/unturned/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
-* [Quake Live](/steamcmd_servers/quake_live/)
 
 [Teeworlds](/teeworlds/)
 * [teeworlds](/teeworlds/teeworlds/)

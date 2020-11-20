@@ -46,6 +46,9 @@ This is a collection of servers that use steamcmd to install.
 ## Project Zomboid
 [project_zomboid](project_zomboid/)
 
+## Quake Live
+[Quake Live](quake_live/)
+
 ## Rising World
 [rising_world](rising_world/)
 
@@ -78,6 +81,3 @@ This is a collection of servers that use steamcmd to install.
 
 ## Unturned
   * [Unturned](unturned)
-
-## Quake Live
-[Quake Live](quake_live/)
