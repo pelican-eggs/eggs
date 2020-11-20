@@ -1,0 +1,135 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-07-12T20:06:39-04:00",
+    "name": "Killing Floor 2",
+    "author": "parker@parkervcp.com",
+    "description": "In KILLING FLOOR 2, players descend into continental Europe after it has been overrun by horrific, murderous clones called Zeds that were created by the corporation Horzine. The Zed outbreak caused by Horzine Biotech\u2019s failed experiments has quickly spread with unstoppable momentum, paralyzing the European Union. Only a month ago, the first Zed outbreak from the original KILLING FLOOR ripped through London; now the specimen clones are everywhere.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_source",
+    "startup": "\/home\/container\/Binaries\/Win64\/KFGameSteamServer.bin.x86_64 {{MAP_NAME}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?AdminPassword={{ADMIN_PASS}}?Difficulty={{DIFFICULTY}}$( [ \"$WEB_ADMIN\" == \"true\" ] || printf %s '??WebAdminPort={{WEB_ADMIN_PORT}}' )",
+    "config": {
+        "files": "{\r\n    \"KFGame\/Config\/KFWeb.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"IpDrv.WebServer.IpDrv.WebServer\": \"{{server.build.env.WEB_ADMIN}}\",\r\n            \"IpDrv.WebServer.IpDrv.ListenPort\": \"{{server.build.env.WEB_ADMIN_PORT}}\"\r\n        }\r\n    },\r\n    \"KFGame\/Config\/LinuxServer-KFGame.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"Engine.AccessControl.AdminPassword\": \"{{server.build.env.ADMIN_PASS}}\",\r\n            \"Engine.GameReplicationInfo.ServerName\": \"{{server.build.env.SERVER_NAME}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"DevOnline: Playfab server registered with lobby ID \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id ffound here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# EXTRA_FLAGS - when a server has extra glas for things like beta installs or updates.\r\n#\r\n##\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [ \"${WINDOWS_INSTALL}\" == \"1\" ] || printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam Username",
+            "description": "A steam username to use to install the server.\r\n\r\nOnly needed for games that need a user that owns the server",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Password for the Steam account to install a server.",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Auth",
+            "description": "Will most likely time out before it gets used.",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string|max:6"
+        },
+        {
+            "name": "Steam Server App ID",
+            "description": "The App ID for the Server",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "232130",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "required|string"
+        },
+        {
+            "name": "Extra Flags",
+            "description": "Only needed for specific situations.",
+            "env_variable": "EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": 0,
+            "user_editable": 0,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Map Name",
+            "description": "The map to load when the server starts\r\n\r\ndefault - 'kf-bioticslab'",
+            "env_variable": "MAP_NAME",
+            "default_value": "kf-bioticslab",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Query Port",
+            "description": "The port steam will use to query the server.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "Enable WebAdmin (beta)",
+            "description": "",
+            "env_variable": "WEB_ADMIN",
+            "default_value": "false",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Admin Password",
+            "description": "An admin password for the server.",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "PleaseChangeMe",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Server Name",
+            "description": "This is the displayed server name to all players in the server and the server browser",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl Hosted Server",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Server Difficulty",
+            "description": "0 = Normal, 1 = Hard, 2 = Suicidal, 3 = Hell on Earth",
+            "env_variable": "DIFFICULTY",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|numeric|max:3"
+        },
+        {
+            "name": "Web Admin Port",
+            "description": "The port the webadmin panel should use. This is a beta feature.",
+            "env_variable": "WEB_ADMIN_PORT",
+            "default_value": "8089",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

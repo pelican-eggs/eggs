@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-09-13T21:18:48-04:00",
+    "name": "SpongeVanilla",
+    "author": "parker@parkervcp.com",
+    "description": "SpongeVanilla is the implementation of the Sponge API on top of Vanilla Minecraft.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# spongeVanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y jq curl\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n#Adding .jar when not eding by SERVER_JARFILE\r\nif [[ ! ${SERVER_JARFILE} = *\\.jar ]]; then\r\n  SERVER_JARFILE=\"${SERVER_JARFILE}.jar\"\r\nfi\r\n\r\n## check spongevanilla version and default to recommended if it's invalid\r\nif [ -z ${SV_VERSION} ] || [ \"$(curl -s https:\/\/dl-api.spongepowered.org\/v1\/org.spongepowered\/spongevanilla\/downloads\/${SV_VERSION})\" == \"Unknown version\" ]; then\r\n    echo -e \"defaulting to recommended\"\r\n    SV_VERSION=\"recommended\"\r\nfi\r\n\r\n## handle getting download linsk for sponge\r\nif [ \"${SV_VERSION}\" == \"recommended\" ]; then\r\n    echo -e \"using recommended spongevanilla version\"\r\n    SV_VERSION=$(curl -s https:\/\/dl-api.spongepowered.org\/v1\/org.spongepowered\/spongevanilla\/downloads\/recommended | jq -r '.version')\r\n    echo -e \"found spongevanilla Version ${SV_VERSION}\"\r\n    SV_DL_LINK=$(curl -s https:\/\/dl-api.spongepowered.org\/v1\/org.spongepowered\/spongevanilla\/downloads\/recommended | jq -r '.artifacts.\"\".url')\r\nelif [ \"${SV_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"using latest SpongForge version\"\r\n    SV_VERSION=$(curl -s https:\/\/dl-api.spongepowered.org\/v1\/org.spongepowered\/spongevanilla | jq -r '.buildTypes.stable.latest.version')\r\n    echo -e \"found spongevanilla Version ${SV_VERSION}\"\r\nelse\r\n    echo -e \"found spongevanilla Version ${SV_VERSION}\"\r\n    SV_DL_LINK=$(curl -s https:\/\/dl-api.spongepowered.org\/v1\/org.spongepowered\/spongevanilla\/downloads\/${SV_VERSION} | jq -r '.artifacts.\"\".url')\r\nfi\r\n\r\nif [ -f ${SERVER_JARFILE} ] && [ $(sha1sum server.jar | awk '{ print $1 }') == $(curl -s https:\/\/dl-api.spongepowered.org\/v1\/org.spongepowered\/spongevanilla\/downloads\/recommended | jq -r '.artifacts.\"\".sha1') ]; then\r\n    echo -e \"Already have the correct spongevanilla version\"\r\nelse\r\n    echo -e \"Downloading spongevanilla version ${SV_VERSION}\"\r\n    echo -e \"running: curl -s ${SV_DL_LINK} -o \/mnt\/server\/mods\/spongevanilla-${SV_VERSION}.jar\"\r\n    curl -s ${SV_DL_LINK} -o \/mnt\/server\/${SERVER_JARFILE}\r\nfi\r\n\r\nif [ ! -f server.properties ]; then\r\n    echo -e \"Downloading MC server.properties\"\r\n    curl -s -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/java\/server.properties\r\nfi\r\n\r\necho -e \"Install for spongevanilla is complete\"",
+            "container": "debian:stable-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SpongeVanilla Version",
+            "description": "Example 1.12.2-7.1.6\r\n\r\nIf the version fails it defaults to recommended",
+            "env_variable": "SV_VERSION",
+            "default_value": "recommended",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Server Jar File",
+            "description": "The name of the Jarfile to use when running Mod.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        }
+    ]
+}

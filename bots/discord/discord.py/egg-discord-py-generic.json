@@ -1,0 +1,99 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-09-28T22:35:14-04:00",
+    "name": "discord.py generic",
+    "author": "parker@parkervcp.com",
+    "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_python-3.8",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${PY_PACKAGES} ]]; then pip install -U --target \/home\/container\/ ${PY_PACKAGES}; fi; if [[ -f \/home\/container\/requirements.txt ]]; then pip install -U --target \/home\/container\/ -r requirements.txt; fi; \/usr\/local\/bin\/python \/home\/container\/{{BOT_PY_FILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [[ ! \"${USERNAME}\" == \"\" ]]; then\r\n    if [[ ! https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git = *\\.git ]]; then\r\n      INSTALL_REPO=$(echo -e https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git | sed 's:\/*$::')\r\n      INSTALL_REPO=\"https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git\"\r\n    fi\r\n    \r\n    echo -e \"working on installing a discord.js bot from https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git\"\r\n    \r\n    if [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    \techo -e \"assuming user knows what they are doing have a good day.\"\r\n    \texit 0\r\n    else\r\n    \tif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    \t\techo -e \"\/mnt\/server directory is not empty.\"\r\n    \t     if [ -d .git ]; then\r\n    \t\t\techo -e \".git directory exists\" \r\n    \t\t\tif [ -f .git\/config ]; then\r\n    \t\t\t\techo -e \"loading info from git config\"\r\n    \t\t\t\tORIGIN=$(git config --get remote.origin.url)\r\n    \t\t\telse\r\n    \t\t\t\techo -e \"files found with no git config\"\r\n    \t\t\t\techo -e \"closing out without touching things to not break anything\"\r\n    \t\t\t\texit 10\r\n    \t\t\tfi\r\n    \t\tfi\r\n    \t\tif [ \"${ORIGIN}\" == \"https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git\" ]; then\r\n    \t\t\techo \"pulling latest from github\"\r\n    \t\t\tgit pull \r\n    \t\tfi\r\n    \telse\r\n        \techo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    \t\tif [ -z ${INSTALL_BRANCH} ]; then\r\n    \t\t\techo -e \"assuming master branch\"\r\n    \t\t\tINSTALL_BRANCH=master\r\n    \t\tfi\r\n            \r\n    \t\techo -e \"running 'git clone --single-branch --branch ${INSTALL_BRANCH} https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git .'\"\r\n    \t\tgit clone --single-branch --branch ${INSTALL_BRANCH} https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git .\r\n    \tfi\r\n    fi \r\nelse\r\n    if [[ ! ${INSTALL_REPO} = *\\.git ]]; then\r\n      INSTALL_REPO=$(echo -e ${INSTALL_REPO} | sed 's:\/*$::')\r\n      INSTALL_REPO=\"${INSTALL_REPO}.git\"\r\n    fi\r\n    \r\n    echo -e \"working on installing a discord.js bot from ${INSTALL_REPO}\"\r\n    \r\n    if [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    \techo -e \"assuming user knows what they are doing have a good day.\"\r\n    \texit 0\r\n    else\r\n    \tif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    \t\techo -e \"\/mnt\/server directory is not empty.\"\r\n    \t     if [ -d .git ]; then\r\n    \t\t\techo -e \".git directory exists\" \r\n    \t\t\tif [ -f .git\/config ]; then\r\n    \t\t\t\techo -e \"loading info from git config\"\r\n    \t\t\t\tORIGIN=$(git config --get remote.origin.url)\r\n    \t\t\telse\r\n    \t\t\t\techo -e \"files found with no git config\"\r\n    \t\t\t\techo -e \"closing out without touching things to not break anything\"\r\n    \t\t\t\texit 10\r\n    \t\t\tfi\r\n    \t\tfi\r\n    \t\tif [ \"${ORIGIN}\" == \"${INSTALL_REPO}\" ]; then\r\n    \t\t\techo \"pulling latest from github\"\r\n    \t\t\tgit pull \r\n    \t\tfi\r\n    \telse\r\n        \techo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    \t\tif [ -z ${INSTALL_BRANCH} ]; then\r\n    \t\t\techo -e \"assuming master branch\"\r\n    \t\t\tINSTALL_BRANCH=master\r\n    \t\tfi\r\n            \r\n    \t\techo -e \"running 'git clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} .'\"\r\n    \t\tgit clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} .\r\n    \tfi\r\n    fi \r\nfi\r\n\r\necho \"Installing python requirements into folder\"\r\nif [[ ! -z ${PY_PACKAGES} ]]; then\r\n    pip install -U --target \/mnt\/server\/ ${PY_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/requirements.txt ]; then\r\n    pip install -U --target \/mnt\/server\/ -r requirements.txt\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "python:3.8-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Install Repo",
+            "description": "The GitHub repo to clone and install the discord py bot from.",
+            "env_variable": "INSTALL_REPO",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:128"
+        },
+        {
+            "name": "Install Branch",
+            "description": "The branch of the bot to install",
+            "env_variable": "INSTALL_BRANCH",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:32"
+        },
+        {
+            "name": "User Uploaded Files",
+            "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Pull the latest files on startup when using a GitHub repo.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Bot py file",
+            "description": "The file that starts the bot.",
+            "env_variable": "BOT_PY_FILE",
+            "default_value": "bot.py",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string"
+        },
+        {
+            "name": "Additional Python packages",
+            "description": "Install additional python packages.\r\n\r\nUse spaces to separate",
+            "env_variable": "PY_PACKAGES",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Username",
+            "description": "The GitHub username. Leave this field blank if the GitHub repo is NOT a private repo.",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:128"
+        },
+        {
+            "name": "Password",
+            "description": "The GitHub password. Leave this field blank if the GitHub repo is NOT a private repo.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string|max:128"
+        }
+    ]
+}

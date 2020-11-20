@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-11T13:25:55-07:00",
+    "name": "Lavalink",
+    "author": "damuffin36@gmail.com",
+    "description": "Standalone audio sending node based on Lavaplayer and JDA-Audio. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/Frederikam\/Lavalink",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-13",
+    "startup": "java -jar Lavalink.jar",
+    "config": {
+        "files": "{\r\n    \"application.yml\": {\r\n        \"parser\": \"yml\",\r\n        \"find\": {\r\n            \"server.address\": \"0.0.0.0\",\r\n            \"server.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Started Launcher in \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -L -o Lavalink.jar https:\/\/github.com\/frederikam\/Lavalink\/releases\/latest\/download\/Lavalink.jar\r\n\r\ncurl -L -o application.yml https:\/\/raw.githubusercontent.com\/Frederikam\/Lavalink\/master\/LavalinkServer\/application.yml.example\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}

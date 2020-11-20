@@ -1,4 +1,4 @@
-# Parkers Pterodactyl eggs repo
+﻿# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 

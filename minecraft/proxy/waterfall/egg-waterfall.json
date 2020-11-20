@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-06-03T16:13:49-04:00",
+    "name": "Waterfall",
+    "author": "hostmaster@waterfallgaming.net",
+    "description": "Waterfall is a fork of the well-known BungeeCord server teleportation suite.",
+    "image": "quay.io\/pterodactyl\/core:java",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Listening on \",\r\n    \"userInteraction\": [\r\n        \"Listening on \/0.0.0.0:\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"proxy.log.0\"\r\n}",
+        "stop": "end"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Paper Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq\r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\r\n\r\nif [ -n \"${DL_PATH}\" ]; then\r\n    echo -e \"using supplied download url\"\r\n    DOWNLOAD_URL=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\nelse\r\n    if [ -z \"$VANILLA_VERSION\" ] || [ \"${MINECRAFT_VERSION}\" == \"latest\" ]; then\r\n        echo -e \"getting latest supported mc version and latest paper build\"\r\n        MINECRAFT_VERSION=$(curl -s https:\/\/papermc.io\/api\/v1\/waterfall | jq -r '.versions[0]')\r\n        BUILD_NUMBER=$(curl -sSL https:\/\/papermc.io\/api\/v1\/waterfall\/${MINECRAFT_VERSION} | jq -r '.builds.latest')\r\n        VER_EXISTS=true\r\n    else\r\n        echo -e \"checking if version ${MINECRAFT_VERSION} exists\"\r\n        VER_EXISTS=$(curl -s https:\/\/papermc.io\/api\/v1\/waterfall | jq -r --arg VERSION ${MINECRAFT_VERSION} '.versions[] | contains($VERSION)' | grep true)\r\n    fi\r\n    \r\n    if [ \"${VER_EXISTS}\" == \"true\" ]; then\r\n        echo -e \"Version is valid. Using version ${MINECRAFT_VERSION}\"\r\n    else\r\n        echo -e \"Using the latest waterfall version\"\r\n        MINECRAFT_VERSION=${LATEST_WATERFALL_VERSION}\r\n    fi\r\n    \r\n    BUILD_EXISTS=$(curl -sSL https:\/\/papermc.io\/api\/v1\/waterfall\/${MINECRAFT_VERSION} | jq -r --arg BUILD ${BUILD_NUMBER} '.builds.all[] | contains($BUILD)' | grep true)\r\n    \r\n    if [ \"${BUILD_EXISTS}\" == \"true\" ] || [ ${BUILD_NUMBER} == \"latest\" ]; then\r\n        echo -e \"Build is valid. Using version ${BUILD_NUMBER}\"\r\n    else\r\n        echo -e \"Using the latest paper build for version ${MINECRAFT_VERSION}\"\r\n        BUILD_NUMBER=$(curl -sSL https:\/\/papermc.io\/api\/v1\/waterfall\/${MINECRAFT_VERSION} | jq -r '.builds.latest')\r\n    fi\r\n    \r\n    echo \"Version being downloaded\"\r\n    echo -e \"MC Version: ${MINECRAFT_VERSION}\"\r\n    echo -e \"Build: ${BUILD_NUMBER}\"\r\n    DOWNLOAD_URL=https:\/\/papermc.io\/api\/v1\/waterfall\/${MINECRAFT_VERSION}\/${BUILD_NUMBER}\/download \r\nfi\r\n\r\nif [ -z ${SERVER_JARFILE} ]; then\r\n    SERVER_JARFILE=server.jar\r\nfi\r\n\r\nif [[ ! $SERVER_JARFILE = *\\.jar ]]; then\r\n  SERVER_JARFILE=\"$SERVER_JARFILE.jar\"\r\nfi\r\n\r\necho -e \"running curl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\"\r\n\r\ncurl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\r\n\r\nif [ ! -f config.yml ]; then\r\n    echo -e \"Downloading waterfall config.yml\"\r\n   curl -o config.yml https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/proxy\/waterfall\/config.yml\r\nelse\r\n    echo -e \"Waterfall config.yml exists. Will not pull a new file\"\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Minecraft Version",
+            "description": "The version of Minecraft that water was built to support.",
+            "env_variable": "MINECRAFT_VERSION",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|alpha_num|between:1,6"
+        },
+        {
+            "name": "Waterfall Jar File",
+            "description": "The name of the Jarfile to use when running Waterfall.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "waterfall.jar",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Download Link",
+            "description": "A link to the server jar to download the waterfall jar.",
+            "env_variable": "DL_LINK",
+            "default_value": "",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Waterfall build number",
+            "description": "Default is latest.\r\n\r\nif set to latest or an invalid version will grab the latest build number.",
+            "env_variable": "BUILD_NUMBER",
+            "default_value": "latest",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
