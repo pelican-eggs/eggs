@@ -78,3 +78,6 @@ This is a collection of servers that use steamcmd to install.
 
 ## Unturned
   * [Unturned](unturned)
+
+## Quake Live
+[Quake Live](quake_live/)
