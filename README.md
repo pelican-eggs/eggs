@@ -160,6 +160,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Stormworks](/steamcmd_servers/stormworks/)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [Squad](/steamcmd_servers/squad/)
+* [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic/)
 * [Unturned](/steamcmd_servers/unturned/)
   * [Unturned](/steamcmd_servers/unturned/unturned/)
 
