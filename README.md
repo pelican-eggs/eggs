@@ -88,7 +88,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Minecraft](/minecraft/)
 * [Bedrock](/minecraft/bedrock/)  
   * [Bedrock](/minecraft/bedrock/bedrock/)
-  * [DragonProxy](/minecraft/bedrock/dragonproxy/)  
   * [Nukkit](/minecraft/bedrock/nukkit/)  
   * [PocketMine MP](/minecraft/bedrock/pocketmine_mp/)  
 
@@ -106,12 +105,18 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Tuinity](/minecraft/java/tuinity/)
   * [VanillaCord](/minecraft/java/vanillacord/)
 
-* [Proxies](/minecraft/proxy/) (these are for the java version of minecraft)
-  * [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/)
-  * [Travertine](/minecraft/proxy/travertine/) Java
-  * [Velocity](/minecraft/proxy/velocity/)
-  * [Waterdog](/minecraft/proxy/waterdog/) Java/Bedrock
-  * [Waterfall](/minecraft/proxy/waterfall/)
+* [Proxies](/minecraft/proxy/) Minecraft Server Proxies
+  * [Java](/minecraft/proxy/java/)
+    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo/)
+    * [Waterfall](/minecraft/proxy/java/waterfall/)
+    * [Travertine](/minecraft/proxy/java/travertine/)
+    * [Velocity](/minecraft/proxy/java/velocity/)
+  * [Bedrock](/minecraft/proxy/bedrock/)
+    * [DragonProxy](/minecraft/proxy/bedrock/dragonproxy/)  
+    * [GeyserMC](/minecraft/proxy/bedrock/geyser/)
+  * [Cross Platform](/minecraft/proxy/cross_platform)
+    * [Waterdog](/minecraft/proxy/cross_platform/waterdog/)
+
 
 [OpenRA](/openra/)
 * [OpenRA Dune2000](/openra/openra_dune2000)
