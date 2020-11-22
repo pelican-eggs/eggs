@@ -25,12 +25,12 @@ prevent-client-proxy-connections = false
 #                  unable to implement network level firewalling (on a shared host).
 # - "modern":      Forward player IPs and UUIDs as part of the login process using
 #                  Velocity's native forwarding. Only applicable for Minecraft 1.13 or higher.
-player-info-forwarding-mode = "NONE"
+player-info-forwarding-mode = "legacy"
 # If you are using modern or BungeeGuard IP forwarding, configure an unique secret here.
-forwarding-secret = "pNuOOnPLzGd4"
+forwarding-secret = ""
 # Announce whether or not your server supports Forge. If you run a modded server, we
 # suggest turning this on.
-# 
+#
 # If your network runs one modpack consistently, consider using ping-passthrough = "mods"
 # instead for a nicer display in the server list.
 announce-forge = false
@@ -77,7 +77,7 @@ ping-passthrough = "DISABLED"
   # Enables compatibility with HAProxy.
   proxy-protocol = false
   # Enables TCP fast open support on the proxy. Requires the proxy to run on Linux.
-  tcp-fast-open = false
+  tcp-fast-open = true
   # Shows ping requests to the proxy from clients.
   show-ping-requests = false
   # By default, Velocity will attempt to gracefully handle situations where the user unexpectedly
@@ -118,7 +118,7 @@ ping-passthrough = "DISABLED"
   # player count. We recommend keeping bStats enabled, but if you're not comfortable with
   # this, you can turn this setting off. There is no performance penalty associated with
   # having metrics enabled, and data sent to bStats can't identify your server.
-  enabled = true
+  enabled = false
 
 # Legacy color codes and JSON are accepted in all messages.
 [messages]
