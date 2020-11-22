@@ -3,13 +3,13 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-11-21T14:09:45-05:00",
+    "exported_at": "2020-11-22T01:50:29-05:00",
     "name": "Velocity",
     "author": "parker@parkervcp.com",
     "description": "Velocity is a Minecraft server proxy with unparalleled server support, scalability, and flexibility.",
     "features": null,
-    "image": "quay.io\/pterodactyl\/core:java",
-    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "image": "quay.io\/discoversquishy\/dockerimages:openjdk-15-hostpot",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"velocity.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"bind = \": \"bind = \\\"0.0.0.0:{{server.build.default.port}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Done (\"\r\n}",
@@ -18,14 +18,15 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z ${VELOCITY_VERSION} ] || [ ${VELOCITY_VERSION} == \"latest\" ]; then\r\n\tVELOCITY_VERSION=\/latest\r\nfi\r\n\r\necho -e \"Getting download link\"\r\nDOWNLOAD_ENDPOINT=$(curl https:\/\/versions.velocitypowered.com\/download\/${VELOCITY_VERSION}\/ | grep -Eo 'href=\"[^\\\"]+\"' | grep -vE \"view|fingerprint\" | grep \".jar\" | sed -n 's\/.*href=\"\\([^\"]*\\).*\/\\1\/p')\r\nDOWNLOAD_LINK=https:\/\/versions.velocitypowered.com\/download\/${DOWNLOAD_ENDPOINT}\r\n\r\necho -e \"Downloading ${DOWNLOAD_LINK}\"\r\ncurl ${DOWNLOAD_LINK} -o ${SERVER_JARFILE}\r\n\r\nif [ -f velocity.toml ]; then\r\n    echo -e \"velocity config file exists\"\r\nelse\r\n    echo -e \"downloading velocity config file.\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/proxy\/proxy\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\n\r\necho -e \"install complete\"",
+            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z ${VELOCITY_VERSION} ] || [ ${VELOCITY_VERSION} == \"latest\" ]; then\r\n\tVELOCITY_VERSION=\"latest\"\r\nfi\r\n\r\necho -e \"Getting download link\"\r\nDOWNLOAD_LINK=https:\/\/versions.velocitypowered.com\/download\/${VELOCITY_VERSION}\r\n\r\necho -e \"Downloading ${DOWNLOAD_LINK}\"\r\ncurl ${DOWNLOAD_LINK} -o ${SERVER_JARFILE}\r\n\r\nif [ -f velocity.toml ]; then\r\n    echo -e \"velocity config file exists\"\r\nelse\r\n    echo -e \"downloading velocity config file.\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/proxy\/java\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\n\r\necho -e \"install complete\"",
             "container": "alpine:3.10",
             "entrypoint": "ash"
         }
     },
-    "variables": [{
+    "variables": [
+        {
             "name": "Velocity Version",
-            "description": "The Velocity Proxy version to download.\r\n\r\nset to 'latest ' the download the last stable build.",
+            "description": "The Velocity Proxy version to download.\r\n\r\nSet to 'latest ' the download the last stable build.\r\nSet to '1.1.x-SNAPSHOT' to get the latest dev build.",
             "env_variable": "VELOCITY_VERSION",
             "default_value": "latest",
             "user_viewable": true,
@@ -34,7 +35,7 @@
         },
         {
             "name": "Server Jar File",
-            "description": "Server Jar File name",
+            "description": "Server Jarfile, by default this is set to 'velocity.jar'.\r\nSet it to otherwise if you wish to have a different jarfile name.",
             "env_variable": "SERVER_JARFILE",
             "default_value": "velocity.jar",
             "user_viewable": true,
