@@ -20,8 +20,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\njava -jar fabric-installer-$FABRIC_VERSION.jar server -downloadMinecraft\r\necho -e \"Install Complete\"",
-            "container": "openjdk:8-jdk-slim",
+        "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\nFABRIC_VERSION=$(curl https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/ | grep -Po '(?<=href=\")[^\"]*' | sort -h | tail -1 | sed 's,\/,,g')\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nelse\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nfi\r\njava -jar fabric-installer-$FABRIC_VERSION.jar server -downloadMinecraft\r\necho -e \"Install Complete\"",            "container": "openjdk:8-jdk-slim",
             "entrypoint": "bash"
         }
     },
