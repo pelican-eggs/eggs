@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-11-22T20:03:06-03:00",
+    "exported_at": "2020-11-22T20:26:08-03:00",
     "name": "Botify",
     "author": "joaquin@rciag.tech",
     "description": "Discord bot that plays Spotify tracks and YouTube videos or plays any URL including Soundcloud links and Twitch streams.\r\n\r\nTo configure please read: https:\/\/github.com\/robinfriedli\/botify\r\nSteps  1 to 5\r\n\r\nNOTE: YOU NEED A WORKING DATABASE, OTHERWISE IT WONT WORK\r\n\r\nNOTE 2: If you need an updated version you can go to https:\/\/github.com\/robinfriedli\/botify and use those files instead, but you would need to run \"mvn clean install\" as the startup command first and change it back to the original.",
@@ -18,7 +18,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Botify Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\n\r\n# Download needed software.\r\nfunction install_required {\r\n    \r\n    apt update\r\n    apt install -y jq dos2unix git\r\n\r\n}\r\n\r\nfunction get_download {\r\n    \r\n    cd \/mnt\/server\r\n    git clone https:\/\/github.com\/robinfriedli\/botify.git\r\n    cd \/mnt\/server\/botify\r\n    mvn clean install\r\n\r\n}\r\n\r\n\r\n\r\ninstall_required\r\nget_download",
+            "script": "#!\/bin\/ash\r\n# Botify Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\n\r\n# Download needed software.\r\nfunction install_required {\r\n    apt update\r\n    apt install -y git\r\n}\r\nfunction dl_and_compile {\r\n    cd \/mnt\/server\r\n    git clone https:\/\/github.com\/robinfriedli\/botify.git\r\n    mv \/mnt\/server\/botify\/* \/mnt\/server\/\r\n    rm -r \/mnt\/server\/botify\r\n    cd \/mnt\/server\/\r\n    mvn clean install\r\n}\r\n\r\ninstall_required\r\ndl_and_compile",
             "container": "maven:3.6.3-openjdk-11-slim",
             "entrypoint": "bash"
         }
