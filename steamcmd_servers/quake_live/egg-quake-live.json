@@ -9,7 +9,7 @@
     "description": "Quake Live is a first-person shooter video game by id Software. It is an updated version of Quake III Arena that was originally designed as a free-to-play game launched via a web browser plug-in. On September 17, 2014, the game was re-launched as a standalone title on Steam.",
     "features": null,
     "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
-    "startup": ".\/qzeroded.x64  +set net_port \"{{SERVER_PORT}}\" +set sv_hostname \"{{SERVER_NAME}}\" +set sv_serverType \"{{SERVER_TYPE}}\" +sv_maxClients \"{{MAX_CLIENTS}}\" +set g_password \"{{PASSWORD}}\" +sv_fps \"{{FPS}}\"",
+    "startup": ".\/qzeroded.x64  +set net_port \"{{SERVER_PORT}}\" +set sv_hostname \"{{SERVER_NAME}}\" +set sv_serverType \"{{SERVER_TYPE}}\" +set g_password \"{{PASSWORD}}\" +sv_fps \"{{FPS}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"zmq stats and rcon passwords updated\",\r\n    \"userInteraction\": []\r\n}",
@@ -50,15 +50,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|numeric|max:2"
-        },
-        {
-            "name": "Max Clients",
-            "description": "How many players can connect at once",
-            "env_variable": "MAX_CLIENTS",
-            "default_value": "8",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|numeric"
         },
         {
             "name": "Server Password",
