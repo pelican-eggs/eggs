@@ -8,7 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "Onset is an open world multiplayer sandbox without predefined goals. Create and host your very own experience in Onset using scripting functions. Whether that is Roleplay, Cops and Robbers or classic Freeroam. Or just enjoy the different gamemodes created by other players.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
-    "startup": ".\/OnsetServer",
+    "startup": ".\/OnsetServer --noinput",
     "config": {
         "files": "{\r\n    \"server_config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ipaddress\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"servername\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"password\":\"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Entering simulation\",\r\n    \"userInteraction\": []\r\n}",
