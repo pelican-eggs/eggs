@@ -100,6 +100,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Forge](/minecraft/java/forge/)  
   * [Magma](/minecraft/java/magma/)
   * [Paper](/minecraft/java/paper)
+  * [Purpur](/minecraft/java/purpur)
   * [Spigot](/minecraft/java/spigot/)
   * [spongeforge](/minecraft/java/spongeforge/)
   * [SpongeVanilla](/minecraft/java/spongevanilla/)
