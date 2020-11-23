@@ -29,7 +29,9 @@ Join us on [Discord](https://discord.gg/mtAAnkk)
 
 Downloads can be obtained from Pl3x's [Jenkins CI Server](https://ci.pl3x.net/job/Purpur/).
 
-* [1.16.4](https://ci.pl3x.net/job/Purpur/lastSuccessfulBuild/artifact/final/purpurclip.jar) builds 809+
+* [LATEST](https://ci.pl3x.net/job/Purpur/lastSuccessfulBuild/artifact/final/purpurclip.jar)
+
+#### Legacy Builds
 * [1.16.3](https://ci.pl3x.net/job/Purpur/808/artifact/final/purpurclip-808.jar) builds 751-808
 * [1.16.2](https://ci.pl3x.net/job/Purpur/750/artifact/final/purpurclip-750.jar) builds 711-750
 * [1.16.1](https://ci.pl3x.net/job/Purpur/710/artifact/final/purpurclip-710.jar) builds 608-710
@@ -37,14 +39,6 @@ Downloads can be obtained from Pl3x's [Jenkins CI Server](https://ci.pl3x.net/jo
 * [1.15.1](https://ci.pl3x.net/job/Purpur/397/artifact/target/purpur-397.jar) builds 348-397
 * [1.15](https://ci.pl3x.net/job/Purpur/346/artifact/target/purpur-346.jar) builds 339-346
 * [1.14.x](https://ci.pl3x.net/job/Purpur/337/artifact/target/purpur-337.jar) builds 337 and below
-
-## License
-[![MIT License](https://img.shields.io/github/license/pl3xgaming/Purpur?&logo=github)](License)
-
-Everything is licensed under the MIT license, and is free to be used in your own fork.
-
-See [starlis/empirecraft](https://github.com/starlis/empirecraft) and [electronicboy/byof](https://github.com/electronicboy/byof) 
-for the license of material used/modified by this project.
 
 ## bStats
 
