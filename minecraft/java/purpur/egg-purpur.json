@@ -5,9 +5,11 @@
     },
     "exported_at": "2020-11-23T02:59:36-05:00",
     "name": "Purpur",
-    "author": "pemigrade@birdflop.com",
+    "author": "purpur@birdflop.com",
     "description": "Fork of Paper and Tuinity providing new configuration options.",
-    "features": null,
+    "features": [
+        "eula"
+    ],
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
