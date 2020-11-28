@@ -1,0 +1,26 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-11-28T00:28:06-05:00",
+    "name": "Magical Fidget Bot",
+    "author": "domi@imagine.team",
+    "description": "Magical Fidget Bot is a Bot created for the game \"Shakes and Fidget\". It can handle multiple accounts at once and do a variety of tasks inside the game.",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete\\",
+    "startup": "chmod +x .\/MFBot_Konsole_x86_64 && .\/MFBot_Konsole_x86_64",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Running MFBot Konsole\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "cd \/mnt\/server\r\napt update\r\napt install -y wget\r\nwget https:\/\/www.mfbot.de\/Download\/latest\/MFBot_Konsole_x86_64\r\nchmod +x .\/MFBot_Konsole_x86_64",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
