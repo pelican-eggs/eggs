@@ -1,0 +1,37 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-11-27T21:24:29-05:00",
+    "name": "Minio S3",
+    "author": "accounts@bofanodes.io",
+    "description": "MinIO is a cloud storage server compatible with Amazon S3, released under Apache License v2. As an object store, MinIO can store unstructured data such as photos, videos, log files, backups and container images. The maximum size of an object is 5TB.",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu",
+    "startup": ".\/minio.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"guide\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#\r\n#\r\napt update\r\napt install -y wget\r\ncd \/mnt\/server\r\nwget https:\/\/dl.min.io\/server\/minio\/release\/linux-amd64\/minio\r\nchmod +x minio\r\nmkdir data\r\nmkdir keys\r\nwget https:\/\/github.com\/tmunsch\/eggs\/raw\/minio\/storage\/minio.sh\r\nchmod +x minio.sh\r\nexport MINIO_ACCESS_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_ACCESS_KEY > keys\/key.txt\r\nexport MINIO_SECRET_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_SECRET_KEY > keys\/secret.txt\r\necho done",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Startup Type",
+            "description": "normal or rotate",
+            "env_variable": "STARTUP_TYPE",
+            "default_value": "normal",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:normal,rotate"
+        }
+    ]
+}
