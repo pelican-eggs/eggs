@@ -20,14 +20,10 @@ fi
 if [ -f "keys/oldsecret.txt" ]; then
 echo "Old secret file detected..."
 export MINIO_SECRET_KEY_OLD=`cat keys/oldsecret.txt`
-else
-echo ".."
 fi
 if [ -f "keys/oldkey.txt" ]; then
 echo "Old key file detected..."
 export MINIO_ACCESS_KEY_OLD=`cat keys/oldkey.txt`
-else
-echo "......"
 fi
 if [ -f "keys/justrotated.txt" ]; then
 echo "Previous key rotation detected...."
@@ -38,8 +34,6 @@ STARTUP_TYPE=normal
 rm keys/justrotated.txt
 rm keys/oldsecret.txt
 rm keys/oldkey.txt
-else
-echo "......"
 fi
 ##########################################
 if [ -z "$STARTUP_TYPE" ] || [ "$STARTUP_TYPE" == "rotate" ]; then
