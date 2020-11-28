@@ -1,8 +1,7 @@
 #!/bin/bash
 ##################################
 echo Starting up....
-echo "Startup Type: (normal/rotate)"
-echo Detected $STARTUP_TYPE
+echo "Startup Type: $STARTUP_TYPE"
 if [ -f "keys/key.txt" ]; then
 echo "Key file detected..."
 export MINIO_ACCESS_KEY=`cat keys/key.txt`
