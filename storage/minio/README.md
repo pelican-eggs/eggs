@@ -17,6 +17,6 @@ Be sure to change your startup back to "normal" once you have started your serve
 
 ## Known Issues
 
-Double encryption may occur if you manually manipulate files in the /keys directory
+Double encryption may occur if you manually manipulate files in the keys directory
 
-#### Key rotation is handled automatically, DO NOT manually delete files in /keys
+#### Key rotation is handled automatically, DO NOT manually delete files in keys directory
