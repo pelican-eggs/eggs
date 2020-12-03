@@ -3,11 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-08-01T04:49:37-04:00",
+    "exported_at": "2020-12-03T13:14:51+00:00",
     "name": "Paper",
     "author": "parker@pterodactyl.io",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
-    "image": "quay.io\/pterodactyl\/core:java",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
@@ -28,8 +29,8 @@
             "description": "The version of minecraft to download. \r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.",
             "env_variable": "MINECRAFT_VERSION",
             "default_value": "latest",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "nullable|string|max:20"
         },
         {
@@ -37,8 +38,8 @@
             "description": "The name of the server jarfile to run the server with.",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
@@ -46,8 +47,8 @@
             "description": "A URL to use to download a server.jar rather than the ones in the install script. This is not user viewable.",
             "env_variable": "DL_PATH",
             "default_value": "",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "nullable|string"
         },
         {
@@ -55,8 +56,8 @@
             "description": "The build number for the paper release.\r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.",
             "env_variable": "BUILD_NUMBER",
             "default_value": "latest",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|string|max:20"
         }
     ]
