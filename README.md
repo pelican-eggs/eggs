@@ -142,6 +142,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Don't Starve](/steamcmd_servers/dont_starve)
 * [ECO](/steamcmd_servers/eco/)
 * [HLDS server](/steamcmd_servers/hlds_server)
+* [Holdfast](/steamcmd_servers/holdfast)
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](/steamcmd_servers/killingfloor2)

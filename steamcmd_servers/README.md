@@ -31,6 +31,9 @@ This is a collection of servers that use steamcmd to install.
 ## HLDS Server
 [hlds](hlds_server/)
 
+## Holdfast
+[holdfast](holdfast/)
+
 ## Hurtworld
 [hurtworld](hurtworld/)
 
