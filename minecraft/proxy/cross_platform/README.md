@@ -2,6 +2,7 @@
 
 ### GeyserMC
 [GeyserMC](https://github.com/GeyserMC/)
+
 A bridge/proxy allowing you to connect to Minecraft: Java Edition servers with Minecraft: Bedrock edition.
 
 
