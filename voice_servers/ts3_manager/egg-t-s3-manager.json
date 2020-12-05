@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-12-05T08:50:02+01:00",
+    "exported_at": "2020-12-05T08:58:33+01:00",
     "name": "TS3 Manager",
     "author": "info@goover.de",
     "description": "The Open Source Webinterface For TeamSpeak Servers",
@@ -38,8 +38,8 @@
             "description": "",
             "env_variable": "VERSION",
             "default_value": "latest",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:30"
         },
         {
