@@ -45,7 +45,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [sogeBot](/bots/twitch/sogebot/)
   
 [Other](/bots/other/)
-* [Big Brother Bot](/bots/other/bigbrotherbot)
+* [Big Brother Bot](/bots/other/bigbrotherbot/)
 
 * [TeamSpeak3](bots/teamspeak3)
   * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
@@ -53,22 +53,22 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Database](/database/)
 ### In-Memory Databases
 [Redis](/database/redis/)
-* [Redis 5](/database/redis/redis-5)
-* [Redis 6](/database/redis/redis-6)
+* [Redis 5](/database/redis/redis-5/)
+* [Redis 6](/database/redis/redis-6/)
 
 ### noSQL
-* [mongoDB](/database/nosql/mongodb)
+* [mongoDB](/database/nosql/mongodb/)
 
 ### SQL Databases
 * [MariaDB](/database/sql/mariadb/)
 * [PostgreSQL](/database/sql/postgres/)
 
 ## Voice Servers
-* [Lavalink](/voice_servers/lavalink)
-* [teaspeak](/voice_servers/teaspeak)
+* [Lavalink](/voice_servers/lavalink/)
+* [teaspeak](/voice_servers/teaspeak/)
 
 ## Game Eggs
-[Among Us Impostor Server](/among_us/impostor_server)
+[Among Us Impostor Server](/among_us/impostor_server/)
 
 [ET Legacy](/enemy_territory/etlegacy/)
 
@@ -95,13 +95,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Java](/minecraft/java/) Servers for Java Minecraft
   * [Cuberite](/minecraft/java/cuberite/)
-  * [feather](/minecraft/feather/)  
+  * [feather](/minecraft/java/feather/)  
   * [Feed The Beast](/minecraft/java/ftb/)  
   * [Forge](/minecraft/java/forge/)  
   * [Magma](/minecraft/java/magma/)
   * [Paper](/minecraft/java/paper)
   * [Spigot](/minecraft/java/spigot/)
-  * [spongeforge](/minecraft/java/spongeforge/)
+  * [SpongeForge](/minecraft/java/spongeforge/)
   * [SpongeVanilla](/minecraft/java/spongevanilla/)
   * [Technic](/minecraft/java/technic/)
   * [Tuinity](/minecraft/java/tuinity/)
@@ -113,17 +113,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [Waterfall](/minecraft/proxy/java/waterfall/)
     * [Travertine](/minecraft/proxy/java/travertine/)
     * [Velocity](/minecraft/proxy/java/velocity/)
-  * [Bedrock](/minecraft/proxy/bedrock/)
-    * [DragonProxy](/minecraft/proxy/bedrock/dragonproxy/)  
-    * [GeyserMC](/minecraft/proxy/bedrock/geyser/)
-  * [Cross Platform](/minecraft/proxy/cross_platform)
+  * [Cross Platform](/minecraft/proxy/cross_platform/)
+    * [GeyserMC] (/minecraft/proxy/cross_platform/geyser/)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog/)
-
+	* DragonProxy abandoned in favour of GeyserMC.
+	
 
 [OpenRA](/openra/)
-* [OpenRA Dune2000](/openra/openra_dune2000)
-* [OpenRA Red Alert](/openra/openra_red_alert)
-* [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn)
+* [OpenRA Dune2000](/openra/openra_dune2000/)
+* [OpenRA Red Alert](/openra/openra_red_alert/)
+* [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn/)
 
 
 [Red Dead Redemption](/rdr/)
@@ -137,40 +136,39 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client/)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_x64/)
 * [Avorion](/steamcmd_servers/avorion/)
-* [Citadel: Forged with Fire](/steamcmd_servers/citadel)
-* [Conan Exiles](/steamcmd_servers/conan_exiles)
-* [Don't Starve](/steamcmd_servers/dont_starve)
+* [Citadel: Forged with Fire](/steamcmd_servers/citadel/)
+* [Conan Exiles](/steamcmd_servers/conan_exiles/)
+* [Don't Starve](/steamcmd_servers/dont_starve/)
 * [ECO](/steamcmd_servers/eco/)
 * [HLDS server](/steamcmd_servers/hlds_server)
 * [Holdfast](/steamcmd_servers/holdfast)
 * [Hurtworld](/steamcmd_servers/hurtworld)
-* [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
-* [Killing Floor 2](/steamcmd_servers/killingfloor2)
-* [Mordhau](/steamcmd_servers/mordhau)
-* [Onset](/steamcmd_servers/onset)
+* [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm/)
+* [Killing Floor 2](/steamcmd_servers/killingfloor2/)
+* [Mordhau](/steamcmd_servers/mordhau/)
+* [Onset](/steamcmd_servers/onset/)
 * [PixARK](/steamcmd_servers/pixark/)
 * [Project Zomboid](/steamcmd_servers/project_zomboid/)
-* [Rising World](/steamcmd_servers/rising_world)
+* [Rising World](/steamcmd_servers/rising_world/)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging/)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
   * [dedicated](/steamcmd_servers/scpsl/dedicated/)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin/)
 * [Soldat](/steamcmd_servers/soldat/)
-* [Starbound](/steamcmd_servers/starbound)
+* [Starbound](/steamcmd_servers/starbound/)
 * [Stationeers](/steamcmd_servers/stationeers/)
 * [Stormworks](/steamcmd_servers/stormworks/)
-* [Sven Co-op](/steamcmd_servers/svencoop)
+* [Sven Co-op](/steamcmd_servers/svencoop/)
 * [Squad](/steamcmd_servers/squad/)
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic/)
 * [Unturned](/steamcmd_servers/unturned/)
-  * [Unturned](/steamcmd_servers/unturned/unturned/)
 
 [Teeworlds](/teeworlds/)
 * [teeworlds](/teeworlds/teeworlds/)
 
 [Terraria](/terraria/)
-* [vanilla](/terraria/vanilla)
-* [tmodloader](/terraria/tmodloader)
+* [vanilla](/terraria/vanilla/)
+* [tmodloader](/terraria/tmodloader/)
 * [tshock](/terraria/tshock/)
 
 [Tycoon Games](/tycoon_games/)
