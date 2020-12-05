@@ -116,7 +116,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-	* DragonProxy abandoned in favour of GeyserMC.
+    * DragonProxy abandoned in favour of GeyserMC.
 	
 
 [OpenRA](/openra)
