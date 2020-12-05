@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-12-05T10:34:29+01:00",
+    "exported_at": "2020-12-05T11:42:04+01:00",
     "name": "TeaSpeak",
     "author": "parker@parkervcp.com",
     "description": "TeaSpeak is a free to use client and server software for VoIP communication.\r\n\r\nIts the ideal deal software for everyone who is annoyed about limits and restrictions.",
@@ -71,7 +71,7 @@
         },
         {
             "name": "Teaspeak Version",
-            "description": "What version of teaspeak to install",
+            "description": "What version of teaspeak to install: latest = latest stable ; beta = latest beta",
             "env_variable": "VERSION",
             "default_value": "latest",
             "user_viewable": true,
