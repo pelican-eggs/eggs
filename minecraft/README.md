@@ -23,6 +23,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Technic](/minecraft/java/technic)
 * [Tuinity](/minecraft/java/tuinity)
 * [VanillaCord](/minecraft/java/vanillacord)
+* [Mohist](/minecraft/java/mohist)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
