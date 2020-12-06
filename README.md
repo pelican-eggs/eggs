@@ -95,7 +95,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Java](/minecraft/java) Servers for Java Minecraft
   * [Cuberite](/minecraft/java/cuberite)
-  * [feather](/minecraft/java/feather)  
+  * [Fabric](/minecraft/java/fabric) 
+  * [Feather](/minecraft/java/feather)  
   * [Feed The Beast](/minecraft/java/ftb)  
   * [Forge](/minecraft/java/forge)  
   * [Magma](/minecraft/java/magma)
