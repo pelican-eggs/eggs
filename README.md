@@ -43,7 +43,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Twitch](/bots/twitch)
   * [PhantomBot](/bots/twitch/phantombot)
   * [sogeBot](/bots/twitch/sogebot)
-  
+
 [Other](/bots/other)
 * [Big Brother Bot](/bots/other/bigbrotherbot)
 
@@ -65,7 +65,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Voice Servers
 * [Lavalink](/voice_servers/lavalink)
-* [teaspeak](/voice_servers/teaspeak)
+* [TeaSpeak](/voice_servers/teaspeak)
+* [TS3-Manager](/voice_servers/ts3_manager)
 
 ## Game Eggs
 [Among Us Impostor Server](/among_us/impostor_server)
