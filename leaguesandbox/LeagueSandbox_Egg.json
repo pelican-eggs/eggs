@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-11-10T17:07:44-05:00",
+    "name": "LeagueSandbox",
+    "author": "domi@imagine.team",
+    "description": "A simple egg to run LeagueSandbox server in pterodactyl",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
+    "startup": ".\/GameServerConsole",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Game is ready.\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apk update && apk add git\r\ngit clone $GIT_URL\r\nrm .git -rf\r\ncd GameServer\r\ngit submodule init\r\ngit submodule update\r\ndotnet build .\r\ncp -r GameServerConsole\/bin\/Debug\/netcoreapp3.0\/* \/mnt\/server\/\r\ncp -r Content \/mnt\/server\/Content",
+            "container": "mcr.microsoft.com\/dotnet\/sdk:5.0",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Git Url",
+            "description": "This is where the install script will clone the server files from",
+            "env_variable": "GIT_URL",
+            "default_value": "https:\/\/github.com\/LeagueSandbox\/GameServer",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:90|url"
+        }
+    ]
+}
