@@ -38,7 +38,7 @@
             "name": "Fabric Version",
             "description": "The version of Fabric to install.",
             "env_variable": "FABRIC_VERSION",
-            "default_value": "0.6.1.51",
+            "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|between:3,15"
