@@ -1,18 +1,20 @@
-# Ark: Survival Evolved
+# Pavlov VR
 Steam Description :
-As a man or woman stranded naked, freezing and starving on the shores of a mysterious island called ARK, you must hunt, harvest resources, craft items, grow crops, research technologies, and build shelters to withstand the elements. Use your cunning and resources to kill or tame & breed the leviathan dinosaurs and other primeval creatures roaming the land, and team up with or prey on hundreds of other players to survive, dominate... and escape!
+Pavlov is a multiplayer shooter in VR
 
 ## Recommended server settings
 ### Minimum RAM
-This server requires about 4096M to run with no players. It is recommended to run 6144M by the ARK creators.
+This server requires about 2048M to run. A 3.2 GHz core will support approximately 24 players. Since Pavlov VR is single threaded, faster clockspeeds will mean higher performance.
 
-See the following - https://ark.gamepedia.com/Dedicated_Server_Setup#Hardware
+### Tickrate
+For stable results, please use a minimum of 50 and a maximum of 120.
+
+
+See the following - http://wiki.pavlov-vr.com/index.php?title=Dedicated_server
 
 ## Server Ports
 
 | Port  | default |
 |-------|---------|
 | Game  | 7777   |
-| Query | 27015   |
-| Raw UDP  | 7778   |
-| RCON  | 27020   |
+| Game | 8177   |
