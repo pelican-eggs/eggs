@@ -94,3 +94,7 @@ The official Tekkit Classic modpack. Build factories, automate crafting!
 ## Tuinity
 Fork of Paper aimed at improving server performance at high playercounts.
 [Tuinity GitHub](https://github.com/Spottedleaf/Tuinity) 
+
+## Mohist
+Fork of Spigot focused on performance optimizations.
+[Mohist Github](https://github.com/Mohist-Community)
