@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-11-05T01:08:38+01:00",
+    "exported_at": "2020-01-29T19:54:33+01:00",
     "name": "SCP:SL",
     "author": "info@goover.de",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server",
@@ -28,18 +28,9 @@
             "description": "",
             "env_variable": "SRCDS_APPID",
             "default_value": "996560",
-            "user_viewable": true,
-            "user_editable": false,
+            "user_viewable": 1,
+            "user_editable": 0,
             "rules": "required|string|max:20"
-        },
-        {
-            "name": "Dotnet Bundle",
-            "description": "Only used for EXILED Framework Updater.",
-            "env_variable": "DOTNET_BUNDLE_EXTRACT_BASE_DIR",
-            "default_value": ".\/dotnet-bundle",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string"
         }
     ]
 }
