@@ -3,10 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-03-27T00:25:53-04:00",
+    "exported_at": "2020-12-06T18:58:35-08:00",
     "name": "Tuinity",
     "author": "unknown@unknown.com",
     "description": "Fork of Paper aimed at improving server performance at high playercounts.",
+    "features": ["eula"],
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
@@ -28,8 +29,8 @@
             "description": "The name of the server jarfile to run the server with.",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         }
     ]
