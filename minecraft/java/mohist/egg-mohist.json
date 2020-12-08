@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-12-06T02:04:44-08:00",
+    "exported_at": "2020-12-08T11:59:05-08:00",
     "name": "Mohist",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Spigot fork with performance optimizations.",
@@ -18,24 +18,15 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Mohistmc Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt install -y curl\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sSL \"https:\/\/mohistmc.com\/api\/${MINECRAFT_VERSION}\/${BUILD_NUMBER}\/download\" -o ${SERVER_JARFILE}",
+            "script": "#!\/bin\/bash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl\r\n\r\n#Go into main direction\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ ! -z ${BUILD_VERSION} ]; then\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/${BUILD_VERSION}\/download\r\n    \r\n    #Downloading jars\r\n    echo -e \"Download link is ${DOWNLOAD_LINK}\"\r\n    echo -e \"Downloading build version ${BUILD_VERSION}\"\r\n    if [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n        if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}-server.jar; then\r\n            echo -e \"Download link is valid.\"\r\n        else\r\n            echo -e \"Link is invalid closing out\"\r\n            exit 2\r\n        fi\r\n    fi\r\n\r\n    curl -s -o server.jar -sS ${DOWNLOAD_LINK}\r\n\r\n    #Checking if downloaded jars exist\r\n    if [ ! -f .\/server.jar ]; then\r\n        echo \"!!! Error downloading build version ${BUILD_VERSION} !!!\"\r\n        exit\r\n    fi\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/${BUILD_TYPE}\/download\r\n\r\n    #Downloading jars\r\n    echo -e \"Download link is ${DOWNLOAD_LINK}\"\r\n    echo -e \"Downloading ${BUILD_TYPE} build version\"\r\n    if [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n        if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}-server.jar; then\r\n            echo -e \"Download link is valid.\"\r\n        else\r\n            echo -e \"Link is invalid closing out\"\r\n            exit 2\r\n        fi\r\n    fi\r\n\r\n    curl -s -o server.jar -sS ${DOWNLOAD_LINK}\r\n\r\n    #Checking if downloaded jars exist\r\n    if [ ! -f .\/server.jar ]; then\r\n        echo \"!!! Error downloading ${BUILD_TYPE} build !!!\"\r\n        exit\r\n    fi\r\nfi",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Minecraft Version",
-            "description": "The version of minecraft to download. \r\n\r\nInvalid versions will default to 1.12.2.",
-            "env_variable": "MINECRAFT_VERSION",
-            "default_value": "1.12.2",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:20"
-        },
-        {
             "name": "Server Jar File",
-            "description": "The name of the server jarfile to run the server with.",
+            "description": "The name of the jarfile to run the server with.",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
             "user_viewable": true,
@@ -43,9 +34,27 @@
             "rules": "required|string|max:20"
         },
         {
+            "name": "Minecraft Version",
+            "description": "The version of Minecraft to download.",
+            "env_variable": "MC_VERSION",
+            "default_value": "1.16.4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
             "name": "Build Number",
-            "description": "The build number for the Mohist release.\r\n\r\nLeave at latest to always get the latest version. Invalid versions will default to latest.",
-            "env_variable": "BUILD_NUMBER",
+            "description": "Optional: \r\nThe build number for the Mohist release. Overrides Build Type.",
+            "env_variable": "BUILD_VERSION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Build Type",
+            "description": "The type of server jar to download from Mohist.\r\n\r\nValid types are \"recommended\" and \"latest\".",
+            "env_variable": "BUILD_TYPE",
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
