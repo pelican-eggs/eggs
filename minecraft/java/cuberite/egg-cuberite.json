@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-12-08T14:43:06-08:00",
+    "exported_at": "2020-12-08T17:25:20-08:00",
     "name": "Cuberite",
     "author": "parker@parkervcp.com",
     "description": "A lightweight, fast and extensible game server for Minecraft",
@@ -11,8 +11,8 @@
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
     "startup": ".\/Cuberite",
     "config": {
-        "files": "{\r\n    \"settings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"Server.Ports\": \"{{server.build.default.port}}\",\r\n            \"Server.Description\": \"{{server.build.env.SERV_DESC}}\"\r\n        }\r\n    },\r\n    \"webadmin.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"User:admin.Password\": \"{{server.build.env.ADMIN_PASS}}\",\r\n            \"WebAdmin.Ports\":\"{{server.build.env.WEB_PORT}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Startup complete \"\r\n}",
+        "files": "{\r\n    \"settings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"Server.Ports\": \"{{server.build.default.port}}\",\r\n            \"Server.Description\": \"{{server.build.env.SERV_DESC}}\"\r\n        }\r\n    },\r\n    \"webadmin.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"User:admin.Password\": \"{{server.build.env.ADMIN_PASS}}\",\r\n            \"WebAdmin.Ports\": \"{{server.build.env.WEB_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Startup complete\"\r\n}",
         "logs": "{}",
         "stop": "stop"
     },
