@@ -3,10 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-10-15T03:54:24+00:00",
+    "exported_at": "2020-12-05T13:11:06+01:00",
     "name": "Waterdog",
     "author": "parker@pterodactyl.io",
     "description": "Waterdog is fork of the well-known Waterfall, which is a fork of the well-known BungeeCord, server teleportation suite.",
+    "features": null,
     "image": "quay.io\/pterodactyl\/core:java",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
@@ -17,7 +18,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\n# Adding '.jar' if it isn't part of the file name\r\nif [[ \"${SERVER_JARFILE}\" == \"*\\.jar\" ]]; then\r\n    echo -e \"adding.jar to server file name\"\r\n    SERVER_JARFILE=\"${SERVER_JARFILE}.jar\"\r\nfi\r\n\r\nif [ -z \"${WATERDOG_VERSION}\" ] || [ \"${WATERDOG_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"downloading latest waterdog build\\n\"\r\n    curl -sSL -o ${SERVER_JARFILE} https:\/\/ci.codemc.io\/job\/yesdog\/job\/Waterdog\/lastSuccessfulBuild\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterdog.jar\r\nelse \r\n    echo -e \"downloading waterdog build ${WATERDOG_VERSION}\\n\"\r\n    curl -sSL -o ${SERVER_JARFILE} https:\/\/ci.codemc.io\/job\/yesdog\/job\/Waterdog\/${WATERDOG_VERSION}\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterdog.jar\r\nfi\r\n\r\nif [ ! -f config.yml ]; then\r\n    echo -e \"Downloading waterfall config.yml\"\r\n   curl -o config.yml https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft_proxy\/waterfall\/config.yml\r\nelse\r\n    echo -e \"Waterfall config.yml exists. Will not pull a new file\"\r\nfi",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\n# Adding '.jar' if it isn't part of the file name\r\nif [[ \"${SERVER_JARFILE}\" == \"*\\.jar\" ]]; then\r\n    echo -e \"adding.jar to server file name\"\r\n    SERVER_JARFILE=\"${SERVER_JARFILE}.jar\"\r\nfi\r\n\r\nif [ -z \"${WATERDOG_VERSION}\" ] || [ \"${WATERDOG_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"downloading latest waterdog build\\n\"\r\n    curl -sSL -o ${SERVER_JARFILE} https:\/\/ci.codemc.io\/job\/yesdog\/job\/Waterdog\/lastSuccessfulBuild\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterdog.jar\r\nelse \r\n    echo -e \"downloading waterdog build ${WATERDOG_VERSION}\\n\"\r\n    curl -sSL -o ${SERVER_JARFILE} https:\/\/ci.codemc.io\/job\/yesdog\/job\/Waterdog\/${WATERDOG_VERSION}\/artifact\/Waterfall-Proxy\/bootstrap\/target\/Waterdog.jar\r\nfi\r\n\r\nif [ ! -f config.yml ]; then\r\n    echo -e \"Downloading waterfall config.yml\"\r\n   curl -o config.yml https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/proxy\/java\/waterfall\/config.yml\r\nelse\r\n    echo -e \"Waterfall config.yml exists. Will not pull a new file\"\r\nfi",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }

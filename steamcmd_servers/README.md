@@ -31,6 +31,9 @@ This is a collection of servers that use steamcmd to install.
 ## HLDS Server
 [hlds](hlds_server/)
 
+## Holdfast
+[holdfast](holdfast/)
+
 ## Hurtworld
 [hurtworld](hurtworld/)
 
@@ -72,6 +75,9 @@ This is a collection of servers that use steamcmd to install.
 
 ## Sven coop
 [svencoop](svencoop)
+
+## Team Fortress 2 Classic
+[Team Fortress 2 Classic](team_fortress_2_classic)
 
 ## Tower Unite
 [Tower Unite](tower_unite)

@@ -4,9 +4,9 @@
 [Minecraft Bedrock Server](https://minecraft.net/en-us/download/server/bedrock/)
 The official Minecraft Bedrock (Formerly Minecraft Pocket Edition) server.
 
-#### DragonProxy
-[DragonProxy Github](https://github.com/DragonetMC/DragonProxy)
-A proxy to allow Minecraft: Bedrock clients to connect to Minecraft: Java Edition servers.
+#### gomint
+[Gomint Bedrock Server](https://github.com/gomint/gomint)
+Easy-to-use, highly configurable Minecraft Bedrock Edition  server software with the ability to sustain in a low-resource environment.
 
 #### Nukkit
 [Nukkit GitHub](https://github.com/Nukkit/Nukkit)  

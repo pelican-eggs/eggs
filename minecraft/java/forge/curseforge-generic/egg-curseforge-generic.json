@@ -3,10 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-08-12T08:19:04-04:00",
+    "exported_at": "2020-12-07T11:33:04-05:00",
     "name": "Curseforge Generic",
     "author": "parker@parkervcp.com",
     "description": "A generic egg for a forge modpack",
+    "features": null,
     "image": "quay.io\/pterodactyl\/core:java",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
     "config": {
@@ -25,11 +26,11 @@
     "variables": [
         {
             "name": "modpack project ID",
-            "description": "The modpack project ID from the curseforge site on the pack page.\r\n\r\n(Ex. https:\/\/minecraft.curseforge.com\/projects\/sevtech-ages ID is 268208)",
+            "description": "The modpack project ID from the curseforge site on the pack page.\r\n\r\n(Ex. https:\/\/www.curseforge.com\/minecraft\/modpacks\/bofa-mods ID is 375152)",
             "env_variable": "MODPACK_ID",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -37,8 +38,8 @@
             "description": "Version of the modpack to use.",
             "env_variable": "MODPACK_VERSION",
             "default_value": "latest",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         }
     ]
