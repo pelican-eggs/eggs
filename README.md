@@ -71,6 +71,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## Game Eggs
 [Among Us Impostor Server](/among_us/impostor_server)
 
+[Cryofall](/cryofall)
+
 [ET Legacy](/enemy_territory/etlegacy)
 
 [Factorio](/factorio/factorio)
@@ -188,4 +190,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Xonotic](/xonotic/xonotic)
 
-[Cryofall](/cryofall)
+## [Storage](/storage/)
+### S3 Storage
+* [minio](/storage/minio)
