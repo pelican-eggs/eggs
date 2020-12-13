@@ -1,5 +1,4 @@
-## FTB Packs
-[FTB Modpacks](https://api.modpacks.ch)
+## FTB Modpacks
 A generic service to pull FTB modpacks from api.modpacks.ch.
 There are 2 ways to install a server through this service.
 The first method only requires you to know the modpacks name and version.
