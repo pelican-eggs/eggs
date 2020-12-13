@@ -24,13 +24,7 @@ This is a direct fork of the default forge service
 A generic service to pull forge mod packs from the curseforge site.  
 
 ## FTB Packs
-[FTB](https://www.feed-the-beast.com/modpacks)  
-A generic service to pull forge mod packs from the FTB site.  
-Supply values to 2 variables to use  
-- MODPACK_URL:  from the url to the pack https://www.feed-the-beast.com/projects/{MODPACK_URL}  
-- MODPACK_VERSION: version of the modpack to install
-
-[FTB Modpacks through modpacks.ch](https://api.modpacks.ch)
+[FTB Modpacks](https://api.modpacks.ch)
 A generic service to pull FTB modpacks from api.modpacks.ch.
 There are 2 ways to install a server through this service.
 The first method only requires you to know the modpacks name and version.
@@ -51,10 +45,7 @@ The second method requires you to know the id for both the modpack and version i
 **NOTE**
 **Not all FTB packs come with a server.properties file, due to this the server.properties file
 may not get updated with the correct ip address and port at first launch.
-Please restart the server after first launch to fix this.**
-
-[FTB Revelation](https://www.feed-the-beast.com/projects/ftb-revelation)  
-Revelation is a general all-purpose modpack with optimal FPS, server performance and stability.  
+Please restart the server after first launch to fix this.**  
 
 ## Magma
 [Magma](https://magmafoundation.org/)
