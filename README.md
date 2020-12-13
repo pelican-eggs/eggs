@@ -93,6 +93,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock)  
   * [Bedrock](/minecraft/bedrock/bedrock)
+  * [gomint](/minecraft/bedrock/gomint)
   * [Nukkit](/minecraft/bedrock/nukkit)  
   * [PocketMine MP](/minecraft/bedrock/pocketmine_mp)  
 
