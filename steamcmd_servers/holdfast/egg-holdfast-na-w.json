@@ -1,0 +1,144 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-10-18T19:13:53-04:00",
+    "name": "Holdfast NaW",
+    "author": "ankit@bmghosting.com",
+    "description": "Holdfast: Nations at War",
+    "image": "bmghosting\/pterodactyl-holdfast",
+    "startup": "\".\/holdfastnaw-dedicated\/Holdfast NaW\" -startserver -batchmode -nographics -screen-width 320 -screen-height 240 -screen-quality Fastest -framerate {{FPSMAX}} --serverheadless -serverConfigFilePath holdfastnaw-dedicated\/configs\/{{SERVER_CONFIG_PATH}} -logFile holdfastnaw-dedicated\/logs_output\/output_{{SERVER_CONFIG_PATH}} -logArchivesDirectory holdfastnaw-dedicated\/{{SERVER_LOG_ARCHIVE_PATH}}\/ -adminCommandsLogFilePath holdfastnaw-dedicated\/logs_adminactions\/admin_{{SERVER_CONFIG_PATH}} -playersLogFilePath holdfastnaw-dedicated\/logs_playerlogin\/players_{{SERVER_CONFIG_PATH}} -scoreboardLogFilePath holdfastnaw-dedicated\/logs_score\/scorelog_{{SERVER_CONFIG_PATH}} -chatLogFilePath holdfastnaw-dedicated\/logs_chat\/chatlog_{{SERVER_CONFIG_PATH}} -workshopDataPath holdfastnaw-dedicated\/workshop -micSpammersPlayersFilePath holdfastnaw-dedicated\/micspammers.txt -mutedVoipPlayersFilePath holdfastnaw-dedicated\/mutedplayersvoip.txt -mutedChatPlayersFilePath holdfastnaw-dedicated\/mutedplayerschat.txt -bannedPlayersFilePath holdfastnaw-dedicated\/bannedplayers.txt -p {{SERVER_PORT}} -l \"94.130.66.231\" -o 7101",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"STEAMAPPS_INTERFACE_VERSION008\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id ffound here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# EXTRA_FLAGS - when a server has extra glas for things like beta installs or updates.\r\n#\r\n##\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates git\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir \/mnt\/server\/holdfastnaw-dedicated +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## copy config to the configs folder - avoid rewrite from steamCMD update\r\ncd \/mnt\/server\/holdfastnaw-dedicated\r\nmkdir -p configs \r\ngit clone https:\/\/github.com\/ankit2951\/holdfast-config.git configs\r\ncp serverconfig_default.txt configs\/serverconfig_default.txt\r\n \r\n## Read\/Write access\r\nchmod -R 777 \/mnt\/server\/*",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Config Name",
+            "description": "Tells the server which config to load in the configs folder. Put .txt at the end of the config name or else the server will not launch.",
+            "env_variable": "SERVER_CONFIG_PATH",
+            "default_value": "serverconfig_default.txt",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200"
+        },
+        {
+            "name": "Server Name",
+            "description": "Server name that shows up on the server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Server Hosted by BMGHosting.com",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200"
+        },
+        {
+            "name": "Welcome Message",
+            "description": "Welcome Message in text chat.",
+            "env_variable": "MOTD",
+            "default_value": "Welcome!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:500"
+        },
+        {
+            "name": "Server Region",
+            "description": "Region of the world the server is located in. \r\nOptions: europe \/ usa \/ australia \/ brazil \/ china \/ japan \/ russia \/ southkorea",
+            "env_variable": "REGION",
+            "default_value": "europe",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password for Admin Login (F1).",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "ChangeMe123",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server Password to lock the server. Leave blank if you want the server public.",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:50"
+        },
+        {
+            "name": "Max Players",
+            "description": "Max Players",
+            "env_variable": "PLAYERS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Server Comm Port",
+            "description": "Server Comm Port",
+            "env_variable": "SERVER_COMM_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Server Query Port",
+            "description": "Server Query Port",
+            "env_variable": "SERVER_QUERY_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Server FPS",
+            "description": "Server FPS",
+            "env_variable": "FPSMAX",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Server Log Archive",
+            "description": "Server Log Archive",
+            "env_variable": "SERVER_LOG_ARCHIVE_PATH",
+            "default_value": "logs_archive",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:200"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "Steam CMD App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1424230",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Holdfast Build",
+            "description": "To apply a beta branch, do -beta.\r\nIf you are wanting to specify a beta branch, do -beta <betaname>.\r\nIf the beta branch has a password, do -beta <betaname> -betapassword <password>.",
+            "env_variable": "EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:100"
+        }
+    ]
+}
