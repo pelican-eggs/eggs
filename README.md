@@ -144,6 +144,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_x64)
 * [Avorion](/steamcmd_servers/avorion)
+* [Assetto Corsa](/steamcmd_servers/assetto_corsa)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
 * [Don't Starve](/steamcmd_servers/dont_starve)
