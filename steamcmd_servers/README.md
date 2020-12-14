@@ -16,6 +16,9 @@ This is a collection of servers that use steamcmd to install.
 ## Avorion
 [avorion](avorion/)
 
+## Assetto Corsa
+[assetto_corsa](assetto_corsa/)
+
 ## Citadel: Forged with Fire
 [citadel](citadel/)
 
