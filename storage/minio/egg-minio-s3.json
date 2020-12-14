@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-11-27T21:39:14-05:00",
+    "exported_at": "2020-12-14T05:29:26+02:00",
     "name": "Minio S3",
     "author": "accounts@bofanodes.io",
     "description": "MinIO is a cloud storage server compatible with Amazon S3, released under Apache License v2. As an object store, MinIO can store unstructured data such as photos, videos, log files, backups and container images. The maximum size of an object is 5TB.",
@@ -18,7 +18,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#\r\n#\r\napt update\r\napt install -y wget\r\ncd \/mnt\/server\r\nwget https:\/\/dl.min.io\/server\/minio\/release\/linux-amd64\/minio\r\nchmod +x minio\r\nmkdir data\r\nmkdir keys\r\nwget https:\/\/github.com\/tmunsch\/eggs\/raw\/minio\/storage\/minio\/minio.sh\r\nchmod +x minio.sh\r\nexport MINIO_ACCESS_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_ACCESS_KEY > keys\/key.txt\r\nexport MINIO_SECRET_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_SECRET_KEY > keys\/secret.txt\r\necho done",
+            "script": "#\r\n#\r\napt update\r\napt install -y wget\r\ncd \/mnt\/server\r\nwget https:\/\/dl.min.io\/server\/minio\/release\/linux-amd64\/minio\r\nchmod +x minio\r\nmkdir data\r\nmkdir keys\r\n\r\nwget https:\/\/github.com\/\/parkervcp\/eggs\/raw\/master\/storage\/minio\/minio.sh\r\nchmod +x minio.sh\r\nexport MINIO_ACCESS_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_ACCESS_KEY > keys\/key.txt\r\nexport MINIO_SECRET_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_SECRET_KEY > keys\/secret.txt\r\necho done",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
