@@ -109,11 +109,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Paper](/minecraft/java/paper)
   * [Purpur](/minecraft/java/purpur)
   * [Spigot](/minecraft/java/spigot/)
-  * [spongeforge](/minecraft/java/spongeforge/)
+  * [SpongeForge](/minecraft/java/spongeforge/)
   * [SpongeVanilla](/minecraft/java/spongevanilla/)
   * [Technic](/minecraft/java/technic/)
   * [Tuinity](/minecraft/java/tuinity/)
   * [VanillaCord](/minecraft/java/vanillacord/)
+  * [Mohist] (/minecraft/java/mohist)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
@@ -121,7 +122,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [Waterfall](/minecraft/proxy/java/waterfall)
     * [Travertine](/minecraft/proxy/java/travertine)
     * [Velocity](/minecraft/proxy/java/velocity)
-
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
