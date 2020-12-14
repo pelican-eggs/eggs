@@ -1,4 +1,4 @@
-﻿# steamcmd servers
+﻿﻿# steamcmd servers
 
 This is a collection of servers that use steamcmd to install.
 
@@ -78,6 +78,9 @@ This is a collection of servers that use steamcmd to install.
 
 ## Team Fortress 2 Classic
 [Team Fortress 2 Classic](team_fortress_2_classic)
+
+## The Forest
+[The Forest](the_forest)
 
 ## Tower Unite
 [Tower Unite](tower_unite)
