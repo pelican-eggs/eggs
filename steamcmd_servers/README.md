@@ -19,6 +19,9 @@ This is a collection of servers that use steamcmd to install.
 ## Assetto Corsa
 [assetto_corsa](assetto_corsa/)
 
+## Barotrauma
+[barotrauma](barotrauma/)
+
 ## Citadel: Forged with Fire
 [citadel](citadel/)
 
