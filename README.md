@@ -71,6 +71,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## Game Eggs
 [Among Us Impostor Server](/among_us/impostor_server)
 
+[Cryofall](/cryofall)
+
 [ET Legacy](/enemy_territory/etlegacy)
 
 [Factorio](/factorio/factorio)
@@ -142,6 +144,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_x64)
 * [Avorion](/steamcmd_servers/avorion)
+* [Assetto Corsa](/steamcmd_servers/assetto_corsa)
 * [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
@@ -189,4 +192,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Xonotic](/xonotic/xonotic)
 
-[Cryofall](/cryofall)
+## [Storage](/storage/)
+### S3 Storage
+* [minio](/storage/minio)

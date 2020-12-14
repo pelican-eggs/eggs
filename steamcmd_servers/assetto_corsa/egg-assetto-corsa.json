@@ -1,0 +1,91 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-12-14T03:20:46+02:00",
+    "name": "Assetto Corsa",
+    "author": "admin@softwarenoob.com",
+    "description": "Assetto Corsa (Italian for \"Race Setup\") is a sim racing video game developed by the Italian video game developer Kunos Simulazioni. It is designed with an emphasis on a realistic racing experience with support for extensive customization and moddability",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "startup": ".\/acServer",
+    "config": {
+        "files": "{\r\n    \"cfg\/server_cfg.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"NAME\": \"NAME={{server.build.env.HOSTNAME}}\",\r\n            \"PASSWORD\": \"PASSWORD={{server.build.env.PASSWORD}}\",\r\n            \"ADMIN_PASSWORD\": \"ADMIN_PASSWORD={{server.build.env.ADM_PASSWORD}}\",\r\n            \"UDP_PORT\": \"UDP_PORT={{server.build.default.port}}\",\r\n            \"TCP_PORT\": \"TCP_PORT={{server.build.default.port}}\",\r\n            \"HTTP_PORT\": \"HTTP_PORT={{server.build.env.HTTP_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"Downloading the game as Steam user ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +app_update 302550 ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nif [ \"${STEAM_USER}\" == \"anonymous\" ]; then\r\n    echo -e \"ERROR - STEAM USER NOT SET\\n\"\r\n    echo -e \"Steam account must have the dedicated server in his library in order to install and host the game\\n\"\r\n    echo -e \"You must configure Steam account in the server startup variables, after that reinstall the server\\n\"\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam Username",
+            "description": "A steam username of an account that owns the game is required",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Steam Auth Code",
+            "description": "Steam Auth Code required if the Steam Account is using Steam Auth",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server",
+            "env_variable": "HOSTNAME",
+            "default_value": "Pterodactyl Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:45"
+        },
+        {
+            "name": "Server Password",
+            "description": "If enabled players must enter the password to join the server",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:40"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Used to login as server administrator, type \/help in-game for more",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "4yRWj5vqr6zD",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "HTTP Port",
+            "description": "HTTP Port",
+            "env_variable": "HTTP_PORT",
+            "default_value": "8081",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
