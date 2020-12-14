@@ -11,8 +11,8 @@ Ports required to run the server in a table format.
 | Game Port  | 27015   |
 | Query Port | 27016   |
 
-**WARNING**
-** You must edit the port and server settings in serversettings.xml file or your server will not work!**
+**WARNING
+You must edit the port and server settings in serversettings.xml file or your server will not work!**
 
 ### No console
 Barotrauma server does not currently have server console, it will just spam random messages. You have to add yourself as admin and type commands in-game. Admin file is located at Data/clientpermissions.xml, example config is below.
