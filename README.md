@@ -24,35 +24,35 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Please read the CONTRIBUTING.md before submitting PRs
 
-## [Bots](/bots/)
+## [Bots](/bots)
 
-[Discord](/bots/discord/)
-* [ATL Bot](/bots/discord/atlbot/) Node JS
-* [Bastion](/bots/discord/bastion/)
-* [CorpBot](/bots/discord/corpbot/) Python
-* [discord.js](bots/discord/discord.js/) Node JS generic
-* [discord.py](bots/discord/discord.py/) Python generic
-* [discordgo](bots/discord/discordgo/) golang generic
-* [fragbot](/bots/discord/fragbot/) Golang
+[Discord](/bots/discord)
+* [ATL Bot](/bots/discord/atlbot) Node JS
+* [Bastion](/bots/discord/bastion)
+* [CorpBot](/bots/discord/corpbot) Python
+* [discord.js](bots/discord/discord.js) Node JS generic
+* [discord.py](bots/discord/discord.py) Python generic
+* [discordgo](bots/discord/discordgo) golang generic
+* [fragbot](/bots/discord/fragbot) Golang
 * [jmusicbot](/bots/discord/jmusicbot) Java
-* [parkertron](/bots/discord/parkertron/) Golang
-* [pixel-bot](/bots/discord/pixelbot/) Python
-* [Red](/bots/discord/redbot/) Python
-* [Sinusbot](/bots/discord/sinusbot/)
+* [parkertron](/bots/discord/parkertron) Golang
+* [pixel-bot](/bots/discord/pixelbot) Python
+* [Red](/bots/discord/redbot) Python
+* [Sinusbot](/bots/discord/sinusbot)
 
 * [Twitch](/bots/twitch)
-  * [PhantomBot](/bots/twitch/phantombot/)
-  * [sogeBot](/bots/twitch/sogebot/)
-  
-[Other](/bots/other/)
+  * [PhantomBot](/bots/twitch/phantombot)
+  * [sogeBot](/bots/twitch/sogebot)
+
+[Other](/bots/other)
 * [Big Brother Bot](/bots/other/bigbrotherbot)
 
 * [TeamSpeak3](bots/teamspeak3)
-  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod/)
+  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
 
-## [Database](/database/)
+## [Database](/database)
 ### In-Memory Databases
-[Redis](/database/redis/)
+[Redis](/database/redis)
 * [Redis 5](/database/redis/redis-5)
 * [Redis 6](/database/redis/redis-6)
 
@@ -60,118 +60,138 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [mongoDB](/database/nosql/mongodb)
 
 ### SQL Databases
-* [MariaDB](/database/sql/mariadb/)
-* [PostgreSQL](/database/sql/postgres/)
+* [MariaDB](/database/sql/mariadb)
+* [PostgreSQL](/database/sql/postgres)
 
 ## Voice Servers
 * [Lavalink](/voice_servers/lavalink)
-* [teaspeak](/voice_servers/teaspeak)
+* [TeaSpeak](/voice_servers/teaspeak)
+* [TS3-Manager](/voice_servers/ts3_manager)
 
 ## Game Eggs
 [Among Us Impostor Server](/among_us/impostor_server)
 
-[ET Legacy](/enemy_territory/etlegacy/)
+[Cryofall](/cryofall)
 
-[Factorio](/factorio/factorio/)
+[ET Legacy](/enemy_territory/etlegacy)
 
-[Grand Theft Auto](/gta/)
+[Factorio](/factorio/factorio)
+
+[Grand Theft Auto](/gta)
 * GTA V
-  * [FiveM](/gta/fivem/)
-  * [RageMP](/gta/ragemp/)
-  * [alt:V](/gta/altv/)
+  * [FiveM](/gta/fivem)
+  * [RageMP](/gta/ragemp)
+  * [alt:V](/gta/altv)
 * GTA SA
-  * [Multi Theft Auto](/gta/mtasa/)
-  * [SA-MP](/gta/samp/)
+  * [Multi Theft Auto](/gta/mtasa)
+  * [SA-MP](/gta/samp)
 
-[Mindustry](/mindustry/)
+[Mindustry](/mindustry)
 
-[Minecraft](/minecraft/)
-* [Bedrock](/minecraft/bedrock/)  
-  * [Bedrock](/minecraft/bedrock/bedrock/)
-  * [DragonProxy](/minecraft/bedrock/dragonproxy/)  
-  * [Nukkit](/minecraft/bedrock/nukkit/)  
-  * [PocketMine MP](/minecraft/bedrock/pocketmine_mp/)  
+[LeagueSandbox](/leaguesandbox)
 
-* [Java](/minecraft/java/) Servers for Java Minecraft
-  * [Cuberite](/minecraft/java/cuberite/)
-  * [feather](/minecraft/feather/)  
-  * [Feed The Beast](/minecraft/java/ftb/)  
-  * [Forge](/minecraft/java/forge/)  
-  * [Magma](/minecraft/java/magma/)
+[Minetest](/minetest) (including MTG)
+
+[Minecraft](/minecraft)
+* [Bedrock](/minecraft/bedrock)  
+  * [Bedrock](/minecraft/bedrock/bedrock)
+  * [gomint](/minecraft/bedrock/gomint)
+  * [Nukkit](/minecraft/bedrock/nukkit)  
+  * [PocketMine MP](/minecraft/bedrock/pocketmine_mp)  
+
+* [Java](/minecraft/java) Servers for Java Minecraft
+  * [Cuberite](/minecraft/java/cuberite)
+  * [Fabric](/minecraft/java/fabric) 
+  * [Feather](/minecraft/java/feather)  
+  * [Feed The Beast](/minecraft/java/ftb)  
+  * [Forge](/minecraft/java/forge)  
+  * [Magma](/minecraft/java/magma)
   * [Paper](/minecraft/java/paper)
-  * [Spigot](/minecraft/java/spigot/)
-  * [spongeforge](/minecraft/java/spongeforge/)
-  * [SpongeVanilla](/minecraft/java/spongevanilla/)
-  * [Technic](/minecraft/java/technic/)
-  * [Tuinity](/minecraft/java/tuinity/)
-  * [VanillaCord](/minecraft/java/vanillacord/)
+  * [Spigot](/minecraft/java/spigot)
+  * [SpongeForge](/minecraft/java/spongeforge)
+  * [SpongeVanilla](/minecraft/java/spongevanilla)
+  * [Technic](/minecraft/java/technic)
+  * [Tuinity](/minecraft/java/tuinity)
+  * [VanillaCord](/minecraft/java/vanillacord)
+  * [Mohist](/minecraft/java/mohist)
 
-* [Proxies](/minecraft/proxy/) (these are for the java version of minecraft)
-  * [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/)
-  * [Travertine](/minecraft/proxy/travertine/) Java
-  * [Velocity](/minecraft/proxy/velocity/)
-  * [Waterdog](/minecraft/proxy/waterdog/) Java/Bedrock
-  * [Waterfall](/minecraft/proxy/waterfall/)
+* [Proxies](/minecraft/proxy) Minecraft Server Proxies
+  * [Java](/minecraft/proxy/java)
+    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
+    * [Waterfall](/minecraft/proxy/java/waterfall)
+    * [Travertine](/minecraft/proxy/java/travertine)
+    * [Velocity](/minecraft/proxy/java/velocity)
+  * [Cross Platform](/minecraft/proxy/cross_platform)
+    * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
+    * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
+    * DragonProxy abandoned in favour of GeyserMC.
+	
 
-[OpenRA](/openra/)
+[OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
 * [OpenRA Red Alert](/openra/openra_red_alert)
 * [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn)
 
 
-[Red Dead Redemption](/rdr/)
-* [RedM](/rdr/redm/)
+[Red Dead Redemption](/rdr)
+* [RedM](/rdr/redm)
 
-[steamcmd servers](/steamcmd_servers/) These eggs use steamcmd to install
-* [7 Days to Die](/steamcmd_servers/7_days_to_die/)
-* [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved/)
-* [Arma](/steamcmd_servers/arma/)
-  * [Arma 3](/steamcmd_servers/arma/arma3/)
-  * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client/)
-* [Avorion](/steamcmd_servers/avorion/)
+[steamcmd servers](/steamcmd_servers) These eggs use steamcmd to install
+* [7 Days to Die](/steamcmd_servers/7_days_to_die)
+* [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved)
+* [Arma](/steamcmd_servers/arma)
+  * [Arma 3](/steamcmd_servers/arma/arma3)
+  * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client)
+  * [Arma 3 HC](/steamcmd_servers/arma/arma3_x64)
+* [Avorion](/steamcmd_servers/avorion)
+* [Assetto Corsa](/steamcmd_servers/assetto_corsa)
+* [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
 * [Don't Starve](/steamcmd_servers/dont_starve)
-* [ECO](/steamcmd_servers/eco/)
+* [ECO](/steamcmd_servers/eco)
 * [HLDS server](/steamcmd_servers/hlds_server)
+* [Holdfast](/steamcmd_servers/holdfast)
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](/steamcmd_servers/killingfloor2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
-* [PixARK](/steamcmd_servers/pixark/)
-* [Project Zomboid](/steamcmd_servers/project_zomboid/)
+* [PixARK](/steamcmd_servers/pixark)
+* [Project Zomboid](/steamcmd_servers/project_zomboid)
 * [Rising World](/steamcmd_servers/rising_world)
-* [Rust Staging Branch](/steamcmd_servers/rust_staging/)
-* [SCP: Secret Laboratory](/steamcmd_servers/scpsl/)
-  * [dedicated](/steamcmd_servers/scpsl/dedicated/)
-  * [multiadmin](/steamcmd_servers/scpsl/multiadmin/)
-* [Soldat](/steamcmd_servers/soldat/)
+* [Rust Staging Branch](/steamcmd_servers/rust_staging)
+* [SCP: Secret Laboratory](/steamcmd_servers/scpsl)
+  * [dedicated](/steamcmd_servers/scpsl/dedicated)
+  * [multiadmin](/steamcmd_servers/scpsl/multiadmin)
+* [Soldat](/steamcmd_servers/soldat)
 * [Starbound](/steamcmd_servers/starbound)
-* [Stationeers](/steamcmd_servers/stationeers/)
-* [Stormworks](/steamcmd_servers/stormworks/)
+* [Stationeers](/steamcmd_servers/stationeers)
+* [Stormworks](/steamcmd_servers/stormworks)
 * [Sven Co-op](/steamcmd_servers/svencoop)
-* [Squad](/steamcmd_servers/squad/)
-* [Unturned](/steamcmd_servers/unturned/)
-  * [Unturned](/steamcmd_servers/unturned/unturned/)
+* [Squad](/steamcmd_servers/squad)
+* [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
+* [Unturned](/steamcmd_servers/unturned)
 
-[Teeworlds](/teeworlds/)
-* [teeworlds](/teeworlds/teeworlds/)
+[Teeworlds](/teeworlds)
+* [teeworlds](/teeworlds/teeworlds)
 
-[Terraria](/terraria/)
+[Terraria](/terraria)
 * [vanilla](/terraria/vanilla)
 * [tmodloader](/terraria/tmodloader)
-* [tshock](/terraria/tshock/)
+* [tshock](/terraria/tshock)
 
-[Tycoon Games](/tycoon_games/)
-* [OpenTTD](/tycoon_games/openttd/)
+[Tycoon Games](/tycoon_games)
+* [OpenTTD](/tycoon_games/openttd)
 
 [Unreal Engine](/unreal_engine)
-* [Tower Unite](/unreal_engine/tower_unite/)
-* [Tower Unite](/steamcmd_servers/tower_unite/)
+* [Tower Unite](/unreal_engine/tower_unite)
+* [Tower Unite](/steamcmd_servers/tower_unite)
 
-[Vintage Story](/vintage_story/vintage_story/)
+[Vintage Story](/vintage_story/vintage_story)
 
-[Xonotic](/xonotic/xonotic/)
+[Xonotic](/xonotic/xonotic)
 
-[Cryofall](/cryofall/)
+## [Storage](/storage/)
+### S3 Storage
+* [minio](/storage/minio)

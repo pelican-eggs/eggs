@@ -1,4 +1,4 @@
-﻿# steamcmd servers
+﻿﻿# steamcmd servers
 
 This is a collection of servers that use steamcmd to install.
 
@@ -16,6 +16,12 @@ This is a collection of servers that use steamcmd to install.
 ## Avorion
 [avorion](avorion/)
 
+## Assetto Corsa
+[assetto_corsa](assetto_corsa/)
+
+## Barotrauma
+[barotrauma](barotrauma/)
+
 ## Citadel: Forged with Fire
 [citadel](citadel/)
 
@@ -30,6 +36,9 @@ This is a collection of servers that use steamcmd to install.
 
 ## HLDS Server
 [hlds](hlds_server/)
+
+## Holdfast
+[holdfast](holdfast/)
 
 ## Hurtworld
 [hurtworld](hurtworld/)
@@ -72,6 +81,12 @@ This is a collection of servers that use steamcmd to install.
 
 ## Sven coop
 [svencoop](svencoop)
+
+## Team Fortress 2 Classic
+[Team Fortress 2 Classic](team_fortress_2_classic)
+
+## The Forest
+[The Forest](the_forest)
 
 ## Tower Unite
 [Tower Unite](tower_unite)

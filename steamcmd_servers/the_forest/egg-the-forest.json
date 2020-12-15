@@ -1,0 +1,109 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2020-12-14T01:03:24+02:00",
+    "name": "The Forest",
+    "author": "admin@softwarenoob.com",
+    "description": "As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive against a society of cannibalistic mutants. Build, explore, survive in this terrifying first-person survival horror simulator.",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_wine-xvfb",
+    "startup": ".\/start.sh -serverip {{SERVER_IP}}:{{QUERY_PORT}  -serversteamport {{STEAM_PORT}} -servergameport {{SERVER_PORT}} -serverqueryport {{QUERY_PORT}} -servername \"{{SERVER_NAME}}\" -serverplayers {{MAX_PLAYERS}} -difficulty {{SERVER_DIFFICULTY}}",
+    "config": {
+        "files": "{\r\n    \"\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"serverIP\": \"serverIP {{server.build.default.ip}}:{{server.build.env.QUERY_PORT}}\",\r\n            \"serverSteamPort\": \"serverSteamPort {{server.build.env.STEAM_PORT}}\",\r\n            \"serverGamePort\": \"serverGamePort {{server.build.default.port}}\",\r\n            \"serverName\": \"serverName {{server.build.env.SERVER_NAME}}\",\r\n            \"serverPlayers\": \"serverPlayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"serverPassword\": \"serverPassword {{server.build.env.SERVER_PASS}}\",\r\n            \"serverPasswordAdmin\": \"serverPasswordAdmin {{server.build.env.ADMIN_PASS}}\",\r\n            \"serverSteamAccount\": \"serverSteamAccount {{server.build.env.STEAM_ACC}}\",\r\n            \"difficulty\": \"difficulty {{server.build.env.SERVER_DIFFICULTY}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Game autosave started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n# Install dependencies\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\n\r\n\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\n.\/steamcmd.sh +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +app_update ${APPID} ${EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Configure wine and server startup config\r\nmkdir -p \/home\/container\/.wine64\r\necho \"#!\/bin\/sh\r\nexport WINEARCH=win64\r\nexport WINEPREFIX=\/home\/container\/.wine64\r\nxvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 \/home\/container\/TheForestDedicatedServer.exe -batchmode -nographics -nosteamclient -savefolderpath \/home\/container\/TheForestDedicatedServer_Data -configfilepath \/home\/container\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg |grep -v 'RenderTexture.Create failed: format unsupported - 2.'\" > \/mnt\/server\/start.sh\r\nchmod +x \/mnt\/server\/start.sh",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "APPID",
+            "default_value": "556450",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Steam browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl Forest Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam port",
+            "env_variable": "STEAM_PORT",
+            "default_value": "8766",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query port, this port is also used for connecting to the server",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "Server player cap",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Server difficulty setting, Peaceful, Normal or Hard.",
+            "env_variable": "SERVER_DIFFICULTY",
+            "default_value": "Normal",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Peaceful,Normal,Hard"
+        },
+        {
+            "name": "Steam Account Token",
+            "description": "The Steam Account Token is required for the server to save player progress. Use APP ID 242760 for the token generation. \r\n\r\nYou can generate the token on steam at https:\/\/steamcommunity.com\/dev\/managegameservers",
+            "env_variable": "STEAM_ACC",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password protects the server if set, any player must enter the password to join",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Admin Password",
+            "description": "A password that will be used to gain admin access to the server in-game",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "cHanGetHePaSwWord",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -1,28 +1,21 @@
 # Configuration for the Feather server.
 
-# Most of the options here are unimplented and have no effect.
-# Those that are unimplemted have been labeled so.
+# Many of the options here are unimplemented and have no effect.
+# Those that are unimplemented have been labeled so.
 
 [io]
 # Packets with a size more than or equal to this value will be sent compressed.
 # Compressing packets reduces bandwidth usage but increases CPU activity.
 compression_threshold = 256
-# The number of worker threads used for asynchronous IO.
-# Set to the number of cores on your CPU for optimal performance.
-io_worker_threads = 8
-
-[proxy]
-# IP forwarding using either "bungee" (BungeeCord/Waterfall/Travertine) or "velocity" (Velocity)
-proxy_mode = "none" # Unimplemented
 
 [server]
 online_mode = true
 motd = "A Feather server"
 max_players = 16
-default_gamemode = "survival"
+default_gamemode = "creative"
 difficulty = "none" # Unimplemented
 view_distance = 6
-address = "127.0.0.1"
+address = "0.0.0.0"
 port = 25565
 
 [gameplay]
@@ -45,3 +38,25 @@ level = "debug"
 url = ""
 # Optional SHA1 hash of the resource pack file.
 hash = ""
+
+[world]
+# The name of the directory containing the world.
+name = "world"
+# The generator to use if the world does not exist.
+# Implemented values are: default, flat
+generator = "default"
+# The seed to use if the world does not exist.
+# Leaving this value empty will generate a random seed.
+# If this value is not a valid integer (i64), the string
+# will be converted using a hash function.
+seed = ""
+# Interval at which to save modified chunks.
+save_interval = "1min"
+
+[proxy]
+# Select the IP forwarding mode that is used by proxies like BungeeCord or Velocity.
+# Valid values are
+# - "None" - for usage without a proxy
+# - "BungeeCord" - for BungeeCord/Waterfall/Travertine
+# - "Velocity" - for Velocity style proxies (unimplemented)
+proxy_mode = "None"
