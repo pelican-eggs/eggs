@@ -105,7 +105,7 @@
             "rules": "required|boolean"
         },
         {
-            "name": "Ballte Eye",
+            "name": "Battle Eye",
             "description": "Enable BattleEye\r\n\r\n0 to disable\r\n1 to enable\r\n\r\ndefault=\"1\"",
             "env_variable": "BATTLE_EYE",
             "default_value": "1",

@@ -4,29 +4,34 @@ It’s a game about placing blocks and going on adventures
 
 It’s set in infinitely-generated worlds of wide open terrain - icy mountains, swampy bayous, vast pastures and much more - filled with secrets, wonders and peril!
 
-[Bedrock](/minecraft/bedrock/) Servers for Bedrock Minecraft (Windows 10, mobile, console)
-* [Bedrock](/minecraft/bedrock/bedrock/)
-* [DragonProxy](/minecraft/bedrock/dragon_proxy/)  
-* [Nukkit](/minecraft/bedrock/nukkit/)  
-* [PocketMine MP](/minecraft/bedrock/pocketmine_mp/)  
+[Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
+* [Bedrock](/minecraft/bedrock/bedrock)
+* [Nukkit](/minecraft/bedrock/nukkit)  
+* [PocketMine MP](/minecraft/bedrock/pocketmine_mp)  
 
 [Java](/minecraft/java/) Servers for Java Minecraft
-* [Cuberite](/minecraft/java/cuberite/)
-* [Feather](/minecraft/java/feather/)  
-* [Feed The Beast](/minecraft/java/ftb/)  
-* [Forge](/minecraft/java/forge/)  
-* [Magma](/minecraft/java/magma/)
+* [Cuberite](/minecraft/java/cuberite)
+* [Fabric](/minecraft/java/fabric) 
+* [Feather](/minecraft/java/feather)  
+* [Feed The Beast](/minecraft/java/ftb)  
+* [Forge](/minecraft/java/forge)  
+* [Magma](/minecraft/java/magma)
 * [Paper](/minecraft/java/paper)
-* [Spigot](/minecraft/java/spigot/)
-* [spongeforge](/minecraft/java/spongeforge/)
-* [SpongeVanilla](/minecraft/java/spongevanilla/)
-* [Technic](/minecraft/java/technic/)
-* [Tuinity](/minecraft/java/tuinity/)
-* [VanillaCord](/minecraft/java/vanillacord/)
+* [Spigot](/minecraft/java/spigot)
+* [SpongeForge](/minecraft/java/spongeforge)
+* [SpongeVanilla](/minecraft/java/spongevanilla)
+* [Technic](/minecraft/java/technic)
+* [Tuinity](/minecraft/java/tuinity)
+* [VanillaCord](/minecraft/java/vanillacord)
+* [Mohist](/minecraft/java/mohist)
 
-[Proxies](/minecraft/proxy/) Minecraft Server Proxies
-* [TyphoonLimbo](/minecraft/proxy/typhoonlimbo/) Java
-* [Travertine](/minecraft/proxy/travertine/) Java
-* [Velocity](/minecraft/proxy/velocity/) Java
-* [Waterdog](/minecraft/proxy/waterdog/) Java/Bedrock
-* [Waterfall](/minecraft/proxy/waterfall/) Java
+* [Proxies](/minecraft/proxy) Minecraft Server Proxies
+  * [Java](/minecraft/proxy/java)
+    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
+    * [Waterfall](/minecraft/proxy/java/waterfall)
+    * [Travertine](/minecraft/proxy/java/travertine)
+    * [Velocity](/minecraft/proxy/java/velocity)
+  * [Cross Platform](/minecraft/proxy/cross_platform)
+    * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
+    * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
+	* DragonProxy abandoned in favour of GeyserMC.
