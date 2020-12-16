@@ -1,7 +1,7 @@
 # Among Us - CrewLink server
 ### From their [Github](https://github.com/ottomated/CrewLink)
 
-This is the relay server for CrewLink, an Among Us proximity voice chat program.
+This project implements proximity voice chat in Among Us. Everyone in an Among Us lobby with this program running will be able to communicate over voice in-game, with no third-party programs required. Spatial audio ensures that you can only hear people close to you.
 
 ### Server Port
 Default port is 9736 but you can change to any port or domain/ip in the egg
