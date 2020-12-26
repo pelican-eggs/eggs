@@ -23,7 +23,7 @@ Ports required to run the server.
 
 | Port    | default |
 |---------|---------|
-| Game and Quary | 28015 UDP |
+| Game and Query | 28015 UDP |
 | RCON | 28016 TCP |
 
 ### Information about server updates can be found [here](https://steamdb.info/app/258550/depots/?branch=staging)
