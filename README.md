@@ -115,7 +115,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Technic](/minecraft/java/technic/)
   * [Tuinity](/minecraft/java/tuinity/)
   * [VanillaCord](/minecraft/java/vanillacord/)
-  * [Mohist] (/minecraft/java/mohist)
+  * [Mohist](/minecraft/java/mohist)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
