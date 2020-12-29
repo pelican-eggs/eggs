@@ -69,7 +69,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TS3-Manager](/voice_servers/ts3_manager)
 
 ## Game Eggs
-[Among Us Impostor Server](/among_us/impostor_server)
+[Among Us - Impostor Server](/among_us/impostor_server)
+
 [Among Us - CrewLink Server](/among_us/crewlink_server)
 
 [Cryofall](/cryofall)
