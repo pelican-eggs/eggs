@@ -6,7 +6,7 @@
     "exported_at": "2020-12-16T20:11:55+01:00",
     "name": "Crewlink server",
     "author": "panel@oxtroit.com",
-    "description": "An egg designed to allow support for Proxmity Chat in Among Us using CrewLink Server",
+    "description": "An egg designed to allow support for Proximity Chat in Among Us using CrewLink Server",
     "features": null,
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
     "startup": "yarn start",
