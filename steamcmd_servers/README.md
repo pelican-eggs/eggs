@@ -52,6 +52,9 @@ This is a collection of servers that use steamcmd to install.
 ## Onset
 [onset](onset/)
 
+##Pavlov VR
+[pavlov_vr](pavlov_vr/)
+
 ## Project Zomboid
 [project_zomboid](project_zomboid/)
 
