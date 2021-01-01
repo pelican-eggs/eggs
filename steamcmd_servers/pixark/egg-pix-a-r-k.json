@@ -3,11 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2019-10-24T00:00:15-04:00",
+    "exported_at": "2021-01-01T18:31:11+02:00",
     "name": "PixARK",
     "author": "hello@venatus.digital",
     "description": "A simple Docker container with Wine to run PixARK using Pterodactyl Panel",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:wine-source",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_wine-source",
     "startup": "wine64 .\/ShooterGame\/Binaries\/Win64\/PixARKServer.exe CubeWorld_Light?listen?MaxPlayers={{MAX_PLAYERS}}?Port={{SERVER_PORT}}?QueryPort={{QPORT}}?RCONPort={{RCPORT}}?ServerPassword={{ARK_PASSWORD}}?ServerAdminPassword={{ARK_ADMIN_PASSWORD}}?CULTUREFORCOOKING=en -NoBattlEye -CubePort={{CUBEPORT}} -cubeworld=world -nosteamclient -NoHangDetection -game -server -log",
     "config": {
         "files": "{}",
@@ -17,7 +18,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# PixARK: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\n\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\/mnt\/server\/steamcmd\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +force_install_dir \/mnt\/server +app_update {{SRCDS_APPID}} +quit",
+            "script": "#!\/bin\/bash\r\n# PixARK: Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit",
             "container": "ubuntu:latest",
             "entrypoint": "bash"
         }
@@ -28,8 +29,8 @@
             "description": "If specified, players must provide this password to join the server.",
             "env_variable": "ARK_PASSWORD",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|alpha_dash|between:1,100"
         },
         {
@@ -37,8 +38,8 @@
             "description": "If specified, players must provide this password (via the in-game console) to gain access to administrator commands on the server.",
             "env_variable": "ARK_ADMIN_PASSWORD",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|alpha_dash|between:1,100"
         },
         {
@@ -46,8 +47,8 @@
             "description": "Specifies the maximum number of players that can play on the server simultaneously.",
             "env_variable": "MAX_PLAYERS",
             "default_value": "10",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|numeric|digits_between:1,4"
         },
         {
@@ -55,8 +56,8 @@
             "description": "The port assigned for use as query port",
             "env_variable": "QPORT",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|numeric|digits_between:1,5"
         },
         {
@@ -64,8 +65,8 @@
             "description": "The port assigned for use as RCON port",
             "env_variable": "RCPORT",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|numeric|digits_between:1,5"
         },
         {
@@ -73,8 +74,8 @@
             "description": "The port to be used for terrain",
             "env_variable": "CUBEPORT",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|numeric|digits_between:1,5"
         },
         {
@@ -82,8 +83,8 @@
             "description": "PixARK Source App ID",
             "env_variable": "SRCDS_APPID",
             "default_value": "824360",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|numeric"
         }
     ]
