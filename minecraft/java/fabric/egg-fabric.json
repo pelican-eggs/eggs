@@ -3,14 +3,12 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-11-10T04:10:30-05:00",
+    "exported_at": "2020-12-06T19:54:35-08:00",
     "name": "Fabric",
     "author": "accounts@bofanodes.io",
     "description": "Fabric is a modular modding toolchain targeting Minecraft 1.14 and above, including snapshots.",
-    "features": [
-        "eula"
-    ],
-    "image": "quay.io\/pterodactyl\/core:java",
+    "features": ["eula"],
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
@@ -20,7 +18,8 @@
     },
     "scripts": {
         "installation": {
-        "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\nFABRIC_VERSION=$(curl https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/ | grep -Po '(?<=href=\")[^\"]*' | sort -h | tail -1 | sed 's,\/,,g')\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nelse\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nfi\r\njava -jar fabric-installer-$FABRIC_VERSION.jar server -downloadMinecraft\r\necho -e \"Install Complete\"",            "container": "openjdk:8-jdk-slim",
+            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\nFABRIC_VERSION=$(curl https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/ | grep -Po '(?<=href=\")[^\"]*' | sort -h | tail -1 | sed 's,\/,,g')\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nelse\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nfi\r\njava -jar fabric-installer-$FABRIC_VERSION.jar server -downloadMinecraft\r\necho -e \"Install Complete\"",
+            "container": "openjdk:11-jdk-slim",
             "entrypoint": "bash"
         }
     },

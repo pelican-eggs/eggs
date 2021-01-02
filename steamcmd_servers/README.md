@@ -1,4 +1,4 @@
-﻿# steamcmd servers
+﻿﻿# steamcmd servers
 
 This is a collection of servers that use steamcmd to install.
 
@@ -15,6 +15,12 @@ This is a collection of servers that use steamcmd to install.
 
 ## Avorion
 [avorion](avorion/)
+
+## Assetto Corsa
+[assetto_corsa](assetto_corsa/)
+
+## Barotrauma
+[barotrauma](barotrauma/)
 
 ## Citadel: Forged with Fire
 [citadel](citadel/)
@@ -49,6 +55,9 @@ This is a collection of servers that use steamcmd to install.
 ## Project Zomboid
 [project_zomboid](project_zomboid/)
 
+## Quake Live
+[Quake Live](quake_live/)
+
 ## Rising World
 [rising_world](rising_world/)
 
@@ -78,6 +87,9 @@ This is a collection of servers that use steamcmd to install.
 
 ## Team Fortress 2 Classic
 [Team Fortress 2 Classic](team_fortress_2_classic)
+
+## The Forest
+[The Forest](the_forest)
 
 ## Tower Unite
 [Tower Unite](tower_unite)

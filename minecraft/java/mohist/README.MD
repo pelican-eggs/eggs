@@ -12,4 +12,9 @@ The minecraft server requires a single port for access (default 25565) but plugi
 
 ## Server Specific
 
-Limited to version 1.12.2 (1.16.4 cannot run headless as of 12/6/2020)
+### Supported versions:
+- 1.16.4 series build 132+
+- 1.12.x series
+- 1.7.x series build 13+
+
+Requires changing Minecraft_Version variable on each new Minecraft version release.

@@ -69,7 +69,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TS3-Manager](/voice_servers/ts3_manager)
 
 ## Game Eggs
-[Among Us Impostor Server](/among_us/impostor_server)
+[Among Us - Impostor Server](/among_us/impostor_server)
+
+[Among Us - CrewLink Server](/among_us/crewlink_server)
+
+[Cryofall](/cryofall)
 
 [ET Legacy](/enemy_territory/etlegacy)
 
@@ -93,6 +97,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock)  
   * [Bedrock](/minecraft/bedrock/bedrock)
+  * [gomint](/minecraft/bedrock/gomint)
   * [Nukkit](/minecraft/bedrock/nukkit)  
   * [PocketMine MP](/minecraft/bedrock/pocketmine_mp)  
 
@@ -104,12 +109,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Forge](/minecraft/java/forge)  
   * [Magma](/minecraft/java/magma)
   * [Paper](/minecraft/java/paper)
-  * [Spigot](/minecraft/java/spigot)
-  * [SpongeForge](/minecraft/java/spongeforge)
-  * [SpongeVanilla](/minecraft/java/spongevanilla)
-  * [Technic](/minecraft/java/technic)
-  * [Tuinity](/minecraft/java/tuinity)
-  * [VanillaCord](/minecraft/java/vanillacord)
+  * [Purpur](/minecraft/java/purpur)
+  * [Spigot](/minecraft/java/spigot/)
+  * [SpongeForge](/minecraft/java/spongeforge/)
+  * [SpongeVanilla](/minecraft/java/spongevanilla/)
+  * [Technic](/minecraft/java/technic/)
+  * [Tuinity](/minecraft/java/tuinity/)
+  * [VanillaCord](/minecraft/java/vanillacord/)
   * [Mohist](/minecraft/java/mohist)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
@@ -141,6 +147,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_x64)
 * [Avorion](/steamcmd_servers/avorion)
+* [Assetto Corsa](/steamcmd_servers/assetto_corsa)
+* [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
 * [Don't Starve](/steamcmd_servers/dont_starve)
@@ -152,8 +160,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Killing Floor 2](/steamcmd_servers/killingfloor2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
-* [PixARK](/steamcmd_servers/pixark)
-* [Project Zomboid](/steamcmd_servers/project_zomboid)
+* [PixARK](/steamcmd_servers/pixark/)
+* [Project Zomboid](/steamcmd_servers/project_zomboid/)
+* [Quake Live](/steamcmd_servers/quake_live/)
 * [Rising World](/steamcmd_servers/rising_world)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl)
@@ -187,4 +196,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Xonotic](/xonotic/xonotic)
 
-[Cryofall](/cryofall)
+## [Storage](/storage/)
+### S3 Storage
+* [minio](/storage/minio)

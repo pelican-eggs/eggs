@@ -3,11 +3,11 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-12-04T12:08:20-05:00",
+    "exported_at": "2020-12-06T18:34:01-08:00",
     "name": "Paper",
     "author": "parker@pterodactyl.io",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
-    "features": null,
+    "features": ["eula"],
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
