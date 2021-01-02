@@ -8,6 +8,11 @@
     "author": "parker@parkervcp.com",
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-10",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14"
+    ],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then  \/usr\/local\/bin\/npm install --production; fi; \/usr\/local\/bin\/node \/home\/container\/{{BOT_JS_FILE}}",
     "config": {
         "files": "{}",
