@@ -160,7 +160,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Killing Floor 2](/steamcmd_servers/killingfloor2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
-* [Pavlov_VR](/steamcmd_servers/pavlov_vr)
+* [Pavlov VR](/steamcmd_servers/pavlov_vr)
 * [PixARK](/steamcmd_servers/pixark/)
 * [Project Zomboid](/steamcmd_servers/project_zomboid/)
 * [Quake Live](/steamcmd_servers/quake_live/)
