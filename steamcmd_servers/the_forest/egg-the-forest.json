@@ -112,7 +112,7 @@
             "name": "Enable VAC",
             "description": "",
             "env_variable": "VAC",
-            "default_value": "on",
+            "default_value": "off",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:3"
