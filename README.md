@@ -66,9 +66,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TS3-Manager](/voice_servers/ts3_manager)
 
 ## Game Eggs
-[Among Us - Impostor Server](/among_us/impostor_server)
-
-[Among Us - CrewLink Server](/among_us/crewlink_server)
+[Among Us](/among_us)
+* [Impostor Server](/among_us/impostor_server)
+* [CrewLink Server](/among_us/crewlink_server)
 
 [Cryofall](/cryofall)
 
@@ -107,12 +107,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Magma](/minecraft/java/magma)
   * [Paper](/minecraft/java/paper)
   * [Purpur](/minecraft/java/purpur)
-  * [Spigot](/minecraft/java/spigot/)
-  * [SpongeForge](/minecraft/java/spongeforge/)
-  * [SpongeVanilla](/minecraft/java/spongevanilla/)
-  * [Technic](/minecraft/java/technic/)
-  * [Tuinity](/minecraft/java/tuinity/)
-  * [VanillaCord](/minecraft/java/vanillacord/)
+  * [Spigot](/minecraft/java/spigot)
+  * [SpongeForge](/minecraft/java/spongeforge)
+  * [SpongeVanilla](/minecraft/java/spongevanilla)
+  * [Technic](/minecraft/java/technic)
+  * [Tuinity](/minecraft/java/tuinity)
+  * [VanillaCord](/minecraft/java/vanillacord)
   * [Mohist](/minecraft/java/mohist)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
@@ -126,19 +126,17 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
     * DragonProxy abandoned in favour of GeyserMC.
 	
-
 [OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
 * [OpenRA Red Alert](/openra/openra_red_alert)
 * [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn)
-
 
 [Red Dead Redemption](/rdr)
 * [RedM](/rdr/redm)
 
 [steamcmd servers](/steamcmd_servers) These eggs use steamcmd to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die)
-* [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved)
+* [ARK: Survival Evolved](/steamcmd_servers/ark_survival_evolved)
 * [Arma](/steamcmd_servers/arma)
   * [Arma 3](/steamcmd_servers/arma/arma3)
   * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client)
@@ -148,7 +146,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
-* [Don't Starve](/steamcmd_servers/dont_starve)
+* [Don't Starve Together](/steamcmd_servers/dont_starve)
 * [ECO](/steamcmd_servers/eco)
 * [HLDS server](/steamcmd_servers/hlds_server)
 * [Holdfast](/steamcmd_servers/holdfast)
@@ -157,9 +155,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Killing Floor 2](/steamcmd_servers/killingfloor2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
-* [PixARK](/steamcmd_servers/pixark/)
-* [Project Zomboid](/steamcmd_servers/project_zomboid/)
-* [Quake Live](/steamcmd_servers/quake_live/)
+* [PixARK](/steamcmd_servers/pixark)
+* [Project Zomboid](/steamcmd_servers/project_zomboid)
+* [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
 * [Rust Staging Branch](/steamcmd_servers/rust_staging)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl)
@@ -175,12 +173,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Unturned](/steamcmd_servers/unturned)
 
 [Teeworlds](/teeworlds)
-* [teeworlds](/teeworlds/teeworlds)
+* [Teeworlds](/teeworlds/teeworlds)
 
 [Terraria](/terraria)
-* [vanilla](/terraria/vanilla)
-* [tmodloader](/terraria/tmodloader)
-* [tshock](/terraria/tshock)
+* [Vanilla](/terraria/vanilla)
+* [tModLoader](/terraria/tmodloader)
+* [TShock](/terraria/tshock)
 
 [Tycoon Games](/tycoon_games)
 * [OpenTTD](/tycoon_games/openttd)
