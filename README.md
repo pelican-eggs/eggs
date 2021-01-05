@@ -41,11 +41,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [PhantomBot](/bots/twitch/phantombot)
   * [SogeBot](/bots/twitch/sogebot)
 
+[TeamSpeak3](bots/teamspeak3)
+  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
+
 [Other](/bots/other)
 * [Big Brother Bot](/bots/other/bigbrotherbot)
-
-* [TeamSpeak3](bots/teamspeak3)
-  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
 
 ## [Database](/database)
 ### In-Memory Databases
