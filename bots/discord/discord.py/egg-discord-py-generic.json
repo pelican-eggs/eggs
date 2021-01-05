@@ -8,6 +8,10 @@
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_python-3.8",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_python-3.8",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_python-2.7"
+    ],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${PY_PACKAGES} ]]; then pip install -U --target \/home\/container\/ ${PY_PACKAGES}; fi; if [[ -f \/home\/container\/requirements.txt ]]; then pip install -U --target \/home\/container\/ -r requirements.txt; fi; \/usr\/local\/bin\/python \/home\/container\/{{BOT_PY_FILE}}",
     "config": {
         "files": "{}",
