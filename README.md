@@ -17,9 +17,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 4. Browse to the json file you saved earlier
 5. Select what nest you want to put the egg in.
    1. If you want a new nest you need to create it before importing the egg.
-6. Restart the daemon on your node before creating a server using the new egg(s).
-
-# You must restart your daemon after importing an egg
 
 
 ## Please read the CONTRIBUTING.md before submitting PRs
@@ -28,21 +25,21 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Discord](/bots/discord)
 * [ATL Bot](/bots/discord/atlbot) Node JS
-* [Bastion](/bots/discord/bastion)
+* [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
 * [discord.js](bots/discord/discord.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
-* [discordgo](bots/discord/discordgo) golang generic
+* [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
-* [jmusicbot](/bots/discord/jmusicbot) Java
+* [JMusicBot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
-* [Red](/bots/discord/redbot) Python
-* [Sinusbot](/bots/discord/sinusbot)
+* [Redbot](/bots/discord/redbot) Python
+* [SinusBot](/bots/discord/sinusbot)
 
 * [Twitch](/bots/twitch)
   * [PhantomBot](/bots/twitch/phantombot)
-  * [sogeBot](/bots/twitch/sogebot)
+  * [SogeBot](/bots/twitch/sogebot)
 
 [Other](/bots/other)
 * [Big Brother Bot](/bots/other/bigbrotherbot)
