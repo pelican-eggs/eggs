@@ -8,6 +8,10 @@
     "author": "support@pterodactyl.io",
     "description": "Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.",
     "image": "quay.io\/pterodactyl\/core:java",
+    "images": [
+        "quay.io\/pterodactyl\/core:java",
+        "quay.io\/pterodactyl\/core:java-11"
+    ],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",

@@ -9,6 +9,10 @@
     "description": "Waterdog is fork of the well-known Waterfall, which is a fork of the well-known BungeeCord, server teleportation suite.",
     "features": null,
     "image": "quay.io\/pterodactyl\/core:java",
+    "images": [
+        "quay.io\/pterodactyl\/core:java",
+        "quay.io\/pterodactyl\/core:java-11"
+    ],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{}",
