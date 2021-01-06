@@ -11,8 +11,8 @@ This is a collection of servers that use SteamCMD to install.
 ## Arma
 [Arma](arma)
 * [Arma 3](arma/arma3)
-* [Arma 3 HC](arma/arma3_headless_client)
-* [Arma 3 HC](arma/arma3_x64))
+* [Arma 3 64 Bit](arma/arma3_x64)
+* [Arma 3 Headless Client](arma/arma3_headless_client)
 
 ## Avorion
 [Avorion](avorion)
