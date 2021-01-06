@@ -1,0 +1,40 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-01-06T12:50:49+01:00",
+    "name": "Code-Server",
+    "author": "admin@altvserver.de",
+    "description": "Run VS Code on any machine anywhere and access it in the browser.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14"
+    ],
+    "startup": "sh .\/.local\/lib\/code-server-3.8.0\/code-server --config cfg.yaml --bind-addr 0.0.0.0:{{SERVER_PORT}}",
+    "config": {
+        "files": "{\r\n    \"cfg.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"auth\": \"password\",\r\n            \"password\": \"{{server.build.env.PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"info  HTTP server listening on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt install curl sudo -y\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nmkdir -p \/mnt\/server\/.local\/lib \/mnt\/server\/.local\/bin\r\ncurl -fL https:\/\/github.com\/cdr\/code-server\/releases\/download\/v3.8.0\/code-server-3.8.0-linux-amd64.tar.gz \\\r\n  | tar -C \/mnt\/server\/.local\/lib -xz\r\nmv \/mnt\/server\/.local\/lib\/code-server-3.8.0-linux-amd64 \/mnt\/server\/.local\/lib\/code-server-3.8.0\r\nrm \/mnt\/server\/.local\/bin\/code-server\r\nln -s \/mnt\/server\/.local\/lib\/code-server-3.8.0\/bin\/code-server \/mnt\/server\/.local\/bin\/code-server\r\nPATH=\"\/mnt\/server\/.local\/bin:$PATH\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Password",
+            "description": "Passwort to login to your VSCode instance",
+            "env_variable": "PASSWORD",
+            "default_value": "changeme",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        }
+    ]
+}
