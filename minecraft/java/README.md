@@ -57,7 +57,7 @@ Please restart the server after first launch to fix this.**
 ## Spigot
 A collection of spigot and forked spigot eggs.
 
-[PaperMC GitHub](https://github.com/PaperMC/Paper)  
+[PaperMC GitHub](https://github.com/PaperMC/Paper)
 High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
 Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
 
