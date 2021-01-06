@@ -6,6 +6,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 
 [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
 * [Bedrock](/minecraft/bedrock/bedrock)
+* [gomint](/minecraft/bedrock/gomint)
 * [Nukkit](/minecraft/bedrock/nukkit)  
 * [PocketMine MP](/minecraft/bedrock/pocketmine_mp)  
 
@@ -16,6 +17,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Feed The Beast](/minecraft/java/ftb)  
 * [Forge](/minecraft/java/forge)  
 * [Magma](/minecraft/java/magma)
+* [Mohist](/minecraft/java/mohist)
 * [Paper](/minecraft/java/paper)
 * [Spigot](/minecraft/java/spigot)
 * [SpongeForge](/minecraft/java/spongeforge)
@@ -23,14 +25,13 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Technic](/minecraft/java/technic)
 * [Tuinity](/minecraft/java/tuinity)
 * [VanillaCord](/minecraft/java/vanillacord)
-* [Mohist](/minecraft/java/mohist)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
-    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
-    * [Waterfall](/minecraft/proxy/java/waterfall)
     * [Travertine](/minecraft/proxy/java/travertine)
+    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
+    * [Waterfall](/minecraft/proxy/java/waterfall)
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
