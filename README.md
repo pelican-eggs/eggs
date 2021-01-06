@@ -18,7 +18,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 5. Select what nest you want to put the egg in.
    1. If you want a new nest you need to create it before importing the egg.
 
-# You must restart your daemon after importing an egg if you are using 0.7, this is not required on 1.X.
+# You must restart your daemon after importing an egg if you are using 0.7. This is not required on 1.X.
 
 
 ## Please read the CONTRIBUTING.md before submitting PRs
@@ -39,15 +39,15 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Redbot](/bots/discord/redbot) Python
 * [SinusBot](/bots/discord/sinusbot)
 
+[Other](/bots/other)
+* [Big Brother Bot](/bots/other/bigbrotherbot)
+
 [Twitch](/bots/twitch)
   * [PhantomBot](/bots/twitch/phantombot)
   * [SogeBot](/bots/twitch/sogebot)
 
 [TeamSpeak3](bots/teamspeak3)
   * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
-
-[Other](/bots/other)
-* [Big Brother Bot](/bots/other/bigbrotherbot)
 
 ## [Database](/database)
 ### In-Memory Databases
