@@ -92,7 +92,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Minetest](/minetest) (including MTG)
 
 [Minecraft](/minecraft)
-* [Bedrock](/minecraft/bedrock)  
+* [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft
   * [Bedrock](/minecraft/bedrock/bedrock)
   * [gomint](/minecraft/bedrock/gomint)
   * [Nukkit](/minecraft/bedrock/nukkit)  
