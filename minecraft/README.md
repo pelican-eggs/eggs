@@ -35,4 +35,4 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-	  * DragonProxy abandoned in favour of GeyserMC.
+	* DragonProxy abandoned in favour of GeyserMC.
