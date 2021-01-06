@@ -68,7 +68,7 @@ Purpur is a fork of Paper and Tuinity with the goal of providing new and interes
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
 - (It's noted that building the jar is intensive and time consuming)
 
-[Mohist Github](https://github.com/Mohist-Community)
+[Mohist Github](https://github.com/Mohist-Community/Mohist)
 Fork of Spigot focused on performance optimizations.
 
 [Tuinity GitHub](https://github.com/Spottedleaf/Tuinity) 
