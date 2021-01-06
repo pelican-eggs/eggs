@@ -70,7 +70,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Impostor Server](/among_us/impostor_server)
 * [CrewLink Server](/among_us/crewlink_server)
 
-[Cryofall](/cryofall)
+[Cryofall](/cryofall/cryofall)
 
 [ET Legacy](/enemy_territory/etlegacy)
 
@@ -87,7 +87,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Mindustry](/mindustry)
 
-[LeagueSandbox](/leaguesandbox)
+[League Sandbox](/leaguesandbox)
 
 [Minetest](/minetest) (including MTG)
 
@@ -134,7 +134,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Red Dead Redemption](/rdr)
 * [RedM](/rdr/redm)
 
-[steamcmd servers](/steamcmd_servers) These eggs use steamcmd to install
+[SteamCMD Servers](/steamcmd_servers) These eggs use SteamCMD to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die)
 * [ARK: Survival Evolved](/steamcmd_servers/ark_survival_evolved)
 * [Arma](/steamcmd_servers/arma)
@@ -152,14 +152,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Holdfast](/steamcmd_servers/holdfast)
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
-* [Killing Floor 2](/steamcmd_servers/killingfloor2)
+* [Killing Floor 2](/steamcmd_servers/killing_floor_2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark)
 * [Project Zomboid](/steamcmd_servers/project_zomboid)
 * [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
-* [Rust Staging Branch](/steamcmd_servers/rust_staging)
+* [Rust](/steamcmd_servers/rust)
+  * [Autowipe](/steamcmd_servers/rust/rust_autowipe)
+  * [Staging](/steamcmd_servers/rust/rust_staging)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl)
   * [dedicated](/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin)
