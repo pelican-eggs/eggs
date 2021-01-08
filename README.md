@@ -17,9 +17,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 4. Browse to the json file you saved earlier
 5. Select what nest you want to put the egg in.
    1. If you want a new nest you need to create it before importing the egg.
-6. Restart the daemon on your node before creating a server using the new egg(s).
 
-# You must restart your daemon after importing an egg
+# You must restart your daemon after importing an egg if you are using 0.7. This is not required on 1.X.
 
 
 ## Please read the CONTRIBUTING.md before submitting PRs
@@ -28,26 +27,26 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Discord](/bots/discord)
 * [ATL Bot](/bots/discord/atlbot) Node JS
-* [Bastion](/bots/discord/bastion)
+* [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
 * [discord.js](bots/discord/discord.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
-* [discordgo](bots/discord/discordgo) golang generic
+* [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
-* [jmusicbot](/bots/discord/jmusicbot) Java
+* [JMusicBot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
-* [Red](/bots/discord/redbot) Python
-* [Sinusbot](/bots/discord/sinusbot)
-
-* [Twitch](/bots/twitch)
-  * [PhantomBot](/bots/twitch/phantombot)
-  * [sogeBot](/bots/twitch/sogebot)
+* [Redbot](/bots/discord/redbot) Python
+* [SinusBot](/bots/discord/sinusbot)
 
 [Other](/bots/other)
 * [Big Brother Bot](/bots/other/bigbrotherbot)
 
-* [TeamSpeak3](bots/teamspeak3)
+[Twitch](/bots/twitch)
+  * [PhantomBot](/bots/twitch/phantombot)
+  * [SogeBot](/bots/twitch/sogebot)
+
+[TeamSpeak3](bots/teamspeak3)
   * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
 
 ## [Database](/database)
@@ -69,11 +68,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TS3-Manager](/voice_servers/ts3_manager)
 
 ## Game Eggs
-[Among Us - Impostor Server](/among_us/impostor_server)
+[Among Us](/among_us)
+* [Impostor Server](/among_us/impostor_server)
+* [CrewLink Server](/among_us/crewlink_server)
 
-[Among Us - CrewLink Server](/among_us/crewlink_server)
-
-[Cryofall](/cryofall)
+[Cryofall](/cryofall/cryofall)
 
 [ET Legacy](/enemy_territory/etlegacy)
 
@@ -90,12 +89,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Mindustry](/mindustry)
 
-[LeagueSandbox](/leaguesandbox)
+[League Sandbox](/leaguesandbox)
 
 [Minetest](/minetest) (including MTG)
 
 [Minecraft](/minecraft)
-* [Bedrock](/minecraft/bedrock)  
+* [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](/minecraft/bedrock/bedrock)
   * [gomint](/minecraft/bedrock/gomint)
   * [Nukkit](/minecraft/bedrock/nukkit)  
@@ -108,82 +107,83 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Feed The Beast](/minecraft/java/ftb)  
   * [Forge](/minecraft/java/forge)  
   * [Magma](/minecraft/java/magma)
+  * [Mohist](/minecraft/java/mohist)
   * [Paper](/minecraft/java/paper)
   * [Purpur](/minecraft/java/purpur)
-  * [Spigot](/minecraft/java/spigot/)
-  * [SpongeForge](/minecraft/java/spongeforge/)
-  * [SpongeVanilla](/minecraft/java/spongevanilla/)
-  * [Technic](/minecraft/java/technic/)
-  * [Tuinity](/minecraft/java/tuinity/)
-  * [VanillaCord](/minecraft/java/vanillacord/)
-  * [Mohist](/minecraft/java/mohist)
+  * [Spigot](/minecraft/java/spigot)
+  * [SpongeForge](/minecraft/java/spongeforge)
+  * [SpongeVanilla](/minecraft/java/spongevanilla)
+  * [Technic](/minecraft/java/technic)
+  * [Tuinity](/minecraft/java/tuinity)
+  * [VanillaCord](/minecraft/java/vanillacord)
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
-    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
-    * [Waterfall](/minecraft/proxy/java/waterfall)
     * [Travertine](/minecraft/proxy/java/travertine)
+    * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
+    * [Waterfall](/minecraft/proxy/java/waterfall)
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
     * DragonProxy abandoned in favour of GeyserMC.
 	
-
 [OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
 * [OpenRA Red Alert](/openra/openra_red_alert)
 * [OpenRA Tiberian Dawn](/openra/openra_tiberian_dawn)
 
-
 [Red Dead Redemption](/rdr)
 * [RedM](/rdr/redm)
 
-[steamcmd servers](/steamcmd_servers) These eggs use steamcmd to install
+[SteamCMD Servers](/steamcmd_servers) These eggs use SteamCMD to install
 * [7 Days to Die](/steamcmd_servers/7_days_to_die)
-* [ARK Survival Evolved](/steamcmd_servers/ark_survival_evolved)
+* [ARK: Survival Evolved](/steamcmd_servers/ark_survival_evolved)
 * [Arma](/steamcmd_servers/arma)
   * [Arma 3](/steamcmd_servers/arma/arma3)
-  * [Arma 3 HC](/steamcmd_servers/arma/arma3_headless_client)
-  * [Arma 3 HC](/steamcmd_servers/arma/arma3_x64)
+  * [Arma 3 64 Bit](/steamcmd_servers/arma/arma3_x64)
+  * [Arma 3 Headless Client](/steamcmd_servers/arma/arma3_headless_client)
 * [Avorion](/steamcmd_servers/avorion)
 * [Assetto Corsa](/steamcmd_servers/assetto_corsa)
 * [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
-* [Don't Starve](/steamcmd_servers/dont_starve)
+* [Don't Starve Together](/steamcmd_servers/dont_starve)
 * [ECO](/steamcmd_servers/eco)
-* [HLDS server](/steamcmd_servers/hlds_server)
-* [Holdfast](/steamcmd_servers/holdfast)
+* [HLDS Server](/steamcmd_servers/hlds_server)
+* [Holdfast: Nations At War](/steamcmd_servers/holdfast)
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
-* [Killing Floor 2](/steamcmd_servers/killingfloor2)
+* [Killing Floor 2](/steamcmd_servers/killing_floor_2)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
-* [PixARK](/steamcmd_servers/pixark/)
-* [Project Zomboid](/steamcmd_servers/project_zomboid/)
-* [Quake Live](/steamcmd_servers/quake_live/)
+* [PixARK](/steamcmd_servers/pixark)
+* [Project Zomboid](/steamcmd_servers/project_zomboid)
+* [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
-* [Rust Staging Branch](/steamcmd_servers/rust_staging)
+* [Rust](/steamcmd_servers/rust)
+  * [Autowipe](/steamcmd_servers/rust/rust_autowipe)
+  * [Staging](/steamcmd_servers/rust/rust_staging)
 * [SCP: Secret Laboratory](/steamcmd_servers/scpsl)
   * [dedicated](/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](/steamcmd_servers/soldat)
+* [Squad](/steamcmd_servers/squad)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/stationeers)
-* [Stormworks](/steamcmd_servers/stormworks)
+* [Stormworks: Build and Rescue](/steamcmd_servers/stormworks)
 * [Sven Co-op](/steamcmd_servers/svencoop)
-* [Squad](/steamcmd_servers/squad)
+* [The Forest](/steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
 * [Unturned](/steamcmd_servers/unturned)
 
 [Teeworlds](/teeworlds)
-* [teeworlds](/teeworlds/teeworlds)
+* [Teeworlds](/teeworlds/teeworlds)
 
 [Terraria](/terraria)
-* [vanilla](/terraria/vanilla)
-* [tmodloader](/terraria/tmodloader)
-* [tshock](/terraria/tshock)
+* [Vanilla](/terraria/vanilla)
+* [tModLoader](/terraria/tmodloader)
+* [TShock](/terraria/tshock)
 
 [Tycoon Games](/tycoon_games)
 * [OpenTTD](/tycoon_games/openttd)

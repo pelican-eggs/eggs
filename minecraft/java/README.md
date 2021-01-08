@@ -8,20 +8,27 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
 
 ## Cuberite
+[Cuberite](https://cuberite.org)
 A lightweight, fast and extensible game server for Minecraft
-[Cuberite](https://cuberite.org/)
+
+## Fabric
+[Fabric](https://fabricmc.net)  
+Fabric is a lightweight, experimental modding toolchain for Minecraft.
 
 ## Feather
 [Feather](https://github.com/feather-rs/feather)  
 An experimental Minecraft server implementation in Rust 
 
 ## Forge 
-[Forge MC](https://files.minecraftforge.net/)  
+[Forge MC](https://files.minecraftforge.net)  
 This is a direct fork of the default forge service  
 - Has a version detection fix for "latest"  
 
-[Curse Generic](https://www.curseforge.com/)  
+[Curse Generic](https://www.curseforge.com)  
 A generic service to pull forge mod packs from the curseforge site.  
+
+[Magma](https://magmafoundation.org)
+Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.
 
 ## FTB Packs
 [FTB Modpacks](https://api.modpacks.ch)
@@ -47,26 +54,32 @@ The second method requires you to know the id for both the modpack and version i
 may not get updated with the correct ip address and port at first launch.
 Please restart the server after first launch to fix this.**  
 
-## Magma
-[Magma](https://magmafoundation.org/)
-Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.
-
-## Paper
-Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
-
-[PaperMC GitHub](https://github.com/PaperMC/Paper)  
-High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
-
 ## Spigot
 A collection of spigot and forked spigot eggs.
 
-[Spigot](https://www.spigotmc.org/)  
+[PaperMC GitHub](https://github.com/PaperMC/Paper)
+High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies  
+Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
+
+[Purpur](https://purpur.pl3x.net)
+Purpur is a fork of Paper and Tuinity with the goal of providing new and interesting configuration options, which allow for creating a unique gameplay experience not seen anywhere else
+
+[Spigot](https://www.spigotmc.org)  
 This is a direct fork of the default spigot service with the added benefit of being able to build the spigot jar.  
 - (It's noted that building the jar is intensive and time consuming)
 
-## Sponge
+[Mohist Github](https://github.com/Mohist-Community/Mohist)
+Fork of Spigot focused on performance optimizations.
 
-[SpongeVanilla](https://www.spongepowered.org/)
+[Tuinity GitHub](https://github.com/Spottedleaf/Tuinity) 
+Fork of Paper aimed at improving server performance at high playercounts.
+
+
+## Sponge Powered
+[SpongeForge](https://www.spongepowered.org)
+SpongeForge is the implementation of the Sponge API on the Minecraft Forge platform.
+
+[SpongeVanilla](https://www.spongepowered.org)
 A community-driven open source Minecraft: Java Edition modding platform.
 
 ## Technic Packs
@@ -82,10 +95,6 @@ The ancient power of Tekkits past return in this legendary pack!
 [Tekkit Classic](https://www.technicpack.net/modpack/tekkit.552560)
 The official Tekkit Classic modpack. Build factories, automate crafting!  
 
-## Tuinity
-Fork of Paper aimed at improving server performance at high playercounts.
-[Tuinity GitHub](https://github.com/Spottedleaf/Tuinity) 
-
-## Mohist
-Fork of Spigot focused on performance optimizations.
-[Mohist Github](https://github.com/Mohist-Community)
+## VanillaCord
+[VanillaCord](https://github.com/ME1312/VanillaCord)
+VanillaCord adds support for BungeeCord's ip-forwarding option on vanilla Minecraft servers
