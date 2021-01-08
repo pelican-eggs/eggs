@@ -8,7 +8,10 @@
     "author": "parker@parkervcp.com",
     "description": "Travertine is a fork of Waterfall with 1.7 protocol support. Waterfall is a fork of the well-known BungeeCord server teleportation suite.",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
+    "image": "quay.io\/pterodactyl\/core:java-11",
+    "images": [
+        "quay.io\/pterodactyl\/core:java-11"
+    ],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
