@@ -60,7 +60,7 @@ This is a collection of servers that use SteamCMD to install.
 [PixARK](pixark)
 
 ## Pavlov VR
-[Pavlov VR](pavlov_vr/)
+[Pavlov VR](pavlov_vr)
 
 ## Project Zomboid
 [Project Zomboid](project_zomboid)
