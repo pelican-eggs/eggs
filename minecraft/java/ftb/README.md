@@ -22,7 +22,7 @@ may not get updated with the correct ip address and port at first launch.
 Please restart the server after first launch to fix this.**  
 
 ## Server Ports
-The minecraft server requires a single port for access (default 25565) but some plugins may require extra ports to enabled for the server.
+The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
 
 
 | Port  | default |

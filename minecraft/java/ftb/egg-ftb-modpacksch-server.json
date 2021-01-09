@@ -8,6 +8,10 @@
     "author": "runemaster580@gmail.com",
     "description": "Since the release of the FTB APP, FTB modpacks are now distributed through modpacks.ch. This egg was developed for support for modpacks that are distributed through this.",
     "image": "quay.io\/pterodactyl\/core:java",
+    "images": [
+        "quay.io\/pterodactyl\/core:java",
+        "quay.io\/pterodactyl\/core:java-11"
+    ],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar forge-server.jar",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",

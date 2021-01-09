@@ -1,4 +1,4 @@
-# Among Us - CrewLink server
+# Among Us - CrewLink Server
 ### From their [Github](https://github.com/ottomated/CrewLink)
 
 This project implements proximity voice chat in Among Us. Everyone in an Among Us lobby with this program running will be able to communicate over voice in-game, with no third-party programs required. Spatial audio ensures that you can only hear people close to you.

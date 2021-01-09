@@ -1,4 +1,5 @@
 # Cuberite
+
 A lightweight, fast and extensible game server for Minecraft
 
 ## Server Ports
