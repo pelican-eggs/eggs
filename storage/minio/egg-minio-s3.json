@@ -29,7 +29,7 @@
     "variables": [
         {
             "name": "Startup Type",
-            "description": "normal or rotate",
+            "description": "normal,rotate,update",
             "env_variable": "STARTUP_TYPE",
             "default_value": "normal",
             "user_viewable": true,
