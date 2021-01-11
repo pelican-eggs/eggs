@@ -3,6 +3,8 @@
 ## Features
 Auto generate keys on server creation bypassing default minio keys
 
+## Update
+Auto update minio to latest version using "update" startup feature
 
 Automatic Key rotation using "rotate" startup feature
 
