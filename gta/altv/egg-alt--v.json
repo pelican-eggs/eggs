@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-23T05:41:04+00:00",
+    "exported_at": "2021-01-23T05:46:56+00:00",
     "name": "alt:V",
     "author": "parker@parkervcp.com",
     "description": "alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V",
@@ -15,7 +15,7 @@
     "file_denylist": "",
     "startup": ".\/update.sh && chmod +x .\/altv-server && .\/altv-server",
     "config": {
-        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"host:\": \"host: 0.0.0.0\",\r\n            \"port:\": \"port: {{server.build.default.port}}\",\r\n            \"password:\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"description:\": \"description: {{server.build.env.SERVER_DESC}}\"\r\n        }\r\n    },\r\n    \"update.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"branch:\": \"branch: {{server.build.env.BUILD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"host:\": \"host: 0.0.0.0\",\r\n            \"port:\": \"port: {{server.build.default.port}}\",\r\n            \"password:\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"description:\": \"description: {{server.build.env.SERVER_DESC}}\"\r\n        }\r\n    },\r\n    \"update.cfg\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"branch\": \"{{server.build.env.BUILD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
         "logs": "{}",
         "stop": "^C"
