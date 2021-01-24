@@ -5,6 +5,8 @@ A multifunction Discord bot
 ### Server Ports
 No port are required to run Red.
 
+if you want to use the internal Lavalink Server, you need to allocate port 2333 as primary
+
 ### Additional Requirements
 When using the Audio Cog the bot will attempt to save files to /tmp resulting in a disk space error.  To resolve this error you must increase the size of `tmpfs` using custom container policy.
 
