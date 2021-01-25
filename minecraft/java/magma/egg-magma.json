@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-24T10:08:35-08:00",
+    "exported_at": "2021-01-25T03:08:06-08:00",
     "name": "Magma",
     "author": "support@pterodactyl.io",
     "description": "Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.",
@@ -23,7 +23,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n## get latest download link\r\necho -e \"Set to download the ${BUILD} build\"\r\nif [ \"${BUILD}\" == \"dev\" ]; then\r\n    echo -e \"dev tag is ${tag}\"\r\nfi\r\n\r\nif [ \"${VANILLA_VERSION}\" == \"1.12\" ]; then\r\n    if [ ! -z ${BUILD_NUMBER} ]; then\r\n        DOWNLOAD_LINK=https:\/\/ci.hexeption.dev\/job\/Magma%20Foundation\/job\/Magma\/job\/master\/${BUILD_NUMBER}\/artifact\/\r\n    else\r\n        DOWNLOAD_LINK=https:\/\/ci.hexeption.dev\/job\/Magma%20Foundation\/job\/Magma\/job\/master\/lastSuccessfulBuild\/artifact\/\r\n    fi\r\nfi\r\n\r\nif [ \"${VANILLA_VERSION}\" == \"1.15\" ]; then\r\n    if [ ! -z ${BUILD_NUMBER} ]; then\r\n        DOWNLOAD_LINK=https:\/\/ci.hexeption.dev\/job\/Magma%20Foundation\/job\/Magma-1.15.x\/job\/1.15.x\/${BUILD_NUMBER}\/artifact\/\r\n    else\r\n        DOWNLOAD_LINK=https:\/\/ci.hexeption.dev\/job\/Magma%20Foundation\/job\/Magma-1.15.x\/job\/1.15.x\/lastSuccessfulBuild\/artifact\/\r\n    fi\r\nfi\r\n\r\necho -e \"Download URL is ${DOWNLOAD_LINK}\"\r\n\r\n## validate download link\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ] ; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_LINK}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## mv old server files\r\nif [ -f ${SERVER_JARFILE} ]; then\r\n    echo -e \"moving old server.jar\"\r\n    mv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\"\r\ncurl -s -o ${SERVER_JARFILE} -sSL ${DOWNLOAD_LINK}\r\n\r\n#Checking if downloaded jars exist\r\nif [ ! -f .\/server.jar ]; then\r\n    echo \"!!! Error downloading build version ${BUILD_VERSION} !!!\"\r\n    exit\r\nfi\r\n\r\necho -e \"Install Complete\"",
+            "script": "apt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ ! -z ${MC_VERSION} ]; then\r\n    DOWNLOAD_LINK=https:\/\/api.magmafoundation.org\/api\/resources\/magma\/${MC_VERSION}\/dev\/latest\/download\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/api.magmafoundation.org\/api\/resources\/magma\/1.12.2\/dev\/latest\/download\r\nfi\r\n\r\necho -e \"Download URL is ${DOWNLOAD_LINK}\"\r\n\r\n## validate download link\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ] ; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_LINK}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## mv old server files\r\nif [ -f ${SERVER_JARFILE} ]; then\r\n    echo -e \"moving old server.jar\"\r\n    mv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\"\r\ncurl -s -o ${SERVER_JARFILE} -sSL ${DOWNLOAD_LINK}\r\n\r\necho -e \"Install Complete\"",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
@@ -39,27 +39,9 @@
             "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
         },
         {
-            "name": "Server Version",
-            "description": "The version of Minecraft to install.\r\n\r\nOnly versions supported are 1.12 and 1.15.",
-            "env_variable": "VANILLA_VERSION",
-            "default_value": "1.12",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|between:3,15"
-        },
-        {
-            "name": "Magma Version",
-            "description": "The Magma version to download.\r\n\r\nValid types: latest",
-            "env_variable": "VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20"
-        },
-        {
-            "name": "Build Number",
-            "description": "Optional. Specify build number. Overrides Version.",
-            "env_variable": "BUILD_NUMBER",
+            "name": "Minecraft Version",
+            "description": "Optional.\r\n\r\nSpecify vanilla version other than default 1.12.2.",
+            "env_variable": "MC_VERSION",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
