@@ -1,14 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2019-12-26T15:50:34-05:00",
+    "exported_at": "2021-01-26T21:54:10+00:00",
     "name": "Arma 3 Headless Client",
-    "author": "brainp4in@blueberry-hood-clan.de",
+    "author": "rehlmgaming@gmail.com",
     "description": "Headless Clients are used to offload AI calculations from the Arma 3 Server.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:game_arma3",
-    "startup": ".\/arma3server -client -connect={{SERVERIP}} -port={{SERVERPORT}} {{CUSTOM}} -mod=\"{{MODS}}\"",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:game_arma3"
+    ],
+    "file_denylist": "",
+    "startup": ".\/{{SERVER_BINARY}} -client -connect={{CONNECT_IP}} -port={{CONNECT_PORT}} -password=\"{{CONNECT_PASSWORD}}\" -profiles=.\/serverprofile -bepath=.\/battleye {{STARTUP_PARAMS}} -mod=\"{{MODS}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Client connected\",\r\n    \"userInteraction\": []\r\n}",
@@ -17,83 +22,128 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## ARMA III specific setup\r\ncd \/mnt\/server\/\r\n\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/server.cfg",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## ARMA III specific setup\r\ncd \/mnt\/server\/\r\n\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Game App ID",
-            "description": "Steam CMD App ID.",
-            "env_variable": "SRCDS_APPID",
+            "name": "Arma 3 Dedicated Server App ID",
+            "description": "Used for installation and updates.",
+            "env_variable": "STEAMCMD_APPID",
             "default_value": "233780",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|alpha_dash|between:1,100"
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric"
         },
         {
-            "name": "Server IP",
-            "description": "IP address of the Arma 3 server that should be supported by the Headless Client.",
-            "env_variable": "SERVERIP",
-            "default_value": "127.0.0.1",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:30"
-        },
-        {
-            "name": "Server Port",
-            "description": "Port of the Arma 3 server that should be supported by the Headless Client.",
-            "env_variable": "SERVERPORT",
-            "default_value": "2302",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:5"
-        },
-        {
-            "name": "Custom Command Line Option.",
-            "description": "Put -autoinit or related things in here :)",
-            "env_variable": "CUSTOM",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "string|nullable"
-        },
-        {
-            "name": "Mods",
-            "description": "This is where you put mods that go along with the -mods startup option",
-            "env_variable": "MODS",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "string|nullable"
-        },
-        {
-            "name": "Steam User",
-            "description": "A Steam username with Arma3 on the account.",
+            "name": "Steam Username",
+            "description": "Used for installation and updates. Account does not need to own Arma 3, but must be a valid Steam account (anonymous login cannot be used). For security reasons it is recommended that you create a new Steam account just for your dedicated servers. *This info is not visible to the server owner.*",
             "env_variable": "STEAM_USER",
-            "default_value": "anonymous",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "default_value": "your_steam_username",
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|string"
         },
         {
             "name": "Steam Password",
-            "description": "Steam User Password",
+            "description": "Used for installation and updates. Steam Guard must be TURNED OFF for install to complete successfully. *This info is not visible to the server owner.*",
             "env_variable": "STEAM_PASS",
+            "default_value": "your_steam_password",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Server Binary",
+            "description": "Server binary to call on server start. (32-bit: arma3server | 64-bit: arma3server_x64)",
+            "env_variable": "SERVER_BINARY",
+            "default_value": "arma3server_x64",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Connect IP",
+            "description": "IP address of the server to connect to.",
+            "env_variable": "CONNECT_IP",
+            "default_value": "127.0.0.1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|ip"
+        },
+        {
+            "name": "Connect Port",
+            "description": "Open port of the server to connect to.",
+            "env_variable": "CONNECT_PORT",
+            "default_value": "2302",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Connect Password",
+            "description": "If the server you are connecting to has a password, enter it here.",
+            "env_variable": "CONNECT_PASSWORD",
             "default_value": "",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string"
         },
         {
-            "name": "Steam Auth Code",
-            "description": "Steam Auth Code only when you're using Steam Auth",
-            "env_variable": "STEAM_AUTH",
+            "name": "Mods",
+            "description": "Mod folders to be used with the -mods startup option. NO capital letters, spaces, or folders starting with a number! Each folder must be followed with a semicolon (ex. @123456789;@987654321;etc;)",
+            "env_variable": "MODS",
             "default_value": "",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string"
+        },
+        {
+            "name": "Extra Startup Parameters",
+            "description": "See https:\/\/community.bistudio.com\/wiki\/Arma_3_Startup_Parameters for more info.",
+            "env_variable": "STARTUP_PARAMS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Extra Flags for SteamCMD",
+            "description": "Only used when checking for server updates, and typically used for grabbing beta builds.\r\nExample: -beta profiling -betapassword CautionSpecialProfilingAndTestingBranchArma3",
+            "env_variable": "STEAMCMD_EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Check for Server Updates",
+            "description": "Check for server updates on server start.\r\n1 True | 0 False",
+            "env_variable": "UPDATE_SERVER",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean"
+        },
+        {
+            "name": "Steam Workshop Mods to Download\/Update",
+            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\\\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format: @ModIdNumber",
+            "env_variable": "UPDATE_WORKSHOP",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Set Mods to Lowercase",
+            "description": "On server start, goes through all the mod folders listed in \"Mods\" & \"Server Mods\", and makes sure every folder and file is lowercase (to prevent errors). This is particularly useful to run ONCE after copying a mod from a Windows machine to the server, or if mods seem to not be loading.",
+            "env_variable": "MODS_LOWERCASE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean"
         }
     ]
 }
