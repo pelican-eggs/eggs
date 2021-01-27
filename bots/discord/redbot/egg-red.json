@@ -1,14 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-04-20T23:06:14-04:00",
-    "name": "Red",
+    "exported_at": "2021-01-27T03:17:15-05:00",
+    "name": "RedBot",
     "author": "parker@parkervcp.com",
     "description": "A multifunction Discord bot \r\n\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_red",
-    "startup": "PATH=$PATH:\/home\/container\/.local\/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}}",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:bot_red"
+    ],
+    "startup": "PATH=$PATH:\/home\/container\/.local\/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}} --owner {{OWNERID}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Invite URL:\"\r\n}",
@@ -28,8 +32,8 @@
             "description": "Get your own token here - https:\/\/discordapp.com\/developers\/applications\/",
             "env_variable": "TOKEN",
             "default_value": "GET_YOUR_OWN",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -37,8 +41,17 @@
             "description": "The prefix for commands from the bot.",
             "env_variable": "PREFIX",
             "default_value": ".",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Owner ID",
+            "description": "The Discord User ID of the owner of this bot.",
+            "env_variable": "OWNERID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         }
     ]
