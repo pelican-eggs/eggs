@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-09T09:08:57+01:00",
+    "exported_at": "2021-01-27T07:26:08+01:00",
     "name": "Code-Server",
     "author": "mario.franze@gmail.com",
     "description": "Run VS Code on any machine anywhere and access it in the browser.",
@@ -12,16 +12,16 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14"
     ],
-    "startup": "sh .local\/lib\/code-server-3.8.0\/bin\/code-server --bind-addr {{IP}}:{{SERVER_PORT}}",
+    "startup": "sh .local\/lib\/code-server-3.8.0\/bin\/code-server",
     "config": {
-        "files": "{\r\n    \".config\/code-server\/config.yaml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"password\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"bind-addr\": \"bind-addr: {{server.build.env.IP}}:{{server.build.default.port}}\",\r\n            \"auth\": \"auth: password\",\r\n            \"cert\": \"cert: false\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \".config\/code-server\/config.yaml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"password\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"bind-addr\": \"bind-addr: 0.0.0.0:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"info  HTTP server listening on\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt install curl sudo -y\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nmkdir -p \/mnt\/server\/.local\/lib \/mnt\/server\/.local\/bin \/mnt\/server\/.config\r\ncurl -fL https:\/\/github.com\/cdr\/code-server\/releases\/download\/v3.8.0\/code-server-3.8.0-linux-amd64.tar.gz \\\r\n  | tar -C \/mnt\/server\/.local\/lib -xz\r\nmv \/mnt\/server\/.local\/lib\/code-server-3.8.0-linux-amd64 \/mnt\/server\/.local\/lib\/code-server-3.8.0\r\nPATH=\"\/mnt\/server\/.local\/bin:$PATH\"",
+            "script": "apt update\r\napt install curl -y\r\n\r\n# Create initial directories\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Create needed directories\r\nmkdir -p \/mnt\/server\/.local\/lib \/mnt\/server\/.local\/bin \/mnt\/server\/.config\/code-server \/mnt\/server\/projects\r\n\r\n# Change permission of projects directory so it can be accessed by code-server\r\nchmod 777 \/mnt\/server\/projects\r\ntouch \"\/mnt\/server\/projects\/PLACE YOUR PROJECTS HERE\"\r\n\r\n# Download the given Version and extract it\r\ncurl -fL https:\/\/github.com\/cdr\/code-server\/releases\/download\/v${VERSION}\/code-server-${VERSION}-linux-amd64.tar.gz \\\r\n  | tar -C \/mnt\/server\/.local\/lib -xz\r\nmv \/mnt\/server\/.local\/lib\/code-server-${VERSION}-linux-amd64 \/mnt\/server\/.local\/lib\/code-server-${VERSION}\r\nPATH=\"\/mnt\/server\/.local\/bin:$PATH\"\r\necho \"password: changeme\r\nbind-addr: 0.0.0.0\r\nauth: password\r\ncert: false\" > \/mnt\/server\/.config\/code-server\/config.yaml",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
@@ -37,13 +37,13 @@
             "rules": "required|string|max:32"
         },
         {
-            "name": "IP",
-            "description": "IP where the interface can be accessed",
-            "env_variable": "IP",
-            "default_value": "0.0.0.0",
+            "name": "Version",
+            "description": "Version for (re)installation",
+            "env_variable": "VERSION",
+            "default_value": "",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|string|max:15"
+            "user_editable": true,
+            "rules": "required|string|max:20"
         }
     ]
 }
