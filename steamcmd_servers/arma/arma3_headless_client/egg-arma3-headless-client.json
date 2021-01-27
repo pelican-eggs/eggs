@@ -12,7 +12,6 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:game_arma3"
     ],
-    "file_denylist": "",
     "startup": ".\/{{SERVER_BINARY}} -client -connect={{CONNECT_IP}} -port={{CONNECT_PORT}} -password=\"{{CONNECT_PASSWORD}}\" -profiles=.\/serverprofile -bepath=.\/battleye {{STARTUP_PARAMS}} -mod=\"{{MODS}}\"",
     "config": {
         "files": "{}",
