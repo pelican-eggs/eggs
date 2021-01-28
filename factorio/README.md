@@ -1,7 +1,8 @@
 # Factorio
 
 #### The Factorio Server
-The server supports mods
+The server supports mods. 
+The factorio-modupdate egg uses the factorio-mod-updater (https://github.com/pdemonaco/factorio-mod-updater) to update your mods when ReInstalling the Server.
 
 #### from the developers
 
