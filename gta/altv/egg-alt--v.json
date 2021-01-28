@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-23T05:46:56+00:00",
+    "exported_at": "2021-01-28T05:46:56+00:00",
     "name": "alt:V",
     "author": "parker@parkervcp.com",
     "description": "alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V",
     "features": null,
     "images": [
-        "quay.io\/paz\/game_altv:game_altv"
+        "quay.io\/parkervcp\/pterodactyl-images:game_altv"
     ],
     "file_denylist": "",
     "startup": ".\/update.sh && chmod +x .\/altv-server && .\/altv-server",
