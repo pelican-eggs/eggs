@@ -1,18 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-11-18T00:37:48+02:00",
+    "exported_at": "2021-01-29T22:41:09+02:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre"
+    ],
     "startup": "java -Djavax.accessibility.assistive_technologies=\" \" -Dnogui=true -jar JMusicBot.jar",
     "config": {
         "files": "{\r\n    \"config.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"token =\": \"token = \\\"{{env.BOT_TOKEN}}\\\"\",\r\n            \"prefix =\": \"prefix = \\\"{{env.BOT_PREFIX}}\\\"\",\r\n            \"owner =\": \"owner = \\\"{{env.BOT_OWNER}}\\\"\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"Finished Loading\": \"\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
