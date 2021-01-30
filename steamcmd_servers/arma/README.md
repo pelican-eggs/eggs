@@ -4,4 +4,3 @@ ARMA is a series of first-person tactical military shooters, originally released
 
 ## Arma 3
 * [Arma 3](arma3)
-* [Arma 3 Headless Client](arma3_headless_client)
