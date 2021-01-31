@@ -13,7 +13,7 @@
         "quay.io\/parkervcp\/pterodactyl-images:game_altv"
     ],
     "file_denylist": "",
-    "startup": ".\/update.sh && chmod +x .\/altv-server && .\/altv-server",
+    "startup": "chmod +x .\/altv-server && .\/altv-server",
     "config": {
         "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"host:\": \"host: 0.0.0.0\",\r\n            \"port:\": \"port: {{server.build.default.port}}\",\r\n            \"password:\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"description:\": \"description: {{server.build.env.SERVER_DESC}}\"\r\n        }\r\n    },\r\n    \"update.cfg\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"branch\": \"{{server.build.env.BUILD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
