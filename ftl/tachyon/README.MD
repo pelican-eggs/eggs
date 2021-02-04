@@ -1,4 +1,4 @@
-# Mohist
+# Tachyon
 
 Tachyon is a multiplayer FTL server and client.
 
