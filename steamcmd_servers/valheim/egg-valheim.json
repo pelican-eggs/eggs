@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-02-04T16:54:21-08:00",
+    "exported_at": "2021-02-04T19:21:59-08:00",
     "name": "Valheim",
     "author": "alex.chang-lam@protonmail.com",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
@@ -13,7 +13,7 @@
         "quay.io\/parkervcp\/pterodactyl-images:debian_source"
     ],
     "file_denylist": "",
-    "startup": ".\/start_server.sh  -nographics -batchmode -name \"{{SERVER_NAME}}\" -port 2456 -world \"Dedicated\" -password \"{{PASSWORD}}\" -public 1",
+    "startup": "{{PATH1}} && {{PATH2}} && {{APP_ID}} && .\/valheim_server.x86_64  -nographics -batchmode -name {{SERVER_NAME}} -port {{PORT}} -world {{WORLD}} -password {{PASSWORD}} -public 1  > \/dev\/null & {{PATH3}} && echo \"Server started\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server started\",\r\n    \"userInteraction\": []\r\n}",
@@ -45,6 +45,60 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "Name to load if switching between multiple saved worlds.",
+            "env_variable": "WORLD",
+            "default_value": "world",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Port",
+            "description": "Game server port.",
+            "env_variable": "PORT",
+            "default_value": "2456",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "lib path 1",
+            "description": "Do Not Edit\r\n\r\nstartup script line 1",
+            "env_variable": "PATH1",
+            "default_value": "export templdpath=$LD_LIBRARY_PATH",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "lib path 2",
+            "description": "Do Not Edit\r\n\r\nstartup script line 2",
+            "env_variable": "PATH2",
+            "default_value": "export LD_LIBRARY_PATH=.\/linux64:$LD_LIBRARY_PATH",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "lib path 3",
+            "description": "Do Not Edit\r\n\r\nstartup script line 10",
+            "env_variable": "PATH3",
+            "default_value": "export LD_LIBRARY_PATH=$templdpath",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "app ID",
+            "description": "Do Not Edit\r\n\r\nstartup script line 3",
+            "env_variable": "APP_ID",
+            "default_value": "export SteamAppId=892970",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
         }
     ]
 }
