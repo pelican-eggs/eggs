@@ -1,0 +1,77 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-02-06T12:50:53-06:00",
+    "name": "Valheim",
+    "author": "magi1053@outlook.com",
+    "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_source"
+    ],
+    "file_denylist": "",
+    "startup": "export templdpath=$LD_LIBRARY_PATH;\r\nexport LD_LIBRARY_PATH=.\/linux64:$LD_LIBRARY_PATH;\r\nexport SteamAppId={{APP_ID}};\r\n.\/valheim_server.x86_64  -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public 1 -logFile \/dev\/stdout |\r\n\tsed -u -E '\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d' | \r\n\tsed -u -E '\/^([[:space:]]+)?$\/d' &\r\nexport LD_LIBRARY_PATH=$templdpath;\r\nfunction shutdown() { echo 1 > server_exit.drp; echo \"Server exit signal set\"; };\r\ntrap shutdown 15;\r\nwait $!;",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Game server connected\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Valheim Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl unzip lib32gcc1 ca-certificates xvfb\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\n\r\nexport HOME=\/mnt\/server\r\nexport AUTO_UPDATE=1\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 896660 validate +quit\r\n\r\n## setup 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\n## setup 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v \/mnt\/server\/steam\/linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name that appears in server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password.\"",
+            "env_variable": "PASSWORD",
+            "default_value": "secret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "Name to load if switching between multiple saved worlds.",
+            "env_variable": "WORLD",
+            "default_value": "world",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Port",
+            "description": "Game server port.",
+            "env_variable": "PORT",
+            "default_value": "2456",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "App ID",
+            "description": "Steam App ID.",
+            "env_variable": "APP_ID",
+            "default_value": "892970",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
