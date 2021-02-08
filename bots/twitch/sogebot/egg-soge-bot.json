@@ -12,7 +12,6 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14"
     ],
-    "file_denylist": "",
     "startup": "npm start",
     "config": {
         "files": "{\r\n    \".env\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"PORT\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
