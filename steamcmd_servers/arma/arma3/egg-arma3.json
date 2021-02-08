@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-26T21:50:23+00:00",
+    "exported_at": "2021-01-30T22:22:39+00:00",
     "name": "Arma 3",
     "author": "rehlmgaming@gmail.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
@@ -12,7 +12,7 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:game_arma3"
     ],
-    "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -bepath=.\/battleye -cfg=\"{{BASIC}}\" -config=\"{{CONFIG}}\" {{STARTUP_PARAMS}} -mod=\"{{MODS}}\" -serverMod=\"{{SERVERMODS}}\"",
+    "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -bepath=.\/battleye -cfg=\\\"{{BASIC}}\\\" -config=\\\"{{CONFIG}}\\\" -mod=\\\"{{MODIFICATIONS}}\\\" -serverMod=\\\"{{SERVERMODS}}\\\" {{STARTUP_PARAMS}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Host identity created.\",\r\n    \"userInteraction\": []\r\n}",
@@ -34,7 +34,7 @@
             "default_value": "233780",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|numeric"
+            "rules": "required|integer"
         },
         {
             "name": "Steam Username",
@@ -61,13 +61,13 @@
             "default_value": "arma3server_x64",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string|in:arma3server,arma3server_x64,arma3serverprofiling,arma3serverprofiling_x64"
         },
         {
             "name": "Extra Startup Parameters",
             "description": "See https:\/\/community.bistudio.com\/wiki\/Arma_3_Startup_Parameters for more info.",
             "env_variable": "STARTUP_PARAMS",
-            "default_value": "",
+            "default_value": "-noLogs",
             "user_viewable": true,
             "user_editable": true,
             "rules": "string|nullable"
@@ -93,7 +93,7 @@
         {
             "name": "Mods",
             "description": "Mod folders to be used with the -mods startup option. NO capital letters, spaces, or folders starting with a number! Each folder must be followed with a semicolon (ex. @123456789;@987654321;etc;)",
-            "env_variable": "MODS",
+            "env_variable": "MODIFICATIONS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -109,17 +109,8 @@
             "rules": "nullable|string"
         },
         {
-            "name": "Extra Flags for SteamCMD",
-            "description": "Only used when checking for server updates, and typically used for grabbing beta builds.\r\nExample: -beta profiling -betapassword CautionSpecialProfilingAndTestingBranchArma3",
-            "env_variable": "STEAMCMD_EXTRA_FLAGS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string"
-        },
-        {
             "name": "Check for Server Updates",
-            "description": "Check for server updates on server start.\r\n1 True | 0 False",
+            "description": "Check for server updates on server start. (1 True | 0 False)",
             "env_variable": "UPDATE_SERVER",
             "default_value": "0",
             "user_viewable": true,
@@ -128,7 +119,7 @@
         },
         {
             "name": "Steam Workshop Mods to Download\/Update",
-            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format: @ModIdNumber",
+            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format \"@ModIdNumber\". NOTE: Particularly large mods (ie. RHS, CUP, typically anything over 3 GB) may not download properly due to limitations of SteamCMD.",
             "env_variable": "UPDATE_WORKSHOP",
             "default_value": "",
             "user_viewable": true,
@@ -143,6 +134,33 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "boolean"
+        },
+        {
+            "name": "[Advanced] Extra Flags for SteamCMD",
+            "description": "Only used when checking for server updates, and typically used for grabbing beta builds.\r\nExample: -beta profiling -betapassword CautionSpecialProfilingAndTestingBranchArma3",
+            "env_variable": "STEAMCMD_EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "[Advanced] Headless Clients (HC)",
+            "description": "Number of Headless Clients (0 - 5) to launch parallel with the server. Be sure to set the following \"HC Connect Password\" variable if your server is password locked. PLEASE NOTE: Using a headless client is only recommended for advanced users, adds extra overhead to your permitted server resources, and is only beneficial if a properly written, HC compliant mission file is provided. See https:\/\/community.bistudio.com\/wiki\/Arma_3:_Headless_Client for more info.",
+            "env_variable": "HC_NUM",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:0,5"
+        },
+        {
+            "name": "[Advanced] HC Connect Password",
+            "description": "If Headless Clients are used, this is the password used to connect to the server if the server is password locked.",
+            "env_variable": "HC_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
         }
     ]
 }
