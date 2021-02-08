@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2021-02-07T19:56:46-06:00",
+    "exported_at": "2021-02-08T10:56:34-06:00",
     "name": "Eco",
     "author": "info@goover.de",
     "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
@@ -12,7 +12,7 @@
     "startup": "export DOTNET_BUNDLE_EXTRACT_BASE_DIR=.\/dotnet-bundle &&  .\/EcoServer",
     "config": {
         "files": "{\r\n    \"Configs\/Network.eco\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"GameServerPort\": \"{{server.build.default.port}}\",\r\n            \"WebServerPort\": \"{{server.build.env.WEB_PORT}}\",\r\n            \"PublicServer\": \"{{server.build.env.PUB_SRV}}\",\r\n            \"Password\": \"{{server.build.env.SRV_PWD}}\",\r\n            \"UPnPEnabled\": \"{{server.build.env.UPNP}}\",\r\n            \"Description\": \"{{server.build.env.SRV_DES}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"[Server Initialization]... Finished in\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Web Server now listening on\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "exit"
     },
