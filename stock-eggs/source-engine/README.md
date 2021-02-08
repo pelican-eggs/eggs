@@ -50,6 +50,7 @@ Garry's Mod is a physics sandbox. There aren't any predefined aims or goals. We 
 |   Port   | default |
 |----------|---------|
 |   Game   | 27015   |
+|   Game   | 27005   |
 
 ## Insurgency
 
