@@ -71,7 +71,7 @@
             "rules": "required|string"
         },
         {
-            "name": "Console FIlter",
+            "name": "Console Filter",
             "description": "Remove spam from the console output.",
             "env_variable": "FILTER",
             "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
