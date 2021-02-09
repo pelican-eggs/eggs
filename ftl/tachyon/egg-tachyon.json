@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-02-04T00:26:26-08:00",
+    "exported_at": "2021-02-09T11:53:05-08:00",
     "name": "Tachyon",
     "author": "alex.chang-lam@protonmail.com",
     "description": "A multiplayer version of FTL.",
@@ -18,7 +18,7 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"[Server] SERVER STARTED.\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{}",
-        "stop": "exit"
+        "stop": "\/exit"
     },
     "scripts": {
         "installation": {
