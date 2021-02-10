@@ -32,7 +32,7 @@
             "default_value": "My Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:60"
         },
         {
             "name": "Server Password",
@@ -47,7 +47,7 @@
             "name": "World Name",
             "description": "Name to load if switching between multiple saved worlds.",
             "env_variable": "WORLD",
-            "default_value": "world",
+            "default_value": "Dedicated",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20"
