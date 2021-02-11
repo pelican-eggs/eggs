@@ -3,7 +3,7 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-12-06T19:54:35-08:00",
+    "exported_at": "2021-02-10T17:15:03-05:00",
     "name": "Fabric",
     "author": "accounts@bofanodes.io",
     "description": "Fabric is a modular modding toolchain targeting Minecraft 1.14 and above, including snapshots.",
@@ -18,7 +18,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\nFABRIC_VERSION=$(curl https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/ | grep -Po '(?<=href=\")[^\"]*' | sort -h | tail -1 | sed 's,\/,,g')\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nelse\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\nfi\r\njava -jar fabric-installer-$FABRIC_VERSION.jar server -downloadMinecraft\r\necho -e \"Install Complete\"",
+            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Enable snapshots\r\nif [ \"$MC_VERSION\" == \"snapshot\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\n  FABRIC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/installer | jq -r '.[0].version')\r\nfi\r\nwget https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\njava -jar fabric-installer-$FABRIC_VERSION.jar server -mcversion ${MC_VERSION:-latest} -downloadMinecraft\r\necho -e \"Install Complete\"",
             "container": "openjdk:11-jdk-slim",
             "entrypoint": "bash"
         }
@@ -32,6 +32,15 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Minecraft Version",
+            "description": "The version of Minecraft to install. Use \"latest\" to install the latest version, or use \"snapshot\" to install the latest snapshot.",
+            "env_variable": "MC_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,15"
         },
         {
             "name": "Fabric Version",

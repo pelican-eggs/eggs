@@ -1,4 +1,4 @@
-﻿# Parkers Pterodactyl eggs repo
+# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
@@ -75,6 +75,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Cryofall](/cryofall/cryofall)
 
 [ET Legacy](/enemy_territory/etlegacy)
+
+[FTL: Tachyon](/ftl/tachyon)
 
 [Factorio](/factorio)
 * [Vanilla](/factorio/factorio)
@@ -178,7 +180,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [The Forest](/steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
 * [Unturned](/steamcmd_servers/unturned)
-* [Valheim] (/steamcmd_servers/valheim)
+* [Valheim](/steamcmd_servers/valheim)
 
 [Teeworlds](/teeworlds)
 * [Teeworlds](/teeworlds/teeworlds)
