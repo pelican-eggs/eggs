@@ -1,14 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-06-27T05:17:21-04:00",
+    "exported_at": "2021-02-16T10:20:13+11:00",
     "name": "Insurgency: Sandstorm",
-    "author": "brycea@terrahost.cloud",
+    "author": "playstrikemc@outlook.com",
     "description": "Insurgency: Sandstorm is a team-based, tactical FPS based on lethal close quarters combat and objective-oriented multiplayer gameplay. Experience the intensity of modern combat where skill is rewarded, and teamwork wins the fight.",
-    "image": "quay.io\/pterodactyl\/core:source",
-    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\"",
+    "features": null,
+    "images": [
+        "quay.io\/pterodactyl\/core:source"
+    ],
+    "file_denylist": "",
+    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\" -GameStatsToken={{GAMESTAT_TOKEN}} -GSLTToken={{GSLT_TOKEN}} -Rcon -RconListenPort={{RCON_PORT}} -RconPassword={{RCON_PASS}} -MapCycle={{MAPCYCLE}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"LogGameState: Match State Changed from LoadingAssets to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
@@ -28,8 +33,8 @@
             "description": "The ID corresponding to the game to download and run. Leave blank to avoid auto update.",
             "env_variable": "SRCDS_APPID",
             "default_value": "581330",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "nullable|numeric"
         },
         {
@@ -37,8 +42,8 @@
             "description": "The name to appear in the server in the server list.",
             "env_variable": "HOSTNAME",
             "default_value": "My Insurgency Server",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:64"
         },
         {
@@ -46,17 +51,8 @@
             "description": "Query port for your Insurgency server.",
             "env_variable": "QUERY_PORT",
             "default_value": "27131",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|numeric"
-        },
-        {
-            "name": "Max Players",
-            "description": "Sets the maximum number of players.",
-            "env_variable": "MAXPLAYERS",
-            "default_value": "28",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|numeric"
         },
         {
@@ -64,8 +60,8 @@
             "description": "Default map to run when starting the server. Scenario must be available with the provided map.",
             "env_variable": "MAP_NAME",
             "default_value": "Canyon",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -73,9 +69,63 @@
             "description": "By default, a server will cycle through all Versus (PVP) scenarios available.",
             "env_variable": "SCENARIO",
             "default_value": "Scenario_Crossing_Checkpoint_Insurgents",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the maximum number of players.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "28",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Game Server Login Token",
+            "description": "Grab your GSLT token from here: https:\/\/steamcommunity.com\/dev\/managegameservers",
+            "env_variable": "GSLT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64"
+        },
+        {
+            "name": "RCon Port",
+            "description": "RCon Port for Administrating the Server.",
+            "env_variable": "RCON_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "RCon Password",
+            "description": "Password for RCON Access.",
+            "env_variable": "RCON_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Game Stats Token",
+            "description": "A Token can be generated here: https:\/\/gamestats.sandstorm.game\/",
+            "env_variable": "GAMESTAT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64"
+        },
+        {
+            "name": "Mapcycle",
+            "description": "txt needs to be placed in the dir: \/Insurgency\/Config\/Server\/ - please do not put the .txt on the end.",
+            "env_variable": "MAPCYCLE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:64"
         }
     ]
 }
