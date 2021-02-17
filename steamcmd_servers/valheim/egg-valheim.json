@@ -41,7 +41,7 @@
             "default_value": "secret",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|min:5|max:20"
         },
         {
             "name": "World Name",
