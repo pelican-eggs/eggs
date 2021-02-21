@@ -12,7 +12,7 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14"
     ],
-    "startup": "sh .local\/lib\/code-server-3.8.0\/bin\/code-server",
+    "startup": "sh .local\/lib\/code-server-{{VERSION}}\/bin\/code-server",
     "config": {
         "files": "{\r\n    \".config\/code-server\/config.yaml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"password\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"bind-addr\": \"bind-addr: 0.0.0.0:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"info  HTTP server listening on\"\r\n}",
