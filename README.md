@@ -162,6 +162,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark)
+* [Post Scriptum](/steamcmd_servers/post_scriptum)
 * [Project Zomboid](/steamcmd_servers/project_zomboid)
 * [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
