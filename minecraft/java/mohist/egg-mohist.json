@@ -41,7 +41,7 @@
             "name": "Minecraft Version",
             "description": "The version of Minecraft to download.",
             "env_variable": "MC_VERSION",
-            "default_value": "1.16.5",
+            "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20"
