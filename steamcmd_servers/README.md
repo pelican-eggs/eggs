@@ -59,6 +59,9 @@ This is a collection of servers that use SteamCMD to install.
 ## PixARK
 [PixARK](pixark)
 
+## Post Scriptum
+[Post Scriptum](post_scriptum)
+
 ## Project Zomboid
 [Project Zomboid](project_zomboid)
 
