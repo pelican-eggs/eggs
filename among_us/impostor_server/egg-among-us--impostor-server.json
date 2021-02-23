@@ -11,7 +11,7 @@
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5",
     "startup": ".\/Impostor.Server",
     "config": {
-        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Server.PublicPort\": \"{{server.build.default.port}}\",\r\n            \"Server.ListenPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Server.PublicPort\": \"{{server.build.default.port}}\",\r\n            \"Server.ListenPort\": \"{{server.build.default.port}}\"\r\n            \"Server.PublicIp\": \"{{server.build.default.ip}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Matchmaker is listening on\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{}",
         "stop": "^C"
