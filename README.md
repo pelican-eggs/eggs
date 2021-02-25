@@ -159,6 +159,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](/steamcmd_servers/killing_floor_2)
+* [Modiverse](/steamcmd_servers/modiverse)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark)
