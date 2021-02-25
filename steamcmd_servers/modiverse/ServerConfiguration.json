@@ -1,0 +1,16 @@
+   {
+       "version": 1,
+       "pin": "0000",
+       "motdURL": "http://modiverse.io/killerjim_motd.html",
+       "motdDelay": 5,
+       "rconPassword" : "admin",
+       "mapCycle": 
+       [
+               {"gameMode":"2258403789","comment":"Der Riese (CODz), N/A - Game-mode includes map, ","map":"","assets":["2229481041"],"duration":300},
+               {"gameMode":"0","comment":"Sandbox, The Forest, Zombie NPC Pack","map":"2306144554","assets":["2369133675","2367962587","2229481041","2115764043","2134504480","2342034582","2336045922","2349758790","2223124581","2281370083","2353033793"],"duration":300}     ,
+               {"gameMode":"2249813701","comment":"EvilGuys Gamemode, The Hill - Evil Guys, ","map":"2245595586","assets":[],"duration":300} ,
+               {"gameMode":"2249813701","comment":"EvilGuys Gamemode, Brick Top - Evil Guys, ","map":"2263986594","assets":[],"duration":300},
+               {"gameMode":"2313164959","comment":"Fantastic Fantasy Scroller Gamemode, Dungeon (FFS), ","map":"2312977419","assets":[],"duration":300},
+               {"gameMode":"2285067974","comment":"Deathrun, Deathrun Example Map, ","map":"2286680373","assets":["2229481041"],"duration":300}
+       ]
+   }
