@@ -4,17 +4,18 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-02-23T15:36:16+01:00",
+    "exported_at": "2021-02-25T17:24:00+01:00",
     "name": "Valheim Plus Mod",
-    "author": "info@goover.de",
+    "author": "magi1053@outlook.com",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
     "features": null,
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_source"
     ],
-    "startup": ".\/start_server_bepinex.sh",
+    "file_denylist": "",
+    "startup": "bash .\/start_server_bepinex.sh",
     "config": {
-        "files": "{\r\n    \"start_server_bepinex.sh\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \".\\\/valheim_server.x86_64\": \".\\\/valheim_server.x86_64 -name \\\"{{server.build.env.SERVER_NAME}}\\\" -password \\\"{{server.build.env.PASSWORD}}\\\" -nographics -batchmode -port {{server.build.default.port}} -world \\\"{{server.build.env.WORLD}}\\\" trap \\\"{{server.build.env.STOP}}\\\" 15; wait $!\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"start_server_bepinex.sh\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \".\/valheim_server.x86_64\": \".\/valheim_server.x86_64 -name \\\"{{server.build.env.SERVER_NAME}}\\\" -password \\\"{{server.build.env.PASSWORD}}\\\" -nographics -batchmode -port {{server.build.default.port}} -world \\\"{{server.build.env.WORLD}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -68,24 +69,6 @@
             "description": "Required to load server libraries.",
             "env_variable": "LD_LIBRARY_PATH",
             "default_value": ".\/linux64",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string"
-        },
-        {
-            "name": "Console Filter",
-            "description": "Remove spam from the console output.",
-            "env_variable": "FILTER",
-            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "string"
-        },
-        {
-            "name": "Shutdown Command",
-            "description": "Commands to trigger a server shutdown.",
-            "env_variable": "STOP",
-            "default_value": "kill -2 $!; wait;",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string"
