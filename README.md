@@ -182,6 +182,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Unturned](/steamcmd_servers/unturned)
 * [Valheim](/steamcmd_servers/valheim)
 
+[uMod Servers] (/umod_servers) These eggs use uMod
+* [Valheim] (/umod_servers/valheim)
+
 [Teeworlds](/teeworlds)
 * [Teeworlds](/teeworlds/teeworlds)
 
