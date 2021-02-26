@@ -1,0 +1,90 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2021-02-25T13:11:57-05:00",
+    "name": "uModValheim-V2",
+    "author": "thewagaming@gmail.com",
+    "description": "Install the uMod tool to install Valheim, many things can be used.",
+    "image": "castblacking\/umod-valheim:v19",
+    "startup": ".\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public 1 valheim  > >(sed -uE \"{{FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Valheim Installation Script\r\n# Colors\r\nGR='\\033[0;32m'\r\nRED='\\033[0;31m'\r\nNC='\\033[0m' # No Color\r\n\r\n# Server Files: \/vhs\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt update && apt upgrade -y\r\napt -y install libgcc1 lib32gcc1 gdb libc6 git wget curl tar zip unzip net-tools ca-certificates\r\napt update -y && apt upgrade -y && wget https:\/\/packages.microsoft.com\/config\/debian\/10\/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb && apt update -y && apt install -y dotnet-sdk-5.0 aspnetcore-runtime-5.0 libgdiplus\r\n\r\n## create files to install server\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# uMod fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\n\r\n# fixes Couldn't find a valid ICU package installed on the system\r\ncd \/mnt\/server\r\n\r\nexport DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1\r\necho \"DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1; export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT\" >> ~\/.profile\r\nexport PATH=\"$PATH:\/mnt\/server\/.dotnet\/tools\/\"\r\n\r\nlog \"Installing uMod global tool...\"\r\ndotnet tool update uMod --version \"*-*\" --global --add-source https:\/\/www.myget.org\/f\/umod\/api\/v3\/index.json\r\ndotnet new -i \"uMod.Templates::*-*\" --nuget-source https:\/\/www.myget.org\/f\/umod\/api\/v3\/index.json &>\/dev\/null\r\n\r\n$HOME\/.dotnet\/tools\/umod complete --install\r\nclear\r\n\r\nchmod +x \/mnt\/server\/.dotnet\/tools\/umod\r\n\r\n## install game using uMod Tool\r\n. ~\/.profile\r\numod install valheim -P\r\numod new launcher valheim -P --force\r\nchmod +x valheim_server.x86_64",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name that appears in server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "uMod & CastBlack",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:60"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password.",
+            "env_variable": "PASSWORD",
+            "default_value": "umodgods",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:5|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "Name to load if switching between multiple saved worlds.",
+            "env_variable": "WORLD",
+            "default_value": "Dedicated",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "App ID",
+            "description": "Valheim steam app id for auto updates.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "896660",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|numeric"
+        },
+        {
+            "name": "LD Library Path",
+            "description": "Required to load server libraries.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/linux64:$LD_LIBRARY_PATH",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Console Filter",
+            "description": "Remove spam from the console output.",
+            "env_variable": "FILTER",
+            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string"
+        },
+        {
+            "name": "Shutdown Command",
+            "description": "Commands to trigger a server shutdown.",
+            "env_variable": "STOP",
+            "default_value": "kill -2 $!; wait;",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        }
+    ]
+}
