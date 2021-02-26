@@ -1,0 +1,108 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2021-02-26T10:20:33-05:00",
+    "name": "uMod Valheim",
+    "author": "thewagaming@gmail.com",
+    "description": "Installs a Valheim server along with the uMod compiler, for using plugins from the uMod platform. In this EGG, creations from CastBlacKing and SoftwareNoob are together.",
+    "image": "castblacking\/umod-valheim:v21",
+    "startup": ".\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public 1 valheim > >(sed -uE \"{{FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"IP address from external\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Valheim Installation Script\r\n\r\n# Server Files: \/vhs\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt update && apt upgrade -y\r\napt -y install libgcc1 lib32gcc1 gdb libc6 git wget curl tar zip unzip net-tools ca-certificates\r\napt update -y && apt upgrade -y && wget https:\/\/packages.microsoft.com\/config\/debian\/10\/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb && apt update -y && apt install -y dotnet-sdk-5.0 aspnetcore-runtime-5.0 libgdiplus\r\n\r\n## Create files to install server \/ Setup permissions\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# uMod fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\n\r\n## Installing\r\n# Umod\r\ncd \/mnt\/server\r\ndotnet tool update uMod --version \"*-*\" --global --add-source https:\/\/www.myget.org\/f\/umod\/api\/v3\/index.json\r\ndotnet new -i \"uMod.Templates::*-*\" --nuget-source https:\/\/www.myget.org\/f\/umod\/api\/v3\/index.json &>\/dev\/null\r\necho \"PATH=\\$PATH:\\$HOME\/.dotnet\/tools; export PATH\" >> ~\/.profile\r\necho \"DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1; export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT\" >> ~\/.profile\r\n\r\n# Reinstall Dotnet? (By SoftwareNoob)\r\nmkdir .dotnet \r\ncd .dotnet\r\ncurl -sSL -o dotnet-sdk.tar.gz https:\/\/dotnetcli.azureedge.net\/dotnet\/Sdk\/5.0.103\/dotnet-sdk-5.0.103-linux-x64.tar.gz.\r\ntar -xvf dotnet-sdk.tar.gz && rm dotnet-sdk.tar.gz && cd \/mnt\/server\r\n\r\n## install game\r\nchmod +x \/mnt\/server\/.dotnet\/tools\/umod\r\n.dotnet\/tools\/umod complete --install\r\n. ~\/.profile\r\numod install valheim -P\r\numod new launcher valheim -P --force\r\nchmod +x valheim_server.x86_64\r\n\r\n# Delete unnecessary files (By SoftwareNoob)\r\nif [ -f \/mnt\/server\/start_server.sh ]; then\r\nrm launcher.sh start_server.sh start_server_xterm.sh\r\nrm \"Valheim Dedicated Server Manual.pdf\"\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name that appears in server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "uMod & CastBlack",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:60"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password.",
+            "env_variable": "PASSWORD",
+            "default_value": "umodgods",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:5|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "Name to load if switching between multiple saved worlds.",
+            "env_variable": "WORLD",
+            "default_value": "Dedicated",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "LD Library Path",
+            "description": "Required to load server libraries.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/linux64:$LD_LIBRARY_PATH",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Console Filter",
+            "description": "Remove spam from the console output.",
+            "env_variable": "FILTER",
+            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string"
+        },
+        {
+            "name": "Shutdown Command",
+            "description": "Commands to trigger a server shutdown.",
+            "env_variable": "STOP",
+            "default_value": "kill -2 $!; wait;",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto-update uMod and the game each time server is started. Enter 0 to disable",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Update Plugins",
+            "description": "Auto-update plugins on server start, this will auto-update all plugins that are located in the plugins folder, even if not installed using the Install Plugins variable. Enter 0 to disable",
+            "env_variable": "UPDATE_PLUGINS",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Install Plugins",
+            "description": "Install uMod plugins by entering their names separated by spaces, such as Autosave Sleepless Position MaxPlayers",
+            "env_variable": "INSTALL_PLUGINS",
+            "default_value": "MaxPlayers",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        }
+    ]
+}
