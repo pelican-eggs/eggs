@@ -17,3 +17,4 @@ To use this script, just do as any other, however there are a few things that mu
 # How to Auto Update
 1. All - Set Auto Update Variable to 1
 2. Only Plugins - Set Auto Update Variable to 0 > Set Update Plugins to 1
+3. IF your server has any errors when Auto-Update, go to Settings, and click REINSTALL SERVER. **(DON'T WORRY, YOUR SERVER WON'T HAVE ANY CORRUPTED OR DELETED FOLDERS, IT WILL JUST BE UPDATED!)**
