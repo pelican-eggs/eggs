@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-02-28T16:55:00+01:00",
+    "exported_at": "2021-02-28T17:37:13+01:00",
     "name": "Subnautica",
     "author": "tueye@tuworld.de",
     "description": "Subnautica is an open world survival action-adventure video game developed and published by Unknown Worlds Entertainment. In it, players are free to explore the ocean on an alien planet, known as planet 4546B, after their spaceship, the Aurora, crashes on the planet's surface.",
@@ -65,7 +65,7 @@
         },
         {
             "name": "Nitrox Version",
-            "description": "Which version of Nitrox to install and use.",
+            "description": "Which version of Nitrox to install and use. Enter Github tags or branch name.",
             "env_variable": "NITROX_VERSION",
             "default_value": "1.4.0.0",
             "user_viewable": true,
