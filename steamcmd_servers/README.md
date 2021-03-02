@@ -96,6 +96,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Stormworks: Build and Rescue
 [Stormworks: Build and Rescue](stormworks)
 
+## Subnautica: Nitrox Mod
+[Subnautica: Nitrox Mod](subnautica_nitrox_mod)
+
 ## Sven coop
 [Sven Co-op](svencoop)
 
