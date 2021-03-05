@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-02-25T17:24:00+01:00",
+    "exported_at": "2021-03-05T16:52:22+01:00",
     "name": "Valheim Plus Mod",
     "author": "magi1053@outlook.com",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
@@ -12,10 +12,9 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_source"
     ],
-    "file_denylist": "",
-    "startup": "bash .\/start_server_bepinex.sh",
+    "startup": ".\/start_server_bepinex.sh -name \"${SERVER_NAME}\" -password \"${PASSWORD}\" -port ${SERVER_PORT} -world \"${WORLD}\" -public ${PUBLIC}",
     "config": {
-        "files": "{\r\n    \"start_server_bepinex.sh\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \".\/valheim_server.x86_64\": \".\/valheim_server.x86_64 -name \\\"{{server.build.env.SERVER_NAME}}\\\" -password \\\"{{server.build.env.PASSWORD}}\\\" -nographics -batchmode -port {{server.build.default.port}} -world \\\"{{server.build.env.WORLD}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{}",
         "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -107,6 +106,15 @@
             "default_value": "UnixServer.zip",
             "user_viewable": false,
             "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Public Server",
+            "description": "",
+            "env_variable": "PUBLIC",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         }
     ]
