@@ -50,6 +50,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Killing Floor 2
 [Killing Floor 2](killing_floor_2)
 
+## Modiverse
+[Modiverse](modiverse)
+
 ## Mordhau
 [Mordhau](mordhau)
 

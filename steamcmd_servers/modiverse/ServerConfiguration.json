@@ -1,0 +1,11 @@
+{
+       "version": 1,
+       "pin": "0000",
+       "motdURL": "http://test.com/motd.html",
+       "motdDelay": 5,
+       "rconPassword" : "cHangeRC0nPasswOrD",
+       "mapCycle": 
+       [
+               {"gameMode":"2285067974","comment":"Deathrun, Deathrun Example Map, ","map":"2286680373","assets":["2229481041"],"duration":1800}
+       ]
+}
