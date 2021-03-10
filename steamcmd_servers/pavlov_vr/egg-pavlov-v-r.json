@@ -7,7 +7,7 @@
     "name": "Pavlov VR Server(s)",
     "author": "admin@devil.wtf",
     "description": "Pavlov VR Servers",
-    "image": "quay.io\/pterodactyl\/core:glibc",
+    "image": "quay.io/m1dn1ght/pavlov:PavlovDebian",
     "startup": ".\/PavlovServer.sh -PORT={{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"Pavlov\/Saved\/Config\/RconSettings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Password=\": \"Password={{env.RCON_PASSWORD}}\",\r\n            \"Port=\": \"Port={{env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
