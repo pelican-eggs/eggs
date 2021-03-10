@@ -184,6 +184,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
 * [Unturned](/steamcmd_servers/unturned)
 * [Valheim](/steamcmd_servers/valheim)
+  * [Valheim Plus](/steamcmd_servers/valheimplus)
 
 [Teeworlds](/teeworlds)
 * [Teeworlds](/teeworlds/teeworlds)
