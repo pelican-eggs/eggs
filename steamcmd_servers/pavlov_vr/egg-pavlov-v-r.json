@@ -1,13 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2021-03-09T19:26:38-05:00",
-    "name": "Pavlov VR Server(s)",
+    "exported_at": "2021-03-10T15:32:23-05:00",
+    "name": "Pavlov VR Servers",
     "author": "admin@devil.wtf",
     "description": "Pavlov VR Servers",
-    "image": "quay.io/m1dn1ght/pavlov:PavlovDebian",
+    "features": null,
+    "images": [
+        "quay.io\/m1dn1ght\/pavlov:PavlovDebian"
+    ],
+    "file_denylist": "",
     "startup": ".\/PavlovServer.sh -PORT={{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"Pavlov\/Saved\/Config\/RconSettings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Password=\": \"Password={{env.RCON_PASSWORD}}\",\r\n            \"Port=\": \"Port={{env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
@@ -28,8 +33,8 @@
             "description": "Pavlov VR steam app id for auto updates. Leave blank to avoid auto update.",
             "env_variable": "SRCDS_APPID",
             "default_value": "622970",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "nullable|numeric"
         },
         {
@@ -37,8 +42,8 @@
             "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 0. Set to 1 to update",
             "env_variable": "AUTO_UPDATE",
             "default_value": "0",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|boolean"
         },
         {
@@ -46,8 +51,8 @@
             "description": "Choose Between Beta or Shack (-beta shack) or (-beta beta_server)",
             "env_variable": "EXTRA_FLAGS",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "nullable|numeric"
         },
         {
@@ -55,8 +60,8 @@
             "description": "Enter a passwords for your RCON Configuration.",
             "env_variable": "RCON_PASSWORD",
             "default_value": "CHANGE ME",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
@@ -64,8 +69,8 @@
             "description": "Port for your RCON Configuration.",
             "env_variable": "RCON_PORT",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|string|max:20"
         }
     ]
