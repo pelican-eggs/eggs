@@ -87,6 +87,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Soldat
 [Soldat](soldat)
 
+## Space Engineers
+[Space Engineers](space_engineers)
+
 ## Squad
 [Squad](squad)
 
