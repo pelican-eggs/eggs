@@ -13,7 +13,7 @@ Everything which is not defined in a variable could be edited directy in the con
 ### RAM
 This server requires about 6GB.
 
-Based on the information provided by the developer: [See here](https://www.spaceengineersgame.com/dedicated-servers/):
+Based on the information provided by the developer: [See here](https://www.spaceengineersgame.com/dedicated-servers/)
 
 ### Disk
 This server uses about 7GB of diskspace.
