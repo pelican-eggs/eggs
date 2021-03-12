@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-12T01:28:31+01:00",
+    "exported_at": "2021-03-12T19:26:23+01:00",
     "name": "Space Engineers",
     "author": "tueye@tuworld.de",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
@@ -122,7 +122,7 @@
             "name": "Remote Api Port",
             "description": "Remote Api Port",
             "env_variable": "REMOTEAPI_PORT",
-            "default_value": "8080",
+            "default_value": "8081",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|numeric|max:65535"

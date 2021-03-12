@@ -24,4 +24,4 @@ This server uses about 7GB of diskspace.
 |-------|---------|
 | Game  | 27016   |
 | Steam | 8766    |
-| API   | 8080    |
+| API   | 8081    |
