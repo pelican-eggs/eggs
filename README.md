@@ -76,7 +76,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [ET Legacy](/enemy_territory/etlegacy)
 
-[Factorio](/factorio/factorio)
+[FTL: Tachyon](/ftl/tachyon)
+
+[Factorio](/factorio)
+* [Vanilla](/factorio/factorio)
+* [ModUpdate](/factorio/factorio-modupdate)
 
 [Grand Theft Auto](/gta)
 * GTA V
@@ -155,10 +159,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](/steamcmd_servers/killing_floor_2)
+* [Modiverse](/steamcmd_servers/modiverse)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [Pavlov VR](/steamcmd_servers/pavlov_vr)
 * [PixARK](/steamcmd_servers/pixark)
+* [Post Scriptum](/steamcmd_servers/post_scriptum)
 * [Project Zomboid](/steamcmd_servers/project_zomboid)
 * [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
@@ -169,14 +175,19 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [dedicated](/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](/steamcmd_servers/soldat)
+* [Space Engineers](/steamcmd_servers/space_engineers)
 * [Squad](/steamcmd_servers/squad)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/stationeers)
 * [Stormworks: Build and Rescue](/steamcmd_servers/stormworks)
+* [Subnautica: Nitrox Mod](/steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [The Forest](/steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
 * [Unturned](/steamcmd_servers/unturned)
+* [Valheim](/steamcmd_servers/valheim)
+  * [Valheim Vanilla](/steamcmd_servers/valheim/valheim_vanilla)
+  * [Valheim Plus Mod](/steamcmd_servers/valheim/valheim_plus)
 
 [Teeworlds](/teeworlds)
 * [Teeworlds](/teeworlds/teeworlds)
@@ -193,6 +204,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](/unreal_engine/tower_unite)
 * [Tower Unite](/steamcmd_servers/tower_unite)
 
+
+
 [Vintage Story](/vintage_story/vintage_story)
 
 [Xonotic](/xonotic/xonotic)
@@ -200,3 +213,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Storage](/storage/)
 ### S3 Storage
 * [minio](/storage/minio)
+
+## [Software](/software/)
+### Code Server
+* [Code-Server](/software/code-server)

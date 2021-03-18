@@ -1,5 +1,5 @@
 # PhantomBot
-### Their [Site](https://phantombot.tv)
+### Their [Site](https://phantombot.github.io/PhantomBot/)
 PhantomBot is an actively developed open source interactive Twitch bot
 with a vibrant community that provides entertainment and moderation for your channel,
 allowing you to focus on what matters the most to you - your game and your viewers.

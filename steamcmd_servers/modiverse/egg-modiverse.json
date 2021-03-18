@@ -1,0 +1,67 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-03-02T23:42:26+02:00",
+    "name": "Modiverse",
+    "author": "admin@softwarenoob.com",
+    "description": "Modiverse provides a sandbox environment with the ability to create and play mods such as TTT, Deathrun, FortWars, RP, and more! Use the many sandbox tools to build complex worlds with props, lights, thrusters, wheels, and much much more!",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+    ],
+    "startup": ".\/KJMod\/Binaries\/Linux\/KJModServer -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -SteamServerName=\\\"{{HOSTNAME}}\\\" -KJModBaseUGCFolder=ServerData -DoNotRestartOnEmpty -InitUGCs -maxplayers={{MAX_PLAYERS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"listening on port\"\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Modiverse install\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\nAPP_ID=1549820\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"Downloading the game as Steam user ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${APP_ID} ${EXTRA_FLAGS} +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n# Server Configuration \r\nif [ -f \/mnt\/server\/KJModServer.sh ]; then\r\n    rm \/mnt\/server\/KJModServer.sh\r\n    echo \"Removing default script\"\r\nfi\r\nif [ ! -d \"\/mnt\/server\/KJMod\/Binaries\/Linux\/ServerData\" ]; then\r\n        echo \"ServerData folder missing....Creating ServerData Folder\"\r\n        mkdir -p \/mnt\/server\/KJMod\/Binaries\/Linux\/ServerData\r\n    fi\r\n    if [ -f \/mnt\/server\/KJMod\/Binaries\/Linux\/ServerData\/ServerConfiguration.json ]; then\r\n            echo \"Config file exists already, skipping config file download\"\r\n    else\r\n        echo \"Config file missing...Downloading default ServerConfiguration file\"\r\n        cd \/mnt\/server\/KJMod\/Binaries\/Linux\/ServerData || exit\r\n        curl -sS -o ServerConfiguration.json https:\/\/github.com\/\/parkervcp\/eggs\/raw\/master\/steamcmd_servers\/modiverse\/ServerConfiguration.json\r\nfi\r\nchmod +x \/mnt\/server\/KJMod\/Binaries\/Linux\/KJModServer\r\necho \"\"\r\necho \"Installation completed, have fun!\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Server name as shown to players in the various server browsing windows",
+            "env_variable": "HOSTNAME",
+            "default_value": "Pterodactyl Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum amount of player slots, the value should be between 2 and 128.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "128",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:2,128"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto-update the game each time server is started, enter value 0 to disable.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        }
+    ]
+}

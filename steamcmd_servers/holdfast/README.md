@@ -16,4 +16,8 @@ Fight on multiple fronts in Holdfast: Nations At War - A competitive multiplayer
 > If you want a new nest you need to create it before importing the egg.
 6. Restart the daemon on your node before creating a server using the new egg(s).
 
+server_port 20100
+steam_communications_port 8700
+steam_query_port 27000
+
 # You must restart your daemon after importing an egg

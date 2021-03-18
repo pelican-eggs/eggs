@@ -1,0 +1,158 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-03-17T23:07:02+01:00",
+    "name": "Space Engineers",
+    "author": "tueye@tuworld.de",
+    "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
+    ],
+    "file_denylist": [],
+    "startup": "cd \/home\/container\/spaceengineers\/DedicatedServer64\/; wine \/home\/container\/spaceengineers\/DedicatedServer64\/SpaceEngineersDedicated.exe -path Z:\\\\home\\\\container\\\\config -noconsole -ignorelastsession",
+    "config": {
+        "files": "{\r\n    \"config\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\config\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\\\\Sandbox.sbc\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Game ready...\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n## Define variables\r\ndlurl=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/space_engineers\"\r\nexport HOME=\/mnt\/server\r\n\r\n## Install dependencies\r\ndpkg --add-architecture i386\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates libsdl2-2.0-0:i386 cabextract\r\napt install -y --install-recommends wine wine64 xvfb\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\n\r\n## Install game using steamcmd\r\nmkdir $HOME\/spaceengineers\r\n.\/steamcmd.sh +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir $HOME\/spaceengineers +app_update ${APPID} ${EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Create world and config\r\nmkdir -p $HOME\/config\/Saves\r\nif [ ! -d $HOME\/config\/Saves\/World ]\r\nthen\r\n    curl $dlurl\/World.zip -o \/tmp\/World.zip\r\n    unzip \/tmp\/World.zip -d $HOME\/config\/Saves\/\r\nfi\r\nif [ ! -f $HOME\/config\/SpaceEngineers-Dedicated.cfg ]; then curl $dlurl\/SpaceEngineers-Dedicated.cfg -o $HOME\/config\/SpaceEngineers-Dedicated.cfg; fi\r\n\r\n## Install WineTricks\r\nexport DISPLAY=:0.0\r\nexport WINEPREFIX=$HOME\/.wine\r\nrm -r $HOME\/.wine\r\nrm -r $HOME\/.cache\r\nmkdir -p $HOME\/.wine\r\nmkdir \/tmp\/winetricks\r\ncurl https:\/\/raw.githubusercontent.com\/Winetricks\/winetricks\/master\/src\/winetricks -o \/tmp\/winetricks\/winetricks\r\nchmod +x \/tmp\/winetricks\/winetricks\r\nXvfb :0 -screen 0 1024x768x16 &\r\nenv WINEDLLOVERRIDES=\"mscoree=d;mshtml=d\" wineboot --init --force \/nogui\r\nenv \/tmp\/winetricks\/winetricks -q vcrun2017  \r\nenv \/tmp\/winetricks\/winetricks -q vcrun2013 \r\nenv \/tmp\/winetricks\/winetricks -q sound=disabled  \r\nenv \/tmp\/winetricks\/winetricks -q corefonts\r\nenv \/tmp\/winetricks\/winetricks -q --force dotnet48",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "APPID",
+            "default_value": "298740",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Steam browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl Space Engineer Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "World Name",
+            "description": "Name of your world (and of your save folder)",
+            "env_variable": "WORLD_NAME",
+            "default_value": "World",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Description",
+            "description": "Description of the game",
+            "env_variable": "SERVER_DESC",
+            "default_value": "Pterodactyl Space Engineer Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200"
+        },
+        {
+            "name": "Game Mode",
+            "description": "Game Mode setting: Survival, Creative",
+            "env_variable": "SERVER_MODE",
+            "default_value": "Survival",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Survival,Creative"
+        },
+        {
+            "name": "Maximum Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "Enable Saving",
+            "description": "",
+            "env_variable": "SAVE_ENABLED",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Auto Save Interval",
+            "description": "Time between auto saves specified in minutes",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam Port",
+            "env_variable": "STEAM_PORT",
+            "default_value": "8766",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "Enable Remote Api",
+            "description": "Enable Remote Api",
+            "env_variable": "REMOTEAPI_ENABLE",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Remote Api Port",
+            "description": "Remote Api Port",
+            "env_variable": "REMOTEAPI_PORT",
+            "default_value": "8081",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "WINEARCH. win32 or win64",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:win32,win64"
+        },
+        {
+            "name": "WINEPREFIX",
+            "description": "WINEPREFIX",
+            "env_variable": "WINEPREFIX",
+            "default_value": "\/home\/container\/.wine",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "WINEDEBUG: Debug Level of wine",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:20"
+        }
+    ]
+}
