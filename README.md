@@ -185,6 +185,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
 * [Unturned](/steamcmd_servers/unturned)
 * [Valheim](/steamcmd_servers/valheim)
+  * [Valheim Vanilla](/steamcmd_servers/valheim/valheim_vanilla)
+  * [Valheim Plus Mod](/steamcmd_servers/valheim/valheim_plus)
 
 [Teeworlds](/teeworlds)
 * [Teeworlds](/teeworlds/teeworlds)
@@ -201,9 +203,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](/unreal_engine/tower_unite)
 * [Tower Unite](/steamcmd_servers/tower_unite)
 
-[Valheim](/valheim)
-* [Valheim Vanilla](/valheim/valheim_vanilla)
-* [Valheim Plus Mod](/valheim/valheim_plus)
+
 
 [Vintage Story](/vintage_story/vintage_story)
 
@@ -215,5 +215,4 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## [Software](/software/)
 ### Code Server
-
 * [Code-Server](/software/code-server)
