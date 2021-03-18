@@ -174,6 +174,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [dedicated](/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](/steamcmd_servers/soldat)
+* [Space Engineers](/steamcmd_servers/space_engineers)
 * [Squad](/steamcmd_servers/squad)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/stationeers)
