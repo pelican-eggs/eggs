@@ -1,4 +1,4 @@
-# Valheim Plus Mod
+﻿# Valheim Plus Mod
 
 ##Valheim
 A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture. Battle, build, and conquer your way to a saga worthy of Odin’s patronage!
@@ -9,7 +9,9 @@ A HarmonyX Mod aimed at improving the gameplay quality of Valheim. The mod inclu
 Support: https://github.com/valheimPlus/ValheimPlus
 Discord: https://discord.gg/AmH6Va97GT
 
-All (Server + Clients) need to have a installed Valheim+ 
+***!!! ATTENTION !!!***
+
+***All (Server + Clients) need to have a installed Valheim Plus Mod !!!!*** 
 
 
 ## Server Ports
