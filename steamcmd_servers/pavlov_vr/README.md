@@ -1,6 +1,5 @@
 # Pavlov VR
-Steam Description :
-Pavlov is a multiplayer shooter in VR
+Pavlov VR is a multiplayer shooter in VR with heavy focus on community features. Realistic reloading features and fast paced combat as part of the core experience. Play the #1 most popular VR shooter on PC today.
 
 ## Recommended server settings
 ### Minimum RAM
