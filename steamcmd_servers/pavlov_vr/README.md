@@ -13,6 +13,9 @@ If you are running multiple servers and have set additional ports (see http://wi
 
 For additional help, please see the following - http://wiki.pavlov-vr.com/index.php?title=Dedicated_server
 
+### Steam Workshop
+When downloading a large map from the steam workshop make sure your node has enough RAM assigned to store the map files in its tmpfs! This requires you to modify your wings configuration to have the tmpfs_size value increased.
+
 ## Server Ports
 | Port  | default |
 |-------|---------|
