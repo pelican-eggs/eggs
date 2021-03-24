@@ -4,21 +4,21 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-23T09:56:00-04:00",
+    "exported_at": "2021-03-23T20:38:42-04:00",
     "name": "Pavlov VR",
     "author": "admin@devil.wtf",
     "description": "Pavlov VR is a multiplayer shooter in VR with heavy focus on community features. Realistic reloading features and fast paced combat as part of the core experience. Play the #1 most popular VR shooter on PC today.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_source"
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
     ],
     "file_denylist": [],
     "startup": ".\/PavlovServer.sh -PORT={{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"Pavlov\/Saved\/Config\/RconSettings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Password=\": \"Password={{env.RCON_PASSWORD}}\",\r\n            \"Port=\": \"Port={{env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"PavlovLog: StartPlay was called\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"PavlovLog: StartPlay was called\"\r\n}",
         "logs": "{}",
-        "stop": "^c"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
@@ -30,10 +30,10 @@
     "variables": [
         {
             "name": "App ID",
-            "description": "Pavlov VR steam app id for auto updates. Leave blank to avoid auto update.",
+            "description": "Pavlov VR steam app id for auto updates.",
             "env_variable": "SRCDS_APPID",
             "default_value": "622970",
-            "user_viewable": true,
+            "user_viewable": false,
             "user_editable": false,
             "rules": "nullable|numeric"
         },
@@ -48,11 +48,11 @@
         },
         {
             "name": "Server Type",
-            "description": "Choose Between Beta or Shack (-beta shack) or (-beta beta_server)",
+            "description": "Choose Between Beta or Shack (-beta shack) or (-beta beta_server). Leave blank for the normal build.",
             "env_variable": "EXTRA_FLAGS",
             "default_value": "",
             "user_viewable": true,
-            "user_editable": false,
+            "user_editable": true,
             "rules": "nullable|numeric"
         },
         {
@@ -70,7 +70,7 @@
             "env_variable": "RCON_PORT",
             "default_value": "",
             "user_viewable": true,
-            "user_editable": false,
+            "user_editable": true,
             "rules": "required|string|max:20"
         }
     ]
