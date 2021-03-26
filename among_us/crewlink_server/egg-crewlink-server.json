@@ -49,7 +49,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:75"
+            "rules": "required|string|max:75"
         },
         {
             "name": "Use HTTPS",
