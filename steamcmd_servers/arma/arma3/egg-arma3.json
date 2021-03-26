@@ -17,7 +17,7 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Host identity created.\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
-        "stop": "^C"
+        "stop": "^CC"
     },
     "scripts": {
         "installation": {
