@@ -127,6 +127,15 @@
             "rules": "string|nullable"
         },
         {
+            "name": "Steam Workshop Mod Blacklist",
+            "description": "Comma separated list of Steam Workshop mod IDs to skip during the download\/update process. This list is mainly comprised of mods that are known not to download properly via SteamCMD (due to their size), but could also be mods you would not like your clients downloading (ie. mods that contain copyrighted content, etc)",
+            "env_variable": "WORKSHOP_BLACKLIST",
+            "default_value": "853743366,583544987,843425103,843593391,843577117,1978754337",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
             "name": "Set Mods to Lowercase",
             "description": "On server start, goes through all the mod folders listed in \"Mods\" & \"Server Mods\", and makes sure every folder and file is lowercase (to prevent errors). This is particularly useful to run ONCE after copying a mod from a Windows machine to the server, or if mods seem to not be loading.",
             "env_variable": "MODS_LOWERCASE",
