@@ -10,14 +10,18 @@ Experience true combat gameplay in a massive military sandbox. Deploying a wide 
 - Configurable to run up to 5 Headless Clients in parallel with the main server (may require additional performance overhead).
 
 ### Installation Requirements
-- A valid, real Steam account, with **Steam Guard turned off**, is required to install the server (default "anonymous" login cannot be used). For security reasons it is [recommended](https://developer.valvesoftware.com/wiki/SteamCMD#With_a_Steam_account) that you create a new Steam account just for your dedicated servers. This account *does not* need to own Arma 3.
+- A valid, real Steam account, with **Steam Guard turned off**, is required to install the server (default "anonymous" login cannot be used). For security reasons it is [recommended by Valve](https://developer.valvesoftware.com/wiki/SteamCMD#With_a_Steam_account) that you create a new Steam account just for your dedicated servers. This account *does not* need to own Arma 3.
+- To make deploying servers easy (**or if you are using WHMCS**), feel free to do the following after importing the egg: Go to the "Variables" tab of the egg editor and edit the default values of "Steam Username" and "Steam Password" to your Steam account dedicated for hosting. This will make all newly installed servers use these credentials. **DO NOT** make these fields visiable to the end user so that they can use their own Steam accounts; the panel will save their Steam credentials in **plain text**, which is a BIG NO NO for security and privacy.
 - For automatic Steam Workshop mod downloading to work, the Steam account *does* need to own Arma 3. This is, of course, optional functionality, and mods can be manually uploaded to the server if desired. Hosts may feel free to delete the "Steam Workshop Mods to Download/Update" variable if they would not like to offer it's functionallity.
-
-### Minimum RAM Warning
-This server requires about 2048 MB of RAM to run properly. If used, every Headless Client uses an additional 2048 MB of RAM as well.
 
 ### CPU Usage Information
 ARMA 3 is mainly CPU intensive. Contrary to popular belief, the server binary *can* run on multiple cores/threads. However, it's ability to manage asynchronous tasks and hyperthread is *very* limited, meaning additional cores/threads reach diminishing returns very quickly. In addition, it's ability to utilize all of the CPU alloted to it for AI processing seems to be limited as well. Therefore, a Headless Client ***and*** a properly written mission file are highly recommended if large amounts of AI units will be used.
+
+### Minimum RAM Requirement
+This server requires about 2048 MB of RAM to run properly. If used, every Headless Client uses an additional 2048 MB of RAM as well.
+
+### Minimum Disk Requirement
+This server requires just under 10 GB of disk space to safely run properly with no mods. However, mods can easily increase disk usage to 50 GB or more, depending on how many are downloaded.
 
 ### Additional Settings
 Additional server flags can be found [here](https://community.bistudio.com/wiki/Arma_3_Startup_Parameters).  
