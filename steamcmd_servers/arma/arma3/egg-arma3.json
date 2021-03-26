@@ -119,7 +119,7 @@
         },
         {
             "name": "Steam Workshop Mods to Download\/Update",
-            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format \"@ModIdNumber\". NOTE: Particularly large mods (ie. RHS, CUP, typically anything over 3 GB) may not download properly due to limitations of SteamCMD.",
+            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format \"@ModIdNumber\". NOTE: Particularly large mods (ie. RHS, CUP, typically anything over 2.5 GB) may not download properly due to limitations of SteamCMD.",
             "env_variable": "UPDATE_WORKSHOP",
             "default_value": "",
             "user_viewable": true,
