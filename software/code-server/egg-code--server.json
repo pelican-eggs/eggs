@@ -29,7 +29,7 @@
     "variables": [
         {
             "name": "Password",
-            "description": "Passwort to login to your Code-Server instance",
+            "description": "Password to login to your Code-Server instance",
             "env_variable": "PASSWORD",
             "default_value": "changeme",
             "user_viewable": true,
