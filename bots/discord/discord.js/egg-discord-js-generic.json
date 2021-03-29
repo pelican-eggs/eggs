@@ -1,18 +1,20 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-08-13T22:04:35-04:00",
+    "exported_at": "2021-03-29T23:34:14+00:00",
     "name": "discord.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+    "features": null,
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14",
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
         "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-10"
     ],
+    "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then  \/usr\/local\/bin\/npm install --production; fi; \/usr\/local\/bin\/node \/home\/container\/{{BOT_JS_FILE}}",
     "config": {
         "files": "{}",
@@ -22,8 +24,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [[ ! \"${USERNAME}\" == \"\" ]]; then\r\n    if [[ ! https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git = *\\.git ]]; then\r\n      INSTALL_REPO=$(echo -e https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git | sed 's:\/*$::')\r\n      INSTALL_REPO=\"https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git\"\r\n    fi\r\n    \r\n    echo -e \"working on installing a discord.js bot from https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git\"\r\n    \r\n    if [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    \techo -e \"assuming user knows what they are doing have a good day.\"\r\n    \texit 0\r\n    else\r\n    \tif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    \t\techo -e \"\/mnt\/server directory is not empty.\"\r\n    \t     if [ -d .git ]; then\r\n    \t\t\techo -e \".git directory exists\" \r\n    \t\t\tif [ -f .git\/config ]; then\r\n    \t\t\t\techo -e \"loading info from git config\"\r\n    \t\t\t\tORIGIN=$(git config --get remote.origin.url)\r\n    \t\t\telse\r\n    \t\t\t\techo -e \"files found with no git config\"\r\n    \t\t\t\techo -e \"closing out without touching things to not break anything\"\r\n    \t\t\t\texit 10\r\n    \t\t\tfi\r\n    \t\tfi\r\n    \t\tif [ \"${ORIGIN}\" == \"https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git\" ]; then\r\n    \t\t\techo \"pulling latest from github\"\r\n    \t\t\tgit pull \r\n    \t\tfi\r\n    \telse\r\n        \techo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    \t\tif [ -z ${INSTALL_BRANCH} ]; then\r\n    \t\t\techo -e \"assuming master branch\"\r\n    \t\t\tINSTALL_BRANCH=master\r\n    \t\tfi\r\n            \r\n    \t\techo -e \"running 'git clone --single-branch --branch ${INSTALL_BRANCH} https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git .'\"\r\n    \t\tgit clone --single-branch --branch ${INSTALL_BRANCH} https:\/\/${USERNAME}:${PASSWORD}@github.com\/${INSTALL_REPO}.git .\r\n    \tfi\r\n    fi \r\nelse\r\n    if [[ ! ${INSTALL_REPO} = *\\.git ]]; then\r\n      INSTALL_REPO=$(echo -e ${INSTALL_REPO} | sed 's:\/*$::')\r\n      INSTALL_REPO=\"${INSTALL_REPO}.git\"\r\n    fi\r\n    \r\n    echo -e \"working on installing a discord.js bot from ${INSTALL_REPO}\"\r\n    \r\n    if [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    \techo -e \"assuming user knows what they are doing have a good day.\"\r\n    \texit 0\r\n    else\r\n    \tif [ \"$(ls -A \/mnt\/server)\" ]; then\r\n    \t\techo -e \"\/mnt\/server directory is not empty.\"\r\n    \t     if [ -d .git ]; then\r\n    \t\t\techo -e \".git directory exists\" \r\n    \t\t\tif [ -f .git\/config ]; then\r\n    \t\t\t\techo -e \"loading info from git config\"\r\n    \t\t\t\tORIGIN=$(git config --get remote.origin.url)\r\n    \t\t\telse\r\n    \t\t\t\techo -e \"files found with no git config\"\r\n    \t\t\t\techo -e \"closing out without touching things to not break anything\"\r\n    \t\t\t\texit 10\r\n    \t\t\tfi\r\n    \t\tfi\r\n    \t\tif [ \"${ORIGIN}\" == \"${INSTALL_REPO}\" ]; then\r\n    \t\t\techo \"pulling latest from github\"\r\n    \t\t\tgit pull \r\n    \t\tfi\r\n    \telse\r\n        \techo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n    \t\tif [ -z ${INSTALL_BRANCH} ]; then\r\n    \t\t\techo -e \"assuming master branch\"\r\n    \t\t\tINSTALL_BRANCH=master\r\n    \t\tfi\r\n            \r\n    \t\techo -e \"running 'git clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} .'\"\r\n    \t\tgit clone --single-branch --branch ${INSTALL_BRANCH} ${INSTALL_REPO} .\r\n    \tfi\r\n    fi \r\nfi\r\n\r\necho \"Installing python requirements into folder\"\r\nif [[ ! -z ${NODE_PACKAGES} ]]; then\r\n    \/usr\/local\/bin\/npm install ${NODE_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/npm install --production\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
-            "container": "node:12-buster-slim",
+            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\n## add git ending if it's not on the address\r\nif [[ ${GIT_ADDRESS} != *.git ]]; then\r\n    GIT_ADDRESS=${GIT_ADDRESS}.git\r\nfi\r\n\r\nif [ -z \"${USERNAME}\" ] && [ -z \"${ACCESS_TOKEN}\" ]; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    GIT_ADDRESS=\"https:\/\/${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d\/ -f3-)\"\r\nfi\r\n\r\n## pull git js bot repo\r\nif [[ ! \"${USERNAME}\" == \"\" ]]; then\r\n    if [ \"$(ls -A \/mnt\/server)\" ]; then\r\n        echo -e \"\/mnt\/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git\/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"\/mnt\/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${BRANCH}'\"\r\n            git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n\r\n    fi\r\nfi\r\n\r\necho \"Installing nodejs packages\"\r\nif [[ ! -z ${NODE_PACKAGES} ]]; then\r\n    \/usr\/local\/bin\/npm install ${NODE_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/npm install --production\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "node:14-buster-slim",
             "entrypoint": "bash"
         }
     },
@@ -33,26 +35,8 @@
             "description": "The GitHub repo to clone and install the discord js bot from.",
             "env_variable": "INSTALL_REPO",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "nullable|string|max:128"
-        },
-        {
-            "name": "Username",
-            "description": "The GitHub username. Leave this field blank if the GitHub repo is NOT a private repo.",
-            "env_variable": "USERNAME",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "nullable|string|max:128"
-        },
-        {
-            "name": "Password",
-            "description": "The GitHub password. Leave this field blank if the GitHub repo is NOT a private repo.",
-            "env_variable": "PASSWORD",
-            "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string|max:128"
         },
         {
@@ -60,8 +44,8 @@
             "description": "The branch of the bot to install.",
             "env_variable": "INSTALL_BRANCH",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string|max:32"
         },
         {
@@ -69,8 +53,8 @@
             "description": "Skip all the install stuff if you are letting a user upload files.\r\n\r\n0 = false (default)\r\n1 = true",
             "env_variable": "USER_UPLOAD",
             "default_value": "0",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|bool"
         },
         {
@@ -78,8 +62,8 @@
             "description": "Pull the latest files on startup when using a GitHub repo.",
             "env_variable": "AUTO_UPDATE",
             "default_value": "0",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|boolean"
         },
         {
@@ -87,8 +71,8 @@
             "description": "The file that starts the bot.",
             "env_variable": "BOT_JS_FILE",
             "default_value": "index.js",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -96,9 +80,27 @@
             "description": "Install additional node packages.\r\n\r\nUse spaces to separate.",
             "env_variable": "NODE_PACKAGES",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string"
+        },
+        {
+            "name": "Username",
+            "description": "The GitHub username. Leave this field blank if the GitHub repo is NOT a private repo.",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128"
+        },
+        {
+            "name": "Password",
+            "description": "The GitHub password. Leave this field blank if the GitHub repo is NOT a private repo.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128"
         }
     ]
 }
