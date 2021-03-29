@@ -110,7 +110,7 @@
         },
         {
             "name": "Check for Server Updates",
-            "description": "Check for server updates on server start. (1 True | 0 False)",
+            "description": "Check for server updates on server start. (1 Update | 0 Skip)",
             "env_variable": "UPDATE_SERVER",
             "default_value": "0",
             "user_viewable": true,
@@ -119,7 +119,7 @@
         },
         {
             "name": "Steam Workshop Mods to Download\/Update",
-            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format \"@ModIdNumber\". NOTE: Particularly large mods (ie. RHS, CUP, typically anything over 2.5 GB) may not download properly due to limitations of SteamCMD.",
+            "description": "[*Only works if the host owns Arma 3] Comma separated list of Steam Workshop mod IDs to download\/update on server start. (ex. 450814997,463939057) Each mod will be downloaded to the root directory with the folder format \"@ModIdNumber\". NOTE: Particularly large mods (ie. RHS, CUP, typically anything over 2.5 GB) may not download properly due to limitations of SteamCMD. (Leave empty to skip)",
             "env_variable": "UPDATE_WORKSHOP",
             "default_value": "",
             "user_viewable": true,
@@ -128,7 +128,7 @@
         },
         {
             "name": "Steam Workshop Mod Blacklist",
-            "description": "Comma separated list of Steam Workshop mod IDs to skip during the download\/update process. This list is mainly comprised of mods that are known not to download properly via SteamCMD (due to their size), but could also be mods you would not like your clients downloading (ie. mods that contain copyrighted content, etc). Set to 0 to disable.",
+            "description": "Comma separated list of Steam Workshop mod IDs to skip during the download\/update process. This list is mainly comprised of mods that are known not to download properly via SteamCMD (due to their size), but could also be mods you would not like your clients downloading (ie. mods that contain copyrighted content, etc). (Set to 0 to disable)",
             "env_variable": "WORKSHOP_BLACKLIST",
             "default_value": "853743366,583544987,843425103,843593391,843577117,1978754337",
             "user_viewable": false,
@@ -137,7 +137,7 @@
         },
         {
             "name": "Set Mods to Lowercase",
-            "description": "On server start, goes through all the mod folders listed in \"Mods\" & \"Server Mods\", and makes sure every folder and file is lowercase (to prevent errors). This is particularly useful to run ONCE after copying a mod from a Windows machine to the server, or if mods seem to not be loading.",
+            "description": "On server start, goes through all the mod folders listed in \"Mods\" & \"Server Mods\", and makes sure every folder and file is lowercase (to prevent errors). This is particularly useful to run ONCE after copying a mod from a Windows machine to the server, or if mods seem to not be loading. (1 Yes | 0 No)",
             "env_variable": "MODS_LOWERCASE",
             "default_value": "0",
             "user_viewable": true,
@@ -170,6 +170,15 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string"
+        },
+        {
+            "name": "[Advanced] HC Hide Console Output",
+            "description": "Hides HC console output (except for critical errors) to prevent nonessential console spam. (1 Hide | 0 Show)",
+            "env_variable": "HC_HIDE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean"
         }
     ]
 }
