@@ -92,10 +92,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [SA-MP](/gta/samp)
 
 [Mindustry](/mindustry)
+  * [Mindustry](/mindustry/mindustry)
 
 [League Sandbox](/leaguesandbox)
+  * [League Sandbox](/leaguesandbox/leaguesandbox)
 
 [Minetest](/minetest) (including MTG)
+  * [Minetest](/minetest/minetest)
 
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
