@@ -137,7 +137,7 @@
         },
         {
             "name": "Set Mods to Lowercase",
-            "description": "On server start, goes through all the mod folders listed in \"Mods\" & \"Server Mods\", and makes sure every folder and file is lowercase (to prevent errors). This is particularly useful to run ONCE after copying a mod from a Windows machine to the server, or if mods seem to not be loading. (1 Yes | 0 No)",
+            "description": "On server start, goes through all the mod folders listed in \"Mods\" & \"Server Mods\", and makes sure every folder and file is lowercase (to prevent errors). This is particularly useful after copying a mod from a Windows machine to the server, or if mods seem to not be loading. Set it to \"1\" for a single server boot, and then back to \"0\". (1 Yes | 0 No)",
             "env_variable": "MODS_LOWERCASE",
             "default_value": "0",
             "user_viewable": true,
@@ -173,7 +173,7 @@
         },
         {
             "name": "[Advanced] HC Hide Console Output",
-            "description": "Hides HC console output (except for critical errors) to prevent nonessential console spam. (1 Hide | 0 Show)",
+            "description": "Hides headless client console output (except for critical errors) to prevent nonessential console spam. (1 Hide | 0 Show)",
             "env_variable": "HC_HIDE",
             "default_value": "1",
             "user_viewable": true,
