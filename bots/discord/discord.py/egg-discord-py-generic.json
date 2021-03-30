@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-29T23:34:50+00:00",
+    "exported_at": "2021-03-30T00:32:29+00:00",
     "name": "discord.py generic",
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
@@ -30,22 +30,22 @@
     },
     "variables": [
         {
-            "name": "Install Repo",
-            "description": "The GitHub repo to clone and install the discord py bot from.",
-            "env_variable": "INSTALL_REPO",
+            "name": "Git Repo Address",
+            "description": "Git repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
+            "env_variable": "GIT_ADDRESS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:128"
+            "rules": "nullable|string"
         },
         {
-            "name": "Install Branch",
-            "description": "The branch of the bot to install",
-            "env_variable": "INSTALL_BRANCH",
+            "name": "Git Branch",
+            "description": "What branch to pull from github.\r\n\r\nDefault is blank to pull the repo default branch",
+            "env_variable": "BRANCH",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:32"
+            "rules": "nullable|string"
         },
         {
             "name": "User Uploaded Files",
@@ -84,22 +84,22 @@
             "rules": "nullable|string"
         },
         {
-            "name": "Username",
-            "description": "The GitHub username. Leave this field blank if the GitHub repo is NOT a private repo.",
+            "name": "Git Username",
+            "description": "Username to auth with git.",
             "env_variable": "USERNAME",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:128"
+            "rules": "nullable|string"
         },
         {
-            "name": "Password",
-            "description": "The GitHub password. Leave this field blank if the GitHub repo is NOT a private repo.",
-            "env_variable": "PASSWORD",
+            "name": "Git Access Token",
+            "description": "Password to use with git.\r\n\r\nIt's best practice to use a Personal Access Token.\r\nhttps:\/\/github.com\/settings\/tokens\r\nhttps:\/\/gitlab.com\/-\/profile\/personal_access_tokens",
+            "env_variable": "ACCESS_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:128"
+            "rules": "nullable|string"
         }
     ]
 }
