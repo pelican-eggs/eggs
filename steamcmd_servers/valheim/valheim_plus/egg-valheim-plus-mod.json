@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-08T17:51:46+01:00",
+    "exported_at": "2021-03-30T15:30:14+02:00",
     "name": "Valheim Plus Mod",
     "author": "info@goover.de",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": "export templdpath=$LD_LIBRARY_PATH; export DOORSTOP_ENABLE=TRUE; export DOORSTOP_INVOKE_DLL_PATH=.\/BepInEx\/core\/BepInEx.Preloader.dll; export DOORSTOP_CORLIB_OVERRIDE_PATH=.\/unstripped_corlib; export LD_LIBRARY_PATH=.\/doorstop_libs:$LD_LIBRARY_PATH; export LD_PRELOAD=libdoorstop_x64.so:$LD_PRELOAD; export LD_LIBRARY_PATH=.\/linux64:$LD_LIBRARY_PATH; export SteamAppId=892970; .\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public ${PUBLIC} > >(sed -uE \"{{FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
     "config": {
-        "files": "{}",
+        "files": "{\r\n    \"BepInEx\/config\/valheim_plus.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"maxPlayers=\": \"maxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -135,6 +135,15 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
         }
     ]
 }
