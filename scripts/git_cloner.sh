@@ -52,5 +52,4 @@ else
         echo -e "cloning ${BRANCH}'"
         git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .
     fi
-
 fi
