@@ -8,4 +8,3 @@
 * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-	* DragonProxy abandoned in favour of GeyserMC.
