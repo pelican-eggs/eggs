@@ -92,10 +92,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [SA-MP](/gta/samp)
 
 [Mindustry](/mindustry)
+  * [Mindustry](/mindustry/mindustry)
 
 [League Sandbox](/leaguesandbox)
+  * [League Sandbox](/leaguesandbox/leaguesandbox)
 
 [Minetest](/minetest) (including MTG)
+  * [Minetest](/minetest/minetest)
 
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
@@ -130,7 +133,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-    * DragonProxy abandoned in favour of GeyserMC.
 	
 [OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
@@ -147,8 +149,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](/steamcmd_servers/arma/arma3)
   * [Arma 3 64 Bit](/steamcmd_servers/arma/arma3_x64)
   * [Arma 3 Headless Client](/steamcmd_servers/arma/arma3_headless_client)
-* [Avorion](/steamcmd_servers/avorion)
 * [Assetto Corsa](/steamcmd_servers/assetto_corsa)
+* [Avorion](/steamcmd_servers/avorion)
 * [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
@@ -202,8 +204,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Unreal Engine](/unreal_engine)
 * [Tower Unite](/unreal_engine/tower_unite)
 * [Tower Unite](/steamcmd_servers/tower_unite)
-
-
 
 [Vintage Story](/vintage_story/vintage_story)
 
