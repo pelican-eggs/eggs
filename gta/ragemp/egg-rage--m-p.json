@@ -7,8 +7,8 @@
     "name": "Rage.MP",
     "author": "noreply.waypointhosting@gmail.com",
     "description": "https:\/\/rage.mp\/\r\n\r\nModified to work with the latest version of RAGE:MP\r\nWill automatically install linux bridge.\r\n**This server requires 2 ports to be added for the server. the main port and the next (port+1) as ports for the server.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
-    "startup": ".\/server",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
+    "startup": ".\/ragemp-server",
     "config": {
         "files": "{\r\n    \"conf.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"bind\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"announce\": \"{{server.build.env.ANNOUNCE}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Started HTTP server\"\r\n}",
@@ -17,7 +17,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt -y install curl tar\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o ragemp-srv-037.tar.gz https:\/\/cdn.rage.mp\/lin\/ragemp-srv-037.tar.gz\r\ncurl -sSL -o bridge-linux-037.tar.gz https:\/\/cdn.rage.mp\/lin\/bridge-linux-037.tar.gz\r\n\r\ntar -xzvf ragemp-srv-037.tar.gz --strip 1 -C \/mnt\/server\r\ntar -xzvf bridge-linux-037.tar.gz --strip 1 -C \/mnt\/server\r\n\r\nrm ragemp-srv-037.tar.gz\r\nrm bridge-linux-037.tar.gz\r\n\r\nchmod +x .\/server\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/gta\/ragemp\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
+            "script": "apt update\r\napt -y install curl tar git wget\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o linux_x64.tar.gz https:\/\/cdn.rage.mp\/updater\/10_mNwuchuQ4ktWbR8d2N5jUzRt\/server-files\/linux_x64.tar.gz\r\n\r\ntar -xzvf linux_x64.tar.gz --strip 1 -C \/mnt\/server\r\n\r\nrm linux_x64.tar.gz\r\n\r\nchmod +x .\/ragemp-server\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/gta\/ragemp\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
             "container": "debian:stable-slim",
             "entrypoint": "bash"
         }
@@ -39,7 +39,7 @@
             "default_value": "50",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|integer|between:1,100"
+            "rules": "required|integer|between:1,10000"
         },
         {
             "name": "Announce",
