@@ -11,9 +11,9 @@
     "startup": ".\/ragemp-server",
     "config": {
         "files": "{\r\n    \"conf.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"bind\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"announce\": \"{{server.build.env.ANNOUNCE}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Started HTTP server\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Started! Waiting for connections..\"\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
-        "stop": "^C"
+        "stop": "^X"
     },
     "scripts": {
         "installation": {
