@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-04-09T22:41:49+00:00",
+    "exported_at": "2021-04-11T13:17:20+00:00",
     "name": "OpenTTD Server",
     "author": "admin@justmyrandomstuff.com",
     "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
@@ -50,7 +50,7 @@
             "name": "OpenTTD Version",
             "description": "The version of OpenTTD i.e. 1.10.1",
             "env_variable": "OPENTTD_VERSION",
-            "default_value": "1.10.1",
+            "default_value": "1.11.0",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|string|max:20"
@@ -59,7 +59,7 @@
             "name": "OpenGFX Version",
             "description": "The OpenGFX Version i.e. 0.6.0",
             "env_variable": "OPENGFX_VERSION",
-            "default_value": "0.6.0",
+            "default_value": "0.6.1",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|string|max:20"
