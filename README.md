@@ -207,6 +207,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](/unreal_engine/tower_unite)
 * [Tower Unite](/steamcmd_servers/tower_unite)
 
+[Veloren](/veloren/veloren)
+
 [Vintage Story](/vintage_story/vintage_story)
 
 [Xonotic](/xonotic/xonotic)
