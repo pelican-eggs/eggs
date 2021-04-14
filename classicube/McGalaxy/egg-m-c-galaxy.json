@@ -1,0 +1,54 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2018-07-30T18:49:34+00:00",
+    "name": "MCGalaxy",
+    "author": "me@eddyn.net",
+    "description": "MCGalaxy is a ClassiCube Server Software based on MCForge, which is in turn based on MCLawl.",
+    "image": "quay.io\/eddynetweb\/pterodactyl:mcgalaxy",
+    "startup": "mono ${SERVER_EXEFILE}",
+    "config": {
+        "files": "{\r\n    \"properties\/server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"verify-names\": \"True\"\r\n        }\r\n    },\r\n    \"Viewmode.cfg\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"cli\": \"True\",\r\n            \"high-quality\": \"False\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Finished setting up server, \",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/pterodactyl.log\"\r\n}",
+        "stop": "\/shutdown 3 SIGTERM shutdown requested by console."
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# MCGalaxy ClassiCube Installation Script\r\n# Copyright 2018 (c) Eduardo Santillan\r\n# If you need help with this egg: me@eddyn.net. \r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n# First we're going to move into the main mount point: \r\ncd \/mnt\/server\r\n\r\n# Echo text for debugging: \r\necho \"Now installing\/reinstalling the server!\"\r\n\r\n# Now do a source check to see which choice was given. \r\nif [ \"${SERVER_SOURCE}\" == \"git\" ]; then\r\n    # Ensures that the two binaries don't exist: \r\n    rm -f \"${SERVER_EXEFILE}\"\r\n    rm -f \"${SERVER_DLLFILE}\"\r\n    # Install and update the required packages for this selection. \r\n    apt update\r\n    apt -y install netselect-apt\r\n    netselect-apt\r\n    rm -f \/etc\/apt\/sources.list\r\n    mv \/mnt\/server\/sources.list \/etc\/apt\/sources.list\r\n    apt update\r\n    apt -y upgrade\r\n    apt -y install git nuget mono-devel mono-xbuild\r\n    nuget update -self\r\n    # Create the location that xbuild will actually build MCGalaxy. \r\n    mkdir -p .gitbuild\r\n    cd .gitbuild\r\n    # Clone the main MCGalaxy repo from GitHub. \r\n    git clone --branch=master https:\/\/github.com\/UnknownShadow200\/MCGalaxy.git .\r\n    # Ensure that people know this is a version of MCGalaxy directly from Git. \r\n    sed -i 's\/public static string SoftwareName = \"MCGalaxy\";\/public static string SoftwareName = \"MCGalaxy Nightly\";\/g' \/mnt\/server\/.gitbuild\/MCGalaxy\/Server\/Server.Fields.cs\r\n    # This is mega important! This actually builds the packages!\r\n    xbuild \/p:Configuration=\"Release\" \/p:DefineConstants=\"TEN_BIT_BLOCKS\" MCGalaxy.sln \/p:TargetFrameworkVersion=\"v4.5\"\r\n    # Move the compiled packages from their location to root. \r\n    mv \/mnt\/server\/.gitbuild\/bin\/Release\/MCGalaxyCLI.exe \/mnt\/server\/${SERVER_EXEFILE}\r\n    mv \/mnt\/server\/.gitbuild\/bin\/Release\/MCGalaxy_.dll \/mnt\/server\/${SERVER_DLLFILE}\r\n    # Remove the location that was used to build MCGalaxy. \r\n    cd \/mnt\/server\r\n    rm -rf .gitbuild\r\nelif [ \"${SERVER_SOURCE}\" == \"stable\" ]; then\r\n    # Ensures that the two binaries don't exist: \r\n    rm -f \"${SERVER_EXEFILE}\"\r\n    rm -f \"${SERVER_DLLFILE}\"\r\n    # Get required packages from Debian repos. \r\n    apt update \r\n    apt -y upgrade\r\n    apt -y install wget\r\n    # Fetch the latest stable version binaries of MCGalaxy from GitHub: \r\n    wget \"https:\/\/raw.githubusercontent.com\/UnknownShadow200\/MCGalaxy\/master\/Uploads\/${SERVER_EXEFILE}?raw=true\" -O \"${SERVER_EXEFILE}\"\r\n    wget \"https:\/\/raw.githubusercontent.com\/UnknownShadow200\/MCGalaxy\/master\/Uploads\/${SERVER_DLLFILE}?raw=true\" -O \"${SERVER_DLLFILE}\"\r\nelif [ \"${SERVER_SOURCE}\" == \"custom\" ]; then\r\n    echo \"Upload your custom MCGalaxy files here. Make sure that if it's named something different, then to change it accordingly via Startup Parameters in Configuration. Continuous Integration services will be added soon for custom stuff.\" >> Custom_Instructions.txt\r\nelse\r\n    # Default to using stable if the user for some reason typed something wrong.\r\n    # Ensures that the two binaries don't exist: \r\n    rm -f \"${SERVER_EXEFILE}\"\r\n    rm -f \"${SERVER_DLLFILE}\"\r\n    # Get required packages from Debian repos. \r\n    apt update \r\n    apt -y upgrade\r\n    apt -y install wget\r\n    # Fetch the latest stable version binaries of MCGalaxy from GitHub: \r\n    wget \"https:\/\/raw.githubusercontent.com\/UnknownShadow200\/MCGalaxy\/master\/Uploads\/${SERVER_EXEFILE}?raw=true\" -O \"${SERVER_EXEFILE}\"\r\n    wget \"https:\/\/raw.githubusercontent.com\/UnknownShadow200\/MCGalaxy\/master\/Uploads\/${SERVER_DLLFILE}?raw=true\" -O \"${SERVER_DLLFILE}\"\r\nfi\r\n\r\n# Adding additional information to bootup:\r\nif [ ! -d \"text\" ]; then\r\n    mkdir -p text\r\n    echo \"%9Welcome to eddynetweb's hosting!\" >> text\/welcome.txt\r\n    echo \"%eControl Panel: https:\/\/games.eddyn.net\/\" >> text\/welcome.txt\r\n    echo \"%eCustomer Service: https:\/\/support.eddyn.net\/\" >> text\/welcome.txt\r\n    echo \"%6The average response time for tickets may range from a few minutes to several hours.\" >> text\/welcome.txt\r\n    echo \"%eWeb Info: https:\/\/eddyn.net\/projects\/games\" >> text\/welcome.txt\r\n    echo \"%dBy using the service, you agree to the terms set forth on the site. You also understand that you are afforded certain data privacy protections under the EU General Data Protection Regulations (GDPR 2016\/679).\" >> text\/welcome.txt\r\n    echo \"%eService Status: https:\/\/status.eddyn.net\/\" >> text\/welcome.txt\r\n    echo \"%9Hello! Welcome to eddynetweb's hosting!\" >> text\/rules.txt\r\n    echo \"%dBy using the service, you agree to the terms set forth on the main project site. You also understand that these terms can change at any time, and can be done so with or without your knowledge. You also understand that you are afforded certain data privacy protections under the EU General Data Protection Regulations (GDPR 2016\/679). This includes provisions regarding the security of personally identifiable account information, how server data is handled, data retention practices, and the right to be forgotten.\" >> text\/rules.txt\r\n    echo \"%eYou can change this via the File Manager (\/text\/rules.txt)\" >> text\/rules.txt\r\n    echo \"%9Hello! Welcome to eddynetweb's hosting!\" >> text\/oprules.txt\r\n    echo \"%dBy using the service, you agree to the terms set forth on the main project site. You also understand that these terms can change at any time, and can be done so with or without your knowledge. You also understand that you are afforded certain data privacy protections under the EU General Data Protection Regulations (GDPR 2016\/679). This includes provisions regarding the security of personally identifiable account information, how server data is handled, data retention practices, and the right to be forgotten.\" >> text\/oprules.txt\r\n    echo \"%eYou can change this via the File Manager (\/text\/oprules.txt)\" >> text\/oprules.txt\r\n    echo \"%eCustomer Service: https:\/\/support.eddyn.net\/\" >> text\/faq.txt\r\n    echo \"%6The average response time for tickets may range from a few minutes to several hours.\" >> text\/faq.txt\r\n    echo \"%eControl Panel: https:\/\/games.eddyn.net\/\" >> text\/faq.txt\r\n    echo \"%6Forgot your password? You can reset it via the panel!\" >> text\/faq.txt\r\n    echo \"%eWeb Info: https:\/\/eddyn.net\/projects\/games\" >> text\/faq.txt\r\n    echo \"%cBy using the service, you agree to the rules set forth on the site. You also agree that you are afforded certain data privacy protections under the EU General Data Protection Regulation (GDPR 2016\/679).\" >> text\/faq.txt\r\n    echo \"%eService Status: https:\/\/status.eddyn.net\/\" >> text\/faq.txt\r\n    echo \"%eYou can change this via the File Manager (\/text\/faq.txt)\" >> text\/faq.txt\r\nfi\r\n\r\n# Adds the logging folder (so permissions don't break):\r\nif [ ! -d \"logs\" ]; then\r\n    mkdir -p logs\r\nfi",
+            "container": "debian:stable-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Executable",
+            "description": "This is the executable which Docker will search for in order to run the server.",
+            "env_variable": "SERVER_EXEFILE",
+            "default_value": "MCGalaxyCLI.exe",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.exe)$\/"
+        },
+        {
+            "name": "Server Dynamic-Link Library",
+            "description": "This is the library which Docker will search for in order to run the server.",
+            "env_variable": "SERVER_DLLFILE",
+            "default_value": "MCGalaxy_.dll",
+            "user_viewable": 1,
+            "user_editable": 0,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.dll)$\/"
+        },
+        {
+            "name": "Server Source",
+            "description": "Specifies which source of MCGalaxy to use when installing and updating the server. Use \"stable\" for the latest stable release. Use \"git\" for a fresh and compiled copy directly from the GitHub source tree. Use \"custom\" if you're using a forked version of MCGalaxy, or you're developing your own. \"stable\" is selected by default.",
+            "env_variable": "SERVER_SOURCE",
+            "default_value": "stable",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|string|between:3,7"
+        }
+    ]
+}
