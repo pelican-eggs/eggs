@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-04-17T12:39:54-07:00",
+    "name": "Risk of Rain 2",
+    "author": "alex.chang-lam@protonmail.com",
+    "description": "Risk of Rain 2 dedicated server.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
+    ],
+    "file_denylist": [],
+    "startup": "xvfb-run wine .\/Risk of Rain 2.exe",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Press Enter to chat.\"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Risk of Rain 2 Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl unzip lib32gcc1 ca-certificates xvfb\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\n\r\nexport WINETRICKS_RUN=mono\r\nexport HOME=\/mnt\/server\r\nexport AUTO_UPDATE=1\r\nexport SRCDS_APPID=1180760\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +force_install_dir \/mnt\/server +app_update 1180760 validate +quit\r\n\r\n## setup 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\n## setup 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v \/mnt\/server\/steam\/linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
