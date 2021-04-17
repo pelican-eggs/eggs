@@ -74,6 +74,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Rising World
 [Rising World](rising_world)
 
+## Risk of Rain 2
+[Risk Of Rain 2](ror2)
+
 ## Rust
 * [Rust](rust)
   * [Autowipe](rust/rust_autowipe)

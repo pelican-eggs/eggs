@@ -169,6 +169,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Project Zomboid](/steamcmd_servers/project_zomboid)
 * [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
+* [Risk Of Rain 2](/steamcmd_servers/ror2)
 * [Rust](/steamcmd_servers/rust)
   * [Autowipe](/steamcmd_servers/rust/rust_autowipe)
   * [Staging](/steamcmd_servers/rust/rust_staging)
