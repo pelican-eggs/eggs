@@ -17,6 +17,6 @@ The RoR2 server requires a single port for access.
 | Game  | 27015   |
 | Query  | 27016   |
 
-##Installation Notes
+## Installation Notes
 
 The first run will error. Kill and relaunch it.

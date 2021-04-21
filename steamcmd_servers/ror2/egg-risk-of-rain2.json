@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-04-17T12:39:54-07:00",
+    "exported_at": "2021-04-20T22:36:07-07:00",
     "name": "Risk of Rain 2",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Risk of Rain 2 dedicated server.",
@@ -13,12 +13,12 @@
         "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
     ],
     "file_denylist": [],
-    "startup": "xvfb-run wine .\/Risk of Rain 2.exe",
+    "startup": "xvfb-run wine .\/\"Risk of Rain 2.exe\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Press Enter to chat.\"\r\n}",
         "logs": "{}",
-        "stop": "stop"
+        "stop": "^\/"
     },
     "scripts": {
         "installation": {
