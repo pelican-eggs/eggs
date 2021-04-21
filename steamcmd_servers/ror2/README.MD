@@ -15,3 +15,4 @@ The RoR2 server requires a single port for access.
 | Port  | default |
 |-------|---------|
 | Game  | 27015   |
+| Query  | 27016   |
