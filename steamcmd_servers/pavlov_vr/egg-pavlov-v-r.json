@@ -44,7 +44,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|numeric"
+            "rules": "nullable|string|max:20"
         },
         {
             "name": "RCON Password",
@@ -62,7 +62,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|numeric"
         }
     ]
 }
