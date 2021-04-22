@@ -72,6 +72,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Impostor Server](/among_us/impostor_server)
 * [CrewLink Server](/among_us/crewlink_server)
 
+* [BeamMP Server](/beammp/beammp)
+
 [Cryofall](/cryofall/cryofall)
 
 [ET Legacy](/enemy_territory/etlegacy)
