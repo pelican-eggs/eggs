@@ -92,6 +92,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA SA
   * [Multi Theft Auto](/gta/mtasa)
   * [SA-MP](/gta/samp)
+* GTAC [/gta/gtac]
 
 [Mindustry](/mindustry)
   * [Mindustry](/mindustry/mindustry)
