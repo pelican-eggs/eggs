@@ -135,7 +135,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-	
+
+[OpenArena](/openarena)  
+  * [openarena](/openarena/openarena) 
+
 [OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
 * [OpenRA Red Alert](/openra/openra_red_alert)
