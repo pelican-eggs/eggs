@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-04-23T22:44:14+00:00",
+    "name": "Veloren",
+    "author": "parker@parkervcp.com",
+    "description": "Veloren is a multiplayer voxel RPG written in Rust. It is inspired by games such as Cube World, Legend of Zelda: Breath of the Wild, Dwarf Fortress and Minecraft.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/veloren-server-cli -b",
+    "config": {
+        "files": "{\r\n    \"userdata\/server\/server_config\/settings.ron\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    gameserver_address\": \"    gameserver_address: \\\"0.0.0.0:{{server.build.default.port}}\\\",\",\r\n\t    \"    server_name\": \"    server_name: \\\"{{server.build.env.SERVER_NAME}}\\\",\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server is ready to accept connections\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown 10"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl git-lfs\r\n\r\nmkdir -p \/mnt\/server\/assets\r\n\r\ncd \/tmp.\r\n\r\ngit clone https:\/\/gitlab.com\/veloren\/veloren.git\r\n\r\n## build veloran server cli\r\nexport VELOREN_USERDATA_STRATEGY=executable\r\ncd veloren\r\necho -e \"building veloran server, this is gonna take a bit\" \r\ncargo build --bin veloren-server-cli --release\r\n\r\ncp -f target\/release\/veloren-server-cli \/mnt\/server\/\r\ncp -Rf assets\/{common,server,world} \/mnt\/server\/assets\/\r\n\r\n## get config from repo because there is no better way to get it.\r\nmkdir -p \/mnt\/server\/userdata\/server\/server_config\/\r\nif [ ! -f \/mnt\/server\/userdata\/server\/server_config\/settings.ron ]; then\r\n    echo -e \"getting default config from git repo\"\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/veloren\/settings.ron > \/mnt\/server\/userdata\/server\/server_config\/settings.ron\r\n    echo -e \"config pulled\"\r\nfi\r\n\r\necho -e \"install complete\"",
+            "container": "rust:slim-buster",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
