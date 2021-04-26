@@ -128,6 +128,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
+	* [FlameCord](/minecraft/proxy/java/flamecord)
     * [Travertine](/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
