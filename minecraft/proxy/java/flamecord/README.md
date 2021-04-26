@@ -1,4 +1,4 @@
-# Travertine server
+# Flamecord server
 FlameCord is a fork of Travertine that fixes Netty Exploits, keeps your console clean from unnecessary messages and orders your BungeeCord modules in a simpler way.
 
 ## Server Ports
