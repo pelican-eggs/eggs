@@ -1,6 +1,7 @@
 # Minecraft Proxies
 
 * [Java](/minecraft/proxy/java/)
+  * [FlameCord](/minecraft/proxy/java/flamecord)
   * [Waterfall](/minecraft/proxy/java/waterfall)
   * [Travertine](/minecraft/proxy/java/travertine)
   * [Velocity](/minecraft/proxy/java/velocity)

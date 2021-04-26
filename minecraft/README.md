@@ -28,6 +28,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
+	* [FlameCord](/minecraft/proxy/java/flamecord)
     * [Travertine](/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
