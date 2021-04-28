@@ -72,7 +72,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Impostor Server](/among_us/impostor_server)
 * [CrewLink Server](/among_us/crewlink_server)
 
+[BeamNG.drive](/beamng)
 * [BeamMP Server](/beammp/beammp)
+* [KissMP](/beamng/kissmp)
 
 [Cryofall](/cryofall/cryofall)
 
