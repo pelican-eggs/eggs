@@ -3,11 +3,16 @@
 ## The value for ${DOWNLOAD_LINK##*/} is derived from DOWNLOAD_LINK
 ## if the download link is https://launcher.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar then the ##*/ is server.jar
 
+apt update
+apt install -y curl file unzip
+
+curl -sSL ${DOWNLOAD_LINK}
+
 FILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*/} | cut -d',' -f2 | cut -d' ' -f2)
 if [ "$FILETYPE" == "gzip" ]; then
     tar xzvf ${DOWNLOAD_LINK##*/}
 elif [ "$FILETYPE" == "Zip" ]; then
-    unzip ${DOWNLOAD_LINK##*/}
+    unzip -o ${DOWNLOAD_LINK##*/}
 elif [ "$FILETYPE" == "XZ" ]; then
     tar xvf ${DOWNLOAD_LINK##*/}
 else

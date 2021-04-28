@@ -1,4 +1,4 @@
-# Parkers Pterodactyl eggs repo
+﻿# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
@@ -73,6 +73,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [CrewLink Server](/among_us/crewlink_server)
 
 [BeamNG.drive](/beamng)
+* [BeamMP Server](/beammp/beammp)
 * [KissMP](/beamng/kissmp)
 
 [Cryofall](/cryofall/cryofall)
@@ -93,12 +94,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA SA
   * [Multi Theft Auto](/gta/mtasa)
   * [SA-MP](/gta/samp)
+* GTAC [/gta/gtac]
 
 [Mindustry](/mindustry)
+  * [Mindustry](/mindustry/mindustry)
 
 [League Sandbox](/leaguesandbox)
+  * [League Sandbox](/leaguesandbox/leaguesandbox)
 
 [Minetest](/minetest) (including MTG)
+  * [Minetest](/minetest/minetest)
 
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
@@ -126,6 +131,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
+	* [FlameCord](/minecraft/proxy/java/flamecord)
     * [Travertine](/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
@@ -133,8 +139,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-    * DragonProxy abandoned in favour of GeyserMC.
-	
+
+[OpenArena](/openarena)  
+  * [openarena](/openarena/openarena) 
+
 [OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
 * [OpenRA Red Alert](/openra/openra_red_alert)
@@ -150,8 +158,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](/steamcmd_servers/arma/arma3)
   * [Arma 3 64 Bit](/steamcmd_servers/arma/arma3_x64)
   * [Arma 3 Headless Client](/steamcmd_servers/arma/arma3_headless_client)
-* [Avorion](/steamcmd_servers/avorion)
 * [Assetto Corsa](/steamcmd_servers/assetto_corsa)
+* [Avorion](/steamcmd_servers/avorion)
 * [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
@@ -162,9 +170,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](/steamcmd_servers/killing_floor_2)
+* [Modiverse](/steamcmd_servers/modiverse)
 * [Mordhau](/steamcmd_servers/mordhau)
 * [Onset](/steamcmd_servers/onset)
 * [PixARK](/steamcmd_servers/pixark)
+* [Post Scriptum](/steamcmd_servers/post_scriptum)
 * [Project Zomboid](/steamcmd_servers/project_zomboid)
 * [Quake Live](/steamcmd_servers/quake_live)
 * [Rising World](/steamcmd_servers/rising_world)
@@ -175,15 +185,19 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [dedicated](/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](/steamcmd_servers/soldat)
+* [Space Engineers](/steamcmd_servers/space_engineers)
 * [Squad](/steamcmd_servers/squad)
 * [Starbound](/steamcmd_servers/starbound)
 * [Stationeers](/steamcmd_servers/stationeers)
 * [Stormworks: Build and Rescue](/steamcmd_servers/stormworks)
+* [Subnautica: Nitrox Mod](/steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](/steamcmd_servers/svencoop)
 * [The Forest](/steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](/steamcmd_servers/team_fortress_2_classic)
 * [Unturned](/steamcmd_servers/unturned)
 * [Valheim](/steamcmd_servers/valheim)
+  * [Valheim Vanilla](/steamcmd_servers/valheim/valheim_vanilla)
+  * [Valheim Plus Mod](/steamcmd_servers/valheim/valheim_plus)
 
 [Teeworlds](/teeworlds)
 * [Teeworlds](/teeworlds/teeworlds)
@@ -200,6 +214,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](/unreal_engine/tower_unite)
 * [Tower Unite](/steamcmd_servers/tower_unite)
 
+[Veloren](/veloren/veloren)
+
 [Vintage Story](/vintage_story/vintage_story)
 
 [Xonotic](/xonotic/xonotic)
@@ -207,3 +223,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Storage](/storage/)
 ### S3 Storage
 * [minio](/storage/minio)
+
+## [Software](/software/)
+### Code Server
+* [Code-Server](/software/code-server)

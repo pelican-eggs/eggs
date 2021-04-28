@@ -35,7 +35,7 @@ Counter-Strike: Global Offensive (CS: GO) expands upon the team-based action gam
 
 This is a generic one size fit's all egg that supports srcds game servers.
 
-This is not for games like Counter Strike 1.6 which is an HLDS title. See [HLDS server](/source_servers/hlds_server)
+This is not for games like Counter Strike 1.6 which is an HLDS title. See [HLDS server](/steamcmd_servers/hlds_server)
 
 ### Port Requirements
 |   Port   | default |

@@ -10,7 +10,7 @@
 # STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.
 # WINDOWS_INSTALL - if it's a windows server you want to install set to 1
 # SRCDS_APPID - steam app id ffound here - https://developer.valvesoftware.com/wiki/Dedicated_Servers_List
-# EXTRA_FLAGS - when a server has extra glas for things like beta installs or updates.
+# INSTALL_FLAGS - when a server has extra glas for things like beta installs or updates.
 #
 ##
 
@@ -18,7 +18,7 @@ apt -y update
 apt -y --no-install-recommends install curl lib32gcc1 ca-certificates
 
 ## just in case someone removed the defaults.
-if [ "${STEAM_USER}" == "" ]; then
+if [[ "${STEAM_USER}" == "" ]] || [[ "${STEAM_PASS}" == "" ]]; then
     echo -e "steam user is not set.\n"
     echo -e "Using anonymous user.\n"
     STEAM_USER=anonymous
@@ -41,7 +41,7 @@ chown -R root:root /mnt
 export HOME=/mnt/server
 
 ## install game using steamcmd
-./steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /mnt/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6
+./steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /mnt/server +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6
 
 ## set up 32 bit libraries
 mkdir -p /mnt/server/.steam/sdk32
