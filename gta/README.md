@@ -18,3 +18,8 @@ SA-MP is a free Massively Multiplayer Online game mod for the PC version of Rock
 
 [MTA SA](https://mtasa.com/)  
 What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.
+
+## GTAC
+
+[GTAC](https://gtaconnected.com/)
+The Grand Theft Auto Connected is a custom scriptable multiplayer modification for multiple Grand Theft Auto games.
