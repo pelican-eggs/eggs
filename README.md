@@ -78,6 +78,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Cryofall](/cryofall/cryofall)
 
+[Call of Duty 4X](/cod/cod4x)
+
 [ET Legacy](/enemy_territory/etlegacy)
 
 [FTL: Tachyon](/ftl/tachyon)
