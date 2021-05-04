@@ -10,7 +10,7 @@ Their github has all the info you need
 [TheBastionBot/Bastion](https://github.com/TheBastionBot/Bastion)  
 Give awesome perks to your Discord server!
 
-### Corpbot
+#### Corpbot
 [corpnewt/CorpBot.py](https://github.com/corpnewt/CorpBot.py)
 A very clumsy python bot for discord
 
@@ -43,7 +43,7 @@ The bot that runs as the pterodactyl `@Support Bot`
 No longer actively developed.  
 Was used to test python services.  
 
-### RedBot
+#### RedBot
 [Cog-Creators/Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot)
 A multifunction Discord bot
 
@@ -51,6 +51,6 @@ A multifunction Discord bot
 [SinusBot](https://www.sinusbot.com/)  
 Please Check their site for an in depth on the bot.
 
-#### Botify
-[Botify](https://github.com/robinfriedli/botify)  
+#### Botify 2.0
+[Botify] (https://github.com/robinfriedli/botify)
 Discord bot that plays Spotify tracks and YouTube videos or any URL including Soundcloud links and Twitch streams.
