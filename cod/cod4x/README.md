@@ -117,6 +117,13 @@ The directory structure will look like this: <details>
 ```
 </details>
 
+First of all add the directory of the mount to the config.yml (in `/etc/pterodactyl`) of your node.
+```
+allowed_mounts:
+  - /home/pterodactyl/serverfiles
+```
+After you've done this, restart wings with `systemctl restart wings`.
+
 Now you simply create a mount in the Pterodactyl Panel with the following settings:
 1. Set the source to `/home/pterodactyl/serverfiles/cod4x`
 2. Set the target to any directory you want (but not something in `/home/container`, I suggest something like `/mnt/gamefiles/cod4`)
