@@ -1,0 +1,149 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-05-04T14:20:57-03:00",
+    "name": "Botify 2.0",
+    "author": "joaquinvarela@rciaghost.com",
+    "description": "Discord bot that plays Spotify tracks and YouTube videos or any URL including Soundcloud links and Twitch streams.",
+    "features": null,
+    "images": [
+        "quay.io\/pterodactyl\/core:java-11"
+    ],
+    "file_denylist": [],
+    "startup": "java -jar build\/libs\/botify-1.0-SNAPSHOT.jar",
+    "config": {
+        "files": "{\r\n    \"\/src\/main\/resources\/application.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"botify.server.port\": \"{{server.build.default.port}}\",\r\n            \"botify.preferences.max_heap_size\": \"{{server.build.memory}}m\",\r\n            \"server.port\": \"{{server.build.default.port}}\",\r\n            \"botify.server.base_uri\": \"http:\/\/{{server.build.env.SERVER_PIP}}:{{server.build.default.port}}\",\r\n            \"spring.datasource.url\": \"jdbc:postgresql:\/\/{{server.build.env.DATABASE_IP}}:{{server.build.env.DATABASE_PORT}}\/{{server.build.env.DATABASE_DB}}\",\r\n            \"botify.server.spotify_login_callback\": \"http:\/\/{{server.build.env.SERVER_PIP}}:{{server.build.default.port}}\"\r\n        }\r\n    },\r\n    \"\/src\/main\/resources\/settings-private.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"botify.tokens.discord_token\": \"{{server.build.env.DISCORD_TOKEN}}\",\r\n            \"botify.tokens.spotify_client_id\": \"{{server.build.env.SPOTIFY_CLIENT_ID}}\",\r\n            \"botify.tokens.spotify_client_secret\": \"{{server.build.env.SPOTIFY_CLIENT_SECRET}}\",\r\n            \"botify.tokens.youtube_credentials\": \"{{server.build.env.YOUTUBE_CREDENTIALS}}\",\r\n            \"botify.security.admin_users\": \"{{server.build.env.DISCORD_ADMIN_ID}}\",\r\n            \"spring.datasource.username\": \"{{server.build.env.DATABASE_USERNAME}}\",\r\n            \"spring.datasource.password\": \"{{server.build.env.DATASOURCE_PASSWORD}}\",\r\n            \"botify.tokens.discord_bot_id\": \"{{server.build.env.DISCORD_CLIENT_ID}}\",\r\n            \"botify.tokens.topgg_token\": \"{{server.build.env.DISCORD_TOPGG_TOKEN}}\",\r\n            \"botify.preferences.ipv6_blocks\": \"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"All starters done\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "echo \"Comenzando instalacion\"\r\n\r\necho \"Instalando dependencias\"\r\napt -y update\r\napt -y --no-install-recommends install ca-certificates openssl git cargo curl wget gcc-multilib default-jdk unzip pkg-config libssl-dev\r\n\r\necho \"Descargando ultima version de Botify\"\r\ncd \/mnt\/server\r\ngit clone -b \"development\/v2.0\" https:\/\/github.com\/robinfriedli\/botify.git .\/\r\n\r\necho \"Creando directorio para archivos temporales\"\r\nmkdir -p \/mnt\/server\/install\/tempfiles\/\r\n\r\necho \"Instalando RUST\"\r\ncd \/mnt\/server\r\nwget https:\/\/static.rust-lang.org\/rustup\/dist\/x86_64-unknown-linux-gnu\/rustup-init\r\nchmod +x rustup-init\r\n.\/rustup-init -y --no-modify-path --default-toolchain nightly\r\nrm rustup-init\r\nsource $HOME\/.cargo\/env\r\n\r\necho \"Cambiando directorio de archivos temporales\"\r\nexport TMPDIR=\/mnt\/server\/install\/tempfiles\/\r\n\r\necho \"Verificando versiones instaladas\"\r\nrustup --version\r\ncargo --version\r\nrustc --version\r\n\r\necho \"Comenzando instalacion de Botify\"\r\necho \"Cambiando tarjet de RUST\"\r\nrustup target add wasm32-unknown-unknown\r\necho \"Preparando permisos para el directorio base\"\r\nchmod -R +x \/mnt\/server\/\r\n\r\necho \"Instalando Cargo\"\r\ncargo install --force cargo-make\r\n\r\necho \"Compilando Web app\"\r\ncd \/mnt\/server\/src\/main\/webapp\r\ncargo make build\r\n\r\necho \"Compilando main app\"\r\ncd \/mnt\/server\r\n.\/gradlew build\r\n\r\necho \"Removiendo archivos temporales\"\r\nrm -r \/mnt\/server\/install\/tempfiles\/\r\n\r\necho \"Instalacion finalizada, recorda cambiar la informacion correspondiente en los archivos de configuracion y luego reinstalar..\"",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discord Token",
+            "description": "Go to https:\/\/discordapp.com\/developers\/applications and create an application. Click \"Bot\" on the side menu to create a bot and copy the token for later",
+            "env_variable": "DISCORD_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100"
+        },
+        {
+            "name": "Spotify Client ID",
+            "description": "Go to https:\/\/developer.spotify.com\/dashboard\/applications to create a Spotify application and copy the client id\r\n\r\nClick on \"Edit Settings\" and whitelist your Redirect URI for the Spotify login",
+            "env_variable": "SPOTIFY_CLIENT_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Spotify Client Secret",
+            "description": "Go to https:\/\/developer.spotify.com\/dashboard\/applications to create a Spotify application and copy the client secret",
+            "env_variable": "SPOTIFY_CLIENT_SECRET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "YouTube Credentials",
+            "description": "Go to https:\/\/console.developers.google.com\/ and create a project for the YouTube Data API and create and copy the credentials",
+            "env_variable": "YOUTUBE_CREDENTIALS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Discord ID for admin",
+            "description": "Your Discord ID so you can became admin",
+            "env_variable": "DISCORD_ADMIN_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Database Username",
+            "description": "The username to use in your database",
+            "env_variable": "DATABASE_USERNAME",
+            "default_value": "postgres",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Database Password",
+            "description": "The password for your database",
+            "env_variable": "DATASOURCE_PASSWORD",
+            "default_value": "postgres",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Discord Client ID",
+            "description": "The bot's client ID",
+            "env_variable": "DISCORD_CLIENT_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Discord TOP.GG Token",
+            "description": "Get a TOP.GG token if you want to and put it here",
+            "env_variable": "DISCORD_TOPGG_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20"
+        },
+        {
+            "name": "Database IP",
+            "description": "The IP of the dabatase",
+            "env_variable": "DATABASE_IP",
+            "default_value": "localhost",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Database Port",
+            "description": "The port of your database",
+            "env_variable": "DATABASE_PORT",
+            "default_value": "5454",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Bot Public IP or Domain Name",
+            "description": "The public IP of the bot (the IP of the server).",
+            "env_variable": "SERVER_PIP",
+            "default_value": "0.0.0.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Databse Name",
+            "description": "The name of the database",
+            "env_variable": "DATABASE_DB",
+            "default_value": "botify",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
