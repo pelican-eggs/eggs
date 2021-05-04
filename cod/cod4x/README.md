@@ -12,9 +12,8 @@ More information here: https://github.com/callofduty4x/CoD4x_Server#setting-up-a
 In order to give the server access to the needed game files you will need to create a new mount.
 
 Let's say you copied the game files to your node into the directory `/home/pterodactyl/serverfiles/cod4x` (you can choose any directory you want of course).  
-The directory structure will look like this:
-<details>
-<summary>Click to expand directory listing</summary>
+The directory structure will look like this: <details>
+ 
 ```
 /home/pterodactyl/serverfiles/cod4x
 ├── main
@@ -138,7 +137,7 @@ When you start the server for the first time it will prompt you to mount the gam
 
 **Congratulations!** Your server should be able to find the game files and start.
 
-## Required Server Ports
+## Default Server Ports
 The default is 28960, but the server will automatically use the port defined in the allocation.
 
 | Port    | default |
