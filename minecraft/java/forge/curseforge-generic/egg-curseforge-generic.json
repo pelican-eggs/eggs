@@ -31,7 +31,7 @@
     "variables": [
         {
             "name": "Modpack Project ID",
-            "description": "The modpack project ID from the curseforge site on the pack page.\r\n\r\n(Ex. https:\/\/www.curseforge.com\/minecraft\/modpacks\/bofa-mods ID is 389615)",
+            "description": "The modpack project ID from the curseforge site on the pack page.\r\n\r\n(Ex. https:\/\/www.curseforge.com\/minecraft\/modpacks\/bofa-mods ID is 375152)",
             "env_variable": "MODPACK_ID",
             "default_value": "",
             "user_viewable": true,
