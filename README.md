@@ -72,6 +72,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Impostor Server](/among_us/impostor_server)
 * [CrewLink Server](/among_us/crewlink_server)
 
+[BeamNG.drive](/beamng)
+* [BeamMP Server](/beammp/beammp)
+* [KissMP](/beamng/kissmp)
+
 [Cryofall](/cryofall/cryofall)
 
 [ET Legacy](/enemy_territory/etlegacy)
@@ -90,12 +94,16 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA SA
   * [Multi Theft Auto](/gta/mtasa)
   * [SA-MP](/gta/samp)
+* GTAC [/gta/gtac]
 
 [Mindustry](/mindustry)
+  * [Mindustry](/mindustry/mindustry)
 
 [League Sandbox](/leaguesandbox)
+  * [League Sandbox](/leaguesandbox/leaguesandbox)
 
 [Minetest](/minetest) (including MTG)
+  * [Minetest](/minetest/minetest)
 
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
@@ -123,6 +131,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](/minecraft/proxy) Minecraft Server Proxies
   * [Java](/minecraft/proxy/java)
+	* [FlameCord](/minecraft/proxy/java/flamecord)
     * [Travertine](/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
@@ -130,8 +139,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
-    * DragonProxy abandoned in favour of GeyserMC.
-	
+
+[OpenArena](/openarena)  
+  * [openarena](/openarena/openarena) 
+
 [OpenRA](/openra)
 * [OpenRA Dune2000](/openra/openra_dune2000)
 * [OpenRA Red Alert](/openra/openra_red_alert)
@@ -147,8 +158,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](/steamcmd_servers/arma/arma3)
   * [Arma 3 64 Bit](/steamcmd_servers/arma/arma3_x64)
   * [Arma 3 Headless Client](/steamcmd_servers/arma/arma3_headless_client)
-* [Avorion](/steamcmd_servers/avorion)
 * [Assetto Corsa](/steamcmd_servers/assetto_corsa)
+* [Avorion](/steamcmd_servers/avorion)
 * [Barotrauma](/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](/steamcmd_servers/citadel)
 * [Conan Exiles](/steamcmd_servers/conan_exiles)
@@ -203,7 +214,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](/unreal_engine/tower_unite)
 * [Tower Unite](/steamcmd_servers/tower_unite)
 
-
+[Veloren](/veloren/veloren)
 
 [Vintage Story](/vintage_story/vintage_story)
 

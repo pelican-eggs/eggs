@@ -1,14 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-12-01T21:01:12-05:00",
+    "exported_at": "2021-04-07T08:57:04+03:00",
     "name": "Vanilla Bedrock",
     "author": "parker@parkervcp.com",
     "description": "Bedrock Edition (also known as the Bedrock Version, Bedrock Codebase, Bedrock Engine or just Bedrock) refers to the multi-platform family of editions of Minecraft developed by Mojang AB, Microsoft Studios, 4J Studios, and SkyBox Labs. Prior to this term, as the engine originated with Pocket Edition, this entire product family was referred to as \"Pocket Edition\", \"MCPE\", or \"Pocket\/Windows 10 Edition\".",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
     "startup": ".\/bedrock_server",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"allow-cheats\": \"{{server.build.env.CHEATS}}\"\r\n        }\r\n    }\r\n}",
@@ -18,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y zip unzip wget curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${BEDROCK_VERSION}\" ] || [ \"${BEDROCK_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest Bedrock server\"\r\n    DOWNLOAD_URL=$(curl -sSL https:\/\/www.minecraft.net\/en-us\/download\/server\/bedrock\/ | grep azureedge | grep linux | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\")\r\nelse \r\n    echo -e \"\\n Downloading ${BEDROCK_VERSION} Bedrock server\"\r\n    DOWNLOAD_URL=https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\r\nfi\r\n\r\necho -e \"backing up config files\"\r\nrm *.bak\r\ncp server.properties server.properties.bak\r\ncp permissions.json permissions.json.bak\r\ncp whitelist.json whitlist.json.bak\r\n\r\necho -e \"Downloading files from https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\"\r\n\r\nwget ${DOWNLOAD_URL}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip -o $(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm $(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\n\r\necho -e \"restoring config files\"\r\ncp -rf server.properties.bak server.properties\r\ncp -rf permissions.json.bak permissions.json\r\ncp -rf whitelist.json.bak whitlist.json\r\n\r\necho -e \"Done\"",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y zip unzip wget curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${BEDROCK_VERSION}\" ] || [ \"${BEDROCK_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest Bedrock server\"\r\n    DOWNLOAD_URL=$(curl -sSL https:\/\/www.minecraft.net\/en-us\/download\/server\/bedrock\/ | grep azureedge | grep linux | grep -Eo \"(http|https):\/\/[a-zA-Z0-9.\/?=_-]*\")\r\nelse \r\n    echo -e \"\\n Downloading ${BEDROCK_VERSION} Bedrock server\"\r\n    DOWNLOAD_URL=https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\r\nfi\r\n\r\necho -e \"backing up config files\"\r\nrm *.bak\r\ncp server.properties server.properties.bak\r\ncp permissions.json permissions.json.bak\r\ncp whitelist.json whitelist.json.bak\r\n\r\necho -e \"Downloading files from https:\/\/minecraft.azureedge.net\/bin-linux\/bedrock-server-$BEDROCK_VERSION.zip\"\r\n\r\nwget ${DOWNLOAD_URL}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip -o $(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm $(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5)\r\n\r\necho -e \"restoring config files\"\r\ncp -rf server.properties.bak server.properties\r\ncp -rf permissions.json.bak permissions.json\r\ncp -rf whitelist.json.bak whitelist.json\r\nchmod +x bedrock_server\r\n\r\necho -e \"Done\"",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }

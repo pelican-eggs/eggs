@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-04-04T11:34:06+01:00",
+    "name": "Discord Java",
+    "author": "sneaky@sneakyhub.com",
+    "description": "Creates a container that runs java.",
+    "features": null,
+    "images": [
+        "quay.io\/pterodactyl\/core:java-11"
+    ],
+    "file_denylist": [],
+    "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Java Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nPROJECT=java\r\n\r\napt update\r\napt install -y curl jq\r\n\r\ncd \/mnt\/server",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "JAR FILE",
+            "description": "",
+            "env_variable": "JARFILE",
+            "default_value": "sneakyhub.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

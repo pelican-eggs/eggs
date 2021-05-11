@@ -14,11 +14,11 @@ This is a collection of servers that use SteamCMD to install.
   * [Arma 3 64 Bit](arma/arma3_x64)
   * [Arma 3 Headless Client](arma/arma3_headless_client)
 
-## Avorion
-[Avorion](avorion)
-
 ## Assetto Corsa
 [Assetto Corsa](assetto_corsa)
+
+## Avorion
+[Avorion](avorion)
 
 ## Barotrauma
 [Barotrauma](barotrauma)
@@ -121,6 +121,6 @@ This is a collection of servers that use SteamCMD to install.
 [Unturned](unturned)
 
 ## Valheim
-[Valheim](/valheim)
-  * [Valheim Vanilla](valheim_vanilla)
-  * [Valheim Plus Mod](valheim_plus)
+[Valheim](valheim)
+  * [Valheim Vanilla](valheim/valheim_vanilla)
+  * [Valheim Plus Mod](valheim/valheim_plus)
