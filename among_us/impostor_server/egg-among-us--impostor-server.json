@@ -1,14 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-11-20T15:01:04+01:00",
+    "exported_at": "2021-05-12T16:58:56-04:00",
     "name": "Among Us - Impostor Server",
     "author": "info@goover.de",
     "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThe latest version supported is 2020.9.22, both desktop and mobile.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5"
+    ],
+    "file_denylist": [],
     "startup": ".\/Impostor.Server",
     "config": {
         "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Server.PublicPort\": \"{{server.build.default.port}}\",\r\n            \"Server.ListenPort\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
@@ -18,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install wget curl jq unzip tar redis-server file ca-certificates apt-utils\r\n\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/$LATEST_VERSION\/$MATCH\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/$MATCH\"\r\nfi\r\n\r\necho $DOWNLOAD_LINK\r\nwget $DOWNLOAD_LINK\r\n\r\nunzip -o Impostor-Server-linux-x64.zip\r\nrm -fR Impostor-Server-linux-x64.zip \r\nchmod +x Impostor.Server",
+            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y upgrade\r\napt -y --no-install-recommends install wget curl jq unzip tar redis-server file ca-certificates apt-utils\r\n\r\n#export HOME=\/mnt\/server\r\n#cd $HOME\r\ncd \/mnt\/server\r\necho $PWD\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION_WITHV=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\nLATEST_VERSION=$(echo $LATEST_VERSION_WITHV | sed 's\/v\/\/' )\r\necho $LATEST_VERSION_WITHV\r\necho $LATEST_VERSION\r\necho $PWD\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v${LATEST_VERSION}\/Impostor-Server_${LATEST_VERSION}_linux-x64.tar.gz\"\r\n    echo \"Using Latest Version Number\"\r\n    echo $PWD\r\n    \r\n    echo $DOWNLOAD_LINK\r\n    wget $DOWNLOAD_LINK\r\n    chmod 777 Impostor-Server_${LATEST_VERSION}_linux-x64.tar.gz\r\n    \r\n    tar -xf Impostor-Server_${LATEST_VERSION}_linux-x64.tar.gz\r\n    rm -fR Impostor-Server_${LATEST_VERSION}_linux-x64.tar.gz\r\n    chmod +x Impostor.Server\r\n    echo $PWD\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v${VERSION}\/Impostor-Server_${VERSION}_linux-x64.tar.gz\"\r\n    echo \"Using Specified Version Number.\"\r\n    echo $PWD\r\n    \r\n    echo $DOWNLOAD_LINK\r\n    wget $DOWNLOAD_LINK\r\n    chmod 777 Impostor-Server_${LATEST_VERSION}_linux-x64.tar.gz\r\n    \r\n    tar -xf Impostor-Server_${VERSION}_linux-x64.tar.gz\r\n    rm -fR Impostor-Server_${VERSION}_linux-x64.tar.gz\r\n    chmod +x Impostor.Server\r\n    echo $PWD\r\nfi",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
@@ -29,15 +33,6 @@
             "description": "GITHUB_PACKAGE",
             "env_variable": "GITHUB_PACKAGE",
             "default_value": "Impostor\/Impostor",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required"
-        },
-        {
-            "name": "MATCH",
-            "description": "Filename to Match",
-            "env_variable": "MATCH",
-            "default_value": "Impostor-Server-linux-x64.zip",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required"
