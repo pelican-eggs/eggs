@@ -8,11 +8,12 @@
     "author": "parker@pterodactyl.io",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
     "features": ["eula"],
-    "image": "quay.io\/pterodactyl\/core:java-11",
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-16",
     "images": [
         "quay.io\/pterodactyl\/core:java-11",
         "quay.io\/pterodactyl\/core:java",
-        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-15"
+        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-15",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-16"
     ],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
