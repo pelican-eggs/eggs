@@ -8,7 +8,8 @@ Currently the game doesn’t have any other goal then being simple team deathmat
 
 **NOTE**
 Development on this game has stopped a long time ago, this WINE implementation is not fully stable.
-If the server does not complete its starting sequence, just restart it untill it works.
+If the server does not complete its starting sequence, just restart it untill it works. Happens personally about 25% of the time.
+Custom maps can be downloaded [on the official website](http://suicide-survival.com/sv_download/maps/).
 
 
 ## Server Ports
