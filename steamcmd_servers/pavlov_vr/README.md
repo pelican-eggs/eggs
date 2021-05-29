@@ -21,3 +21,4 @@ When downloading a large map from the steam workshop make sure your node has eno
 |-------|---------|
 | Game  |  7777   |
 | Game  |  8177   |
+| RCON  |  8188   |
