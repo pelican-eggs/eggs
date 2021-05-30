@@ -36,10 +36,10 @@
             "name": "Max Players",
             "description": "Set the fivem max play count",
             "env_variable": "MAX_PLAYERS",
-            "default_value": "32",
+            "default_value": "48",
             "user_viewable": 1,
             "user_editable": 0,
-            "rules": "required|integer|between:1,32"
+            "rules": "required|integer|between:1,48"
         },
         {
             "name": "Server Hostname",
