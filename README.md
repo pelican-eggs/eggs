@@ -180,6 +180,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](/steamcmd_servers/mordhau)
 * [No More Room in Hell](/steamcmd_servers/nmrih)
 * [Onset](/steamcmd_servers/onset)
+* [Pavlov VR](/steamcmd_servers/pavlov_vr)
 * [PixARK](/steamcmd_servers/pixark)
 * [Post Scriptum](/steamcmd_servers/post_scriptum)
 * [Project Zomboid](/steamcmd_servers/project_zomboid)

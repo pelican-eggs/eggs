@@ -59,6 +59,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Onset
 [Onset](onset)
 
+## Pavlov VR
+[Pavlov VR](pavlov_vr)
+
 ## PixARK
 [PixARK](pixark)
 
