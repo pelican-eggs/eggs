@@ -93,10 +93,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [FiveM](/gta/fivem)
   * [RageMP](/gta/ragemp)
   * [alt:V](/gta/altv)
+  
 * GTA SA
   * [Multi Theft Auto](/gta/mtasa)
   * [SA-MP](/gta/samp)
-* GTAC [/gta/gtac]
+  
+* GTA
+  * [GTAC](/gta/gtac)
 
 [Mindustry](/mindustry)
   * [Mindustry](/mindustry/mindustry)
