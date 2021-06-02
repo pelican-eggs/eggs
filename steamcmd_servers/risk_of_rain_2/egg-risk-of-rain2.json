@@ -71,7 +71,7 @@
             "default_value": "27016",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|numeric"
         },
         {
             "name": "Steam Port",
