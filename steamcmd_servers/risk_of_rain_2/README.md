@@ -8,7 +8,7 @@ Escape a chaotic alien planet by fighting through hordes of frenzied monsters â€
 
 ## Server Ports
 
-The RoR2 server requires a single port for access.
+The Risk of Rain 2 server requires a single port for access. Steam Query ports are optional for server listing, which might not always function properly, and as such direct IP connection might be required.
 
 | Port  | default |
 |-------|---------|
