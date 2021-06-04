@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-05-31T16:38:48+03:00",
+    "exported_at": "2021-06-02T12:27:48+03:00",
     "name": "Risk of Rain 2",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Risk of Rain 2 dedicated server.",
@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": "xvfb-run wine .\/\"Risk of Rain 2.exe\"",
     "config": {
-        "files": "{\r\n    \".\/Risk of Rain 2_Data\/Config\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_password\": \"sv_password \\\"{{server.build.env.password}}\\\";\",\r\n            \"steam_server_heartbeat_enabled\": \"steam_server_heartbeat_enabled {{server.build.env.advertise}};\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.hostname}}\\\";\",\r\n            \"sv_port\": \"sv_port {{server.build.default.port}};\",\r\n            \"sv_maxplayers\": \"sv_maxplayers {{server.build.env.players}};\",\r\n            \"exec server;\": \"\",\r\n            \"host\": \"\",\r\n            \"remove_all_local_users;\": \"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \".\/Risk of Rain 2_Data\/Config\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_password\": \"sv_password \\\"{{server.build.env.PASSWORD}}\\\";\",\r\n            \"steam_server_heartbeat_enabled\": \"steam_server_heartbeat_enabled {{server.build.env.ADVERTISE}};\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.HOSTNAME}}\\\";\",\r\n            \"steam_server_query_port\": \"steam_server_query_port {{server.build.env.QUERY}};\",\r\n            \"steam_server_steam_port\": \"steam_server_steam_port {{server.build.env.STEAM}};\",\r\n            \"sv_maxplayers\": \"sv_maxplayers {{server.build.env.PLAYERS}};\",\r\n            \"exec server;\": \"\",\r\n            \"host\": \"\",\r\n            \"remove_all_local_users;\": \"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Press Enter to chat.\"\r\n}",
         "logs": "{}",
         "stop": "^V"
@@ -31,7 +31,7 @@
         {
             "name": "Server Password",
             "description": "Password to join server. Leave empty to disable.",
-            "env_variable": "password",
+            "env_variable": "PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -40,7 +40,7 @@
         {
             "name": "Server Hostname",
             "description": "The name that will be shown in the server browser.",
-            "env_variable": "hostname",
+            "env_variable": "HOSTNAME",
             "default_value": "\"Risk of Rain 2 Dedicated Server\"",
             "user_viewable": true,
             "user_editable": true,
@@ -49,7 +49,7 @@
         {
             "name": "Max Players",
             "description": "Sets the maximum number of players.",
-            "env_variable": "players",
+            "env_variable": "PLAYERS",
             "default_value": "4",
             "user_viewable": true,
             "user_editable": true,
@@ -58,11 +58,29 @@
         {
             "name": "Advertise Server",
             "description": "Display the server in the public server browser.\r\n1 = enabled\r\n0 = disabled",
-            "env_variable": "advertise",
+            "env_variable": "ADVERTISE",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query Port",
+            "env_variable": "QUERY",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam Port is +1 query",
+            "env_variable": "STEAM",
+            "default_value": "27017",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric"
         }
     ]
 }
