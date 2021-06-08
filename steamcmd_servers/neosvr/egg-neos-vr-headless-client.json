@@ -1,0 +1,59 @@
+{
+    "_comment": "Egg for neos vr headless client/server",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-06-08T09:15:41-04:00",
+    "name": "NeosVR Headless Client",
+    "author": "synk@nasulex.net",
+    "description": "Headless client for NeosVR.",
+    "features": null,
+    "images": [
+        "nasulex\/neos:latest"
+    ],
+    "file_denylist": [],
+    "startup": ".\/RunHeadlessMono.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"World running...\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:20.04'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\nmkdir steamapps\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir \/mnt\/server +app_update 740250 -beta headless-client -betapassword ${BETA_CODE} ${EXTRA_FLAGS} validate +quit \r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "BetaCode",
+            "description": "",
+            "env_variable": "BETA_CODE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:30"
+        },
+        {
+            "name": "Steam User",
+            "description": "",
+            "env_variable": "STEAM_USER",
+            "default_value": "anonymous",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:30"
+        },
+        {
+            "name": "Steam password",
+            "description": "",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string|max:100"
+        }
+    ]
+}
