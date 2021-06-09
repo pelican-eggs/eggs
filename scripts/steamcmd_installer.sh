@@ -33,6 +33,7 @@ cd /tmp
 mkdir -p /mnt/server/steamcmd
 curl -sSL -o steamcmd.tar.gz https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
 tar -xzvf steamcmd.tar.gz -C /mnt/server/steamcmd
+mkdir -p /mnt/server/steamapps # Fix steamcmd disk write error when this folder is missing
 cd /mnt/server/steamcmd
 
 # SteamCMD fails otherwise for some reason, even running as root.
