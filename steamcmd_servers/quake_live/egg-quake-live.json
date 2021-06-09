@@ -1,14 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-11-20T13:09:52+01:00",
+    "exported_at": "2021-06-09T23:58:46+03:00",
     "name": "Quake Live",
     "author": "patz.michael@gmail.com",
     "description": "Quake Live is a first-person shooter video game by id Software. It is an updated version of Quake III Arena that was originally designed as a free-to-play game launched via a web browser plug-in. On September 17, 2014, the game was re-launched as a standalone title on Steam.",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+    ],
+    "file_denylist": [],
     "startup": ".\/qzeroded.x64  +set net_port \"{{SERVER_PORT}}\" +set sv_hostname \"{{SERVER_NAME}}\" +set sv_serverType \"{{SERVER_TYPE}}\" +set g_password \"{{PASSWORD}}\" +sv_fps \"{{FPS}}\"",
     "config": {
         "files": "{}",
@@ -18,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Quake Live Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates libstdc++6 libz1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 349090 +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\n# Quake Live Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates libstdc++6 libz1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 349090 +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },

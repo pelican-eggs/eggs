@@ -1,13 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-10-27T03:09:48+00:00",
+    "exported_at": "2021-06-10T00:27:46+03:00",
     "name": "Stormworks: Build and Rescue",
     "author": "iamkubi@gmail.com",
     "description": "Join a world where you design, create and pilot your own air sea rescue service. Release your inner hero as you battle fierce storms out at sea to rescue those in need.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
+    ],
+    "file_denylist": [],
     "startup": "xvfb-run wine server.exe +server_dir \/home\/container",
     "config": {
         "files": "{}",
@@ -17,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates xvfb screen\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +app_update ${APPID} validate +quit\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so",
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates xvfb screen\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n.\/steamcmd.sh +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +app_update ${APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
