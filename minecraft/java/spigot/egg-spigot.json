@@ -10,6 +10,7 @@
     "features": ["eula"],
     "image": "quay.io\/pterodactyl\/core:java-11",
     "images": [
+        "quay.io/parkervcp/pterodactyl-images:debian_openjdk-16",
         "quay.io\/pterodactyl\/core:java-11",
         "quay.io\/pterodactyl\/core:java"
     ],
