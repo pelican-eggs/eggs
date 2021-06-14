@@ -4,21 +4,23 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-04-26T23:16:37+03:00",
+    "exported_at": "2021-06-14T21:31:08+03:00",
     "name": "Flamecord",
     "author": "admin@softwarenoob.com",
     "description": "FlameCord is a patch for Travertine to fix possible exploits and add useful functionalities. FlameCord aims to fix Netty related exploits to keep your server safe from attacks.",
     "features": null,
     "images": [
-        "quay.io\/pterodactyl\/core:java-11",
-        "quay.io\/pterodactyl\/core:java"
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_14",
+        "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listeners[0].host\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"servers.*.address\": {\r\n                \"127.0.0.1\": \"{{config.docker.interface}}\",\r\n                \"localhost\": \"{{config.docker.interface}}\"\r\n            }\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Listening on \",\r\n    \"userInteraction\": [\r\n        \"Listening on \/0.0.0.0:\"\r\n    ]\r\n}",
-        "logs": "{\r\n}",
+        "logs": "{}",
         "stop": "end"
     },
     "scripts": {

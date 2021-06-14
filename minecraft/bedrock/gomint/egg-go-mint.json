@@ -4,13 +4,16 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-04-07T10:33:24+03:00",
+    "exported_at": "2021-06-14T21:34:39+03:00",
     "name": "GoMint",
     "author": "parker@parkervcp.com",
     "description": "A performant and stable Minecraft server software for the Bedrock Edition that comes with a modern API and support for Java 11 LTS.",
     "features": null,
     "images": [
-        "quay.io\/pterodactyl\/core:java-11"
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_14",
+        "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
     "file_denylist": [],
     "startup": "java --add-opens java.base\/java.nio=io.netty.common --add-exports java.base\/jdk.internal.misc=io.netty.common -p modules -m gomint.server\/io.gomint.server.Bootstrap",
