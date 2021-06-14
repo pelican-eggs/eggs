@@ -4,14 +4,16 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-05-08T02:33:54+03:00",
+    "exported_at": "2021-06-14T21:29:22+03:00",
     "name": "Curseforge Generic",
     "author": "parker@parkervcp.com",
     "description": "A generic egg for a forge modpack",
     "features": null,
     "images": [
-        "quay.io\/pterodactyl\/core:java",
-        "quay.io\/pterodactyl\/core:java-11"
+        "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_14",
+        "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
