@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-05-25T17:22:39+02:00",
+    "exported_at": "2021-06-14T10:31:15+02:00",
     "name": "TS3AudioBot",
     "author": "contact@hunters-tavern.de",
     "description": "TS3 Audio Bot by https:\/\/splamy.de\/TSAudioBot\/Home",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# TS3AudioBot Installation Script\r\n# https:\/\/splamy.de\/TSAudioBot\/Home\r\n# \r\n# Server Files: \/mnt\/server\r\n\r\napt-get -y update\r\napt-get -y --no-install-recommends install ca-certificates bzip2 wget tar curl unzip\r\napt-get -q clean all\r\n\r\n#Create needed directories\r\nmkdir \/mnt\/server\/youtube-dl\r\nmkdir \/mnt\/server\/data\r\n\r\ncd \/mnt\/server\r\n\r\n#Download TS3AudioBot\r\nwget -O Bot.zip https:\/\/splamy.de\/api\/nightly\/ts3ab\/master\/download && unzip Bot.zip\r\nrm Bot.zip\r\n\r\n#Download youtube-dl\r\ncd \/mnt\/server\/youtube-dl\r\nwget -q https:\/\/yt-dl.org\/downloads\/latest\/youtube-dl\r\nchmod a+rx youtube-dl\r\n\r\n#set user:\r\nchown -R 9999:9999 \/mnt\/server",
-            "container": "ubuntu:20.04",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
