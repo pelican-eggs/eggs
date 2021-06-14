@@ -1,17 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-07-15T18:19:27-04:00",
+    "exported_at": "2021-06-14T21:28:54+03:00",
     "name": "FTB-modpacks.ch Server",
     "author": "runemaster580@gmail.com",
     "description": "Since the release of the FTB APP, FTB modpacks are now distributed through modpacks.ch. This egg was developed for support for modpacks that are distributed through this.",
-    "image": "quay.io\/pterodactyl\/core:java",
+    "features": null,
     "images": [
-        "quay.io\/pterodactyl\/core:java",
-        "quay.io\/pterodactyl\/core:java-11"
+        "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_14",
+        "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
+    "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar forge-server.jar",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
@@ -32,8 +36,8 @@
             "description": "the search term for finding the modpack. needs to be at least 4 characters long.\r\nFind out what term is needed by using the ftb app and searching with the term. make sure it only returns 1 result.\r\ncan also be searched for via: https:\/\/api.modpacks.ch\/public\/modpack\/search\/8?term={SEARCHTERM}\r\n\r\nonly needed if the modpack id and modpack version id is unknown.",
             "env_variable": "FTB_SEARCH_TERM",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string|max:99|min:4"
         },
         {
@@ -41,8 +45,8 @@
             "description": "The FTB Api modpack ID.\r\nNeeded if not using the search variable\r\n\r\nExample: FTB Interactions ID is 5.\r\nhttps:\/\/api.modpacks.ch\/public\/modpack\/5",
             "env_variable": "FTB_MODPACK_ID",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string|max:20"
         },
         {
@@ -50,8 +54,8 @@
             "description": "what version of the modpack to install. leave empty if using the modpack version id variable.",
             "env_variable": "FTB_VERSION_STRING",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string|max:20"
         },
         {
@@ -59,8 +63,8 @@
             "description": "The modpack api version ID.\r\nneeded if not using the string for the version.\r\n\r\nExample FTB Revelations version id for version \"2.0.2\" is 86.\r\nwhich would come out as: https:\/\/api.modpacks.ch\/public\/modpack\/5\/86",
             "env_variable": "FTB_MODPACK_VERSION_ID",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "nullable|string|max:20"
         }
     ]
