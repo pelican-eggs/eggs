@@ -1,18 +1,22 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-12-06T19:20:29-08:00",
+    "exported_at": "2021-06-11T16:45:35+01:00",
     "name": "Spigot",
     "author": "support@pterodactyl.io",
     "description": "Spigot is the most widely-used modded Minecraft server software in the world. It powers many of the top Minecraft server networks around to ensure they can cope with their huge player base and ensure the satisfaction of their players. Spigot works by reducing and eliminating many causes of lag, as well as adding in handy features and settings that help make your job of server administration easier.",
-    "features": ["eula"],
-    "image": "quay.io\/pterodactyl\/core:java-11",
+    "features": [
+        "eula"
+    ],
     "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-16",
         "quay.io\/pterodactyl\/core:java-11",
         "quay.io\/pterodactyl\/core:java"
     ],
+    "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
@@ -22,9 +26,9 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache --update curl git openjdk8 openssl bash nss\r\n\r\n## Only download if a path is provided, otherwise continue.\r\nif [ ! -z \"${DL_PATH}\" ]; then\r\n    cd \/mnt\/server\r\n\r\n    MODIFIED_DOWNLOAD=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\n    curl -sSL -o ${SERVER_JARFILE} ${MODIFIED_DOWNLOAD}\r\nelse\r\n    cd \/srv\/\r\n    \r\n    wget https:\/\/hub.spigotmc.org\/jenkins\/job\/BuildTools\/lastSuccessfulBuild\/artifact\/target\/BuildTools.jar\r\n    \r\n    mv BuildTools.jar \/srv\/\r\n\r\n    java -jar BuildTools.jar --rev ${DL_VERSION}\r\n\r\n    mv spigot-*.jar \/mnt\/server\/${SERVER_JARFILE}\r\nfi",
-            "container": "alpine:3.9",
-            "entrypoint": "ash"
+            "script": "#!\/bin\/bash\r\n# Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update \r\napt install -y curl wget git openssl bash bc apt-transport-https gnupg software-properties-common\r\nwget -qO - https:\/\/adoptopenjdk.jfrog.io\/adoptopenjdk\/api\/gpg\/key\/public | apt-key add -\r\nadd-apt-repository --yes https:\/\/adoptopenjdk.jfrog.io\/adoptopenjdk\/deb\/\r\napt update\r\nmkdir -p \/usr\/share\/man\/man1\r\nif [ \"${DL_VERSION}\" == \"latest\" ] || (( $(echo \"${DL_VERSION} >= 1.17\" | bc -l) )); then\r\n    apt install -y adoptopenjdk-16-hotspot\r\nelse\r\n    apt install -y adoptopenjdk-8-hotspot\r\nfi\r\n\r\n## Only download if a path is provided, otherwise continue.\r\nif [ ! -z \"${DL_PATH}\" ]; then\r\n    cd \/mnt\/server\r\n\r\n    MODIFIED_DOWNLOAD=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\n    curl -sSL -o ${SERVER_JARFILE} ${MODIFIED_DOWNLOAD}\r\nelse\r\n    mkdir -p \/srv\/\r\n    cd \/srv\/\r\n    \r\n    wget https:\/\/hub.spigotmc.org\/jenkins\/job\/BuildTools\/lastSuccessfulBuild\/artifact\/target\/BuildTools.jar\r\n    \r\n    java -jar BuildTools.jar --rev ${DL_VERSION}\r\n\r\n    mv spigot-*.jar \/mnt\/server\/${SERVER_JARFILE}\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
         }
     },
     "variables": [

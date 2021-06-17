@@ -1,0 +1,86 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-06-02T12:27:48+03:00",
+    "name": "Risk of Rain 2",
+    "author": "alex.chang-lam@protonmail.com",
+    "description": "Risk of Rain 2 dedicated server.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
+    ],
+    "file_denylist": [],
+    "startup": "xvfb-run wine .\/\"Risk of Rain 2.exe\"",
+    "config": {
+        "files": "{\r\n    \".\/Risk of Rain 2_Data\/Config\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_password\": \"sv_password \\\"{{server.build.env.PASSWORD}}\\\";\",\r\n            \"steam_server_heartbeat_enabled\": \"steam_server_heartbeat_enabled {{server.build.env.ADVERTISE}};\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.HOSTNAME}}\\\";\",\r\n            \"steam_server_query_port\": \"steam_server_query_port {{server.build.env.QUERY}};\",\r\n            \"steam_server_steam_port\": \"steam_server_steam_port {{server.build.env.STEAM}};\",\r\n            \"sv_maxplayers\": \"sv_maxplayers {{server.build.env.PLAYERS}};\",\r\n            \"exec server;\": \"\",\r\n            \"host\": \"\",\r\n            \"remove_all_local_users;\": \"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Press Enter to chat.\"\r\n}",
+        "logs": "{}",
+        "stop": "^V"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Risk of Rain 2 Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl unzip lib32gcc1 ca-certificates xvfb\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\n\r\nexport WINETRICKS_RUN=mono\r\nexport HOME=\/mnt\/server\r\nexport AUTO_UPDATE=1\r\nexport SRCDS_APPID=1180760\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +login anonymous +force_install_dir \/mnt\/server +app_update 1180760 validate +quit\r\n\r\n## setup 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\n## setup 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v \/mnt\/server\/steam\/linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n#create custom server.cfg\r\ncp \"\/mnt\/server\/Risk of Rain 2_Data\/Config\/server_startup.cfg\" \"\/mnt\/server\/Risk of Rain 2_Data\/Config\/server.cfg\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Password",
+            "description": "Password to join server. Leave empty to disable.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:40"
+        },
+        {
+            "name": "Server Hostname",
+            "description": "The name that will be shown in the server browser.",
+            "env_variable": "HOSTNAME",
+            "default_value": "\"Risk of Rain 2 Dedicated Server\"",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the maximum number of players.",
+            "env_variable": "PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Advertise Server",
+            "description": "Display the server in the public server browser.\r\n1 = enabled\r\n0 = disabled",
+            "env_variable": "ADVERTISE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query Port",
+            "env_variable": "QUERY",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam Port is +1 query",
+            "env_variable": "STEAM",
+            "default_value": "27017",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric"
+        }
+    ]
+}

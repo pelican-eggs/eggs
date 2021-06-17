@@ -1,18 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-12-13T18:26:08-08:00",
+    "exported_at": "2021-06-14T21:28:24+03:00",
     "name": "Mohist",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Spigot fork with performance optimizations.",
     "features": null,
-    "image": "quay.io\/pterodactyl\/core:java",
     "images": [
-        "quay.io\/pterodactyl\/core:java",
-        "quay.io\/pterodactyl\/core:java-11"
+        "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_14",
+        "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
+    "file_denylist": [],
     "startup": "java -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} pause",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",

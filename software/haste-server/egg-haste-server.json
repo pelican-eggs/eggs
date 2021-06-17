@@ -1,0 +1,30 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-03-26T17:25:19-04:00",
+    "name": "haste-server",
+    "author": "freelance@harrydev.me",
+    "description": "Haste is an open-source pastebin software written in node.js, which is easily installable in any network. It can be backed by either redis or filesystem, and has a very easy adapter interface for other stores. A publicly available version can be found at hastebin.com",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12"
+    ],
+    "startup": "npm start",
+    "config": {
+        "files": "{\r\n    \"config.js\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"listening on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y git curl\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/seejohnrun\/haste-server\r\ncd haste-server\r\nmv * \/mnt\/server\r\ncd ..\r\nrm -rf haste-server\r\nnpm install\r\n\r\nexit 0",
+            "container": "node:12-buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
