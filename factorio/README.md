@@ -1,10 +1,11 @@
 # Factorio
 
 #### The Factorio Server
-The server supports mods. 
-The factorio-modupdate egg uses the factorio-mod-updater (https://github.com/pdemonaco/factorio-mod-updater) to update your mods when ReInstalling the Server.
+This server instance does support mods.
 
-#### from the developers
+The factorio-modupdate egg uses the factorio-mod-updater (https://github.com/pdemonaco/factorio-mod-updater) to update your mods when reinstalling the server.
+
+#### From The Developers
 
 Factorio is a game in which you build and maintain factories.  
 
