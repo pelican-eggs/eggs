@@ -1,8 +1,6 @@
 # PhantomBot
 ### Their [Site](https://phantombot.github.io/PhantomBot/)
-PhantomBot is an actively developed open source interactive Twitch bot
-with a vibrant community that provides entertainment and moderation for your channel,
-allowing you to focus on what matters the most to you - your game and your viewers.
+PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.
 
 ### Server Ports
 3 ports are required to run PhantomBot.
@@ -24,4 +22,4 @@ Port2: 1003
 
 Port3: 1004
 
-this are forced and can't be changed!
+These settings are forced and can't be changed!
