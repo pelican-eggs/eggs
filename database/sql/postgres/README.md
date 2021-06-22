@@ -3,10 +3,9 @@
 The World's Most Advanced Open Source Relational Database 
 
 ### Minimum RAM warning
-2 Gigabytes minimum recommended
+2GB of RAM is recommended
 
 See here https://www.commandprompt.com/blog/postgresql_mininum_requirements/
-
 
 ### Server Ports
 Ports required to run the server in a table format.
