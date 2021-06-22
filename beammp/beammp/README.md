@@ -4,7 +4,7 @@ BeamNG.drive is a vehicle simulation video game developed and published by Breme
 
 ## Recommended server settings
 
-Minimum RAM can be around 2-4 gb, these server run lightly so you can even use older cpus if you would like. Disk space should be 10 gb minimum.
+Minimum RAM can be around 2-4 GB, this server runs lightly so you can even use older cpus if you would like. Disk space should be 10 GB minimum.
 
 ## Adding Mods
 
