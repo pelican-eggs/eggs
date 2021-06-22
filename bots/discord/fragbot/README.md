@@ -1,6 +1,6 @@
-# fragbot
+# Fragbot
 ### Their [Github](https://github.com/fragforce/fragbot)
-The golang based discord bot for fragforce. 
+The GoLang based Discord bot for fragforce. 
 
 Runs the fragforce `@fragbot`
 

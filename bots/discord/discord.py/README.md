@@ -1,6 +1,6 @@
-# discord.py generic
-This egg was designed to allow a user to pull their own python discord bot from a repo.
+# Discord.py (Generic)
+This egg was designed to allow a user to pull their own Python Discord bot from a Github repository.
 
 There is an option to allow a user to upload their own files to run a bot.
 
-The startup configs and commands may need changing to actually function properly.
+#### Note: The startup configs and commands may need changing to actually function properly.

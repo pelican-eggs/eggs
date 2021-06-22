@@ -1,6 +1,6 @@
 # CorpBot.py
 ### From their [Github](https://github.com/corpnewt/CorpBot.py)
-A very clumsy python bot for discord 
+A very clumsy python bot for Discord 
 
 ### Server Ports
 No ports are required to run CorpBot. You can assign a random port to the bot.

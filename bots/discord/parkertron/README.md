@@ -1,4 +1,4 @@
-# parkertron
+# Parkertron
 ### Their [Github](https://github.com/parkervcp/parkertron)
 Purely a chatbot. Not even a smart one. 
 

@@ -1,4 +1,4 @@
-# pixelbot
+# PixelBot
 ### Their [Github](https://github.com/possatti/pixelbot)
 Bot for pixelcanvas.io 
 
