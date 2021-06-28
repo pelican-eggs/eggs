@@ -110,8 +110,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Minetest](/minetest) (including MTG)
   * [Minetest](/minetest/minetest)
   * 
-[Minetest](/classicube)
-  * [Minetest](/classicube/mcgalaxy)
+[ClassiCube](/classicube)
+  * [MCGalaxy](/classicube/mcgalaxy)
   * 
 [Minecraft](/minecraft)
 * [Bedrock](/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
