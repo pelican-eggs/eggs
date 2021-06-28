@@ -141,6 +141,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [TyphoonLimbo](/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/minecraft/proxy/java/velocity)
     * [Waterfall](/minecraft/proxy/java/waterfall)
+    * [VIAaaS](/minecraft/proxy/java/viaaas)
   * [Cross Platform](/minecraft/proxy/cross_platform)
     * [GeyserMC](/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/minecraft/proxy/cross_platform/waterdog)
