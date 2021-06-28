@@ -4,20 +4,19 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-06-28T11:03:44-04:00",
+    "exported_at": "2021-06-28T11:55:37-04:00",
     "name": "VIAaaS",
     "author": "regulad@outlook.com",
     "description": "VIAaaS - ViaVersion as a Service - Standalone ViaVersion proxy",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_11",
         "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
     "file_denylist": [],
-    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} -sslPort {{WEBSERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config\/viaaas.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"bind-address\": \"0.0.0.0\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\n    \"done\": \"Listening on \",\n    \"userInteraction\": [\n        \"Listening on /0.0.0.0:\"\n    ]\n}",
+        "startup": "{\r\n    \"done\": \"Application started:\"\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "end"
     },
@@ -31,10 +30,19 @@
     "variables": [
         {
             "name": "VIAaaS Jar File",
-            "description": "The name of the jarfile to be used when downloading & running VIAaaS",
+            "description": "The name of the jarfile to be used when downloading & running VIAaaS.",
             "env_variable": "SERVER_JARFILE",
             "default_value": "VIAaaS-all.jar",
-            "user_viewable": false,
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Webserver Port",
+            "description": "The port to listen to webserver connections on.",
+            "env_variable": "WEBSERVER_PORT",
+            "default_value": "25543",
+            "user_viewable": true,
             "user_editable": false,
             "rules": "required|string"
         }
