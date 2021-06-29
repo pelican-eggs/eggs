@@ -1,5 +1,5 @@
 # VIAaaS
-VIAaaS is the Minecraft plugin VIAaaS made standalone as a proxy.
+VIAaaS is the Minecraft plugin ViaVersion made standalone as a proxy.
 
 More information is available here: https://github.com/ViaVersion/VIAaaS
 
