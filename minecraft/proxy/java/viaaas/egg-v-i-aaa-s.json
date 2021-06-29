@@ -13,7 +13,7 @@
         "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
     "file_denylist": [],
-    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} -sslPort {{WEBSERVER_PORT}}",
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} -sslPort={{WEBSERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config\/viaaas.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"bind-address\": \"0.0.0.0\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Application started:\"\r\n}",
@@ -43,7 +43,7 @@
             "env_variable": "WEBSERVER_PORT",
             "default_value": "25543",
             "user_viewable": true,
-            "user_editable": false,
+            "user_editable": true,
             "rules": "required|string"
         }
     ]
