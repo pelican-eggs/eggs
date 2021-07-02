@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-30T22:22:39+00:00",
+    "exported_at": "2021-07-02T04:17:45+03:00",
     "name": "Arma 3",
     "author": "rehlmgaming@gmail.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
@@ -12,16 +12,17 @@
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:game_arma3"
     ],
+    "file_denylist": [],
     "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -bepath=.\/battleye -cfg=\\\"{{BASIC}}\\\" -config=\\\"{{CONFIG}}\\\" -mod=\\\"{{MODIFICATIONS}}\\\" -serverMod=\\\"{{SERVERMODS}}\\\" {{STARTUP_PARAMS}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Host identity created.\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Host identity created.\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## ARMA III specific setup\r\ncd \/mnt\/server\/\r\n\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/server.cfg\r\nchmod 755 basic.cfg server.cfg",
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +force_install_dir \/mnt\/server +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## ARMA III specific setup\r\ncd \/mnt\/server\/\r\n\r\nmkdir -p \"\/mnt\/server\/.local\/share\/Arma 3\" \"\/mnt\/server\/.local\/share\/Arma 3 - Other Profiles\"\r\n\r\n[[ -f basic.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/basic.cfg\r\n[[ -f server.cfg ]] || curl -sSLO https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/server.cfg\r\nchmod 755 basic.cfg server.cfg",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }

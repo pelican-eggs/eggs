@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-06-14T21:33:30+03:00",
+    "exported_at": "2021-07-02T04:14:48+03:00",
     "name": "Velocity",
     "author": "parker@parkervcp.com",
     "description": "Velocity is a Minecraft server proxy with unparalleled server support, scalability, and flexibility.",
@@ -26,7 +26,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z ${VELOCITY_VERSION} ] || [ ${VELOCITY_VERSION} == \"latest\" ]; then\r\n\tVELOCITY_VERSION=\"latest\"\r\nfi\r\n\r\necho -e \"Getting download link\"\r\nDOWNLOAD_LINK=https:\/\/versions.velocitypowered.com\/download\/${VELOCITY_VERSION}\r\n\r\necho -e \"Downloading ${DOWNLOAD_LINK}\"\r\ncurl ${DOWNLOAD_LINK} -o ${SERVER_JARFILE}\r\n\r\nif [ -f velocity.toml ]; then\r\n    echo -e \"velocity config file exists\"\r\nelse\r\n    echo -e \"downloading velocity config file.\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/proxy\/java\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\n\r\necho -e \"install complete\"",
+            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache curl\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z ${VELOCITY_VERSION} ] || [ ${VELOCITY_VERSION} == \"latest\" ]; then\r\n\tVELOCITY_VERSION=\"latest\"\r\nfi\r\n\r\necho -e \"Getting download link\"\r\nDOWNLOAD_LINK=https:\/\/versions.velocitypowered.com\/download\/${VELOCITY_VERSION}\r\n\r\necho -e \"Downloading ${DOWNLOAD_LINK}\"\r\ncurl ${DOWNLOAD_LINK} -o ${SERVER_JARFILE}\r\n\r\nif [ -f velocity.toml ]; then\r\n    echo -e \"velocity config file exists\"\r\nelse\r\n    echo -e \"downloading velocity config file.\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/proxy\/java\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\n\r\necho -e \"install complete\"",
             "container": "alpine:3.10",
             "entrypoint": "ash"
         }
