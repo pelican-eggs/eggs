@@ -17,6 +17,9 @@ A limbo server is a fallback server able to handle a massive amount of simultane
 [Velocity](https://velocitypowered.com)
 Velocity is a Minecraft server proxy with unparalleled server support, scalability, and flexibility. 
 
+#### VIAaaS
+[VIAaaS](https://github.com/ViaVersion/VIAaaS) is the Minecraft plugin ViaVersion made standalone as a proxy.
+
 #### Waterfall
 [Waterfall](https://papermc.io/downloads#Waterfall)
 Paper fork of the BungeeCord software, with improved Forge support and more features.
