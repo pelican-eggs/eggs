@@ -1,0 +1,27 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2021-02-15T20:05:24+00:00",
+    "name": "KissMP Server",
+    "author": "me@weilbyte.dev",
+    "description": "Server for the KISS Multiplayer BeamNG.drive mod",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "startup": ".\/kissmp-server",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server is running!\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Server Files: \/mnt\/server\r\napt update \r\napt install -y wget unzip \r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nLATEST_RELEASE=$(wget -qO- https:\/\/api.github.com\/repos\/TheHellBox\/KISS-multiplayer\/releases\/latest | grep browser_download_url | cut -d '\"' -f 4)\r\necho -e Install repo set to ${INSTALL_REPO}\r\necho -e \"\/mnt\/server is empty.\\nDownloading latest release ${LATEST_RELEASE}\"\r\n\r\nwget $LATEST_RELEASE -O kissmp.zip\r\nunzip -j kissmp.zip '*\/kissmp-server'\r\n\r\nrm -rf kissmp.zip\r\n\r\nif [ -f \/mnt\/server\/kissmp-server ]; then\r\n    echo -e \"Install complete\"\r\n    chmod +x \/mnt\/server\/kissmp-server\r\n    \r\n    # Generate config\r\n    .\/kissmp-server & serverpid=$! \r\n    sleep 1\r\n    kill $serverpid\r\n    \r\n    exit 0\r\nelse \r\n    echo -e \"Install failed (no \/mnt\/server\/kissmp-server file present)\"\r\n    exit 1\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}

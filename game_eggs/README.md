@@ -1,73 +1,4 @@
-﻿# Parkers Pterodactyl eggs repo
-
-I am working on adding a large collection of public eggs for the Pterodactyl community.
-
-With that I am also accepting PR's for new services and also updates to the current ones.
-
-If you are submitting PR's try and keep names and titles the same.
-
-## How to import an egg
-
-If you are reading this it looks like you are looking to add an egg to your server.
-
-1. Download any of the json files located in the folders below.
-   1. It's easiest to right click the `raw` button and save as.
-2. In your panel go to the `Nests` section in the admin part of the panel
-3. Click the green `Import Egg` button
-4. Browse to the json file you saved earlier
-5. Select what nest you want to put the egg in.
-   1. If you want a new nest you need to create it before importing the egg.
-
-# You must restart your daemon after importing an egg if you are using 0.7. This is not required on 1.X.
-
-
-## Please read the CONTRIBUTING.md before submitting PRs
-
-## [Bots](/bots)
-
-[Discord](/bots/discord)
-* [ATL Bot](/bots/discord/atlbot) Node JS
-* [Bastion](/bots/discord/bastion) Node JS
-* [CorpBot](/bots/discord/corpbot) Python
-* [discord.js](bots/discord/discord.js) Node JS generic
-* [discord.py](bots/discord/discord.py) Python generic
-* [discordgo](bots/discord/discordgo) Golang generic
-* [fragbot](/bots/discord/fragbot) Golang
-* [JMusicBot](/bots/discord/jmusicbot) Java
-* [parkertron](/bots/discord/parkertron) Golang
-* [pixel-bot](/bots/discord/pixelbot) Python
-* [Redbot](/bots/discord/redbot) Python
-* [SinusBot](/bots/discord/sinusbot)
-
-[Other](/bots/other)
-* [Big Brother Bot](/bots/other/bigbrotherbot)
-
-[Twitch](/bots/twitch)
-  * [PhantomBot](/bots/twitch/phantombot)
-  * [SogeBot](/bots/twitch/sogebot)
-
-[TeamSpeak3](bots/teamspeak3)
-  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
-
-## [Database](/database)
-### In-Memory Databases
-[Redis](/database/redis)
-* [Redis 5](/database/redis/redis-5)
-* [Redis 6](/database/redis/redis-6)
-
-### noSQL
-* [mongoDB](/database/nosql/mongodb)
-
-### SQL Databases
-* [MariaDB](/database/sql/mariadb)
-* [PostgreSQL](/database/sql/postgres)
-
-## Voice Servers
-* [Lavalink](/voice_servers/lavalink)
-* [TeaSpeak](/voice_servers/teaspeak)
-* [TS3-Manager](/voice_servers/ts3_manager)
-
-## Game Eggs
+﻿## Game Eggs
 [Among Us](game_eggs/among_us)
 * [Impostor Server](game_eggs/among_us/impostor_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
@@ -228,13 +159,3 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Vintage Story](game_eggs/vintage_story/vintage_story)
 
 [Xonotic](game_eggs/xonotic/xonotic)
-
-## [Storage](/storage/)
-### S3 Storage
-* [minio](/storage/minio)
-
-## [Software](/software/)
-### Code Server
-* [Code-Server](/software/code-server)
-### haste-server
-* [haste-server](/software/haste-server)
