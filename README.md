@@ -238,5 +238,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Code-Server](/software/code-server)
 ### Grafana
 * [Grafana](/software/grafana)
+### Gitea
+* [Gitea](/software/gitea)
 ### haste-server
 * [haste-server](/software/haste-server)
