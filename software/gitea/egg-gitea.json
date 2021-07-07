@@ -1,0 +1,50 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-07T21:58:54+02:00",
+    "name": "Gitea",
+    "author": "mario.franze@gmail.com",
+    "description": "Gitea is a community managed lightweight code hosting solution written in Go. It is published under the MIT license.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/gitea web -p {{SERVER_PORT}} -c .\/app.ini",
+    "config": {
+        "files": "{\r\n    \"custom\/app.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISABLE_SSH\": \"DISABLE_SSH: {{server.build.env.DISABLE_SSH}}\",\r\n            \"SSH_PORT\": \"SSH_PORT: {{server.build.env.SSH_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Listen: \",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nwget -O gitea https:\/\/dl.gitea.io\/gitea\/main\/gitea-main-linux-amd64\r\nchmod +x gitea\r\n\r\nmkdir custom\r\n\r\necho \"[server]\r\nLOCAL_ROOT_URL = http:\/\/localhost:${SERVER_PORT}\/\r\nDOMAIN           = ${SERVER_IP}\r\nHTTP_PORT        = ${SERVER_PORT}\r\nDISABLE_SSH      = ${DISABLE_SSH}\r\nSSH_PORT         = ${SSH_PORT}\" > \/mnt\/server\/custom\/app.ini\r\n\r\necho \"Install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Disable SSH",
+            "description": "Disable SSH feature when it\u2019s not available",
+            "env_variable": "DISABLE_SSH",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "SSH Port",
+            "description": "SSH port displayed in clone URL.",
+            "env_variable": "SSH_PORT",
+            "default_value": "22",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1,65535"
+        }
+    ]
+}
