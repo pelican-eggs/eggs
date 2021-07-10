@@ -1,5 +1,6 @@
-# BeamNG.drive - KISS Multiplayer
+# BeamMP
 
-### From their [Github](https://github.com/TheHellBox/KISS-multiplayer)
+BeamMP Bringing Multiplayer to BeamNG.drive! With a smooth and enjoyable experience.
 
-Server settings such as the map can be changed in the `config.json` file. Port is automatically set on each boot.
+* [BeamMP Server](beammp)
+* [KissMP](kissmp)
