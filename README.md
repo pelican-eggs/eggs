@@ -62,12 +62,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [MariaDB](/database/sql/mariadb)
 * [PostgreSQL](/database/sql/postgres)
 
-## Voice Servers
+## [Voice Servers](/voice_servers)
 * [Lavalink](/voice_servers/lavalink)
 * [TeaSpeak](/voice_servers/teaspeak)
 * [TS3-Manager](/voice_servers/ts3_manager)
 
-## Game Eggs
+## [Game Eggs](/game_eggs)
 [Among Us](game_eggs/among_us)
 * [Impostor Server](game_eggs/among_us/impostor_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
