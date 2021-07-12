@@ -161,8 +161,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ARK: Survival Evolved](game_eggs/steamcmd_servers/ark_survival_evolved)
 * [Arma](game_eggs/steamcmd_servers/arma)
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
-  * [Arma 3 64 Bit](game_eggs/steamcmd_servers/arma/arma3_x64)
-  * [Arma 3 Headless Client](game_eggs/steamcmd_servers/arma/arma3_headless_client)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
