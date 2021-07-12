@@ -178,6 +178,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
+* [Night of the dead](game_eggs/steamcmd_servers/night_of_the_dead)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
