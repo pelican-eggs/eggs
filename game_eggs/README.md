@@ -109,6 +109,7 @@
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
+* [Night of the dead](steamcmd_servers/night_of_the_dead)
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [Onset](steamcmd_servers/onset)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
