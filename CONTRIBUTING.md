@@ -9,7 +9,7 @@
     Only use what is absolutely needed.  
 
 3. Try to stay in the stock containers.  
-    If you need something in a container PR it to [my image repo](https://github.com/parkervcp/images) where I can review and pull up to the main repo.
+    If you need something in a container PR it to [my yolks repo](https://github.com/parkervcp/yolks) where I can review and pull up to the main repo.
 
 4. Don't be afraid to submit PR's to the egg repo.  
     I don't bite. I will work with you on the egg and the required things to run it.
