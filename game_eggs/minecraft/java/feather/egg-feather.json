@@ -26,7 +26,7 @@
     "variables": [
         {
             "name": "Generate World",
-            "description": "Do you want the installer to generate a world you you?",
+            "description": "Do you want the installer to generate a world for you?",
             "env_variable": "GEN_WORLD",
             "default_value": "0",
             "user_viewable": true,
