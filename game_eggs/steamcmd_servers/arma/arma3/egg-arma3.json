@@ -216,6 +216,24 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|url"
+        },
+        {
+            "name": "[Depreciated] Server Configuration File",
+            "description": "This is a depreciated variable that is only included for servers running on an older Startup Command.",
+            "env_variable": "CONFIG",
+            "default_value": "server.cfg",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "[Depreciated] Basic Configuration File",
+            "description": "This is a depreciated variable that is only included for servers running on an older Startup Command.",
+            "env_variable": "BASIC",
+            "default_value": "basic.cfg",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
         }
     ]
 }
