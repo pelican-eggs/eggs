@@ -9,7 +9,8 @@
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/games:arma3"
+        "ghcr.io\/pterodactyl\/games:arma3",
+        "quay.io\/parkervcp\/pterodactyl-images:game_arma3"
     ],
     "file_denylist": [],
     "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -bepath=.\/battleye -cfg=basic.cfg -config=server.cfg -mod=\\\"{{CLIENT_MODS}}\\\" -serverMod=\\\"{{SERVERMODS}}\\\" {{STARTUP_PARAMS}}",
