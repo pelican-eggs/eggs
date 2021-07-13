@@ -229,6 +229,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Xonotic](game_eggs/xonotic/xonotic)
 
+## [Monitoring](/monitoring/)
+### Prometheus
+* [Prometheus](/monitoring/prometheus)
+
 ## [Storage](/storage/)
 ### S3 Storage
 * [minio](/storage/minio)
