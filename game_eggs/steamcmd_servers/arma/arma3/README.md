@@ -1,14 +1,58 @@
 # Arma 3
-***Updating your Egg? Please see "How to Update Egg" at the end of this README to avoid any issues!***
+***Updating your Egg? Please see [How to Update Egg](#how-to-update-egg) to avoid any issues!***
 ___
-### From their [Site](https://arma3.com/)
-Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single- and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC’s premier military game. Authentic, diverse, open - Arma 3 sends you to war.
+### Authors / Contributors
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/lilkingjr1">
+                <img src="https://avatars.githubusercontent.com/u/4533989" width="50px;" alt=""/><br /><sub><b>Red-Thirten</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Maintains">🔨</a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/aussieserverhosts">
+                <img src="https://avatars.githubusercontent.com/u/65438932" width="50px;" alt=""/><br /><sub><b>Aussie Server Hosts</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=aussieserverhosts" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=aussieserverhosts" title="Contributor">💡</a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/Software-Noob">
+                <img src="https://avatars.githubusercontent.com/u/10975908" width="50px;" alt=""/><br /><sub><b>Softwarenoob</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Software-Noob" title="Code Reviewer">✅</a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/Yomanz">
+                <img src="https://avatars.githubusercontent.com/u/5119107" width="50px;" alt=""/><br /><sub><b>Daave</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Yomanz" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=Yomanz" title="Original Creator">⭐</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=Yomanz" title="Retired from Development">💤</a>
+        </td>
+    </tr>
+</table>
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+___
+### Game Description
+From Bohemia Interactive's [Website](https://arma3.com/):
+> Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC’s premier military game. Authentic, diverse, open - Arma 3 sends you to war.
 ___
 ### Egg Capabilities
 - Configurable to run 32 or 64-bit versions of the server
-- Max Players is configurable and able to be host enforced (\*see Recommended Egg Modifications)
+- Max Players is configurable and able to be host enforced (\*see [Recommended Egg Modifications](#recommended-egg-modifications))
 - Able to download server updates on startup
-- Able to download, update, and load Steam Workshop mods on startup (\*see Installation Requirements)
+- Able to download, update, and load Steam Workshop mods on startup (\*see [Installation Requirements](#installation-requirements))
   - Accepts uploaded HTML modlist files exported from the Arma 3 Launcher to define mods to load on the server.
   - Also accepts manually listed mods, CDLCs, and server-side only mods.
   - Checks for mod updates against their Steam Workshop page's last update for quick and efficient update checks.
@@ -17,7 +61,7 @@ ___
 - Configurable to run Beta/Performance binaries of the server (if desired; advanced users only)
 - Additional [Arma 3 startup parameters](https://community.bistudio.com/wiki/Arma_3_Startup_Parameters) can be added to fine-tune performance
 - Configurable to run up to 5 Headless Clients in parallel with the main server (may require additional performance overhead)
-- [WHMCS](https://www.whmcs.com/) compatible (\*see Recommended Egg Modifications)
+- [WHMCS](https://www.whmcs.com/) compatible (\*see [Recommended Egg Modifications](#recommended-egg-modifications))
 ___
 ### Installation Requirements
 - A valid, **real** Steam account, with **Steam Guard turned off**, is required to install the server (default "anonymous" login cannot be used). For security reasons it is [recommended by Valve](https://developer.valvesoftware.com/wiki/SteamCMD#With_a_Steam_account) that you create a new Steam account just for your dedicated servers. This account *does not* need to own Arma 3.
@@ -57,6 +101,6 @@ If you already have an Arma 3 egg installed on your panel, there are a couple th
 - Startup Variables have been completely rehauled. While most important existing variables have retained their Environment Variable names, a lot of their titles and order have been adjusted. Simply updating your existing egg with this egg may lead to Startup Variables being terribly out of order and cluttered. Therefore, the following steps are recommended to avoid this:
   1. Change the name of your existing Arma 3 egg to "Arma 3 (Old)".
   2. Install this updated egg as a new egg in your nest.
-  3. Make any egg modifications you would like. (\*see Recommended Egg Modifications)
+  3. Make any egg modifications you would like. (\*see [Recommended Egg Modifications](#recommended-egg-modifications))
   4. Change all existing Arma 3 servers to the new egg via the Startup tab.
   5. Delete the old egg.
