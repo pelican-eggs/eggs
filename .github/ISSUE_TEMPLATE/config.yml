@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ❓ Discord
+    url: https://discord.gg/pterodactyl
+    about: Please visit our Discord for support with configuration issues.
