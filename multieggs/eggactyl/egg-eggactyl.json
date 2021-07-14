@@ -1,0 +1,86 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-06-28T02:59:54+05:30",
+    "name": "Multi-egg",
+    "author": "doge@chiragdev.xyz",
+    "description": "A multi egg by chirag350.",
+    "features": null,
+    "images": [
+        "quay.io\/chirag350\/multi-egg"
+    ],
+    "file_denylist": [],
+    "startup": ".\/t.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\necho \"Hello\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Java Version",
+            "description": "",
+            "env_variable": "JAVA_VERSION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:200"
+        },
+        {
+            "name": "Java Arguments",
+            "description": "",
+            "env_variable": "JAVA_ARGUMENTS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:2000"
+        },
+        {
+            "name": "Bot File Name",
+            "description": "",
+            "env_variable": "BOT_FILENAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:100"
+        },
+        {
+            "name": "NodeJS Version",
+            "description": "",
+            "env_variable": "NODE_VERSION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:2"
+        },
+        {
+            "name": "Query Port",
+            "description": "required for teamspeak 3 or teaspeak",
+            "env_variable": "QUERY_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:2000"
+        },
+        {
+            "name": "File Port",
+            "description": "Required for teamspeak 3 or teaspeak",
+            "env_variable": "FILE_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:2000"
+        }
+    ]
+}
