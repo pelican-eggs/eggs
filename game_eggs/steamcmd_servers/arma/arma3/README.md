@@ -23,13 +23,6 @@ ___
             <a href="https://github.com/parkervcp/eggs/commits?author=aussieserverhosts" title="Contributor">💡</a>
         </td>
         <td align="center">
-            <a href="https://github.com/Software-Noob">
-                <img src="https://avatars.githubusercontent.com/u/10975908" width="50px;" alt=""/><br /><sub><b>Softwarenoob</b></sub>
-            </a>
-            <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=Software-Noob" title="Code Reviewer">✅</a>
-        </td>
-        <td align="center">
             <a href="https://github.com/Yomanz">
                 <img src="https://avatars.githubusercontent.com/u/5119107" width="50px;" alt=""/><br /><sub><b>Daave</b></sub>
             </a>
