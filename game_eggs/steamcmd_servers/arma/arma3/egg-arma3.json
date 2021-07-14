@@ -2,7 +2,7 @@
     "_comment": "Pterodactyl Arma 3 Egg ~ David Wolfe (Red-Thirten) ~ 2021-07-11",
     "meta": {
         "version": "PTDL_v1",
-        "update_url": "https:\/\/github.com\/parkervcp\/eggs\/blob\/master\/game_eggs\/steamcmd_servers\/arma\/arma3\/egg-arma3.json"
+        "update_url": null
     },
     "name": "Arma 3",
     "author": "rehlmgaming@gmail.com",
