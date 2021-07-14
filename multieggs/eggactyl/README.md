@@ -1,6 +1,7 @@
 # Eggactyl
 ### From their [Website](https://eggactyl.cloud)
 A cool pterodactyl egg which includes many server softwares like: Minecraft java, Minecraft bedrock, Discord Bots (DiscordPHP, js, python), and a lot more.
+All that cool software within 650 MB.
 
 ### List of Software
 - Minecraft Java (Paper, Vanilla, Purpur, Mohist, Magma, Spigot)
