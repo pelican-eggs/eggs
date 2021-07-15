@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-15T16:31:12+02:00",
+    "name": "cloudnet",
+    "author": "floxsvk@gmail.com",
+    "description": null,
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_16"
+    ],
+    "file_denylist": [],
+    "startup": "java -XX:+UseG1GC -XX:MaxGCPauseMillis=50 -XX:CompileThreshold=100 -XX:+UnlockExperimentalVMOptions -XX:+UseCompressedOops -Xmx{{SERVER_MEMORY}}M -Xms256M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Done (\"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# \r\n# CloudNet Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napk add --no-cache wget unzip\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/mnt\/server\/\r\n\r\nwget --no-check-certificate https:\/\/ci.cloudnetservice.eu\/job\/CloudNetService\/job\/CloudNet-v3\/job\/development\/lastSuccessfulBuild\/artifact\/CloudNet.zip\r\n\r\nunzip CloudNet.zip\r\n\r\nrm CloudNet.zip\r\n\r\necho -e \"install complete\"",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "Server Jarfile, by default this is set to 'launcher.jar'.\r\nSet it to otherwise if you wish to have a different jarfile name.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "launcher.jar",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
