@@ -1,4 +1,4 @@
-﻿﻿# SteamCMD Servers
+# SteamCMD Servers
 
 This is a collection of servers that use SteamCMD to install.
 
@@ -9,10 +9,7 @@ This is a collection of servers that use SteamCMD to install.
 [ARK: Survival Evolved](ark_survival_evolved)
 
 ## Arma
-[Arma](arma)
   * [Arma 3](arma/arma3)
-  * [Arma 3 64 Bit](arma/arma3_x64)
-  * [Arma 3 Headless Client](arma/arma3_headless_client)
 
 ## Assetto Corsa
 [Assetto Corsa](assetto_corsa)

@@ -92,8 +92,6 @@
 * [ARK: Survival Evolved](steamcmd_servers/ark_survival_evolved)
 * [Arma](steamcmd_servers/arma)
   * [Arma 3](steamcmd_servers/arma/arma3)
-  * [Arma 3 64 Bit](steamcmd_servers/arma/arma3_x64)
-  * [Arma 3 Headless Client](steamcmd_servers/arma/arma3_headless_client)
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
