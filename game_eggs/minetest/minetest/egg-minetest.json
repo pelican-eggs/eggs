@@ -8,12 +8,12 @@
     "author": "support@pterodactyl.io",
     "description": "An open source voxel game engine. Play one of our many games, mod a game to your liking, make your own game, or play on a multiplayer server.",
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_ubuntu",
-    "startup": ".\/bin\/minetestserver --port {{SERVER_PORT}}",
+    "startup": ".\/bin\/minetestserver --port {{SERVER_PORT}} --terminal",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \" listening on \",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \" Server for gameid\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"debug.txt\"\r\n}",
-        "stop": "^C"
+        "stop": "\/shutdown"
     },
     "scripts": {
         "installation": {
@@ -27,7 +27,7 @@
             "name": "Version",
             "description": "The version of MT to install. Releases only",
             "env_variable": "MTVERSION",
-            "default_value": "5.3.0",
+            "default_value": "5.4.1",
             "user_viewable": false,
             "user_editable": true,
             "rules": "required|string|max:10"
