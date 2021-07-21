@@ -242,3 +242,5 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Grafana](/software/grafana)
 ### haste-server
 * [haste-server](/software/haste-server)
+### Node server
+* [Node-server](/software/node-server)
