@@ -1,4 +1,4 @@
-# Grafama
+# Grafana
 
 ### From the [Grafana](https://github.com/grafana/grafana) GitHub
 The open and composable observability and data visualization platform.
