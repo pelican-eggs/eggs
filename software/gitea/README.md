@@ -8,4 +8,4 @@ Ports required to run the server in a table format.
 | Port | default |
 | ---- | ------- |
 | App  | 3000    |
-| SSH  | 22      |
+| SSH  | 2020    |

@@ -41,10 +41,10 @@
             "name": "SSH Port",
             "description": "SSH port displayed in clone URL.",
             "env_variable": "SSH_PORT",
-            "default_value": "22",
+            "default_value": "2020",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|integer|between:1,65535"
+            "rules": "required|integer|between:1024,65535"
         }
     ]
 }
