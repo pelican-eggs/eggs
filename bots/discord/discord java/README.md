@@ -1,4 +1,4 @@
-# discord.py generic
+# discord.java generic
 This egg is designed to run any generic Java application, allowing users to pull their own Java discord bot from a Github repository.
 
 There is an option to allow a user to upload their own files to run a bot.
