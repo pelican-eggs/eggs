@@ -1,12 +1,9 @@
-# discordgo generic
-This egg is designed to run any generic Golang application, allowing users to pull their own Golang discord bot from a Github repository.
+# discord.java generic
+This egg is designed to run any generic Java application, allowing users to pull their own Java discord bot from a Github repository.
+
+There is an option to allow a user to upload their own files to run a bot.
 
 The startup configs and commands may need changing to actually function properly.
-
-Users cannot upload their own code as this is built to build the resulting bot.
-
-`GO_PACKAGE` is the variable for the go repo i.e. `github.com/aurieh/ddg-ng`  
-`EXECUTABLE` is the variable for the executable that is built i.e. `ddg-ng`
 
 ## Configuration
 The server will be stuck as `starting` until the egg Start Configuration is modified. You have to edit the text to match something your bot will print for Pterodactyl panel to detect it as running.
