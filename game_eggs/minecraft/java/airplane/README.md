@@ -12,5 +12,3 @@ Approximately 2048MB
 | Port    | default |
 |---------|---------|
 | Game    | 25565   |
-
-#### Mods/Plugins may require ports to be added to the server.
