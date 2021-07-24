@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-24T14:26:29-05:00",
+    "exported_at": "2021-07-24T15:19:46-05:00",
     "name": "Elasticsearch",
     "author": "dominic@stilma.net",
     "description": null,
@@ -13,9 +13,9 @@
         "quay.io\/pterodactyl\/core:java-11"
     ],
     "file_denylist": [],
-    "startup": ".\/bin\/elasticsearch",
+    "startup": ".\/bin\/elasticsearch -E network.host=0.0.0.0 -E http.port={{SERVER_PORT}} -E discovery.seed_hosts={{DISCOVERY_SEED_HOSTS}}",
     "config": {
-        "files": "{\r\n    \"elasticsearch.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"network.host\": \"network.host: 0.0.0.0\",\r\n            \"http.port\": \"http.port: {{SERVER_PORT}}\",\r\n            \"#discovery.seed_hosts\": \"discovery.seed_hosts: []\"\r\n        }\r\n    }\r\n}",
+        "files": "{}",
         "startup": "{\r\n    \"done\": \"started\"\r\n}",
         "logs": "{}",
         "stop": "^C"
