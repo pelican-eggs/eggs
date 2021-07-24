@@ -71,6 +71,9 @@ This is a direct fork of the default spigot service with the added benefit of be
 [Mohist Github](https://github.com/Mohist-Community/Mohist)
 Fork of Spigot focused on performance optimizations.
 
+[Airplane Github](https://github.com/TECHNOVE/Airplane)
+A stable, optimized and fast Paper fork.
+
 [Tuinity GitHub](https://github.com/Spottedleaf/Tuinity) 
 Fork of Paper aimed at improving server performance at high playercounts.
 
