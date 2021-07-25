@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-25T09:38:49+02:00",
+    "exported_at": "2021-07-25T09:42:47+02:00",
     "name": "Airplane",
     "author": "info@ttr3.eu",
     "description": "A stable, optimized and fast Paper fork.\r\nhttps:\/\/github.com\/TECHNOVE\/Airplane",
@@ -51,7 +51,7 @@
         },
         {
             "name": "Build version",
-            "description": "Here you can set which build version you want to use from Airplane release",
+            "description": "Here you can set which build version you want to use from Airplane release\r\n(You can see the version from this site https:\/\/ci.tivy.ca)\r\n\r\nExample: https:\/\/ci.tivy.ca\/job\/Airplane-1.17\/(Build version)\/artifact\/launcher-airplane.jar",
             "env_variable": "BUILDVERSION",
             "default_value": "latest",
             "user_viewable": true,
