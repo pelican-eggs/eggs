@@ -11,6 +11,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [PocketMine MP](/game_eggs/minecraft/bedrock/pocketmine_mp)  
 
 [Java](/game_eggs/minecraft/java/) Servers for Java Minecraft
+* [Airplane](/game_eggs/minecraft/java/airplane)
 * [Cuberite](/game_eggs/minecraft/java/cuberite)
 * [Fabric](/game_eggs/minecraft/java/fabric) 
 * [Feather](/game_eggs/minecraft/java/feather)  
