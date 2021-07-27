@@ -1,4 +1,4 @@
-﻿# Parkers Pterodactyl eggs repo
+# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
@@ -240,6 +240,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Code-Server](/software/code-server)
 ### Elasticsearch
 * [Elasticsearch](/software/elasticsearch)
+### Gitea
+* [Gitea](/software/gitea)
 ### Grafana
 * [Grafana](/software/grafana)
 ### haste-server
