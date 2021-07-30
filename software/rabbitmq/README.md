@@ -3,10 +3,6 @@
 ### From the [RabbitMQ](https://www.rabbitmq.com/) website
 RabbitMQ is the most widely deployed open source message broker.
 
-### Description
-This is an RabbitMQ egg that makes it possible to run RabbitMQ in Pterodactyl.
-RabbitMQ is a widely used message broker supporting multiple protocols including AMQP.
-
 ### Installation
 Follow the common egg installation guide to install the egg on your Pterodactyl instance.
 When setting up a server, the latest RabbitMQ version will be used by default.
@@ -21,17 +17,17 @@ This means:
  - Enable plugins using the plugin file located at `/home/container/etc/rabbitmq/enabled_plugins`
  - Configure users and vhosts through a [definitions.json](https://www.rabbitmq.com/definitions.html)
 
-You can configure the used `definitions.json` using the `load_definitions` options in your config.
+You can set the path to the used `definitions.json` using the `load_definitions` option in your config.
 Note that RabbitMQ versions prior to 3.8.6 will require a properly configured management plugin to do so!
-The easiest way to gain a working andf configured `definitions.json` is to setup a local instance with the 
-management plugin. You can configure your instance there and import the definitions as stated.
+The easiest way to get a working `definitions.json` is to setup a local instance with the 
+management plugin. You can configure your instance there and load the definitions as stated by uploading them.
 
 By default, only `listeners.tcp.default` is configured to match your primary allocation. 
 If you want to expose some other port (e. g. the web management interface) you have to manually configure the
 port in your `rabbitmq.conf`.
 
 ### Update support
-The egg _should_ keep the etc folder when reinstalling to prevent destroying the configuration by accident. Therefore a reinstallation with "latest" as the selected version can be used to update RabbitMQ.
+The egg _should_ keep the `etc` folder when reinstalling, to prevent destroying the configuration by accident. Therefore a reinstallation with "latest" as the selected version can be used to update RabbitMQ.
 
 If you want to reset the server completly, remove the `etc` directory manually before reinstalling.
 
