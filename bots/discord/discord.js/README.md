@@ -1,6 +1,6 @@
 # discord.js generic
 
-This egg is designed to run any generic Javascript application, allowing users to pull their own python discord bot from a Github repository.
+This egg is designed to run any generic Javascript application, allowing users to pull their own javascript discord bot from a Github repository.
 
 There is an option to allow a user to upload their own files to run a bot.
 
