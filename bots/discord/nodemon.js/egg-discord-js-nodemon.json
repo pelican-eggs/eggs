@@ -18,7 +18,7 @@
     "startup": "if [[ -d .git ]] && [[ 0 == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install --production; fi; bash --rcfile <(echo 'export RUN_CMD=\"\/home\/container\/node_modules\/nodemon\/bin\/nodemon.js \/home\/container\/'{{BOT_JS_FILE}}' &\"; eval $(echo $RUN_CMD)')",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"ready\"\r\n}",
+        "startup": "{\r\n    \"done\": \"change this text\"\r\n}",
         "logs": "{}",
         "stop": "^c"
     },
