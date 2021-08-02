@@ -62,7 +62,7 @@
         },
         {
             "name": "Your OAuth Token",
-            "description": "Please note, this OAuth token needs to be generated while you're logged in into your caster account.\r\nIf you're not logged in as the caster, please go to https:\/\/twitch.tv\/ and login as the caster.\r\nGet the your OAuth token here: https:\/\/phantombot.tv\/oauth\/",
+            "description": "Please note, this OAuth token needs to be generated while you're logged in into your caster account.\r\nIf you're not logged in as the caster, please go to https:\/\/twitch.tv\/ and login as the caster.\r\nGet the your OAuth token here: https:\/\/phantombot.github.io\/PhantomBot\/oauth\/",
             "env_variable": "USER_OAUTH_TOKEN",
             "default_value": "",
             "user_viewable": true,

@@ -1,0 +1,140 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-03-08T17:51:46+01:00",
+    "name": "Valheim Plus Mod",
+    "author": "info@goover.de",
+    "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_source"
+    ],
+    "file_denylist": [],
+    "startup": "export templdpath=$LD_LIBRARY_PATH; export DOORSTOP_ENABLE=TRUE; export DOORSTOP_INVOKE_DLL_PATH=.\/BepInEx\/core\/BepInEx.Preloader.dll; export DOORSTOP_CORLIB_OVERRIDE_PATH=.\/unstripped_corlib; export LD_LIBRARY_PATH=.\/doorstop_libs:$LD_LIBRARY_PATH; export LD_PRELOAD=libdoorstop_x64.so:$LD_PRELOAD; export LD_LIBRARY_PATH=.\/linux64:$LD_LIBRARY_PATH; export SteamAppId=892970; .\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public ${PUBLIC} > >(sed -uE \"{{FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Valheim Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install curl lib32gcc1 ca-certificates unzip jq wget\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\ncd \/mnt\/server\r\nwget -N $DOWNLOAD_LINK\r\nunzip -o $MATCH\r\nrm -fR $MATCH\r\n\r\nchmod u+x start_server_bepinex.sh",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name that appears in server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:60"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password.",
+            "env_variable": "PASSWORD",
+            "default_value": "secret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:5|max:20"
+        },
+        {
+            "name": "World Name",
+            "description": "Name to load if switching between multiple saved worlds.",
+            "env_variable": "WORLD",
+            "default_value": "Dedicated",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "App ID",
+            "description": "Valheim steam app id for auto updates.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "896660",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|numeric"
+        },
+        {
+            "name": "LD Library Path",
+            "description": "Required to load server libraries.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/linux64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "GITHUB_PACKAGE",
+            "description": "",
+            "env_variable": "GITHUB_PACKAGE",
+            "default_value": "valheimPlus\/ValheimPlus",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "MATCH",
+            "description": "",
+            "env_variable": "MATCH",
+            "default_value": "UnixServer.zip",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Public Server",
+            "description": "",
+            "env_variable": "PUBLIC",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Filter",
+            "description": "",
+            "env_variable": "FILTER",
+            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string"
+        },
+        {
+            "name": "Shutdown Command",
+            "description": "",
+            "env_variable": "STOP",
+            "default_value": "kill -2 $!; wait;",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        }
+    ]
+}

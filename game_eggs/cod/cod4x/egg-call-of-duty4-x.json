@@ -1,0 +1,104 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-05-04T10:23:27+02:00",
+    "name": "Call of Duty 4X",
+    "author": "admin@grimsi.de",
+    "description": "A client and server modification for Call of Duty 4: Modern Warfare with the aim to fix bugs and enhance gameplay!",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": "if [ ! -d \"{{GAME_FILE_PATH}}\" ]; then echo \"CoD 4 game files not found. Maybe they are not mounted?\"; echo \"In order for the server to start mount the game files here: {{GAME_FILE_PATH}}\"; while true; do sleep 2; done; fi; .\/cod4x18_dedrun +exec server.cfg +set dedicated \"{{SERVER_NETWORK_MODE}}\" +set sv_maxclients \"{{MAX_PLAYERS}}\" +set net_ip 0.0.0.0 +set net_port \"{{SERVER_PORT}}\" +set fs_basepath \"{{GAME_FILE_PATH}}\" +set fs_homepath . +map_rotate",
+    "config": {
+        "files": "{\r\n    \"main\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"rcon_password\": \"rcon_password \\\"{{server.build.env.ADMIN_PASSWORD}}\\\"\",\r\n            \"g_password\": \"g_password \\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"sv_authtoken\": \"sv_authtoken \\\"{{server.build.env.SERVER_AUTH_TOKEN}}\\\"\",\r\n            \"sv_mapRotation\": \"sv_mapRotation \\\"{{server.build.env.MAP_ROTATION}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"By using this software you agree to the usage conditions\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# CoD 4X Installation script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nDOWNLOAD_LINK=https:\/\/cod4x.me\/downloads\/cod4x_server-linux.zip\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\/\r\n\r\n## this is a simple script to validate a download url actually exists and is reachable\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"Download-URL is reachable.\"\r\n    else        \r\n        echo -e \"Could not reach ${DOWNLOAD_LINK}.\"\r\n        echo -e \"Aborting installation...\"\r\n        exit 1\r\n    fi\r\nfi\r\n\r\n# Download the server binaries\r\necho -e \"running 'curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}'\" \r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\necho -e \"Unpacking server files\"\r\nunzip ${DOWNLOAD_LINK##*\/}\r\n\r\necho -e \"Moving server files to \/mnt\/server\"\r\nmv .\/cod4x-linux-server\/* .\r\n\r\necho -e \"Cleaning up downloaded files.\"\r\nrm ${DOWNLOAD_LINK##*\/}\r\nrm -rf .\/cod4x-linux-server\r\n\r\necho -e \"Installing required runtime libs.\"\r\nmv .\/runtime\/libstdc++.so.6 .\r\n\r\necho -e \"Generating config file\"\r\ncat <<EOF > .\/main\/server.cfg\r\nsv_hostname \"${SERVER_NAME}\"\r\ng_password \"${SERVER_PASSWORD}\"\r\nrcon_password \"${ADMIN_PASSWORD}\"\r\n\r\nsv_punkbuster \"0\"\r\nsv_cheats \"0\"\r\nsv_voice \"0\"\r\nscr_teambalance \"1\"\r\ng_allowvote \"1\"\r\n\r\nsv_authorizemode \"0\"\r\nsv_authtoken \"${SERVER_AUTH_TOKEN}\"\r\n\r\nsv_floodProtect \"1\"\r\n\r\nsv_mapRotation \"${MAP_ROTATION}\"\r\nEOF\r\n\r\necho -e \"running 'chmod +x .\/cod4x18_dedrun'\"\r\nchmod +x .\/cod4x18_dedrun\r\n\r\necho -e \"Installation complete\"",
+            "container": "quay.io\/matthewp\/pterodactyl:alpine-install",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Hostname of the server.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl CoD 4X Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password of the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Admin Password",
+            "description": "RCON password for the server.",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "password123",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|min:8|max:20"
+        },
+        {
+            "name": "Server Slots",
+            "description": "Amount of players that can play on the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "32",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|digits_between:1,3|min:1"
+        },
+        {
+            "name": "Game File Path",
+            "description": "Path to the CoD 4 game files (has to be the same as the \"target\" of the mount)",
+            "env_variable": "GAME_FILE_PATH",
+            "default_value": "\/mnt\/gamefiles\/cod4",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Map Rotation",
+            "description": "Map rotation in Quake format.",
+            "env_variable": "MAP_ROTATION",
+            "default_value": "gametype war map mp_crossfire",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:1000"
+        },
+        {
+            "name": "Server Network Mode",
+            "description": "1 for LAN only, 2 for public",
+            "env_variable": "SERVER_NETWORK_MODE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|digits:1|min:1|max:2"
+        },
+        {
+            "name": "Server Authentication Token",
+            "description": "Token needed to list your server on the public masterserver. Generate here: https:\/\/cod4master.cod4x.me\/index.php?token_generator=true",
+            "env_variable": "SERVER_AUTH_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|size:40"
+        }
+    ]
+}

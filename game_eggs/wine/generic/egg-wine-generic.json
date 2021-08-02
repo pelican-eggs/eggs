@@ -1,0 +1,60 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-04-28T02:09:55+00:00",
+    "name": "Wine Generic",
+    "author": "parker@parkervcp.com",
+    "description": "a generic egg to run servers with wine",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5",
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine-4"
+    ],
+    "file_denylist": [],
+    "startup": "wine {{SERVER_EXECUTABLE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change me\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# The wine generic server installer\r\n# This will just pull a download link and unpack it in directory if specified.\r\n\r\napt update -y\r\napt install -y curl file unzip\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n# if an install dir is set then make it and change to it.\r\nif [ ! -z ${INSTALL_DIR} ]; then\r\n    mkdir -p ${INSTALL_DIR}\r\n    cd ${INSTALL_DIR}\r\nfi\r\n\r\n# validate server link\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\n# unpack servver files\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\n\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n    tar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    exit 2 \r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Download URL",
+            "description": "URL to use to download a servers files.",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "https:\/\/beamng-mp.com\/server\/BeamMP_Server.zip",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Server Executable",
+            "description": "The server executable to run.",
+            "env_variable": "SERVER_EXECUTABLE",
+            "default_value": "BeamMP-Server.exe",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "sub directory to install into",
+            "description": "for example is the server needs to get installed into \/home\/container\/server\/bin\/\r\n\r\nuse server\/bin\/",
+            "env_variable": "INSTALL_DIR",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string"
+        }
+    ]
+}

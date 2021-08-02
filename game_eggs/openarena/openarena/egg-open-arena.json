@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-04-23T17:30:07+00:00",
+    "name": "OpenArena",
+    "author": "parker@parkervcp.com",
+    "description": "OpenArena is a community-produced deathmatch FPS based on GPL idTech3 technology.\r\n\r\nhttp:\/\/www.openarena.ws\/",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/oa_ded.x86_64 +set net_port {{SERVER_PORT}} +map {{GAME_MAP}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"AAS initialized\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# dirty install script for openarena\r\n# will get updated more later\r\n\r\napt update -y\r\napt install -y wget unzip\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n\tmkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nwget http:\/\/www.openarena.ws\/request.php?4 -O openarena.zip\r\n\r\nunzip -o openarena.zip openarena-*\/oa_ded.x86_64 openarena-*\/missionpack\/* openarena-*\/baseoa\/*\r\n\r\nmv -f openarena-*\/* \/mnt\/server\/\r\n\r\nrm -rf openarena-*\/ openarena.zip",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game Map",
+            "description": "The map to load when the server starts.\r\nSee here for all maps available by default - https:\/\/openarena.fandom.com\/wiki\/Maps",
+            "env_variable": "GAME_MAP",
+            "default_value": "aggressor",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        }
+    ]
+}

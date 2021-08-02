@@ -1,0 +1,49 @@
+name: 🎮 Game Request
+description: Suggest a server to build an egg for
+title: "[Egg Request]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+          Make sure there are no existing egg requests by searching the repository issues. Please understand how Pterodactyl works when you are requesting an egg. (ie. docker-compose doesn't work for a pterodactyl server)
+  - type: input
+    id: service
+    attributes:
+      label: Service
+      description: Service you are experiencing issues with
+      placeholder: minecraft/factorio/etc
+    validations:
+      required: true
+  - type: dropdown
+    id: expand
+    attributes:
+      label: Does this expand an already existing service
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: input
+    id: game-link
+    attributes:
+      label: Link to game
+      placeholder: minecraft.net/factorio.com/etc
+    validations:
+      required: true
+  - type: input
+    id: download-link
+    attributes:
+      label: Links for server downloads
+      description: This needs to be an official link and not one that is hosted on some forum page or a personal Github page.
+    validations:
+      required: true
+    validations:
+      required: true
+  - type: input
+    id: instruction-link
+    attributes:
+      label: Links for the install docs
+      description: Link to install instructions or documentation based on which the server can be created
+      placeholder: Install the server, start it, play
+    validations:
+      required: true

@@ -1,0 +1,82 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2021-02-08T10:56:34-06:00",
+    "name": "Eco",
+    "author": "info@goover.de",
+    "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
+    "features": null,
+    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5",
+    "startup": "export DOTNET_BUNDLE_EXTRACT_BASE_DIR=.\/dotnet-bundle &&  .\/EcoServer",
+    "config": {
+        "files": "{\r\n    \"Configs\/Network.eco\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"GameServerPort\": \"{{server.build.default.port}}\",\r\n            \"WebServerPort\": \"{{server.build.env.WEB_PORT}}\",\r\n            \"PublicServer\": \"{{server.build.env.PUB_SRV}}\",\r\n            \"Password\": \"{{server.build.env.SRV_PWD}}\",\r\n            \"UPnPEnabled\": \"{{server.build.env.UPNP}}\",\r\n            \"Description\": \"{{server.build.env.SRV_DES}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Web Server now listening on\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\ncp -f $HOME\/Configs\/Network.eco.template $HOME\/Configs\/Network.eco",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "739590",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Web server port",
+            "description": "port",
+            "env_variable": "WEB_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Public Server",
+            "description": "Public Server = true | Private Server = false",
+            "env_variable": "PUB_SRV",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password to join the Server",
+            "env_variable": "SRV_PWD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Server Description",
+            "description": "Server Description",
+            "env_variable": "SRV_DES",
+            "default_value": "Hosted by Pterodactyl",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "UPNP",
+            "description": "UPNP OFF",
+            "env_variable": "UPNP",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
