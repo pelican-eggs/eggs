@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-30T22:37:14+02:00",
+    "exported_at": "2021-08-02T15:24:45+02:00",
     "name": "RabbitMQ",
     "author": "p.zarrad@outlook.de",
     "description": "RabbitMQ is a feature rich, multi-protocol messaging broker.",
@@ -24,7 +24,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update and install xz\r\napk update\r\napk add xz\r\n# Cleanup previous install if available but leave etc untouched\r\nfind . -maxdepth 1 -type f -print0 | xargs -0 -I {} rm -fv {}\r\nfind . -maxdepth 1 -type d -not -name 'etc' -print0 | xargs -0 -I {} rm -rfv {}\r\n# Download and extract RabbitMQ\r\nversion=${RABBITMQ_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/rabbitmq\/rabbitmq-server\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/rabbitmq\/rabbitmq-server\/releases\/download\/v${version}\/rabbitmq-server-generic-unix-${version}.tar.xz --output rabbitmq.tar.xz\r\nxz -v -d rabbitmq.tar.xz && tar -xvf rabbitmq.tar\r\nmv -n rabbitmq_server-*\/* .\/\r\nrm -rf rabbitmq.tar rabbitmq_server-*\/\r\n# If there is no config, download default one\r\nif [ ! -f \"etc\/rabbitmq\/rabbitmq.conf\" ]; then mkdir -p etc\/rabbitmq\/ && curl -L https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/software\/rabbitmq\/rabbitmq.conf --output etc\/rabbitmq\/rabbitmq.conf; fi",
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update and install xz\r\napk update\r\napk add xz\r\n# Cleanup previous install if available but leave etc untouched\r\nfind . -maxdepth 1 ! -name \"etc\" ! -name . -exec rm -rf {} \\;\r\n# Download and extract RabbitMQ\r\nversion=${RABBITMQ_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/rabbitmq\/rabbitmq-server\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/rabbitmq\/rabbitmq-server\/releases\/download\/v${version}\/rabbitmq-server-generic-unix-${version}.tar.xz --output rabbitmq.tar.xz\r\nxz -v -d rabbitmq.tar.xz && tar -xvf rabbitmq.tar\r\nmv -n rabbitmq_server-*\/* .\/\r\nrm -rf rabbitmq.tar rabbitmq_server-*\/\r\n# If there is no config, download default one\r\nif [ ! -f \"etc\/rabbitmq\/rabbitmq.conf\" ]; then mkdir -p etc\/rabbitmq\/ && curl -L https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/software\/rabbitmq\/rabbitmq.conf --output etc\/rabbitmq\/rabbitmq.conf; fi",
             "container": "ghcr.io\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
