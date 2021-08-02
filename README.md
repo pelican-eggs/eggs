@@ -30,12 +30,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
 * [discord.js](bots/discord/discord.js) Node JS generic
-* [nodemon.js](bots/discord/nodemon.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
 * [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
-* [parkertron](/bots/discord/parkertron) Golang
+* [nodemon.js](bots/discord/nodemon.js) Node JS generic
+* [parkertron](/bots/discord/parkertron) Golang 
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
 * [SinusBot](/bots/discord/sinusbot)
