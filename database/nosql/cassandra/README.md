@@ -34,7 +34,7 @@ Example command you can enter into the Pterodactyl console after CQLSH is connec
 ALTER USER cassandra WITH PASSWORD 'SomePasswordYouShouldSpecifyOnYourOwn!';
 ```
 
-#### Inernet Access
+#### Internet Access
 Cassandra recommends to not expose the service to the internet. 
 Therefore, it is recommended to run this egg in an internal network or behind a firewall, 
 that is properly configured to restrict access to the service from outside of your network.
