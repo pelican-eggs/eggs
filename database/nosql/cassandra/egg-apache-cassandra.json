@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-08-03T21:09:15+02:00",
+    "exported_at": "2021-08-03T22:11:40+02:00",
     "name": "Apache Cassandra",
     "author": "p.zarrad@outlook.de",
     "description": "Apache Cassandra is an open source NoSQL distributed database trusted by thousands of companies for scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data.",
@@ -14,7 +14,7 @@
         "ghcr.io\/parkervcp\/yolks:cassandra_java8_python2"
     ],
     "file_denylist": [],
-    "startup": "nohup .\/bin\/cassandra -R -p \/home\/container\/cassandra.pid -f &\r\n while ! .\/bin\/cqlsh -e 'describe cluster' 127.0.0.1 $SERVER_PORT; do\r\n \tsleep 10;\r\ndone\r\n.\/bin\/cqlsh -t 127.0.0.1 $SERVER_PORT",
+    "startup": ".\/start.sh",
     "config": {
         "files": "{\r\n    \"conf\/jvm-server.options\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#-Xms\": \"-Xms128M\",\r\n            \"#-Xmx\": \"-Xmx{{server.build.memory}}M\"\r\n        }\r\n    },\r\n    \"conf\/jvm11-server.options\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#-Xms\": \"-Xms128M\",\r\n            \"#-Xmx\": \"-Xmx{{server.build.memory}}M\"\r\n        }\r\n    },\r\n    \"conf\/jvm8-server.options\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#-Xms\": \"-Xms128M\",\r\n            \"#-Xmx\": \"-Xmx{{server.build.memory}}M\"\r\n        }\r\n    },\r\n    \"conf\/cassandra.yaml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"native_transport_port\": \"native_transport_port: {{server.build.default.port}}\",\r\n            \"# rpc_address\": \"rpc_address: 0.0.0.0\",\r\n            \"rpc_address\": \"rpc_address: 0.0.0.0\",\r\n            \"# broadcast_rpc_address\": \"broadcast_rpc_address: {{server.build.default.ip}}\",\r\n            \"broadcast_rpc_address\": \"broadcast_rpc_address: {{server.build.default.ip}}\",\r\n            \"authenticator: AllowAllAuthenticator\": \"authenticator: PasswordAuthenticator\",\r\n            \"authorizer: AllowAllAuthorizer\": \"authorizer: CassandraAuthorizer\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Connected to\"\r\n}",
