@@ -3,12 +3,13 @@
     "meta": {
         "version": "PTDL_v1"
     },
-    "exported_at": "2020-06-25T09:46:46-04:00",
+    "exported_at": "2021-08-02T22:03:34-04:00",
     "name": "tModloader",
     "author": "parker@parkervcp.com",
     "description": "tModLoader is essentially a mod that provides a way to load your own mods without having to work directly with Terraria's source code itself. This means you can easily make mods that are compatible with other people's mods, save yourself the trouble of having to decompile and recompile Terraria.exe, and escape from having to understand all of the obscure \"intricacies\" of Terraria's source code. It is made to work for Terraria 1.3+.",
+    "features": null,
     "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5",
-    "startup": ".\/tModLoaderServer -ip 0.0.0.0 -port ${SERVER_PORT} -maxplayers ${MAX_PLAYERS} -world ~\/saves\/Worlds\/${WORLD_NAME}.wld -worldname ${WORLD_NAME} -autocreate ${WORLD_SIZE} -savedirectory ~\/ -tmlsavedirectory ~\/saves -modpath ~\/mods",
+    "startup": ".\/tModLoaderServer -ip 0.0.0.0 -port ${SERVER_PORT} -maxplayers ${MAX_PLAYERS} -difficulty ${DIFFICULTY} -password \"${SERVER_PASSWORD}\" -motd \"${MOTD}\" -lang ${LANGUAGE} -world ~\/saves\/Worlds\/${WORLD_NAME}.wld -worldname ${WORLD_NAME} -autocreate ${WORLD_SIZE} -savedirectory ~\/ -tmlsavedirectory ~\/saves -modpath ~\/mods",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
@@ -24,21 +25,12 @@
     },
     "variables": [
         {
-            "name": "tModloader Version",
-            "description": "The version of tModloader that is to be used.",
-            "env_variable": "VERSION",
-            "default_value": "latest",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
-        },
-        {
             "name": "World Name",
             "description": "The name for the world file.",
             "env_variable": "WORLD_NAME",
             "default_value": "world",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
@@ -46,8 +38,8 @@
             "description": "The maximum number of players a server will hold.",
             "env_variable": "MAX_PLAYERS",
             "default_value": "8",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|numeric|digits_between:1,3"
         },
         {
@@ -55,17 +47,26 @@
             "description": "Defines the worlds size. 3 sizes 1 (small), 2 (medium), 3 (large).",
             "env_variable": "WORLD_SIZE",
             "default_value": "1",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "tModloader Version",
+            "description": "The version of tModloader that is to be used.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
         },
         {
             "name": "GitHub User",
             "description": "GitHub user to use for api calls.\r\n\r\nThis only needs to be set if you hit the GitHub API too often across multiple servers.",
             "env_variable": "GITHUB_USER",
             "default_value": "",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "string|nullable"
         },
         {
@@ -73,9 +74,45 @@
             "description": "This can be either an OAuth or a Personal Access Token.\r\n\r\nThis is required for the install is you set a user.",
             "env_variable": "GITHUB_OAUTH_TOKEN",
             "default_value": "",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "string|nullable"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Sets the difficulty of the world when using autocreate 0(normal), 1(expert)",
+            "env_variable": "DIFFICULTY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int|max:1"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password for users to connect to your server",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "MOTD",
+            "description": "Message of the Day for the server",
+            "env_variable": "MOTD",
+            "default_value": "Please don\u2019t cut the purple trees!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Language",
+            "description": "Sets the server language \r\n1:English, \r\n2:German, \r\n3:Italian, \r\n4:French, \r\n5:Spanish",
+            "env_variable": "LANGUAGE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int|max:1"
         }
     ]
 }
