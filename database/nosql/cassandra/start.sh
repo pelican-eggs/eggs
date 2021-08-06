@@ -4,7 +4,7 @@ echo "Starting Cassandra..."
 ./bin/cassandra -R -p cassandra.pid
 # Wait for successful startup
 while ! ./bin/cqlsh -u "$CASSANDRA_USER" -p "$CASSANDRA_PASSWORD" -e 'describe cluster' 127.0.0.1 $SERVER_PORT; do
-    echo "Still awaiting Cassandra satrtup..."
+    echo "Still awaiting Cassandra startup..."
  	sleep 10;
     if ! kill -0 $(cat cassandra.pid); then
     	echo "It seems Cassandra has crashed!"
