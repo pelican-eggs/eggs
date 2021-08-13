@@ -4,15 +4,16 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-26T04:36:03+02:00",
+    "exported_at": "2021-08-07T17:13:40+03:00",
     "name": "discord.py generic",
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_python-3.9",
-        "quay.io\/parkervcp\/pterodactyl-images:debian_python-3.8",
-        "quay.io\/parkervcp\/pterodactyl-images:debian_python-2.7"
+        "ghcr.io\/parkervcp\/yolks:python_3.9",
+        "ghcr.io\/parkervcp\/yolks:python_3.8",
+        "ghcr.io\/parkervcp\/yolks:python_3.7",
+        "ghcr.io\/parkervcp\/yolks:python_2.7"
     ],
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z {{PY_PACKAGES}} ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; \/usr\/local\/bin\/python \/home\/container\/{{BOT_PY_FILE}}",
@@ -29,8 +30,7 @@
             "entrypoint": "bash"
         }
     },
-    "variables": [
-        {
+    "variables": [{
             "name": "Git Repo Address",
             "description": "Git repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
             "env_variable": "GIT_ADDRESS",
