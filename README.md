@@ -75,6 +75,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [ET Legacy](/enemy_territory/etlegacy)
 
+* [Eugen games](/eugen)
+  * [Steel Division 2](/eugen/steel-division-2)
+  * [Wargame: Red Dragon](/eugen/wargame-red-dragon)
+  * [Wargame: Red Dragon - patched](/eugen/wargame-red-dragon-patched)
+
 [Factorio](/factorio/factorio)
 
 [Grand Theft Auto](/gta)
