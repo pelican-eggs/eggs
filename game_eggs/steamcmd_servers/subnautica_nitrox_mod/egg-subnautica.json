@@ -1,0 +1,130 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-02-28T17:37:13+01:00",
+    "name": "Subnautica",
+    "author": "tueye@tuworld.de",
+    "description": "Subnautica is an open world survival action-adventure video game developed and published by Unknown Worlds Entertainment. In it, players are free to explore the ocean on an alien planet, known as planet 4546B, after their spaceship, the Aurora, crashes on the planet's surface.",
+    "features": null,
+    "images": [
+        "quay.io\/pterodactyl\/core:mono"
+    ],
+    "startup": ".\/start.sh",
+    "config": {
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"ServerPort\": \"{{server.build.default.port}}\",\r\n            \"SaveInterval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"DisableAutoSave\": \"{{server.build.env.SAVE_DISABLE}}\",\r\n            \"SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"ServerPassword\": \"{{server.build.env.SUBNAUTICA_PASSWORD}}\",\r\n            \"AdminPassword\": \"{{server.build.env.SUBNAUTICA_ADMIN_PASSWORD}}\",\r\n            \"GameMode\": \"{{server.build.env.SERVER_MODE}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server is waiting for players!\"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n# Install dependencies\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates nuget git\r\n\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n\r\n## Install game using steamcmd\r\nGUARDCODE=\"${STEAM_GUARDCODE}\"\r\nif [ -z $GUARDCODE ]\r\nthen\r\n    echo \"\"\r\n    echo \"### You did not specify a Steam Guardcode\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    timeout 60 .\/steamcmd.sh +login ${STEAM_USERNAME} ${STEAM_PASSWORD} +quit\r\n    exit 1\r\nfi\r\n\r\nmkdir $HOME\/subnautica\r\n.\/steamcmd.sh +set_steam_guard_code ${STEAM_GUARDCODE} +login ${STEAM_USERNAME} ${STEAM_PASSWORD} +@sSteamCmdForcePlatformType windows +force_install_dir $HOME\/subnautica +app_update ${APPID} ${EXTRA_FLAGS} validate +quit\r\nstatus=$?\r\n\r\nif [ $status -ne 0 ]\r\nthen\r\n    echo \"\"\r\n    echo \"### The Download was not successful\"\r\n    echo \"### Probably the entered Guardcode was wrong\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    sleep 10\r\n    timeout 30 .\/steamcmd.sh +login ${STEAM_USERNAME} ${STEAM_PASSWORD} +quit\r\n    exit 1\r\nfi\r\n\r\n\r\n## Install Nitrox using git\r\n[ -d \"$HOME\/nitrox\" ] && rm -r $HOME\/nitrox\r\ngit clone --recursive https:\/\/github.com\/SubnauticaNitrox\/Nitrox.git --branch ${NITROX_VERSION} $HOME\/nitrox\r\n\r\n\r\n## set up 32 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n\r\n## Prepare building Nitrox\r\ncd $HOME\/nitrox\r\nnuget restore\r\n\r\n\r\n## Create path files to Subnautica Install-Dir\r\necho \"\/home\/container\/subnautica\" > $HOME\/path.txt\r\ncp $HOME\/nitrox\/DevVars.targets.example $HOME\/nitrox\/DevVars.targets\r\nsed -i 's#<SubnauticaDir>C:\\\\Program Files\\\\Epic Games\\\\Subnautica<\/SubnauticaDir>#<SubnauticaDir>\/mnt\/server\/subnautica<\/SubnauticaDir>#' $HOME\/nitrox\/DevVars.targets\r\n\r\n\r\n## Build Nitrox\r\nmsbuild\r\n\r\n\r\n## Configure server startup config\r\necho \"#!\/bin\/sh\r\nexport MONO_PATH=$MONO_PATH:\/home\/container\/nitrox\/NitroxModel-Subnautica\/bin\/Debug\/\r\nmono .\/nitrox\/NitroxServer-Subnautica\/bin\/Debug\/NitroxServer-Subnautica.exe\" > \/mnt\/server\/start.sh\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\n\r\n## Create Config\r\nif [ -e $HOME\/server.cfg ]; then\r\n    echo \"server settings exists\"\r\nelse\r\n    echo \"writing server default settings\"\r\n    cat <<EOT > $HOME\/server.cfg\r\n    # Server settings can be changed here\r\n    ServerPort=11000\r\n    # Measured in milliseconds\r\n    SaveInterval=120000\r\n    MaxConnections=100\r\n    DisableConsole=False\r\n    DisableAutoSave=False\r\n    SaveName=world\r\n    ServerPassword=\r\n    AdminPassword=PleaseChangeMe\r\n    # Possible values: SURVIVAL, FREEDOM, HARDCORE, CREATIVE\r\n    GameMode=SURVIVAL\r\n    # Possible values: PROTOBUF, JSON\r\n    SerializerMode=PROTOBUF\r\n    #\r\n    # Default player stats below here\r\n    DefaultOxygenValue=45\r\n    DefaultMaxOxygenValue=45\r\n    DefaultHealthValue=80\r\n    DefaultHungerValue=50.5\r\n    DefaultThirstValue=90.5\r\n    # Recommended to keep at 0.1f which is the default starting value. If set to 0 then new players are cured by default.\r\n    DefaultInfectionValue=0.1\r\nEOT\r\nfi",
+            "container": "mono:latest",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "APPID",
+            "default_value": "264710",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Steam-Username",
+            "description": "Your Steam-Account SUername",
+            "env_variable": "STEAM_USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam-Password",
+            "description": "Your Steam Account Password",
+            "env_variable": "STEAM_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam-GuardCode",
+            "description": "Yout Steam Guard Code",
+            "env_variable": "STEAM_GUARDCODE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:6"
+        },
+        {
+            "name": "Nitrox Version",
+            "description": "Which version of Nitrox to install and use. Enter Github tags or branch name.",
+            "env_variable": "NITROX_VERSION",
+            "default_value": "1.4.0.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,12"
+        },
+        {
+            "name": "Auto Save Interval",
+            "description": "Time between auto saves specified in milliseconds",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "120000",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:6,7"
+        },
+        {
+            "name": "Disable Auto Save",
+            "description": "Disables Auto Save: False \/ True",
+            "env_variable": "SAVE_DISABLE",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:True,False"
+        },
+        {
+            "name": "Save Name",
+            "description": "The save name for the server.",
+            "env_variable": "SAVE_NAME",
+            "default_value": "world",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "alpha_dash|between:1,100"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password neccessary for connecting to the Server",
+            "env_variable": "SUBNAUTICA_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|between:3,12"
+        },
+        {
+            "name": "Admin Password",
+            "description": "If specified, players must provide this password to gain access to administrator commands on the server.",
+            "env_variable": "SUBNAUTICA_ADMIN_PASSWORD",
+            "default_value": "PleaseChangeMe",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|between:3,12"
+        },
+        {
+            "name": "Game Mode",
+            "description": "Game Mode setting: SURVIVAL, FREEDOM, HARDCORE, CREATIVE",
+            "env_variable": "SERVER_MODE",
+            "default_value": "SURVIVAL",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:SURVIVAL,FREEDOM,HARDCORE,CREATIVE"
+        }
+    ]
+}

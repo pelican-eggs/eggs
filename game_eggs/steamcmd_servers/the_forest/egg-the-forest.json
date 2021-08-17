@@ -1,0 +1,121 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-01-03T20:24:12+01:00",
+    "name": "The Forest",
+    "author": "admin@softwarenoob.com",
+    "description": "As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive against a society of cannibalistic mutants. Build, explore, survive in this terrifying first-person survival horror simulator.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_wine-xvfb"
+    ],
+    "startup": ".\/start.sh",
+    "config": {
+        "files": "{\r\n    \"\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"serverIP\": \"serverIP {{server.build.default.ip}}:{{server.build.default.port}}\",\r\n            \"serverSteamPort\": \"serverSteamPort {{server.build.env.STEAM_PORT}}\",\r\n            \"serverGamePort\": \"serverGamePort {{server.build.default.port}}\",\r\n            \"serverQueryPort\": \"serverQueryPort {{server.build.env.QUERY_PORT}}\",\r\n            \"serverName\": \"serverName {{server.build.env.SERVER_NAME}}\",\r\n            \"serverPlayers\": \"serverPlayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"serverPassword\": \"serverPassword {{server.build.env.SERVER_PASS}}\",\r\n            \"serverPasswordAdmin\": \"serverPasswordAdmin {{server.build.env.ADMIN_PASS}}\",\r\n            \"serverSteamAccount\": \"serverSteamAccount {{server.build.env.STEAM_ACC}}\",\r\n            \"enableVAC\": \"enableVAC {{server.build.env.VAC}}\",\r\n            \"difficulty\": \"difficulty {{server.build.env.SERVER_DIFFICULTY}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Game autosave started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n# Install dependencies\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates\r\n\r\n\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\n.\/steamcmd.sh +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +app_update ${APPID} ${EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Configure wine and server startup config\r\nmkdir -p \/home\/container\/.wine64\r\necho \"#!\/bin\/sh\r\nexport WINEARCH=win64\r\nexport WINEPREFIX=\/home\/container\/.wine64\r\nxvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 \/home\/container\/TheForestDedicatedServer.exe -batchmode -nographics -nosteamclient -savefolderpath \/home\/container\/TheForestDedicatedServer_Data -configfilepath \/home\/container\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg |grep -v 'RenderTexture.Create failed: format unsupported - 2.'\" > \/mnt\/server\/start.sh\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\n## Create Config\r\n\r\nmkdir -p $HOME\/TheForestDedicatedServer_Data\/forest\/config\/\r\n#rm -fR $HOME\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\r\ncat <<EOT > $HOME\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\r\n\/\/ Dedicated Server Settings.\r\n\/\/ Server IP address - Note: If you have a router, this address is the internal address, and you need to configure ports forwarding, append the current game port here as well\r\nserverIP\r\n\/\/ Steam Communication Port - Note: If you have a router you will need to open this port.\r\nserverSteamPort\r\n\/\/ Game Communication Port - Note: If you have a router you will need to open this port.\r\nserverGamePort\r\n\/\/ Query Communication Port - Note: If you have a router you will need to open this port.\r\nserverQueryPort\r\n\/\/ Server display name\r\nserverName\r\n\/\/ Maximum number of players\r\nserverPlayers 5\r\n\/\/ Server password. blank means no password\r\nserverPassword\r\n\/\/ Server administration password. blank means no password\r\nserverPasswordAdmin\r\n\/\/ Your Steam account name. blank means anonymous (see Steam server account bellow)\r\nserverSteamAccount\r\n\/\/ Enable VAC (Valve Anti Cheat) on the server. off by default, uncomment to enable\r\nenableVAC on\r\n\/\/ Time between server auto saves in minutes\r\nserverAutoSaveInterval 15\r\n\/\/ Game difficulty mode. Must be set to \"Peaceful\" \"Normal\" or \"Hard\"\r\ndifficulty Normal\r\n\/\/ New or continue a game. Must be set to \"New\" or \"Continue\"\r\ninitType New\r\n\/\/ Slot to save the game. Must be set 1 2 3 4 or 5\r\nslot 1\r\n\/\/ Show event log. Must be set \"off\" or \"on\"\r\nshowLogs off\r\n\/\/ Contact email for server admin\r\nserverContact email@gmail.com\r\n\/\/ No enemies. Must be set to \"on\" or \"off\"\r\nveganMode off\r\n\/\/ No enemies during day time. Must be set to \"on\" or \"off\"\r\nvegetarianMode off\r\n\/\/ Reset all structure holes when loading a save. Must be set to \"on\" or \"off\"\r\nresetHolesMode off\r\n\/\/ Regrow 10% of cut down trees when sleeping. Must be set to \"on\" or \"off\"\r\ntreeRegrowMode off\r\n\/\/ Allow building destruction. Must be set to \"on\" or \"off\"\r\nallowBuildingDestruction on\r\n\/\/ Allow enemies in creative games. Must be set to \"on\" or \"off\"\r\nallowEnemiesCreativeMode off\r\n\/\/ Allow clients to use the built in development console. Must be set to \"on\" or \"off\"\r\nallowCheats off\r\n\/\/ Allows defining a custom folder for save slots, leave empty to use the default location\r\nsaveFolderPath\r\n\/\/ Target FPS when no client is connected\r\ntargetFpsIdle 5\r\n\/\/ Target FPS when there is at least one client connected\r\ntargetFpsActive 60\r\nEOT",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "APPID",
+            "default_value": "556450",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Steam browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl Forest Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam port",
+            "env_variable": "STEAM_PORT",
+            "default_value": "8766",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query port, this port is also used for connecting to the server",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Max Players",
+            "description": "Server player cap",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Server difficulty setting, Peaceful, Normal or Hard.",
+            "env_variable": "SERVER_DIFFICULTY",
+            "default_value": "Normal",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Peaceful,Normal,Hard"
+        },
+        {
+            "name": "Steam Account Token",
+            "description": "The Steam Account Token is required for the server to save player progress. Use APP ID 242760 for the token generation. \r\n\r\nYou can generate the token on steam at https:\/\/steamcommunity.com\/dev\/managegameservers",
+            "env_variable": "STEAM_ACC",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password protects the server if set, any player must enter the password to join",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Admin Password",
+            "description": "A password that will be used to gain admin access to the server in-game",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "cHanGetHePaSwWord",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Enable VAC",
+            "description": "",
+            "env_variable": "VAC",
+            "default_value": "off",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:3"
+        }
+    ]
+}

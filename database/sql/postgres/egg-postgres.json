@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "#! \/bin\/ash\r\nadduser -D -h \/home\/container container\r\n\r\necho $POSTGRES_PASSWORD > .passwd\r\n\r\nchown -R container: \/mnt\/server\/\r\n\r\ncat .passwd\r\n\r\nsu container -c 'initdb -D \/mnt\/server\/postgres_db\/ -A md5 -U container --pwfile .passwd'\r\n\r\nmkdir -p \/mnt\/server\/postgres_db\/run\/\r\n\r\necho -e \"Done\"",
-            "container": "postgres:12.2-alpine",
+            "container": "postgres:13.1-alpine",
             "entrypoint": "ash"
         }
     },

@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-02T03:51:58+03:00",
+    "name": "Rage.MP",
+    "author": "noreply.waypointhosting@gmail.com",
+    "description": "https:\/\/rage.mp\/\r\n\r\nModified to work with the latest version of RAGE:MP\r\nWill automatically install linux bridge.\r\n**This server requires 2 ports to be added for the server. the main port and the next (port+1) as ports for the server.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet"
+    ],
+    "file_denylist": [],
+    "startup": ".\/ragemp-server",
+    "config": {
+        "files": "{\r\n    \"conf.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"bind\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"announce\": \"{{server.build.env.ANNOUNCE}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"The server is ready to accept connections\"\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^X"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt -y install curl tar git wget\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o linux_x64.tar.gz https:\/\/cdn.rage.mp\/updater\/10_mNwuchuQ4ktWbR8d2N5jUzRt\/server-files\/linux_x64.tar.gz\r\n\r\ntar -xzvf linux_x64.tar.gz --strip 1 -C \/mnt\/server\r\n\r\nrm linux_x64.tar.gz\r\n\r\nchmod +x .\/ragemp-server\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/gta\/ragemp\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
+            "container": "debian:stable-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Server name that will be displayed to the master server.  (64 Char max)",
+            "env_variable": "SERVER_NAME",
+            "default_value": "RAGE:MP Unofficial server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players your server will hold.  (Max 100)",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "50",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1,10000"
+        },
+        {
+            "name": "Announce",
+            "description": "Announce to the master server so people can see you in their server browser.\r\n\r\nThis needs to be a 0 (false) or 1 (true) due to weird boolean parsing.",
+            "env_variable": "ANNOUNCE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        }
+    ]
+}

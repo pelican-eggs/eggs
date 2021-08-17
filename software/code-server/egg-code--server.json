@@ -1,0 +1,50 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-05-03T21:06:19+03:00",
+    "name": "Code-Server",
+    "author": "mario.franze@gmail.com",
+    "description": "Run VS Code on any machine anywhere and access it in the browser.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-14"
+    ],
+    "file_denylist": [],
+    "startup": "sh .local\/lib\/code-server-{{VERSION}}\/bin\/code-server",
+    "config": {
+        "files": "{\r\n    \".config\/code-server\/config.yaml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"password\": \"password: {{server.build.env.PASSWORD}}\",\r\n            \"bind-addr\": \"bind-addr: 0.0.0.0:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"HTTP server listening on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt install -y curl jq\r\nMATCH=linux-amd64\r\n\r\n# Create initial directories\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Create needed directories\r\nmkdir -p \/mnt\/server\/.local\/lib \/mnt\/server\/.local\/bin \/mnt\/server\/.config\/code-server \/mnt\/server\/projects\r\n\r\n# Change permission of projects directory so it can be accessed by code-server\r\nchmod 777 \/mnt\/server\/projects\r\ntouch \"\/mnt\/server\/projects\/PLACE YOUR PROJECTS HERE\"\r\n\r\n# Check for available versions. Defaults to latest if no valid version is found.\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/cdr\/code-server\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/cdr\/code-server\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"v${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"v${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"v${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n# Download the given Version and extract it\r\necho \"Downloading $DOWNLOAD_URL\"\r\ncurl -fL $DOWNLOAD_URL | tar -C \/mnt\/server\/.local\/lib -xz\r\nmv \/mnt\/server\/.local\/lib\/code-server-*linux-amd64 \/mnt\/server\/.local\/lib\/code-server-${VERSION}\r\n\r\n\r\nPATH=\"\/mnt\/server\/.local\/bin:$PATH\"\r\necho \"password: changeme\r\nbind-addr: 0.0.0.0\r\nauth: password\r\ncert: false\" > \/mnt\/server\/.config\/code-server\/config.yaml\r\n\r\necho \"Install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Password",
+            "description": "Password to login to your Code-Server instance",
+            "env_variable": "PASSWORD",
+            "default_value": "changeme",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Version",
+            "description": "Version for (re)installation such as 3.9.3. Defaults to latest version if no valid version is provided",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20"
+        }
+    ]
+}

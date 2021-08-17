@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-04-17T15:17:54-04:00",
+    "name": "BeamMP Servers",
+    "author": "noah@noahserver.online",
+    "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/BeamMP-Server",
+    "config": {
+        "files": "{\r\n    \"Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers = {{server.build.env.MAX_PLAYER}}\",\r\n            \"Port\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTH}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "cd \/mnt\/server\r\n\r\nrm -f BeamMP-Server\r\n\r\napt update -y\r\napt install -y curl\r\ncurl -LJO https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases\/download\/${VERSION}\/BeamMP-Server-linux\r\nmv BeamMP-Server-linux BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\necho \"# This is the BeamMP Server Configuration File v0.60\r\nDebug = false # true or false to enable debug console output\r\nPrivate = true # Private?\r\nPort = 30814 # Port to run the server on UDP and TCP\r\nCars = 1 # Max cars for every player\r\nMaxPlayers = 10 # Maximum Amount of Clients\r\nMap = \\\"\/levels\/gridmap\/info.json\\\" # Default Map\r\nName = \\\"BeamMP New Server\\\" # Server Name\r\nDesc = \\\"BeamMP Default Description\\\" # Server Description\r\nuse = \\\"Resources\\\" # Resource file name\r\nAuthKey = \\\"\\\" # Auth Key\" > Server.cfg",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "Github Server Version, to see all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
+            "env_variable": "VERSION",
+            "default_value": "v2.0.3",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Authentication Key",
+            "description": "BeamMP Server Key (https:\/\/beamng-mp.com\/k\/keys)",
+            "env_variable": "AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum number of allowed players",
+            "env_variable": "MAX_PLAYER",
+            "default_value": "6",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        }
+    ]
+}

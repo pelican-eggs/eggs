@@ -1,0 +1,50 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-06T23:52:45+02:00",
+    "name": "Grafana",
+    "author": "p.zarrad@outlook.de",
+    "description": "The open and composable observability and data visualization platform.\r\nVisualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/bin\/grafana-server web",
+    "config": {
+        "files": "{\r\n    \"conf\/defaults.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"server.http_port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"HTTP Server Listen\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\nshopt -s extglob\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update installation system and install curl\r\napt-get update\r\napt-get install -y curl\r\n# Cleanup previous install if available\r\nif [ -d \"conf\" ]; then mv conf conf.bak; fi\r\nrm -rfv !(conf.bak|data)\r\n# Download and extract Grafana\r\nversion=${GRAFANA_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/grafana\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl https:\/\/dl.grafana.com\/oss\/release\/grafana-${version}.linux-amd64.tar.gz --output grafana.tar.gz\r\ntar -zxvf grafana.tar.gz\r\nmv -n grafana-*\/* .\/\r\nrm -rf grafana.tar.gz grafana-*\/\r\n# Restore configuration if necessary\r\nif [ -d \"conf.bak\" ]; then rm -rf conf && mv conf.bak conf && rm -rf conf.bak; fi\r\n# Update existing plugins and install Grafana plugins\r\nif [ ! -z \"${GRAFANA_PLUGINS}\" ]; then\r\nfor v in $(tr ',' '\\n' <<< \"${GRAFANA_PLUGINS}\") ; do .\/bin\/grafana-cli --pluginsDir=\"\/mnt\/server\/data\/plugins\" plugins install \"$v\" ; done\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Grafana Version",
+            "description": "The version of Grafana to install. By default the latest version is being installed.",
+            "env_variable": "GRAFANA_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Grafana Plugins",
+            "description": "A list of Grafana plugins that should be installed. Enter the plugins comma separated (e. g. a,b,c).",
+            "env_variable": "grafana_plugins",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        }
+    ]
+}
