@@ -80,10 +80,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Cryofall](game_eggs/cryofall/cryofall)
 
-[Eugen games](/eugen)
-* [Steel Division 2](/eugen/steel-division-2)
-* [Wargame: Red Dragon](/eugen/wargame-red-dragon)
-* [Wargame: Red Dragon - patched](/eugen/wargame-red-dragon-patched)
+[Eugen games](game_eggs/eugen)
+* [Steel Division 2](game_eggs/eugen/steel-division-2)
+* [Wargame: Red Dragon](game_eggs/eugen/wargame-red-dragon)
+* [Wargame: Red Dragon - patched](game_eggs/eugen/wargame-red-dragon-patched)
 
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
