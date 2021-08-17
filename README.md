@@ -87,8 +87,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
-[Factorio](/factorio/factorio)
-
 [FTL: Tachyon](game_eggs/ftl/tachyon)
 
 [Factorio](game_eggs/factorio)
