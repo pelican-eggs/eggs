@@ -13,7 +13,7 @@
         "quay.io\/parkervcp\/pterodactyl-images:base_debian"
     ],
     "file_denylist": [],
-    "startup": ".\/wargame3-server +ip {{SERVER_IP}} +port {{SERVER_PORT}} +ip_mms {{SRV_MMS_IP}} +port_mms {{SRV_MMS_PORT}} +rcon_password {{SRV_RCON}} +rcon_port {{SRV_RCON_PORT}}",
+    "startup": ".\/wargame3-server +ip {{SERVER_IP}} +port {{SERVER_PORT}} +ip_mms {{SRV_MMS_IP}} +port_mms {{SRV_MMS_PORT}} +rcon_password {{SRV_RCON}} +rcon_port {{SRV_RCON_PORT}} +chat_log_file chat.txt",
     "config": {
         "files": "{\r\n    \"login.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"login\": \"login=\\\"{{server.build.env.SRV_LOGIN}}\\\"\",\r\n            \"dedicated_key\": \"dedicated_key=\\\"{{server.build.env.SRV_APIKEY}}\\\"\"\r\n        }\r\n    },\r\n    \"variables.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.SRV_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Connection to match making server validated\"\r\n}",
