@@ -15,6 +15,11 @@ You can choose between a Java 11/Python 3 (Cassandra >= 4.0.0) and Java 8/Python
 
 ### Security
 
+#### General usage
+Allowing general users to use this egg is potentially dangerous as the user can modify the Cassandra startup script,
+which is a simple shell script located in the mounted `/home/container` directory. Only trusted users
+should have access to a Cassandra server hosted with this egg to prevent malicious use!
+
 #### Authentication
 The automated configuration of the egg won't allow disable authentication for Cassandra.
 
