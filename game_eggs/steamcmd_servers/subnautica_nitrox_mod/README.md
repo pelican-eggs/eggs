@@ -12,6 +12,9 @@ Once the initial installation is complete, you will need to enter the Steamguard
 
 This will only work if you receive Steamguard codes via mail. The Authenticator app is not supported.
 
+**NOTE**
+NitroxMod version >=1.5.0.0 is required for this egg
+
 ## Server Ports
 The nitrox server requires only the default Server port.
 
