@@ -1,4 +1,4 @@
-# Example Server Name
+# Airplane
 ### From their [Github](https://github.com/TECHNOVE/Airplane)
 A stable, optimized and fast Paper fork.
 
