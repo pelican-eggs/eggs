@@ -1,0 +1,131 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-08-23T15:02:06+02:00",
+    "name": "Life is Feudal: Your Own - Expect",
+    "author": "tueye@tuworld.de",
+    "description": "Life is Feudal is an open persistent virtual world, allowing players can roam around freely without restrictions. Its terraforming abilities allow you to shape the terrain organized in a unique grid-pattern. This means that players can not only raise, lower and flatten terrain, but also dig tunnels and underground caverns. The game also includes a skill system, mini-games, loot, PvP, and crafting.",
+    "features": null,
+    "images": [
+        "ghcr.io\/tueye\/pt-images_wine:wine-expect"
+    ],
+    "file_denylist": [],
+    "startup": "WINEDLLOVERRIDES=\"mscoree=d;mshtml=d\" nohup wine ddctd_cm_yo_server.exe -worldid 1 & echo -e \"Checking on telnet connection\" && until nc -z -v -w5 127.0.0.1 {{TELNET_PORT}}; do echo \"Waiting for telnet connection...\"; sleep 5; done && expect -c \"spawn telnet -E 127.0.0.1 {{TELNET_PORT}}; expect \\\"Enter Password:\\\"; send \\\"{{TELNET_PASSWORD}}\\\\r\\\"; interact\"",
+    "config": {
+        "files": "{\r\n    \"config\/world_1.xml\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"config.name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"config.password\": \"{{server.build.env.SERVER_PASS}}\",\r\n            \"config.adminPassword\": \"{{server.build.env.GM_PASS}}\",\r\n            \"config.maxPlayers\": \"{{server.build.env.MAXIMUM_PLAYERS}}\",\r\n            \"config.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    },\r\n    \"config_local.cs\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"$cm_config::DB::Connect::server\": \"$cm_config::DB::Connect::server = \\\"{{server.build.env.SQL_SERVER}}:{{server.build.env.SQL_PORT}}\\\";\",\r\n            \"$cm_config::DB::Connect::user\": \"$cm_config::DB::Connect::user = \\\"{{server.build.env.SQL_USER}}\\\";\",\r\n            \"$cm_config::DB::Connect::password\": \"$cm_config::DB::Connect::password = \\\"{{server.build.env.SQL_PASSWORD}}\\\";\"\r\n        }\r\n    },\r\n    \"main.cs\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"$telnet::bindAddress\": \"$telnet::bindAddress = \\\"127.0.0.1\\\";\",\r\n            \"telnetSetParameters\": \"telnetSetParameters({{server.build.env.TELNET_PORT}}, \\\"{{server.build.env.TELNET_PASSWORD}}\\\", \\\"{{server.build.env.TELNET_PASSWORD}}\\\", false);\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server is up and ready to accept connections\"\r\n}",
+        "logs": "{}",
+        "stop": "quit();"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n## Define script variables\r\nexport HOME=\/mnt\/server\r\n\r\n## Install dependencies\r\ndpkg --add-architecture i386\r\napt update\r\napt -y --no-install-recommends install curl unzip libstdc++6 lib32gcc1 ca-certificates libsdl2-2.0-0:i386 telnet\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\nchown -R root:root \/mnt\r\n\r\n## Install game using steamcmd\r\n.\/steamcmd.sh +login anonymous +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +app_update ${APPID} ${EXTRA_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Create local database config\r\necho \"writing server database config\"\r\ncat <<EOT > $HOME\/config_local.cs\r\n\\$cm_config::DB::Connect::server =   \"${SQL_SERVER}:${SQL_PORT}\";     \/\/ server IP or domain name. Can enter port if it is not default\r\n\\$cm_config::DB::Connect::user =     \"${SQL_USER}\"; \/\/ MUST be a user with ROOT privileges in order to create new DBs\r\n\\$cm_config::DB::Connect::password = \"${SQL_PASSWORD}\"; \/\/ password for that user\r\nEOT\r\n\r\n## Create telnet config\r\nif ! grep -q \"$telnet::bindAddress\" \"$HOME\/main.cs\"; then\r\n    echo \"adding telnet config to main.cs\"\r\n    echo \"\" >> $HOME\/main.cs\r\n    echo \"\\$telnet::bindAddress = \\\"127.0.0.1\\\";\" >> $HOME\/main.cs\r\n    echo \"telnetSetParameters(${TELNET_PORT}, \\\"${TELNET_PASSWORD}\\\", \\\"${TELNET_PASSWORD}\\\", false);\" >> $HOME\/main.cs\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "APPID",
+            "default_value": "320850",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Steam browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl LiF:YO Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:63"
+        },
+        {
+            "name": "Maximum Players",
+            "description": "Maximum Players",
+            "env_variable": "MAXIMUM_PLAYERS",
+            "default_value": "24",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password protects the server if set, any player must enter the password to join",
+            "env_variable": "SERVER_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32"
+        },
+        {
+            "name": "GM Password",
+            "description": "A password that will be used to gain GrandMaster access to the server in-game",
+            "env_variable": "GM_PASS",
+            "default_value": "cHanGetHePaSwWord",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "SQL Server",
+            "description": "Hostname or IP of your SQL-Server",
+            "env_variable": "SQL_SERVER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:63"
+        },
+        {
+            "name": "SQL Username",
+            "description": "Username of your SQL Server",
+            "env_variable": "SQL_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "SQL Password",
+            "description": "Password of your SQL user",
+            "env_variable": "SQL_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "SQL Port",
+            "description": "SQL Port",
+            "env_variable": "SQL_PORT",
+            "default_value": "3306",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "Telnet Port",
+            "description": "Telnet Port",
+            "env_variable": "TELNET_PORT",
+            "default_value": "9000",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|max:65535"
+        },
+        {
+            "name": "Telnet Password",
+            "description": "Telnet Password",
+            "env_variable": "TELNET_PASSWORD",
+            "default_value": "T3ln37P4SS!",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:63"
+        }
+    ]
+}

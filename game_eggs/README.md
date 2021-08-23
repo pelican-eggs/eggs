@@ -106,6 +106,7 @@
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
+* [Life is Feudal: Your Own](steamcmd_servers/life_is_feudal_your_own)
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)

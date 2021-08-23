@@ -175,6 +175,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
+* [Life is Feudal: Your Own](game_eggs/steamcmd_servers/life_is_feudal_your_own)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)

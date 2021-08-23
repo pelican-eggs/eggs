@@ -47,6 +47,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Killing Floor 2
 [Killing Floor 2](killing_floor_2)
 
+## Life is Feudal: Your Own
+[Life is Feudal: Your Own](life_is_feudal_your_own)
+
 ## Modiverse
 [Modiverse](modiverse)
 
