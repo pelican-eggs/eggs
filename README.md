@@ -34,7 +34,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
-* [parkertron](/bots/discord/parkertron) Golang
+* [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
+* [parkertron](/bots/discord/parkertron) Golang 
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
 * [SinusBot](/bots/discord/sinusbot)
