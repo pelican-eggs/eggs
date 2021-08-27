@@ -4,19 +4,21 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-04-04T11:34:06+01:00",
+    "exported_at": "2021-07-21T18:23:17+03:00",
     "name": "Discord Java",
     "author": "sneaky@sneakyhub.com",
     "description": "Creates a container that runs java.",
     "features": null,
     "images": [
-        "quay.io\/pterodactyl\/core:java-11"
+        "ghcr.io\/parkervcp\/yolks:java_8",
+        "ghcr.io\/parkervcp\/yolks:java_11",
+        "ghcr.io\/parkervcp\/yolks:java_16"
     ],
     "file_denylist": [],
     "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"\"\r\n}",
+        "startup": "{\r\n    \"done\": \"change this text\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
