@@ -7,6 +7,12 @@ The game does not yet have an official dedicated server. So there are no admin c
 Also, the server is always public and cannot be secured with a password.
 
 ## Game Infos
+### Steam Guardcode
+To download the base game, you will need to authenticate against Steam. Because of the normally active Steamgaurd protection, it is important to enter the Steamgaurd code. 
+Once the initial installation is complete, you will need to enter the Steamguard code that will be emailed to you and then reinstall the server.
+
+This will only work if you receive Steamguard codes via mail. The Authenticator app is not supported.
+
 ### Config files and savegame locations
 The config files are stored here: .wine/drive_c/users/container/Local Settings/Application Data/FactoryGame/Saved/Config/WindowsNoEditor/
 

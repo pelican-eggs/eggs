@@ -1,0 +1,131 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-08-28T00:07:39+02:00",
+    "name": "Satisfactory",
+    "author": "tueye@tuworld.de",
+    "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_wine"
+    ],
+    "file_denylist": [],
+    "startup": "FGSAVEDPATH=.wine\/drive_c\/users\/container\/Local\\ Settings\/Application\\ Data\/FactoryGame\/Saved;\r\nFGLASTSAVE=$(find \"$FGSAVEDPATH\"\/SaveGames\/common\/ -name \"${SAVENAME}[._]*.sav\" -type f -printf '%T@ %f\\n' | sort -k1,1nr | sed 's\/^[^ ]* \/\/' | head -1);\r\n[ -z \"$FGLASTSAVE\" ] && FGLASTSAVE={{SAVENAME}};\r\nprintf '\\e[1;32m%-6s\\e[m\\n' \"Loading savegame: ${FGLASTSAVE%.*}\";\r\nsed -ir \"s\/^[#]*\\s*LocalMapOptions=.*\/LocalMapOptions=??startloc={{START_LOCATION}}?sessionName=${FGLASTSAVE%.*}?Visibility=SV_FriendsOnly?loadgame=${FGLASTSAVE%.*}?listen?bUseIpSockets?name=Host\/\" \"$FGSAVEDPATH\/Config\/WindowsNoEditor\/Engine.ini\";\r\nWINEDEBUG=-all WINEDLLOVERRIDES=\"mscoree=d;mshtml=d\" wine .\/FactoryGame.exe -port={{SERVER_PORT}} -nosteamclient -nullrhi -nosplash -nosound -log",
+    "config": {
+        "files": "{\r\n    \".wine\/drive_c\/users\/container\/Local Settings\/Application Data\/FactoryGame\/Saved\/Config\/WindowsNoEditor\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mAutosaveInterval=\": \"mAutosaveInterval={{server.build.env.SAVE_INTERVAL}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Match State Changed from WaitingToStart to InProgress\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n\r\n## Install dependencies\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates libsdl2-2.0-0:i386 unzip\r\n\r\n## Define variables\r\nexport HOME=\/mnt\/server\r\ngame_saved_dir=$HOME\/.wine\/drive_c\/users\/container\/Local\\ Settings\/Application\\ Data\/FactoryGame\/Saved\/\r\n\r\n# Get latest ModLoader release\r\nlatest_sml=$(curl --silent \"https:\/\/api.github.com\/repos\/satisfactorymodding\/SatisfactoryModLoader\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/')\r\nif [ -z \"${SML_VERSION}\" ] || [ \"${SML_VERSION}\" == \"latest\" ]; then\r\n  dl_version=$latest_sml\r\nelse\r\n  dl_version=${SML_VERSION}\r\nfi\r\n\r\n# Set Steam credentials explicitly\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\nmkdir -p $HOME\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n## Install game using steamcmd and Guardcode\r\nGUARDCODE=\"${STEAM_GUARDCODE}\"\r\nif [ -z $GUARDCODE ]\r\nthen\r\n    echo \"\"\r\n    echo \"### You did not specify a Steam Guardcode\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    timeout 60 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n.\/steamcmd.sh +set_steam_guard_code ${STEAM_GUARDCODE} +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir ${HOME} +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit\r\nstatus=$?\r\nif [ $status -ne 0 ]\r\nthen\r\n    echo \"\"\r\n    echo \"### The Download was not successful\"\r\n    echo \"### Probably the entered Guardcode was wrong\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    sleep 10\r\n    timeout 30 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n## set up 32 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Create folder\r\nmkdir -p \"$game_saved_dir\/SaveGames\/common\"\r\nmkdir -p \"$game_saved_dir\/Config\/WindowsNoEditor\"\r\n\r\n## Download and extract SML\r\nif [ ${ENABLE_SML_INSTALL} == \"True\" ]\r\nthen\r\n    cd \/tmp\r\n    [ -d \"$HOME\/FactoryGame\/Mods\/SML\" ] && rm -r $HOME\/FactoryGame\/Mods\/SML\r\n    mkdir -p $HOME\/FactoryGame\/Mods\/SML\r\n    curl -sL https:\/\/github.com\/satisfactorymodding\/SatisfactoryModLoader\/releases\/download\/$dl_version\/SML.zip -o SML.zip\r\n    unzip -o .\/SML.zip -d $HOME\/FactoryGame\/Mods\/SML\r\nfi\r\n\r\n## Create Dummy-Save\r\n#touch $game_saved_dir\/SaveGames\/common\/Dummy.sav\r\n\r\n## Create config\r\n# engine.ini > base engine and savegame config\r\nif [ -e \"$game_saved_dir\/Config\/WindowsNoEditor\/Engine.ini\" ]; then\r\n    echo \"engine settings exists\"\r\nelse\r\n    echo \"writing engine settings\"\r\n    awk '{$1=$1};1' <<EOT > \"$game_saved_dir\/Config\/WindowsNoEditor\/Engine.ini\"\r\n    [Core.System]\r\n    Paths=..\/..\/..\/Engine\/Content\r\n    Paths=%GAMEDIR%Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Wwise\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Compositing\/LensDistortion\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Experimental\/PythonScriptPlugin\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Tests\/EditorTests\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Tests\/RuntimeTests\/Content\r\n    Paths=..\/..\/..\/FactoryGame\/Plugins\/CSSEditorToolsExtension\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/2D\/Paper2D\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Developer\/AnimationSharing\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Editor\/GeometryMode\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Enterprise\/DatasmithContent\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Experimental\/ChaosClothEditor\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Experimental\/GeometryProcessing\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Experimental\/GeometryCollectionPlugin\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Experimental\/ChaosSolverPlugin\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Experimental\/ChaosNiagara\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/FX\/Niagara\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/MagicLeap\/MagicLeapPassableWorld\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/Media\/MediaCompositing\/Content\r\n    Paths=..\/..\/..\/Engine\/Plugins\/MovieScene\/MovieRenderPipeline\/Content\r\n    \r\n    [\/Script\/Engine.Player]\r\n    ConfiguredInternetSpeed=60000\r\n    ConfiguredLanSpeed=70000\r\n    \r\n    [\/Script\/OnlineSubsystemUtils.IpNetDriver]\r\n    MaxClientRate=60000\r\n    MaxInternetClientRate=60000\r\n    \r\n    [\/Script\/SocketSubsystemEpic.EpicNetDriver]\r\n    MaxClientRate=60000\r\n    MaxInternetClientRate=60000\r\n    \r\n    [WindowsApplication.Accessibility]\r\n    StickyKeysHotkey=False\r\n    ToggleKeysHotkey=False\r\n    FilterKeysHotkey=False\r\n    StickyKeysConfirmation=False\r\n    ToggleKeysConfirmation=False\r\n    FilterKeysConfirmation=False\r\n\r\n    [\/Script\/FactoryGame.FGSaveSession]\r\n    mAutosaveInterval=${SAVE_INTERVAL}\r\n\r\n    [\/Script\/EngineSettings.GameMapsSettings]\r\n    GameDefaultMap=\/Game\/FactoryGame\/Map\/GameLevel01\/Persistent_Level.Persistent_Level\r\n    LocalMapOptions=?sessionName=${SAVENAME}?Visibility=SV_FriendsOnly?loadgame=${SAVENAME}?listen?bUseIpSockets?name=Host\r\nEOT\r\nfi\r\n\r\n# GameUserSettings > graphic and performance settings important fpr reducing cpu load \r\nif [ -e \"$game_saved_dir\/Config\/WindowsNoEditor\/GameUserSettings.ini\" ]; then\r\n    echo \"game user settings settings exists\"\r\nelse\r\n    echo \"writing game user settings\"\r\n    awk '{$1=$1};1' <<EOT > \"$game_saved_dir\/Config\/WindowsNoEditor\/GameUserSettings.ini\"\r\n    [\/Script\/FactoryGame.FGGameUserSettings]\r\n    mAudioVolumes=(Name=\"Master_Bus_Volume\",Value=1.000000)\r\n    mAudioVolumes=(Name=\"Ambient_Bus_Volume\",Value=1.000000)\r\n    mAudioVolumes=(Name=\"Factory_Bus_Volume\",Value=1.000000)\r\n    mAudioVolumes=(Name=\"Music_Bus_Volume\",Value=0.500000)\r\n    mAudioVolumes=(Name=\"SFX_Bus_Volume\",Value=1.000000)\r\n    mAudioVolumes=(Name=\"VO_Bus_Volume\",Value=1.000000)\r\n    mNetworkQuality=0\r\n    mIsArachnophobiaMode=False\r\n    mInvertY=False\r\n    mAutoSortInventory=False\r\n    mIntValues=((\"t.MaxFPS\", 120))\r\n    mIntValues=((\"r.FullScreenMode\", 2),(\"sg.TextureQuality\", 0),(\"sg.ShadowQuality\", 0),(\"sg.PostProcessQuality\", 0),(\"sg.AntiAliasingQuality\", 0),(\"sg.EffectsQuality\", 0),(\"sg.FoliageQuality\", 0),(\"sg.PoolLightQuality\", 0),(\"t.MaxFPS\", 30),(\"sg.ViewDistanceQuality\", 0),(\"r.HZBOcclusion\", 0),(\"foliage.DitheredLOD\", 0),(\"r.ContactShadows\", 0),(\"conveyor.UseExperimental\", 0))\r\n    mFloatValues=()\r\n    mPrimaryLanguage=\r\n    CurrentFGGameUserSettingsVersion=0\r\n    bUseVSync=False\r\n    bUseDynamicResolution=False\r\n    ResolutionSizeX=1024\r\n    ResolutionSizeY=768\r\n    LastUserConfirmedResolutionSizeX=1024\r\n    LastUserConfirmedResolutionSizeY=768\r\n    WindowPosX=-1\r\n    WindowPosY=-1\r\n    FullscreenMode=1\r\n    LastConfirmedFullscreenMode=1\r\n    PreferredFullscreenMode=1\r\n    Version=5\r\n    AudioQualityLevel=0\r\n    LastConfirmedAudioQualityLevel=0\r\n    FrameRateLimit=0.000000\r\n    DesiredScreenWidth=1280\r\n    DesiredScreenHeight=720\r\n    LastUserConfirmedDesiredScreenWidth=1280\r\n    LastUserConfirmedDesiredScreenHeight=720\r\n    LastRecommendedScreenWidth=-1.000000\r\n    LastRecommendedScreenHeight=-1.000000\r\n    LastCPUBenchmarkResult=-1.000000\r\n    LastGPUBenchmarkResult=-1.000000\r\n    LastGPUBenchmarkMultiplier=1.000000\r\n    bUseHDRDisplayOutput=False\r\n    HDRDisplayOutputNits=1000\r\n    \r\n    [ScalabilityGroups]\r\n    sg.ResolutionQuality=100.000000\r\n    sg.ViewDistanceQuality=0\r\n    sg.AntiAliasingQuality=0\r\n    sg.ShadowQuality=0\r\n    sg.PostProcessQuality=0\r\n    sg.TextureQuality=0\r\n    sg.EffectsQuality=0\r\n    sg.FoliageQuality=0\r\n    sg.ShadingQuality=0\r\n    \r\n    [\/Script\/Engine.GameUserSettings]\r\n    bUseDesiredScreenHeight=False\r\nEOT\r\nfi\r\n\r\n# Game.ini > network settings, i guess\r\n#if [ -e \"$game_saved_dir\/Config\/WindowsNoEditor\/Game.ini\" ]; then\r\n#    echo \"game settings exists\"\r\n#else\r\n#    echo \"writing game settings\"\r\n#    {cat} | awk '{$1=$1};1' <<EOT > \"$game_saved_dir\/Config\/WindowsNoEditor\/Game.ini\"\r\n#    [\/Script\/Engine.GameNetworkManager]\r\n#    TotalNetBandwidth=240000\r\n#    MaxDynamicBandwidth=60000\r\n#    MinDynamicBandwidth=50000\r\n#EOT\r\n#fi\r\n\r\n# Scalability.ini > has to be there\r\n#if [ -e \"$game_saved_dir\/Config\/WindowsNoEditor\/Scalability.ini\" ]; then\r\n#    echo \"scalability settings exists\"\r\n#else\r\n#    echo \"writing scalability settings\"\r\n#    touch \"$game_saved_dir\/Config\/WindowsNoEditor\/Scalability.ini\"\r\n#fi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "526870",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6"
+        },
+        {
+            "name": "Steam-Username",
+            "description": "Your Steam-Account Username",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam-Password",
+            "description": "Your Steam Account Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "Steam-GuardCode",
+            "description": "Yout Steam Guard Code",
+            "env_variable": "STEAM_GUARDCODE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:6"
+        },
+        {
+            "name": "Save Name",
+            "description": "The save name for the server.",
+            "env_variable": "SAVENAME",
+            "default_value": "DefaultSave",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|alpha_num|max:20"
+        },
+        {
+            "name": "Enable Auto Server Update",
+            "description": "Updates the game when starting the server",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:0,1"
+        },
+        {
+            "name": "Windows Game",
+            "description": "Tells Steamcmd to download the Windows version of this game.\r\nOnly change if you know hat you are doing!",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:0,1"
+        },
+        {
+            "name": "Starting Location",
+            "description": "Which is your starting location (for new saves only).\r\nGrass Fields, Rocky Desert, Northern Forest, DuneDesert",
+            "env_variable": "START_LOCATION",
+            "default_value": "Grass Fields",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Grass Fields,Rocky Desert,Northern Forest,DuneDesert"
+        },
+        {
+            "name": "Autosave Interval",
+            "description": "Time between auto saves specified in seconds.\r\nThe value must be at least 300.",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "300",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:300"
+        },
+        {
+            "name": "Install Mod Loader",
+            "description": "Installs (and updates) the Mod Loader (SML) when reinstalling the server",
+            "env_variable": "ENABLE_SML_INSTALL",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:True,False"
+        },
+        {
+            "name": "Mod Loader Version",
+            "description": "Which version of SML to install and use. Use the version e.g. \"3.1.1\" or \"latest\" for the newest release",
+            "env_variable": "SML_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
