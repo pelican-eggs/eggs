@@ -83,7 +83,7 @@ This is a collection of servers that use SteamCMD to install.
   * [Staging](rust/rust_staging)
 
 ## Satisfactory
-* [satisfactory](satisfactory)
+* [Satisfactory](satisfactory)
 
 ## SCP: Secret Laboratory
 * [SCP: Secret Laboratory](scpsl)
