@@ -34,6 +34,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
+* [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
@@ -231,6 +232,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Vintage Story](game_eggs/vintage_story/vintage_story)
 
+[Wine Generic](game_eggs/wine/generic)
+
 [Xonotic](game_eggs/xonotic/xonotic)
 
 ## [Monitoring](/monitoring/)
@@ -250,3 +253,5 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Grafana](/software/grafana)
 ### haste-server
 * [haste-server](/software/haste-server)
+### RabbitMQ
+* [rabbitmq](/software/rabbitmq)
