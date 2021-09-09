@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-09-09T11:44:02+02:00",
+    "exported_at": "2021-09-09T12:05:16+02:00",
     "name": "PhantomBot",
     "author": "pokelpv1@outlook.com",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# PhantomBot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\ncd \/tmp\r\n\r\n# Fetching last github release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n        echo -e \"Using latest Github Master version\"\r\n        DOWNLOAD_URL=https:\/\/raw.githubusercontent.com\/PhantomBot\/nightly-build\/master\/PhantomBot-nightly-lin.zip\r\nelse\r\n    if [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        echo -e \"Using latest release version\"\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/latest\" | grep -o '[0-9].[0-9].[0-9]')\r\n    fi\r\n    DOWNLOAD_URL=https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/download\/v${RELEASE_VERSION}\/PhantomBot-${RELEASE_VERSION}.zip\r\nfi\r\n\r\n# Downloading\r\ncurl -LJO ${DOWNLOAD_URL}\r\nunzip -o PhantomBot-*.zip\r\n\r\n# Moveing unziped files into the server folder\r\ncp -f -r .\/PhantomBot-*\/* \/mnt\/server\/\r\n\r\n# Creating default config\r\nif [ ! -f \/mnt\/server\/config\/botlogin.txt ]; then\r\n    echo -e \"Creating config\/botlogin.txt\"\r\n    cat << EOF > \/mnt\/server\/config\/botlogin.txt\r\n    #PhantomBot Configuration File\r\n    #\r\n    # Here is a list wiht all config values:\r\n    # https:\/\/community.phantom.bot\/t\/settings-for-botlogin-txt\/78\r\n    #\r\n    apioauth=\r\n    baseport=\r\n    channel=\r\n    oauth=\r\n    owner=\r\n    panelpassword=\r\n    paneluser=\r\n    user=\r\n    youtubekey=\r\n    discord_token=\r\nEOF\r\nfi",
-            "container": "ubuntu:16.04",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
@@ -39,7 +39,7 @@
         },
         {
             "name": "Twitch Channel Name",
-            "description": "Please enter the your Twitch username",
+            "description": "Please enter your Twitch username",
             "env_variable": "CHANNEL_NAME",
             "default_value": "",
             "user_viewable": true,
@@ -84,7 +84,7 @@
         },
         {
             "name": "Youtube API Key",
-            "description": "https:\/\/community.phantom.bot\/t\/acquire-youtube-api-key\/222",
+            "description": "Here is the Guide from the Official Phantombot Website for the YouTube API Key\r\nhttps:\/\/phantombot.github.io\/PhantomBot\/guides\/#guide=content\/integrations\/youtubesetup",
             "env_variable": "YOUTUBE_API_KEY",
             "default_value": "",
             "user_viewable": true,
@@ -93,7 +93,7 @@
         },
         {
             "name": "Discord Bot Token",
-            "description": "https:\/\/community.phantom.bot\/t\/discord-integration-setup\/64",
+            "description": "Here is the Guide from the Official Phantombot Website for the Discord Integration\r\nhttps:\/\/phantombot.github.io\/PhantomBot\/guides\/#guide=content\/integrations\/discordintegrationsetup",
             "env_variable": "DISCORD_BOT_TOKEN",
             "default_value": "",
             "user_viewable": true,
