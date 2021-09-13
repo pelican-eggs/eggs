@@ -108,6 +108,14 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:10"
-        }
-    ]
+        },
+        {
+            "name": "Validate Serverfiles",
+            "description": "Should be enabled once after changing the server version.\r\n0 = disable validating serverfiles,\r\n1 = enable validating serverfiles",
+            "env_variable": "VALIDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        }    ]
 }
