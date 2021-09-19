@@ -250,3 +250,5 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [haste-server](/software/haste-server)
 ### RabbitMQ
 * [rabbitmq](/software/rabbitmq)
+### Language-Tool
+* [languagetool](/software/language-tool)
