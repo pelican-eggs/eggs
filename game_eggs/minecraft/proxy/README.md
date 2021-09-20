@@ -8,5 +8,7 @@
   * [VIAaaS](/game_eggs/minecraft/proxy/java/viaaas)
   * [Waterfall](/game_eggs/minecraft/proxy/java/waterfall)
 * [Cross Platform](/game_eggs/minecraft/proxy/cross_platform)
+  * [Waterdog PE](/game_eggs/minecraft/proxy/bedrock/waterdogpe)
+* [Cross Platform](/game_eggs/minecraft/proxy/cross_platform)
     * [GeyserMC](/game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/game_eggs/minecraft/proxy/cross_platform/waterdog)
