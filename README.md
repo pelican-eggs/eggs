@@ -77,6 +77,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [BeamMP Server](game_eggs/beamng/beammp)
 * [KissMP](game_eggs/beamng/kissmp)
 
+[ClassiCube](game_eggs/classicube)
+* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+
 [Cryofall](game_eggs/cryofall/cryofall)
 
 [Call of Duty 4X](game_eggs/cod/cod4x)

@@ -7,6 +7,9 @@
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
+[ClassiCube](game_eggs/classicube)
+* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+
 [Cryofall](cryofall/cryofall)
 
 [Call of Duty 4X](cod/cod4x)
