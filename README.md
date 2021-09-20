@@ -248,7 +248,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Grafana](/software/grafana)
 ### haste-server
 * [haste-server](/software/haste-server)
+### LanguageTool
+* [languagetool](/software/languagetool)
 ### RabbitMQ
 * [rabbitmq](/software/rabbitmq)
-### Language-Tool
-* [languagetool](/software/language-tool)
