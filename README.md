@@ -144,7 +144,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
   * [Bedrock](game_eggs/minecraft/proxy/bedrock)
-    * [Waterdog](game_eggs/minecraft/proxy/bedrock/waterdog_pe)
+    * [Waterdog PE](game_eggs/minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](game_eggs/minecraft/proxy/cross_platform)
     * [GeyserMC](game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](game_eggs/minecraft/proxy/cross_platform/waterdog)
