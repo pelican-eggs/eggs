@@ -97,11 +97,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [FiveM](game_eggs/gta/fivem)
   * [RageMP](game_eggs/gta/ragemp)
   * [alt:V](game_eggs/gta/altv)
-  
+
 * GTA SA
   * [Multi Theft Auto](game_eggs/gta/mtasa)
   * [SA-MP](game_eggs/gta/samp)
-  
+
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
@@ -124,7 +124,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
   * [Airplane](game_eggs/minecraft/java/airplane)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
-  * [Fabric](game_eggs/minecraft/java/fabric) 
+  * [Fabric](game_eggs/minecraft/java/fabric)
   * [Feather](game_eggs/minecraft/java/feather)  
   * [Feed The Beast](game_eggs/minecraft/java/ftb)  
   * [Forge](game_eggs/minecraft/java/forge)  
@@ -141,17 +141,19 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
-	* [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
+	  * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
+  * [Bedrock](game_eggs/minecraft/proxy/bedrock)
+    * [Waterdog PE](game_eggs/minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](game_eggs/minecraft/proxy/cross_platform)
     * [GeyserMC](game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](game_eggs/minecraft/proxy/cross_platform/waterdog)
 
 [OpenArena](game_eggs/openarena)  
-  * [openarena](game_eggs/openarena/openarena) 
+  * [openarena](game_eggs/openarena/openarena)
 
 [OpenRA](game_eggs/openra)
 * [OpenRA Dune2000](game_eggs/openra/openra_dune2000)

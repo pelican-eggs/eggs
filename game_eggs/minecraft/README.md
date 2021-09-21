@@ -13,7 +13,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 [Java](/game_eggs/minecraft/java/) Servers for Java Minecraft
 * [Airplane](/game_eggs/minecraft/java/airplane)
 * [Cuberite](/game_eggs/minecraft/java/cuberite)
-* [Fabric](/game_eggs/minecraft/java/fabric) 
+* [Fabric](/game_eggs/minecraft/java/fabric)
 * [Feather](/game_eggs/minecraft/java/feather)  
 * [Feed The Beast](/game_eggs/minecraft/java/ftb)  
 * [Forge](/game_eggs/minecraft/java/forge)  
@@ -30,12 +30,14 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 
 * [Proxies](/game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](/game_eggs/minecraft/proxy/java)
-	* [FlameCord](/game_eggs/minecraft/proxy/java/flamecord)
+    * [FlameCord](/game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](/game_eggs/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](/game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](/game_eggs/minecraft/proxy/java/velocity)
     * [VIAaaS](/game_eggs/minecraft/proxy/java/viaaas)
     * [Waterfall](/game_eggs/minecraft/proxy/java/waterfall)
+  * [Bedrock](/game_eggs/minecraft/proxy/bedrock)
+    * [Waterdog PE](/game_eggs/minecraft/proxy/bedrock/waterdogpe)
   * [Cross Platform](/game_eggs/minecraft/proxy/cross_platform)
     * [GeyserMC](/game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/game_eggs/minecraft/proxy/cross_platform/waterdog)
