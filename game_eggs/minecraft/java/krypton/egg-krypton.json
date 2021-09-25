@@ -10,7 +10,7 @@
   "description": "A fast, lightweight Minecraft server written in Kotlin",
   "features": null,
   "images": [
-    "quay.io\/pterodactyl\/core:java-11"
+    "ghcr.io/pterodactyl/yolks:java_16"
   ],
   "file_denylist": "",
   "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JAR}}",
