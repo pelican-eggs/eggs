@@ -41,7 +41,7 @@
             "name": "CONFIG_URL",
             "description": "URL from where to get the initial server.cfg",
             "env_variable": "CONFIG_URL",
-            "default_value": "https:\/\/raw.githubusercontent.com\/Th3Dilli\/eggs\/master\/game_eggs\/mohaa\/server.cfg",
+            "default_value": "https:\/\/raw.githubusercontent.com\/Th3Dilli\/eggs\/mohaa\/game_eggs\/mohaa\/server.cfg",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string"
