@@ -105,11 +105,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
-[Mindustry](game_eggs/mindustry)
-  * [Mindustry](game_eggs/mindustry/mindustry)
-
 [League Sandbox](game_eggs/leaguesandbox)
   * [League Sandbox](game_eggs/leaguesandbox/leaguesandbox)
+
+[Medal of Honor: Allied Assault](game_eggs/mohaa)
+
+[Mindustry](game_eggs/mindustry)
+  * [Mindustry](game_eggs/mindustry/mindustry)
 
 [Minetest](game_eggs/minetest) (including MTG)
   * [Minetest](game_eggs/minetest/minetest)
