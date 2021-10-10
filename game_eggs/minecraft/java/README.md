@@ -30,6 +30,9 @@ A generic service to pull forge mod packs from the curseforge site.
 [Magma](https://magmafoundation.org)
 Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.
 
+[Krypton](https://github.com/KryptonMC/Krypton)
+A fast, lightweight Minecraft server written in Kotlin.
+
 ## FTB Packs
 [FTB Modpacks](https://api.modpacks.ch)
 A generic service to pull FTB modpacks from api.modpacks.ch.
