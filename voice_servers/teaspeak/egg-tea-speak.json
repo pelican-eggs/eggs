@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-09-26T03:45:00+00:00",
+    "exported_at": "2021-10-13T23:25:12+00:00",
     "name": "TeaSpeak",
     "author": "parker@parkervcp.com",
     "description": "TeaSpeak is a free to use client and server software for VoIP communication.\r\n\r\nIts the ideal deal software for everyone who is annoyed about limits and restrictions.",
@@ -16,7 +16,7 @@
     "startup": ".\/TeaSpeakServer --property:binding.query.port={{QUERY_PORT}} --property:binding.file.port={{FILE_PORT}} --property:voice.default_port={{SERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"voice.default_port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"file.port\": \"{{server.build.env.FILE_PORT}}\",\r\n            \"query.motd\": \"\\\"{{server.build.env.SERVER_MOTD}}\\\"\",\r\n            \"query.max_line_buffer\": \"10000\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Started server on \"\r\n}",
+        "startup": "{\r\n    \"done\": \"Loaded \"\r\n}",
         "logs": "{}",
         "stop": "shutdown now"
     },
