@@ -6,9 +6,11 @@ body:
   - type: markdown
     attributes:
       value: |
-          If you see any of the following, go to [Discord](https://discord.gg/pterodactyl) and report your error in a support channel.
-          * `A fatal error was encountered while starting this server.`
-          * `No server egg configuration could be located; aborting startup.`
+        If you see any of the following, go to [Discord](https://discord.gg/pterodactyl) and report your error in a support channel.
+        * `A fatal error was encountered while starting this server.`
+        * `No server egg configuration could be located; aborting startup.`
+
+        Make sure there are no existing bug reports by searching the [repository issues](https://github.com/parkervcp/eggs/issues?q=is%3Aopen+is%3Aissue+label%3ABug).
   - type: input
     id: panel-version
     attributes:
@@ -24,7 +26,7 @@ body:
       description: Version number of your Wings (latest is not a version)
       placeholder: 1.x.x
     validations:
-      required: true      
+      required: true
   - type: input
     id: service
     attributes:
@@ -32,18 +34,18 @@ body:
       description: Service you are experiencing issues with
       placeholder: minecraft/factorio/etc
     validations:
-      required: true          
+      required: true
   - type: dropdown
     id: modified
     attributes:
       label: Modified
       description: Did you add or change things, this includes startup configs/install scripts/variables
       options:
-        -  Yes, I modified the egg (will provide details below)
-        -  No, I did not modify the egg   
+        - Yes, I modified the egg (will provide details below)
+        - No, I did not modify the egg
     validations:
-      required: true 
-  - type: textarea          
+      required: true
+  - type: textarea
     id: expected-behavior
     attributes:
       label: Expected Behavior
@@ -51,7 +53,7 @@ body:
       placeholder: Install the server, start it, play
     validations:
       required: true
-  - type: textarea      
+  - type: textarea
     id: actual-behavior
     attributes:
       label: Actual Behavior
@@ -59,15 +61,15 @@ body:
       placeholder: Server crashed with error X
     validations:
       required: true
-  - type: textarea       
+  - type: textarea
     id: reproduce-steps
     attributes:
       label: Steps To Reproduce
       description: Step by step what to do to cause the issue
       placeholder: |
-       Step 1 Set version to latest
-       Step 2 install
-       Step 3 Receive error X or Y
+        Step 1 Set version to latest
+        Step 2 install
+        Step 3 Receive error X or Y
     validations:
       required: true
   - type: textarea

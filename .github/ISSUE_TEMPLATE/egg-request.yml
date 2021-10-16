@@ -1,19 +1,12 @@
 name: 🥚 Egg Request
 description: Suggest a server to build an egg for
 title: "[Egg Request]: "
+labels: [Egg Request]
 body:
   - type: markdown
     attributes:
       value: |
-          Make sure there are no existing egg requests by searching the repository issues. Please understand how Pterodactyl works when you are requesting an egg. (ie. docker-compose doesn't work for a pterodactyl server)
-  - type: input
-    id: service
-    attributes:
-      label: Service
-      description: Service you are experiencing issues with
-      placeholder: minecraft/factorio/etc
-    validations:
-      required: true
+          Make sure there are no existing egg requests by searching the [repository issues](https://github.com/parkervcp/eggs/issues?q=is%3Aissue+is%3Aopen+label%3A%22Egg+Request%22). Please understand how Pterodactyl works when you are requesting an egg. (ie. docker-compose doesn't work for a pterodactyl server)
   - type: dropdown
     id: expand
     attributes:
@@ -26,14 +19,14 @@ body:
   - type: input
     id: game-link
     attributes:
-      label: Link to game
+      label: Link to a game or software
       placeholder: minecraft.net/factorio.com/etc
     validations:
       required: true
   - type: input
     id: download-link
     attributes:
-      label: Links for server downloads
+      label: Links for the download
       description: This needs to be an official link and not one that is hosted on some forum page or a personal Github page.
     validations:
       required: true
