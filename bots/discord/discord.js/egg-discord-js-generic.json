@@ -4,12 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-08-07T17:11:56+03:00",
+    "exported_at": "2021-10-22T07:43:48-04:00",
     "name": "discord.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "features": null,
     "images": [
+        "ghcr.io\/parkervcp\/yolks:nodejs_17",
         "ghcr.io\/parkervcp\/yolks:nodejs_16",
         "ghcr.io\/parkervcp\/yolks:nodejs_15",
         "ghcr.io\/parkervcp\/yolks:nodejs_14",
@@ -30,7 +31,8 @@
             "entrypoint": "bash"
         }
     },
-    "variables": [{
+    "variables": [
+        {
             "name": "Git Repo Address",
             "description": "GitHub Repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
             "env_variable": "GIT_ADDRESS",
