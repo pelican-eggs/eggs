@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-08-21T11:31:41+02:00",
+    "exported_at": "2021-10-24T16:47:50+02:00",
     "name": "PocketmineMP",
     "author": "info@swisscrafting.ch",
     "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/bin\/php7\/bin\/php .\/PocketMine-MP.phar --no-wizard --disable-ansi",
@@ -22,21 +22,12 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl jq\r\n\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n## this is a simple script to validate a download url actaully exists\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\"]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} > PocketMine-MP.phar\r\n\r\necho -e \"\\n downloading latest php build from pocketmine\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-8.0-Aggregate\/lastStableBuild\/artifact\/PHP-8.0-Linux-x86_64.tar.gz\r\n\r\necho -e \"\\n getting default server.properties\"\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/bedrock\/pocketmine_mp\/server.properties > server.properties\r\n\r\necho -e \"\\n unpacking php binaries\"\r\ntar -xzvf php.binary.tar.gz\r\n\r\necho -e \"\\n removing php packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.txt banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl jq\r\n\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nDOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n\r\n## this is a simple script to validate a download url actaully exists\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\"]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} > PocketMine-MP.phar\r\n\r\necho -e \"\\n downloading latest php build from pocketmine\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-8.0-Aggregate\/lastStableBuild\/artifact\/PHP-8.0-Linux-x86_64.tar.gz\r\n\r\necho -e \"\\n getting default server.properties\"\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/bedrock\/pocketmine_mp\/server.properties > server.properties\r\n\r\necho -e \"\\n unpacking php binaries\"\r\ntar -xzvf php.binary.tar.gz\r\n\r\necho -e \"\\n removing php packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.txt banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
-        {
-            "name": "PocketmineMP Version",
-            "description": "Version from Github",
-            "env_variable": "VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20"
-        },
         {
             "name": "Github Package",
             "description": "",
