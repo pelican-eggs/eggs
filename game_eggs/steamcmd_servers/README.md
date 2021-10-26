@@ -82,6 +82,9 @@ This is a collection of servers that use SteamCMD to install.
   * [Autowipe](rust/rust_autowipe)
   * [Staging](rust/rust_staging)
 
+## Satisfactory
+[Satisfactory](satisfactory)
+
 ## SCP: Secret Laboratory
 * [SCP: Secret Laboratory](scpsl)
   * [dedicated](scpsl/dedicated)
