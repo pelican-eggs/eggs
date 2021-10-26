@@ -195,6 +195,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Rust](game_eggs/steamcmd_servers/rust)
   * [Autowipe](game_eggs/steamcmd_servers/rust/rust_autowipe)
   * [Staging](game_eggs/steamcmd_servers/rust/rust_staging)
+* [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
