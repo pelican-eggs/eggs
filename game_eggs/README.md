@@ -124,6 +124,7 @@
 * [Rust](steamcmd_servers/rust)
   * [Autowipe](steamcmd_servers/rust/rust_autowipe)
   * [Staging](steamcmd_servers/rust/rust_staging)
+* [Satisfactory](steamcmd_servers/Satisfactory)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [dedicated](steamcmd_servers/scpsl/dedicated)
   * [multiadmin](steamcmd_servers/scpsl/multiadmin)
