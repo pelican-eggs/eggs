@@ -69,3 +69,24 @@ ___
 ### Minimum Disk Requirement
 This server requires just under 5 GB of disk space to safely run properly. However, save files could easily surpass this amount, so 7-10 GB is recommended.
 ___
+### Errors/Warnings
+The following errors or warnings you see in the console can safely be ignored:
+```log
+steamclient.so: cannot open shared object file: No such file or directory
+[S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
+LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
+```
+The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers)).
+```log
+...Error: Couldn't find file for package...
+```
+```log
+...Error: Navmesh bounds are too large!...
+```
+```log
+...Warning: NiagaraSystem...
+```
+```log
+LogStreaming: Warning: Failed to read file '../../../FactoryGame/Saved/SaveGames/GameAnalytics.sav' error.
+```
+These seem to be common error messages with the current experimental version of the game.
