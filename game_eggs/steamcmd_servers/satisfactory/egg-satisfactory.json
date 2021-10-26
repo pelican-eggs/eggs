@@ -1,0 +1,76 @@
+{
+    "_comment": "Pterodactyl Satisfactory Egg ~ Kubi, matthewp, and Red-Thirten ~ 2021-10-26",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "name": "Satisfactory",
+    "author": "rehlmgaming@gmail.com",
+    "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/games:source"
+    ],
+    "file_denylist": [],
+    "startup": ".\/FactoryServer.sh -GamePort={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
+        "logs": "{}",
+        "stop": "^CC"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Satisfactory Egg - egg-satisfactory.json\r\n## Authors: ryan@kubiq.io (Kubi), matthew@pterodactyl.io (matthewp), & David Wolfe (Red-Thirten)\r\n## Date: 2021\/10\/26\r\n## License: MIT License\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${APP_ID} validate +exit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Server Query Port",
+            "description": "This is the port that you need to enter in the game when you first connect to a dedicated server.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "15777",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|min:1024|max:65536"
+        },
+        {
+            "name": "[REQUIRED] Beacon Port",
+            "description": "This port's internal opening on this server *must* match it's external opening on your network (ie. If you set this value to 3333, your externally open port, which is linked to this port, must also be 3333). This is also true for the master Game Port.",
+            "env_variable": "BEACON_PORT",
+            "default_value": "15000",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|min:1024|max:65536"
+        },
+        {
+            "name": "Automatic Updates",
+            "description": "Quickly checks for any server updates on startup, and updates if necessary. (1 Enable | 0 Disable)",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean"
+        },
+        {
+            "name": "[Repair] Validate Server Files",
+            "description": "Leave empty (no value) for OFF or type \"true\" or \"1\" for ON. Validates all server files when Automatic Updates is enabled. Note: This will significantly increase server startup times, so it is recommended to only enable this when needed.",
+            "env_variable": "VALIDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "[Advanced] Satisfactory Dedicated Server App ID",
+            "description": "Steam App ID used for installation and updates. Rarely needs to be changed.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1690800",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|integer|min:1"
+        }
+    ]
+}
