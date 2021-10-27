@@ -1,5 +1,6 @@
 # Satisfactory
 ***Server version currently marked as experimental by the Satisfactory developers! Egg loads fine, but your mileage may vary in-game.***
+**Note: At this time, you can only run *one* Satisfactory server on your Pterodactyl panel. See [Server Ports](#server-ports) for more info.**
 ___
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
@@ -51,7 +52,7 @@ ___
     - ...and possibly more as the client's UI is developed further for more configuration options.
 ___
 ### Server Ports
-Default server ports are listed below, and **only** the Server Query port can currently be changed. The current experimental version limits the default Game and Beacon ports from being changed, unless two instances of the server are ran on the **same system** (which cannot be done with Pterodactyl, since every server is ran on it's own containerized system). This is expected to change as the dedicated server is further developed. **All three ports are required to be open for normal server behavior!**
+Default server ports are listed below, and **only** the Server Query port can currently be changed. The current experimental version limits the default Game and Beacon ports from being changed, unless two instances of the server are ran on the same system (which cannot be done with Pterodactyl, since every server is ran on it's own containerized system). This is expected to change as the dedicated server is further developed. Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match). **All three ports are required to be open for normal server behavior!**
 
 | Description | REQUIRED UDP Port |
 |---------|---------|
