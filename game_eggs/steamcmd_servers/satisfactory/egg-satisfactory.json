@@ -32,18 +32,18 @@
             "description": "This is the port that you need to enter in the game when you first connect to a dedicated server.",
             "env_variable": "QUERY_PORT",
             "default_value": "15777",
-            "user_viewable": true,
+            "user_viewable": false,
             "user_editable": false,
             "rules": "required|integer|min:1024|max:65536"
         },
         {
             "name": "[REQUIRED] Beacon Port",
-            "description": "This port's internal opening on this server *must* match it's external opening on your network (ie. If you set this value to 3333, your externally open port, which is linked to this port, must also be 3333). This is also true for the master Game Port.",
+            "description": "This port's default value currently cannot be changed due to the server's experimental status. However, it is left here for posterity, as changing this value is expected to be possible after the developer further develops the dedicated server. This is also true for the main Game Port (must be 7777)!",
             "env_variable": "BEACON_PORT",
             "default_value": "15000",
-            "user_viewable": true,
+            "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer|min:1024|max:65536"
+            "rules": "required|integer|min:15000|max:15000"
         },
         {
             "name": "Automatic Updates",
