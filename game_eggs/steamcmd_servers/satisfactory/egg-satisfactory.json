@@ -12,7 +12,7 @@
         "ghcr.io\/pterodactyl\/games:source"
     ],
     "file_denylist": [],
-    "startup": ".\/FactoryServer.sh -GamePort={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}}",
+    "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame -ServerQueryPort={{SERVER_PORT}} -Port={{GAME_PORT}} -BeaconPort={{BEACON_PORT}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -21,29 +21,29 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Satisfactory Egg - egg-satisfactory.json\r\n## Authors: ryan@kubiq.io (Kubi), matthew@pterodactyl.io (matthewp), & David Wolfe (Red-Thirten)\r\n## Date: 2021\/10\/26\r\n## License: MIT License\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} validate +exit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Satisfactory Egg - egg-satisfactory.json\r\n## Authors: ryan@kubiq.io (Kubi), matthew@pterodactyl.io (matthewp), admin@softwarenoob.com (Software-Noob) & David Wolfe (Red-Thirten)\r\n## Date: 2021\/10\/27\r\n## License: MIT License\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} validate +exit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n# Satisfactory setup\r\ncd \/mnt\/server\/Engine\/Binaries\/Linux\r\nif [[ ! -f UE4Server-Linux-Shipping ]]; then\r\n    echo -e \"\\n\\nSteamCMD failed to install the Satisfactory Dedicated Server!\"\r\n    echo -e \"\\tTry reinstalling the server again.\\n\"\r\n    exit 1\r\nelse\r\n    chmod +x UE4Server-Linux-Shipping\r\nfi\r\n\r\necho -e \"\\n\\nSatisfactory Dedicated Server successfully installed!\\n\"",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "[REQUIRED] Server Query Port",
-            "description": "This is the port that you need to enter in the game when you first connect to a dedicated server.",
-            "env_variable": "QUERY_PORT",
-            "default_value": "15777",
+            "name": "[REQUIRED] Game Port",
+            "description": "This is the port that the game client uses to connect to the game world (not the lobby). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended). This is also true for the Primary (Query) Port!",
+            "env_variable": "GAME_PORT",
+            "default_value": "7777",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|integer|min:1024|max:65536"
         },
         {
             "name": "[REQUIRED] Beacon Port",
-            "description": "This port's default value currently cannot be changed due to the server's experimental status. However, it is left here for posterity, as changing this value is expected to be possible after the developer further develops the dedicated server. This is also true for the main Game Port (must be 7777)!",
+            "description": "This port provides a lightweight way for clients to contact a server and interact with it without committing to a normal game connection (likely used for client administration). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended).",
             "env_variable": "BEACON_PORT",
             "default_value": "15000",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer|min:15000|max:15000"
+            "rules": "required|integer|min:1024|max:65536"
         },
         {
             "name": "Automatic Updates",
