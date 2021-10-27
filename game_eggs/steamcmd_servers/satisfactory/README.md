@@ -1,5 +1,6 @@
 # Satisfactory
 ***Server version currently marked as experimental by the Satisfactory developers! Egg loads fine, but your mileage may vary in-game.***
+
 **Note: At this time, you can only run *one* Satisfactory server on your Pterodactyl panel. See [Server Ports](#server-ports) for more info.**
 ___
 ### Authors / Contributors
@@ -77,7 +78,7 @@ steamclient.so: cannot open shared object file: No such file or directory
 [S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
-The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers)).
+The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_library_error)).
 ```log
 ...Error: Couldn't find file for package...
 ```
