@@ -1,5 +1,5 @@
 # Satisfactory
-***Server version currently marked as experimental by the Satisfactory developers! Egg loads fine, but your mileage may very in-game.***
+***Server version currently marked as experimental by the Satisfactory developers! Egg loads fine, but your mileage may vary in-game.***
 ___
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
@@ -41,7 +41,7 @@ From Coffee Stain's [Website](https://www.satisfactorygame.com/):
 > Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!
 ___
 ### Egg Capabilities
-- Port configuration for Game, Query, and Beacon ports.
+- Configuration of the Server Query port.
 - Configurable to automatically check for server updates on start via SteamCMD. Forcing validation is also configurable.
 - Misc. settings listed below can be configured by an admin client via the game's UI, and are currently **not** set via the Egg:
     - Server Password
@@ -50,21 +50,21 @@ ___
     - Pause When No Players Online
     - ...and possibly more as the client's UI is developed further for more configuration options.
 ___
-### Installation Requirements
-- No major requirements, other than RAM and Disk space noted below. You *do not* need to own the base game to host this server.
-___
 ### Server Ports
-Default server ports are listed below, but all can be configured differently (at least according to the [wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers); developers highly recommend using the default ports during the experimental release). **All three ports are required for normal server behavior.**
+Default server ports are listed below, and **only** the Server Query port can currently be changed. The current experimental version limits the default Game and Beacon ports from being changed, unless two instances of the server are ran on the **same system** (which cannot be done with Pterodactyl, since every server is ran on it's own containerized system). This is expected to change as the dedicated server is further developed. **All three ports are required to be open for normal server behavior!**
 
-| Port | Default |
+| Description | REQUIRED UDP Port |
 |---------|---------|
 | **Game Port (Main Server Port in Pterodactyl)** | 7777 |
-| Server Query Port | 15777 |
+| Server Query Port | 15777 *(Configurable)* |
 | Beacon Port | 15000 |
 
 ___
+### Installation Requirements
+- No major requirements, other than RAM and Disk space noted below. You *do not* need to own the base game to host this server.
+___
 ### Minimum RAM Requirement
-This server requires a minimum of 4096 MiB of RAM to boot, but the developers recommend 8192 MiB of RAM for 4 players.
+This server requires a minimum of 4096 MiB of RAM to boot, but the developers recommend 6144 to 8192 MiB of RAM for 4 players.
 ___
 ### Minimum Disk Requirement
 This server requires just under 5 GB of disk space to safely run properly. However, save files could easily surpass this amount, so 7-10 GB is recommended.
