@@ -63,7 +63,7 @@ Default server ports are listed below, and **only** the Server Query port can cu
 
 ___
 ### Installation Requirements
-- No major requirements, other than RAM and Disk space noted below. You *do not* need to own the base game to host this server.
+No major requirements, other than RAM and Disk space noted below. You *do not* need to own the base game to host this server.
 ___
 ### Minimum RAM Requirement
 This server requires a minimum of 4096 MiB of RAM to boot, but the developers recommend 6144 to 8192 MiB of RAM for 4 players.
@@ -71,14 +71,23 @@ ___
 ### Minimum Disk Requirement
 This server requires just under 5 GB of disk space to safely run properly. However, save files could easily surpass this amount, so 7-10 GB is recommended.
 ___
+### Save File Location
+[According to the developer](https://www.youtube.com/watch?v=Nn-1s87JJxc), save files will be able to be download by clients via their game in the future. Until then, below is the save file location incase you would like to upload or download a save file (note that it is different from their wiki):
+
+`/home/container/.config/Epic/FactoryGame/Saved/SaveGames/server`
+
+Single-player save files can be uploaded here and are playable if desired.
+___
 ### Errors/Warnings
 The following errors or warnings you see in the console can safely be ignored:
+
 ```log
 steamclient.so: cannot open shared object file: No such file or directory
 [S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
 The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_library_error)).
+
 ```log
 ...Error: Couldn't find file for package...
 ```
