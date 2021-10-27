@@ -72,7 +72,7 @@ ___
 This server requires just under 5 GB of disk space to safely run properly. However, save files could easily surpass this amount, so 7-10 GB is recommended.
 ___
 ### Save File Location
-[According to the developer](https://www.youtube.com/watch?v=Nn-1s87JJxc), save files will be able to be download by clients via their game in the future. Until then, below is the save file location incase you would like to upload or download a save file (note that it is different from their wiki):
+[According to the developer](https://www.youtube.com/watch?v=Nn-1s87JJxc), save files will be able to be uploaded and downloaded by clients via their game client in the future. Until then, below is the save file location incase you would like to upload or download a save file manually (note that it is different from their wiki):
 
 `/home/container/.config/Epic/FactoryGame/Saved/SaveGames/server`
 
