@@ -38,6 +38,14 @@ ___
             <a href="https://github.com/parkervcp/eggs/commits?author=Software-Noob" title="Codes">💻</a>
             <a href="https://github.com/parkervcp/eggs/commits?author=Software-Noob" title="Contributor">💡</a>
         </td>
+        <td align="center">
+            <a href="https://github.com/Zarklord">
+                <img src="https://avatars.githubusercontent.com/u/1622280" width="50px;" alt=""/><br /><sub><b>Zarklord</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Zarklord" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=Zarklord" title="Contributor">💡</a>
+        </td>
     </tr>
 </table>
 <!-- markdownlint-enable -->
@@ -51,6 +59,7 @@ ___
 ### Egg Capabilities
 - Configuration of the Server Query, Beacon, and Game ports.
 - Configurable to automatically check for server updates on start via SteamCMD. Forcing validation is also configurable.
+- *[Experimental]* Max player configuration.
 - Misc. settings listed below can be configured by an admin client via the game's UI, and are currently **not** set via the Egg:
     - Server Password
     - Admin Password
@@ -59,35 +68,41 @@ ___
     - ...and possibly more as the client's UI is developed further for more configuration options.
 ___
 ### Server Ports
-Default server ports are listed below, but all three ports can be changed freely. Note: The Primary/Default/"Game" Port for your server in Pterodactyl will be your Server Query port. It is recommended to distance ports of other running Satisfactory servers in Pterodactyl by increments of 100 (it is currently unknown what the minimum increment is, but an increment of +1 caused cross-server talk in testing). Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match). **All three ports are required to be open for normal server behavior!**
+- Default server ports are listed below, but all three ports can be changed freely.
+- **Note:** The Primary/Default/Game Port for your server in Pterodactyl will be Satisfactory's `-Port=????` game port, even though clients will **connect with the Query port**.
+- It is recommended to distance ports of other running Satisfactory servers in Pterodactyl by **increments of 100** (it is currently unknown what the minimum increment is, but an increment of +1 caused cross-server talk in testing). Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match).
+- ***All three ports are required to be open for normal server behavior!***
 
 | Port | Default (UDP) |
 |---------|---------|
-| **Server Query (Primary Port in Pterodactyl)** | 15777 |
+| **Game (Primary Port in Pterodactyl)** | 7777 |
 | Beacon | 15000 |
-| Game | 7777 |
+| Server Query | 15777 |
 
 ___
 ### Installation Requirements/Instructions
 - No major requirements, other than RAM and Disk space noted below.
 - You *do not* need to own the base game to host this server.
 - However, to fully "initialize" your server, a client who owns the game must log into the server to "claim" it and create a new session. The generated session will not be written to disk until the first save occurs.
+- Currently, there is no way to save the session on server stop. Therefore, ensure the session is saved or the last player has disconnected (causing an auto-save) before stopping the server.
 ___
 ### Minimum RAM Requirement
-This server requires a minimum of 4096 MiB of RAM to boot, but the developers recommend 6144 to 8192 MiB of RAM for 4 players.
+This server requires a minimum of 4096 MiB of RAM to boot, but the developers recommend 6144 to 8192 MiB of RAM for 4 players or large save files.
 ___
 ### Minimum Disk Requirement
 This server requires just under 5 GB of disk space to safely run properly. However, save files could easily surpass this amount, so 7-10 GB is recommended.
 ___
 ### Save File Location
-[According to the developer](https://www.youtube.com/watch?v=Nn-1s87JJxc), save files will be able to be uploaded and downloaded by clients via their game client in the future. Until then, below is the save file location in case you would like to upload or download a save file manually (note that it is different from their wiki):
+[According to the developer](https://www.youtube.com/watch?v=Nn-1s87JJxc), save files will be able to be uploaded and downloaded by clients via their game client in the future. Until then, below is the save file location in case you would like to upload or download a save file manually:
 
 `/home/container/.config/Epic/FactoryGame/Saved/SaveGames/server`
 
 Single-player save files can be uploaded here and are playable if desired.
 ___
-### Console
-Currently, it does not appear that commands sent through the console register with the server. The in-game client command line can be used instead (but valid commands are currently unknown at this time).
+### Console Commands
+As of v5.0.4, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
+
+[List of known commands can be found via the Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#Commands)
 ___
 ### Errors/Warnings
 The following errors or warnings you see in the console can safely be ignored:
@@ -97,7 +112,7 @@ steamclient.so: cannot open shared object file: No such file or directory
 [S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
-The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_library_error)).
+The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#No_Such_File_or_Directory)).
 
 ```log
 Warning: failed to init SDL thread priority manager: SDL not found
