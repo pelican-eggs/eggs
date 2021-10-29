@@ -32,7 +32,7 @@
             "description": "This is the port that your clients will type in and use to connect to the lobby (not the game world). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended). This is also true for the Primary\/Game Port!",
             "env_variable": "QUERY_PORT",
             "default_value": "15777",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|between:1024,65536"
         },
@@ -41,7 +41,7 @@
             "description": "This port provides a lightweight way for clients to contact a server and interact with it without committing to a normal game connection (likely used for client administration). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended).",
             "env_variable": "BEACON_PORT",
             "default_value": "15000",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|between:1024,65536"
         },
