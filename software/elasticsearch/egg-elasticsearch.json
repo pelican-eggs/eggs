@@ -32,7 +32,7 @@
             "name": "Discovery Seed Hosts",
             "description": "Please keep default if you are unsure.",
             "env_variable": "DISCOVERY_SEED_HOSTS",
-            "default_value": "[]",
+            "default_value": "single-node",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required"
@@ -41,7 +41,7 @@
             "name": "Elasticsearch Version",
             "description": "Go to https:\/\/www.elastic.co\/downloads\/elasticsearch and look at the version at the top.",
             "env_variable": "VERSION",
-            "default_value": "7.13.4",
+            "default_value": "7.15.1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20"
