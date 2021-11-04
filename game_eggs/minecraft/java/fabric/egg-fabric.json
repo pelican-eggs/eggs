@@ -64,7 +64,7 @@
             "name": "Fabric Loader Version",
             "description": "The version of Fabric Loader to install.",
             "env_variable": "LOADER_VERSION",
-            "default_value": "stable",
+            "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|between:3,15"
