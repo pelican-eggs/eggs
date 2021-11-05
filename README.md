@@ -29,9 +29,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
+* [discordgo](bots/discord/discordgo) Golang generic
+* [discord.js](bots/discord/discord.java) Java generic
 * [discord.js](bots/discord/discord.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
-* [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
 * [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
