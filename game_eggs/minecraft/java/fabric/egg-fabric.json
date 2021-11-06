@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-11-04T15:17:39+00:00",
+    "exported_at": "2021-11-06T19:02:28+00:00",
     "name": "Fabric",
     "author": "accounts@bofanodes.io",
     "description": "Fabric is a modular modding toolchain targeting Minecraft 1.14 and above, including snapshots.",
@@ -12,9 +12,8 @@
         "eula"
     ],
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_11",
         "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_14",
+        "ghcr.io\/pterodactyl\/yolks:java_11",
         "ghcr.io\/pterodactyl\/yolks:java_16"
     ],
     "file_denylist": [],
@@ -64,7 +63,7 @@
             "name": "Fabric Loader Version",
             "description": "The version of Fabric Loader to install.",
             "env_variable": "LOADER_VERSION",
-            "default_value": "latest",
+            "default_value": "stable",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|between:3,15"
