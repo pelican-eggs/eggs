@@ -29,11 +29,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
+* [discordgo](bots/discord/discordgo) Golang generic
+* [discord.java](bots/discord/discord.java) Java generic
 * [discord.js](bots/discord/discord.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
-* [discordgo](bots/discord/discordgo) Golang generic
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
+* [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
@@ -76,6 +78,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [BeamMP Server](game_eggs/beamng/beammp)
 * [KissMP](game_eggs/beamng/kissmp)
 
+[ClassiCube](game_eggs/classicube)
+* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+
 [Cryofall](game_eggs/cryofall/cryofall)
 
 [Call of Duty 4X](game_eggs/cod/cod4x)
@@ -93,11 +98,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [FiveM](game_eggs/gta/fivem)
   * [RageMP](game_eggs/gta/ragemp)
   * [alt:V](game_eggs/gta/altv)
-  
+
 * GTA SA
   * [Multi Theft Auto](game_eggs/gta/mtasa)
   * [SA-MP](game_eggs/gta/samp)
-  
+
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
@@ -120,7 +125,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
   * [Airplane](game_eggs/minecraft/java/airplane)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
-  * [Fabric](game_eggs/minecraft/java/fabric) 
+  * [Fabric](game_eggs/minecraft/java/fabric)
   * [Feather](game_eggs/minecraft/java/feather)  
   * [Feed The Beast](game_eggs/minecraft/java/ftb)  
   * [Forge](game_eggs/minecraft/java/forge)  
@@ -137,17 +142,19 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
-	* [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
+	  * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
+  * [Bedrock](game_eggs/minecraft/proxy/bedrock)
+    * [Waterdog PE](game_eggs/minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](game_eggs/minecraft/proxy/cross_platform)
     * [GeyserMC](game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](game_eggs/minecraft/proxy/cross_platform/waterdog)
 
 [OpenArena](game_eggs/openarena)  
-  * [openarena](game_eggs/openarena/openarena) 
+  * [openarena](game_eggs/openarena/openarena)
 
 [OpenRA](game_eggs/openra)
 * [OpenRA Dune2000](game_eggs/openra/openra_dune2000)
@@ -189,6 +196,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Rust](game_eggs/steamcmd_servers/rust)
   * [Autowipe](game_eggs/steamcmd_servers/rust/rust_autowipe)
   * [Staging](game_eggs/steamcmd_servers/rust/rust_staging)
+* [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
@@ -226,6 +234,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Vintage Story](game_eggs/vintage_story/vintage_story)
 
+[Wine Generic](game_eggs/wine/generic)
+
 [Xonotic](game_eggs/xonotic/xonotic)
 
 ## [Monitoring](/monitoring/)
@@ -245,3 +255,5 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Grafana](/software/grafana)
 ### haste-server
 * [haste-server](/software/haste-server)
+### RabbitMQ
+* [rabbitmq](/software/rabbitmq)

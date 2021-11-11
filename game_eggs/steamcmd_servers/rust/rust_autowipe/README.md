@@ -1,9 +1,9 @@
 ### Rust Autowipe
 The only aim in Rust is to survive. To do this you will need to overcome struggles such as hunger, thirst and cold. Build a fire. Build a shelter. Kill animals for meat. Protect yourself from other players, and kill them for meat. Create alliances with other players and form a town. Do whatever it takes to survive.
 
-Adds variables to wipe files based on a list you set.
+Adds variables to wipe files based on a list you set. Reinstall to perform the wipe.
 
-The variable `REGEN_SERVER` was added, default 0 set to 1 to generate a random seed and remove old files
+The variable `REGEN_SERVER` was added, default 0, set to 1 to generate a random seed and remove old files on reinstall.
 
 Files listed in the `REMOVE_FILES` variabe, space separated, will be removed.
 

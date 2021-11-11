@@ -7,6 +7,9 @@
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
+[ClassiCube](game_eggs/classicube)
+* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+
 [Cryofall](cryofall/cryofall)
 
 [Call of Duty 4X](cod/cod4x)
@@ -54,7 +57,8 @@
   * [Fabric](minecraft/java/fabric) 
   * [Feather](minecraft/java/feather)  
   * [Feed The Beast](minecraft/java/ftb)  
-  * [Forge](minecraft/java/forge)  
+  * [Forge](minecraft/java/forge)
+  * [Krypton](/minecraft/java/krypton)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
   * [Paper](minecraft/java/paper)
@@ -120,6 +124,7 @@
 * [Rust](steamcmd_servers/rust)
   * [Autowipe](steamcmd_servers/rust/rust_autowipe)
   * [Staging](steamcmd_servers/rust/rust_staging)
+* [Satisfactory](steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [dedicated](steamcmd_servers/scpsl/dedicated)
   * [multiadmin](steamcmd_servers/scpsl/multiadmin)
