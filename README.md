@@ -238,6 +238,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Xonotic](game_eggs/xonotic/xonotic)
 
+[FoundryVTT](game_eggs/FoundryVTT)
+
 ## [Monitoring](/monitoring/)
 ### Prometheus
 * [Prometheus](/monitoring/prometheus)
