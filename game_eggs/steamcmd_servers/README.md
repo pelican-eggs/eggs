@@ -88,6 +88,7 @@ This is a collection of servers that use SteamCMD to install.
 ## SCP: Secret Laboratory
 * [SCP: Secret Laboratory](scpsl)
   * [dedicated](scpsl/dedicated)
+  * [exiled](scpsl/exiled)
   * [multiadmin](scpsl/multiadmin)
 
 ## Soldat
