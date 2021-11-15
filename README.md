@@ -210,6 +210,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Sven Co-op](game_eggs/steamcmd_servers/svencoop)
 * [The Forest](game_eggs/steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
+* [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
@@ -225,10 +226,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Tycoon Games](game_eggs/tycoon_games)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
-
-[Unreal Engine](game_eggs/unreal_engine)
-* [Tower Unite](game_eggs/unreal_engine/tower_unite)
-* [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 
 [Veloren](game_eggs/veloren/veloren)
 
