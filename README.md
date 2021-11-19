@@ -227,7 +227,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Tycoon Games](game_eggs/tycoon_games)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
 
-[Veloren](game_eggs/veloren/veloren)
+[Veloren](game_eggs/veloren)
 
 [Vintage Story](game_eggs/vintage_story/vintage_story)
 
