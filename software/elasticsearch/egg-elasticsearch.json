@@ -1,0 +1,50 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-07-27T08:27:04-05:00",
+    "name": "Elasticsearch",
+    "author": "dominic@stilma.net",
+    "description": null,
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:ubuntu"
+    ],
+    "file_denylist": [],
+    "startup": ".\/bin\/elasticsearch -E network.host=0.0.0.0 -E http.port={{SERVER_PORT}} -E discovery.type={{DISCOVERY_SEED_HOSTS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Elasticsearch Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Install Requirements\r\n\r\napt update\r\napt install -y jq ca-certificates gnupg2 wget tar curl\r\n\r\ncd \/mnt\/server\r\n\r\n## Install Elasticsearch\r\nwget https:\/\/artifacts.elastic.co\/downloads\/elasticsearch\/elasticsearch-$VERSION-linux-x86_64.tar.gz\r\ntar -zxf elasticsearch-*-linux-x86_64.tar.gz --directory \/mnt\/server\r\nmv elasticsearch*\/* \/mnt\/server\r\nrm elasticsearch-*-linux-x86_64.tar.gz\r\nrm -R elasticsearch-*\r\n\r\n## Finish command\r\necho \"All done! Just start it up :)\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Discovery Seed Hosts",
+            "description": "Please keep default if you are unsure.",
+            "env_variable": "DISCOVERY_SEED_HOSTS",
+            "default_value": "single-node",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required"
+        },
+        {
+            "name": "Elasticsearch Version",
+            "description": "Go to https:\/\/www.elastic.co\/downloads\/elasticsearch and look at the version at the top.",
+            "env_variable": "VERSION",
+            "default_value": "7.15.1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
