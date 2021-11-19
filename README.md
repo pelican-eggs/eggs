@@ -81,8 +81,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [ClassiCube](game_eggs/classicube)
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Cryofall](game_eggs/cryofall/cryofall)
-
 [Call of Duty 4X](game_eggs/cod/cod4x)
 
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
@@ -174,6 +172,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
+* [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
