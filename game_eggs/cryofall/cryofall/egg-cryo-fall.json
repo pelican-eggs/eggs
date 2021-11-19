@@ -4,15 +4,15 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-22T16:39:06+01:00",
+    "exported_at": "2021-11-13T11:00:34+01:00",
     "name": "CryoFall",
     "author": "contact@zennodes.dk",
     "description": "NOTE: For now you have to change SettingsServer.xml under CryoFall_Server_v(Version)_NetCore\/Data\/SettingsServer.xml\r\n\r\nCryoFall is a sci-fi multiplayer colony simulation survival game set on a forgotten planet in a distant future.\r\n\r\nJoin the vast world of CryoFall together with other survivors to rebuild your civilization from scratch. Start with primitive technology and simple tools and use them to progress towards modern industrial might and even beyond, eventually reaching space-age technology only seen in science fiction.\r\n\r\nCryoFall can be played either as a relaxed PvE experience with no competition or as a brutal and unforgiving PvP. Make your choice and join one of many available servers with different game modes or host your own and invite your friends to join you!\r\n\r\nBuild your house or a large base together with other players. Dig wells and create farms to sustain basic needs. Build vehicles to explore the world faster. Establish basics of science, all the way from medicine and chemistry to fuel creation and even lithium extraction to create electronic devices. Cook food or prepare drinks to sell them from vending machines in your store.\r\n\r\nBuild factories to produce on an industrial scale: Weapons and defense systems, bionic implants to augment yourself, even large war machines and artillery guns to use against the biggest of opponents",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5"
+        "ghcr.io\/parkervcp\/yolks:dotnet_5"
     ],
-    "file_denylist": "",
+    "file_denylist": [],
     "startup": "dotnet Binaries\/Server\/CryoFall_Server.dll loadOrNew",
     "config": {
         "files": "{}",
@@ -22,19 +22,19 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n#Server Files: \/mnt\/server\r\napt update\r\napt install -y curl zip unzip\r\n\r\nif [[ ! -d \/mnt\/server\/ ]]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ \"${VERSION}\" == \"latest\" ] || [ \"${VERSION}\" == \"\" ]; then\r\n    DOWNLOAD_URL=$(curl -sSL https:\/\/wiki.atomictorch.com\/CryoFall\/Server\/Setup | grep 'SERVER DOWNLOAD' | grep -Eoi '<a [^>]+>' | grep -Eo 'href=\\\"[^\\\\\\\"]+\\\"' | grep -Eo '(http|https):\\\/\\\/[^\\\"]+' | tail -1 | cut -d'?' -f1)\r\nelse\r\n    DOWNLOAD_URL=https:\/\/atomictorch.com\/Files\/CryoFall_Server_v${VERSION}_NetCore.zip\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -L -o cryofall_server.zip ${DOWNLOAD_LINK}\r\n\r\nunzip cryofall_server.zip\r\n\r\ncp -rf CryoFall_Server*NetCore\/. \/mnt\/server\r\n\r\nrm -rf cryofall_server.zip CryoFall_Server*NetCore\/",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id ffound here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# INSTALL_FLAGS - when a server has extra glas for things like beta installs or updates.\r\n#\r\n##\r\n\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Game server version",
-            "description": "type game server version",
-            "env_variable": "VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1061710",
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|string|max:20"
         }
     ]
