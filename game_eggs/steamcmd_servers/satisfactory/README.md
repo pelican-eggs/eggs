@@ -1,5 +1,5 @@
 # Satisfactory
-***Updating your Egg?**: Ensure any existing servers have the latest Startup Command and new Startup Variables are set!**
+***Updating your Egg?**: Ensure any existing servers have the latest Startup Command and new Startup Variables are set!*
 ___
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
@@ -115,7 +115,7 @@ Save files are located in this directory:
 ```
 /home/container/.config/Epic/FactoryGame/Saved/SaveGames/server
 ```
-^Note: A manually uploaded save will only load if it is (a.) loaded manually via the "Manage Saves" tab in-game, (b.) it is the only save file present, or (c.) its existing session name (not its file name) matches the existing save's session name *and* has the most recent time stamp.^
+*Note: A manually uploaded save will only load if it is (a.) loaded manually via the "Manage Saves" tab in-game, (b.) it is the only save file present, or (c.) its existing session name (not its file name) matches the existing save's session name *and* has the most recent time stamp.*
 
 If you have forgotten your administrator password or would generally like to reset your server as if it were new, you can delete the following file:
 ```
@@ -135,13 +135,13 @@ steamclient.so: cannot open shared object file: No such file or directory
 [S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
-^The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).^
+The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).
 
 ```log
 Warning: failed to init SDL thread priority manager: SDL not found
 ```
 
-^This is a common error with Steam related software on Linux, but can safely be ignored.^
+This is a common error with Steam related software on Linux, but can safely be ignored.
 
 ```log
 ...Error: Couldn't find file for package...
@@ -155,4 +155,4 @@ Warning: failed to init SDL thread priority manager: SDL not found
 ```log
 LogStreaming: Warning: Failed to read file '../../../FactoryGame/Saved/SaveGames/GameAnalytics.sav' error.
 ```
-^These seem to be common error messages with the current experimental version of the game.^
+These seem to be common error messages with the current experimental version of the game.
