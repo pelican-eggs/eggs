@@ -9,8 +9,7 @@
     "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/games:source",
-        "ghcr.io\/pterodactyl\/games:source"
+        "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
     "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0",
@@ -93,7 +92,7 @@
         },
         {
             "name": "[Experimental] Max Players",
-            "description": "The server and client are currently not optimized to support more than 4 players. However, you can override this value here at your own risk of poor performance.",
+            "description": "[Requires server re-install to change default value!] The server and client are currently not optimized to support more than 4 players. However, you can override this value here at your own risk of poor performance.",
             "env_variable": "MAX_PLAYERS",
             "default_value": "4",
             "user_viewable": true,
