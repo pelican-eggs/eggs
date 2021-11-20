@@ -1,5 +1,5 @@
 # Satisfactory
-***Updating your Egg?**: Ensure any existing servers have the latest Startup Command and new Startup Variables are set!*
+***Updating your Egg?**: Ensure any existing servers have the latest Startup Command, new Startup Variables are set, **and you reinstall server!***
 ___
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
@@ -116,6 +116,8 @@ Save files are located in this directory:
 /home/container/.config/Epic/FactoryGame/Saved/SaveGames/server
 ```
 *Note: A manually uploaded save will only load if it is (a.) loaded manually via the "Manage Saves" tab in-game, (b.) it is the only save file present, or (c.) its existing session name (not its file name) matches the existing save's session name *and* has the most recent time stamp.*
+
+***Warning:*** Stopping the server **does not** currently save your game! Ensure it is saved before stopping the server.
 
 If you have forgotten your administrator password or would generally like to reset your server as if it were new, you can delete the following file:
 ```
