@@ -103,4 +103,8 @@ The official Tekkit Classic modpack. Build factories, automate crafting!
 
 ## VanillaCord
 [VanillaCord](https://github.com/ME1312/VanillaCord)
-VanillaCord adds support for BungeeCord's ip-forwarding option on vanilla Minecraft servers
+VanillaCord adds support for BungeeCord's ip-forwarding option on vanilla Minecraft servers.
+
+## NanoLimbo
+[NanoLimbo](https://github.com/Nan1t/NanoLimbo)
+This is lightweight minecraft limbo server, written on Java with Netty. The main goal of the project is maximum simplicity with a minimum number of sent and processed packets.

@@ -69,6 +69,7 @@
   * [Technic](minecraft/java/technic)
   * [Tuinity](minecraft/java/tuinity)
   * [VanillaCord](minecraft/java/vanillacord)
+  * [NanoLimbo](/minecraft/java/nanolimbo)
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
   * [Java](minecraft/proxy/java)
