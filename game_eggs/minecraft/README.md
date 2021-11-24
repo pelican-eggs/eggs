@@ -20,6 +20,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Krypton](/minecraft/java/krypton)
 * [Magma](/game_eggs/minecraft/java/magma)
 * [Mohist](/game_eggs/minecraft/java/mohist)
+* [NanoLimbo](/game_eggs/minecraft/java/nanolimbo)
 * [Paper](/game_eggs/minecraft/java/paper)
 * [Purpur](/game_eggs/minecraft/java/purpur)
 * [Spigot](/game_eggs/minecraft/java/spigot)
@@ -28,7 +29,6 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Technic](/game_eggs/minecraft/java/technic)
 * [Tuinity](/game_eggs/minecraft/java/tuinity)
 * [VanillaCord](/game_eggs/minecraft/java/vanillacord)
-* [NanoLimbo](/game_eggs/minecraft/java/nanolimbo)
 
 * [Proxies](/game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](/game_eggs/minecraft/proxy/java)

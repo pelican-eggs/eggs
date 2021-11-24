@@ -61,6 +61,7 @@
   * [Krypton](/minecraft/java/krypton)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
+  * [NanoLimbo](/minecraft/java/nanolimbo)
   * [Paper](minecraft/java/paper)
   * [Purpur](minecraft/java/purpur)
   * [Spigot](minecraft/java/spigot)
@@ -69,7 +70,6 @@
   * [Technic](minecraft/java/technic)
   * [Tuinity](minecraft/java/tuinity)
   * [VanillaCord](minecraft/java/vanillacord)
-  * [NanoLimbo](/minecraft/java/nanolimbo)
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
   * [Java](minecraft/proxy/java)
