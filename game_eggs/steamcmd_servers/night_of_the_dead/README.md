@@ -10,8 +10,8 @@ Night of the dead requires up to 2 ports
 Game query port (default 27015)
 Game client port (default 7777)
 
-| Port    | default |
-|---------|---------|
-| Game    | 27015   |
-| Client  | 7777    |
+| Port    | default    | 
+|---------|------------|
+| Game    | 27015 (UDP)|
+| Client  | 7777  (UDP)|
 
