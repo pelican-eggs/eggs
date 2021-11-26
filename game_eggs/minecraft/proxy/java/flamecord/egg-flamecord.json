@@ -8,12 +8,15 @@
     "name": "Flamecord",
     "author": "admin@softwarenoob.com",
     "description": "FlameCord is a patch for Travertine to fix possible exploits and add useful functionalities. FlameCord aims to fix Netty related exploits to keep your server safe from attacks.",
-    "features": null,
+    "features": [
+        "eula",
+        "java_version"
+    ],
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_11",
         "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_14",
-        "ghcr.io\/pterodactyl\/yolks:java_16"
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",

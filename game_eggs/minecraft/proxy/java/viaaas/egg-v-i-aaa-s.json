@@ -8,10 +8,15 @@
     "name": "VIAaaS",
     "author": "regulad@outlook.com",
     "description": "VIAaaS - ViaVersion as a Service - Standalone ViaVersion proxy",
-    "features": null,
+    "features": [
+        "eula",
+        "java_version"
+    ],
     "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_17",
         "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_17"
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_8"
     ],
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} -sslPort={{WEBSERVER_PORT}}",

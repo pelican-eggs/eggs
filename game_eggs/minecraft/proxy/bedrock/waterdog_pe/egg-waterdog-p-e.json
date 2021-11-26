@@ -8,11 +8,15 @@
     "name": "Waterdog PE",
     "author": "parker@pterodactyl.io",
     "description": "Brand new proxy server for Minecraft: Bedrock Edition",
-    "features": null,
+    "features": [
+        "eula",
+        "java_version"
+    ],
     "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_8",
         "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_14",
-        "ghcr.io\/pterodactyl\/yolks:java_16"
+        "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Dterminal.ansi=true -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
