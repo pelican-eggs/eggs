@@ -9,10 +9,12 @@
     "author": "info@ttr3.eu",
     "description": "A stable, optimized and fast Paper fork.\r\nhttps:\/\/github.com\/TECHNOVE\/Airplane",
     "features": [
-        "eula"
+        "eula",
+        "java_version"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17",
         "ghcr.io\/pterodactyl\/yolks:java_11"
     ],
     "file_denylist": [],

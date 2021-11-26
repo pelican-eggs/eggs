@@ -8,12 +8,15 @@
     "name": "Mohist",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Spigot fork with performance optimizations.",
-    "features": null,
+    "features": [
+        "eula",
+        "java_version"
+    ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_8",
         "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_14",
-        "ghcr.io\/pterodactyl\/yolks:java_16"
+        "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} pause",
