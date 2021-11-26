@@ -9,9 +9,11 @@ A HarmonyX Mod aimed at improving the gameplay quality of Valheim. The mod inclu
 Support: https://github.com/valheimPlus/ValheimPlus
 Discord: https://discord.gg/AmH6Va97GT
 
+This egg based on the egg of
+
 ***!!! ATTENTION !!!***
 
-***All (Server + Clients) need to have a installed Valheim Plus Mod !!!!*** 
+***All (Server + Clients) need to have a installed Valheim Plus Mod !!!!***
 
 
 ## Server Ports
