@@ -2,7 +2,7 @@
 # steamcmd Base Installation Script
 #
 # Server Files: /mnt/server
-# Image to install with is 'ghcr.io/parkervcp/games:source'
+# Image to install with is 'ghcr.io/parkervcp/yolks:debian'
 
 ##
 #
