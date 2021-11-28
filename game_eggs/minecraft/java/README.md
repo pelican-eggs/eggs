@@ -59,7 +59,7 @@ Please restart the server after first launch to fix this.**
 
 ## NanoLimbo
 [NanoLimbo](https://github.com/Nan1t/NanoLimbo)
-This is lightweight minecraft limbo server, written on Java with Netty. The main goal of the project is maximum simplicity with a minimum number of sent and processed packets.
+A lightweight minecraft limbo server, written on Java with Netty. The main goal of the project is maximum simplicity with a minimum number of sent and processed packets.
 
 ## Spigot
 A collection of spigot and forked spigot eggs.
