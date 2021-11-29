@@ -53,7 +53,7 @@
             "default_value": "8",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric"
+            "rules": "required|numeric|between:1,255"
         },
         {
             "name": "World Size",
