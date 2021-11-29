@@ -125,25 +125,25 @@ If you have forgotten your administrator password or would generally like to res
 ```
 ___
 ### Console Commands
-As of v5.0.4, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
+As of v0.5.1.2, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
 
 [List of known commands can be found via the Wiki.](https://satisfactory.fandom.com/wiki/Dedicated_servers#Console_commands)
 ___
 ### Errors/Warnings
-##### The following errors or warnings you see in the console can safely be ignored:
+The following errors or warnings you see in the console can safely be ignored:
 
 ```log
 steamclient.so: cannot open shared object file: No such file or directory
 [S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
-The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).
+<sup>↑ The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).</sup>
 
 ```log
 Warning: failed to init SDL thread priority manager: SDL not found
 ```
 
-This is a common error with Steam related software on Linux, but can safely be ignored.
+<sup>↑ This is a common error with Steam related software on Linux, but can safely be ignored.</sup>
 
 ```log
 ...Error: Couldn't find file for package...
@@ -157,4 +157,4 @@ This is a common error with Steam related software on Linux, but can safely be i
 ```log
 LogStreaming: Warning: Failed to read file '../../../FactoryGame/Saved/SaveGames/GameAnalytics.sav' error.
 ```
-These seem to be common error messages with the current experimental version of the game.
+<sup>↑ These seem to be common error messages with the current experimental version of the game.</sup>
