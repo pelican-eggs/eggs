@@ -1,35 +1,35 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "Pterodactyl JMusicBot Egg ~ parkervcp, Software-Noob, Proxymiity, and Red-Thirten ~ 2021-11-29",
     "meta": {
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-01-29T22:41:09+02:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-8-jre"
+        "ghcr.io\/parkervcp\/yolks:java_8"
     ],
-    "startup": "java -Djavax.accessibility.assistive_technologies=\" \" -Dnogui=true -jar JMusicBot.jar",
+    "file_denylist": [],
+    "startup": "java -Dnogui=true -jar JMusicBot.jar",
     "config": {
-        "files": "{\r\n    \"config.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"token =\": \"token = \\\"{{env.BOT_TOKEN}}\\\"\",\r\n            \"prefix =\": \"prefix = \\\"{{env.BOT_PREFIX}}\\\"\",\r\n            \"owner =\": \"owner = \\\"{{env.BOT_OWNER}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"token =\": \"token = \\\"{{server.build.env.BOT_TOKEN}}\\\"\",\r\n            \"owner =\": \"owner = {{server.build.env.BOT_OWNER}}\",\r\n            \"prefix =\": \"prefix = \\\"{{server.build.env.BOT_PREFIX}}\\\"\",\r\n            \"game =\": \"game = \\\"{{server.build.env.BOT_GAME}}\\\"\",\r\n            \"status =\": \"status = {{server.build.env.BOT_STATUS}}\",\r\n            \"songinstatus =\": \"songinstatus = {{server.build.env.BOT_SONG_STATUS}}\",\r\n            \"altprefix =\": \"altprefix = \\\"{{server.build.env.BOT_ALT_PREFIX}}\\\"\",\r\n            \"npimages =\": \"npimages = {{server.build.env.BOT_NPIMAGES}}\",\r\n            \"stayinchannel =\": \"stayinchannel = {{server.build.env.BOT_STAY_IN_CHANNEL}}\",\r\n            \"maxtime =\": \"maxtime = {{server.build.env.BOT_MAXTIME}}\",\r\n            \"alonetimeuntilstop =\": \"alonetimeuntilstop = {{server.build.env.BOT_ALONE_TIME}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\r\napt update\r\napt install -y jq curl\r\n\r\nGITHUB_PACKAGE=\"jagrosh\/MusicBot\"\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/config.txt\"\r\nPLAYLIST_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/playlist.txt\"\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"no github user set, using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i config)\r\n    else\r\n        echo -e \"defaulting to the latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -f JMusicBot.jar ]; then\r\n    mv -f JMusicBot.jar JMusicBot.jar-old\r\nfi\r\n\r\ncurl -Lo JMusicBot.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"config already exists\"\r\nelse\r\n    echo -e \"config not found, downloading default config\"\r\n    curl -Lo config.txt ${CONFIG_LINK}\r\nfi\r\n\r\nif [ -f playlist.txt ]; then\r\n    echo -e \"playlist already exists\"\r\nelse\r\n    echo -e \"playlist not found, downloading default playlist\"\r\n    curl -Lo playlist.txt ${PLAYLIST_LINK}\r\nfi\r\n\r\necho \"Job's Done\"",
+            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\r\napt update\r\napt install -y jq curl\r\n\r\nGITHUB_PACKAGE=\"jagrosh\/MusicBot\"\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/config.txt\"\r\nPLAYLIST_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/example_playlist.txt\"\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"no github user set, using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n# get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i config)\r\n    else\r\n        echo -e \"defaulting to the latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n## JMusicBot Setup\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ -f JMusicBot.jar ]; then\r\n    echo -e \"Updating JMusicBot.jar to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"JMusicBot.jar-old\")'\r\n    mv -f JMusicBot.jar JMusicBot.jar-old\r\nfi\r\ncurl -sSLo JMusicBot.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"Updating config.txt to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"config.txt-old\")'\r\n    mv -f config.txt config.txt-old\r\nfi\r\ncurl -sSLo config.txt ${CONFIG_LINK}\r\n\r\n[ ! -d Playlists ] && mkdir Playlists\r\ncd Playlists\r\nif [ -f example_playlist.txt ]; then\r\n    echo -e \"example_playlist.txt already exists. Skipping default download.\"\r\nelse\r\n    echo -e \"example_playlist.txt not found. Downloading default example_playlist...\"\r\n    curl -sSLo example_playlist.txt ${PLAYLIST_LINK}\r\nfi\r\n\r\necho -e \"\\nJMusicBot Successfully Installed!\"",
             "container": "debian:buster-slim",
-            "entrypoint": "\/bin\/bash"
+            "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Discord Bot Token",
-            "description": "The token for your discord bot.\r\n\r\nhttps:\/\/discord.com\/developers\/applications\/",
+            "name": "[REQUIRED] Discord Bot Token",
+            "description": "The token for your Discord bot. Learn how to obtain a token and configure your bot application properly here: https:\/\/jmusicbot.com\/getting-a-bot-token\/",
             "env_variable": "BOT_TOKEN",
             "default_value": "You need to get a token",
             "user_viewable": true,
@@ -37,22 +37,94 @@
             "rules": "required|string|max:64"
         },
         {
+            "name": "[REQUIRED] Bot Owner ID",
+            "description": "This is the Discord User ID of the bot owner. Learn how to obtain this ID here: https:\/\/jmusicbot.com\/finding-your-user-id\/",
+            "env_variable": "BOT_OWNER",
+            "default_value": "Change This To Your Discord User ID",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|digits:18"
+        },
+        {
             "name": "Bot Prefix",
-            "description": "The prefix for the bot.\r\n\r\nDefault is to @mention the bot.",
+            "description": "This sets the prefix for the bot. The prefix is used to control the commands. If you use !, the play command will be !play. If you do not set this, the prefix will be a mention of the bot (@Botname play).",
             "env_variable": "BOT_PREFIX",
             "default_value": "@mention",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Bot Alternate Prefix",
+            "description": "If you set this, the bot will also use this prefix in addition to \"Bot Prefix\". Set to NONE to not have an alternate prefix.",
+            "env_variable": "BOT_ALT_PREFIX",
+            "default_value": "NONE",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
-            "name": "Bot Owner ID",
-            "description": "This is the user ID of the bot owner. It's a long numeric ID, such as 4440512350692326306",
-            "env_variable": "BOT_OWNER",
-            "default_value": "Change This To Your Discord User ID",
+            "name": "Bot Default Game",
+            "description": "If you change this, it modifies the default game of the bot. Set this to NONE to have no game. Set this to DEFAULT to use the default game. You can make the game \"Playing X\", \"Listening to X\", or \"Watching X\" where X is the title. If you don't include an action, it will use the default of \"Playing\".",
+            "env_variable": "BOT_GAME",
+            "default_value": "DEFAULT",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32"
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Bot Default Status",
+            "description": "[ Accepted Values: ONLINE IDLE DND INVISIBLE ] Will modify the default status of bot.",
+            "env_variable": "BOT_STATUS",
+            "default_value": "ONLINE",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:ONLINE,IDLE,DND,INVISIBLE"
+        },
+        {
+            "name": "Bot Show Song in Status",
+            "description": "If you set this to true, the bot will list the title of the song it is currently playing in its \"Playing\" status. NOTE: This will ONLY work if the bot is playing music on ONE Discord server; if the bot is playing in multiple servers, this will not work!",
+            "env_variable": "BOT_SONG_STATUS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Bot Show Images for \"Now Playing\"",
+            "description": "If set to true, the \"nowplaying\" command will show YouTube thumbnails. NOTE: If you set this to true, the nowplaying boxes will NOT refresh. This is because refreshing the boxes causes the image to be reloaded every time it refreshes.",
+            "env_variable": "BOT_NPIMAGES",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Bot Stay In Channel",
+            "description": "If set to true, the bot will not leave a voice channel after it finishes a queue. Keep in mind that being connected to a voice channel uses additional bandwidth, so this option is not recommended if bandwidth is a concern.",
+            "env_variable": "BOT_STAY_IN_CHANNEL",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Bot Alone Time Until Disconnect",
+            "description": "This sets the amount of seconds the bot will stay alone on a voice channel until it automatically leaves the voice channel and clears the queue. If not set or set to any number less than or equal to zero, the bot won't leave when alone.",
+            "env_variable": "BOT_ALONE_TIME",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Bot Max Song Length",
+            "description": "This sets the maximum amount of seconds any track loaded can be. If not set or set to any number less than or equal to zero, there is no maximum time length. This time restriction applies to songs loaded from any source.",
+            "env_variable": "BOT_MAXTIME",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer"
         }
     ]
 }
