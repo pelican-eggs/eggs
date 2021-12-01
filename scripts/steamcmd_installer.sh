@@ -2,7 +2,7 @@
 # steamcmd Base Installation Script
 #
 # Server Files: /mnt/server
-# Image to install with is 'debian:buster-slim'
+# Image to install with is 'ghcr.io/parkervcp/installers:debian'
 
 ##
 #
@@ -15,7 +15,7 @@
 ##
 
 apt -y update
-apt -y --no-install-recommends install curl lib32gcc1 ca-certificates
+apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates
 
 ## just in case someone removed the defaults.
 if [[ "${STEAM_USER}" == "" ]] || [[ "${STEAM_PASS}" == "" ]]; then
@@ -42,7 +42,7 @@ chown -R root:root /mnt
 export HOME=/mnt/server
 
 ## install game using steamcmd
-./steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir /mnt/server +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6
+./steamcmd.sh +force_install_dir /mnt/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ "${WINDOWS_INSTALL}" == "1" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6
 
 ## set up 32 bit libraries
 mkdir -p /mnt/server/.steam/sdk32
