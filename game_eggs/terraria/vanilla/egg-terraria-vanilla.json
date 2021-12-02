@@ -1,18 +1,22 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-12-06T02:18:03-08:00",
+    "exported_at": "2021-11-29T09:48:58+01:00",
     "name": "Terraria Vanilla",
     "author": "iamkubi@gmail.com",
     "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game.",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
     "startup": ".\/TerrariaServer.bin.x86_64 -config serverconfig.txt",
     "config": {
         "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\"done\": \"Type 'help' for a list of commands\"}",
         "logs": "{}",
         "stop": "exit"
     },
@@ -48,8 +52,8 @@
             "env_variable": "MAX_PLAYERS",
             "default_value": "8",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|numeric|digits_between:1,3"
+            "user_editable": true,
+            "rules": "required|numeric|max:255"
         },
         {
             "name": "World Size",
@@ -58,7 +62,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric|digits_between:1,3"
+            "rules": "required|numeric|in:1,2,3"
         },
         {
             "name": "Difficulty",
@@ -67,7 +71,7 @@
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|numeric|in:0,1,2,3"
         },
         {
             "name": "MOTD",
