@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-11-28T04:47:00+01:00",
+    "name": "NanoLimbo",
+    "author": "mail@wuffy.eu",
+    "description": "This is lightweight minecraft limbo server, written on Java with Netty. The main goal of the project is maximum simplicity with a minimum number of sent and processed packets. This limbo is empty, there are no ability to set schematic building since this is not necessary. You can send useful information in chat or BossBar.\r\n\r\nNo plugins, no logs. The server is fully clear. It only able keep a lot of players while the main server is down.",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_8"
+    ],
+    "file_denylist": [],
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"settings.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bind.ip\": \"0.0.0.0\",\r\n            \"bind.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NanoLimbo Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt install -y curl jq git openssl bash bc apt-transport-https gnupg software-properties-common\r\n\r\nif [ -z \"${DOWNLOAD_URL}\" ]; then\r\n    GITHUB_PACKAGE=\"Nan1t\/NanoLimbo\"\r\n    MATCH=\"NanoLimbo-\"\r\n\r\n    ## get release info and download links\r\n    LATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\n    RELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n    \r\n    if [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n    else\r\n        VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n        if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n            DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n        else\r\n            echo -e \"defaulting to latest release\"\r\n            DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n        fi\r\n    fi\r\nelse\r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}.jar; then\r\n        echo -e \"Provided download link is valid. Proceeding to download\"\r\n    else\r\n        echo -e \"Provided download link is invalid. Exiting now\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading server file...\"\r\necho -e \"performing curl -sSL ${DOWNLOAD_URL}\"\r\ncurl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\r\n\r\nif [ ! -f \"settings.yml\" ]; then\r\necho \"Creating settings file...\"\r\n    cat <<EOT > settings.yml\r\nbind:\r\n  ip: 0.0.0.0\r\n  port: 25000\r\nbossBar:\r\n  color: PINK\r\n  division: SOLID\r\n  enable: true\r\n  health: 1\r\n  text: '{\"text\": \"Welcome to the Limbo!\"}'\r\ndebugLevel: 3\r\ndimension: THE_END\r\ngameMode: 3\r\ninfoForwarding:\r\n  secret: <YOUR_SECRET_HERE>\r\n  tokens:\r\n  - <BUNGEE_GUARD_TOKEN>\r\n  type: NONE\r\njoinMessage:\r\n  enable: true\r\n  text: '{\"text\": \"&eWelcome to the Limbo!\"}'\r\nmaxPlayers: 100\r\nnetty:\r\n  threads:\r\n    bossGroup: 1\r\n    workerGroup: 4\r\n  useEpoll: true\r\nping:\r\n  description: '{\"text\": \"&9NanoLimbo\"}'\r\n  version: NanoLimbo\r\nreadTimeout: 30000\r\nspawnPosition:\r\n  pitch: 0\r\n  \"true\": 64\r\n  x: 0\r\n  yaw: 0\r\n  z: 0\r\ntitle:\r\n  enable: true\r\n  fadeIn: 10\r\n  fadeOut: 10\r\n  stay: 100\r\n  subtitle: '{\"text\": \"&6NanoLimbo\"}'\r\n  title: '{\"text\": \"&9&lWelcome!\"}'\r\nEOT\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Download URL",
+            "description": "A URL to use to download.\r\nThis is optional! Let this field empty for the latest version.",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Version",
+            "description": "The version of NanoLimbo to download. Use \"latest\" for latest.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

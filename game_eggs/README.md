@@ -61,6 +61,7 @@
   * [Krypton](/minecraft/java/krypton)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
+  * [NanoLimbo](/minecraft/java/nanolimbo)
   * [Paper](minecraft/java/paper)
   * [Purpur](minecraft/java/purpur)
   * [Spigot](minecraft/java/spigot)
