@@ -11,7 +11,7 @@ Discord: https://discord.gg/AmH6Va97GT
 
 ***!!! ATTENTION !!!***
 
-***All (Server + Clients) need to have a installed Valheim Plus Mod !!!!*** 
+***All (Server + Clients) need to have a installed Valheim Plus Mod !!!!***
 
 
 ## Server Ports
