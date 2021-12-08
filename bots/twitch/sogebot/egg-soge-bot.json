@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-08-04T05:39:15+03:00",
+    "exported_at": "2021-12-07T12:36:17+00:00",
     "name": "SogeBot",
     "author": "info@goover.de",
     "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-16"
+        "ghcr.io\/parkervcp\/yolks:nodejs_16"
     ],
     "file_denylist": [],
     "startup": "npm start",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#\/bin\/bash\r\napt -y update\r\napt install -y curl unzip sqlite jq wget python3 build-essential\r\nexport NODE_OPTIONS=--max-old-space-size=8192\r\nMATCH=sogeBot\r\ncd \/mnt\/server\r\n\r\nrm -fR dest\r\nrm -fR public\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/sogehige\/sogeBot\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/sogehige\/sogeBot\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"Downloading from $DOWNLOAD_LINK\"\r\nwget -N $DOWNLOAD_LINK\r\nunzip -o $MATCH-*.zip\r\nrm -fR $MATCH-*.zip\r\n\r\necho \"Installing dependencies, this will take some time so sit back and relax...\"\r\n\/usr\/local\/bin\/npm ci 2>&1 | tee npmlog.txt\r\n\r\nexit 0",
+            "script": "#\/bin\/bash\r\napt -y update\r\napt install -y curl unzip sqlite jq wget python3 build-essential\r\nexport NODE_OPTIONS=--max-old-space-size=8192\r\nMATCH=sogeBot\r\ncd \/mnt\/server\r\n\r\nrm -fR dest\r\nrm -fR public\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/sogebot\/sogeBot\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/sogebot\/sogeBot\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"Downloading from $DOWNLOAD_LINK\"\r\nwget -N $DOWNLOAD_LINK\r\nunzip -o $MATCH-*.zip\r\nrm -fR $MATCH-*.zip\r\n\r\necho \"Installing dependencies, this will take some time so sit back and relax...\"\r\n\/usr\/local\/bin\/npm ci 2>&1 | tee npmlog.txt\r\n\r\necho -e \"install completed\"\r\nexit 0",
             "container": "node:16-buster-slim",
             "entrypoint": "bash"
         }
@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Version",
-            "description": "Choose Version, you want to install. Default: Latest",
+            "description": "Version to install. Latest will install the latest available version.",
             "env_variable": "VERSION",
             "default_value": "latest",
             "user_viewable": true,
