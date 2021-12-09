@@ -1,5 +1,6 @@
 # Space Engineers
-Space Engineers is a voxel-based sandbox game set in space and on planets. 
+
+Space Engineers is a voxel-based sandbox game set in space and on planets.
 
 Many parts of this egg are based on the work of [mmmaxwwwell](https://github.com/mmmaxwwwell/space-engineers-dedicated-docker-linux). A thank you therefore goes to him.
 
@@ -10,12 +11,15 @@ When installed, the Server loads a base World and config from this repo. New wor
 Everything which is not defined in a variable could be edited directy in the config file /config/SpaceEngineers-Dedicated.cfg.
 
 ## Minumum server settings
+
 ### RAM
+
 This server requires about 6GB.
 
 Based on the information provided by the developer: [See here](https://www.spaceengineersgame.com/dedicated-servers/)
 
 ### Disk
+
 This server uses about 7GB of diskspace.
 
 ## Server Ports
