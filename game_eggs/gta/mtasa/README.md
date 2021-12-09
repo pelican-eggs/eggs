@@ -1,7 +1,8 @@
 # Multi Theft Auto
+
 [Multi Theft Auto](https://mtasa.com/) is a Open Source Grand Theft Auto: San Andreas Multiplayer modification.
 
-### Server Ports
+## Server Ports
 
 Multi Theft Auto requires 3 ports.
 
