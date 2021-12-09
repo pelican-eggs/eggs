@@ -19,5 +19,5 @@ Discord: https://discord.gg/AmH6Va97GT
 
 | Port  | default |
 |-------|---------|
-| Game  | 2456   |
-| Query | 2457   |
+| Game  | 2456    |
+| Query | 2457    |
