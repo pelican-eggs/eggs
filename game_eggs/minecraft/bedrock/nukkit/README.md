@@ -1,8 +1,9 @@
-# Now abandoned. Please use NukkitX by Cloudburst.
-[NukkitX](https://github.com/CloudburstMC/Nukkit)
 # Nukkit
 
-[Nukkit GitHub](https://github.com/Nukkit/Nukkit)  
+[Old Nukkit GitHub](https://github.com/Nukkit/Nukkit)
 
-Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition  
+## Nukkit is Abandoned, uses NukkitX now
 
+[NukkitX](https://github.com/CloudburstMC/Nukkit)
+
+Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition
