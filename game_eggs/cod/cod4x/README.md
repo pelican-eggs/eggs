@@ -1,20 +1,22 @@
 # Call of Duty 4X
 
 ## Game files mounting
+
 The server does **not** contain the base game files, but they are necessary to use the server.
 
 While the server itself is open-source, the game files are copyrighted and you will need to own a legitimate copy of the game (Call of Duty 4: Modern Warfare)
 in order to provide the game files to the server.
 
-More information here: https://github.com/callofduty4x/CoD4x_Server#setting-up-a-call-of-duty-4-server-with-cod4x-18
+More information here: <https://github.com/callofduty4x/CoD4x_Server#setting-up-a-call-of-duty-4-server-with-cod4x-18>
 
-### Correctly mounting the game files
+## Correctly mounting the game files
+
 In order to give the server access to the needed game files you will need to create a new mount.
 
 Let's say you copied the game files to your node into the directory `/home/pterodactyl/serverfiles/cod4x` (you can choose any directory you want of course).  
 The directory structure will look like this: <details>
- 
-```
+
+```md
 /home/pterodactyl/serverfiles/cod4x
 ├── main
 │   ├── iw_00.iwd
@@ -115,16 +117,20 @@ The directory structure will look like this: <details>
 
 3 directories, 93 files
 ```
+
 </details>
 
 First of all add the directory of the mount to the config.yml (in `/etc/pterodactyl`) of your node.
-```
+
+```md
 allowed_mounts:
   - /home/pterodactyl/serverfiles
 ```
+
 After you've done this, restart wings with `systemctl restart wings`.
 
 Now you simply create a mount in the Pterodactyl Panel with the following settings:
+
 1. Set the source to `/home/pterodactyl/serverfiles/cod4x`
 2. Set the target to any directory you want (but not something in `/home/container`, I suggest something like `/mnt/gamefiles/cod4`)
 3. Set read-only to "true" ("false" will also work, but then you risk that one instance overwrites files for all other instances)
@@ -134,21 +140,23 @@ Now you simply create a mount in the Pterodactyl Panel with the following settin
 7. Add the CoD4X egg to the list of eggs for the mount
 
 ### Correctly configuring the servers
-In order for the server to find the game files you have to set "Game file path" variable in the server to the same directory that you used in the "target" field of the mount.  
+
+In order for the server to find the game files you have to set "Game file path" variable in the server to the same directory that you used in the "target" field of the mount.
 When you start the server for the first time it will prompt you to mount the game files under the configured path.
+
 1. In the admin interface open your server
 2. Go to the tab "Mounts"
 3. Klick on the green "+" button on the correct mount in order to mount the game files
 4. Restart the server
 
-
 **Congratulations!** Your server should be able to find the game files and start.
 
 ## Default Server Ports
+
 The default is 28960, but the server will automatically use the port defined in the allocation.
 
 | Port    | default |
 |---------|---------|
 | Game    | 28960   |
 
-#### Plugins may require ports to be added to the server.
+### Plugins may require ports to be added to the server
