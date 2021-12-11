@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-11-18T21:36:31+00:00",
+    "exported_at": "2021-12-11T19:52:34+00:00",
     "name": "PocketmineMP",
     "author": "info@swisscrafting.ch",
     "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
@@ -22,29 +22,20 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n# This is already installed in our Script container image. Leaving it here for future reference | apt install -y curl jq\r\n\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nDOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n\r\n## this is a simple script to validate a download url actually exists\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\"]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\necho -e \"performing curl -sSL ${DOWNLOAD_LINK}\"\r\ncurl -sSL ${DOWNLOAD_LINK} > PocketMine-MP.phar\r\n\r\necho -e \"\\n downloading latest php build from pocketmine from https:\/\/jenkins.pmmp.io\/job\/PHP-8.0-Aggregate\/lastStableBuild\/artifact\/PHP-8.0-Linux-x86_64.tar.gz\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-8.0-Aggregate\/lastStableBuild\/artifact\/PHP-8.0-Linux-x86_64.tar.gz\r\n\r\nif [ ! -f server.properties ]; then\r\n    echo -e \"\\n downloading default server.properties\"\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/bedrock\/pocketmine_mp\/server.properties > server.properties\r\nfi\r\n\r\necho -e \"\\n unpacking php binaries\"\r\ntar -xzvf php.binary.tar.gz\r\n\r\necho -e \"\\n removing php packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n configuring PHP extensions library directory\"\r\nEXTENSION_DIR=$(find \"bin\" -name *debug-zts*)\r\ngrep -q '^extension_dir' bin\/php7\/bin\/php.ini && sed -i'bak' \"s{^extension_dir=.*{extension_dir=\\\"$EXTENSION_DIR\\\"{\" bin\/php7\/bin\/php.ini || echo \"extension_dir=\\\"$EXTENSION_DIR\\\"\" >> bin\/php7\/bin\/php.ini\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.txt banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs",
+            "script": "#!\/bin\/bash\r\n\r\n# This is already installed in our Script container image. Leaving it here for future reference | apt install -y curl jq\r\n\r\ncd \/mnt\/server\r\n\r\n# Restrict versions to latest pm3 and pm4 for now.\r\nif [[ \"${VERSION}\" == \"pm4\" ]] || [[ \"${VERSION}\" == \"\" ]]; then\r\n  DOWNLOAD_LINK=$(curl -ssL https:\/\/update.pmmp.io\/api?channel=stable | grep 'download_url' | cut -d '\"' -f 4)\r\n  echo -e \"Downloading latest PocketMine 4 from ${DOWNLOAD_LINK}\"\r\n  curl -ssL \"${DOWNLOAD_LINK}\" -o PocketMine-MP.phar\r\nelif [[ \"${VERSION}\" == \"pm3\" ]]; then\r\n  DOWNLOAD_LINK=$(curl -ssL https:\/\/update.pmmp.io\/api?channel=pm3 | grep 'download_url' | cut -d '\"' -f 4)\r\n  echo -e \"Downloading latest PocketMine 3 from ${DOWNLOAD_LINK}\"\r\n  curl -ssL \"${DOWNLOAD_LINK}\" -o PocketMine-MP.phar\r\nelse\r\n  echo -e \"Unknown version ${VERSION}\"\r\n  exit 1\r\nfi\r\n\r\necho -e \"\\n downloading latest php build from PocketMine https:\/\/jenkins.pmmp.io\/job\/PHP-8.0-Aggregate\/lastStableBuild\/artifact\/PHP-8.0-Linux-x86_64.tar.gz\"\r\ncurl -sSL -o php.binary.tar.gz https:\/\/jenkins.pmmp.io\/job\/PHP-8.0-Aggregate\/lastStableBuild\/artifact\/PHP-8.0-Linux-x86_64.tar.gz\r\n\r\nif [[ ! -f server.properties ]]; then\r\n  echo -e \"\\n downloading default server.properties\"\r\n  curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/bedrock\/pocketmine_mp\/server.properties >server.properties\r\nfi\r\n\r\necho -e \"\\n unpacking php binaries\"\r\ntar -xzvf php.binary.tar.gz\r\n\r\necho -e \"\\n removing php packages\"\r\nrm -rf \/mnt\/server\/php.binary.tar.gz\r\n\r\necho -e \"\\n configuring PHP extensions library directory\"\r\nEXTENSION_DIR=$(find \"bin\" -name *debug-zts*)\r\ngrep -q '^extension_dir' bin\/php7\/bin\/php.ini && sed -i'bak' \"s{^extension_dir=.*{extension_dir=\\\"$EXTENSION_DIR\\\"{\" bin\/php7\/bin\/php.ini || echo \"extension_dir=\\\"$EXTENSION_DIR\\\"\" >>bin\/php7\/bin\/php.ini\r\n\r\necho -e \"\\n creating files and folders\"\r\ntouch banned-ips.txt banned-players.txt ops.txt white-list.txt server.log\r\nmkdir -p players worlds plugins resource_packs\r\n\r\necho -e \"\\n\\nInstall script completed. Enjoy!\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Github Package",
-            "description": "",
-            "env_variable": "GITHUB_PACKAGE",
-            "default_value": "pmmp\/PocketMine-MP",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:20"
-        },
-        {
-            "name": "Match",
-            "description": "",
-            "env_variable": "MATCH",
-            "default_value": "PocketMine-MP.phar",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:20"
+            "name": "Version to install [pm3 or pm4]",
+            "description": "Latest PocketMine version to install. Valid options: pm3 and pm4",
+            "env_variable": "VERSION",
+            "default_value": "pm4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:pm3,pm4"
         }
     ]
 }
