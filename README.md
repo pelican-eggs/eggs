@@ -40,6 +40,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
 * [SinusBot](/bots/discord/sinusbot)
+* [Dynamica](/bots/discord/dynamica) Node JS
 
 [Other](/bots/other)
 * [Big Brother Bot](/bots/other/bigbrotherbot)
