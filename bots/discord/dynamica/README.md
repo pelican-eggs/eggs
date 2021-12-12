@@ -1,4 +1,4 @@
-# fragbot
+# Dynamica
 
 ### Their [Github](https://github.com/sebasptsch/dynamica)
 
