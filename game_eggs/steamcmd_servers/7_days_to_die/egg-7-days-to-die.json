@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-07T16:16:58+00:00",
+    "exported_at": "2021-12-13T03:08:36+00:00",
     "name": "7 Days To Die",
     "author": "kristoffer.norman@bahnhof.se",
     "description": "7 days to die server",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
-    "startup": ".\/7DaysToDieServer.x86_64 -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated -ServerPort=${SERVER_PORT} -ServerMaxPlayerCount=${MAX_PLAYERS} -GameDifficulty=${GAME_DIFFICULTY} -ControlPanelEnabled=false -TelnetEnabled=true -TelnetPort=8081 -logfile logs\/latest.log & echo -e \"Checking on telnet connection\" && until nc -z -v -w5 127.0.0.1 8081; do echo \"Waiting for telnet connection...\"; sleep 5; done && telnet -E 127.0.0.1 8081",
+    "startup": ".\/7DaysToDieServer.x86_64 -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated -ServerPort=${SERVER_PORT} -ServerMaxPlayerCount=${MAX_PLAYERS} -GameDifficulty=${GAME_DIFFICULTY} -ControlPanelEnabled=false -TelnetEnabled=true -TelnetPort=8081 -TelnetPassword=${PASSWORD} -logfile logs\/latest.log & echo -e \"Checking on telnet connection\" && until nc -z -v -w5 127.0.0.1 8081; do echo \"Waiting for telnet connection...\"; sleep 5; done && $( [[ -z ${PASSWORD} ]] && printf %s \"telnet -E 127.0.0.1 8081\" || printf %s \"rcon -t telnet -a 127.0.0.1:8081 -p {{PASSWORD}}\" )",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connected with 7DTD server\"\r\n}",
@@ -81,6 +81,15 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Telnet Password",
+            "description": "Telnet listens on a local interface by default without a password. However, you can specify if you wish to expose it.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:30"
         }
     ]
 }
