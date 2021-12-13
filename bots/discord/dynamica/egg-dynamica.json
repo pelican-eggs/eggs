@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt-get update\r\napt-get install openssl git -y -qq\r\ncd \\\/mnt\\\/server\r\nif [[ -d .git\\\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\\\/\\\/github.com\\\/sebasptsch\\\/dynamica.git .;\r\nfi;\r\nyarn install --frozen-lockfile",
+            "script": "apt-get update\r\napt-get install openssl git -y -qq\r\ncd \\\/mnt\\\/server\r\nif [[ -d .git\\\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\\\/\\\/github.com\\\/dynamicabot\\\/dynamica.git .;\r\nfi;\r\nyarn install --frozen-lockfile",
             "container": "node:lts-buster-slim",
             "entrypoint": "bash"
         }
