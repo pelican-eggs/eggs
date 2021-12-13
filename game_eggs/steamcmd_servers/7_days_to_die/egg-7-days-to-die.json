@@ -84,7 +84,7 @@
         },
         {
             "name": "Telnet Password",
-            "description": "Telnet listens on a local interface by default without a password. However, you can specify if you wish to expose it.",
+            "description": "Telnet listens on a local interface by default without a password. However, you can specify a password if  you wish to expose telnet.",
             "env_variable": "PASSWORD",
             "default_value": "",
             "user_viewable": true,
