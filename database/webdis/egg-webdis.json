@@ -1,0 +1,50 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-12-13T18:45:31+00:00",
+    "name": "webdis",
+    "author": "parker@parkervcp.com",
+    "description": "A very simple web server providing an HTTP interface to Redis. It uses hiredis, jansson, libevent, and http-parser.",
+    "features": null,
+    "images": [
+        "ghcr.io\/parkervcp\/yolks:debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/webdis",
+    "config": {
+        "files": "{\r\n    \"webdis.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"http_host\":\"0.0.0.0\",\r\n            \"http_port\":\"{{server.build.default.port}}\",\r\n            \"redis_host\": \"{{server.build.env.REDIS_HOST}}\",\r\n            \"redis_port\": \"{{server.build.env.REDIS_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\nGITHUB_PACKAGE='nicolasff\/webdis'\r\n\r\napt update -y\r\napt install -y make gcc libevent-dev curl jq unzip\r\n\r\nmkdir -p \/mnt\/server\/\r\n\r\ncd \/tmp\/\r\n\r\nZIP_URL=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/tags\" | jq -r '.[0].zipball_url')\r\n\r\ncurl -sSL ${ZIP_URL} -o webdis.zip\r\n\r\nunzip webdis.zip\r\n\r\nmv $(echo $GITHUB_PACKAGE | sed 's,\/,-,g')* webdis\r\n\r\ncd webdis\/\r\n\r\nmake\r\n\r\nmv webdis webdis.json \/mnt\/server\r\n\r\necho -e \"job's done\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Redis Host",
+            "description": "",
+            "env_variable": "REDIS_HOST",
+            "default_value": "172.18.0.1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Redis Port",
+            "description": "",
+            "env_variable": "REDIS_PORT",
+            "default_value": "6379",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric"
+        }
+    ]
+}
