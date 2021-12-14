@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-11-26T10:45:23-05:00",
+    "name": "Fosscord",
+    "author": "chris@chrischromeyt.com",
+    "description": "https:\/\/github.com\/fosscord\/fosscord-server",
+    "features": null,
+    "images": [
+        "ghcr.io\/parkervcp\/yolks:nodejs_17"
+    ],
+    "file_denylist": [],
+    "startup": "\/usr\/local\/bin\/npm run --prefix \/home\/container\/bundle start:bundle",
+    "config": {
+        "files": "{\r\n    \"bundle\/.env\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"PORT\": \"PORT={{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[Process] starting with\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/fosscord\/fosscord-server .\r\n\r\ncd bundle\r\necho \"Building Fosscord\"\r\necho \"PORT=$SERVER_PORT\" > \/mnt\/server\/bundle\/.env\r\nmkdir \/mnt\/server\/api\/assets\/plugins\r\n\/usr\/local\/bin\/npm run setup\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "node:14-buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Threads",
+            "description": "The amount of CPU threads for Fosscord to make",
+            "env_variable": "THREADS",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int"
+        }
+    ]
+}
