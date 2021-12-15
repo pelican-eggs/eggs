@@ -10,7 +10,7 @@
     "description": null,
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/games:mohaa"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/mohaa_lnxded +set sv_punkbuster 0 +set fs_basepath {{BASE_PATH}} +set fs_outputpath {{LOG_DIR}} +set dedicated 2 +set sv_maxclients {{SERVER_MAXCLIENTS}} +set net_ip 0.0.0.0 +set net_port {{SERVER_PORT}} +exec server.cfg",
