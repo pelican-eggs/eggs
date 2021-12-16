@@ -15,6 +15,6 @@ Don't Starve Together only requires a single port to run. The default is 10999
 
 | Port    | default |
 |---------|---------|
-| Game    | 10998   |
+| Game    | 10999   |
 
 #### Mods/Plugins may require ports to be added to the server.
