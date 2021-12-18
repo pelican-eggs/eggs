@@ -183,6 +183,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
+* [Left 4 Dead](game_eggs/steamcdm_servers/left4dead)
+* [Left 4 Dead 2](game_eggs/steamcdm_servers/left4dead_2)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
