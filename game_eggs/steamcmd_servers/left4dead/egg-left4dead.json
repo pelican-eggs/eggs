@@ -10,7 +10,7 @@
     "description": "An outbreak of a highly contagious pathogen nicknamed the \"Green Flu\" begins in Pennsylvania. Two weeks after the first infection, four immune survivors, Bill, Zoey, Louis, and Francis make their way out of the city of Fairfield, only to discover that the infection is creating dangerous mutations in some of its hosts.",
     "features": null,
     "images": [
-        "quay.io\/pterodactyl\/core:source"
+        "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
     "startup": ".\/srcds_run -console -port {{SERVER_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
-            "container": "debian:bullseye",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
