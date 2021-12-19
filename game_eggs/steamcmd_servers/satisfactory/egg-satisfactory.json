@@ -1,9 +1,10 @@
 {
-    "_comment": "Pterodactyl Satisfactory Egg ~ Red-Thirten, Kubi, matthewp, Software-Noob, and Zarklord ~ 2021-11-29",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
         "version": "PTDL_v1",
         "update_url": null
     },
+    "exported_at": "2021-12-19T14:18:57+01:00",
     "name": "Satisfactory",
     "author": "rehlmgaming@gmail.com",
     "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
@@ -12,7 +13,7 @@
         "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
-    "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0",
+    "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0 {{ASC}}",
     "config": {
         "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mNumRotatingAutosaves\": \"mNumRotatingAutosaves={{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"bImplicitSend\": \"bImplicitSend={{server.build.env.UPLOAD_CRASH_REPORT}}\",\r\n            \"InitialConnectTimeout\": \"InitialConnectTimeout={{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"ConnectionTimeout\": \"ConnectionTimeout={{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/GameUserSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mFloatValues\": \"mFloatValues=((\\\"FG.AutosaveInterval\\\", {{server.build.env.AUTOSAVE_INTERVAL}}))\",\r\n            \"mIntValues\": \"mIntValues=((\\\"FG.NetworkQuality\\\", {{server.build.env.NETWORK_QUALITY}}))\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -64,6 +65,24 @@
             "rules": "string|nullable"
         },
         {
+            "name": "[Experimental] Max Players",
+            "description": "[Requires server re-install to change default value!] The server and client are currently not optimized to support more than 4 players. However, you can override this value here at your own risk of poor performance.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1"
+        },
+        {
+            "name": "[Advanced] Satisfactory Dedicated Server App ID",
+            "description": "Steam App ID used for installation and updates. Rarely needs to be changed.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1690800",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|integer|min:1"
+        },
+        {
             "name": "Autosave Interval",
             "description": "How often, in seconds, the server should generate a new autosave (ex. 300 = 5 min). Keep in mind that shorter times mean that while the server will save the game more often, it also means a potential drop in server performance. NOTE: This overrides any \"FG.AutosaveInterval\" commands made to the console!",
             "env_variable": "AUTOSAVE_INTERVAL",
@@ -89,15 +108,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false"
-        },
-        {
-            "name": "[Experimental] Max Players",
-            "description": "[Requires server re-install to change default value!] The server and client are currently not optimized to support more than 4 players. However, you can override this value here at your own risk of poor performance.",
-            "env_variable": "MAX_PLAYERS",
-            "default_value": "4",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|min:1"
         },
         {
             "name": "[Advanced] Client Initial Connection Timeout",
@@ -136,13 +146,13 @@
             "rules": "string|nullable|in:public,experimental"
         },
         {
-            "name": "[Advanced] Satisfactory Dedicated Server App ID",
-            "description": "Steam App ID used for installation and updates. Rarely needs to be changed.",
-            "env_variable": "SRCDS_APPID",
-            "default_value": "1690800",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|integer|min:1"
+            "name": "Additional Startup Commands",
+            "description": "Additional commands could look like this: -ANewCommand or -ANewString=NUMBERSandLETTERS",
+            "env_variable": "ASC",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable|max:200"
         }
     ]
 }
