@@ -139,6 +139,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Technic](game_eggs/minecraft/java/technic)
   * [Tuinity](game_eggs/minecraft/java/tuinity)
   * [VanillaCord](game_eggs/minecraft/java/vanillacord)
+  * [ServerJars AutoUpdater](game_eggs/minecraft/java/ServerJars)
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
