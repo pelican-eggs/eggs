@@ -4,10 +4,10 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-09T13:30:47-05:00",
+    "exported_at": "2021-12-18T19:20:26-05:00",
     "name": "Purpur",
     "author": "purpur@birdflop.com",
-    "description": "Fork of Paper and Tuinity providing new configuration options.",
+    "description": "A drop-in replacement for Paper servers designed for configurability, and new fun and exciting gameplay features.",
     "features": [
         "eula",
         "java_version"
