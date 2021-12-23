@@ -58,6 +58,7 @@
   * [Feather](minecraft/java/feather)  
   * [Feed The Beast](minecraft/java/ftb)  
   * [Forge](minecraft/java/forge)
+  * [Glowstone](minecraft/java/glowstone)
   * [Krypton](/minecraft/java/krypton)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)

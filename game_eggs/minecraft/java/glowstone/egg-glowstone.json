@@ -1,0 +1,50 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-12-23T08:39:17-05:00",
+    "name": "Glowstone",
+    "author": "regulad@regulad.xyz",
+    "description": "Glowstone is an open-source server implementation for Minecraft: Java Edition 1.12.2 and up.",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_8"
+    ],
+    "file_denylist": [],
+    "startup": "java -Xms768M -Xmx{{SERVER_MEMORY}}M -XX:+UseG1GC -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"config\/glowstone.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Ready for connections.\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y jq curl wget grep\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ $MAVEN_VERSION == \"latest\" ]\r\nthen\r\n  echo -e \"Downloading latest release from GitHub...\"\r\n\r\n  curl -s https:\/\/api.github.com\/repos\/GlowstoneMC\/Glowstone\/releases\/latest \\\r\n  | grep \"browser_download_url.*jar\" \\\r\n  | cut -d : -f 2,3 \\\r\n  | tr -d \\\" \\\r\n  | wget -O ${SERVER_JARFILE} -qi -\r\nelse \r\n  echo -e \"Downloading release ${MAVEN_VERSION} from Maven Repository...\"\r\n  \r\n  wget -O ${SERVER_JARFILE} \"https:\/\/repo.glowstone.net\/service\/rest\/v1\/search\/assets\/download?group=net.glowstone&name=glowstone&sort=version&repository=snapshots&maven.baseVersion=${MAVEN_VERSION}&direction=desc&maven.classifier=\"\r\nfi\r\n\r\necho -e \"Generating configuration...\"\r\njava -jar ${SERVER_JARFILE} --generate-config\r\n\r\necho -e \"Install Complete\"",
+            "container": "eclipse-temurin:8-jdk",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Maven Version",
+            "description": "The version to download from the Maven Repository, or latest (downloads from GitHub)",
+            "env_variable": "MAVEN_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

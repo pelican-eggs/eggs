@@ -17,6 +17,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Feather](/game_eggs/minecraft/java/feather)  
 * [Feed The Beast](/game_eggs/minecraft/java/ftb)  
 * [Forge](/game_eggs/minecraft/java/forge)
+* [Glowstone](/minecraft/java/glowstone)
 * [Krypton](/minecraft/java/krypton)
 * [Magma](/game_eggs/minecraft/java/magma)
 * [Mohist](/game_eggs/minecraft/java/mohist)
@@ -43,4 +44,4 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
   * [Cross Platform](/game_eggs/minecraft/proxy/cross_platform)
     * [GeyserMC](/game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](/game_eggs/minecraft/proxy/cross_platform/waterdog)
-	* DragonProxy abandoned in favour of GeyserMC.
+    * DragonProxy abandoned in favour of GeyserMC.
