@@ -4,18 +4,21 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-23T08:39:17-05:00",
+    "exported_at": "2021-12-23T08:49:44-05:00",
     "name": "Glowstone",
-    "author": "regulad@regulad.xyz",
+    "author": "support@pterodactyl.io",
     "description": "Glowstone is an open-source server implementation for Minecraft: Java Edition 1.12.2 and up.",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_8"
+        "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Xms768M -Xmx{{SERVER_MEMORY}}M -XX:+UseG1GC -jar {{SERVER_JARFILE}}",
     "config": {
-        "files": "{\r\n    \"config\/glowstone.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config\/glowstone.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server.port\": \"{{server.build.default.port}}\",\r\n            \"console.prompt\": \"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Ready for connections.\"\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "stop"
