@@ -72,9 +72,15 @@ body:
         Step 3 Receive error X or Y
     validations:
       required: true
-  - type: textarea
-    id: logs
+  - type: input
+    id: install-logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      label: Install logs
+      description: |
+        Run the command below on the SSH terminal of your Wings machine and provide the link to logs.
+        
+        `tail -n 100 $(ls -Alrt /var/log/pterodactyl/install/*.log | tail -1 | sed 's/  */ /g' | cut -s -d' ' -f9) | nc pteropaste.com 99`
+      placeholder: |
+        https://pteropaste.com/exampleLogs
+    validations:
+      required: true
