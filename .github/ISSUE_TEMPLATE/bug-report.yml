@@ -79,12 +79,7 @@ body:
       description: |
         Run the command below on the SSH terminal of your Wings machine and provide the link to logs.
         
-        **If using Pterodactyl 1.x or newer:**
-        
         `tail -n 100 $(ls -Alrt /var/log/pterodactyl/install/*.log | tail -1 | sed 's/  */ /g' | cut -s -d' ' -f9) | nc pteropaste.com 99`
-        **If using legacy Pterodactyl 0.7:**
-
-        `tail -n 100 $(ls -Alrt /srv/daemon/config/servers/*/install.log | tail -1 | sed 's/  */ /g' | cut -s -d' ' -f9) | nc pteropaste.com 99`
       placeholder: |
         https://pteropaste.com/exampleLogs
     validations:
