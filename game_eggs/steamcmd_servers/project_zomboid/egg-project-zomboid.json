@@ -18,7 +18,7 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"SERVER STARTED\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "quit"
     },
     "scripts": {
         "installation": {
