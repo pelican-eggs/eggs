@@ -210,6 +210,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Subnautica: Nitrox Mod](game_eggs/steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](game_eggs/steamcmd_servers/svencoop)
 * [The Forest](game_eggs/steamcmd_servers/the_forest)
+* [The Isle](game_eggs/steamcmd_servers/the_isle)
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
