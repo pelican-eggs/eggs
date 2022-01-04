@@ -124,7 +124,7 @@ This is a collection of servers that use SteamCMD to install.
 ## The Forest
 [The Forest](the_forest)
 
-## The Forest
+## The Isle
 [The Isle](the_isle)
 
 ## Tower Unite
