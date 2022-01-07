@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-23T10:20:23-05:00",
+    "exported_at": "2022-01-07T15:15:07-05:00",
     "name": "Glowstone",
     "author": "support@pterodactyl.io",
     "description": "Glowstone is an open-source server implementation for Minecraft: Java Edition 1.12.2 and up.",
@@ -74,7 +74,7 @@
             "default_value": "GlowstoneMC\/Glowstone",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string"
         },
         {
             "name": "Match",
