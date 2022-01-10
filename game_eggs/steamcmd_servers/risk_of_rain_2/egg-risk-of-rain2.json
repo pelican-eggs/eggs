@@ -16,7 +16,7 @@
     "startup": "xvfb-run wine .\/\"Risk of Rain 2.exe\"",
     "config": {
         "files": "{\r\n    \".\/Risk of Rain 2_Data\/Config\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_password\": \"sv_password \\\"{{server.build.env.PASSWORD}}\\\";\",\r\n            \"steam_server_heartbeat_enabled\": \"steam_server_heartbeat_enabled {{server.build.env.ADVERTISE}};\",\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.HOSTNAME}}\\\";\",\r\n            \"steam_server_query_port\": \"steam_server_query_port {{server.build.env.QUERY}};\",\r\n            \"steam_server_steam_port\": \"steam_server_steam_port {{server.build.env.STEAM}};\",\r\n            \"sv_maxplayers\": \"sv_maxplayers {{server.build.env.PLAYERS}};\",\r\n            \"exec server;\": \"\",\r\n            \"host\": \"\",\r\n            \"remove_all_local_users;\": \"\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Press Enter to chat.\"\r\n}",
+        "startup": "{\r\n    \"done\": \"CHAT_KEYBIND_TIP\"\r\n}",
         "logs": "{}",
         "stop": "^V"
     },
