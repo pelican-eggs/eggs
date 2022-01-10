@@ -21,7 +21,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y git curl\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/seejohnrun\/haste-server\r\ncd haste-server\r\nmv * \/mnt\/server\r\ncd ..\r\nrm -rf haste-server\r\nnpm install\r\n\r\nexit 0",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y git curl\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/toptal\/haste-server\r\ncd haste-server\r\nmv * \/mnt\/server\r\ncd ..\r\nrm -rf haste-server\r\nnpm install\r\n\r\nexit 0",
             "container": "node:12-buster-slim",
             "entrypoint": "bash"
         }
