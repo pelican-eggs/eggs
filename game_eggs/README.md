@@ -111,6 +111,8 @@
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
+* [Left 4 Dead](steamcmd_servers/left4dead)
+* [Left 4 Dead 2](steamcmd_servers/left4dead_2)
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)

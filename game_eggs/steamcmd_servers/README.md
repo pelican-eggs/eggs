@@ -50,6 +50,12 @@ This is a collection of servers that use SteamCMD to install.
 ## Killing Floor 2
 [Killing Floor 2](killing_floor_2)
 
+## Left 4 Dead
+[Left 4 Dead](left4dead)
+
+## Left 4 Dead 2
+[Left 4 Dead](left4dead_2)
+
 ## Modiverse
 [Modiverse](modiverse)
 
