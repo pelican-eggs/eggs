@@ -1,5 +1,5 @@
 # OpenRCT2
-
+***Note:** OpenRCT2 only recently (Jan. 2022) updated to support non-interactive Docker environments, and development is ongoing to improve it. Please understand future updates may be unstable, or this Egg may update in the future to accommodate changes.*
 ___
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
