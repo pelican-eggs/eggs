@@ -155,6 +155,7 @@
 * [TShock](terraria/tshock)
 
 [Tycoon Games](tycoon_games)
+* [OpenRCT2](tycoon_games/openrct2)
 * [OpenTTD](tycoon_games/openttd)
 
 [Unreal Engine](unreal_engine)
