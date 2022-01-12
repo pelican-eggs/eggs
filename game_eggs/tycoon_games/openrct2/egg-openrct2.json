@@ -1,11 +1,10 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "Pterodactyl OpenRCT2 Egg ~ Red-Thirten and parkervcp ~ 2022-01-12",
     "meta": {
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-01-12T02:53:49+00:00",
-    "name": "OpenRCT2 (In Dev)",
+    "name": "OpenRCT2",
     "author": "rehlmgaming@gmail.com",
     "description": "OpenRCT2 is an open-source re-implementation of RollerCoaster Tycoon 2 (RCT2), expanding the game with new features, fixing bugs and raising game limits.",
     "features": null,
@@ -13,16 +12,16 @@
         "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
-    "startup": ".\/OpenRCT2\/openrct2-cli --version && .\/OpenRCT2\/openrct2-cli host $(if [ {{LOAD_AUTOSAVE}} ] && [ -d ServerData\/save\/autosave\/ ]; then find ServerData\/save\/autosave\/ | sort -r | head -1; else printf {{SAVE_URI}}; fi) --port {{SERVER_PORT}} --user-data-path \/home\/container\/ServerData\/",
+    "startup": ".\/OpenRCT2\/openrct2-cli --version && .\/OpenRCT2\/openrct2-cli host $(if {{LOAD_AUTOSAVE}} && [ -d ServerData\/save\/autosave\/ ]; then find ServerData\/save\/autosave\/ | sort -r | head -1; else echo \"{{SAVE_URI}}\"; fi) --port {{SERVER_PORT}} --user-data-path \/home\/container\/ServerData\/",
     "config": {
-        "files": "{\r\n    \"Data\/config.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"general.autosave\": \"{{server.build.env.AUTOSAVE_INTERVAL}}\",\r\n            \"general.autosave_amount\": \"{{server.build.env.AUTOSAVE_AMOUNT}}\",\r\n            \"network.player_name\": \"\\\"{{server.build.env.SERVER_PLAYER_NAME}}\\\"\",\r\n            \"network.default_port\": \"{{server.build.default.port}}\",\r\n            \"network.default_password\": \"\\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"network.advertise\": \"{{server.build.env.SERVER_ADVERTISE}}\",\r\n            \"network.maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"network.server_name\": \"\\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"network.server_description\": \"\\\"{{server.build.env.SERVER_DESCRIPTION}}\\\"\",\r\n            \"network.server_greeting\": \"\\\"{{server.build.env.SERVER_GREETING}}\\\"\",\r\n            \"network.provider_name\": \"\\\"{{server.build.env.PROVIDER_NAME}}\\\"\",\r\n            \"network.provider_email\": \"\\\"{{server.build.env.PROVIDER_EMAIL}}\\\"\",\r\n            \"network.provider_website\": \"\\\"{{server.build.env.PROVIDER_WEBSITE}}\\\"\",\r\n            \"network.log_chat\": \"{{server.build.env.LOG_CHAT}}\",\r\n            \"network.log_server_actions\": \"{{server.build.env.LOG_SERVER_ACTIONS}}\",\r\n            \"network.pause_server_if_no_clients\": \"{{server.build.env.PAUSE_NO_CLIENTS}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"ServerData\/config.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"general.autosave\": \"{{server.build.env.AUTOSAVE_INTERVAL}}\",\r\n            \"general.autosave_amount\": \"{{server.build.env.AUTOSAVE_AMOUNT}}\",\r\n            \"network.player_name\": \"\\\"{{server.build.env.SERVER_PLAYER_NAME}}\\\"\",\r\n            \"network.default_port\": \"{{server.build.default.port}}\",\r\n            \"network.default_password\": \"\\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"network.advertise\": \"{{server.build.env.SERVER_ADVERTISE}}\",\r\n            \"network.maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"network.server_name\": \"\\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"network.server_description\": \"\\\"{{server.build.env.SERVER_DESCRIPTION}}\\\"\",\r\n            \"network.server_greeting\": \"\\\"{{server.build.env.SERVER_GREETING}}\\\"\",\r\n            \"network.provider_name\": \"\\\"{{server.build.env.PROVIDER_NAME}}\\\"\",\r\n            \"network.provider_email\": \"\\\"{{server.build.env.PROVIDER_EMAIL}}\\\"\",\r\n            \"network.provider_website\": \"\\\"{{server.build.env.PROVIDER_WEBSITE}}\\\"\",\r\n            \"network.log_chat\": \"{{server.build.env.LOG_CHAT}}\",\r\n            \"network.log_server_actions\": \"{{server.build.env.LOG_SERVER_ACTIONS}}\",\r\n            \"network.pause_server_if_no_clients\": \"{{server.build.env.PAUSE_NO_CLIENTS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Listening for clients on\"\r\n}",
         "logs": "{}",
         "stop": "^C^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl OpenRCT2 Egg - egg-openrct2.json\r\n## Authors: David Wolfe (Red-Thirten), parkervcp\r\n## Date: 2022\/01\/11\r\n## License: MIT License\r\n\r\nGITHUB_PACKAGE=\"OpenRCT2\/OpenRCT2\"\r\nMATCH=\"linux-bullseye-x86_64\"\r\n#DEFAULT_SAVE=\"https:\/\/github.com\/parkervcp\/eggs\/tree\/master\/game_eggs\/tycoon_games\/openrct2\/save.sv6\"\r\nDEFAULT_SAVE=\"https:\/\/github.com\/parkervcp\/eggs\/tree\/master\/game_eggs\/tycoon_games\/openrct2\/save.sv6\"\r\n\r\n## OpenRCT Install\r\napt -y update\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\n# Remove existing installation if present\r\n[ -d \/mnt\/server\/OpenRCT2 ] && rm -rf \/mnt\/server\/OpenRCT2\r\n\r\n# Determine if installing from source or from release\r\nif [ \"${VERSION}\" == \"develop\" ]; then\r\n    echo -e \"\\nInstalling\/Updating OpenRCT2 from source...\\n\"\r\n\t# Get required packages\r\n    apt -y install curl git make cmake gcc build-essential libicu-dev pkg-config libcurl4-openssl-dev libcrypto++-dev libpng-dev libssl-dev libzip-dev duktape-dev nlohmann-json3-dev\r\n    cd \/tmp\r\n\t# Clone the branch and check if successful\r\n\tgit clone --branch ${VERSION} https:\/\/github.com\/${GITHUB_PACKAGE} && cd OpenRCT2 || { echo -e '\\nFailed to clone \"${VERSION}\" branch from https:\/\/github.com\/${GITHUB_PACKAGE}\\n' && exit 1 }\r\n\tmkdir build && cd build\r\n\t# Prepare CMake files for a lightweight and CLI-only build of OpenRCT2, using the appropriate flags\r\n\tcmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DPORTABLE=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_CXX_FLAGS=\"-g -gz\" -DDISABLE_TTF=ON -DDISABLE_GOOGLE_BENCHMARK=ON -DDISABLE_DISCORD_RPC=ON -DDISABLE_GUI=ON\r\n\techo -e \"\\nBuilding OpenRCT2 package from source...\\n\\tThis process can take quite some time. Grab a coffee :)\"\r\n\t# Build OpenRCT2\r\n\tDESTDIR=. make install\r\n\t# Check if build was successful\r\n\tcd usr\/local || { echo -e \"\\nFailed to successfully build OpenRCT2!\\n\" && exit 1 }\r\n\t# Make executable-ready package by moving compiled files to the correct locations\r\n\tmkdir -p \/mnt\/server\/OpenRCT2\/data\r\n\tmv bin\/* \/mnt\/server\/OpenRCT2\/\r\n\tmv share\/openrct2\/* share\/openrct2-cli\/* \/mnt\/server\/OpenRCT2\/data\/\r\n\tmv share\/doc \/mnt\/server\/OpenRCT2\/\r\n\tcd \/mnt\/server\r\n\techo -e \"\\nBuild of OpenRCT2 package complete!\"\r\nelse\r\n    echo -e '\\nInstalling\/Updating OpenRCT2 from release tag \"${VERSION}\"...\\n'\r\n\t# Get required packages\r\n    apt install -y curl jq\r\n    cd \/mnt\/server\r\n\t# This is a simple script to use the GitHub API for release versions.\r\n\t# This requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (MATCH is to match the filename in some way).\r\n\t# This supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required).\r\n\t# If you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\tif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n\t\techo -e \"\\nUsing anonymous GitHub API call.\"\r\n\telse\r\n\t\techo -e \"\\nGitHub user and OAuth token set.\"\r\n\t\talias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\n\tfi\r\n\r\n\t# Get release info and download links\r\n\tLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\n\tRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\n\tif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n\t\tDOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n\telse\r\n\t\tVERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n\t\tif [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n\t\t\tDOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n\t\telse\r\n\t\t\techo -e \"\\tDefaulting to latest release...\"\r\n\t\t\tDOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n\t\tfi\r\n\tfi\r\n\t# Download and unpackage the release\r\n\tif [ curl -L ${DOWNLOAD_URL} | tar -xzv ]; then\r\n\t\techo -e \"\\nDownload of OpenRCT release successful!\"\r\n\telse\r\n\t\techo -e '\\nFailed to download release tag \"${VERSION}\" from https:\/\/github.com\/${GITHUB_PACKAGE}\\n' && exit 1\r\n\tfi\r\nfi\r\n\r\n## OpenRCT2 Setup\r\n# Setup ServerData\/save directory\r\n[ ! -d ServerData\/save ] && mkdir -p ServerData\/save\r\ncd ServerData\/save\r\n# Download default save.sv6 if missing\r\nif [ ! -f save.sv6 ]; then\r\n\techo -e \"Downloading default save.sv6 file from ${DEFAULT_SAVE}\"\r\n\tcurl -sSL ${DEFAULT_SAVE}\r\nfi\r\n\r\necho -e \"\\nOpenRCT2 Successfully Installed!\"",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl OpenRCT2 Egg - egg-openrct2.json\r\n## Authors: David Wolfe (Red-Thirten), parkervcp\r\n## Date: 2022\/01\/12\r\n## License: MIT License\r\n\r\nGITHUB_PACKAGE=\"OpenRCT2\/OpenRCT2\"\r\nMATCH=\"linux-bullseye-x86_64.tar.gz\"\r\nDEFAULT_SAVE=\"https:\/\/github.com\/parkervcp\/eggs\/blob\/master\/game_eggs\/tycoon_games\/openrct2\/save.park\"\r\n\r\n## OpenRCT2 Install\r\napt -y update\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\n# Remove existing installation if present\r\n[ -d OpenRCT2 ] && rm -rf OpenRCT2\r\n\r\n# Determine if installing from source or from release\r\nif [ \"${VERSION}\" == \"develop\" ]; then\r\n    # Get required packages\r\n    apt -y install curl git make cmake gcc build-essential libicu-dev pkg-config libcurl4-openssl-dev libcrypto++-dev libpng-dev libssl-dev libzip-dev duktape-dev nlohmann-json3-dev\r\n    echo -e \"\\nInstalling\/Updating OpenRCT2 from source...\\n\"\r\n    # Setup temp directory for building and move to it\r\n    [ -d temp ] && rm -rf temp\r\n    mkdir temp && cd temp\r\n    # Clone the branch and check if successful\r\n    git clone --branch \"${VERSION}\" https:\/\/github.com\/${GITHUB_PACKAGE}\r\n    if [ ! -d OpenRCT2 ]; then\r\n        echo -e \"\\nFailed to clone \\\"${VERSION}\\\" branch from https:\/\/github.com\/${GITHUB_PACKAGE}\\n\"\r\n        exit 1\r\n    fi\r\n    cd OpenRCT2\r\n    mkdir build && cd build\r\n    # Prepare CMake files for a lightweight and CLI-only build of OpenRCT2, using the appropriate flags\r\n    cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DPORTABLE=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_CXX_FLAGS=\"-g -gz\" -DDISABLE_TTF=ON -DDISABLE_GOOGLE_BENCHMARK=ON -DDISABLE_DISCORD_RPC=ON -DDISABLE_GUI=ON\r\n    echo -e \"\\nBuilding OpenRCT2 package from source...\\n\\tThis process can take quite some time. Grab a coffee :)\\n\"\r\n    # Build OpenRCT2\r\n    DESTDIR=. make install\r\n    # Check if build was successful and move to it\r\n    if [ ! -d usr\/local ]; then\r\n        echo -e \"\\nFailed to successfully build OpenRCT2!\\n\"\r\n        exit 1\r\n    fi\r\n    cd usr\/local\r\n    # Make executable-ready package by moving compiled files to the correct locations\r\n    mkdir -p \/mnt\/server\/OpenRCT2\/data\r\n    mv bin\/* \/mnt\/server\/OpenRCT2\/\r\n    mv share\/openrct2\/* share\/openrct2-cli\/* \/mnt\/server\/OpenRCT2\/data\/\r\n    mv share\/doc \/mnt\/server\/OpenRCT2\/\r\n    cd \/mnt\/server\r\n    rm -rf temp # Clean up temp building directory\r\n    echo -e \"\\nBuild of OpenRCT2 package complete!\"\r\nelse\r\n    # Get required packages\r\n    apt install -y curl jq\r\n    echo -e \"\\nInstalling\/Updating OpenRCT2 from release tag \\\"${VERSION}\\\"...\\n\"\r\n    # This is a simple script to use the GitHub API for release versions.\r\n    # This requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (MATCH is to match the filename in some way).\r\n    # Get release info and download links\r\n    LATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\n    RELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\n    if [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n    else\r\n        VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n        if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n            DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n        else\r\n            DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n        fi\r\n    fi\r\n    # Download and unpackage the release\r\n    curl -L ${DOWNLOAD_URL} | tar -xzv\r\n    # Check if it was successful\r\n    if [ -d OpenRCT2 ]; then\r\n        echo -e \"\\nDownload of OpenRCT2 release successful!\"\r\n    else\r\n        echo -e \"\\nFailed to download\/unpack file: ${DOWNLOAD_URL}\\n\"\r\n        exit 1\r\n    fi\r\nfi\r\n\r\n## OpenRCT2 Setup\r\n# Setup ServerData\/save directory\r\n[ ! -d ServerData\/save ] && mkdir -p ServerData\/save\r\ncd ServerData\/save\r\n# Download default save.sv6 if missing\r\nif [ ! -f save.sv6 ]; then\r\n    echo -e \"Downloading default save.sv6 file from ${DEFAULT_SAVE}\"\r\n    curl -sSLO ${DEFAULT_SAVE}\r\nfi\r\n\r\necho -e \"\\nOpenRCT2 Successfully Installed!\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "\/bin\/bash"
         }
@@ -32,28 +31,46 @@
             "name": "Save File",
             "description": "Save file (.sv4 \/ .sv6 \/ .park) to load. Can be a file path or can be a webhosted file URL. An existing save file must be specified; the server cannot generate a new scenario\/save from scratch.",
             "env_variable": "SAVE_URI",
-            "default_value": "ServerData\/save\/save.sv6",
+            "default_value": "ServerData\/save\/save.park",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|min:5"
         },
         {
-            "name": "OpenRCT2 Version",
-            "description": "The release tag (version) of OpenRCT2 to download and install from their official Github (ie. \"v0.3.5.1\"). Use \"latest\" to download the latest release, or \"develop\" to build from the latest source (takes longer to install but is the most up to date).",
-            "env_variable": "VERSION",
-            "default_value": "develop",
+            "name": "Load Latest Autosave",
+            "description": "Will load the latest autosave (assuming one is present) *instead* of the Save File when the server is started. Useful for loading the latest progress of a park after a reboot. Set to \"false\" to \"lock\" progress of the park, and always load the original Save File on start up.",
+            "env_variable": "LOAD_AUTOSAVE",
+            "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|min:1"
+            "rules": "required|string|in:true,false"
         },
         {
-            "name": "Server Player Name",
-            "description": "The server appears as a player in the player list. This is the name it will have.",
-            "env_variable": "SERVER_PLAYER_NAME",
-            "default_value": "Server",
+            "name": "Autosave Interval",
+            "description": "0 = Every 1 min, 1 = Every 5 min, 2 = Every 15 min, 3 = Every 30 min, 4 = Every hour, 5 = Never",
+            "env_variable": "AUTOSAVE_INTERVAL",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string|nullable"
+            "rules": "required|integer|between:0,5"
+        },
+        {
+            "name": "Autosaves To Keep",
+            "description": "Number of autosaves to keep before rolling over and deleting the oldest one. Set to 0 to disable autosaving.",
+            "env_variable": "AUTOSAVE_AMOUNT",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum players allowed to connect to the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0"
         },
         {
             "name": "Server Password",
@@ -74,13 +91,13 @@
             "rules": "required|string|in:true,false"
         },
         {
-            "name": "Max Players",
-            "description": "Maximum players allowed to connect to the server.",
-            "env_variable": "MAX_PLAYERS",
-            "default_value": "16",
+            "name": "Pause Server If No Clients",
+            "description": "Set to \"true\" to have the server pause simulation if no clients are on the server.",
+            "env_variable": "PAUSE_NO_CLIENTS",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|min:0"
+            "rules": "required|string|in:true,false"
         },
         {
             "name": "Server Name",
@@ -96,6 +113,15 @@
             "description": "Description of the server that appears when hovering over the server in the server list.",
             "env_variable": "SERVER_DESCRIPTION",
             "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable"
+        },
+        {
+            "name": "Server Player Name",
+            "description": "The server appears as a player in the player list. This is the name it will have.",
+            "env_variable": "SERVER_PLAYER_NAME",
+            "default_value": "Server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "string|nullable"
@@ -155,40 +181,13 @@
             "rules": "required|string|in:true,false"
         },
         {
-            "name": "Pause Server If No Clients",
-            "description": "Set to \"true\" to have the server pause simulation if no clients are on the server.",
-            "env_variable": "PAUSE_NO_CLIENTS",
-            "default_value": "false",
+            "name": "OpenRCT2 Version",
+            "description": "The release tag (version) of OpenRCT2 to download and install from their official Github (ie. \"v0.3.5.1\"). Use \"latest\" to download the latest release, or \"develop\" to build from the latest source (takes longer to install but is the most up to date).",
+            "env_variable": "VERSION",
+            "default_value": "develop",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
-        },
-        {
-            "name": "Autosave Interval",
-            "description": "0 = Every 1 min, 1 = Every 5 min, 2 = Every 15 min, 3 = Every 30 min, 4 = Every hour, 5 = Never",
-            "env_variable": "AUTOSAVE_INTERVAL",
-            "default_value": "1",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|between:0,5"
-        },
-        {
-            "name": "Autosaves To Keep",
-            "description": "Number of autosaves to keep before rolling over and deleting the oldest one. Set to 0 to disable autosaving.",
-            "env_variable": "AUTOSAVE_AMOUNT",
-            "default_value": "10",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|min:0"
-        },
-        {
-            "name": "Load Latest Autosave",
-            "description": "Will load the latest autosave (assuming one is present) *instead* of the Save File when the server is started. Useful for loading the latest progress of a park after a reboot. Set to \"0\" to \"lock\" progress of the park, and always load the original Save File on start up.",
-            "env_variable": "LOAD_AUTOSAVE",
-            "default_value": "1",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean"
+            "rules": "required|string|min:1"
         }
     ]
 }

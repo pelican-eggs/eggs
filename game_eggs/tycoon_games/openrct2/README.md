@@ -79,6 +79,7 @@ ___
 ### Known Issues
 The following are known issues that are unique to running OpenRCT2 on Pterodactyl, but likely can only be fixed by further development/updates from OpenRCT2.
 - Only building from source from the `develop` branch currently yields a package that is bootable. This will no longer be true for any OpenRCT2 releases after v.0.3.5.1.
+    - This also means that clients joining the server must be on the latest develop branch as well.
 - Configuring a password on the server disallows non-admin clients from entering in a password in their client to connect; it just disconnects them. Admin clients can still join normally.
 - You may rarely run into the server crashing on start due to a "Floating point exception(core dumped)" error. If this occurs to you, please help with OpenRCT2 development by doing the following:
 	1. Add the following to the beginning of your server's startup command: `SEGFAULT_SIGNALS=fpe LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so `
