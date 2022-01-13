@@ -10,8 +10,6 @@
 [ClassiCube](game_eggs/classicube)
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Cryofall](cryofall/cryofall)
-
 [Call of Duty 4X](cod/cod4x)
 
 [ET Legacy](enemy_territory/etlegacy)
@@ -103,6 +101,8 @@
 * [Barotrauma](steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
+* [Craftopia](steamcmd_servers/craftopia)
+* [CryoFall](steamcmd_servers/cryofall)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
 * [Fistful of Frags](steamcmd_servers/fof)
@@ -130,6 +130,7 @@
 * [Satisfactory](steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [dedicated](steamcmd_servers/scpsl/dedicated)
+  * [exiled](steamcmd_servers/scpsl/exiled)
   * [multiadmin](steamcmd_servers/scpsl/multiadmin)
 * [Soldat](steamcmd_servers/soldat)
 * [Space Engineers](steamcmd_servers/space_engineers)

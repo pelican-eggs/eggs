@@ -26,8 +26,11 @@ This is a collection of servers that use SteamCMD to install.
 ## Conan Exiles
 [Conan Exiles](conan_exiles)
 
+## Craftopia
+[Craftopia](craftopia)
+
 ## CryoFall
-* [Cryofall](cryofall)
+[Cryofall](cryofall)
 
 ## Don't Starve Together
 [Don't Starve Together](dont_starve)
