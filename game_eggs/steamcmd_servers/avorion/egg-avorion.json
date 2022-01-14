@@ -130,7 +130,7 @@
         {
             "name": "Steam App ID",
             "description": "",
-            "env_variable": "APP_ID",
+            "env_variable": "SRCDS_APPID",
             "default_value": "565060",
             "user_viewable": false,
             "user_editable": false,
