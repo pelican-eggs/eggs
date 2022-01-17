@@ -34,7 +34,7 @@
             "default_value": "ServerData\/save\/save.park",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|min:5"
+            "rules": "required|string|min:4"
         },
         {
             "name": "Load Latest Autosave",
