@@ -10,7 +10,8 @@
     "description": "Spigot is the most widely-used modded Minecraft server software in the world. It powers many of the top Minecraft server networks around to ensure they can cope with their huge player base and ensure the satisfaction of their players. Spigot works by reducing and eliminating many causes of lag, as well as adding in handy features and settings that help make your job of server administration easier.",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_17",

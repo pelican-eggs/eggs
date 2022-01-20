@@ -10,7 +10,8 @@
     "description": "FlameCord is a patch for Travertine to fix possible exploits and add useful functionalities. FlameCord aims to fix Netty related exploits to keep your server safe from attacks.",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_17",
