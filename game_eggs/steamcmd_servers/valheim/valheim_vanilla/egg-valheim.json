@@ -8,7 +8,9 @@
     "name": "Valheim",
     "author": "magi1053@outlook.com",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_source"
     ],

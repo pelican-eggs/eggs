@@ -8,7 +8,9 @@
     "name": "Project Zomboid",
     "author": "iamkubi@gmail.com",
     "description": "Project Zomboid is an open world survival horror video game in alpha stage development by British and Canadian independent developer, The Indie Stone. The game is set in a post apocalyptic, zombie infested world where the player is challenged to survive for as long as possible before inevitably dying.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "ghcr.io\/pterodactyl\/games:source"
     ],
