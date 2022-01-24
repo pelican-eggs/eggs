@@ -50,7 +50,7 @@ ___
 
 |  | Minimum |
 |---------|---------|
-| Processor | Recent x86/64 (AMD/Intel) processor. No ARM support. |
+| Processor | Multiarch is supported for most modern processors  |
 | RAM | 256-512 MiB (depends on # of clients & park size) |
 | Storage | 80 MB (*may require more if building from source*) |
 | RCT2 Files | **Not required** |
