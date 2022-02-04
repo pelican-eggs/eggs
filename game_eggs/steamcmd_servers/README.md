@@ -53,6 +53,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Killing Floor 2
 [Killing Floor 2](killing_floor_2)
 
+## Last Oasis
+[Last Oasis](lastoasis)
+
 ## Left 4 Dead
 [Left 4 Dead](left4dead)
 
