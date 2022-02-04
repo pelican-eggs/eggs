@@ -10,7 +10,8 @@
     "description": "Fabric is a modular modding toolchain targeting Minecraft 1.14 and above, including snapshots.",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_17",

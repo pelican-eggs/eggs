@@ -8,7 +8,9 @@
     "name": "TyphoonLimbo",
     "author": "parker@parkervcp.com",
     "description": "Lightweight minecraft limbo server",
-    "features": null,
+    "features": [
+        "pid_limit"
+    ],
     "images": [
         "ghcr.io\/parkervcp\/yolks:debian"
     ],

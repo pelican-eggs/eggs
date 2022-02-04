@@ -10,7 +10,8 @@
     "description": "Brand new proxy server for Minecraft: Bedrock Edition",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_17",
