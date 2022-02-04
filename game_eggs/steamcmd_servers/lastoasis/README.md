@@ -24,7 +24,7 @@ ___
 Last Oasis is a Nomadic Survival MMO. Earth has stopped rotating, and the last human survivors need to outrun the scorching Sun in a massive Open World. Traverse the world on your walker: a wooden, wind-powered machine inspired by Theo Jansen's amazing strandbeests
 
 ### SPECIAL NOTE
-To run the server, you must increase container_pid_limit in Pterodactyl confic.yaml
+To run the server, you must increase container_pid_limit in Pterodactyl config.yaml
 
 go to: /etc/pterodactyl
 edit config.yaml and change in line 65:
