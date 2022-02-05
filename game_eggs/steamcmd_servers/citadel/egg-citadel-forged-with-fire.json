@@ -8,7 +8,9 @@
     "name": "Citadel: Forged with Fire",
     "author": "info@goover.de",
     "description": "Citadel: Forged With Fire is a massive online sandbox RPG set in the mystical world of Ignus. Featuring magic, spellcasting, building, exploring and crafting as you fight to make a name for yourself and achieve notoriety across the land.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "ghcr.io\/parkervcp\/games:source"
     ],

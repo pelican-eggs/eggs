@@ -8,7 +8,9 @@
     "name": "Craftopia",
     "author": "info@goover.de",
     "description": "Craftopia is the brand new multiplayer survival action game made in Japan. We combined many features we find enjoyable, such as hunting, farming, hack-and-slash, building, automation to develop this game.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "ghcr.io\/parkervcp\/games:source"
     ],

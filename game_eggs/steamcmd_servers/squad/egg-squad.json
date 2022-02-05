@@ -1,18 +1,25 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2019-10-08T08:47:08-04:00",
+    "exported_at": "2022-01-20T12:59:49-05:00",
     "name": "Squad",
     "author": "brycea@terrahost.cloud",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
-    "image": "quay.io\/pterodactyl\/core:source",
+    "features": [
+        "steam_disk_space"
+    ],
+    "images": [
+        "quay.io\/pterodactyl\/core:source"
+    ],
+    "file_denylist": [],
     "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
     "config": {
         "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.servername}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.maxplayers}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.allowteamchange}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.advertise}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.reservedslots}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.ptciu}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.teambal}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.recorddemos}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Engine Initialization\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
@@ -28,8 +35,8 @@
             "description": "Query port for your Squad server.",
             "env_variable": "QUERY_PORT",
             "default_value": "27165",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|numeric"
         },
         {
@@ -37,8 +44,8 @@
             "description": "this is needed for some reason",
             "env_variable": "LD_LIBRARY_PATH",
             "default_value": "\/home\/container\/linux64\/",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|string"
         },
         {
@@ -46,8 +53,8 @@
             "description": "The ID corresponding to the game to download and run using SRCDS.",
             "env_variable": "SRCDS_APPID",
             "default_value": "403240",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|string|max:20"
         },
         {
@@ -55,8 +62,8 @@
             "description": "The name for the server in the server list",
             "env_variable": "servername",
             "default_value": "Squad Server",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:30"
         },
         {
@@ -64,8 +71,8 @@
             "description": "Sets the maximum number of players.",
             "env_variable": "maxplayers",
             "default_value": "80",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required"
         },
         {
@@ -73,8 +80,8 @@
             "description": "Allow players to change teams ( true \/ false )",
             "env_variable": "allowteamchange",
             "default_value": "true",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -82,8 +89,8 @@
             "description": "Have the server report to the public server list ( true \/ false )",
             "env_variable": "advertise",
             "default_value": "true",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -91,8 +98,8 @@
             "description": "The number of reserved slots for admins \/ mods",
             "env_variable": "reservedslots",
             "default_value": "0",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -100,8 +107,8 @@
             "description": "This will prevent players from changing teams if they're already unbalanced ( true \/ false )",
             "env_variable": "ptciu",
             "default_value": "true",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -109,8 +116,8 @@
             "description": "This will FORCE team balance if the teams are too uneven ( true \/ false )",
             "env_variable": "teambal",
             "default_value": "true",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         },
         {
@@ -118,8 +125,8 @@
             "description": "This will record demos of the players ( true \/ false )",
             "env_variable": "recorddemos",
             "default_value": "true",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string"
         }
     ]

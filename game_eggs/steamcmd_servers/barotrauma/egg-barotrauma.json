@@ -8,7 +8,9 @@
     "name": "Barotrauma",
     "author": "admin@softwarenoob.com",
     "description": "Barotrauma is a 2D co-op survival horror submarine simulator, inspired by games like FTL: Faster Than Light, Rimworld, Dwarf Fortress and Space Station 13. It\u2019s a Sci-Fi game that combines ragdoll physics and alien sea monsters with teamwork and existential fear.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "ghcr.io\/parkervcp\/games:source"
     ],
