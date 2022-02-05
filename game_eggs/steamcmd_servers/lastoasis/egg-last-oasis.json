@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-02-05T15:14:22+01:00",
+    "exported_at": "2022-02-05T15:17:38+01:00",
     "name": "Last Oasis",
     "author": "info@goover.de",
     "description": "Last Oasis is a Nomadic Survival MMO. Earth has stopped rotating, and the last human survivors need to outrun the scorching Sun in a massive Open World. Traverse the world on wooden wind-powered, walking machines. Walkers can be adapted for travel, transportation, harvesting, combat, or used as mobile bases.",
@@ -65,7 +65,7 @@
             "default_value": "5",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:2"
+            "rules": "required|string|max:100"
         },
         {
             "name": "Provider Key",
@@ -101,7 +101,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|boolean"
         }
     ]
 }
