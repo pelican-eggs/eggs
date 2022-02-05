@@ -4,19 +4,19 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-11-29T09:48:58+01:00",
+    "exported_at": "2022-01-22T05:44:42-05:00",
     "name": "Terraria Vanilla",
     "author": "iamkubi@gmail.com",
     "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/TerrariaServer.bin.x86_64 -config serverconfig.txt",
     "config": {
         "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\"done\": \"Type 'help' for a list of commands\"}",
+        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\"\r\n}",
         "logs": "{}",
         "stop": "exit"
     },
