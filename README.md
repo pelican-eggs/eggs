@@ -229,6 +229,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TShock](game_eggs/terraria/tshock)
 
 [Tycoon Games](game_eggs/tycoon_games)
+* [OpenRCT2](game_eggs/tycoon_games/openrct2)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
 
 [Veloren](game_eggs/veloren)
