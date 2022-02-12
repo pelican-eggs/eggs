@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-02-12T16:48:01+01:00",
+    "name": "Reposilite",
+    "author": "info@goover.de",
+    "description": "Lightweight and easy-to-use repository manager for Maven based artifacts in JVM ecosystem. This is simple, extensible and scalable self-hosted solution to replace managers like Nexus, Archiva or Artifactory, with reduced resources consumption.",
+    "features": null,
+    "images": [
+        "ghcr.io\/parkervcp\/yolks:java_16"
+    ],
+    "file_denylist": [],
+    "startup": "java  -Xmx{{SERVER_MEMORY}}M -jar reposilite.jar",
+    "config": {
+        "files": "{\r\n    \"configuration.local.cdn\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port:\": \"port: {{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \" Binding server at\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "## Reposile Installscript\r\n\r\ncd \/mnt\/server\r\necho \"Download URL: https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${VERSION}\/reposilite-${VERSION}-all.jar\"\r\ncurl -sSLo reposilite.jar https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${VERSION}\/reposilite-${VERSION}-all.jar\r\necho \"Installation done\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "VERSION",
+            "description": "Latest download latest stable. For PreReleases use Version",
+            "env_variable": "VERSION",
+            "default_value": "3.0.0-alpha.20",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40"
+        }
+    ]
+}
