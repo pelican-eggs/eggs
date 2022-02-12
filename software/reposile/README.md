@@ -26,13 +26,10 @@ Lightweight and easy-to-use repository manager for Maven based artifacts in JVM 
 ### Server Ports
 - Default server ports are listed below, but all two ports can be changed freely.
 
-- ***All two ports are required to be open/allocated for normal server behavior!***
-
 | Port | Default (UDP) |
 |---------|---------|
 | default | 81 |
 
-You can use any port you want
 ___
 ### Installation/System Requirements
 
