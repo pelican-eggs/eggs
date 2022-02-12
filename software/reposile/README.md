@@ -28,7 +28,7 @@ Lightweight and easy-to-use repository manager for Maven based artifacts in JVM 
 
 | Port | Default (UDP) |
 |---------|---------|
-| default | 81 |
+| default | 3000 |
 
 ___
 ### Installation/System Requirements
