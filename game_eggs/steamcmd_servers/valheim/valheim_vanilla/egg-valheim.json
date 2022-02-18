@@ -116,8 +116,8 @@
             "description": "",
             "env_variable": "SRCDS_BETAPASS",
             "default_value": "",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "max:30"
         }
     ]
