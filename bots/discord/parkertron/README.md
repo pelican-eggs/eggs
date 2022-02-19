@@ -1,8 +1,11 @@
 # parkertron
-### Their [Github](https://github.com/parkervcp/parkertron)
-Purely a chatbot. Not even a smart one. 
+
+## Their [Github](https://github.com/parkervcp/parkertron)
+
+Purely a chatbot. Not even a smart one.
 
 Runs the Pterodactyl `@support bot`
 
-### Server Ports
+## Server Ports
+
 There are no ports required for parkertron

@@ -1,6 +1,9 @@
 # JMusicBot
+
 ___
-### Authors / Contributors
+
+## Authors / Contributors
+
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
@@ -51,7 +54,9 @@ ___
 <!-- prettier-ignore-end -->
 
 ___
-### Bot Description & Features
+
+## Bot Description & Features
+
 From the developer's [Github](https://github.com/jagrosh/MusicBot):
 > A Discord music bot that's easy to set up and run yourself!
 
@@ -65,15 +70,23 @@ From the developer's [Github](https://github.com/jagrosh/MusicBot):
 - Supports many online radio/streams
 - Supports local files
 - Playlist support (both web/youtube, and local)
+
 ___
-### Configuration
+
+## Configuration
+
 - If you can, edit the Startup Variables before starting the bot, because otherwise it will fail to start.
 - Most settings found in `config.txt` can be edited via the Startup Variables. Advanced settings not listed can still be edited manually via the File Manager. Available Startup Variables will take precedent over manual edits.
+
 ___
-### Server Ports
+
+## Server Ports
+
 There are no ports required for JMusicBot.
 ___
-### Updating
+
+## Updating
+
 Re-Installing the server via the panel will do the following:
 
 1. Update the bot to the latest version.

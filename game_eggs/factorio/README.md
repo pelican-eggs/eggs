@@ -1,12 +1,13 @@
 # Factorio
 
-#### The Factorio Server
-The server supports mods. 
-The factorio-modupdate egg uses the factorio-mod-updater (https://github.com/pdemonaco/factorio-mod-updater) to update your mods when ReInstalling the Server.
+## The Factorio Server
 
-#### from the developers
+The server supports mods.
+The factorio-modupdate egg uses the [factorio-mod-updater](https://github.com/pdemonaco/factorio-mod-updater) to update your mods when ReInstalling the Server.
 
-Factorio is a game in which you build and maintain factories.  
+## from the developers
+
+Factorio is a game in which you build and maintain factories.
 
 You will be mining resources, researching technologies, building infrastructure, automating production and fighting enemies. Use your imagination to design your factory, combine simple elements into ingenious structures, apply management skills to keep it working, and protect it from the creatures who don't really like you.
 
@@ -16,8 +17,9 @@ Factorio has been in development since the spring of 2012. So far over 1,400,000
 
 New to the game? Make sure to checkout their [starter page](https://factorio.com/starter-page).
 
-### Server Ports
-Factorio requires a single port  
+## Server Ports
+
+Factorio requires a single port
 
 | Port    | default |
 |---------|---------|

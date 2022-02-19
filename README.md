@@ -18,14 +18,14 @@ If you are reading this it looks like you are looking to add an egg to your serv
 5. Select what nest you want to put the egg in.
    1. If you want a new nest you need to create it before importing the egg.
 
-# You must restart your daemon after importing an egg if you are using 0.7. This is not required on 1.X.
-
+## You must restart your daemon after importing an egg if you are using 0.7. This is not required on 1.X
 
 ## Please read the CONTRIBUTING.md before submitting PRs
 
 ## [Bots](/bots)
 
 [Discord](/bots/discord)
+
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
@@ -43,43 +43,56 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [SinusBot](/bots/discord/sinusbot)
 
 [Other](/bots/other)
+
 * [Big Brother Bot](/bots/other/bigbrotherbot)
 
 [Twitch](/bots/twitch)
-  * [PhantomBot](/bots/twitch/phantombot)
-  * [SogeBot](/bots/twitch/sogebot)
+
+* [PhantomBot](/bots/twitch/phantombot)
+* [SogeBot](/bots/twitch/sogebot)
 
 [TeamSpeak3](bots/teamspeak3)
-  * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
+
+* [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
 
 ## [Database](/database)
+
 ### In-Memory Databases
+
 [Redis](/database/redis)
+
 * [Redis 5](/database/redis/redis-5)
 * [Redis 6](/database/redis/redis-6)
 
 ### noSQL
+
 * [mongoDB](/database/nosql/mongodb)
 
 ### SQL Databases
+
 * [MariaDB](/database/sql/mariadb)
 * [PostgreSQL](/database/sql/postgres)
 
 ## [Voice Servers](/voice_servers)
+
 * [Lavalink](/voice_servers/lavalink)
 * [TeaSpeak](/voice_servers/teaspeak)
 * [TS3-Manager](/voice_servers/ts3_manager)
 
 ## [Game Eggs](/game_eggs)
+
 [Among Us](game_eggs/among_us)
+
 * [Impostor Server](game_eggs/among_us/impostor_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
 
 [BeamNG.drive](game_eggs/beamng)
+
 * [BeamMP Server](game_eggs/beamng/beammp)
 * [KissMP](game_eggs/beamng/kissmp)
 
 [ClassiCube](game_eggs/classicube)
+
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
 [Call of Duty 4X](game_eggs/cod/cod4x)
@@ -89,10 +102,12 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [FTL: Tachyon](game_eggs/ftl/tachyon)
 
 [Factorio](game_eggs/factorio)
+
 * [Vanilla](game_eggs/factorio/factorio)
 * [ModUpdate](game_eggs/factorio/factorio-modupdate)
 
 [Grand Theft Auto](game_eggs/gta)
+
 * GTA V
   * [FiveM](game_eggs/gta/fivem)
   * [RageMP](game_eggs/gta/ragemp)
@@ -106,28 +121,32 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [GTAC](game_eggs/gta/gtac)
 
 [Mindustry](game_eggs/mindustry)
-  * [Mindustry](game_eggs/mindustry/mindustry)
+
+* [Mindustry](game_eggs/mindustry/mindustry)
 
 [League Sandbox](game_eggs/leaguesandbox)
-  * [League Sandbox](game_eggs/leaguesandbox/leaguesandbox)
+
+* [League Sandbox](game_eggs/leaguesandbox/leaguesandbox)
 
 [Minetest](game_eggs/minetest) (including MTG)
-  * [Minetest](game_eggs/minetest/minetest)
+
+* [Minetest](game_eggs/minetest/minetest)
 
 [Minecraft](game_eggs/minecraft)
+
 * [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](game_eggs/minecraft/bedrock/bedrock)
   * [gomint](game_eggs/minecraft/bedrock/gomint)
-  * [Nukkit](game_eggs/minecraft/bedrock/nukkit)  
-  * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)  
+  * [Nukkit](game_eggs/minecraft/bedrock/nukkit)
+  * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
   * [Airplane](game_eggs/minecraft/java/airplane)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
   * [Fabric](game_eggs/minecraft/java/fabric)
-  * [Feather](game_eggs/minecraft/java/feather)  
-  * [Feed The Beast](game_eggs/minecraft/java/ftb)  
-  * [Forge](game_eggs/minecraft/java/forge)  
+  * [Feather](game_eggs/minecraft/java/feather)
+  * [Feed The Beast](game_eggs/minecraft/java/ftb)
+  * [Forge](game_eggs/minecraft/java/forge)
   * [Magma](game_eggs/minecraft/java/magma)
   * [Mohist](game_eggs/minecraft/java/mohist)
   * [NanoLimbo](/game_eggs/minecraft/java/nanolimbo)
@@ -142,7 +161,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
-	  * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
+    * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [TyphoonLimbo](game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
@@ -153,18 +172,22 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [GeyserMC](game_eggs/minecraft/proxy/cross_platform/geyser)
     * [Waterdog](game_eggs/minecraft/proxy/cross_platform/waterdog)
 
-[OpenArena](game_eggs/openarena)  
-  * [openarena](game_eggs/openarena/openarena)
+[OpenArena](game_eggs/openarena)
+
+* [openarena](game_eggs/openarena/openarena)
 
 [OpenRA](game_eggs/openra)
+
 * [OpenRA Dune2000](game_eggs/openra/openra_dune2000)
 * [OpenRA Red Alert](game_eggs/openra/openra_red_alert)
 * [OpenRA Tiberian Dawn](game_eggs/openra/openra_tiberian_dawn)
 
 [Red Dead Redemption](game_eggs/rdr)
+
 * [RedM](game_eggs/rdr/redm)
 
 [SteamCMD Servers](game_eggs/steamcmd_servers) These eggs use SteamCMD to install
+
 * [7 Days to Die](game_eggs/steamcmd_servers/7_days_to_die)
 * [ARK: Survival Evolved](game_eggs/steamcmd_servers/ark_survival_evolved)
 * [Arma](game_eggs/steamcmd_servers/arma)
@@ -221,9 +244,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
 
 [Teeworlds](game_eggs/teeworlds)
+
 * [Teeworlds](game_eggs/teeworlds/teeworlds)
 
 [Terraria](game_eggs/terraria)
+
 * [Vanilla](game_eggs/terraria/vanilla)
 * [tModLoader](game_eggs/terraria/tmodloader)
 * [TShock](game_eggs/terraria/tshock)
@@ -241,23 +266,39 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Xonotic](game_eggs/xonotic/xonotic)
 
 ## [Monitoring](/monitoring/)
+
 ### Prometheus
+
 * [Prometheus](/monitoring/prometheus)
 
 ## [Storage](/storage/)
+
 ### S3 Storage
+
 * [minio](/storage/minio)
 
 ## [Software](/software/)
+
 ### Code Server
+
 * [Code-Server](/software/code-server)
+
 ### Elasticsearch
+
 * [Elasticsearch](/software/elasticsearch)
+
 ### Gitea
+
 * [Gitea](/software/gitea)
+
 ### Grafana
+
 * [Grafana](/software/grafana)
+
 ### haste-server
+
 * [haste-server](/software/haste-server)
+
 ### RabbitMQ
+
 * [rabbitmq](/software/rabbitmq)
