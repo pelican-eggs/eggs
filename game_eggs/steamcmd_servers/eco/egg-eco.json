@@ -8,7 +8,9 @@
     "name": "Eco",
     "author": "info@goover.de",
     "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet-5"
     ],

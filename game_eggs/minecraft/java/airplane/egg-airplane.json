@@ -10,7 +10,8 @@
     "description": "A stable, optimized and fast Paper fork.\r\nhttps:\/\/github.com\/TECHNOVE\/Airplane",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_17",

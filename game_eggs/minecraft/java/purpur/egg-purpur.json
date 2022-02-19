@@ -10,7 +10,8 @@
     "description": "A drop-in replacement for Paper servers designed for configurability, and new fun and exciting gameplay features.",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_17",

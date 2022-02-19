@@ -1,18 +1,25 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2019-02-08T01:46:57+01:00",
+    "exported_at": "2022-01-20T13:03:59-05:00",
     "name": "Tower Unite",
     "author": "teamwuffy@gmail.com",
     "description": "Tower Unite\r\n\r\nDefault Port: 7778\r\nDefault Query Port: 27016\r\n\r\nConfig Path: Tower\/Saved\/Config\/TowerServer.ini",
-    "image": "quay.io\/pterodactyl\/core:source",
+    "features": [
+        "steam_disk_space"
+    ],
+    "images": [
+        "quay.io\/pterodactyl\/core:source"
+    ],
+    "file_denylist": [],
     "startup": ".\/Tower\/Binaries\/Linux\/TowerServer-Linux-Shipping -log -Port={{SERVER_PORT}} -MULTIHOME=0.0.0.0 -TowerServerINI=..\/..\/Saved\/Config\/TowerServer.ini",
     "config": {
         "files": "{\r\n    \"Tower\/Saved\/Config\/TowerServer.ini\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"{{server.build.env.SERVER_MAX_PLAYER}}\",\r\n            \"ServerTitle\": \"{{server.build.env.SERVER_TITLE}}\",\r\n            \"SteamLoginToken\": \"{{server.build.env.STEAM_LOGIN_TOKEN}}\",\r\n            \"AdminSteamID\": \"{{server.build.env.STEAM_ADMIN_ID}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Match State Changed from EnteringMap to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Match State Changed from EnteringMap to WaitingToStart\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
@@ -28,8 +35,8 @@
             "description": "Login and generate a token for the app-id: 394690\r\nhttps:\/\/steamcommunity.com\/dev\/managegameservers",
             "env_variable": "STEAM_LOGIN_TOKEN",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:100"
         },
         {
@@ -37,8 +44,8 @@
             "description": "Note that your admin id is only a number!",
             "env_variable": "STEAM_ADMIN_ID",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|integer|max:76561202255233023"
         },
         {
@@ -46,8 +53,8 @@
             "description": "",
             "env_variable": "SERVER_TITLE",
             "default_value": "Tower Unite Server",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:512"
         },
         {
@@ -55,8 +62,8 @@
             "description": "",
             "env_variable": "SERVER_MAX_PLAYER",
             "default_value": "40",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|integer|max:512"
         }
     ]

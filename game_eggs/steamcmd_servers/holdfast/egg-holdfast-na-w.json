@@ -1,18 +1,25 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2020-10-18T19:13:53-04:00",
+    "exported_at": "2022-01-20T12:53:50-05:00",
     "name": "Holdfast NaW",
     "author": "ankit@bmghosting.com",
     "description": "Holdfast: Nations at War",
-    "image": "bmghosting\/pterodactyl-holdfast",
+    "features": [
+        "steam_disk_space"
+    ],
+    "images": [
+        "bmghosting\/pterodactyl-holdfast"
+    ],
+    "file_denylist": [],
     "startup": "\".\/holdfastnaw-dedicated\/Holdfast NaW\" -startserver -batchmode -nographics -screen-width 320 -screen-height 240 -screen-quality Fastest -framerate {{FPSMAX}} --serverheadless -serverConfigFilePath holdfastnaw-dedicated\/configs\/{{SERVER_CONFIG_PATH}} -logFile holdfastnaw-dedicated\/logs_output\/output_{{SERVER_CONFIG_PATH}} -logArchivesDirectory holdfastnaw-dedicated\/{{SERVER_LOG_ARCHIVE_PATH}}\/ -adminCommandsLogFilePath holdfastnaw-dedicated\/logs_adminactions\/admin_{{SERVER_CONFIG_PATH}} -playersLogFilePath holdfastnaw-dedicated\/logs_playerlogin\/players_{{SERVER_CONFIG_PATH}} -scoreboardLogFilePath holdfastnaw-dedicated\/logs_score\/scorelog_{{SERVER_CONFIG_PATH}} -chatLogFilePath holdfastnaw-dedicated\/logs_chat\/chatlog_{{SERVER_CONFIG_PATH}} -workshopDataPath holdfastnaw-dedicated\/workshop -micSpammersPlayersFilePath holdfastnaw-dedicated\/micspammers.txt -mutedVoipPlayersFilePath holdfastnaw-dedicated\/mutedplayersvoip.txt -mutedChatPlayersFilePath holdfastnaw-dedicated\/mutedplayerschat.txt -bannedPlayersFilePath holdfastnaw-dedicated\/bannedplayers.txt -p {{SERVER_PORT}} -l \"94.130.66.231\" -o 7101",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"STEAMAPPS_INTERFACE_VERSION008\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"STEAMAPPS_INTERFACE_VERSION008\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {

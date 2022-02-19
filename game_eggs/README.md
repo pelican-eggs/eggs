@@ -1,64 +1,65 @@
-﻿## Game Eggs
+﻿# Game Eggs
+
 [Among Us](among_us)
+
 * [Impostor Server](among_us/impostor_server)
 * [CrewLink Server](among_us/crewlink_server)
 
 [BeamNG.drive](beamng)
+
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
 [ClassiCube](game_eggs/classicube)
-* [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Cryofall](cryofall/cryofall)
+* [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
 [Call of Duty 4X](cod/cod4x)
 
 [ET Legacy](enemy_territory/etlegacy)
 
-[FTL: Tachyon](ftl/tachyon)
-
 [Factorio](factorio)
+
 * [Vanilla](factorio/factorio)
 * [ModUpdate](factorio/factorio-modupdate)
 
+[FTL: Tachyon](ftl/tachyon)
+
 [Grand Theft Auto](gta)
+
 * GTA V
   * [FiveM](gta/fivem)
   * [RageMP](gta/ragemp)
   * [alt:V](gta/altv)
-  
+
 * GTA SA
   * [Multi Theft Auto](gta/mtasa)
   * [SA-MP](gta/samp)
-  
+
 * GTA
   * [GTAC](gta/gtac)
 
-[Mindustry](mindustry)
-  * [Mindustry](mindustry/mindustry)
-
 [League Sandbox](leaguesandbox)
-  * [League Sandbox](leaguesandbox/leaguesandbox)
 
-[Minetest](minetest) (including MTG)
-  * [Minetest](minetest/minetest)
+[Mindustry](mindustry)
 
 [Minecraft](minecraft)
+
 * [Bedrock](minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](minecraft/bedrock/bedrock)
   * [gomint](minecraft/bedrock/gomint)
-  * [Nukkit](minecraft/bedrock/nukkit)  
-  * [PocketMine MP](minecraft/bedrock/pocketmine_mp)  
+  * [Nukkit](minecraft/bedrock/nukkit)
+  * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
   * [Airplane](minecraft/java/airplane)
   * [Cuberite](minecraft/java/cuberite)
-  * [Fabric](minecraft/java/fabric) 
-  * [Feather](minecraft/java/feather)  
-  * [Feed The Beast](minecraft/java/ftb)  
+  * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
+  * [Fabric](minecraft/java/fabric)
+  * [Feather](minecraft/java/feather)
   * [Forge](minecraft/java/forge)
   * [Glowstone](minecraft/java/glowstone)
+  * [Feed The Beast](minecraft/java/ftb)
   * [Krypton](/minecraft/java/krypton)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
@@ -73,28 +74,37 @@
   * [VanillaCord](minecraft/java/vanillacord)
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
-  * [Java](minecraft/proxy/java)
-	* [FlameCord](minecraft/proxy/java/flamecord)
-    * [Travertine](minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](minecraft/proxy/java/typhoonlimbo)
-    * [Velocity](minecraft/proxy/java/velocity)
-    * [Waterfall](minecraft/proxy/java/waterfall)
+  * [Bedrock](minecraft/proxy/bedrock)
+    * [Waterdog PE](minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](minecraft/proxy/cross_platform)
     * [GeyserMC](minecraft/proxy/cross_platform/geyser)
     * [Waterdog](minecraft/proxy/cross_platform/waterdog)
+  * [Java](minecraft/proxy/java)
+    * [FlameCord](minecraft/proxy/java/flamecord)
+    * [Travertine](minecraft/proxy/java/travertine)
+    * [TyphoonLimbo](minecraft/proxy/java/typhoonlimbo)
+    * [Velocity](minecraft/proxy/java/velocity)
+    * [VIAaas](minecraft/proxy/java/viaaas)
+    * [Waterfall](minecraft/proxy/java/waterfall)
 
-[OpenArena](openarena)  
-  * [openarena](openarena/openarena) 
+[Minetest](minetest) (including MTG)
+
+[OpenArena](openarena)
 
 [OpenRA](openra)
+
 * [OpenRA Dune2000](openra/openra_dune2000)
 * [OpenRA Red Alert](openra/openra_red_alert)
 * [OpenRA Tiberian Dawn](openra/openra_tiberian_dawn)
 
 [Red Dead Redemption](rdr)
+
 * [RedM](rdr/redm)
 
+[Starmade](starmade)
+
 [SteamCMD Servers](steamcmd_servers) These eggs use SteamCMD to install
+
 * [7 Days to Die](steamcmd_servers/7_days_to_die)
 * [ARK: Survival Evolved](steamcmd_servers/ark_survival_evolved)
 * [Arma](steamcmd_servers/arma)
@@ -104,6 +114,7 @@
 * [Barotrauma](steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
+* [CryoFall](steamcmd_servers/cryofall)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
 * [Fistful of Frags](steamcmd_servers/fof)
@@ -112,6 +123,8 @@
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
+* [Left 4 Dead](steamcmd_servers/left4dead)
+* [Left 4 Dead 2](steamcmd_servers/left4dead_2)
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)
@@ -128,8 +141,9 @@
   * [Staging](steamcmd_servers/rust/rust_staging)
 * [Satisfactory](steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
-  * [dedicated](steamcmd_servers/scpsl/dedicated)
-  * [multiadmin](steamcmd_servers/scpsl/multiadmin)
+  * [Dedicated](steamcmd_servers/scpsl/dedicated)
+  * [Exiled](steamcmd_servers/scpsl/exiled)
+  * [Multiadmin](steamcmd_servers/scpsl/multiadmin)
 * [Soldat](steamcmd_servers/soldat)
 * [Space Engineers](steamcmd_servers/space_engineers)
 * [Squad](steamcmd_servers/squad)
@@ -138,30 +152,28 @@
 * [Stormworks: Build and Rescue](steamcmd_servers/stormworks)
 * [Subnautica: Nitrox Mod](steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](steamcmd_servers/svencoop)
-* [The Forest](steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](steamcmd_servers/team_fortress_2_classic)
+* [The Forest](steamcmd_servers/the_forest)
+* [Tower Unite](steamcmd_servers/tower_unite)
 * [Unturned](steamcmd_servers/unturned)
 * [Valheim](steamcmd_servers/valheim)
-  * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
+  * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
 
 [Teeworlds](teeworlds)
-* [Teeworlds](teeworlds/teeworlds)
 
 [Terraria](terraria)
-* [Vanilla](terraria/vanilla)
+
 * [tModLoader](terraria/tmodloader)
 * [TShock](terraria/tshock)
+* [Vanilla](terraria/vanilla)
 
 [Tycoon Games](tycoon_games)
+* [OpenRCT2](tycoon_games/openrct2)
 * [OpenTTD](tycoon_games/openttd)
 
-[Unreal Engine](unreal_engine)
-* [Tower Unite](unreal_engine/tower_unite)
-* [Tower Unite](steamcmd_servers/tower_unite)
+[Veloren](veloren)
 
-[Veloren](veloren/veloren)
-
-[Vintage Story](vintage_story/vintage_story)
+[Vintage Story](vintage_story)
 
 [Xonotic](xonotic/xonotic)

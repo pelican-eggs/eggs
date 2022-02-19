@@ -7,7 +7,9 @@
     "name": "Satisfactory",
     "author": "rehlmgaming@gmail.com",
     "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "ghcr.io\/parkervcp\/games:source"
     ],

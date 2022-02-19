@@ -4,16 +4,18 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-13T03:08:36+00:00",
+    "exported_at": "2021-12-22T12:58:29+01:00",
     "name": "7 Days To Die",
     "author": "kristoffer.norman@bahnhof.se",
     "description": "7 days to die server",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
-    "startup": ".\/7DaysToDieServer.x86_64 -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated -ServerPort=${SERVER_PORT} -ServerMaxPlayerCount=${MAX_PLAYERS} -GameDifficulty=${GAME_DIFFICULTY} -ControlPanelEnabled=false -TelnetEnabled=true -TelnetPort=8081 -TelnetPassword=${PASSWORD} -logfile logs\/latest.log & echo -e \"Checking on telnet connection\" && until nc -z -v -w5 127.0.0.1 8081; do echo \"Waiting for telnet connection...\"; sleep 5; done && $( [[ -z ${PASSWORD} ]] && printf %s \"telnet -E 127.0.0.1 8081\" || printf %s \"rcon -t telnet -a 127.0.0.1:8081 -p {{PASSWORD}}\" )",
+    "startup": ".\/7DaysToDieServer.x86_64 -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated -ServerPort=${SERVER_PORT} -ServerMaxPlayerCount=${MAX_PLAYERS} -GameDifficulty=${GAME_DIFFICULTY} -ControlPanelEnabled=false -TelnetEnabled=true -TelnetPort=${TELNET_PORT} -TelnetPassword=${PASSWORD} -logfile logs\/latest.log & echo -e \"Checking on telnet connection\" && until nc -z -v -w5 127.0.0.1 ${TELNET_PORT}; do echo \"Waiting for telnet connection...\"; sleep 5; done && $( [[ -z ${PASSWORD} ]] && printf %s \"telnet -E 127.0.0.1 ${TELNET_PORT}\" || printf %s \"rcon -t telnet -a 127.0.0.1:${TELNET_PORT} -p {{PASSWORD}}\" )",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connected with 7DTD server\"\r\n}",
@@ -90,6 +92,15 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:30"
+        },
+        {
+            "name": "Telnet Port",
+            "description": "",
+            "env_variable": "TELNET_PORT",
+            "default_value": "8081",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
         }
     ]
 }

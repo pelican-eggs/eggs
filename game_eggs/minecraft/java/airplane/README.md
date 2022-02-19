@@ -1,13 +1,14 @@
 # Airplane
-### From their [Github](https://github.com/TECHNOVE/Airplane)
-A stable, optimized and fast Paper fork.
 
+A stable, optimized, well supported Paper fork.
 
-### Minimum RAM warning
+[Airplane Github](https://github.com/TECHNOVE/Airplane)
+
+## Minimum RAM warning
+
 Approximately 2048MB
 
-
-### Server Ports
+## Server Ports
 
 | Port    | default |
 |---------|---------|
