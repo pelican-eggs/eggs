@@ -21,6 +21,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
   * [Forge](minecraft/java/forge/forge)
   * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
 * [Feed The Beast](minecraft/java/ftb)
+* [Glowstone](/minecraft/java/glowstone)
 * [Krypton](/minecraft/java/krypton)
 * [Magma](minecraft/java/magma)
 * [Mohist](minecraft/java/mohist)

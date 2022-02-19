@@ -54,11 +54,11 @@
 * [Java](minecraft/java) Servers for Java Minecraft
   * [Airplane](minecraft/java/airplane)
   * [Cuberite](minecraft/java/cuberite)
+  * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
   * [Fabric](minecraft/java/fabric)
   * [Feather](minecraft/java/feather)
   * [Forge](minecraft/java/forge)
-    * [Forge](minecraft/java/forge/forge)
-    * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
+  * [Glowstone](minecraft/java/glowstone)
   * [Feed The Beast](minecraft/java/ftb)
   * [Krypton](/minecraft/java/krypton)
   * [Magma](minecraft/java/magma)

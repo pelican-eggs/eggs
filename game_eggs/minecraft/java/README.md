@@ -37,6 +37,10 @@ This is a direct fork of the default forge service
 [CurseForge Generic Website](https://www.curseforge.com)
 A generic service to pull forge mod packs from the curseforge site.
 
+## Glowstone 
+[Glowstone](https://glowstone.net/)
+Glowstone is an open-source replacement for CraftBukkit, Spigot, and Paper.
+
 ### [Magma](magma)
 
 [Magma Website](https://magmafoundation.org)
@@ -152,5 +156,6 @@ The official Tekkit Classic modpack. Build factories, automate crafting!
 
 ## [VanillaCord](vanillacord)
 
-[VanillaCord GitHub](https://github.com/ME1312/VanillaCord)
+## VanillaCord
+[VanillaCord](https://github.com/ME1312/VanillaCord)
 VanillaCord adds support for BungeeCord's ip-forwarding option on vanilla Minecraft servers.
