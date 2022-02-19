@@ -33,6 +33,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [discord.java](bots/discord/discord.java) Java generic
 * [discord.js](bots/discord/discord.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
+* [Dynamica](/bots/discord/dynamica) Node JS
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
 * [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
@@ -196,6 +197,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
+* [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
@@ -205,6 +207,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
+* [Left 4 Dead](game_eggs/steamcdm_servers/left4dead)
+* [Left 4 Dead 2](game_eggs/steamcdm_servers/left4dead_2)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
@@ -250,7 +254,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TShock](game_eggs/terraria/tshock)
 
 [Tycoon Games](game_eggs/tycoon_games)
-
+* [OpenRCT2](game_eggs/tycoon_games/openrct2)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
 
 [Veloren](game_eggs/veloren)

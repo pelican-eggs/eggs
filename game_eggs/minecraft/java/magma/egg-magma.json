@@ -4,32 +4,32 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-06-14T21:28:39+03:00",
+    "exported_at": "2022-01-11T09:07:47-05:00",
     "name": "Magma",
     "author": "support@pterodactyl.io",
     "description": "Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.",
     "features": [
         "eula",
-        "java_version"
+        "java_version",
+        "pid_limit"
     ],
     "images": [
         "ghcr.io\/pterodactyl\/yolks:java_8",
         "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
         "ghcr.io\/pterodactyl\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "logs": "{}",
         "stop": "stop"
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ ! -z ${MC_VERSION} ]; then\r\n    DOWNLOAD_LINK=https:\/\/api.magmafoundation.org\/api\/resources\/magma\/${MC_VERSION}\/dev\/latest\/download\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/api.magmafoundation.org\/api\/resources\/magma\/1.12.2\/dev\/latest\/download\r\nfi\r\n\r\necho -e \"Download URL is ${DOWNLOAD_LINK}\"\r\n\r\n## validate download link\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ] ; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_LINK}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## mv old server files\r\nif [ -f ${SERVER_JARFILE} ]; then\r\n    echo -e \"moving old server.jar\"\r\n    mv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\n\r\n## download files\r\necho -e \"running: curl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\"\r\ncurl -s -o ${SERVER_JARFILE} -sSL ${DOWNLOAD_LINK}\r\n\r\necho -e \"Install Complete\"",
-            "container": "debian:buster-slim",
+            "script": "apt update\r\napt install -y curl jq\r\n\r\nif [[ ! -d \/mnt\/server ]]; then\r\n  mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n# get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/1.16.5\/${BRANCH}\/latest\")\r\nOLD_JSON=$(curl --silent \"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/1.12\/${BRANCH}\/latest\")\r\n\r\nif [[ -z \"${MC_VERSION}\" ]] || [[ \"${MC_VERSION}\" == \"latest\" ]]; then\r\n  echo -e \"Version not set. Defaulting to latest\"\r\n  DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i installer.jar)\r\n\r\nelif [[ $MC_VERSION =~ ^1\\.(16|17|18|19|20|21|22|23) ]]; then\r\n  CUSTOM_JSON=$(curl --silent \"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/${MC_VERSION}\/${BRANCH}\/latest\")\r\n  DOWNLOAD_LINK=$(echo ${CUSTOM_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i installer.jar)\r\nelif [[ \"${MC_VERSION}\" == \"1.12\" ]]; then\r\n  CUSTOM_JSON=$(curl --silent \"https:\/\/api.magmafoundation.org\/api\/resources\/magma\/1.12\/${BRANCH}\/latest\")\r\n  DOWNLOAD_LINK=$(echo ${OLD_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i server.jar)\r\nelse\r\n  # Try to locate version by exact tag name. This will most likely always fail, because the tag names are in a weird format. Leaving it here just in case someone wants to fetch exact tag releases.\r\n  VERSION_CHECK=$(echo ${OLD_JSON} | jq -r --arg MC_VERSION \"${MC_VERSION}\" '.[] | select(.tag_name==$MC_VERSION) | .tag_name')\r\n  if [[ \"${MC_VERSION}\" == \"${VERSION_CHECK}\" ]]; then\r\n    DOWNLOAD_LINK=$(echo ${OLD_JSON} | jq -r --arg MC_VERSION \"${MC_VERSION}\" '.[] | select(.tag_name==$MC_VERSION) | .assets[].browser_download_url' | grep -i installer.jar)\r\n  else\r\n    echo -e \"Specified ${MC_VERSION} version not found. Defaulting to latest\"\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n  fi\r\nfi\r\n\r\n# validate download link\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then\r\n  echo -e \"Validating downlaod link\"\r\n  if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n    echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n    DOWNLOAD_LINK=${DOWNLOAD_LINK}\r\n  else\r\n    echo -e \"Download URL ${DOWNLOAD_LINK} is invalid. Terminating install.\"\r\n    exit 2\r\n  fi\r\nfi\r\n\r\nfunction downloadMagma {\r\n  echo -e \"running: curl -sSL -o installer.jar ${DOWNLOAD_LINK}\"\r\n  curl -sSL -o installer.jar -sSL ${DOWNLOAD_LINK}\r\n}\r\n\r\nif [[ $MC_VERSION =~ ^1\\.(16|17|18|19|20|21|22|23) ]] || [[ -z \"${MC_VERSION}\" ]] || [[ \"${MC_VERSION}\" == \"latest\" ]] ; then\r\n  downloadMagma\r\n  echo -e \"1.16.5 or newer version detected. Running installer\"\r\n  java -jar installer.jar --installServer || { echo -e \"install failed\" exit 4; }\r\n  mv forge-*.jar $SERVER_JARFILE\r\n  echo -e \"Deleting installer.jar file.\\n\"\r\n  rm -rf *installer.jar\r\nelse\r\n  downloadMagma\r\n  echo -e \"Older magma version detected. Skipping installer\"\r\n  mv installer.jar $SERVER_JARFILE\r\nfi\r\n\r\necho -e \"Install Complete\"",
+            "container": "openjdk:8-jdk-slim",
             "entrypoint": "bash"
         }
     },
@@ -39,18 +39,27 @@
             "description": "The name of the server jarfile to run the server with.",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": false,
             "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
         },
         {
             "name": "Minecraft Version",
-            "description": "Optional.\r\n\r\nSpecify vanilla version other than default 1.12.2.",
+            "description": "Optional.\r\n\r\nSpecify the version to install, such as 1.16 or 1.12. Leave empty or set latest to install latest",
             "env_variable": "MC_VERSION",
-            "default_value": "",
+            "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Branch [dev or stable]",
+            "description": "Branch to install. Valid options: dev or stable",
+            "env_variable": "BRANCH",
+            "default_value": "dev",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:dev,stable"
         }
     ]
 }

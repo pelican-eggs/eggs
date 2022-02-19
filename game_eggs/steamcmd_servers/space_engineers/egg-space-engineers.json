@@ -8,7 +8,9 @@
     "name": "Space Engineers",
     "author": "tueye@tuworld.de",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
     ],

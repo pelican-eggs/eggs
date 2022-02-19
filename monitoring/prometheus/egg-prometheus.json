@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-07T19:53:13+02:00",
+    "exported_at": "2022-01-22T05:45:16-05:00",
     "name": "Prometheus",
     "author": "p.zarrad@outlook.de",
     "description": "The Prometheus monitoring system and time series database.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/prometheus --web.listen-address=0.0.0.0:{{SERVER_PORT}} --config.file=\/home\/container\/prometheus.yml --storage.tsdb.path=\/home\/container\/data --web.console.templates=\/home\/container\/consoles --web.console.libraries=\/home\/container\/console_libraries --web.config.file=\/home\/container\/prometheus.web.yml",

@@ -14,8 +14,6 @@
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Cryofall](cryofall/cryofall)
-
 [Call of Duty 4X](cod/cod4x)
 
 [ET Legacy](enemy_territory/etlegacy)
@@ -125,6 +123,8 @@
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
+* [Left 4 Dead](steamcmd_servers/left4dead)
+* [Left 4 Dead 2](steamcmd_servers/left4dead_2)
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)
@@ -169,7 +169,7 @@
 * [Vanilla](terraria/vanilla)
 
 [Tycoon Games](tycoon_games)
-
+* [OpenRCT2](tycoon_games/openrct2)
 * [OpenTTD](tycoon_games/openttd)
 
 [Veloren](veloren)

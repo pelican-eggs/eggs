@@ -2,6 +2,7 @@
 
 ## General rules
 
+
 1. Keep it simple.
     We don't need 8 miles of install script.
 
@@ -25,7 +26,10 @@ The Pterodactyl install process is fairly simple once you know.
         This uses a volume mount on /mnt/server for the server files.
         This can pull or set up all that is needed to run the server.
         It is regularly used to just download the files required. Such as server files and configs.
+
+
     2. Stop install container
+
     3. Start a new container with the server files in /home/container
         This is where the server is actually run.
         Any dependencies installed during the install process are gone.

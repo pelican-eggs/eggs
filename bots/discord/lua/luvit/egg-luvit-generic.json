@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-30T02:11:23+00:00",
+    "exported_at": "2022-01-22T05:40:57-05:00",
     "name": "luvit generic",
     "author": "parker@parkervcp.com",
     "description": "A generic luvit egg This will clone a git repo for a bot. It defaults to master if no branch is specified.\r\n\r\nSupports the discordia lua framework.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/luvit {{LUA_FILE}}",
@@ -62,7 +62,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|bool"
+            "rules": "required|boolean"
         },
         {
             "name": "Git Branch",

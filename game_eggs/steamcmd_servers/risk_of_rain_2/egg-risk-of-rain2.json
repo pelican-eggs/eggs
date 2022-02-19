@@ -8,7 +8,9 @@
     "name": "Risk of Rain 2",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Risk of Rain 2 dedicated server.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_wine-5"
     ],
