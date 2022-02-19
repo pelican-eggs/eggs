@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "quay.io\/pterodactyl\/core:source"
+        "ghcr.io/pterodactyl/games:source"
     ],
     "file_denylist": [],
     "startup": ".\/svends_run -console -port {{SERVER_PORT}} +maxplayers {{SC_PLAYERS}} +map {{SC_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
