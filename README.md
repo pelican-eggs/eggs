@@ -133,13 +133,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [NanoLimbo](/game_eggs/minecraft/java/nanolimbo)
   * [Paper](game_eggs/minecraft/java/paper)
   * [Purpur](game_eggs/minecraft/java/purpur)
+  * [ServerJars AutoUpdater](game_eggs/minecraft/java/ServerJars)
   * [Spigot](game_eggs/minecraft/java/spigot)
   * [SpongeForge](game_eggs/minecraft/java/spongeforge)
   * [SpongeVanilla](game_eggs/minecraft/java/spongevanilla)
   * [Technic](game_eggs/minecraft/java/technic)
   * [Tuinity](game_eggs/minecraft/java/tuinity)
   * [VanillaCord](game_eggs/minecraft/java/vanillacord)
-  * [ServerJars AutoUpdater](game_eggs/minecraft/java/ServerJars)
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
