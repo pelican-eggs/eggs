@@ -1,4 +1,4 @@
-# Reposile
+# Reposilite
 ***Updating your Egg?**: Ensure any existing servers have the latest Startup Command, new Startup Variables are set, **and you reinstall server!***
 ___
 ### Authors / Contributors
