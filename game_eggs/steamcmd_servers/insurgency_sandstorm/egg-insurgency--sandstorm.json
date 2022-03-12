@@ -60,7 +60,7 @@
         {
             "name": "Max Players",
             "description": "Sets the maximum number of players.",
-            "env_variable": "MAXPLAYERS",
+            "env_variable": "MAX_PLAYERS",
             "default_value": "28",
             "user_viewable": true,
             "user_editable": true,
