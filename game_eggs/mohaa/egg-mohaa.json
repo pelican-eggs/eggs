@@ -10,7 +10,7 @@
     "description": null,
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
+        "ghcr.io\/parkervcp\/games:mohaa"
     ],
     "file_denylist": [],
     "startup": ".\/mohaa_lnxded +set sv_punkbuster 0 +set fs_basepath {{BASE_PATH}} +set fs_outputpath {{LOG_DIR}} +set dedicated 2 +set sv_maxclients {{SERVER_MAXCLIENTS}} +set net_ip 0.0.0.0 +set net_port {{SERVER_PORT}} +exec server.cfg",
@@ -41,7 +41,7 @@
             "name": "CONFIG_URL",
             "description": "URL from where to get the initial server.cfg",
             "env_variable": "CONFIG_URL",
-            "default_value": "https:\/\/raw.githubusercontent.com\/Th3Dilli\/eggs\/mohaa\/game_eggs\/mohaa\/server.cfg",
+            "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/mohaa\/game_eggs\/mohaa\/server.cfg",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string"
