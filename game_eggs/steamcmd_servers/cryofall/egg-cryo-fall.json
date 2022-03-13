@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "ghcr.io\/parkervcp\/yolks:dotnet_5"
+        "ghcr.io\/parkervcp\/yolks:dotnet_6"
     ],
     "file_denylist": [],
     "startup": "dotnet Binaries\/Server\/CryoFall_Server.dll loadOrNew",

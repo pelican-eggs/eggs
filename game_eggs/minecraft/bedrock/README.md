@@ -1,17 +1,22 @@
-# Minecraft PE (bedrock edition)
+# Minecraft Bedrock (Formerly Pocket Edition)
 
-#### Bedrock
+## [Bedrock](/game_eggs/minecraft/bedrock/bedrock)
+
 [Minecraft Bedrock Server](https://minecraft.net/en-us/download/server/bedrock/)
 The official Minecraft Bedrock (Formerly Minecraft Pocket Edition) server.
 
-#### gomint
+## [gomint](/game_eggs/minecraft/bedrock/gomint)
+
 [Gomint Bedrock Server](https://github.com/gomint/gomint)
-Easy-to-use, highly configurable Minecraft Bedrock Edition  server software with the ability to sustain in a low-resource environment.
+No longer actively maintained.
+GoMint is a modern Minecraft Bedrock Edition server enabling you to make your visions come true
 
-#### Nukkit
-[Nukkit GitHub](https://github.com/Nukkit/Nukkit)  
-Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition  
+## [Nukkit](/game_eggs/minecraft/bedrock/nukkit)
 
-#### PocketMine MP
-[PocketMine MP](https://github.com/pmmp/PocketMine-MP)  
-A server software for Minecraft: Bedrock Edition in PHP  
+[Nukkit GitHub](https://github.com/Nukkit/Nukkit)
+Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition
+
+## [PocketMine MP](/game_eggs/minecraft/bedrock/pocketmine_mp)
+
+[PocketMine MP](https://github.com/pmmp/PocketMine-MP)
+A server software for Minecraft: Bedrock Edition in PHP
