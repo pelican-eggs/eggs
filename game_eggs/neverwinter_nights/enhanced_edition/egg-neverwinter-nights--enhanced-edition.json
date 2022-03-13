@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-03-13T19:39:53+01:00",
+    "name": "Neverwinter Nights: Enhanced Edition",
+    "author": "unknown@unknown.com",
+    "description": "Return to the Forgotten Realms in this bestselling Dungeons & Dragons roleplaying game. Combines all the content of Neverwinter Nights Diamond Edition with all-new enhanced features. Includes 100+ hours of award-winning adventures and the tools to create your own!",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/data\/bin\/linux-x86\/run-server.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server: Loading...\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Neverwinter Nights Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add jq unzip\r\n\r\nif [ -z ${NWN_VERSION} ] || [ ${NWN_VERSION} == latest ]; then\r\n    NWN_VERSION=$(curl -L -s 'https:\/\/registry.hub.docker.com\/v2\/repositories\/beamdog\/nwserver\/tags' | jq -r '[.\"results\"[][\"name\"] | select(test(\"\\\\d*\\\\.\\\\d*$\"))][0]')\r\nfi\r\n\r\nmkdir -p \/mnt\/server\/data\r\nmkdir -p \/mnt\/server\/home\r\nmkdir -p \/mnt\/server\/run\r\n\r\necho 'Downloading version: ' https:\/\/nwn.beamdog.net\/downloads\/nwnee-dedicated-${NWN_VERSION}.zip\r\ncurl -o nwnee.zip -L https:\/\/nwn.beamdog.net\/downloads\/nwnee-dedicated-${NWN_VERSION}.zip\r\nunzip -u nwnee.zip -d \/mnt\/server\/data\r\n\r\nmkdir \/tmp\/nw\r\ncd \/tmp\/nw\r\ngit clone https:\/\/github.com\/niv\/dockerhub-beamdog-nwserver \/tmp\/nw\r\n\r\nsed -i 's\/=\\\/nwn\\\/home\/=\\\/home\\\/container\\\/home\/' run-server.sh\r\nsed -i 's\/=\\\/nwn\\\/run\/=\\\/home\\\/container\\\/run\/' run-server.sh\r\nsed -i '\/^HOMEPATH=*\/a NWN_TAIL_LOGS=y' run-server.sh\r\nsed -i '\/^HOMEPATH=*\/a NWN_EXTRA_ARGS=\"-userdirectory \\\/home\\\/container\\\/run\"' run-server.sh\r\n\r\nmv run-server.sh \/mnt\/server\/data\/bin\/linux-x86\r\nmv prep-nwn-ini.awk \/mnt\/server\/data\/bin\/linux-x86\r\nmv prep-nwnplayer-ini.awk \/mnt\/server\/data\/bin\/linux-x86",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "Version",
+            "env_variable": "NWN_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

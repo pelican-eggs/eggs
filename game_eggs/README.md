@@ -80,6 +80,9 @@
     * [GeyserMC](minecraft/proxy/cross_platform/geyser)
     * [Waterdog](minecraft/proxy/cross_platform/waterdog)
 
+[Neverwinter Nights](neverwinter_nights)
+* [Neverwinter Nights: Enhanced Edition](neverwinter_nights/enhanced_edition)
+
 [OpenArena](openarena)  
   * [openarena](openarena/openarena) 
 
