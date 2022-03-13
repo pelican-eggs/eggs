@@ -8,7 +8,9 @@
     "name": "Subnautica",
     "author": "tueye@tuworld.de",
     "description": "Subnautica is an open world survival action-adventure video game developed and published by Unknown Worlds Entertainment. In it, players are free to explore the ocean on an alien planet, known as planet 4546B, after their spaceship, the Aurora, crashes on the planet's surface.\r\n\r\nNote: NitroxMod version >=1.5.0.0 is required",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/pterodactyl\/core:mono"
     ],

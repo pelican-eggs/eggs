@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-04-17T15:17:54-04:00",
+    "exported_at": "2021-12-22T09:10:34+00:00",
     "name": "BeamMP Servers",
     "author": "noah@noahserver.online",
     "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/BeamMP-Server",
@@ -22,19 +22,19 @@
     },
     "scripts": {
         "installation": {
-            "script": "cd \/mnt\/server\r\n\r\nrm -f BeamMP-Server\r\n\r\napt update -y\r\napt install -y curl\r\ncurl -LJO https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases\/download\/${VERSION}\/BeamMP-Server-linux\r\nmv BeamMP-Server-linux BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\necho \"# This is the BeamMP Server Configuration File v0.60\r\nDebug = false # true or false to enable debug console output\r\nPrivate = true # Private?\r\nPort = 30814 # Port to run the server on UDP and TCP\r\nCars = 1 # Max cars for every player\r\nMaxPlayers = 10 # Maximum Amount of Clients\r\nMap = \\\"\/levels\/gridmap\/info.json\\\" # Default Map\r\nName = \\\"BeamMP New Server\\\" # Server Name\r\nDesc = \\\"BeamMP Default Description\\\" # Server Description\r\nuse = \\\"Resources\\\" # Resource file name\r\nAuthKey = \\\"\\\" # Auth Key\" > Server.cfg",
-            "container": "debian:buster-slim",
+            "script": "mkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nrm -f BeamMP-Server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Using latest version\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i Server-linux)\r\nelse\r\n    echo -e \"Chosen version :${VERSION}. Verifying version from releases\"\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i Server-linux)\r\n    else\r\n        echo -e \"No valid versions found. Defaulting to the latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o BeamMP-Server\"\r\ncurl -L ${DOWNLOAD_URL} -o BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\necho \"# This is the BeamMP Server Configuration File v0.60\r\nDebug = false # true or false to enable debug console output\r\nPrivate = true # Private?\r\nPort = 30814 # Port to run the server on UDP and TCP\r\nCars = 1 # Max cars for every player\r\nMaxPlayers = 10 # Maximum Amount of Clients\r\nMap = \\\"\/levels\/gridmap\/info.json\\\" # Default Map\r\nName = \\\"BeamMP New Server\\\" # Server Name\r\nDesc = \\\"BeamMP Default Description\\\" # Server Description\r\nuse = \\\"Resources\\\" # Resource file name\r\nAuthKey = \\\"\\\" # Auth Key\" > Server.cfg",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Version",
-            "description": "Github Server Version, to see all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
+            "name": "Version to install",
+            "description": "Latest or invalid versions would default to latest. See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
             "env_variable": "VERSION",
-            "default_value": "v2.0.3",
+            "default_value": "latest",
             "user_viewable": true,
-            "user_editable": false,
+            "user_editable": true,
             "rules": "required|string|max:32"
         },
         {

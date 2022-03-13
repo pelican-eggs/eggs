@@ -1,6 +1,7 @@
-## Technic Eggs
+# Technic Eggs
 
 [Technic](/game_eggs/minecraft/java/technic/)
+
 * [Attack of the B-Team](/game_eggs/minecraft/java/technic/attack-of-the-bteam/)
 * [Blightfall](/game_eggs/minecraft/java/technic/blightfall/)
 * [Hexxit](/game_eggs/minecraft/java/technic/hexxit/)

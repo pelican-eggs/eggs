@@ -8,7 +8,9 @@
     "name": "Rising World",
     "author": "info@goover.de",
     "description": "Rising World is a voxel based open-world sandbox game, featuring a procedurally generated world, playable in single and multi-player.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/pterodactyl\/core:java"
     ],

@@ -8,7 +8,9 @@
     "name": "Mordhau Wine",
     "author": "parker@parkervcp.com",
     "description": "Mordhau is a multiplayer medieval hack 'n slash video game, developed by Slovenian independent studio Triternion, with a prominent aspect of skill-based competitive play and customization.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_wine"
     ],

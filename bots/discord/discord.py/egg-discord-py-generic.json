@@ -4,12 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-08-07T17:13:40+03:00",
+    "exported_at": "2021-10-19T13:22:35-04:00",
     "name": "discord.py generic",
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
     "features": null,
     "images": [
+        "ghcr.io\/parkervcp\/yolks:python_3.10",
         "ghcr.io\/parkervcp\/yolks:python_3.9",
         "ghcr.io\/parkervcp\/yolks:python_3.8",
         "ghcr.io\/parkervcp\/yolks:python_3.7",
@@ -30,7 +31,8 @@
             "entrypoint": "bash"
         }
     },
-    "variables": [{
+    "variables": [
+        {
             "name": "Git Repo Address",
             "description": "Git repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
             "env_variable": "GIT_ADDRESS",

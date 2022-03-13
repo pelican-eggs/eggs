@@ -2,7 +2,8 @@
 
 The Free and Fast Arena Shooter
 
-### Server Ports
+## Server Ports
+
 Xonotic requires 1 port
 
 | Port  | default |

@@ -3,6 +3,7 @@
 Escape a chaotic alien planet by fighting through hordes of frenzied monsters – with your friends, or on your own.
 
 ## Minimum Specifications
+
 - At least 1GB RAM
 - Minimum 4GB hard disk space
 
