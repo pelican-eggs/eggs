@@ -4,8 +4,4 @@ Lightweight and easy-to-use repository management software dedicated for Maven b
 
 ## Server Ports
 
-Ports required to run the server in a table format.
-
-| Port | default |
-| ---- | ------- |
-| App  | 80      |
+One port needs to be allocated to run Reposilite.

@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-03-18T18:01:24+01:00",
+    "exported_at": "2022-03-19T18:47:13+01:00",
     "name": "Reposilite",
     "author": "mk@kcra.me",
     "description": "Lightweight and easy-to-use repository management software dedicated for Maven based artifacts in the JVM ecosystem.",
@@ -25,8 +25,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update installation system and install curl\r\napt-get update\r\napt-get install -y curl\r\n# Remove old Reposilite JAR\r\nrm -f reposilite.jar\r\n# Find latest Reposilite version, if needed\r\nif [ \"$REPOSILITE_VERSION\" == \"latest\" ]; then\r\n    REPOSILITE_VERSION=$(grep -oPm1 \"(?<=<latest>)[^<]+\" <<< \"$(curl -s https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/maven-metadata.xml)\")\r\nfi\r\n# Check if -all suffixed jar is available\r\nstatus_code=$(curl --write-out '%{http_code}' -X HEAD -s -o \/dev\/null https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar)\r\n# Download new Reposilite\r\nif [ \"$status_code\" == 200 ]; then\r\n    curl -o reposilite.jar https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar\r\nelse\r\n    curl -o reposilite.jar https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}.jar\r\nfi",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Find latest Reposilite version, if needed\r\nif [ \"$REPOSILITE_VERSION\" == \"latest\" ]; then\r\n    REPOSILITE_VERSION=$(grep -oPm1 \"(?<=<latest>)[^<]+\" <<< \"$(curl -s https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/maven-metadata.xml)\")\r\nfi\r\n# Check if -all suffixed jar is available\r\nstatus_code=$(curl --write-out '%{http_code}' -X HEAD -s -o \/dev\/null https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar)\r\n# Download new Reposilite\r\nif [ \"$status_code\" == 200 ]; then\r\n    curl -o reposilite.jar https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar\r\nelse\r\n    curl -o reposilite.jar https:\/\/repo.panda-lang.org\/releases\/org\/panda-lang\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}.jar\r\nfi",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -36,7 +36,7 @@
             "description": "The version of Reposilite.",
             "env_variable": "REPOSILITE_VERSION",
             "default_value": "latest",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": true,
             "rules": "required|string"
         }
