@@ -1,0 +1,93 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-12-08T20:48:39+07:00",
+    "name": "NextJS",
+    "author": "me@raflymaulana.me",
+    "description": "Unofficial NextJS by Vercel Deployment Egg for Pterodactyl Panel.\r\nWritten by Rafly Maulana <me@raflymaulana.me> (https://raflymaulana.me)\r\n\r\nCopyright \u00a9 2021 Vercel, Inc. All rights reserved.",
+    "features": null,
+    "images": ["ghcr.io/parkervcp/yolks:nodejs_17", "ghcr.io/parkervcp/yolks:nodejs_16", "ghcr.io/parkervcp/yolks:nodejs_15", "ghcr.io/parkervcp/yolks:nodejs_14", "ghcr.io/parkervcp/yolks:nodejs_12"],
+    "file_denylist": [],
+    "startup": "BLUE='\\033[1;34m'; YELLOW='\\033[1;33m'; GREEN='\\033[1;32m'; RESET='\\033[0m'; echo -e \"${YELLOW}[STARTING]${RESET} Checking Server...\"; if [[ -d .git ]] && [[ ${GITHUB_REPOSITORY_AUTO_UPDATE} == \"1\" ]]; then echo -e \"${BLUE}[INFO]${RESET} Github Repository Auto Update is Enabled.\"; echo -e \"${BLUE}[INFO]${RESET} Github Repository Detected, Updating...\"; git pull; else if [[ ! -z ${GITHUB_TOKEN} ]] && [[ ! -z ${GITHUB_REPOSITORY_NAME} ]] && [[ ! -z ${GITHUB_REPOSITORY_USERNAME} ]]; then echo -e \"${BLUE}[INFO]${RESET} Github Repository Configuration is Fully Presented.\"; echo -e \"${BLUE}[INFO]${RESET} Github Repository File Not Found, Cloning...\"; GITHUB_CLONE_URL = https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY_USERNAME}/${GITHUB_REPOSITORY_NAME}.git; if [[ ! -z ${GITHUB_REPOSITORY_BRANCH} ]]; then git clone -b ${GITHUB_REPOSITORY_BRANCH} ${GITHUB_CLONE_URL} .; else git clone ${GITHUB_CLONE_URL} .; fi fi fi; if [ -f /home/container/package.json ]; then echo -e \"${BLUE}[INFO]${RESET} Found package.json, Installing Dependencies...\"; yarn; fi; if [[ ! -z ${ADDITIONAL_NODE_PACKAGES} ]]; then echo -e \"${BLUE}[INFO]${RESET} Installing Additional Dependencies...\"; yarn add ${ADDITIONAL_NODE_PACKAGES}; fi; if [[ ! -z ${REMOVED_NODE_PACKAGES} ]]; then echo -e \"${BLUE}[INFO]${RESET} Removing Unused Dependencies...\"; yarn remove ${REMOVED_NODE_PACKAGES}; fi; echo \"${BLUE}[INFO]${RESET} Building Files...\" && /home/container/node_modules/.bin/next build && echo \"${GREEN}[INFO]${RESET} Starting Server...\" && /home/container/node_modules/.bin/next start -p {{SERVER_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\r\n# [NodeJS] NextJS Installation Script\r\n# Server Files: /mnt/server\r\n\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nBLUE='\\033[1;34m';\r\nYELLOW='\\033[1;33m';\r\nGREEN='\\033[1;32m';\r\nRESET='\\033[0m';\r\n\r\n# Starting\r\necho -e \"${YELLOW}[STARTING]${RESET} Began Installation...\";\r\n\r\n# Checking Github Configuration\r\necho -e \"${BLUE}[INFO]${RESET} Checking Github Configuration...\";\r\nif [[ ! -z ${GITHUB_TOKEN} ]] && [[ ! -z ${GITHUB_REPOSITORY_NAME} ]] && [[ ! -z ${GITHUB_REPOSITORY_USERNAME} ]]; then\r\n    echo -e \"${BLUE}[INFO]${RESET} Github Repository Configuration is Fully Presented, Cloning...\";\r\n\r\n    GITHUB_CLONE_URL=https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY_USERNAME}/${GITHUB_REPOSITORY_NAME}.git;\r\n    \r\n    # Clone Repository\r\n    if [[ ! -z ${GITHUB_REPOSITORY_BRANCH} ]]; then\r\n        git clone -b ${GITHUB_REPOSITORY_BRANCH} ${GITHUB_CLONE_URL} .; \r\n    else\r\n        git clone ${GITHUB_CLONE_URL} .; \r\n    fi\r\n\r\n    # Installing Dependencies\r\n    if [ -f /mnt/server/package.json ]; then\r\n        echo -e \"${BLUE}[INFO]${RESET} Found package.json, Installing Dependencies...\";\r\n        yarn;\r\n    fi\r\n\r\n    # Installing Additional Dependencies\r\n    if [[ ! -z ${ADDITIONAL_NODE_PACKAGES} ]]; then\r\n        echo -e \"${BLUE}[INFO]${RESET} Installing Dependencies...\";\r\n        yarn add ${ADDITIONAL_NODE_PACKAGES};\r\n    fi\r\n    \r\n    # Removing Unused Dependencies\r\n    if [[ ! -z ${REMOVED_NODE_PACKAGES} ]]; then \r\n        echo -e \"${BLUE}[INFO]${RESET} Removing Unused Dependencies...\";\r\n        yarn remove ${REMOVED_NODE_PACKAGES}; \r\n    fi;\r\nfi;\r\n\r\n# Finishing\r\necho \"${GREEN}[INFO]${RESET} Installation Complete\"\r\nexit 0",
+            "container": "node:16-buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Github Access Token",
+            "description": "Token to validate and authenticate to Github before cloning the repository. To get the token, go to Github > Settings > Developer Settings > Personal Access Tokens. (Example: ghp_abCDeFghIjK123456790LMnOp)",
+            "env_variable": "GITHUB_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Github Repository Name",
+            "description": "The repository name to clone. (Example: next.js)",
+            "env_variable": "GITHUB_REPOSITORY_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Github Repository Username",
+            "description": "The repository owner username. (Example: vercel)",
+            "env_variable": "GITHUB_REPOSITORY_USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Github Repository Branch",
+            "description": "The branch on the repository to clone. (Example: main)",
+            "env_variable": "GITHUB_REPOSITORY_BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Auto Update Github Repository",
+            "description": "Choose whether to update the installed repository with the one on Github everytime the application restart. Options: [1: Yes] [0: No] (Example: 1)",
+            "env_variable": "GITHUB_REPOSITORY_AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|bool"
+        },
+        {
+            "name": "Additional Dependencies",
+            "description": "Install additional dependencies. Use spaces between package name to separate. (Example: cryptr prisma)",
+            "env_variable": "ADDITIONAL_NODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Remove Dependencies",
+            "description": "Remove unused dependencies. Use spaces between package name to separate. (Example: cryptr prisma)",
+            "env_variable": "REMOVED_NODE_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        }
+    ]
+}
