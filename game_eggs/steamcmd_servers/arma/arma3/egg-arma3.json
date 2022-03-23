@@ -139,6 +139,15 @@
             "rules": "nullable|string"
         },
         {
+            "name": "Optional Mods",
+            "description": "A semicolon-separated list of optional mod folders to load into the keys folder, but not include in server's mod parameter. Useful for allowing clients to connect to the server with or without the mod loaded. Any mods in this list that are in \"@workshopID\" form will also be included in Automatic Updates (if enabled). NO capital letters, spaces, or folders starting with a number! (ex. myMod;vn;@123456789;@987654321;etc;)",
+            "env_variable": "OPTIONALMODS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
             "name": "[Repair] Make Mod Files Lowercase",
             "description": "Every mod that is set to be loaded will have its folder and files changed to lowercase (to prevent errors). It is recommended to enable this for one server boot after copying a mod from a Windows machine to the server, or if mods seem to not be loading. (1 Enable | 0 Disable)",
             "env_variable": "MODS_LOWERCASE",
