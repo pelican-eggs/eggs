@@ -47,5 +47,5 @@ Ports required to run the server in a table format.
 
 | Port            | default |
 | --------------- | ------- |
-| Webserver 	  | 8080    |
-| RTMP 			  | 1935 	|
+| Webserver 	  | 8090    |
+| RTMP 			  | 8091 	|
