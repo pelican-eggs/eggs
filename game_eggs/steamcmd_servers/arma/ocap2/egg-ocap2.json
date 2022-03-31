@@ -1,0 +1,77 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-03-31T20:58:04+00:00",
+    "name": "OCAP2",
+    "author": "webmaster@arcomm.co.uk",
+    "description": "OCAP is an Arma 3 mission recording suite. It consists of a serverside addon and a packaged web server executable that allows for after-action review and better insight into what really happened.",
+    "features": null,
+    "images": [
+        "ghcr.io\/arcomm\/ocap2-pterodactyl:master"
+    ],
+    "file_denylist": [],
+    "startup": "\/usr\/local\/ocap\/app",
+    "config": {
+        "files": "{\r\n    \"setting.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"listen\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"secret\": \"{{env.OCAP_SECRET}}\",\r\n            \"logger\": \"{{env.OCAP_LOGGER}}\",\r\n            \"customize.websiteURL\": \"{{env.OCAP_CUSTOMIZE_WEBSITEURL}}\",\r\n            \"customize.websiteLogo\": \"{{env.OCAP_CUSTOMIZE_WEBSITELOGO}}\",\r\n            \"customize.disableKillCount\": \"{{env.OCAP_CUSTOMIZE_DISABLEKILLCOUNT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"http server started on\"\r\n}",
+        "logs": "{}",
+        "stop": "^CC"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# OCAP Install Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir db maps data\r\ntouch setting.json",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Secret",
+            "description": "This specifies the secret that will be used to authorize record to be uploaded.",
+            "env_variable": "OCAP_SECRET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:1"
+        },
+        {
+            "name": "Website Link",
+            "description": "Link on the logo to your website",
+            "env_variable": "OCAP_CUSTOMIZE_WEBSITEURL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "url"
+        },
+        {
+            "name": "Website Logo",
+            "description": "URL to your website logo",
+            "env_variable": "OCAP_CUSTOMIZE_WEBSITELOGO",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "url"
+        },
+        {
+            "name": "Disable kill count",
+            "description": "",
+            "env_variable": "OCAP_CUSTOMIZE_DISABLEKILLCOUNT",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        },
+        {
+            "name": "Enable Logging",
+            "description": "",
+            "env_variable": "OCAP_LOGGER",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
+        }
+    ]
+}
