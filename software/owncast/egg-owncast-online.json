@@ -32,7 +32,7 @@
             "name": "RTMP Port",
             "description": "The port that is used to receive the stream data.",
             "env_variable": "RTMP_PORT",
-            "default_value": "1935",
+            "default_value": "8091",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer"
