@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-04-06T15:54:35+02:00",
+    "exported_at": "2022-04-06T17:26:12+02:00",
     "name": "LanguageTool",
     "author": "thomasruhl@live.de",
     "description": "This egg installs a LanguageTool server\r\n\r\nLanguageTool is an Open Source proofreading software for English, French, German, Polish, Russian, and more than 20 other languages. It finds many errors that a simple spell checker cannot find.\r\n\r\nView https:\/\/languagetool.org for more information.",
@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Include traindata",
-            "description": "This takes up a lot of disk space. I'm talking about multiple gigabytes. \r\n\r\nSeparate each value with spaces. For example, \"de en\". \r\n\r\nView all available models at https:\/\/languagetool.org\/download\/ngram-data\/",
+            "description": "This uses many gigabytes of disk space. \r\n\r\nSeparate each value with spaces. For example, \"de en\". \r\n\r\nView all available models at https:\/\/languagetool.org\/download\/ngram-data\/",
             "env_variable": "TRAIN_MODELS",
             "default_value": "",
             "user_viewable": true,
