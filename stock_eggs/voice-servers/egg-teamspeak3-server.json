@@ -7,7 +7,7 @@
     "exported_at": "2021-04-27T20:49:27+01:00",
     "name": "Teamspeak3 Server",
     "author": "support@pterodactyl.io",
-    "description": "VoIP software designed with security in mind, featuring crystal clear voice quality, endless customization options, and scalabilty up to thousands of simultaneous users.",
+    "description": "VoIP software designed with security in mind, featuring crystal clear voice quality, endless customization options, and scalability up to thousands of simultaneous users.",
     "features": null,
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:base_debian"

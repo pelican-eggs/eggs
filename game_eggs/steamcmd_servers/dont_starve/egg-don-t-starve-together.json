@@ -8,7 +8,9 @@
     "name": "Don't Starve Together",
     "author": "parker@parkervcp.com",
     "description": "Don\u2019t Starve Together is an uncompromising wilderness survival game full of science and magic.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:debian_source"
     ],

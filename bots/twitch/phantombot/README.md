@@ -1,10 +1,11 @@
 # PhantomBot
-### Their [Site](https://phantombot.github.io/PhantomBot/)
-PhantomBot is an actively developed open source interactive Twitch bot
-with a vibrant community that provides entertainment and moderation for your channel,
-allowing you to focus on what matters the most to you - your game and your viewers.
 
-### Server Ports
+[WebSite](https://phantombot.github.io/PhantomBot/)
+[GitHub](https://github.com/phantombot/PhantomBot)
+PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.
+
+## Server Ports
+
 3 ports are required to run PhantomBot.
 
 | Port                | default |
@@ -13,7 +14,8 @@ allowing you to focus on what matters the most to you - your game and your viewe
 | YoutubeSocketServer | 25003   |
 | PanelSocketServer   | 25004   |
 
-# NOTES
+### NOTES
+
 You need to define one main port and the other 2 port need to be +3 and +4!
 
 Example:

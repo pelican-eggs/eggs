@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-03-30T00:48:40+00:00",
+    "exported_at": "2022-01-22T05:40:17-05:00",
     "name": "Deno Generic",
     "author": "parker@parkervcp.com",
     "description": "A generic egg to run deno code.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/deno run {{JS_FILE}}",
@@ -62,7 +62,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|bool"
+            "rules": "required|boolean"
         },
         {
             "name": "Git Branch",

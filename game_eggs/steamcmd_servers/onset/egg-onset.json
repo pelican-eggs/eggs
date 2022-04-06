@@ -1,17 +1,24 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v1",
+        "update_url": null
     },
-    "exported_at": "2019-12-12T18:56:28-05:00",
+    "exported_at": "2022-01-20T12:56:32-05:00",
     "name": "Onset",
     "author": "parker@parkervcp.com",
     "description": "Onset is an open world multiplayer sandbox without predefined goals. Create and host your very own experience in Onset using scripting functions. Whether that is Roleplay, Cops and Robbers or classic Freeroam. Or just enjoy the different gamemodes created by other players.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "features": [
+        "steam_disk_space"
+    ],
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+    ],
+    "file_denylist": [],
     "startup": ".\/OnsetServer --noinput",
     "config": {
-        "files": "{\r\n    \"server_config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ipaddress\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"servername\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"password\":\"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Entering simulation\",\r\n    \"userInteraction\": []\r\n}",
+        "files": "{\r\n    \"server_config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ipaddress\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"servername\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"password\": \"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Entering simulation\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -28,8 +35,8 @@
             "description": "ARK steam app id for auto updates. Leave blank to avoid auto update.",
             "env_variable": "SRCDS_APPID",
             "default_value": "1204170",
-            "user_viewable": 1,
-            "user_editable": 0,
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|string|max:20"
         },
         {
@@ -37,8 +44,8 @@
             "description": "required to load server libraries.",
             "env_variable": "LD_LIBRARY_PATH",
             "default_value": ".",
-            "user_viewable": 0,
-            "user_editable": 0,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|string|max:20"
         },
         {
@@ -46,8 +53,8 @@
             "description": "This flag will auto update the server on restart. (default is 1) \r\n\r\nSet to 1 to update\r\nSet to 0 to no update",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
-            "user_viewable": 1,
-            "user_editable": 1,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20"
         }
     ]
