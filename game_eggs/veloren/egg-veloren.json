@@ -13,7 +13,7 @@
         "quay.io\/parkervcp\/pterodactyl-images:base_debian"
     ],
     "file_denylist": [],
-    "startup": ".\/veloren-server-cli -b",
+    "startup": ".\/veloren-server-cli",
     "config": {
         "files": "{\r\n    \"userdata\/server\/server_config\/settings.ron\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    gameserver_address\": \"    gameserver_address: \\\"0.0.0.0:{{server.build.default.port}}\\\",\",\r\n\t    \"    server_name\": \"    server_name: \\\"{{server.build.env.SERVER_NAME}}\\\",\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server is ready to accept connections\"\r\n}",

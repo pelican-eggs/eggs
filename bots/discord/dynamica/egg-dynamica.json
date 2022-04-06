@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-12-13T10:34:52+11:00",
+    "name": "Dynamica",
+    "author": "sebastian.pietschner@gmail.com",
+    "description": "The dynamica discord bot",
+    "features": null,
+    "images": [
+        "ghcr.io\/parkervcp\/yolks:nodejs_16"
+    ],
+    "file_denylist": [],
+    "startup": "yarn deploy && yarn prisma migrate deploy && yarn start",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Ready! Logged in as \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt-get update\r\napt-get install openssl git -y -qq\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/dynamicabot\/dynamica.git .;\r\nfi;\r\nyarn install --frozen-lockfile",
+            "container": "node:lts-buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Database Path",
+            "description": "The path in which to create the sqlite database.",
+            "env_variable": "DATABASE_URL",
+            "default_value": "file:\/home\/container\/dynamica\/db.sqlite",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string"
+        },
+        {
+            "name": "Token",
+            "description": "The token for the discord bot.",
+            "env_variable": "TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Client ID",
+            "description": "The client ID of your discord bot.",
+            "env_variable": "CLIENT_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|size:18"
+        }
+    ]
+}

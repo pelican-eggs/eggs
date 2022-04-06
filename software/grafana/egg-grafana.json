@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-06T23:52:45+02:00",
+    "exported_at": "2022-01-22T05:46:01-05:00",
     "name": "Grafana",
     "author": "p.zarrad@outlook.de",
     "description": "The open and composable observability and data visualization platform.\r\nVisualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/bin\/grafana-server web",

@@ -1,0 +1,63 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-03-02T18:33:43+01:00",
+    "name": "NanoLimbo",
+    "author": "mail@wuffy.eu",
+    "description": "This is lightweight minecraft limbo server, written on Java with Netty. The main goal of the project is maximum simplicity with a minimum number of sent and processed packets. This limbo is empty, there are no ability to set schematic building since this is not necessary. You can send useful information in chat or BossBar.\r\n\r\nNo plugins, no logs. The server is fully clear. It only able keep a lot of players while the main server is down.",
+    "features": [
+        "eula",
+        "java_version",
+        "pid_limit"
+    ],
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_8"
+    ],
+    "file_denylist": [],
+    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"settings.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bind.ip\": \"0.0.0.0\",\r\n            \"bind.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# NanoLimbo Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt install -y curl jq git openssl bash bc apt-transport-https gnupg software-properties-common\r\n\r\nif [ -z \"${DOWNLOAD_URL}\" ]; then\r\n    GITHUB_PACKAGE=\"Nan1t\/NanoLimbo\"\r\n    MATCH=\"NanoLimbo-\"\r\n\r\n    ## get release info and download links\r\n    LATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\n    RELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n    \r\n    if [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n    else\r\n        VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n        if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n            DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n        else\r\n            echo -e \"defaulting to latest release\"\r\n            DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n        fi\r\n    fi\r\nelse\r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}.jar; then\r\n        echo -e \"Provided download link is valid. Proceeding to download\"\r\n    else\r\n        echo -e \"Provided download link is invalid. Exiting now\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading server file...\"\r\necho -e \"performing curl -sSL ${DOWNLOAD_URL}\"\r\ncurl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\r\n\r\nif [ ! -f \"settings.yml\" ]; then\r\necho \"Creating settings file...\"\r\ncurl -sSL -o settings.yml https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/java\/nanolimbo\/settings.yml\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+        },
+        {
+            "name": "Download URL",
+            "description": "A URL to use to download.\r\nThis is optional! Let this field empty for the latest version.",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
+            "name": "Version",
+            "description": "The version of NanoLimbo to download. Use \"latest\" for latest.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

@@ -55,7 +55,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|bool"
+            "rules": "required|boolean"
         },
         {
             "name": "Auto Update",
