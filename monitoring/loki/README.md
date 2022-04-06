@@ -6,7 +6,7 @@ Loki is a horizontally-scalable, highly-available, multi-tenant log aggregation 
 
 ## Working with Loki
 
-To get logs "into" Loki you need a scrape agent, such as official [Promtail](https://grafana.com/docs/loki/latest/clients/promtail/installation/) or a library for you app that can push logs through HTTP endpoint (gRPC endpoint is disabled in Docker enviroment by default)
+To get logs "into" Loki you need a scrape agent, such as official [Promtail](https://grafana.com/docs/loki/latest/clients/promtail/installation/) or a library for your app that can push logs through HTTP endpoint (gRPC endpoint is disabled in Docker enviroment by default)
 
 ## Resource consumption
 
