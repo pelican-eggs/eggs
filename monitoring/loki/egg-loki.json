@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-03-23T19:24:39+03:00",
+    "name": "Loki",
+    "author": "unknown@unknown.com",
+    "description": "Prometheus but for logs. This egg is for Loki instance only! You usually need pushing agents like Promtail to put logs inside",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/loki-linux-amd64 -config.file=loki-docker-config.yaml",
+    "config": {
+        "files": "{\r\n    \"loki-docker-config.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server.http_listen_port\": \"{{server.build.default.port}}\",\r\n            \"common.ring.instance_addr\": \"0.0.0.0\",\r\n            \"common.path_prefix\": \"\/home\/container\/loki\",\r\n            \"common.storage.filesystem.chunks_directory\": \"\/home\/container\/loki\/chunks\",\r\n            \"common.storage.filesystem.rules_directory\": \"\/home\/container\/loki\/rules\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Loki started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\nshopt -s extglob\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update installation system and install curl\r\napt-get update\r\napt-get install -y curl unzip\r\n# Cleanup previous install if available\r\n# Download and extract Loki\r\nversion=${LOKI_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/loki\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${version}\/loki-linux-amd64.zip --output loki-linux-amd64.zip\r\nunzip loki-linux-amd64.zip\r\nrm -rf loki-linux-amd64.zip\r\ncurl -L https:\/\/raw.githubusercontent.com\/grafana\/loki\/v${version}\/cmd\/loki\/loki-docker-config.yaml --output loki-docker-config.yaml",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Loki Version",
+            "description": "The version of Loki to use",
+            "env_variable": "LOKI_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
