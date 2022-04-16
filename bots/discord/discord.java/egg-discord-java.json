@@ -6,7 +6,7 @@
     },
     "exported_at": "2021-07-21T18:23:17+03:00",
     "name": "Discord Java",
-    "author": "sneaky@sneakyhub.com",
+    "author": "parkervcp@pterodactyl.io",
     "description": "Creates a container that runs java.",
     "features": null,
     "images": [
@@ -34,7 +34,7 @@
             "name": "JAR FILE",
             "description": "",
             "env_variable": "JARFILE",
-            "default_value": "sneakyhub.jar",
+            "default_value": "jar.jar",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20"
