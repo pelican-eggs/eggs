@@ -4,10 +4,10 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-22T09:10:34+00:00",
-    "name": "BeamMP Servers",
-    "author": "noah@noahserver.online",
-    "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point throug which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
+    "exported_at": "2022-04-17T16:09:38-05:00",
+    "name": "BeamMP",
+    "author": "me@grnt.dev",
+    "description": "Servers are an integral part of BeamMP; players are connected to each other through the server. They run natively on Windows and Linux. This Pterodactyl Egg makes it easier than ever to get a server up and running.\r\n\r\nYou can make private servers, which only people you invite can join, or public servers, which will show in our official server list.\r\n\r\nYou can read more about BeamMP Servers here https:\/\/wiki.beammp.com\/en\/home\/Server_Mod",
     "features": null,
     "images": [
         "ghcr.io\/parkervcp\/yolks:debian"
@@ -15,45 +15,81 @@
     "file_denylist": [],
     "startup": ".\/BeamMP-Server",
     "config": {
-        "files": "{\r\n    \"Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers = {{server.build.env.MAX_PLAYER}}\",\r\n            \"Port\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTH}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.NAME}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "mkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nrm -f BeamMP-Server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Using latest version\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i Server-linux)\r\nelse\r\n    echo -e \"Chosen version :${VERSION}. Verifying version from releases\"\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i Server-linux)\r\n    else\r\n        echo -e \"No valid versions found. Defaulting to the latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o BeamMP-Server\"\r\ncurl -L ${DOWNLOAD_URL} -o BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\necho \"# This is the BeamMP Server Configuration File v0.60\r\nDebug = false # true or false to enable debug console output\r\nPrivate = true # Private?\r\nPort = 30814 # Port to run the server on UDP and TCP\r\nCars = 1 # Max cars for every player\r\nMaxPlayers = 10 # Maximum Amount of Clients\r\nMap = \\\"\/levels\/gridmap\/info.json\\\" # Default Map\r\nName = \\\"BeamMP New Server\\\" # Server Name\r\nDesc = \\\"BeamMP Default Description\\\" # Server Description\r\nuse = \\\"Resources\\\" # Resource file name\r\nAuthKey = \\\"\\\" # Auth Key\" > Server.cfg",
+            "script": "#Create the server directory\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n#Remove any old versions\r\nrm -f BeamMP-Server\r\n\r\n#Check for latest release & download URLs\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/BeamMP\/BeamMP-Server\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Using latest BeamMP server version\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i Server-linux)\r\nelse\r\n    echo -e \"Chosen version :${VERSION}. Verifying version from releases\"\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i Server-linux)\r\n    else\r\n        echo -e \"No valid versions found. Defaulting to the latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n#Download the BeamMP server binary\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o BeamMP-Server\"\r\ncurl -L ${DOWNLOAD_URL} -o BeamMP-Server\r\nchmod +x BeamMP-Server\r\n\r\n#Create a default configuration file\r\necho \"[HTTP]\r\n# Recommended to keep enabled. With SSL the server will serve https and requires valid key and cert files\r\nUseSSL = true\r\n# Enables the internal HTTP server\r\nHTTPServerEnabled = false\r\nSSLKeyPath = \\\".\/.ssl\/HttpServer\/key.pem\\\"\r\nHTTPServerPort = 8080\r\nSSLCertPath = \\\".\/.ssl\/HttpServer\/cert.pem\\\"\r\n\r\n[General]\r\n# If SendErrors is `true`, the server will send helpful info about crashes and other issues back to the BeamMP developers. This info may include your config, who is on your server at the time of the error, and similar general information. This kind of data is vital in helping us diagnose and fix issues faster. This has no impact on server performance. You can opt-out of this system by setting this to `false`\r\nSendErrorsShowMessage = true\r\nName = \\\"BeamMP Server\\\"\r\nPort = 30814\r\nResourceFolder = \\\"Resources\\\"\r\n# AuthKey has to be filled out in order to run the server\r\nAuthKey = \\\"\\\"\r\nPrivate = true\r\nMaxPlayers = 10\r\nDebug = false\r\nDescription = \\\"BeamMP Default Description\\\"\r\nMaxCars = 1\r\nMap = \\\"\/levels\/gridmap_v2\/info.json\\\"\r\n# You can turn on\/off the SendErrors message you get on startup here\r\nSendErrors = true\" > ServerConfig.toml",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Version to install",
-            "description": "Latest or invalid versions would default to latest. See all versions visit https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
+            "name": "Server Name",
+            "description": "The name of your server. This is what appears on the server list.",
+            "env_variable": "NAME",
+            "default_value": "BeamMP Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
+        },
+        {
+            "name": "BeamMP Server Version",
+            "description": "The BeamMP server version to be installed. Latest or invalid versions will default to latest. See all available versions at https:\/\/github.com\/BeamMP\/BeamMP-Server\/releases",
             "env_variable": "VERSION",
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32"
+            "rules": "required|string|max:8"
         },
         {
             "name": "Authentication Key",
-            "description": "BeamMP Server Key (https:\/\/beamng-mp.com\/k\/keys)",
-            "env_variable": "AUTH",
+            "description": "The authentication key for your server. A key can be obtained from the BeamMP keymaster at https:\/\/beamng-mp.com\/k\/dashboard",
+            "env_variable": "AUTHKEY",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:50"
+            "rules": "required|string|max:64"
         },
         {
             "name": "Max Players",
-            "description": "The maximum number of allowed players",
-            "env_variable": "MAX_PLAYER",
+            "description": "The maximum number of players allowed on the server.",
+            "env_variable": "MAX_PLAYERS",
             "default_value": "6",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32"
+            "rules": "required|integer|max:100"
+        },
+        {
+            "name": "Private",
+            "description": "Should the server be private?",
+            "env_variable": "PRIVATE",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Max Cars",
+            "description": "The maximum number of cars allowed to be spawned per player.",
+            "env_variable": "MAX_CARS",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:4"
+        },
+        {
+            "name": "Map",
+            "description": "The map for your server. Stock maps are listed below.\r\n\r\n\/levels\/gridmap_v2\/info.json\r\n\/levels\/automation_test_track\/info.json\r\n\/levels\/east_coast_usa\/info.json\r\n\/levels\/hirochi_raceway\/info.json\r\n\/levels\/italy\/info.json\r\n\/levels\/jungle_rock_island\/info.json\r\n\/levels\/industrial\/info.json\r\n\/levels\/small_island\/info.json\r\n\/levels\/smallgrid\/info.json\r\n\/levels\/utah\/info.json\r\n\/levels\/west_coast_usa\/info.json\r\n\/levels\/driver_training\/info.json\r\n\/levels\/derby\/info.json",
+            "env_variable": "MAP",
+            "default_value": "\/levels\/gridmap_v2\/info.json",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64"
         }
     ]
 }
