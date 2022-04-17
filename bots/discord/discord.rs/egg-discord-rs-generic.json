@@ -5,9 +5,9 @@
         "update_url": null
     },
     "exported_at": "2022-04-17T16:56:51+01:00",
-    "name": "Serenity",
+    "name": "discord.rs generic",
     "author": "ethan.coward@icloud.com",
-    "description": "Creates a container that runs rust.",
+    "description": "Creates a container that runs rust with cargo.",
     "features": null,
     "images": [
         "ghcr.io\/parkervcp\/yolks:rust_1.31",
