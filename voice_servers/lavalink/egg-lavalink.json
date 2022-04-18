@@ -10,7 +10,7 @@
     "description": "Standalone audio sending node based on Lavaplayer and JDA-Audio. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/Frederikam\/Lavalink",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-13"
+        "ghcr.io/parkervcp/yolks:java_11"
     ],
     "file_denylist": [],
     "startup": "java -jar Lavalink.jar",
