@@ -1,5 +1,5 @@
 {
-    "_comment": "Pterodactyl Satisfactory Egg ~ Red-Thirten, Kubi, matthewp, Software-Noob, and Zarklord ~ 2021-11-29",
+    "_comment": "Pterodactyl Satisfactory Egg ~ Red-Thirten, Kubi, matthewp, Software-Noob, and Zarklord ~ 2022-02-07",
     "meta": {
         "version": "PTDL_v1",
         "update_url": null
@@ -14,7 +14,7 @@
         "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
-    "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0",
+    "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0 $(if {{DISABLE_SEASONAL}}; then echo \"-DisableSeasonalEvents\"; fi)",
     "config": {
         "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mNumRotatingAutosaves\": \"mNumRotatingAutosaves={{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"bImplicitSend\": \"bImplicitSend={{server.build.env.UPLOAD_CRASH_REPORT}}\",\r\n            \"InitialConnectTimeout\": \"InitialConnectTimeout={{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"ConnectionTimeout\": \"ConnectionTimeout={{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/GameUserSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mFloatValues\": \"mFloatValues=((\\\"FG.AutosaveInterval\\\", {{server.build.env.AUTOSAVE_INTERVAL}}))\",\r\n            \"mIntValues\": \"mIntValues=((\\\"FG.NetworkQuality\\\", {{server.build.env.NETWORK_QUALITY}}))\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -88,6 +88,15 @@
             "description": "Accepted values are \"true\" or \"false\". Determines if the server should upload any crash reports to the developer to help pinpoint issues for future patches.",
             "env_variable": "UPLOAD_CRASH_REPORT",
             "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false"
+        },
+        {
+            "name": "Disable Seasonal Events",
+            "description": "Accepted values are \"true\" or \"false\". Setting to \"true\" will disable any currently active seasonal events.",
+            "env_variable": "DISABLE_SEASONAL",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false"
