@@ -1,7 +1,10 @@
 # Satisfactory
+
 ***Updating your Egg?**: Ensure any existing servers have the latest Startup Command, new Startup Variables are set, **and you reinstall server!***
 ___
+
 ### Authors / Contributors
+
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
@@ -59,11 +62,16 @@ ___
 <!-- prettier-ignore-end -->
 
 ___
+
 ### Game Description
+
 From Coffee Stain's [Website](https://www.satisfactorygame.com/):
 > Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!
+
 ___
+
 ### Egg Capabilities
+
 - Configuration of the Server Query, Beacon, and Game ports.
 - Configurable to automatically check for server updates on start via SteamCMD. Forcing validation is also configurable.
 - *[Experimental]* Max player configuration.
@@ -71,8 +79,11 @@ ___
 - Disable crash reporting if desired.
 - Disable seasonal events if desired.
 - ...and other advanced networking and server branch configurable settings.
+
 ___
+
 ### Server Ports
+
 - Default server ports are listed below, but all three ports can be changed freely (\*some exceptions apply below).
     - All three ports must be unique; they cannot currently be shared on one port (this may change in the future).
     - It is recommended to distance ports of other running Satisfactory servers in Pterodactyl by **increments of 100** (it is currently unknown what the minimum increment is, but an increment of +1 caused cross-server talk in testing). Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match).
@@ -86,6 +97,7 @@ ___
 | Server Query (Port clients connect with) | 15777 |
 
 ___
+
 ### Installation/System Requirements
 
 |  | Bare Minimum | Recommended |
@@ -98,40 +110,56 @@ ___
 | Game Ownership | Not required to start. | Required to fully "initialize" (see [Server Initialization](#server-initialization) below) |
 
 ___
+
 ### Server Initialization
+
 For a server to be fully "initialized", a client who owns the game must log into the server to "claim" it and create an administrator password. Then, a new session can be created via the "Create Game" tab in-game, or an existing save file can be uploaded (see [Save Files](#save-files) below).
 
 Misc. settings listed below can be configured by an admin client via the game's "Server Settings" tab, and are currently **not** set via the Egg:
+
 - Server Password
 - Admin Password
 - Auto-Save on Player Disconnect
 - Pause When No Players Online
 - ...and possibly more as the client's UI is developed further for more configuration options.
+
 ___
+
 ### Save Files
+
 An existing save file (including single-player saves) can currently be uploaded to the server via two different methods:
+
 - "Manage Saves" tab via an admin client in-game (Recommended)
 - Manually via the File Manager or SFTP
 
 Save files are located in this directory:
+
 ```md
 /home/container/.config/Epic/FactoryGame/Saved/SaveGames/server
 ```
+
 *Note: A manually uploaded save will only load if it is (a.) loaded manually via the "Manage Saves" tab in-game, (b.) it is the only save file present, or (c.) its existing session name (not its file name) matches the existing save's session name *and* has the most recent time stamp.*
 
 ***Warning:*** Stopping the server **does not** currently save your game! Ensure it is saved before stopping the server.
 
 If you have forgotten your administrator password or would generally like to reset your server as if it were new, you can delete the following file:
+
 ```md
 /home/container/.config/Epic/FactoryGame/Saved/SaveGames/ServerSettings.<your_server_query_port>
 ```
+
 ___
+
 ### Console Commands
+
 As of v0.5.1.10, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
 
 [List of known commands can be found via the Wiki.](https://satisfactory.fandom.com/wiki/Dedicated_servers#Console_commands)
+
 ___
+
 ### Known Errors/Warnings
+
 The following errors or warnings you see in the console can safely be ignored:
 
 ```log
@@ -139,6 +167,7 @@ steamclient.so: cannot open shared object file: No such file or directory
 [S_API] SteamAPI_Init(): Loaded '/home/container/.steam/sdk64/steamclient.so' OK.  (First tried local 'steamclient.so')
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
+
 ↑ The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).
 
 ```log
@@ -150,13 +179,17 @@ Warning: failed to init SDL thread priority manager: SDL not found
 ```log
 ...Error: Couldn't find file for package...
 ```
+
 ```log
 ...Error: Navmesh bounds are too large!...
 ```
+
 ```log
 ...Warning: NiagaraSystem...
 ```
+
 ```log
 LogStreaming: Warning: Failed to read file '../../../FactoryGame/Saved/SaveGames/GameAnalytics.sav' error.
 ```
+
 ↑ These seem to be common error messages with the current experimental version of the game.
