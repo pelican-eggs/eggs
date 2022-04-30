@@ -81,6 +81,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## [Game Eggs](/game_eggs)
 
+[Doom](game_eggs/doom)
+* [Zandronum](game_eggs/doom/zandronum)
+
 [Among Us](game_eggs/among_us)
 
 * [Impostor Server](game_eggs/among_us/impostor_server)
@@ -303,3 +306,4 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### RabbitMQ
 
 * [rabbitmq](/software/rabbitmq)
+
