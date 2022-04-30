@@ -3,7 +3,7 @@
 ***Updating your Egg?**: Ensure any existing servers have the latest Startup Command, new Startup Variables are set, **and you reinstall server!***
 ___
 
-## Authors / Contributors
+### Authors / Contributors
 
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -77,22 +77,24 @@ ___
 - *[Experimental]* Max player configuration.
 - Autosave amount and interval configuration.
 - Disable crash reporting if desired.
+- Disable seasonal events if desired.
 - ...and other advanced networking and server branch configurable settings.
 
 ___
 
 ### Server Ports
 
-- Default server ports are listed below, but all three ports can be changed freely.
+- Default server ports are listed below, but all three ports can be changed freely (\*some exceptions apply below).
+    - All three ports must be unique; they cannot currently be shared on one port (this may change in the future).
+    - It is recommended to distance ports of other running Satisfactory servers in Pterodactyl by **increments of 100** (it is currently unknown what the minimum increment is, but an increment of +1 caused cross-server talk in testing). Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match).
 - **Note:** The Primary/Default/Game Port for your server in Pterodactyl will be Satisfactory's `-Port=????` game port, even though clients will **connect with the Query port**.
-- It is recommended to distance ports of other running Satisfactory servers in Pterodactyl by **increments of 100** (it is currently unknown what the minimum increment is, but an increment of +1 caused cross-server talk in testing). Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match).
 - ***All three ports are required to be open/allocated for normal server behavior!***
 
 | Port | Default (UDP) |
 |---------|---------|
 | **Game (Primary Port in Pterodactyl)** | 7777 |
 | Beacon | 15000 |
-| Server Query | 15777 |
+| Server Query (Port clients connect with) | 15777 |
 
 ___
 
@@ -126,7 +128,8 @@ ___
 ### Save Files
 
 An existing save file (including single-player saves) can currently be uploaded to the server via two different methods:
-- "Manage Saves" tab via a client in-game (Recommended)
+
+- "Manage Saves" tab via an admin client in-game (Recommended)
 - Manually via the File Manager or SFTP
 
 Save files are located in this directory:
@@ -149,12 +152,13 @@ ___
 
 ### Console Commands
 
-As of v0.5.1.2, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
+As of v0.5.1.10, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
 
 [List of known commands can be found via the Wiki.](https://satisfactory.fandom.com/wiki/Dedicated_servers#Console_commands)
+
 ___
 
-### Errors/Warnings
+### Known Errors/Warnings
 
 The following errors or warnings you see in the console can safely be ignored:
 
@@ -164,13 +168,13 @@ steamclient.so: cannot open shared object file: No such file or directory
 LogSteamShared: Warning: Steam Dedicated Server API failed to initialize.
 ```
 
-The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).
+↑ The local file of 'steamclient.so' was attempted to be loaded, but could not because it is not present, causing the warning message. However, the backup `/home/container/.steam/sdk64/steamclient.so` is loaded successfully (this is the correct behavior according to the [Wiki](https://satisfactory.fandom.com/wiki/Dedicated_servers#SteamAPI_Init.28.29:_Sys_LoadModule_filed_to_load:_.2Fpath.2Fto.2F.steam.2Fsdk64.2Fsteamclient.so)).
 
 ```log
 Warning: failed to init SDL thread priority manager: SDL not found
 ```
 
-This is a common error with Steam related software on Linux, but can safely be ignored.
+↑ This is a common error with Steam related software on Linux, but can safely be ignored.
 
 ```log
 ...Error: Couldn't find file for package...
@@ -188,4 +192,4 @@ This is a common error with Steam related software on Linux, but can safely be i
 LogStreaming: Warning: Failed to read file '../../../FactoryGame/Saved/SaveGames/GameAnalytics.sav' error.
 ```
 
-These seem to be common error messages with the current experimental version of the game.
+↑ These seem to be common error messages with the current experimental version of the game.
