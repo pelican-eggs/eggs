@@ -81,9 +81,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## [Game Eggs](/game_eggs)
 
-[Doom](game_eggs/doom)
-* [Zandronum](game_eggs/doom/zandronum)
-
 [Among Us](game_eggs/among_us)
 
 * [Impostor Server](game_eggs/among_us/impostor_server)
@@ -99,6 +96,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
 [Call of Duty 4X](game_eggs/cod/cod4x)
+
+[Doom](game_eggs/doom)
+* [Zandronum](game_eggs/doom/zandronum)
 
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
