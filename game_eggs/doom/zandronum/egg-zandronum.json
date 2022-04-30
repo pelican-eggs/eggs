@@ -48,7 +48,7 @@
         },
         {
             "name": "PWADS",
-            "description": "If you wish to use multiple PWAD you can do so by separating them with spaces\r\n\r\nA PWAD is a WAD containing lumps of data, often used as addons. They replace in-game assets.",
+            "description": "If you wish to use multiple PWAD you can do so by separating them with spaces.\r\n\r\nA PWAD is a WAD containing lumps of data, often used as addons. They replace in-game assets.",
             "env_variable": "PWADS",
             "default_value": "",
             "user_viewable": true,
@@ -57,7 +57,7 @@
         },
         {
             "name": "Skill",
-            "description": "Set the difficulty of the game",
+            "description": "Set the difficulty of the game.",
             "env_variable": "SKILL",
             "default_value": "2",
             "user_viewable": true,
@@ -66,12 +66,12 @@
         },
         {
             "name": "map",
-            "description": "The map the server should start with",
+            "description": "The map the server should start with. ",
             "env_variable": "MAP",
             "default_value": "e1m1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:255"
+            "rules": "nullable|string|max:255"
         },
         {
             "name": "dmflags",
