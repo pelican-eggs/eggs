@@ -5,7 +5,7 @@ This egg uses the [Freedoom](https://freedoom.github.io/) WAD by default.
 
 ### Server Ports
 
-Zandronum requires a single port
+Zandronum requires a single port:
 
 | Port    | default  |
 |---------|----------|
