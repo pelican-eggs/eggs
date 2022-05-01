@@ -57,7 +57,7 @@
         },
         {
             "name": "Skill",
-            "description": "Set the difficulty of the game",
+            "description": "Set the difficulty of the game.",
             "env_variable": "SKILL",
             "default_value": "",
             "user_viewable": true,
@@ -66,7 +66,7 @@
         },
         {
             "name": "map",
-            "description": "The map the server should start with",
+            "description": "The map the server should start with.",
             "env_variable": "MAP",
             "default_value": "e1m1",
             "user_viewable": true,
@@ -75,7 +75,7 @@
         },
         {
             "name": "dmflags",
-            "description": "Gameplay flags",
+            "description": "Gameplay flags.",
             "env_variable": "DMFLAGS",
             "default_value": "",
             "user_viewable": true,
@@ -84,7 +84,7 @@
         },
         {
             "name": "dmflags2",
-            "description": "Gameplay flags",
+            "description": "Gameplay flags.",
             "env_variable": "DMFLAGS2",
             "default_value": "",
             "user_viewable": true,
@@ -93,7 +93,7 @@
         },
         {
             "name": "zadmflags",
-            "description": "Zandronum specific gameplay flags",
+            "description": "Zandronum specific gameplay flags.",
             "env_variable": "ZADMFLAGS",
             "default_value": "",
             "user_viewable": true,
@@ -102,7 +102,7 @@
         },
         {
             "name": "compatflags",
-            "description": "Compatibility flags",
+            "description": "Compatibility flags.",
             "env_variable": "COMPATFLAGS",
             "default_value": "",
             "user_viewable": true,
@@ -111,7 +111,7 @@
         },
         {
             "name": "compatflags2",
-            "description": "Compatibility flags",
+            "description": "Compatibility flags.",
             "env_variable": "COMPATFLAGS2",
             "default_value": "",
             "user_viewable": true,
@@ -120,7 +120,7 @@
         },
         {
             "name": "zacompatflags",
-            "description": "Zandronum specific compatibility flags",
+            "description": "Zandronum specific compatibility flags.",
             "env_variable": "ZACOMPATFLAGS",
             "default_value": "",
             "user_viewable": true,
