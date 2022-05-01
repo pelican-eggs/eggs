@@ -84,7 +84,7 @@
         },
         {
             "name": "dmflags2",
-            "description": "Gameplay flags",
+            "description": "Gameplay flags.",
             "env_variable": "DMFLAGS2",
             "default_value": "",
             "user_viewable": true,
@@ -93,7 +93,7 @@
         },
         {
             "name": "zadmflags",
-            "description": "Zandronum specific gameplay flags",
+            "description": "Zandronum specific gameplay flags.",
             "env_variable": "ZADMFLAGS",
             "default_value": "",
             "user_viewable": true,
