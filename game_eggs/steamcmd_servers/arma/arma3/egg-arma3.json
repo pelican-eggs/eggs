@@ -166,6 +166,15 @@
             "rules": "nullable|string"
         },
         {
+            "name": "[Advanced] Optional Client-Side Mods",
+            "description": "A semicolon-separated list of optional mods to load into the keys folder, but not include in server's mod parameter. Useful for allowing clients to connect to the server with or without the mod loaded. Mods in this list must be in \"@workshopID\" form (ex. @123456789;@987654321;). These will also be included in Automatic Updates (if enabled).",
+            "env_variable": "OPTIONALMODS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        },
+        {
             "name": "[Advanced] Extra Flags for SteamCMD",
             "description": "[This will override \"Download Creator DLCs\" if used] Only used when checking for server updates, and typically used for grabbing beta builds. Example: -beta profiling -betapassword CautionSpecialProfilingAndTestingBranchArma3",
             "env_variable": "STEAMCMD_EXTRA_FLAGS",
