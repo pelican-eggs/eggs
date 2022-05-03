@@ -1,0 +1,149 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-05-03T15:07:04+05:30",
+    "name": "csgo",
+    "author": "support@pterodactyl.io",
+    "description": "Counter-Strike: Global Offensive is a multiplayer first-person shooter video game developed by Hidden Path Entertainment and Valve Corporation.",
+    "features": null,
+    "images": [
+        "quay.io\/pterodactyl\/core:source"
+    ],
+    "file_denylist": [],
+    "startup": ".\/srcds_run -game csgo -console -strictportbind -usercon +ip 0.0.0.0 -port {{SERVER_PORT}} +clientport 27005 +tv_port {{TV_PORT}} +sv_setsteamaccount {{STEAM_ACC}} -maxplayers_override {{MAXPLAYERS}} -tickrate {{TICRATE}} +map {{SRCDS_MAP}} +mapgroup {{MAPGROUP}} +game_type {{GAMETYPE}} +game_mode {{GAMEMODE}} +host_workshop_collection {{WS_COLLECTIONID}} +workshop_start_map {{WS_MAP}} -authkey {{WS_APIKEY}} -nobreakpad -autoupdate -steam_dir steamcmd -steamcmd_script update.txt",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\n# CSGO Installation Script\n#\n# Server Files: \/mnt\/server\napt -y update\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\n\ncd \/tmp\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\n\nmkdir -p \/mnt\/server\/steamcmd\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\ncd \/mnt\/server\/steamcmd\n\n# SteamCMD fails otherwise for some reason, even running as root.\n# This is changed at the end of the install process anyways.\nchown -R root:root \/mnt\n\nexport HOME=\/mnt\/server\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 740 +quit\n\nmkdir -p \/mnt\/server\/.steam\/sdk32\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ubuntu:16.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Map",
+            "description": "The default map for the server.",
+            "env_variable": "SRCDS_MAP",
+            "default_value": "de_dust2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|alpha_dash"
+        },
+        {
+            "name": "Steam Account Token",
+            "description": "The Steam Account Token required for the server to be displayed publicly.\r\nhttps:\/\/steamcommunity.com\/dev\/managegameservers",
+            "env_variable": "STEAM_ACC",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|alpha_num|size:32"
+        },
+        {
+            "name": "Source AppID",
+            "description": "Required for game to update on server restart. Do not modify this.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "740",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Ticrate",
+            "description": "Set server ticrate to 64 or 128",
+            "env_variable": "TICRATE",
+            "default_value": "128",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|in:64,128"
+        },
+        {
+            "name": "Player Slots",
+            "description": "No. of player slots",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|digits_between:1,20"
+        },
+        {
+            "name": "Game Type",
+            "description": "Game Type: 0 = Classic, 1 = Gun Game, 2 = Training, 3 = Custom, 4 = Cooperative, 5 = Skirmish, 6 = Free For All",
+            "env_variable": "GAMETYPE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|digits_between:0,6"
+        },
+        {
+            "name": "Game Mode",
+            "description": "Game Mode: 0= Casual, 1 = Competitive, 2 = Wingman",
+            "env_variable": "GAMEMODE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|digits_between:0,2"
+        },
+        {
+            "name": "Map Group",
+            "description": "Set server map group: mg_active for competetive",
+            "env_variable": "MAPGROUP",
+            "default_value": "mg_active",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Config File",
+            "description": "Set server config file by default csgo\/cfg\/server.cfg is used, currently feature not added.",
+            "env_variable": "SERVERCFGFILE",
+            "default_value": "server.cfg",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Workshop API Key",
+            "description": "You can set your workshop key",
+            "env_variable": "WS_APIKEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32"
+        },
+        {
+            "name": "Workshop Collection Id",
+            "description": "You can set collection",
+            "env_variable": "WS_COLLECTIONID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Workshop Start Map",
+            "description": "Set workshop map",
+            "env_variable": "WS_MAP",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "GOTV Port",
+            "description": "Set server gotv port",
+            "env_variable": "TV_PORT",
+            "default_value": "27020",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
