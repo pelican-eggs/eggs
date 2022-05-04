@@ -304,6 +304,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [rabbitmq](/software/rabbitmq)
 
+### 5e Tools
+* [5e Tools](/software/5e-tools)
+
 ### Reposilite
 
 * [Reposilite](/software/reposilite)
