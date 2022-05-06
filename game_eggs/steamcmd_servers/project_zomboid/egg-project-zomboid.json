@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-12-29T14:38:26+00:00",
+    "exported_at": "2022-05-06T10:50:50+02:00",
     "name": "Project Zomboid",
     "author": "iamkubi@gmail.com",
     "description": "Project Zomboid is an open world survival horror video game in alpha stage development by British and Canadian independent developer, The Indie Stone. The game is set in a post apocalyptic, zombie infested world where the player is challenged to survive for as long as possible before inevitably dying.",
@@ -15,7 +15,7 @@
         "ghcr.io\/pterodactyl\/games:source"
     ],
     "file_denylist": [],
-    "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -steamport1 {{STEAM_PORT}} -cachedir=\/home\/container\/.cache -servername \\\"{{SERVER_NAME}}\\\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
+    "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -steamport1 {{STEAM_PORT}} -cachedir=\/home\/container\/.cache -servername \"{{SERVER_NAME}}\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"SERVER STARTED\"\r\n}",
@@ -32,12 +32,12 @@
     "variables": [
         {
             "name": "Server Name",
-            "description": "Name of the server",
+            "description": "The internal server name used for save\/ config files.",
             "env_variable": "SERVER_NAME",
-            "default_value": "Project Zomboid Server",
+            "default_value": "Pterodactyl",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|alpha_num|max:64"
         },
         {
             "name": "Admin Username",
