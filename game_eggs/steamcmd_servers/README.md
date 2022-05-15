@@ -75,6 +75,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Left 4 Dead 2
 [Left 4 Dead](left4dead_2)
 
+## Longvinter
+[Longvinter](longvinter)
+
 ## Modiverse
 
 [Modiverse](modiverse)
