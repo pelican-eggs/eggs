@@ -4,7 +4,7 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-05-16T23:56:39+02:00",
+    "exported_at": "2022-05-17T00:10:05+02:00",
     "name": "The Isle",
     "author": "fredrik.johansenfuun@gmail.com",
     "description": "The Isle is an open beta with an open-world survival game where players choose from three factions in an attempt to survive a fierce island. Hunt. Prey. Survive.",
@@ -54,15 +54,6 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required"
-        },
-        {
-            "name": "Server admin",
-            "description": "",
-            "env_variable": "ADMINSTEAMID",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable"
         },
         {
             "name": "RCON",
