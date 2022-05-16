@@ -154,6 +154,7 @@
 * [Sven Co-op](steamcmd_servers/svencoop)
 * [Team Fortress 2 Classic](steamcmd_servers/team_fortress_2_classic)
 * [The Forest](steamcmd_servers/the_forest)
+* [The Isle](steamcmd_servers/the_isle)
 * [Tower Unite](steamcmd_servers/tower_unite)
 * [Unturned](steamcmd_servers/unturned)
 * [Valheim](steamcmd_servers/valheim)
