@@ -17,6 +17,13 @@ ___
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Maintains">🔨</a>
         </td>
+        <td align="center">
+            <a href="https://github.com/Soljian">
+                <img src="https://avatars.githubusercontent.com/u/4036453" width="50px;" alt=""/><br /><sub><b>Soljian</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Soljian" title="Contributor">💡</a>
+        </td>
     </tr>
 </table>
 <!-- markdownlint-enable -->
@@ -65,7 +72,35 @@ ___
 
 ### How to Add Mods
 
-**TODO**
+Currently, adding mods to your server is tricky because there is very little documentation and it is difficult to find mod IDs. Hopefully this will change in the future, but following these steps will get it to work:
+
+1. Open up a client copy of Arma Reforger and subscribe/download any mods you want to add to the server (at this time, I do not know of a way to find mod IDs without requiring use of the game).
+2. Once done, close the game and navigate to this folder on your computer: `My Documents\My Games\ArmaReforger\addons\`
+3. Aimlessly open each folder to find which mods you want to add and open each of their `ServerData.json` files in a text editor.
+4. Then, on your server panel, open the `config.json` file for editing.
+5. Find `"mods": []` and replace it with the following:
+
+```json
+"mods": [
+	{
+		"modId": "591AF5BDA9F7CE8B",
+		"name": "Capture & Hold",
+		"version": "1.0.0"
+	},
+	{
+		"modId": "9A51598BACFBFDE7",
+		"name": "Explosive Goats Beta",
+		"version": "0.5.42"
+	}
+]
+```
+
+6. Change `modId` to equal the `id` value found at the top of the `ServerData.json` file you found.
+7. Change `name` to equal the `name` value found at the **top** of the `ServerData.json` file you found.
+8. Change `version` to equal the `version` value found at the top of the `ServerData.json` file you found.
+9. Repeat for each mod you want to add by copy/pasting the `{}` sections like shown above. Make sure each `{}` section has a `,` after it, **except** for the last item.
+
+The server will automatically download and run the mods you specify on startup. For mods that add scenarios, you can find the Scenario IDs listed as `gameId` in the `ServerData.json` file. Lastly, if a mod updates, you will likely have to change the `version` value to match it's new version. You may also have to delete the mod folder in the `addons/` directory to have it re-download (reports on this have been mixed).
 
 ___
 
@@ -78,7 +113,7 @@ The following are highly recommended variable modifications you can make to the 
 Due to a current behavior of Pterodactyl, `SERVER_IP` will not return the node's public IP address if it is behind a NAT; it will return its private IP address. Unfortunately at this time, Arma Reforger **requires** the server's public IP address to be strictly defined within `config.json`. If you know your node is behind a NAT (or you are finding your node's private IP address being added to `config.json`), you will need to edit this egg after importing it by following these steps:
 
 1. As a panel admin, find and open the egg within your Nests tab.
-2. On the first tab, "Configuration", find the "Configuration Files" box under the "Process Management" section.
+2. On the first tab "Configuration", find the "Configuration Files" box under the "Process Management" section.
 3. Carefully (as to not touch anything else), find `{{server.build.default.ip}}` and replace it with your node's public IP address. If done correctly, the line should now look something like this:
 
 ```json
