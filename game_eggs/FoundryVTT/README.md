@@ -1,5 +1,5 @@
 # Foundry VTT
-Foundry VTT is a standalone application built for experiencing multiplayer tabletop RPGs using a feature-rich and modern self-hosted application where your players connect directly through the browser.
+[Foundry VTT](https://foundryvtt.com/) is a standalone application built for experiencing multiplayer tabletop RPGs using a feature-rich and modern self-hosted application where your players connect directly through the browser.
 
 # Installation
 Foundry requires a license. In order to use this egg, you will need to purchase a foundry license, select the linux platform from your profile on the website, and then paste the "Timed URL" into the variable when seting up the server.
