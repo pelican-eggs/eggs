@@ -63,7 +63,7 @@
             "default_value": "32",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|between:1,64"
+            "rules": "required|integer|between:1,256"
         },
         {
             "name": "Server Password",
