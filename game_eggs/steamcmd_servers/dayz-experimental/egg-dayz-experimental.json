@@ -249,7 +249,7 @@
             "name": "[Advanced] Extra Startup Parameters",
             "description": "See https:\/\/community.bistudio.com\/wiki\/DayZ:Server_Configuration#Launch_Parameters for more info on valid flags for this field.",
             "env_variable": "STARTUP_PARAMS",
-            "default_value": "-doLogs",
+            "default_value": "-doLogs -limitFPS=120",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string"
