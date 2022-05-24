@@ -41,6 +41,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Cryofall](cryofall)
 
+## DayZ (Experimental)
+
+[DayZ (Experimental)](dayz-experimental)
+
 ## Don't Starve Together
 
 [Don't Starve Together](dont_starve)
