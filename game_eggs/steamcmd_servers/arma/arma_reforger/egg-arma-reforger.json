@@ -132,7 +132,7 @@
             "name": "[Advanced] Max FPS",
             "description": "Sets a maximum FPS limit for the server, saving performance in some cases. Leave empty for no limit.",
             "env_variable": "MAX_FPS",
-            "default_value": "",
+            "default_value": "120",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|integer|gt:0"
