@@ -26,6 +26,14 @@ ___
             <a href="https://github.com/parkervcp/eggs/commits?author=aussieserverhosts" title="Contributor">💡</a>
         </td>
         <td align="center">
+            <a href="https://github.com/IAmSilK">
+                <img src="https://avatars.githubusercontent.com/u/16708907" width="50px;" alt=""/><br /><sub><b>IAmSilK</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=IAmSilK" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=IAmSilK" title="Contributor">💡</a>
+        </td>
+        <td align="center">
             <a href="https://github.com/Yomanz">
                 <img src="https://avatars.githubusercontent.com/u/5119107" width="50px;" alt=""/><br /><sub><b>Daave</b></sub>
             </a>
@@ -76,31 +84,25 @@ ___
 
 Default server ports are listed below, but the Main port can be any port. There are three more ports after the Main port are relative to the Main port (For example: The BattlEye port is always 4 ports higher than the main port). **All four ports are required for normal server behavior.** It is [recommended](https://community.bistudio.com/wiki/Arma_3:_Dedicated_Server#Port_Forwarding) that each server be 100 ports separate from each other.
 
-| Port | Default |
+| Port | Default (UDP) |
 |---------|---------|
 | **Arma 3 Game & VON (Main)** | 2302 |
 | Steam Query (+1) | 2303 |
 | Steam Port (+2) | 2304 |
 | BattleEye (+4) | 2306 |
 
-#### Mods/Plugins may require ports to be added to the server
-
 ___
 
-### CPU Usage Information
+### Installation/System Requirements
 
-ARMA 3 is mainly CPU intensive. Contrary to popular belief, the server binary *can* run on multiple cores/threads. However, it's ability to manage asynchronous tasks and hyperthread is *very* limited, meaning additional cores/threads reach diminishing returns very quickly. In addition, it's ability to utilize all of the CPU allotted to it for AI processing seems to be limited as well. Therefore, a Headless Client ***and*** a properly written mission file are highly recommended if large amounts of AI units will be used.
+|  | Bare Minimum | Recommended |
+|---------|---------|---------|
+| Processor | Recent x86/64 (AMD/Intel) processor. No ARM support. | ARMA 3 is mainly CPU intensive. Contrary to popular belief, the server binary *can* run on multiple cores/threads. However, it's ability to manage asynchronous tasks and hyperthread is *very* limited, meaning additional cores/threads reach diminishing returns very quickly. In addition, it's ability to utilize all of the CPU allotted to it for AI processing seems to be limited as well. Therefore, a Headless Client ***and*** a properly written mission file are highly recommended if large amounts of AI units will be used. |
+| RAM | 2048 MiB | 3072 MiB (If used, every Headless Client uses an additional 2048 MB of RAM as well) |
+| Storage | 10 GB | 50+ GB (depends on how many mods are installed) |
+| Network | 0.512 Mbit/s/player | 1-5 Mbit/s/player |
+| Host OS | Most stable Linux OS branches should work | Using the latest kernel version for your installed OS can prevent some edge-case installation/boot issues. |
 
-___
-
-### Minimum RAM Requirement
-
-This server requires about 2048 MB of RAM to run properly. If used, every Headless Client uses an additional 2048 MB of RAM as well.
-___
-
-### Minimum Disk Requirement
-
-This server requires just under 10 GB of disk space to safely run properly with no mods. However, mods can easily increase disk usage to 50 GB or more, depending on how many are downloaded.
 ___
 
 ### Recommended Egg Modifications
