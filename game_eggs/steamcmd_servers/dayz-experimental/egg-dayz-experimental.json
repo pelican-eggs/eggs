@@ -1,5 +1,5 @@
 {
-    "_comment": "Pterodactyl DayZ (Experimental) Egg ~ David Wolfe (Red-Thirten) ~ 2022-05-22",
+    "_comment": "Pterodactyl DayZ (Experimental) Egg ~ David Wolfe (Red-Thirten) ~ 2022-05-26",
     "meta": {
         "version": "PTDL_v1",
         "update_url": null
@@ -23,7 +23,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl DayZ (Experimental) Egg - egg-dayz-experimental.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/22\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl DayZ (Experimental) Egg - egg-dayz-experimental.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/26\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
@@ -58,7 +58,7 @@
         },
         {
             "name": "Number of SteamCMD Retry Attempts",
-            "description": "How many times SteamCMD should retry downloading a server or mod after a recoverable error. (ie. A particularly large mod like CUP or RHS download times out)",
+            "description": "How many times SteamCMD should retry downloading a server or mod after a recoverable error. (ie. A particularly large mod download times out)",
             "env_variable": "STEAMCMD_ATTEMPTS",
             "default_value": "3",
             "user_viewable": false,
@@ -78,7 +78,7 @@
             "name": "Max Players",
             "description": "Maximum number of players allowed to join the server.",
             "env_variable": "MAX_PLAYERS",
-            "default_value": "60",
+            "default_value": "64",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer|gt:0"
@@ -103,7 +103,7 @@
         },
         {
             "name": "Automatic Updates",
-            "description": "Quickly checks for any server or mod updates on startup, and updates if necessary. (1 ON | 0 OFF)",
+            "description": "Quickly checks for any server or mod updates on startup, and updates if necessary.",
             "env_variable": "UPDATE_SERVER",
             "default_value": "1",
             "user_viewable": true,
@@ -111,22 +111,22 @@
             "rules": "boolean"
         },
         {
-            "name": "Client Mods",
-            "description": "A semicolon-separated list of mod folders to load. Any mods in this list that are in \"@workshopID\" form will also be included in Automatic Updates (if enabled). NO capital letters, spaces, or folders starting with a number! (ex. myMod;@123456789;@987654321;etc;)",
-            "env_variable": "MODIFICATIONS",
-            "default_value": "",
+            "name": "Modlist File (Exported from DayZ Launcher)",
+            "description": "Filename for an exported modlist. This file will be parsed for mod installation and loading. Upload your HTML file to the root directory (eg. \/home\/container\/modlist.html). Leave blank to disable loading mods from a modlist.",
+            "env_variable": "MOD_FILE",
+            "default_value": "modlist.html",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string"
         },
         {
-            "name": "Enforce Game Version",
-            "description": "When ON, the server will allow the connection only to clients with same the .exe revision as the server. (1 ON | 0 OFF)",
-            "env_variable": "ENFORCE_BUILD",
-            "default_value": "1",
+            "name": "Additional Mods",
+            "description": "A semicolon-separated list of mod folders to load from the root directory. Useful for loading manually uploaded mods. Any mods in this list that are in \"@workshopID\" form will also be included in Automatic Updates (if enabled). NO capital letters, spaces, or folders starting with a number! (ex. myMod;@123456789;@987654321;etc;)",
+            "env_variable": "MODIFICATIONS",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "nullable|string"
         },
         {
             "name": "Verify Signatures",
@@ -138,8 +138,17 @@
             "rules": "required|string|in:0,2"
         },
         {
+            "name": "Enforce Game Version",
+            "description": "When ON, the server will allow the connection only to clients with same the version as the server.",
+            "env_variable": "ENFORCE_BUILD",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean"
+        },
+        {
             "name": "Disable VoN",
-            "description": "When ON, will disable Voice over Network (voice chat) in the server. (1 ON | 0 OFF)",
+            "description": "When ON, will disable Voice over Network (voice chat) in the server.",
             "env_variable": "DISABLE_VON",
             "default_value": "0",
             "user_viewable": true,
@@ -157,7 +166,7 @@
         },
         {
             "name": "Disable Third Person",
-            "description": "When ON, will disable third person view while on the server. (1 ON | 0 OFF)",
+            "description": "When ON, will disable third person view while on the server.",
             "env_variable": "DISABLE_THIRD",
             "default_value": "0",
             "user_viewable": true,
@@ -166,7 +175,7 @@
         },
         {
             "name": "Disable Crosshair",
-            "description": "When ON, will disable the crosshair from being visible while on the server. (1 ON | 0 OFF)",
+            "description": "When ON, will disable the crosshair from being visible while on the server.",
             "env_variable": "DISABLE_CROSSHAIR",
             "default_value": "0",
             "user_viewable": true,
@@ -175,7 +184,7 @@
         },
         {
             "name": "Disable Personal Light",
-            "description": "When ON, will disable a personal light positioned above all clients during the night time while on the server. (1 ON | 0 OFF)",
+            "description": "When ON, will disable a personal light positioned above all clients during the night time while on the server.",
             "env_variable": "DISABLE_PERSONAL_LIGHT",
             "default_value": "1",
             "user_viewable": true,
@@ -184,7 +193,7 @@
         },
         {
             "name": "Darker Nights",
-            "description": "When ON, will make nights darker (more accurate nights, but hard to see without a light). (1 ON | 0 OFF)",
+            "description": "When ON, will make nights darker (more accurate nights, but hard to see without a light).",
             "env_variable": "LIGHTING_CONFIG",
             "default_value": "0",
             "user_viewable": true,
@@ -193,7 +202,7 @@
         },
         {
             "name": "Persistent Time",
-            "description": "The actual server time is saved to storage, so when ON, the next server start will use the saved time value. (1 ON | 0 OFF)",
+            "description": "The actual server time is saved to storage, so when ON, the next server start will use the saved time value.",
             "env_variable": "PERSISTENT_TIME",
             "default_value": "0",
             "user_viewable": true,
@@ -220,7 +229,7 @@
         },
         {
             "name": "[Repair] Make Mod Files Lowercase",
-            "description": "Every mod that is set to be loaded will have its folder and files changed to lowercase (to prevent errors). It is recommended to enable this for one server boot after copying a mod from a Windows machine to the server, or if mods seem to not be loading. (1 ON | 0 OFF)",
+            "description": "Every mod that is set to be loaded will have its folder and files changed to lowercase (to prevent errors). It is recommended to enable this for one server boot after copying a mod from a Windows machine to the server, or if mods seem to not be loading.",
             "env_variable": "MODS_LOWERCASE",
             "default_value": "0",
             "user_viewable": true,
@@ -229,7 +238,7 @@
         },
         {
             "name": "[Repair] Validate Server Files",
-            "description": "Validates all server files when Automatic Updates is ON. Note: This will significantly increase server startup times, so it is recommended to only enable this when needed. (1 ON | 0 OFF)",
+            "description": "Validates all server files when Automatic Updates is ON. Note: This will significantly increase server startup times, so it is recommended to only enable this when needed.",
             "env_variable": "VALIDATE_SERVER",
             "default_value": "0",
             "user_viewable": true,

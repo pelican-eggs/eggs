@@ -1,6 +1,6 @@
 # DayZ (Experimental)
 
-**Author's Notice:** This egg ***only*** works with the experimental branch of DayZ (Standalone), and it will ***only*** accept players who are running the experimental client! At time of writing (May 2022), there is ***no*** Stable branch native Linux server binary, and compatibility with Wine is poor.
+**Author's Notice:** This egg ***only*** works with the experimental branch of DayZ (Standalone), and it will ***only*** accept players who are running the experimental client! At time of writing (May 2022), there is ***no*** native Linux server binary for the Stable branch, and compatibility with Wine is poor for the Windows binary.
 
 ___
 
@@ -38,6 +38,7 @@ ___
   - Also accepts server-side only mods.
   - Checks for mod updates against their Steam Workshop page's last update for quick and efficient update checks.
   - Automatically moves mod `.bikey`'s to the `/keys/` directory.
+  - Note: These features only work with mods in the `@workshopID#` format. Manually uploaded mods are not automatically updated.
 - Multiple basic settings found within the `serverDZ.cfg` file can be easily set from the server's Startup tab
   - Server name, passwords, disable third person, persistant time, and more...
 - Max Players is configurable and able to be host enforced (\*see [Recommended Egg Modifications](#recommended-egg-modifications))
