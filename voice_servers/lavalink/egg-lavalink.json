@@ -6,7 +6,7 @@
     },
     "exported_at": "2021-04-11T13:56:42+02:00",
     "name": "Lavalink",
-    "author": "damuffin36@gmail.com",
+    "author": "mattske06@gmail.com",
     "description": "Standalone audio sending node based on Lavaplayer and JDA-Audio. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/Frederikam\/Lavalink",
     "features": null,
     "images": [
