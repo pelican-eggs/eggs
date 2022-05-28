@@ -159,6 +159,7 @@
 * [Valheim](steamcmd_servers/valheim)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
+* [V Rising](steamcmd_servers/v_rising)
 
 [Teeworlds](teeworlds)
 

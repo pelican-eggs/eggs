@@ -186,3 +186,7 @@ This is a collection of servers that use SteamCMD to install.
 
 * [Valheim Vanilla](valheim/valheim_vanilla)
 * [Valheim Plus Mod](valheim/valheim_plus)
+
+## V Rising
+
+[V Rising](v_rising)
