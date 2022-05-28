@@ -240,10 +240,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
+* [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
-* [V Rising](game_eggs/steamcmd_servers/v_rising)
 
 [Teeworlds](game_eggs/teeworlds)
 

@@ -156,10 +156,10 @@
 * [The Forest](steamcmd_servers/the_forest)
 * [Tower Unite](steamcmd_servers/tower_unite)
 * [Unturned](steamcmd_servers/unturned)
+* [V Rising](steamcmd_servers/v_rising)
 * [Valheim](steamcmd_servers/valheim)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
-* [V Rising](steamcmd_servers/v_rising)
 
 [Teeworlds](teeworlds)
 

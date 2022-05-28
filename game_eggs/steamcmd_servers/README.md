@@ -180,13 +180,13 @@ This is a collection of servers that use SteamCMD to install.
 
 [Unturned](unturned)
 
+## V Rising
+
+[V Rising](v_rising)
+
 ## Valheim
 
 [Valheim](valheim)
 
 * [Valheim Vanilla](valheim/valheim_vanilla)
 * [Valheim Plus Mod](valheim/valheim_plus)
-
-## V Rising
-
-[V Rising](v_rising)

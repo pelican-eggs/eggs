@@ -85,17 +85,17 @@ You can find the game settings and saves in the `~/save-data/` directory.
 
 #### Server Game Settings
 
-Standardized game settings can be applied via the "Game Mode" startup parameter. If you would like a more custom array of settings to adjust, you can copy the `ServerGameSettings.json` file located in `~/VRisingServer_Data/StreamingAssets/Settings/` to `~/save-data/Settings` and adjust as needed. Also, ensure "Game Mode" is set to empty/null. A list of settings, with a description of what each setting does and the min/max values where applicable, [can be found here](https://cdn.stunlock.com/blog/2022/05/25083113/Game-Server-Settings.pdf).
+Standardized game settings can be applied via the "Game Settings Preset" startup parameter. If you would like a more custom array of settings to adjust, you can copy the `ServerGameSettings.json` file located in `~/VRisingServer_Data/StreamingAssets/Settings/` to `~/save-data/Settings/` and adjust as needed. Also, ensure "Game Settings Preset" is set to empty/null. A list of settings, with a description of what each setting does and the min/max values where applicable, [can be found here](https://cdn.stunlock.com/blog/2022/05/25083113/Game-Server-Settings.pdf).
 
 #### Becoming an Administrator
 
-To become an administrator in the game you will first need to modify the `adminlist.txt` file under `~/save-data/Settings` with your SteamID (one SteamID per line). This can be done without restarting your server. To become an administrator in the game you need to enable the console in the options menu, bring it down with `~` and authenticate using the `adminauth` console command. Once an administrator you can use a number of administrative commands like `banuser`, `bancharacter`, `banned`, `unban` and `kick`.
+To become an administrator in the game you will first need to open the `adminlist.txt` file under `~/VRisingServer_Data/StreamingAssets/Settings/` and add your [steamID64](https://steamid.io/) (one steamID64 per line). This can be done without restarting your server. To become an administrator in the game you need to enable the console in the options menu, bring it down with `~` and authenticate using the `adminauth` console command. Once an administrator you can use a number of administrative commands like `banuser`, `bancharacter`, `banned`, `unban` and `kick`.
 
-If you ban users through the in-game console the server will automatically modify the `banlist.txt` file, but you can also modify this manually (one SteamID per line).
+If you ban users through the in-game console the server will automatically modify the `banlist.txt` file, but you can also modify this manually (one steamID64 per line).
 
 #### Transfer Local/Client Save to the Server
 
-[Follow these instructions by the developer very carefully](https://github.com/StunlockStudios/vrising-dedicated-server-instructions#transfer-localclient-save-to-a-dedicated-server). Note: The `-saveName <name>` command line parameter and `GameSettingsPreset` setting are handled automatically by the Egg's "Save Name" and "Game Mode" startup parameters, respectively. Also, if a custom `ServerGameSettings.json` file exists for any reason in the `~/save-data/Settings` directory, delete it.
+[Follow these instructions by the developer very carefully](https://github.com/StunlockStudios/vrising-dedicated-server-instructions#transfer-localclient-save-to-a-dedicated-server). Note: The `-saveName <name>` command line parameter and `GameSettingsPreset` setting are handled automatically by the Egg's "Save Name" and "Game Settings Preset" startup parameters, respectively. Also, if a custom `ServerGameSettings.json` file exists for any reason in the `~/save-data/Settings` directory, delete it.
 
 #### RCON
 
