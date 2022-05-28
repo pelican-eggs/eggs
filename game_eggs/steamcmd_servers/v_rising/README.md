@@ -57,7 +57,7 @@ ___
 - The RCON port is optional and only required if the server owner enables/uses RCON.
 
 | Port | Default | Protocol |
-|---------|---------|
+|---------|---------|---------|
 | **Game (Primary Port in Pterodactyl)** | 9876 | UDP |
 | Query | 9877 | UDP |
 | RCON | 25575 | TCP |
