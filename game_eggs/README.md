@@ -109,6 +109,7 @@
 * [ARK: Survival Evolved](steamcmd_servers/ark_survival_evolved)
 * [Arma](steamcmd_servers/arma)
   * [Arma 3](steamcmd_servers/arma/arma3)
+  * [OCAP2](steamcmd_servers/arma/ocap2)
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
