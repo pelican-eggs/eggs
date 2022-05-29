@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/yolks:wine_latest"
     ],
     "file_denylist": [],
-    "startup": "xvfb-run wine server.exe +server_dir \/home\/container",
+    "startup": "xvfb-run wine server64.exe +server_dir \/home\/container",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server: ready to spawn for peer\"\r\n}",
