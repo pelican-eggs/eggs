@@ -12,7 +12,9 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Arma
 
-[Arma 3](arma/arma3)
+* [Arma](arma)
+  * [Arma 3](arma/arma3)
+  * [Arma Reforger](arma/arma_reforger)
 
 ## Assetto Corsa
 
@@ -35,6 +37,7 @@ This is a collection of servers that use SteamCMD to install.
 [Conan Exiles](conan_exiles)
 
 ## Craftopia
+
 [Craftopia](craftopia)
 
 ## CryoFall
@@ -70,9 +73,11 @@ This is a collection of servers that use SteamCMD to install.
 [Killing Floor 2](killing_floor_2)
 
 ## Left 4 Dead
+
 [Left 4 Dead](left4dead)
 
 ## Left 4 Dead 2
+
 [Left 4 Dead](left4dead_2)
 
 ## Modiverse
@@ -182,7 +187,6 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Valheim
 
-[Valheim](valheim)
-
-* [Valheim Vanilla](valheim/valheim_vanilla)
-* [Valheim Plus Mod](valheim/valheim_plus)
+* [Valheim](valheim)
+  * [Valheim Vanilla](valheim/valheim_vanilla)
+  * [Valheim Plus Mod](valheim/valheim_plus)
