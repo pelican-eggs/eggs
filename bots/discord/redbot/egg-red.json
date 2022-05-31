@@ -10,7 +10,7 @@
     "description": "A multifunction Discord bot \r\n\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:bot_red"
+        "ghcr.io\/parkervcp\/yolks:bot_red"
     ],
     "file_denylist": [],
     "startup": "PATH=$PATH:\/home\/container\/.local\/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}}",

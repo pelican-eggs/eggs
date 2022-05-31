@@ -7,7 +7,7 @@
     "name": "Big Brother Bot",
     "author": "parker@parkervcp.com",
     "description": "Big Brother Bot B3 is a complete and total server administration package for online games. B3 is designed primarily to keep your server free from the derelicts of online gaming, but offers more, much more.\r\n\r\nhttps:\/\/github.com\/BigBrotherBot\/big-brother-bot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_python-2.7",
+    "image": "ghcr.io\/parkervcp\/yolks:python_2.7",
     "startup": "python b3_run.py",
     "config": {
         "files": "{}",

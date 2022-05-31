@@ -7,7 +7,7 @@
     "name": "Postgres",
     "author": "parker@parkervcp.com",
     "description": "A default Postgres install that is not really editable.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:db_postgres",
+    "image": "ghcr.io\/parkervcp\/yolks:postgres_13",
     "startup": "postgres  -D \/home\/container\/postgres_db\/",
     "config": {
         "files": "{\r\n    \"postgres_db\/postgresql.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n\t\t    \"#port =\": \"port = {{server.build.default.port}}\",\r\n            \"#external_pid_file =\": \"external_pid_file = '\/home\/container\/postgres_db\/run\/postgres.pid'\",\r\n            \"#unix_socket_directories =\": \"unix_socket_directories = '\/home\/container\/postgres_db\/run\/'\"\r\n        }\r\n    }\r\n}",

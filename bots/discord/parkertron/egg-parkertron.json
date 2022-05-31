@@ -7,7 +7,7 @@
     "name": "parkertron",
     "author": "parker@parkervcp.com",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_parkertron",
+    "image": "ghcr.io\/parkervcp\/yolks:bot_parkertron",
     "startup": ".\/parkertron",
     "config": {
         "files": "{}",

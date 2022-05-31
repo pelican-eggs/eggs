@@ -7,7 +7,7 @@
     "name": "fragbot",
     "author": "parker@parkervcp.com",
     "description": "The fragforce discord bot.\r\n\r\nlocated at https:\/\/github.com\/fragforce\/fragbot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
+    "image": "ghcr.io\/parkervcp\/yolks:alpine",
     "startup": ".\/fragbot",
     "config": {
         "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"token\": \"{{server.build.env.DISCORD_TOKEN}}\"\r\n        }\r\n    }\r\n}",

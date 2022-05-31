@@ -7,7 +7,7 @@
     "name": "discordgo generic",
     "author": "parker@parkervcp.com",
     "description": "A generic golang egg.\r\n\r\nMeant to be customized before it is used.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "image": "ghcr.io\/parkervcp\/yolks:debian",
     "startup": ".\/${EXECUTABLE}",
     "config": {
         "files": "{}",

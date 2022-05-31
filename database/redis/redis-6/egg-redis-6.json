@@ -7,7 +7,7 @@
     "name": "Redis-6",
     "author": "parker@parkervcp.com",
     "description": "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:db_redis-6",
+    "image": "ghcr.io\/parkervcp\/yolks:redis_6",
     "startup": "\/usr\/local\/bin\/redis-server \/home\/container\/redis.conf --save 60 1 --dir \/home\/container\/ --bind 0.0.0.0 --port {{SERVER_PORT}} --requirepass {{SERVER_PASSWORD}} --maxmemory {{SERVER_MEMORY}}mb --daemonize yes && redis-cli -p {{SERVER_PORT}} -a {{SERVER_PASSWORD}}; redis-cli -p {{SERVER_PORT}} -a {{SERVER_PASSWORD}} shutdown save",
     "config": {
         "files": "{}",

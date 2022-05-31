@@ -7,7 +7,7 @@
     "name": "MariaDB",
     "author": "parker@parkervcp.com",
     "description": "One of the most popular database servers. Made by the original developers of MySQL. Guaranteed to stay open source.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:db_mariadb",
+    "image": "ghcr.io\/parkervcp\/yolks:mariadb_10.3",
     "startup": "{ \/usr\/sbin\/mysqld & } && sleep 5 && mysql -u root",
     "config": {
         "files": "{\r\n    \".my.cnf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"bind-address\": \"bind-address=0.0.0.0\"\r\n        }\r\n    }\r\n}",
