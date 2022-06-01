@@ -7,7 +7,7 @@
     "name": "ET Legacy",
     "author": "parker@parkervcp.com",
     "description": "Welcome to Enemy Territory: Legacy, an open source project that aims to create a fully compatible client and server for the popular online FPS game Wolfenstein: Enemy Territory - whose gameplay is still considered unmatched by many, despite its great age.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "image": "ghcr.io\/parkervcp\/yolks:ubuntu",
     "startup": ".\/etlded +set net_port {{SERVER_PORT}} +map {{MAP}}",
     "config": {
         "files": "{\r\n    \"etmain\/etl_server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"\/\/set net_ip \\\"\\\"\": \"set net_ip \\\"0.0.0.0\\\"\",\r\n            \"\/\/set net_port \\\"27960\\\"\": \"set net_port \\\"{{server.build.env.SERVER_PORT}}\\\"\"\r\n        }\r\n    }\r\n}",

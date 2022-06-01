@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+        "ghcr.io\/parkervcp\/yolks:ubuntu"
     ],
     "startup": ".\/KJMod\/Binaries\/Linux\/KJModServer -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -SteamServerName=\\\"{{HOSTNAME}}\\\" -KJModBaseUGCFolder=ServerData -DoNotRestartOnEmpty -InitUGCs -maxplayers={{MAX_PLAYERS}}",
     "config": {

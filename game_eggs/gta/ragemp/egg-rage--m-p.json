@@ -10,7 +10,7 @@
     "description": "https:\/\/rage.mp\/\r\n\r\nModified to work with the latest version of RAGE:MP\r\nWill automatically install linux bridge.\r\n**This server requires 2 ports to be added for the server. the main port and the next (port+1) as ports for the server.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet"
+        "ghcr.io\/parkervcp\/yolks:dotnet_6"
     ],
     "file_denylist": [],
     "startup": ".\/ragemp-server",

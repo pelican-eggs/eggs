@@ -7,7 +7,7 @@
     "name": "Vintage Story",
     "author": "mail@wuffy.eu",
     "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
+    "image": "ghcr.io/\/parkervcp\/yolks:mono_latest",
     "startup": "mono VintagestoryServer.exe --dataPath .\/data --port={{SERVER_PORT}} --maxclients={{MAX_CLIENTS}} {{OPTIONS}}",
     "config": {
         "files": "{}",

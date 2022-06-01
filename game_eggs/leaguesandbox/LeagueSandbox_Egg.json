@@ -7,7 +7,7 @@
     "name": "LeagueSandbox",
     "author": "domi@imagine.team",
     "description": "A simple egg to run LeagueSandbox server in pterodactyl",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_dotnet",
+    "image": "ghcr.io\/parkervcp\/yolks:dotnet_6",
     "startup": ".\/GameServerConsole",
     "config": {
         "files": "{}",

@@ -10,7 +10,7 @@
     "description": "alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:game_altv"
+        "ghcr.io\/parkervcp\/games:altv"
     ],
     "file_denylist": "",
     "startup": "chmod +x .\/altv-server && .\/altv-server",

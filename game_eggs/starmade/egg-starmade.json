@@ -7,7 +7,7 @@
     "name": "starmade",
     "author": "contact@hunters-tavern.de",
     "description": "starmade",
-    "image": "quay.io\/pterodactyl\/core:java",
+    "image": "ghcr.io\/pterodactyl\/yolks:java_8",
     "startup": "java -Xms128m -Xmx{{SERVER_MEMORY}}m -jar {{SERVER_JARFILE}} -server -port:{{SERVER_PORT}}",
     "config": {
         "files": "{}",

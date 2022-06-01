@@ -7,7 +7,7 @@
     "name": "tshock",
     "author": "parker@parkervcp.com",
     "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
-    "image": "quay.io\/pterodactyl\/core:mono",
+    "image": "ghcr.io\/parkervcp\/yolks:mono_latest",
     "startup": "mono TerrariaServer.exe -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -world {{WORLD_NAME}}.wld -autocreate {{WORLD_SIZE}}",
     "config": {
         "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",

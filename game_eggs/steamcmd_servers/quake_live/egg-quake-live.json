@@ -10,7 +10,7 @@
     "features": [
         "steam_disk_space"
     ],
-    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
+    "image": "ghcr.io\/parkervcp\/yolks:ubuntu",
     "startup": ".\/qzeroded.x64  +set net_port \"{{SERVER_PORT}}\" +set sv_hostname \"{{SERVER_NAME}}\" +set sv_serverType \"{{SERVER_TYPE}}\" +set g_password \"{{PASSWORD}}\" +sv_fps \"{{FPS}}\"",
     "config": {
         "files": "{}",

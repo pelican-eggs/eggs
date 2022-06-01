@@ -10,7 +10,7 @@
     "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_ubuntu"
+        "ghcr.io\/parkervcp\/yolks:ubuntu"
     ],
     "file_denylist": [],
     "startup": ".\/openttd -D",

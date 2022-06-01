@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+        "ghcr.io\/parkervcp\/yolks:ubuntu"
     ],
     "file_denylist": [],
     "startup": ".\/OnsetServer --noinput",

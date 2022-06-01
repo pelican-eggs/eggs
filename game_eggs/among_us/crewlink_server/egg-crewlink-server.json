@@ -8,7 +8,7 @@
     "author": "panel@oxtroit.com",
     "description": "An egg designed to allow support for Proximity Chat in Among Us using CrewLink Server",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12",
+    "image": "ghcr.io\/parkervcp\/yolks:nodejs_12",
     "startup": "yarn start",
     "config": {
         "files": "{}",

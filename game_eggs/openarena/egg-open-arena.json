@@ -10,7 +10,7 @@
     "description": "OpenArena is a community-produced deathmatch FPS based on GPL idTech3 technology.\r\n\r\nhttp:\/\/www.openarena.ws\/",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/oa_ded.x86_64 +set net_port {{SERVER_PORT}} +map {{GAME_MAP}}",

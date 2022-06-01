@@ -10,7 +10,7 @@
     "description": "Debian based MCGalaxy Egg.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete"
+        "ghcr.io\/parkervcp\/yolks:mono_latest"
     ],
     "file_denylist": [],
     "startup": "mono MCGalaxyCLI.exe",

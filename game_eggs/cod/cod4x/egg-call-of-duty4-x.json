@@ -10,7 +10,7 @@
     "description": "A client and server modification for Call of Duty 4: Modern Warfare with the aim to fix bugs and enhance gameplay!",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": "if [ ! -d \"{{GAME_FILE_PATH}}\" ]; then echo \"CoD 4 game files not found. Maybe they are not mounted?\"; echo \"In order for the server to start mount the game files here: {{GAME_FILE_PATH}}\"; while true; do sleep 2; done; fi; .\/cod4x18_dedrun +exec server.cfg +set dedicated \"{{SERVER_NETWORK_MODE}}\" +set sv_maxclients \"{{MAX_PLAYERS}}\" +set net_ip 0.0.0.0 +set net_port \"{{SERVER_PORT}}\" +set fs_basepath \"{{GAME_FILE_PATH}}\" +set fs_homepath . +map_rotate",
