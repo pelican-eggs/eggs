@@ -10,7 +10,7 @@
     "description": null,
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu"
+        "ghcr.io\/parkervcp\/yolks:ubuntu"
     ],
     "file_denylist": [],
     "startup": ".\/bin\/elasticsearch -E network.host=0.0.0.0 -E http.port={{SERVER_PORT}} -E discovery.type={{DISCOVERY_SEED_HOSTS}}",

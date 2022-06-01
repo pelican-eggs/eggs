@@ -10,7 +10,7 @@
     "description": "MinIO is a cloud storage server compatible with Amazon S3, released under Apache License v2. As an object store, MinIO can store unstructured data such as photos, videos, log files, backups and container images. The maximum size of an object is 5TB.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu"
+        "ghcr.io\/parkervcp\/yolks:ubuntu"
     ],
     "startup": ".\/minio.sh",
     "config": {

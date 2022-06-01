@@ -8,7 +8,7 @@
     "author": "info@goover.de",
     "description": "The Open Source Webinterface For TeamSpeak Servers",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "image": "ghcr.io\/parkervcp\/yolks:debian",
     "startup": ".\/start_ts3-manager -p ${SERVER_PORT}",
     "config": {
         "files": "{}",
