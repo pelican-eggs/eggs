@@ -70,7 +70,6 @@
   * [SpongeForge](minecraft/java/spongeforge)
   * [SpongeVanilla](minecraft/java/spongevanilla)
   * [Technic](minecraft/java/technic)
-  * [Tuinity](minecraft/java/tuinity)
   * [VanillaCord](minecraft/java/vanillacord)
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
