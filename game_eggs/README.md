@@ -130,6 +130,7 @@
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [Onset](steamcmd_servers/onset)
+* [Open Fortress](steamcmd_servers/open_fortress)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
 * [Post Scriptum](steamcmd_servers/post_scriptum)
