@@ -92,6 +92,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Onset](onset)
 
+## Open Fortress
+
+[Open Fortress](open_fortress)
+
 ## Pavlov VR
 
 [Pavlov VR](pavlov_vr)
