@@ -9,7 +9,7 @@ This will grab the latest release when the version is set to latest.
 
 It "should" grab versions of the pack based on the modpack version numbers
 
-## API Kays
+## API Keys
 
 You will need to get an API key to run the installer now. Make an account at https://console.curseforge.com/
 
