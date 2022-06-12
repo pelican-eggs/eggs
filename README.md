@@ -126,8 +126,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [League Sandbox](game_eggs/leaguesandbox)
 
-* [League Sandbox](game_eggs/leaguesandbox/leaguesandbox)
-
 [Minetest](game_eggs/minetest) (including MTG)
 
 * [Minetest](game_eggs/minetest/minetest)
@@ -157,7 +155,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [SpongeForge](game_eggs/minecraft/java/spongeforge)
   * [SpongeVanilla](game_eggs/minecraft/java/spongevanilla)
   * [Technic](game_eggs/minecraft/java/technic)
-  * [Tuinity](game_eggs/minecraft/java/tuinity)
   * [VanillaCord](game_eggs/minecraft/java/vanillacord)
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
@@ -193,6 +190,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ARK: Survival Evolved](game_eggs/steamcmd_servers/ark_survival_evolved)
 * [Arma](game_eggs/steamcmd_servers/arma)
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
+  * [Arma Reforger](game_eggs/steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
@@ -200,6 +198,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
+* [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
@@ -208,8 +207,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
-* [Left 4 Dead](game_eggs/steamcdm_servers/left4dead)
-* [Left 4 Dead 2](game_eggs/steamcdm_servers/left4dead_2)
+* [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
+* [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
@@ -240,6 +239,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
+* [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
@@ -265,6 +265,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Wine Generic](game_eggs/wine/generic)
 
 [Xonotic](game_eggs/xonotic/xonotic)
+
+[FoundryVTT](game_eggs/FoundryVTT)
 
 ## [Monitoring](/monitoring/)
 

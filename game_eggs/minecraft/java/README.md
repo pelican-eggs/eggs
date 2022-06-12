@@ -115,11 +115,6 @@ This is a direct fork of the default spigot service with the added benefit of be
 [Airplane Github](https://github.com/TECHNOVE/Airplane)
 A stable, optimized and well supported Paper fork.
 
-### [Tuinity](tuinity)
-
-[Tuinity GitHub](https://github.com/Spottedleaf/Tuinity)
-Fork of Paper aimed at improving server performance at high playercounts.
-
 ## Sponge Powered
 
 ### [SpongeForge](spongeforge)
