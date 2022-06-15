@@ -1,18 +1,19 @@
 {
-    "_comment": "Pterodactyl V Rising Egg ~ David Wolfe (Red-Thirten) and Kapatheus ~ 2022-05-28",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
+    "exported_at": "2022-06-12T23:01:53+03:00",
     "name": "V Rising",
     "author": "rehlmgaming@gmail.com",
     "description": "Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:wine_latest"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
     "file_denylist": [],
     "startup": "wine64 .\/VRisingServer.exe -persistentDataPath save-data -address 0.0.0.0",
     "config": {
@@ -23,7 +24,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl V Rising Egg - egg-v-rising.json\r\n## Authors: David Wolfe (Red-Thirten), Kapatheus\r\n## Date: 2022\/05\/28\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\nexport HOME=\/mnt\/server\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd $HOME\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir $HOME +login anonymous $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so $HOME\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so $HOME\/.steam\/sdk64\/steamclient.so\r\n\r\n## V Rising Setup\r\nmkdir -p $HOME\/save-data\/Settings && cd \"$_\"\r\ncat > ServerHostSettings.json << EOF\r\n{\r\n  \"Name\": \"${SERVER_NAME}\",\r\n  \"Description\": \"${DESCRIPTION}\",\r\n  \"Port\": ${SERVER_PORT},\r\n  \"QueryPort\": ${QUERY_PORT},\r\n  \"MaxConnectedUsers\": ${MAX_PLAYERS},\r\n  \"MaxConnectedAdmins\": ${MAX_ADMINS},\r\n  \"ServerFps\": ${FPS},\r\n  \"SaveName\": \"${SAVE_NAME}\",\r\n  \"Password\": \"${SERVER_PASSWORD}\",\r\n  \"Secure\": ${SERVER_SECURE},\r\n  \"ListOnMasterServer\": ${SERVER_LIST},\r\n  \"AutoSaveCount\": ${SAVE_COUNT},\r\n  \"AutoSaveInterval\": ${SAVE_INTERVAL},\r\n  \"GameSettingsPreset\": \"${GAME_SETTINGS_PRESET}\",\r\n  \"AdminOnlyDebugEvents\": ${ADMIN_ONLY_DEBUG_EVENTS},\r\n  \"DisableDebugEvents\": ${DEBUG_EVENTS},\r\n  \"Rcon\": {\r\n    \"Enabled\": ${RCON},\r\n    \"Password\": \"${RCON_PASS}\",\r\n    \"Port\": ${RCON_PORT}\r\n  }\r\n}\r\nEOF",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl V Rising Egg - egg-v-rising.json\r\n## Authors: David Wolfe (Red-Thirten), Kapatheus\r\n## Date: 2022\/05\/28\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\nexport HOME=\/mnt\/server\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd $HOME\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir $HOME +login anonymous $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so $HOME\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so $HOME\/.steam\/sdk64\/steamclient.so\r\n\r\n## V Rising Setup\r\nmkdir -p $HOME\/save-data\/Settings && cd \"$_\"\r\ncat > ServerHostSettings.json << EOF\r\n{\r\n  \"Name\": \"${SERVER_NAME}\",\r\n  \"Description\": \"${DESCRIPTION}\",\r\n  \"Port\": ${SERVER_PORT},\r\n  \"QueryPort\": ${QUERY_PORT},\r\n  \"MaxConnectedUsers\": ${MAX_PLAYERS},\r\n  \"MaxConnectedAdmins\": ${MAX_ADMINS},\r\n  \"ServerFps\": ${FPS},\r\n  \"SaveName\": \"${SAVE_NAME}\",\r\n  \"Password\": \"${SERVER_PASSWORD}\",\r\n  \"Secure\": ${SERVER_SECURE},\r\n  \"ListOnMasterServer\": ${SERVER_LIST},\r\n  \"AutoSaveCount\": ${SAVE_COUNT},\r\n  \"AutoSaveInterval\": ${SAVE_INTERVAL},\r\n  \"GameSettingsPreset\": \"${GAME_SETTINGS_PRESET}\",\r\n  \"AdminOnlyDebugEvents\": ${ADMIN_ONLY_DEBUG_EVENTS},\r\n  \"DisableDebugEvents\": ${DEBUG_EVENTS},\r\n  \"Rcon\": {\r\n    \"Enabled\": ${RCON},\r\n    \"Password\": \"${RCON_PASS}\",\r\n    \"Port\": ${RCON_PORT}\r\n  }\r\n}\r\nEOF",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
@@ -34,9 +35,10 @@
             "description": "UDP port for Steam server list features.",
             "env_variable": "QUERY_PORT",
             "default_value": "9877",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": false,
-            "rules": "required|integer|between:1024,65536"
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
         },
         {
             "name": "Automatic Updates",
@@ -45,7 +47,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Game Settings Preset",
@@ -54,7 +57,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|in:,DuoPvP,HardcorePvP,Level30PvE,Level30PvP,Level50PvE,Level50PvP,Level70PvE,Level70PvP,SoloPvP,StandardPvE_Easy,StandardPvE_Hard,StandardPvE,StandardPvP_Easy,StandardPvP_Hard,StandardPVP"
+            "rules": "nullable|string|in:,DuoPvP,HardcorePvP,Level30PvE,Level30PvP,Level50PvE,Level50PvP,Level70PvE,Level70PvP,SoloPvP,StandardPvE_Easy,StandardPvE_Hard,StandardPvE,StandardPvP_Easy,StandardPvP_Hard,StandardPVP",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -63,7 +67,8 @@
             "default_value": "V Rising Dedicated Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Server Description",
@@ -72,7 +77,8 @@
             "default_value": "Welcome to the server!",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Max Connected Users",
@@ -81,7 +87,8 @@
             "default_value": "40",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|min:1"
+            "rules": "required|integer|min:1",
+            "field_type": "text"
         },
         {
             "name": "Max Connected Admins",
@@ -90,7 +97,8 @@
             "default_value": "4",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|min:0"
+            "rules": "required|integer|min:0",
+            "field_type": "text"
         },
         {
             "name": "Server Password",
@@ -99,7 +107,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Save Name",
@@ -108,7 +117,8 @@
             "default_value": "world1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Auto Save Count",
@@ -117,7 +127,8 @@
             "default_value": "50",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|min:0"
+            "rules": "required|integer|min:0",
+            "field_type": "text"
         },
         {
             "name": "Auto Save Interval",
@@ -126,7 +137,8 @@
             "default_value": "600",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|min:1"
+            "rules": "required|integer|min:1",
+            "field_type": "text"
         },
         {
             "name": "List On Master Server",
@@ -135,7 +147,8 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "[Repair] Validate Server Files",
@@ -144,7 +157,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string|nullable"
+            "rules": "string|nullable",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Server FPS",
@@ -153,7 +167,8 @@
             "default_value": "30",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|min:1"
+            "rules": "required|integer|min:1",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Enable RCON",
@@ -162,7 +177,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] RCON Password",
@@ -171,7 +187,8 @@
             "default_value": "somepassword",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] RCON Port",
@@ -179,8 +196,9 @@
             "env_variable": "RCON_PORT",
             "default_value": "25575",
             "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|between:1024,65536"
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Secure Server",
@@ -189,7 +207,8 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Admin Only Debug Events",
@@ -198,7 +217,8 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Disable Debug Events",
@@ -207,7 +227,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] V Rising Dedicated Server App ID",
@@ -216,7 +237,8 @@
             "default_value": "1829350",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Use Windows Branch",
@@ -225,7 +247,8 @@
             "default_value": "1",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|in:1"
+            "rules": "required|string|in:1",
+            "field_type": "text"
         }
     ]
 }
