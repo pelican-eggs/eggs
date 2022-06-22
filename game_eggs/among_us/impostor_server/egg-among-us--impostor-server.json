@@ -7,7 +7,7 @@
     "exported_at": "2021-07-23T12:00:05+03:00",
     "name": "Among Us - Impostor Server",
     "author": "info@goover.de",
-    "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThe latest version supported is 2020.9.22, both desktop and mobile.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
+    "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThe latest version supported is 2022.4.19, both desktop and mobile.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
     "features": null,
     "images": [
         "qaeonlucid/impostor:nightly"
