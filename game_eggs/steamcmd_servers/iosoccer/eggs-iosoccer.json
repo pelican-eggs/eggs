@@ -1,0 +1,88 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-02-20T01:24:34+01:00",
+    "name": "IOSOCER-server-hyper",
+    "author": "hyperbeats@raptorhost.fr",
+    "description": "SERVER IOSOCCER",
+    "features": [
+        "steam_disk_space"
+    ],
+    "images": [
+        "ghcr.io\/parkervcp\/games:source"
+    ],
+    "file_denylist": [],
+    "startup": ".\/srcds_run -console -game iosoccer -condebug -port {{SERVER_PORT}} +maxplayers {{SLOTS}} +fps_max {{MAX_FPS}} -tickrate {{TICKRATE}} +map {{MAP}} +rcon_password {{RCON}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Connection to Steam servers successful.\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} validate +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "Game ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "673990",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|regex:\/^(673990)$\/"
+        },
+        {
+            "name": "MAP",
+            "description": "",
+            "env_variable": "MAP",
+            "default_value": "8v8_vienna",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "SLOTS",
+            "description": "",
+            "env_variable": "SLOTS",
+            "default_value": "32",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "TICKRATE",
+            "description": "",
+            "env_variable": "TICKRATE",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "MAX FPS",
+            "description": "",
+            "env_variable": "MAX_FPS",
+            "default_value": "500",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "RCON",
+            "description": "",
+            "env_variable": "RCON",
+            "default_value": "pleasechangepassword",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}
