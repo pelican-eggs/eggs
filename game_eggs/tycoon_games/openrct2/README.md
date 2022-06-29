@@ -50,9 +50,9 @@ ___
 
 |  | Minimum |
 |---------|---------|
-| Processor | Multiarch is supported for most modern processors  |
+| Processor | x86/64 (\*multiarch may be supported for develop builds, but has not been tested) |
 | RAM | 256-512 MiB (depends on # of clients & park size) |
-| Storage | 80 MB (*may require more if building from source*) |
+| Storage | 110 MB (*may require more if building from source*) |
 | RCT2 Files | **Not required** |
 
 ___
@@ -71,15 +71,13 @@ Unfortunately, because console commands currently do not register, becoming the 
 1. Ensure the "Log Server Actions" startup variable is set to "true".
 2. Start the server and join it with the client you want to make an admin.
 3. Open `ServerData/serverlogs/<Server Name>/<Latest Date>.txt` and copy the SHA1 hash next to your client's username (note the username as well).
-4. Then, open `ServerData/users.json`. Paste the hash into the "hash" value, and change the "name" value to your client's username.
+4. Then, open `ServerData/users.json`. Paste the hash into the "hash" value, change the "name" value to your client's username, and save the file.
 5. Reboot the server, re-join it, and you should be an admin!
 
 After becoming an admin, you can use the in-game users management window to add additional admins (or groups) more easily if you wish.
 ___
 ### Known Issues
 The following are known issues that are unique to running OpenRCT2 on Pterodactyl, but likely can only be fixed by further development/updates from OpenRCT2.
-- Only building from source from the `develop` branch currently yields a package that is bootable. This will no longer be true for any OpenRCT2 releases after v.0.3.5.1.
-    - This also means that clients joining the server must be on the latest `develop` branch as well.
 - Configuring a password on the server disallows non-admin clients from entering in a password in their client to connect; it just disconnects them. Admin clients can still join normally. (reference issue [OpenRCT2/OpenRCT2#16396](https://github.com/OpenRCT2/OpenRCT2/issues/16396))
 - You may rarely run into the server crashing on start due to a "Floating point exception(core dumped)" error. If this occurs to you, please help with OpenRCT2 development by doing the following:
 	1. Add the following to the beginning of your server's startup command: `SEGFAULT_SIGNALS=fpe LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so `
