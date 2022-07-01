@@ -44,6 +44,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Cryofall](cryofall)
 
+## DayZ (Experimental)
+
+[DayZ (Experimental)](dayz-experimental)
+
 ## Don't Starve Together
 
 [Don't Starve Together](dont_starve)
@@ -184,6 +188,10 @@ This is a collection of servers that use SteamCMD to install.
 ## Unturned
 
 [Unturned](unturned)
+
+## V Rising
+
+[V Rising](v_rising)
 
 ## Valheim
 

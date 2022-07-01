@@ -155,7 +155,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [SpongeForge](game_eggs/minecraft/java/spongeforge)
   * [SpongeVanilla](game_eggs/minecraft/java/spongevanilla)
   * [Technic](game_eggs/minecraft/java/technic)
-  * [Tuinity](game_eggs/minecraft/java/tuinity)
   * [VanillaCord](game_eggs/minecraft/java/vanillacord)
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
@@ -199,6 +198,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
+* [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
@@ -239,6 +239,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
+* [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)

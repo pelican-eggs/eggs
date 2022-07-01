@@ -70,7 +70,6 @@
   * [SpongeForge](minecraft/java/spongeforge)
   * [SpongeVanilla](minecraft/java/spongevanilla)
   * [Technic](minecraft/java/technic)
-  * [Tuinity](minecraft/java/tuinity)
   * [VanillaCord](minecraft/java/vanillacord)
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
@@ -116,6 +115,7 @@
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
 * [CryoFall](steamcmd_servers/cryofall)
+* [DayZ (Experimental)](steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
 * [Fistful of Frags](steamcmd_servers/fof)
@@ -157,6 +157,7 @@
 * [The Forest](steamcmd_servers/the_forest)
 * [Tower Unite](steamcmd_servers/tower_unite)
 * [Unturned](steamcmd_servers/unturned)
+* [V Rising](steamcmd_servers/v_rising)
 * [Valheim](steamcmd_servers/valheim)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
