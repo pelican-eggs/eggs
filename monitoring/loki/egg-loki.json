@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-03T17:35:56-04:00",
+    "exported_at": "2022-07-03T17:40:29-04:00",
     "name": "Loki",
     "author": "unknown@unknown.com",
     "description": "Prometheus but for logs. This egg is for Loki instance only! You usually need pushing agents like Promtail to put logs in this",
@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Loki Version",
-            "description": "The version of Loki to use",
+            "description": "The version of Loki to use.\r\n\r\nFind all versions from https:\/\/github.com\/grafana\/loki",
             "env_variable": "LOKI_VERSION",
             "default_value": "latest",
             "user_viewable": true,
