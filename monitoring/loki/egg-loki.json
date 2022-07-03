@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-06-06T23:42:44+03:00",
+    "exported_at": "2022-07-03T17:35:56-04:00",
     "name": "Loki",
     "author": "unknown@unknown.com",
     "description": "Prometheus but for logs. This egg is for Loki instance only! You usually need pushing agents like Promtail to put logs in this",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/sh\r\nshopt -s extglob\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update installation system and install curl\r\napt-get update\r\napt-get install -y curl unzip\r\n# Cleanup previous install if available\r\n# Download and extract Loki\r\nversion=${LOKI_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/loki\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${version}\/loki-linux-amd64.zip --output loki-linux-amd64.zip\r\nunzip loki-linux-amd64.zip\r\nrm -rf loki-linux-amd64.zip\r\ncurl -L https:\/\/raw.githubusercontent.com\/grafana\/loki\/v${version}\/cmd\/loki\/loki-docker-config.yaml --output loki-docker-config.yaml",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# Switch to mounted working install directory\r\ncd \/mnt\/server\r\n\r\n# Download and extract Loki\r\n\r\nif [ \"$LOKI_VERSION\" = \"latest\" ]; then LOKI_VERSION=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/loki\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\necho -e \"running curl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${LOKI_VERSION}\/loki-linux-amd64.zip --output loki-linux-amd64.zip\"\r\ncurl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${LOKI_VERSION}\/loki-linux-amd64.zip --output loki-linux-amd64.zip\r\nunzip loki-linux-amd64.zip\r\nrm -rf loki-linux-amd64.zip\r\ncurl -L https:\/\/raw.githubusercontent.com\/grafana\/loki\/v${LOKI_VERSION}\/cmd\/loki\/loki-docker-config.yaml --output loki-docker-config.yaml\r\necho -e \"installation completed\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
