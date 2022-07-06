@@ -76,7 +76,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Voice Servers](/voice_servers)
 
 * [Lavalink](/voice_servers/lavalink)
-* [Teamspeak_arm64](/voice_servers/teamspeak_arm64)
+* [Teamspeak_ARM64](/voice_servers/teamspeak_ARM64)
 * [TeaSpeak](/voice_servers/teaspeak)
 * [TS3-Manager](/voice_servers/ts3_manager)
 
