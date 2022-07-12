@@ -16,6 +16,9 @@
 
 [Call of Duty 4X](cod/cod4x)
 
+[Doom](doom)
+* [Zandronum](doom/zandronum)
+
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)
