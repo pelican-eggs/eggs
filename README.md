@@ -145,9 +145,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Airplane](game_eggs/minecraft/java/airplane)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
   * [Fabric](game_eggs/minecraft/java/fabric)
-  * [Feather](game_eggs/minecraft/java/feather)  
-  * [Feed The Beast](game_eggs/minecraft/java/ftb)  
-  * [Forge](game_eggs/minecraft/java/forge)  
+  * [Feather](game_eggs/minecraft/java/feather)
+  * [Feed The Beast](game_eggs/minecraft/java/ftb)
+  * [Forge](game_eggs/minecraft/java/forge)
   * [Glowstone](game_eggs/minecraft/java/glowstone)
   * [Magma](game_eggs/minecraft/java/magma)
   * [Mohist](game_eggs/minecraft/java/mohist)
@@ -258,6 +258,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [TShock](game_eggs/terraria/tshock)
 
 [Tycoon Games](game_eggs/tycoon_games)
+
 * [OpenRCT2](game_eggs/tycoon_games/openrct2)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
 
@@ -272,6 +273,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [FoundryVTT](game_eggs/FoundryVTT)
 
 ## [Monitoring](/monitoring/)
+
+### Loki
+
+* [Loki](/monitoring/loki)
 
 ### Prometheus
 
