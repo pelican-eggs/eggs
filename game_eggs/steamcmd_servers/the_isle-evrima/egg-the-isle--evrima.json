@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-15T04:25:01+02:00",
+    "exported_at": "2022-07-15T04:49:38+02:00",
     "name": "The Isle - Evrima",
-    "author": "xvrage@gmail.com",
+    "author": "kkilbury01@gmail.com",
     "description": "Experience fierce open world survival gameplay as you attempt to stay alive on an unforgiving island inhabited by dinosaurs! Hunt. Grow. Survive.",
     "features": null,
     "docker_images": {
@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": "\/home\/container\/steamcmd\/steamcmd.sh +force_install_dir \/home\/container +login Anonymous +app_update 412680 -beta evrima +quit && \/home\/container\/TheIsle\/Binaries\/Linux\/TheIsleServer-Linux-Shipping -Port=$PORT -QueryPort=$QUERY_PORT -ini:Engine [EpicOnlineServices]:DedicatedServerClientId=xyza7891gk5PRo3J7G9puCJGFJjmEguW -ini:Engine:[EpicOnlineServices]:DedicatedServerClientSecret=pKWl6t5i9NJK8gTpVlAxzENZ65P8hYzodV8Dqe5Rlc8",
     "config": {
-        "files": "{}",
+        "files": "{\r\n    \"\/TheIsle\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"MaxPlayerCount\": \"MaxPlayerCount={{server.build.env.MAX_PLAYERS}}\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Queue system listening on\"\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
