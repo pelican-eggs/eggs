@@ -1,19 +1,12 @@
 # The Isle - Evrima
 
-As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive against a society of cannibalistic mutants.
-Build, explore, survive in this terrifying first-person survival horror simulator.
-
-## NOTE
-
-This server requires a Steam Token
-You can generate the token on steam at <https://steamcommunity.com/dev/managegameservers>
+Experience fierce open world survival gameplay as you attempt to stay alive on an unforgiving island inhabited by dinosaurs! Hunt. Grow. Survive.
 
 ## Server Ports
 
-The forest server requires three ports for access Server port (Default), Steam port (8766), Query Port (27016) but some plugins may require extra ports to enabled for the server.
+The Isle requires, by default, two ports. Those ports are as follows (Can be changed if necessary): 
 
 | Port   | default |
 |--------|---------|
-| Server | any     |
-| Steam  | 8766    |
-| Query  | 27016   |
+| Server | 7777    |
+| Query  | 7778   |
