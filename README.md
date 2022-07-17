@@ -194,6 +194,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
+* [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
