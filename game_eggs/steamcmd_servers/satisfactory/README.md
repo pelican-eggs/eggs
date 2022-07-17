@@ -152,7 +152,7 @@ ___
 
 ### Console Commands
 
-As of v0.5.1.10, the console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
+The console tab in the client server manager is the only way to execute commands. Entering commands via Pterodactyl do nothing.
 
 [List of known commands can be found via the Wiki.](https://satisfactory.fandom.com/wiki/Dedicated_servers#Console_commands)
 
