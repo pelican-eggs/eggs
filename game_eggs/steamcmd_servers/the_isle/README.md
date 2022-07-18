@@ -8,6 +8,5 @@ The Isle requires 4 ports
 | Port  | default |
 |-------|---------|
 | Game  | 7777    |
-| Query | 7778    |
 | Rcon  | 9999    |
 | Queue | 10000   |
