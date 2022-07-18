@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-18T08:05:28+02:00",
+    "exported_at": "2022-07-18T08:34:37+02:00",
     "name": "The Isle",
     "author": "fredrik.johansenfuun@gmail.com",
     "description": "The Isle is an open beta with an open-world survival game where players choose from three factions in an attempt to survive a fierce island. Hunt. Prey. Survive.",
@@ -16,7 +16,7 @@
     "startup": "\/home\/container\/steamcmd\/steamcmd.sh +force_install_dir \/home\/container +login Anonymous +app_update 412680 -beta evrima +quit && \/home\/container\/TheIsle\/Binaries\/Linux\/TheIsleServer-Linux-Shipping -Port=$SERVER_PORT -ini:Engine:[EpicOnlineServices]:DedicatedServerClientId=xyza7891gk5PRo3J7G9puCJGFJjmEguW -ini:Engine:[EpicOnlineServices]:DedicatedServerClientSecret=pKWl6t5i9NJK8gTpVlAxzENZ65P8hYzodV8Dqe5Rlc8",
     "config": {
         "files": "{\r\n    \"\/TheIsle\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"MaxPlayerCount\": \"MaxPlayerCount={{server.build.env.PLAYER_COUNT}}\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.PLAYER_COUNT}}\",\r\n            \"RconEnabled\": \"RconEnabled={{server.build.env.RCON}}\",\r\n            \"RconPort\": \"RconPort={{server.build.env.RCON_PORT}}\",\r\n            \"RconPassword\": \"RconPassword={{server.build.env.RCON_PASSWORD}}\",\r\n            \"QueuePort\": \"QueuePort={{server.build.env.QUEUE_PORT}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Queue system listening on'\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Queue system listening on\"\r\n}",
         "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "^C"
     },
