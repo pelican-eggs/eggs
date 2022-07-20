@@ -4,10 +4,10 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2022-04-17T16:09:38-05:00",
-    "name": "BeamMP",
-    "author": "me@grnt.dev",
-    "description": "Servers are an integral part of BeamMP; players are connected to each other through the server. They run natively on Windows and Linux. This Pterodactyl Egg makes it easier than ever to get a server up and running.\r\n\r\nYou can make private servers, which only people you invite can join, or public servers, which will show in our official server list.\r\n\r\nYou can read more about BeamMP Servers here https:\/\/wiki.beammp.com\/en\/home\/Server_Mod",
+    "exported_at": "2021-12-22T09:10:34+00:00",
+    "name": "BeamMP Servers",
+    "author": "noah@noahserver.online",
+    "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point through which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
     "features": null,
     "images": [
         "ghcr.io\/parkervcp\/yolks:debian"
