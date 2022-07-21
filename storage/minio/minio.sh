@@ -42,7 +42,8 @@ echo "$(tput setaf 3)Performing update...."
 echo "$(tput setaf 1)Removing old minio version"
 rm minio
 echo "$(tput setaf 3)Downloading new minio version"
-wget https://dl.min.io/server/minio/release/linux-amd64/minio
+export ARCH=$([[ "$(uname -m)" == "x86_64" ]] && echo "amd64" || echo "arm64")
+wget https://dl.min.io/server/minio/release/linux-$ARCH/minio
 chmod +x minio
 echo "$(tput setaf 2)Update Complete"
 fi

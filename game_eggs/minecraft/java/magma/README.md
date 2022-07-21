@@ -2,7 +2,7 @@
 
 Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.
 
-[Magma Website](https://magmefoundation.org/)
+[Magma Website](https://magmafoundation.org/)
 
 ## Server Ports
 
