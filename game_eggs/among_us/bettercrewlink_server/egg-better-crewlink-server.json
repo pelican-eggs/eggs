@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Github branch",
-            "description": "Select one of the available BetterCrewLink-server branches available. Master per default.",
+            "description": "Select one of the available BetterCrewLink-server branches. Master per default.",
             "env_variable": "BRANCH",
             "default_value": "master",
             "user_viewable": true,
