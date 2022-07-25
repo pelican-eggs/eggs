@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-25T22:35:11+02:00",
+    "exported_at": "2022-07-25T23:48:33+02:00",
     "name": "BetterCrewlink Server",
     "author": "tobiornotto@gmail.com",
     "description": "An egg designed to allow support for Proximity Chat in Among Us using BetterCrewLink Server",
     "features": null,
     "docker_images": {
-        "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12": "quay.io\/parkervcp\/pterodactyl-images:debian_nodejs-12"
+        "ghcr.io\/parkervcp\/yolks:nodejs_12": "ghcr.io\/parkervcp\/yolks:nodejs_12"
     },
     "file_denylist": [],
     "startup": "yarn start",
