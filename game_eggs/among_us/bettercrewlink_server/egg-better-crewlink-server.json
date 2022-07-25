@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-25T21:57:48+02:00",
+    "exported_at": "2022-07-25T22:35:11+02:00",
     "name": "BetterCrewlink Server",
     "author": "tobiornotto@gmail.com",
     "description": "An egg designed to allow support for Proximity Chat in Among Us using BetterCrewLink Server",
@@ -40,7 +40,7 @@
         },
         {
             "name": "Domain",
-            "description": "The hostname or IP of the server (a record without a proxy so if you have cloudflare make a extra dns record named for example direct.domain.com and disable the proxy for that record (this is for the turn server)",
+            "description": "Domain of your server or ip of your server",
             "env_variable": "HOSTNAME",
             "default_value": "",
             "user_viewable": true,
