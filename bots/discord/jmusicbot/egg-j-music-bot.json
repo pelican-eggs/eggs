@@ -9,7 +9,7 @@
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_16"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_16"
     ],
     "file_denylist": [],
     "startup": "java -Dnogui=true -jar JMusicBot.jar",

@@ -10,7 +10,7 @@
     "description": "This is for the default xonotic setup.",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/games:source"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/games:source"
     ],
     "file_denylist": [],
     "startup": ".\/xonotic-linux64-dedicated +log_file latest.log +net_address 0.0.0.0 +port {{SERVER_PORT}} +maxplayers {{MAX_PLAYERS}}",

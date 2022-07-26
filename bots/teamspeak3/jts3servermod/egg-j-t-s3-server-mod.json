@@ -10,7 +10,7 @@
     "description": "Setup:\r\n- Install the latest version\r\n- Go into config\/server1 and edit JTS3ServerMod_server.cfg\r\n- Save and start the server\r\n\r\nAuthor: https:\/\/www.stefan1200.de\/forum\/index.php?topic=2.0",
     "features": null,
     "docker_images": {
-        "ghcr.io\/pterodactyl\/yolks:java_8": "ghcr.io\/pterodactyl\/yolks:java_8"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_8": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_8"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar JTS3ServerMod.jar",

@@ -11,10 +11,10 @@
     "features": null,
     "images": [
         "quay.io\/pterodactyl\/core:java-glibc",
-        "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_17"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_11",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_16",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_8",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
