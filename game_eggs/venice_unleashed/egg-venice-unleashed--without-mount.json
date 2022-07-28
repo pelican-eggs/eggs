@@ -1,0 +1,83 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-27T15:58:10-04:00",
+    "name": "Venice Unleashed [Without Mount]",
+    "author": "me@itsmemac.com",
+    "description": "Experience Battlefield 3 like never before\r\nVU \/vi:ju:\/ is a community-oriented Battlefield 3 modding platform that gives you back control of your gaming experience.",
+    "features": null,
+    "docker_images": {
+        "Wine Latest (Preferred)": "ghcr.io\/parkervcp\/yolks:wine_latest",
+        "Wine Legacy": "quay.io\/parkervcp\/pterodactyl-images:debian_wine"
+    },
+    "file_denylist": [],
+    "startup": "if [ ! -f \/home\/container\/activated ]; then wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -activate -o_mail ${EMAIL} -o_pass ${PASSWORD}; touch \/home\/container\/activated; else wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -serverInstancePath \"$(winepath -w ~\/vu\/instance)\" -server -dedicated -listen 0.0.0.0:$SERVER_PORT -mHarmonyPort ${HARMONY} -RemoteAdminPort 0.0.0.0:${RCON}; fi",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Game successfully registered with Zeus\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Venice Unleashed installer\r\n#\r\n# This will just pull the latest VU server files and unpack it in directory.\r\napt update -y\r\ndpkg --add-architecture i386\r\napt -y --no-install-recommends install curl gnupg2 wget software-properties-common file unzip lib32gcc1 ca-certificates\r\n## VU specific because reasons\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\nmkdir -p \/mnt\/server\/tmp\r\ncd \/tmp\r\n## install latest wine\r\nwget -nc https:\/\/dl.winehq.org\/wine-builds\/winehq.key\r\napt-key add winehq.key\r\necho \"deb https:\/\/dl.winehq.org\/wine-builds\/debian\/ buster main\" >> \/etc\/apt\/sources.list\r\napt update\r\n## install wine, cabextract, and xvfb for winetricks\r\napt install -y --install-recommends winehq-stable cabextract xvfb\r\nexport WINEPREFIX=\/mnt\/server\/.wine\r\nexport WINEDLLOVERRIDES=\"mscoree,mshtml=\"\r\nexport DISPLAY=:0\r\nexport DISPLAY_WIDTH=1024\r\nexport DISPLAY_HEIGHT=768\r\nexport DISPLAY_DEPTH=16\r\nexport AUTO_UPDATE=1\r\nexport XVFB=1\r\n## install winetricks\r\nwget -q -O \/usr\/sbin\/winetricks https:\/\/raw.githubusercontent.com\/Winetricks\/winetricks\/master\/src\/winetricks \\\r\n&& chmod +x \/usr\/sbin\/winetricks\r\n## install vc redistributable\r\nxvfb-run --auto-servernum winetricks -q vcrun2019\r\n## Make VU Required Directories\r\ncd \/\r\nmkdir -p \/mnt\/server\/bf3\r\nmkdir -p \/mnt\/server\/vu\/client\r\nmkdir -p \/mnt\/server\/vu\/instance\r\ncd \/mnt\/server\/vu\/client\r\n# Validate and Download VU Server files\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then\r\nif curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\necho -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\nDOWNLOAD_LINK=${DOWNLOAD_URL}\r\nelse\r\necho -e \"link is invalid closing out\"\r\nexit 2\r\nfi\r\nfi\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n# unpack servver files\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\ntar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\nunzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\ntar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\necho -e \"unknown filetype. Exiting\"\r\nexit 2\r\nfi",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "VU Server Download URL",
+            "description": "Official URL provided by VU to download servers files.\r\n(Should not be changed unless you know what you are doing)",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "https:\/\/veniceunleashed.net\/files\/vu.zip",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Origin Account Email",
+            "description": "Your Origin Account Email to validate install",
+            "env_variable": "EMAIL",
+            "default_value": "example@example.com",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "email",
+            "field_type": "text"
+        },
+        {
+            "name": "Origin Account Password",
+            "description": "Your Origin Account Password to validate install",
+            "env_variable": "PASSWORD",
+            "default_value": "Password@123",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Harmony Port",
+            "description": "Port used by Harmony services",
+            "env_variable": "HARMONY",
+            "default_value": "7948",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Port",
+            "description": "Port used for RCON",
+            "env_variable": "RCON",
+            "default_value": "47200",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric",
+            "field_type": "text"
+        }
+    ]
+}
