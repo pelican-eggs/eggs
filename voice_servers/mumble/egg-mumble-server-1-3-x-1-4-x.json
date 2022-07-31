@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-31T10:12:53+02:00",
+    "name": "Mumble Server (1.3.x-1.4.x)",
+    "author": "josdekurk@gmail.com",
+    "description": "Mumble is an open source, low-latency, high quality voice chat software primarily intended for use while gaming.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/murmur.x86 -fg",
+    "config": {
+        "files": "{\r\n    \"murmur.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"logfile\": \"murmur.log\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"host\": \"0.0.0.0\",\r\n            \"users\": \"{{server.build.env.MAX_USERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server listening on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y tar curl jq file bzip2 wget\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\nrm murmur.x86\r\ncd \/tmp\r\n\r\nif  [[ \"${MUMBLE_VERSION}\" == \"latest\" ]] ; then\r\necho \"Downloading latest 1.4 version\"\r\nwget https:\/\/dl.mumble.info\/latest\/stable\/server-linux-x64 -O server-linux-x64\r\nwget https:\/\/raw.githubusercontent.com\/mumble-voip\/mumble\/master\/scripts\/murmur.ini -O murmur.ini\r\nmv server-linux-x64 murmur.x86\r\nchmod +x murmur.x86\r\ncp murmur.ini \/mnt\/server\r\ncp murmur.x86 \/mnt\/server\r\nelse\r\necho \"Downloading: ${MUMBLE_VERSION}\"\r\nwget  https:\/\/github.com\/mumble-voip\/mumble\/releases\/download\/${MUMBLE_VERSION}\/murmur-static_x86-${MUMBLE_VERSION}.tar.bz2 -O murmur-static_x86-${MUMBLE_VERSION}.tar.bz2\r\ntar -xjvf murmur-static_x86-${MUMBLE_VERSION}.tar.bz2\r\ncp -r murmur-static_x86-*\/* \/mnt\\\/server\r\nfi\r\necho \"done\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Version",
+            "description": "Version of Mumble Server to download and use.",
+            "env_variable": "MUMBLE_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|in:1.3.1,1.3.2,1.3.3,1.3.4,latest",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximum Users",
+            "description": "Maximum concurrent users on the mumble server.",
+            "env_variable": "MAX_USERS",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|min:1|max:100",
+            "field_type": "text"
+        }
+    ]
+}
