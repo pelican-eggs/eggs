@@ -10,7 +10,7 @@
     "description": "Experience Battlefield 3 like never before\r\nVU \/vi:ju:\/ is a community-oriented Battlefield 3 modding platform that gives you back control of your gaming experience.",
     "features": null,
     "docker_images": {
-        "Wine Stable": "ghcr.io\/parkervcp\/yolks:wine_latest",
+        "Wine Stable": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
     "startup": "if [ ! -f \/home\/container\/activated ]; then wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -activate -o_mail ${EMAIL} -o_pass ${PASSWORD}; touch \/home\/container\/activated; else wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -serverInstancePath \"$(winepath -w ~\/vu\/instance)\" -server -dedicated -listen 0.0.0.0:$SERVER_PORT -mHarmonyPort ${HARMONY} -RemoteAdminPort 0.0.0.0:${RCON}; fi",
