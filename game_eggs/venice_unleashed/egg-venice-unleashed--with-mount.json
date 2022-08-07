@@ -4,14 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-27T15:58:13-04:00",
+    "exported_at": "2022-08-07T02:06:14-04:00",
     "name": "Venice Unleashed [With Mount]",
     "author": "me@itsmemac.com",
     "description": "Experience Battlefield 3 like never before\r\nVU \/vi:ju:\/ is a community-oriented Battlefield 3 modding platform that gives you back control of your gaming experience.",
     "features": null,
     "docker_images": {
-        "Wine Latest (Preferred)": "ghcr.io\/parkervcp\/yolks:wine_latest",
-        "Wine Legacy": "quay.io\/parkervcp\/pterodactyl-images:debian_wine"
+        "Wine Stable": "ghcr.io\/parkervcp\/yolks:wine_latest",
     },
     "file_denylist": [],
     "startup": "if [ ! -f \/home\/container\/activated ]; then wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -activate -o_mail ${EMAIL} -o_pass ${PASSWORD}; touch \/home\/container\/activated; else wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -serverInstancePath \"$(winepath -w ~\/vu\/instance)\" -server -dedicated -listen 0.0.0.0:$SERVER_PORT -mHarmonyPort ${HARMONY} -RemoteAdminPort 0.0.0.0:${RCON}; fi",
