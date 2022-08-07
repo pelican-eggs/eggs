@@ -28,6 +28,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Barotrauma](barotrauma)
 
+## Black Mesa
+
+[Black Mesa](black_mesa)
+
 ## Citadel: Forged with Fire
 
 [citadel](citadel)

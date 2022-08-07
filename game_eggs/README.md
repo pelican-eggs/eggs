@@ -112,6 +112,7 @@
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
+* [Black Mesa](steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
 * [CryoFall](steamcmd_servers/cryofall)
