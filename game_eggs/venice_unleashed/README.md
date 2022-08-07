@@ -27,7 +27,7 @@ There is 2 variants of Eggs for Venice Unleashed
 In order to reduce size of server, **/bf3** directory is shared with multiple servers rather than having it in root directory of each server.
 
 This type of egg uses mount feature of Pterodactyl where you need to create a mount for **/bf3** directory and mount it to server.
-Refer to this [link](https://pterodox.com/guides/mounts.html)  for more info on how to create mounts in Pterodactyl Panel
+Refer to this [link](https://pterodactyl.io/guides/mounts.html)  for more info on how to create mounts in Pterodactyl Panel
 
 Below example shows BF3 game files mount hosted in source path `/var/lib/pterodactyl/mounts/bf3` which has required BF3 game files
 ![Mounts](https://i.postimg.cc/mgrmVL5t/image.png)
