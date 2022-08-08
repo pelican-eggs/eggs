@@ -1,0 +1,134 @@
+"GameInfo"
+{
+	game 			"Open Fortress"
+	title 			""
+	title2			""	
+	gamelogo		"1"
+	developer		"https://github.com/AgitationSkeleton/open_fortress/blob/master/credits.txt"
+	developer_url	"https://github.com/KaidemonLP/Open-Fortress-Source"
+	manual			""
+	
+	type			"multiplayer_only"
+	hasportals		"0" // gameui.dll
+	hashdcontent	"0" // gameui.dll
+	nomodels		"0" // gameui.dll
+	nohimodel		"0" // gameui.dll
+	nocrosshair		"0" // gameui.dll
+	advcrosshair 	"1" // gameui.dll
+	nodifficulty	"1" // gameui.dll
+	supportsvr		"0" // engine.dll + gameui.dll
+	bots			"0" // gameui.dll
+	nodegraph		"1" // engine.dll
+	perfwizard		"0" // unused
+	SupportsDX8		"0" // unused
+	SupportsDX9		"1" // unused
+	SupportsDX10	"0" // unused
+	SupportsDX11	"0" // unused
+	SupportsXbox	"0" // unused
+	SupportsXbox360	"0" // unused
+	SupportsXboxOne	"0" // unused
+	SupportsPS3		"0" // unused
+	SupportsPS4		"0" // unused
+	icon			"resource/game"
+	GameData		"ofd_fic2.fgd"
+	InstancePath	"maps/instances/"
+	
+	hidden_maps
+	{
+		"test_speakers"		1
+		"test_hardware"		1
+        "background01"		1
+        "background02"		1
+        "background03"		1
+        "background04"		1
+        "background05"		1
+        "background06"		1
+        "background07"		1
+        "background08"		1
+        "background09"		1
+        "background12"		1
+        "background15"		1
+		"ep1_c17_00"		1
+		"ep1_c17_00a"		1
+		"ep1_c17_01"		1
+		"ep1_c17_01a"		1
+		"ep1_c17_02"		1
+		"ep1_c17_02a"		1
+		"ep1_c17_02b"		1
+		"ep1_c17_05"		1
+		"ep1_c17_06"		1
+		"ep1_citadel_00"	1
+		"ep1_citadel_00_demo" 1
+		"ep1_citadel_01"	1
+		"ep1_citadel_02"	1
+		"ep1_citadel_02b"	1
+		"ep1_citadel_03"	1
+		"ep1_citadel_04"	1
+		"ep1_background01"	1
+		"ep1_background01a"	1
+		"ep1_background02"	1
+		"ep2_outland_01"	1
+		"ep2_outland_01a"	1
+		"ep2_outland_02"	1
+		"ep2_outland_03"	1
+		"ep2_outland_04"	1
+		"ep2_outland_05"	1
+		"ep2_outland_06"	1
+		"ep2_outland_06a"	1
+		"ep2_outland_07"	1
+		"ep2_outland_08"	1
+		"ep2_outland_09"	1
+		"ep2_outland_10"	1
+		"ep2_outland_10a"	1
+		"ep2_outland_11"	1
+		"ep2_outland_11a"	1
+		"ep2_outland_11b"	1
+		"ep2_outland_12"	1
+		"ep2_outland_12a"	1
+		"ep2_background01"	1
+		"ep2_background02"	1
+		"ep2_background02a"	1
+		"ep2_background03"	1
+		"credits"			1
+		"vst_lostcoast"		1
+        "test"				1
+		"sdk_vehicles"		1
+	}
+	
+	FileSystem
+	{
+		SteamAppId				243750
+		
+		SearchPaths
+		{
+			game+mod			|gameinfo_path|custom/*
+			game+game_write+mod+mod_write+default_write_path |gameinfo_path|.
+			gamebin				|gameinfo_path|bin
+			
+			// The lines below until the BREAK comment are responsible for the game resources to work properly
+			// in Hammer and other Source tools. The default setup assumes that you have everything (Steam, TF2,
+			// Source SDK and OF) in the same drive letter/partition. If you have a different storage configuration,
+			// feel free to modify the paths below between quotes (example: D:\Steam\steamapps\common\Team Fortress 2\tf).
+			game				"/home/container/tf2/tf/tf2_misc.vpk"
+			game				"/home/container/tf2/tf/tf2_sound_misc.vpk"
+			game				"/home/container/tf2/tf/tf2_sound_vo_english.vpk"
+			game				"/home/container/tf2/tf/tf2_textures.vpk"
+			game				"/home/container/tf2/tf"
+			
+			game				"/home/container/tf2/hl2/hl2_textures.vpk"
+			game				"/home/container/tf2/hl2/hl2_sound_vo_english.vpk"
+			game				"/home/container/tf2/hl2/hl2_sound_misc.vpk"
+			
+			// The hl2 folder here is from Source SDK Base 2013 Multiplayer.
+			game				"|all_source_engine_paths|hl2\hl2_misc.vpk"
+			game				"|all_source_engine_paths|hl2"
+			// ========== BREAK ==========
+			
+			platform			|all_source_engine_paths|platform/platform_misc.vpk
+			platform			|all_source_engine_paths|platform
+			
+			game+download		|gameinfo_path|download
+			
+		}
+	}
+}

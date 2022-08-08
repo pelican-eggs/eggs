@@ -33,6 +33,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [discord.java](bots/discord/discord.java) Java generic
 * [discord.js](bots/discord/discord.js) Node JS generic
 * [discord.py](bots/discord/discord.py) Python generic
+* [discord.rs](bots/discord/discord.rs) Rust generic
 * [Dynamica](/bots/discord/dynamica) Node JS
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
@@ -76,6 +77,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Voice Servers](/voice_servers)
 
 * [Lavalink](/voice_servers/lavalink)
+* [Teamspeak_ARM64](/voice_servers/teamspeak_ARM64)
 * [TeaSpeak](/voice_servers/teaspeak)
 * [TS3-Manager](/voice_servers/ts3_manager)
 
@@ -121,6 +123,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [GTAC](game_eggs/gta/gtac)
 
 [League Sandbox](game_eggs/leaguesandbox)
+
+[Los Angeles Crimes](game_eggs/losangelescrimes)
 
 [Mindustry](game_eggs/mindustry)
 
@@ -194,6 +198,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
+* [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
@@ -213,6 +218,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
+* [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
@@ -310,5 +316,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### RabbitMQ
 
 * [rabbitmq](/software/rabbitmq)
+
+### Owncast
+
+* [owncast](/software/owncast)
+
+=======
 ### 5e Tools
 * [5e Tools](/software/5e-tools)
