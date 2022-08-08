@@ -39,6 +39,8 @@
 * GTA
   * [GTAC](gta/gtac)
 
+[Los Angeles Crimes](losangelescrimes)
+
 [League Sandbox](leaguesandbox)
 
 [Mindustry](mindustry)
