@@ -1,21 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-11-25T23:18:02+00:00",
+    "exported_at": "2022-08-08T17:51:35+02:00",
     "name": "The Forest",
     "author": "admin@softwarenoob.com",
     "description": "As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive against a society of cannibalistic mutants. Build, explore, survive in this terrifying first-person survival horror simulator.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:wine_latest"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
     "file_denylist": [],
-    "startup": "xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 \/home\/container\/TheForestDedicatedServer.exe -batchmode -nographics -nosteamclient -savefolderpath \/home\/container\/TheForestDedicatedServer_Data -configfilepath \/home\/container\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg |grep -v 'RenderTexture.Create failed: format unsupported - 2.'",
+    "startup": "winetricks sound=disabled; export WINEDEBUG=-all; xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 \/home\/container\/TheForestDedicatedServer.exe -batchmode -nographics -nosteamclient -savefolderpath \/home\/container\/TheForestDedicatedServer_Data -configfilepath \/home\/container\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg |grep -v 'RenderTexture.Create failed: format unsupported - 2.'",
     "config": {
         "files": "{\r\n    \"\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"serverIP\": \"serverIP 0.0.0.0\",\r\n            \"serverSteamPort\": \"serverSteamPort {{server.build.env.STEAM_PORT}}\",\r\n            \"serverGamePort\": \"serverGamePort {{server.build.default.port}}\",\r\n            \"serverQueryPort\": \"serverQueryPort {{server.build.env.QUERY_PORT}}\",\r\n            \"serverName\": \"serverName {{server.build.env.SERVER_NAME}}\",\r\n            \"serverPlayers\": \"serverPlayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"serverPassword\": \"serverPassword {{server.build.env.SERVER_PASS}}\",\r\n            \"serverPasswordAdmin\": \"serverPasswordAdmin {{server.build.env.ADMIN_PASS}}\",\r\n            \"serverSteamAccount\": \"serverSteamAccount {{server.build.env.STEAM_ACC}}\",\r\n            \"enableVAC\": \"enableVAC {{server.build.env.VAC}}\",\r\n            \"difficulty\": \"difficulty {{server.build.env.SERVER_DIFFICULTY}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Game autosave started\"\r\n}",
@@ -37,7 +37,8 @@
             "default_value": "556450",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,6"
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -46,7 +47,8 @@
             "default_value": "Pterodactyl Forest Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Steam Port",
@@ -55,7 +57,8 @@
             "default_value": "8766",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "[Connection Port] Query Port",
@@ -64,7 +67,8 @@
             "default_value": "27016",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Max Players",
@@ -73,7 +77,8 @@
             "default_value": "10",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Difficulty",
@@ -82,7 +87,8 @@
             "default_value": "Normal",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:Peaceful,Normal,Hard"
+            "rules": "required|string|in:Peaceful,Normal,Hard",
+            "field_type": "text"
         },
         {
             "name": "Steam Account Token",
@@ -91,7 +97,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Server Password",
@@ -100,7 +107,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20"
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Admin Password",
@@ -109,7 +117,8 @@
             "default_value": "cHanGetHePaSwWord",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Enable VAC",
@@ -118,7 +127,8 @@
             "default_value": "off",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:3"
+            "rules": "required|string|max:3",
+            "field_type": "text"
         },
         {
             "name": "Windows Install",
@@ -127,7 +137,8 @@
             "default_value": "1",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|in:1"
+            "rules": "required|string|in:1",
+            "field_type": "text"
         },
         {
             "name": "Auto-Update",
@@ -136,7 +147,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean"
+            "rules": "required|boolean",
+            "field_type": "text"
         }
     ]
 }
