@@ -1,7 +1,8 @@
 # V Rising
 
-***NOTE: Server version currently marked as Early Access by the V Rising developers. Your mileage may vary as updates are released.***
-___
+**_NOTE: Server version currently marked as Early Access by the V Rising developers. Your mileage may vary as updates are released._**
+
+---
 
 ### Authors / Contributors
 
@@ -30,14 +31,15 @@ ___
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 
-___
+---
 
 ### Game Description
 
 From Stunlock Studios's [Website](https://playvrising.com/):
+
 > Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.
 
-___
+---
 
 ### Egg Capabilities
 
@@ -46,34 +48,35 @@ ___
 - All `ServerHostSettings.json` settings can be automatically configured via Startup variables.
   - This includes: Server name, game settings preset, password, max players, auto save settings, and more...
 - RCON ready (\*requires extra port – see [Server Ports](#server-ports)). See the RCON section under [Manual Configuration Topics](#manual-configuration-topics) for more info.
+- Load BepInEx if enabled
 
-___
+---
 
 ### Server Ports
 
 - Default server ports are listed below, but all three ports can be changed freely.
-- The only *required* port is the Game port, but the Query port is needed for the server to appear in the server list (Direct connect is still possible without the Query port). There have also been reports that servers only appear in the server list if they are popular, so consider this when troubleshooting.
+- The only _required_ port is the Game port, but the Query port is needed for the server to appear in the server list (Direct connect is still possible without the Query port). There have also been reports that servers only appear in the server list if they are popular, so consider this when troubleshooting.
 - Clients connect via the Game port.
 - The RCON port is optional and only required if the server owner enables/uses RCON.
 
-| Port | Default | Protocol |
-|---------|---------|---------|
-| **Game (Primary Port in Pterodactyl)** | 9876 | UDP |
-| Query | 9877 | UDP |
-| RCON | 25575 | TCP |
+| Port                                   | Default | Protocol |
+| -------------------------------------- | ------- | -------- |
+| **Game (Primary Port in Pterodactyl)** | 9876    | UDP      |
+| Query                                  | 9877    | UDP      |
+| RCON                                   | 25575   | TCP      |
 
-___
+---
 
 ### Installation/System Requirements
 
-|  | Bare Minimum | Recommended |
-|---------|---------|---------|
-| Processor | Recent x86/64 (AMD/Intel) processor. No 32 bit or ARM support. | Unsubstantiated reports say that RCON uses significantly more CPU when enabled, but I have not been able to replicate myself. |
-| RAM | 3072 MiB | 4096-6144 MiB |
-| Storage | 3.5 GB | 5-10 GB (or more, depending on save size or frequency) |
-| Game Ownership | Not required at all. | ---- |
+|                | Bare Minimum                                                   | Recommended                                                                                                                   |
+| -------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Processor      | Recent x86/64 (AMD/Intel) processor. No 32 bit or ARM support. | Unsubstantiated reports say that RCON uses significantly more CPU when enabled, but I have not been able to replicate myself. |
+| RAM            | 3072 MiB                                                       | 4096-6144 MiB                                                                                                                 |
+| Storage        | 3.5 GB                                                         | 5-10 GB (or more, depending on save size or frequency)                                                                        |
+| Game Ownership | Not required at all.                                           | ----                                                                                                                          |
 
-___
+---
 
 ### Manual Configuration Topics
 
