@@ -2,8 +2,6 @@
 
 Allowing users to create Path of Titans server on Pterodactyl panels.
 
-* [Path of Titans](pot)
-
 # Default Server Ports
 | Port    | Default |
 |---------|---------|
