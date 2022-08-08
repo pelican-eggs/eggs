@@ -312,6 +312,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### haste-server
 
 * [haste-server](/software/haste-server)
+### LanguageTool
+* [languagetool](/software/languagetool)
 
 ### Owncast
 
