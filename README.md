@@ -122,13 +122,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
+[League Sandbox](game_eggs/leaguesandbox)
+
 [Los Angeles Crimes](game_eggs/losangelescrimes)
 
 [Mindustry](game_eggs/mindustry)
 
 * [Mindustry](game_eggs/mindustry/mindustry)
-
-[League Sandbox](game_eggs/leaguesandbox)
 
 [Minetest](game_eggs/minetest) (including MTG)
 
