@@ -216,6 +216,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
+* [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
