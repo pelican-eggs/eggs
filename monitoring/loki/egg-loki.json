@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-08T15:50:16+02:00",
+    "name": "Loki",
+    "author": "unknown@unknown.com",
+    "description": "Prometheus but for logs. This egg is for Loki instance only! You usually need pushing agents like Promtail to put logs in this",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/loki-linux -config.file=loki-docker-config.yaml",
+    "config": {
+        "files": "{\r\n    \"loki-docker-config.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"server.http_listen_port\": \"{{server.build.default.port}}\",\r\n            \"common.ring.instance_addr\": \"0.0.0.0\",\r\n            \"common.path_prefix\": \"\/home\/container\/loki\",\r\n            \"common.storage.filesystem.chunks_directory\": \"\/home\/container\/loki\/chunks\",\r\n            \"common.storage.filesystem.rules_directory\": \"\/home\/container\/loki\/rules\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Loki started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Switch to mounted working install directory\r\ncd \/mnt\/server\r\n\r\napt update\r\napt install -y zip unzip wget curl git file\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n# Download and extract Loki\r\n\r\nif [ \"$LOKI_VERSION\" = \"latest\" ]; then LOKI_VERSION=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/loki\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\necho -e \"running curl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${LOKI_VERSION}\/loki-linux-${ARCH}.zip --output loki-linux-amd64.zip\"\r\ncurl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${LOKI_VERSION}\/loki-linux-${ARCH}.zip --output loki-linux-${ARCH}.zip\r\nunzip loki-linux-${ARCH}.zip\r\nrm -rf loki-linux-${ARCH}.zip\r\ncurl -L https:\/\/raw.githubusercontent.com\/grafana\/loki\/v${LOKI_VERSION}\/cmd\/loki\/loki-docker-config.yaml --output loki-docker-config.yaml\r\nmv loki-linux-* loki-linux\r\necho -e \"installation completed\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Loki Version",
+            "description": "The version of Loki to use.\r\n\r\nFind all versions from https:\/\/github.com\/grafana\/loki",
+            "env_variable": "LOKI_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

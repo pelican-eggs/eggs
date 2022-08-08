@@ -10,6 +10,7 @@
     "description": "a generic discord js bot egg\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "features": null,
     "images": [
+        "ghcr.io\/parkervcp\/yolks:nodejs_18",
         "ghcr.io\/parkervcp\/yolks:nodejs_17",
         "ghcr.io\/parkervcp\/yolks:nodejs_16",
         "ghcr.io\/parkervcp\/yolks:nodejs_15",
