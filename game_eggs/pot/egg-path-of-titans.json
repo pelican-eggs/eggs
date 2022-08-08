@@ -1,0 +1,75 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY WISP - https:\/\/wisp.gg\/",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2022-08-05T20:26:29+01:00",
+    "name": "Path of Titans",
+    "tag": "null",
+    "author": "dev@shepper.fr",
+    "description": "Path of Titans is an MMO dinosaur video game currently in active development for home computers and mobile devices fully compatible with cross platform play. Play as one of 18 core dinosaurs in a rich ecosystem filled with complex AI creatures and up to 200 other players.",
+    "image": "ghcr.io\/parkervcp\/games:source",
+    "startup": "\".\/PathOfTitans\/Binaries\/Linux\/PathOfTitansServer-Linux-Shipping\" -log -MULTIHOME=000.000.000 -Port={{SERVER_PORT}} -BranchKey={{BRANCH_TYPE}} -AuthToken={{AUTH_TOKEN}} -ServerGUID={{SERVER_GUID}} -Database={{DATABASE_TYPE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^C",
+        "custom": "{}"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install curl lib32gcc-s1 ca-certificates\r\n\r\n# Installation dependencies to make it work\r\napt-get install wget -y\r\n\r\napt-get install -y libicu-dev\r\n\r\n# Temporary file directory for installation\r\nmkdir \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Pulling necessary file to begin server installation\r\nwget https:\/\/launcher-cdn.alderongames.com\/AlderonGamesCmd-Linux-x64\r\n\r\n# Setting that file as an executable\r\nchmod u+x AlderonGamesCmd-Linux-x64\r\n\r\n# Running server installation and downloading necessary files\r\necho Updating Server Files\r\n.\/AlderonGamesCmd-Linux-x64 --game path-of-titans --server true --beta-branch $BRANCH_TYPE --auth-token $AUTH_TOKEN\r\n\r\n# Setting startup executable permissions\r\ncd .\/PathOfTitans\/Binaries\/Linux\/\r\nchmod u+x PathOfTitansServer-Linux-Shipping",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        },
+        "update": {
+            "script": ".\/AlderonGamesCmd-Linux-x64 --game path-of-titans --server true --beta-branch $BRANCH_TYPE --auth-token $AUTH_TOKEN",
+            "container": "alpine:3.4",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server GUID",
+            "description": "Set a randomly generated GUID for the server. Has to be unique. https:\/\/www.guidgenerator.com\/",
+            "env_variable": "SERVER_GUID",
+            "default_value": "00000000-0000-0000-0000-000000000000",
+            "tickable": false,
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:120"
+        },
+        {
+            "name": "Auth Token",
+            "description": "Requires an Auth Token generated from the Alderon Games website. https:\/\/alderongames.com\/oauth\/hosting-token",
+            "env_variable": "AUTH_TOKEN",
+            "default_value": "",
+            "tickable": false,
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "Branch Type",
+            "description": "Sets the branch type of the game to be installed. Valid types are \"demo-public-test\" and \"production\".",
+            "env_variable": "BRANCH_TYPE",
+            "default_value": "production",
+            "tickable": false,
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40"
+        },
+        {
+            "name": "Database Type",
+            "description": "Sets the database type on whether to be local or remote.",
+            "env_variable": "DATABASE_TYPE",
+            "default_value": "local",
+            "tickable": false,
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:12"
+        }
+    ],
+    "mods": []
+}
