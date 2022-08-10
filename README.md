@@ -87,6 +87,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Impostor Server](game_eggs/among_us/impostor_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
+* [BetterCrewLink Server](game_eggs/among_us/bettercrewlink_server)
 
 [BeamNG.drive](game_eggs/beamng)
 
