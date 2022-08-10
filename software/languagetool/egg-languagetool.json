@@ -1,0 +1,41 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-04-06T17:26:12+02:00",
+    "name": "LanguageTool",
+    "author": "thomasruhl@live.de",
+    "description": "This egg installs a LanguageTool server\r\n\r\nLanguageTool is an Open Source proofreading software for English, French, German, Polish, Russian, and more than 20 other languages. It finds many errors that a simple spell checker cannot find.\r\n\r\nView https:\/\/languagetool.org for more information.",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_8"
+    ],
+    "file_denylist": [],
+    "startup": "java -cp languagetool-server.jar org.languagetool.server.HTTPServer --port {{SERVER_PORT}} --allow-origin \\\"*\\\" --public --config config.properties",
+    "config": {
+        "files": "{\r\n    \"config.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"languageModel\": \"models\/\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\napk add --no-cache unzip # to make shure the unzipper is working properly\r\nmkdir -p \/mnt\/server\r\nmkdir -p \/mnt\/server\/models\r\ntouch config.properties\r\n\r\n# if TRAIN_MODELS has content install them\r\nif [ -n TRAIN_MODELS ]; then\r\n\r\n    content=$(curl -L https:\/\/languagetool.org\/download\/ngram-data\/)\r\n\r\n    links=$(echo \"$content\" | grep -o '<a href=\"[^\"]*\\.zip\">' | sed 's\/<a href=\"\/\/' | sed 's\/\">\/\/')\r\n    echo $links\r\n\r\n    cd \/mnt\/server\/models\r\n    for model in $TRAIN_MODELS; do\r\n        echo \"$model\"\r\n        for link in $links; do\r\n            # echo \"    $link\"\r\n            if [[ $link == *\"-$model-\"* ]]; then\r\n                fullLink=\"https:\/\/languagetool.org\/download\/ngram-data\/$link\"\r\n                echo \"Downloading $fullLink\"\r\n                echo \"this could take some while\"\r\n                curl $fullLink --output $model.zip\r\n                echo \"unziping $model.zip\"\r\n                unzip $model.zip\r\n                rm $model.zip\r\n            fi\r\n        done\r\n    done\r\nfi\r\n\r\n# main languagetool install\r\ncd \/mnt\/server\r\n\r\necho \"downloading languagetool\"\r\ncurl https:\/\/languagetool.org\/download\/LanguageTool-stable.zip --output download.zip\r\necho unziping\r\nunzip download.zip\r\necho moving files\r\n\r\ncp -r LanguageTool-*\/* .\r\n\r\nrm -rf LanguageTool-*\r\nrm download.zip -rf\r\n\r\necho Finished install",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Include traindata",
+            "description": "This uses many gigabytes of disk space. \r\n\r\nSeparate each value with spaces. For example, \"de en\". \r\n\r\nView all available models at https:\/\/languagetool.org\/download\/ngram-data\/",
+            "env_variable": "TRAIN_MODELS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string"
+        }
+    ]
+}
