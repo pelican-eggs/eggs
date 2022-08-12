@@ -11,12 +11,20 @@
 <table>
     <tr>
         <td align="center">
+            <a href="https://github.com/upd4ting">
+                <img src="https://avatars.githubusercontent.com/u/6763934" width="50px;" alt=""/><br /><sub><b>Upd4ting</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=upd4ting" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=upd4ting" title="Maintains">🔨</a>
+        </td>
+        <td align="center">
             <a href="https://github.com/lilkingjr1">
                 <img src="https://avatars.githubusercontent.com/u/4533989" width="50px;" alt=""/><br /><sub><b>Red-Thirten</b></sub>
             </a>
             <br />
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Maintains">🔨</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Contributor">💡</a>
         </td>
         <td align="center">
             <a href="https://github.com/kapatheus">
@@ -48,7 +56,7 @@ From Stunlock Studios's [Website](https://playvrising.com/):
 - All `ServerHostSettings.json` settings can be automatically configured via Startup variables.
   - This includes: Server name, game settings preset, password, max players, auto save settings, and more...
 - RCON ready (\*requires extra port – see [Server Ports](#server-ports)). See the RCON section under [Manual Configuration Topics](#manual-configuration-topics) for more info.
-- Load BepInEx if enabled
+- Load BepInEx so you can install mod on your server
 
 ---
 
