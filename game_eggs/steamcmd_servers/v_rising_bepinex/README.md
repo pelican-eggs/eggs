@@ -1,4 +1,4 @@
-# V Rising
+# V Rising BepInEx
 
 **_NOTE: Server version currently marked as Early Access by the V Rising developers. Your mileage may vary as updates are released._**
 
