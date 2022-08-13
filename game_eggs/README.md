@@ -14,8 +14,6 @@
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Call of Duty 4X](cod/cod4x)
-
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)
