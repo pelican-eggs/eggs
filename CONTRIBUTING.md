@@ -10,8 +10,8 @@ You can contribute by either creating a new pull request or testing [existing pu
 2. Keep it small.
     Only use what is absolutely needed. The [Yolks install images](https://github.com/parkervcp/yolks#installation-images) already contain the most basic packages that speeds up the installation process.
 
-3. Stay in the stock containers.
-    If you need something in a container, open a PR in [my yolks repo](https://github.com/parkervcp/yolks) where it can reviewed and built. Self-hosted or third-party images won't be accepted for security reasons.
+3. Use the stock images.
+    If you need something in an image, open a PR in [my yolks repo](https://github.com/parkervcp/yolks) where it can be reviewed and built. Self-hosted or third-party images won't be accepted for security reasons.
 
 4. Don't be afraid to submit PR's to the egg repo.
     I don't bite. I will work with you on the egg and the required things to run it. Feel free to open a draft PR if you don't quite have the egg finished yet by yourself.
