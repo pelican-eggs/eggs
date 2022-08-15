@@ -85,8 +85,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Among Us](game_eggs/among_us)
 
-* [Impostor Server](game_eggs/among_us/impostor_server)
+* [BetterCrewLink Server](game_eggs/among_us/bettercrewlink_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
+* [Impostor Server](game_eggs/among_us/impostor_server)
 
 [BeamNG.drive](game_eggs/beamng)
 
@@ -232,6 +233,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
+  * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
@@ -312,7 +314,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### haste-server
 
 * [haste-server](/software/haste-server)
+
 ### LanguageTool
+
 * [languagetool](/software/languagetool)
 
 ### Owncast
@@ -330,4 +334,3 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### 5e Tools
 
 * [5e Tools](/software/5e-tools)
-
