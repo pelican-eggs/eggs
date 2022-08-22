@@ -27,7 +27,7 @@ body:
     id: download-link
     attributes:
       label: Links for the download
-      description: This needs to be an official link and not one that is hosted on some forum page or a personal Github page.
+      description: This needs to be an official link and not one that is hosted on some forum page or a personal Github page. Docker image is not a viable option.
     validations:
       required: true
     validations:
@@ -36,7 +36,6 @@ body:
     id: instruction-link
     attributes:
       label: Links for the install docs
-      description: Link to install instructions or documentation based on which the server can be created
-      placeholder: Install the server, start it, play
+      description: Link to installation instructions or documentation covering required dependencies and configuration for the server creation. Docker image is not installation documentation!
     validations:
       required: true
