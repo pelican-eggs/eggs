@@ -22,7 +22,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## Please read the CONTRIBUTING.md before submitting PRs
 
-## [Bots](/bots)
+## [机器人](/bots)
 
 [Discord](/bots/discord)
 
@@ -56,7 +56,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
 
-## [Database](/database)
+## [数据库](/database)
 
 ### In-Memory Databases
 
@@ -74,14 +74,14 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [MariaDB](/database/sql/mariadb)
 * [PostgreSQL](/database/sql/postgres)
 
-## [Voice Servers](/voice_servers)
+## [语音服务器](/voice_servers)
 
 * [Lavalink](/voice_servers/lavalink)
 * [Teamspeak_ARM64](/voice_servers/teamspeak_ARM64)
 * [TeaSpeak](/voice_servers/teaspeak)
 * [TS3-Manager](/voice_servers/ts3_manager)
 
-## [Game Eggs](/game_eggs)
+## [游戏预设](/game_eggs)
 
 [Among Us](game_eggs/among_us)
 
