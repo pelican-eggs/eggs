@@ -27,7 +27,8 @@
 
 * GTA V
   * [FiveM](gta/fivem)
-  * [RageMP](gta/ragemp)
+  * [RageMP](gta/ragemp
+  * [ragecoop](gta/ragecoop)
   * [alt:V](gta/altv)
 
 * GTA SA
