@@ -10,7 +10,7 @@
     "description": "VoIP software designed with security in mind, featuring crystal clear voice quality, endless customization options, and scalabilty up to thousands of simultaneous users.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:box64": "ghcr.io\/parkervcp\/yolks:box64"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:box64": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:box64"
     },
     "file_denylist": [],
     "startup": "box64 .\/ts3server default_voice_port={{SERVER_PORT}} query_port={{QUERY_PORT}} filetransfer_ip=0.0.0.0 filetransfer_port={{FILE_TRANSFER}} license_accepted=1",

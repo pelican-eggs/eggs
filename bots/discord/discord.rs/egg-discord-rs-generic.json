@@ -10,10 +10,10 @@
     "description": "Creates a container that runs rust with cargo.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:rust_1.31",
-        "ghcr.io\/parkervcp\/yolks:rust_1.56",
-        "ghcr.io\/parkervcp\/yolks:rust_1.60",
-        "ghcr.io\/parkervcp\/yolks:rust_latest"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:rust_1.31",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:rust_1.56",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:rust_1.60",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:rust_latest"
     ],
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cargo run --release",

@@ -10,7 +10,7 @@
     "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:ubuntu"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:ubuntu"
     ],
     "file_denylist": [],
     "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} -n",

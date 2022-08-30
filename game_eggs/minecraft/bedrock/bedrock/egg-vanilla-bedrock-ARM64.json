@@ -12,7 +12,7 @@
         "pid_limit"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:box64": "ghcr.io\/parkervcp\/yolks:box64"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:box64": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:box64"
     },
     "file_denylist": [],
     "startup": "box64 .\/bedrock_server",

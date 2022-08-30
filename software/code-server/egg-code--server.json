@@ -10,10 +10,10 @@
     "description": "Run VS Code on any machine anywhere and access it in the browser.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:nodejs_17",
-        "ghcr.io\/parkervcp\/yolks:nodejs_16",
-        "ghcr.io\/parkervcp\/yolks:nodejs_14",
-        "ghcr.io\/parkervcp\/yolks:nodejs_12"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_17",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_16",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_14",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_12"
     ],
     "file_denylist": [],
     "startup": "sh .local\/lib\/code-server-{{VERSION}}\/bin\/code-server",

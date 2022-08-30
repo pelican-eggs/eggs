@@ -10,7 +10,7 @@
     "description": "alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/games:altv": "ghcr.io\/parkervcp\/games:altv"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:altv": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:altv"
     },
     "file_denylist": [],
     "startup": ".\/altv-server",

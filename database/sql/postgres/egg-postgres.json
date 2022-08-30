@@ -10,7 +10,7 @@
     "description": "A default Postgres install that is not really editable.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:postgres_14"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:postgres_14"
     ],
     "file_denylist": [],
     "startup": "postgres  -D \/home\/container\/postgres_db\/",

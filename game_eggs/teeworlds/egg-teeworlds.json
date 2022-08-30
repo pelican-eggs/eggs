@@ -10,7 +10,7 @@
     "description": "Teeworlds is a free online multiplayer game, available for all major operating systems. Battle with up to 16 players in a variety of game modes, including Team Deathmatch and Capture The Flag. You can even design your own maps!",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/teeworlds_srv",

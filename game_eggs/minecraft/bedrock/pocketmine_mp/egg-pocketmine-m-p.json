@@ -10,7 +10,7 @@
     "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian"
     },
     "file_denylist": [],
     "startup": ".\/bin\/php7\/bin\/php .\/PocketMine-MP.phar --no-wizard --disable-ansi",

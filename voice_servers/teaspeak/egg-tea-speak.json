@@ -10,7 +10,7 @@
     "description": "TeaSpeak is a free to use client and server software for VoIP communication.\r\n\r\nIts the ideal deal software for everyone who is annoyed about limits and restrictions.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:voice_teaspeak"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:voice_teaspeak"
     ],
     "file_denylist": [],
     "startup": ".\/TeaSpeakServer --property:binding.query.port={{QUERY_PORT}} --property:binding.file.port={{FILE_PORT}} --property:voice.default_port={{SERVER_PORT}}",

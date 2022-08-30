@@ -10,7 +10,7 @@
     "description": "A generic egg to run deno code.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/deno run {{JS_FILE}}",

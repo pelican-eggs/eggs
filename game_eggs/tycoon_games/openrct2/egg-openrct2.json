@@ -9,7 +9,7 @@
     "description": "OpenRCT2 is an open-source re-implementation of RollerCoaster Tycoon 2 (RCT2), expanding the game with new features, fixing bugs and raising game limits.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian"
     },
     "file_denylist": [],
     "startup": ".\/OpenRCT2\/openrct2-cli --version && .\/OpenRCT2\/openrct2-cli host $(if {{LOAD_AUTOSAVE}} && [ -d ServerData\/save\/autosave\/ ]; then find ServerData\/save\/autosave\/ | sort -r | head -1; else echo \"{{SAVE_URI}}\"; fi) --port {{SERVER_PORT}} --user-data-path \/home\/container\/ServerData\/",

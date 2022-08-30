@@ -10,10 +10,10 @@
     "description": "Nodemon javascript egg that automatically restarts the node application when file changes in the directory are detected\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload, then I assume you know what you are doing.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:nodejs_16",
-        "ghcr.io\/parkervcp\/yolks:nodejs_15",
-        "ghcr.io\/parkervcp\/yolks:nodejs_14",
-        "ghcr.io\/parkervcp\/yolks:nodejs_12"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_16",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_15",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_14",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_12"
     ],
     "file_denylist": [],
     "startup": "npm install nodemon; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${NODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm install ${NODE_PACKAGES}; fi; if [[ ! -z ${UNNODE_PACKAGES} ]]; then \/usr\/local\/bin\/npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then \/usr\/local\/bin\/npm install --production; fi; \/home\/container\/node_modules\/nodemon\/bin\/nodemon.js \/home\/container\/{{BOT_JS_FILE}}",

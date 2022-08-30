@@ -11,7 +11,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source"
     },
     "file_denylist": [],
     "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0 $(if {{DISABLE_SEASONAL}}; then echo \"-DisableSeasonalEvents\"; fi)",

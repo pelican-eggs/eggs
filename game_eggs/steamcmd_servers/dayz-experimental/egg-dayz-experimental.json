@@ -11,7 +11,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "ghcr.io\/parkervcp\/games:dayz"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:dayz"
     ],
     "file_denylist": [],
     "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -BEpath=.\/ -config=serverDZ.cfg -mod=\\\"{{CLIENT_MODS}}\\\" -serverMod=\\\"{{SERVERMODS}}\\\" \\\"{{STARTUP_PARAMS}}\\\"",
@@ -23,8 +23,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl DayZ (Experimental) Egg - egg-dayz-experimental.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/26\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
-            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl DayZ (Experimental) Egg - egg-dayz-experimental.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/26\r\n## License: MIT License\r\n## Image to install with is 'registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "container": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
     },

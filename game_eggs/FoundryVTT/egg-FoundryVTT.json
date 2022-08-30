@@ -10,7 +10,7 @@
     "description": "Foundry VTT is a standalone application built for experiencing multiplayer tabletop RPGs using a feature-rich and modern self-hosted application where your players connect directly through the browser.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:nodejs_17"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_17"
     ],
     "file_denylist": [],
     "startup": "node .\/app\/resources\/app\/main.js --dataPath=\"\/home\/container\/data\"",

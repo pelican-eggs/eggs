@@ -10,7 +10,7 @@
     "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": "if [ ! -f \".\/saves\/{{SAVE_NAME}}.zip\" ]; then .\/bin\/x64\/factorio --create .\/saves\/{{SAVE_NAME}}.zip --map-gen-settings data\/map-gen-settings.json --map-settings data\/map-settings.json; fi;\r\n .\/bin\/x64\/factorio --port {{SERVER_PORT}} --server-settings data\/server-settings.json --start-server saves\/{{SAVE_NAME}}.zip",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update \r\napt install -y curl tar xz-utils jq\r\n\r\nVERSION_JSON=$(curl -sSL https:\/\/factorio.com\/api\/latest-releases)\r\n\r\nlatest_stable=$(echo $VERSION_JSON | jq -r '.stable.headless')\r\nlatest_experimental=$(echo $VERSION_JSON | jq -r '.experimental.headless')\r\n\r\nif [ -z \"${FACTORIO_VERSION}\" ] || [ \"${FACTORIO_VERSION}\" == \"latest\" ]; then\r\n  DL_VERSION=$latest_stable\r\nelif [ \"${FACTORIO_VERSION}\" == \"experimental\" ]; then\r\n  DL_VERSION=$latest_experimental\r\nelse\r\n  DL_VERSION=${FACTORIO_VERSION}\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"\\n running 'curl -sL https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}' \\n\"\r\n\r\ncurl -sL https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}\r\n\r\ntar -xf factorio-${DL_VERSION} --strip-components=1 -C \/mnt\/server\r\n\r\nrm factorio-${DL_VERSION}\r\n\r\nif [ -e data\/map-gen-settings.json ]; then\r\n    echo \"map-gen exists\"\r\nelse\r\n    echo \"copying map-gen default settings\"\r\n    mv data\/map-gen-settings.example.json data\/map-gen-settings.json\r\nfi\r\n\r\nif [ -e data\/server-settings.json ]; then\r\n    echo \"server settings exists\"\r\nelse\r\n    echo \"copying server default settings\"\r\n    mv data\/server-settings.example.json data\/server-settings.json\r\nfi\r\n\r\nif [ -e map-settings.json ]; then\r\n    echo \"map settings exists\"\r\nelse\r\n    echo \"copying map default settings\"\r\n    mv data\/map-settings.example.json data\/map-settings.json\r\nfi\r\n\r\nif [ -e .\/saves\/${SAVE_NAME}.zip ]; then\r\n    echo \"save file exists\"\r\nelse\r\n    .\/bin\/x64\/factorio --create .\/saves\/${SAVE_NAME} --map-gen-settings data\/map-gen-settings.json --map-settings data\/map-settings.json\r\n    chmod o+w .\/saves\/${SAVE_NAME}.zip\r\nfi",
-            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "container": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/installers:debian",
             "entrypoint": "bash"
         }
     },

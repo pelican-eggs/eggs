@@ -10,9 +10,9 @@
     "description": "Creates a container that runs java.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:java_8",
-        "ghcr.io\/parkervcp\/yolks:java_11",
-        "ghcr.io\/parkervcp\/yolks:java_16"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:java_8",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:java_11",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:java_16"
     ],
     "file_denylist": [],
     "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",

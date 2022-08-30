@@ -10,9 +10,9 @@
     "description": "RabbitMQ is a feature rich, multi-protocol messaging broker.",
     "features": null,
     "images": [
-        "ghcr.io\/parkervcp\/yolks:erlang_24",
-        "ghcr.io\/parkervcp\/yolks:erlang_23",
-        "ghcr.io\/parkervcp\/yolks:erlang_22"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:erlang_24",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:erlang_23",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:erlang_22"
     ],
     "file_denylist": [],
     "startup": ".\/sbin\/rabbitmq-server",
