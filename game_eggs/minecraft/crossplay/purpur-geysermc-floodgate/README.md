@@ -1,4 +1,4 @@
-# Purpur
+# Purpur-Geyser-Floodgate
 
 Purpur-GeyserMC-Floodgate is a drop-in replacement for Paper servers designed for configurability, and new fun and exciting gameplay features, with the addition of GeyserMC and Floodgate
 
