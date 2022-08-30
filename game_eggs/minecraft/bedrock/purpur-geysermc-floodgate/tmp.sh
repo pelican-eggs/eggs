@@ -2,6 +2,7 @@
 # Paper Installation Script
 #
 # Server Files: \/mnt\/server
+# shellcheck shell=bash
 PROJECT=purpur
 
 if [ -n \"${DL_PATH}\" ]; then
@@ -50,4 +51,4 @@ curl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}
 if [ ! -f server.properties ]; then
     echo -e \"Downloading MC server.properties\"
     curl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/minecraft\/java\/server.properties
-fi",
+fi
