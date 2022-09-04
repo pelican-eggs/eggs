@@ -1,0 +1,122 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-09-04T13:41:19+02:00",
+    "name": "DDRaceNetwork",
+    "author": "mail@dewed.de",
+    "description": "DDraceNetwork (DDNet) is an actively maintained version of DDRace, a Teeworlds modification with a unique cooperative gameplay. Help each other play through custom maps with up to 64 players, compete against the best in international tournaments, design your own maps, or run your own server. The official servers are around the world. All ranks made on official servers are available worldwide and you can collect points!",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/DDNet-Server",
+    "config": {
+        "files": "{\r\n    \"data\/autoexec_server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"exec myServerconfig.cfg\": \"exec \\\".\/serverconfig.cfg\\\"\"\r\n        }\r\n    },\r\n    \"serverconfig.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_port\": \"sv_port {{server.build.default.port}}\",\r\n            \"sv_name\": \"sv_name \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"sv_map\": \"sv_map \\\"{{server.build.env.MAP}}\\\"\",\r\n            \"sv_rcon_password\": \"sv_rcon_password \\\"{{server.build.env.RCON_PASSWORD}}\\\"\",\r\n            \"password\": \"password \\\"{{server.build.env.PASSWORD}}\\\"\",\r\n            \"sv_rescue\": \"sv_rescue {{server.build.env.RESCUE}}\",\r\n            \"sv_register\": \"sv_register {{server.build.env.REGISTER}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[server]: server name is\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# DDRaceNetwork server installer\r\napt update \r\napt -y install curl tar xz-utils\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\ncd \/mnt\/server\r\n\r\n## fetch current game version from master or use VERSION if given\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    GITHUB_MASTER_GAME_VERSION=\"https:\/\/raw.githubusercontent.com\/ddnet\/ddnet\/master\/src\/game\/version.h\"\r\n    if [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_ACCESS_TOKEN}\" ] ; then\r\n        LATEST_GAME_VERSION=$(curl --silent \"${GITHUB_MASTER_GAME_VERSION}\")\r\n    else\r\n        LATEST_GAME_VERSION=$(curl -u ${GITHUB_USER}:${GITHUB_ACCESS_TOKEN} --silent \"${GITHUB_MASTER_GAME_VERSION}\")\r\n    fi\r\n    VERSION=$(echo ${LATEST_GAME_VERSION} | grep -oP '(?<=#define GAME_RELEASE_VERSION \")\\d{1,4}\\.\\d{1,4}\\.\\d{1,4}')\r\nfi\r\n\r\nINNER_FILE_NAME=\"DDNet-${VERSION}-linux_x86_64\"\r\nDOWNLOAD_LINK=\"https:\/\/ddnet.tw\/downloads\/${INNER_FILE_NAME}.tar.xz\"\r\nFILE_NAME=\"ddnet.tar.xz\"\r\n\r\n# download\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${FILE_NAME}\r\n# uncompress\r\ntar --strip-components=1 --overwrite -xvf ${FILE_NAME} ${INNER_FILE_NAME}\r\n# remove tar.xz\r\nrm -f ${FILE_NAME}\r\n\r\nif [ ! -f \"serverconfig.cfg\" ]; then\r\n    printf '%s\\n' 'sv_name \"My Pterodactyl DDNet Server\"' 'sv_map \"Sunny Side Up\"' 'sv_rcon_password ' 'password ' 'sv_rescue 0' 'sv_register 1' '' 'sv_welcome ' 'sv_client_suggestion  ' 'sv_client_suggestion_old  ' '' 'sv_ddrace_rules 1' 'sv_test_cmds 0' 'sv_rescue_delay 2' 'sv_vote_spectate 1' 'sv_vote_spectate_rejoindelay 5' 'sv_vote_kick 1' 'sv_vote_kick_bantime 5' 'sv_kill_protection 0' '' 'bindaddr 0.0.0.0' 'sv_port 8303' 'sv_server_type ddrace' >> serverconfig.cfg\r\nfi\r\n\r\necho \"Installation done.\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Github username",
+            "description": "[Optional] A username that can be provided for the installation script to authenticate with github.",
+            "env_variable": "GITHUB_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Github access token",
+            "description": "[Optional] An access token that can be provided in conjunction with a github username for the installation script to authenticate with github.",
+            "env_variable": "GITHUB_ACCESS_TOKEN",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Game version",
+            "description": "The game version to be installed. Could be an explicitly provided older version like \"16.0.3\" or the most current version available by leaving the value empty.\r\nPossible values: <empty> | x.x.x",
+            "env_variable": "VERSION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|regex:\/^\\d{1,4}\\.\\d{1,4}\\.\\d{1,4}$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Server name",
+            "description": "A server name that will be displayed in the games server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My Pterodactyl DDNet Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Map",
+            "description": "The map that is loaded upon server startup.",
+            "env_variable": "MAP",
+            "default_value": "Sunny Side Up",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON password",
+            "description": "Administrative password to the server. Empty values will default to a random password being generated on startup and shown in server console.",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server password",
+            "description": "A password that is required to join. Empty values will allow for anyone to join (public server).",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Rescue",
+            "description": "1 to allow \/rescue (also \/r) command so players can teleport themselves out of freeze. 0 to disallow.",
+            "env_variable": "RESCUE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0|max:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Register",
+            "description": "Register the server with the master server. 1 to show it in the server browser. 0 to only connect directly via ip.",
+            "env_variable": "REGISTER",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0|max:1",
+            "field_type": "text"
+        }
+    ]
+}

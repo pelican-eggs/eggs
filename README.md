@@ -255,6 +255,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Teeworlds](game_eggs/teeworlds)
 
 * [Teeworlds](game_eggs/teeworlds/teeworlds)
+* [DDRace](game_eggs/teeworlds/d-d-race-network)
 
 [Terraria](game_eggs/terraria)
 
