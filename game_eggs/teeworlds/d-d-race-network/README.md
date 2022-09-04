@@ -2,6 +2,12 @@
 
 [DDraceNetwork](https://ddnet.tw/) is an actively maintained version of DDRace, a Teeworlds modification with a unique cooperative gameplay. Help each other play through custom maps with up to 64 players, compete against the best in international tournaments, design your own maps, or run your own server. The official servers are around the world. All ranks made on official servers are available worldwide and you can collect points!
 
+## Requirements
+
+- [amd64](https://en.wikipedia.org/wiki/X86-64) cpu architecture
+
+*[arm64](https://en.wikipedia.org/wiki/AArch64) is not supported by this egg.*
+
 ## Configuration
 
 Configure via egg variables. [Additional configurations](https://ddnet.tw/settingscommands/) can be added via `serverconfig.cfg` in server root files.
