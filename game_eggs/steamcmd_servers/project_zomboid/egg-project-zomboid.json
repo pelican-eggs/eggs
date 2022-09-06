@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "ghcr.io\/pterodactyl\/games:source"
+        "ghcr.io\/parkervcp\/games:source"
     ],
     "file_denylist": [],
     "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -steamport1 {{STEAM_PORT}} -cachedir=\/home\/container\/.cache -servername \"{{SERVER_NAME}}\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
