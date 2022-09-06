@@ -1,23 +1,23 @@
-# databases
+# Databases
 
 ## In-Memory Databases
 
-### [redis](/redis/)
+### [redis](redis)
 
     https://redis.io/
 
 ## NoSQL
 
-### [mongodb](/nosql/mongodb/)
+### [mongodb](nosql/mongodb)
 
     https://www.mongodb.com/
 
 ## SQL Databases
 
-### [mariadb](/sql/mariadb/)
+### [mariadb](sql/mariadb)
 
     https://mariadb.org/
 
-### [postgres](/sql/postgres/)
+### [postgres](sql/postgres)
 
     https://www.postgresql.org/

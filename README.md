@@ -85,8 +85,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Among Us](game_eggs/among_us)
 
-* [Impostor Server](game_eggs/among_us/impostor_server)
+* [BetterCrewLink Server](game_eggs/among_us/bettercrewlink_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
+* [Impostor Server](game_eggs/among_us/impostor_server)
 
 [BeamNG.drive](game_eggs/beamng)
 
@@ -122,11 +123,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
+[League Sandbox](game_eggs/leaguesandbox)
+
+[Los Angeles Crimes](game_eggs/losangelescrimes)
+
 [Mindustry](game_eggs/mindustry)
 
 * [Mindustry](game_eggs/mindustry/mindustry)
-
-[League Sandbox](game_eggs/leaguesandbox)
 
 [Minetest](game_eggs/minetest) (including MTG)
 
@@ -196,6 +199,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
+* [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
@@ -215,6 +219,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
+* [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
@@ -228,6 +233,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
+  * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
@@ -311,8 +317,22 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [haste-server](/software/haste-server)
 
+### LanguageTool
+
+* [languagetool](/software/languagetool)
+
+### Owncast
+
+* [owncast](/software/owncast)
+
 ### RabbitMQ
 
 * [rabbitmq](/software/rabbitmq)
+
+### Reposilite
+
+* [Reposilite](/software/reposilite)
+
 ### 5e Tools
+
 * [5e Tools](/software/5e-tools)

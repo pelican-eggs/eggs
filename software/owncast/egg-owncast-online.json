@@ -1,0 +1,95 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2022-03-31T11:32:42+01:00",
+    "name": "owncast.online",
+    "author": "psychoalex@thevcbc.com",
+    "description": "Owncast is a self-hosted live video and web chat server for use with existing popular broadcasting software.",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:debian"
+    ],
+    "file_denylist": [],
+    "startup": ".\/owncast -webserverport {{SERVER_PORT}} -rtmpport {{RTMP_PORT}} -streamkey {{STREAM_KEY}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"The web admin interface is available at \/admin.\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n#Make Server Dir\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\ncd \/mnt\/server\/\r\n\r\n#Get Dependencies\r\napt-get -y update\r\napt-get -y install curl unzip tar jq\r\n\r\n#Get Owncast Install Files\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho Download URL is: ${DOWNLOAD_URL}\r\n\r\ncurl -L ${DOWNLOAD_URL} --output .\/owncast_installer.zip\r\n\r\n#curl -L https:\/\/github.com\/owncast\/owncast\/releases\/download\/v${OWNCAST_VERSION}\/owncast-${OWNCAST_VERSION}-linux-64bit.zip --output .\/owncast_installer.zip\r\n\r\n#Unzip Install Files\r\nunzip -o -q .\/owncast_installer.zip\r\nrm .\/owncast_installer.zip",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "RTMP Port",
+            "description": "The port that is used to receive the stream data.",
+            "env_variable": "RTMP_PORT",
+            "default_value": "8091",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer"
+        },
+        {
+            "name": "Stream\/Admin Key",
+            "description": "This is used to authenticate to the web admin interface, as well as to authenticate your stream.",
+            "env_variable": "STREAM_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:32|max:128"
+        },
+        {
+            "name": "Owncast Version",
+            "description": "The version of Owncast that you would like to install, from https:\/\/github.com\/owncast\/owncast\/releases\r\nAs an Example - \"v0.0.11\" for a specific version or \"latest\" for the most up to date version.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Github Repository",
+            "description": "Used to identify the github repository to pull the release from.",
+            "env_variable": "GITHUB_PACKAGE",
+            "default_value": "owncast\/owncast",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:120"
+        },
+        {
+            "name": "Github File Match",
+            "description": "Used to identify the specific asset under a release for download.",
+            "env_variable": "MATCH",
+            "default_value": "linux-64bit",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Github User",
+            "description": "Required if you are doing more calls than the github anonymous API user allows.",
+            "env_variable": "GITHUB_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:20"
+        },
+        {
+            "name": "Github Oauth Token",
+            "description": "Required if you are doing more calls than the github anonymous API user allows.",
+            "env_variable": "GITHUB_OAUTH_TOKEN",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:128"
+        }
+    ]
+}

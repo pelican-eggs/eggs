@@ -6,7 +6,7 @@
     },
     "exported_at": "2021-08-26T23:09:55-04:00",
     "name": "nodemon",
-    "author": "nick@blackfortmc.com",
+    "author": "nick@blackforthosting.com",
     "description": "Nodemon javascript egg that automatically restarts the node application when file changes in the directory are detected\r\n\r\nThis will clone a git repo for a bot. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload, then I assume you know what you are doing.",
     "features": null,
     "images": [
