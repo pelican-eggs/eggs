@@ -5,7 +5,7 @@
         "update_url": null
     },
     "exported_at": "2021-07-21T18:23:17+03:00",
-    "name": "Discord Java",
+    "name": "Generic Java",
     "author": "sneaky@sneakyhub.com",
     "description": "Creates a container that runs java.",
     "features": null,

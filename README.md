@@ -29,15 +29,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
-* [discordgo](bots/discord/discordgo) Golang generic
-* [discord.java](bots/discord/discord.java) Java generic
-* [discord.js](bots/discord/discord.js) Node JS generic
-* [discord.py](bots/discord/discord.py) Python generic
-* [discord.rs](bots/discord/discord.rs) Rust generic
 * [Dynamica](/bots/discord/dynamica) Node JS
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
-* [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
@@ -55,6 +49,17 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [TeamSpeak3](bots/teamspeak3)
 
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
+
+## [Generic Languages](/generic)
+
+* [deno](/generic/deno/)
+* [golang](/generic/golang/)
+* [java](/generic/java/)
+* [lua](/generic/lua/)
+* [nodejs](/generic/nodejs/)
+* [nodemon](/generic/nodemon/)
+* [python](/generic/python/)
+* [rust](/generic/rust/)
 
 ## [Database](/database)
 
