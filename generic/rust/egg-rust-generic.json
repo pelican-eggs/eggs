@@ -1,20 +1,20 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-04-17T16:56:51+01:00",
-    "name": "discord.rs generic",
+    "exported_at": "2022-07-25T14:36:57-04:00",
+    "name": "rust generic",
     "author": "ethan.coward@icloud.com",
     "description": "Creates a container that runs rust with cargo.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:rust_1.31",
-        "ghcr.io\/parkervcp\/yolks:rust_1.56",
-        "ghcr.io\/parkervcp\/yolks:rust_1.60",
-        "ghcr.io\/parkervcp\/yolks:rust_latest"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:rust_1.31": "ghcr.io\/parkervcp\/yolks:rust_1.31",
+        "ghcr.io\/parkervcp\/yolks:rust_1.56": "ghcr.io\/parkervcp\/yolks:rust_1.56",
+        "ghcr.io\/parkervcp\/yolks:rust_1.60": "ghcr.io\/parkervcp\/yolks:rust_1.60",
+        "ghcr.io\/parkervcp\/yolks:rust_latest": "ghcr.io\/parkervcp\/yolks:rust_latest"
+    },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cargo run --release",
     "config": {
@@ -38,7 +38,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Git Branch",
@@ -47,7 +48,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Auto Update",
@@ -56,7 +58,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean"
+            "rules": "required|boolean",
+            "field_type": "text"
         },
         {
             "name": "Git Username",
@@ -65,7 +68,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Git Access Token",
@@ -74,16 +78,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
-        },
-        {
-            "name": "Bot Token",
-            "description": "The discord token used to run your bot. Sets to the environment variable `DISCORD_TOKEN`\r\n\r\nAlternatively, you can use a .env file",
-            "env_variable": "DISCORD_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }

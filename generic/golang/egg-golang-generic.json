@@ -1,13 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-10-11T12:12:50-04:00",
-    "name": "discordgo generic",
+    "exported_at": "2022-07-25T14:20:37-04:00",
+    "name": "golang generic",
     "author": "parker@parkervcp.com",
-    "description": "A generic golang egg.\r\n\r\nMeant to be customized before it is used.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "description": "A generic golang egg that compiles the application and saves an executable\r\n\r\nMeant to be customized before it is used.",
+    "features": null,
+    "docker_images": {
+        "quay.io\/parkervcp\/pterodactyl-images:base_debian": "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+    },
+    "file_denylist": [],
     "startup": ".\/${EXECUTABLE}",
     "config": {
         "files": "{}",
@@ -28,18 +33,20 @@
             "description": "Go package to get and build",
             "env_variable": "GO_PACKAGE",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Executable",
-            "description": "This is the executable from the bot build.",
+            "description": "This is the executable from the build.",
             "env_variable": "EXECUTABLE",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|string"
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
         }
     ]
 }
