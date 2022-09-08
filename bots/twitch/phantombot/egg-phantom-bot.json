@@ -4,20 +4,20 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-09-08T03:33:45+02:00",
+    "exported_at": "2022-09-08T16:55:56+02:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
     "features": null,
     "docker_images": {
-        "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11"
+        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
     },
     "file_denylist": [],
     "startup": "java --add-opens java.base\/java.lang=ALL-UNNAMED -Djava.security.policy=config\/security -Dinteractive -Xms1m -Dfile.encoding=UTF-8 -jar PhantomBot.jar",
     "config": {
         "files": "{\r\n    \"config\/botlogin.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"baseport\": \"{{server.build.default.port}}\",\r\n            \"channel\": \"{{server.build.env.CHANNEL_NAME}}\",\r\n            \"owner\": \"{{server.build.env.CHANNEL_OWNER}}\",\r\n            \"paneluser\": \"{{server.build.env.WEBPANEL_USERNAME}}\",\r\n            \"panelpassword\": \"{{server.build.env.WEBPANEL_PASSWORD}}\",\r\n            \"user\": \"{{server.build.env.BOT_TWITCH_USERNAME}}\",\r\n            \"youtubekey\": \"{{server.build.env.YOUTUBE_API_KEY}}\",\r\n            \"discord_token\": \"{{server.build.env.DISCORD_BOT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Connecting to Twitch WS-IRC Server\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Connecting to Twitch WS-IRC Server\"\r\n}",
+        "logs": "{}",
         "stop": "exit"
     },
     "scripts": {
