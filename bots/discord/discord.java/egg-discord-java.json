@@ -12,7 +12,8 @@
     "images": [
         "ghcr.io\/parkervcp\/yolks:java_8",
         "ghcr.io\/parkervcp\/yolks:java_11",
-        "ghcr.io\/parkervcp\/yolks:java_16"
+        "ghcr.io\/parkervcp\/yolks:java_16",
+        "ghcr.io\/parkervcp\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",
