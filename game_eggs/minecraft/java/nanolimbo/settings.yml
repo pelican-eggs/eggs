@@ -33,11 +33,11 @@ headerAndFooter:
 
 # Spawn position in the world
 spawnPosition:
-  x: 0.0
-  y: 64.0
-  z: 0.0
-  yaw: 0.0
-  pitch: 0.0
+  'x': 0.0
+  'y': 400.0
+  'z': 0.0
+  'yaw': 0.0
+  'pitch': 0.0
 
 # Setup player's game mode
 # 0 - Survival
