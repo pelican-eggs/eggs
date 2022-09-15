@@ -27,6 +27,10 @@ A generic discord.js egg for running discord bots.
 [discord.py](https://discordpy.readthedocs.io/en/latest/)
 A generic discord.py egg for running discord bots.
 
+### [DiscordRS](discord.rs)
+
+A generic Rust application egg.
+
 ### [discordgo](discordgo)
 
 [discordgo](https://github.com/bwmarrin/discordgo)
