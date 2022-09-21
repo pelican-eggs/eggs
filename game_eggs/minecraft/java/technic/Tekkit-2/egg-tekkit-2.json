@@ -36,7 +36,7 @@
             "name": "Modpack Version",
             "description": "",
             "env_variable": "MODPACK_VERSION",
-            "default_value": "v1.0.0",
+            "default_value": "v1.0.5",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:10",
