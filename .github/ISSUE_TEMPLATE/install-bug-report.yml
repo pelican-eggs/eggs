@@ -1,7 +1,7 @@
-name: 🐛 Bug Report
-description: Report an Egg issue
-title: "[Bug]: <Egg Name>"
-labels: ["bug", "not confirmed"]
+name: 🐛 Install Bug Report
+description: Resport an Egg install issue
+title: "[Install Bug]: <Egg Name>"
+labels: ["install bug", "not confirmed"]
 body:
   - type: markdown
     attributes:
