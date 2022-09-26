@@ -174,7 +174,8 @@ This is a collection of servers that use SteamCMD to install.
 
 ## The Isle
 
-[The Isle](the_isle)
+* [The Isle](the_isle)
+  * [Evrima](the_isle/evrima/)
 
 ## Tower Unite
 
