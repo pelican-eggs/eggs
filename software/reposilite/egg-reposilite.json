@@ -10,10 +10,10 @@
     "description": "Lightweight and easy-to-use repository management software dedicated for Maven based artifacts in the JVM ecosystem.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/pterodactyl\/yolks:java_8": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_16": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_8": "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_8",
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_11": "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_11",
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_16": "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_16",
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_17": "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -Xmx{{SERVER_MEMORY}}M -Dreposilite.port={{SERVER_PORT}} -jar reposilite.jar --port {{SERVER_PORT}}",

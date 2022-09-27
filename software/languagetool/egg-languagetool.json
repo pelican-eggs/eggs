@@ -10,7 +10,7 @@
     "description": "This egg installs a LanguageTool server\r\n\r\nLanguageTool is an Open Source proofreading software for English, French, German, Polish, Russian, and more than 20 other languages. It finds many errors that a simple spell checker cannot find.\r\n\r\nView https:\/\/languagetool.org for more information.",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_8"
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-china/yolks:java_8"
     ],
     "file_denylist": [],
     "startup": "java -cp languagetool-server.jar org.languagetool.server.HTTPServer --port {{SERVER_PORT}} --allow-origin \\\"*\\\" --public --config config.properties",

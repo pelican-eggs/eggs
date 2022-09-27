@@ -1,7 +1,7 @@
-name: 🐛 Bug Report
-description: Report an Egg issue
-title: "[Bug]: <Egg Name>"
-labels: ["bug", "not confirmed"]
+name: 🐛 Install Bug Report
+description: Resport an Egg install issue
+title: "[Install Bug]: <Egg Name>"
+labels: ["install bug", "not confirmed"]
 body:
   - type: markdown
     attributes:
@@ -10,7 +10,7 @@ body:
         * `A fatal error was encountered while starting this server.`
         * `No server egg configuration could be located; aborting startup.`
 
-        Make sure there are no existing bug reports by searching the [repository issues](https://github.com/parkervcp/eggs/issues?q=is%3Aopen+is%3Aissue+label%3ABug).
+        Make sure there are no existing bug reports by searching the the issues for [install bugs](https://github.com/parkervcp/eggs/labels/install%20bug).
   - type: input
     id: panel-version
     attributes:
