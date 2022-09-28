@@ -13,7 +13,6 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 
 ## [Java](java) Servers for Java Minecraft
 
-* [Airplane](java/airplane)
 * [Cuberite](java/cuberite)
 * [Fabric](java/fabric)
 * [Feather](java/feather)
