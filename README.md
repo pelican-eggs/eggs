@@ -170,7 +170,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Java](game_eggs/minecraft/proxy/java)
     * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
   * [Bedrock](game_eggs/minecraft/proxy/bedrock)

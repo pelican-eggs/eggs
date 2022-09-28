@@ -43,7 +43,6 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Java](proxy/java)
   * [FlameCord](proxy/java/flamecord)
   * [Travertine](proxy/java/travertine)
-  * [TyphoonLimbo](proxy/java/typhoonlimbo)
   * [Velocity](proxy/java/velocity)
   * [VIAaas](proxy/java/viaaas)
   * [Waterfall](proxy/java/waterfall)
