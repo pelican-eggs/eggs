@@ -52,7 +52,6 @@
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
-  * [Airplane](minecraft/java/airplane)
   * [Cuberite](minecraft/java/cuberite)
   * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
   * [Fabric](minecraft/java/fabric)
