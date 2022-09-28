@@ -80,7 +80,6 @@
   * [Java](minecraft/proxy/java)
     * [FlameCord](minecraft/proxy/java/flamecord)
     * [Travertine](minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](minecraft/proxy/java/typhoonlimbo)
     * [Velocity](minecraft/proxy/java/velocity)
     * [VIAaas](minecraft/proxy/java/viaaas)
     * [Waterfall](minecraft/proxy/java/waterfall)
