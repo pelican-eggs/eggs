@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-02-06T02:44:05+02:00",
+    "exported_at": "2022-09-29T16:00:25-04:00",
     "name": "Sinusbot",
     "author": "support@pterodactyl.io",
     "description": "Musicbot for Discord and Teamspeak.",
     "features": null,
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:bot_sinusbot"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:bot_sinusbot": "ghcr.io\/parkervcp\/yolks:bot_sinusbot"
+    },
     "file_denylist": [],
     "startup": ".\/sinusbot --override-password=\"${OVERRIDE_PASSWORD}\"",
     "config": {
@@ -35,7 +35,8 @@
             "default_value": "CHANGEME",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
