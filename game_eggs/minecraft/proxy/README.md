@@ -3,7 +3,6 @@
 * [Java](/game_eggs/minecraft/proxy/java/)
   * [FlameCord](/game_eggs/minecraft/proxy/java/flamecord)
   * [Travertine](/game_eggs/minecraft/proxy/java/travertine)
-  * [TyphoonLimbo](/game_eggs/minecraft/proxy/java/typhoonlimbo)
   * [Velocity](/game_eggs/minecraft/proxy/java/velocity)
   * [VIAaaS](/game_eggs/minecraft/proxy/java/viaaas)
   * [Waterfall](/game_eggs/minecraft/proxy/java/waterfall)

@@ -149,7 +149,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
-  * [Airplane](game_eggs/minecraft/java/airplane)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
   * [Fabric](game_eggs/minecraft/java/fabric)
   * [Feather](game_eggs/minecraft/java/feather)
@@ -171,7 +170,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Java](game_eggs/minecraft/proxy/java)
     * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
   * [Bedrock](game_eggs/minecraft/proxy/bedrock)

@@ -52,7 +52,6 @@
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
-  * [Airplane](minecraft/java/airplane)
   * [Cuberite](minecraft/java/cuberite)
   * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
   * [Fabric](minecraft/java/fabric)
@@ -81,7 +80,6 @@
   * [Java](minecraft/proxy/java)
     * [FlameCord](minecraft/proxy/java/flamecord)
     * [Travertine](minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](minecraft/proxy/java/typhoonlimbo)
     * [Velocity](minecraft/proxy/java/velocity)
     * [VIAaas](minecraft/proxy/java/viaaas)
     * [Waterfall](minecraft/proxy/java/waterfall)

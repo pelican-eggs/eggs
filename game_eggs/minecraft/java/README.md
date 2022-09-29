@@ -110,11 +110,6 @@ This is a direct fork of the default spigot service with the added benefit of be
 
 - (It's noted that building the jar is intensive and time consuming)
 
-### [Airplane](airplane)
-
-[Airplane Github](https://github.com/TECHNOVE/Airplane)
-A stable, optimized and well supported Paper fork.
-
 ## Sponge Powered
 
 ### [SpongeForge](spongeforge)
