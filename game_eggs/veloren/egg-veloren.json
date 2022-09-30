@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-09-07T18:12:29+02:00",
+    "exported_at": "2022-09-30T18:17:45+02:00",
     "name": "Veloren",
     "author": "parker@parkervcp.com",
     "description": "Veloren is a multiplayer voxel RPG written in Rust. It is inspired by games such as Cube World, Legend of Zelda: Breath of the Wild, Dwarf Fortress and Minecraft.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl wget unzip git jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/veloren\/veloren\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"-linux-x86_64-\" || echo \"-linux-aarch64-\")\r\nMARCH_AND_SPACES=$(echo ${VERSION} && echo ${ARCH} && echo ${RELEASE_DATE})\r\nMATCH=$(echo ${MARCH_AND_SPACES} | sed 's\/ \/\/g')\r\n\r\necho ${MATCH}\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"weekly\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"invalid ${RELEASE_DATE}\"\r\n    fi\r\nfi\r\n\r\nwget ${DOWNLOAD_URL} -O files.zip\r\n\r\nunzip files.zip\r\nrm files.zip\r\n\r\nchmod +x veloren-server-cli\r\n\r\n## generate config because there is no better way to get it.\r\nmkdir -p \/mnt\/server\/userdata\/server\/server_config\/\r\nif [ ! -f \/mnt\/server\/userdata\/server\/server_config\/settings.ron ]; then\r\n    echo -e \"creating default config\"\r\n     echo -n \"(\r\n    gameserver_address: \"0.0.0.0:14004\",\r\n    metrics_address: \"0.0.0.0:14005\",\r\n    auth_server_address: Some(\"https:\/\/auth.veloren.net\"),\r\n    max_players: 100,\r\n    world_seed: 25269,\r\n    server_name: \"Veloren Alpha\",\r\n    start_time: 32400,\r\n    map_file: None,\r\n    max_view_distance: Some(65),\r\n    banned_words_files: [],\r\n    max_player_group_size: 6,\r\n    client_timeout: (\r\n        secs: 40,\r\n        nanos: 0,\r\n    ),\r\n    spawn_town: None,\r\n    safe_spawn: true,\r\n    max_player_for_kill_broadcast: Some(20),\r\n)\r\n\" > \/mnt\/server\/userdata\/server\/server_config\/settings.ron\r\n    echo -e \"config pulled\"\r\nfi\r\n\r\necho -e \"install complete\"",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl wget unzip git jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/veloren\/veloren\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"-linux-x86_64-\" || echo \"-linux-aarch64-\")\r\nMARCH_AND_SPACES=$(echo ${VERSION} && echo ${ARCH} && echo ${RELEASE_DATE})\r\nMATCH=$(echo ${MARCH_AND_SPACES} | sed 's\/ \/\/g')\r\n\r\necho ${MATCH}\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"weekly\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"invalid ${RELEASE_DATE}\"\r\n    fi\r\nfi\r\n\r\nwget ${DOWNLOAD_URL} -O files.zip\r\n\r\nunzip files.zip\r\nrm files.zip\r\n\r\nchmod +x veloren-server-cli\r\n\r\n## generate config because there is no better way to get it.\r\nmkdir -p \/mnt\/server\/userdata\/server\/server_config\/\r\nif [ ! -f \/mnt\/server\/userdata\/server\/server_config\/settings.ron ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/veloren\/settings.ron -O \/mnt\/server\/userdata\/server\/server_config\/settings.ron\r\n    echo \"config file pulled\"\r\nfi\r\n\r\necho -e \"install complete\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
@@ -42,7 +42,7 @@
             "name": "Release date",
             "description": "The date of the version you want look here:\r\nhttps:\/\/github.com\/veloren\/veloren\/releases\r\n\r\neverything after the x86_64 but not the first -\r\nand not the .zip extention\r\n\r\nexample:\r\n2022-08-31T08_26",
             "env_variable": "RELEASE_DATE",
-            "default_value": "2022-08-31T08_26",
+            "default_value": "2022-09-26T13_34",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:40",
