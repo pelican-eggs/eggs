@@ -1,0 +1,36 @@
+(
+    gameserver_protocols: [
+        Tcp(
+            address: "[::]:14004",
+        ),
+        Tcp(
+            address: "0.0.0.0:14004",
+        ),
+    ],
+    metrics_address: "127.0.0.1:14005",
+    auth_server_address: Some("https://auth.veloren.net"),
+    max_players: 100,
+    world_seed: 230,
+    server_name: "Veloren Server",
+    start_time: 32400.0,
+    map_file: None,
+    max_view_distance: Some(65),
+    max_player_group_size: 6,
+    client_timeout: (
+        secs: 40,
+        nanos: 0,
+    ),
+    spawn_town: None,
+    max_player_for_kill_broadcast: None,
+    calendar_mode: Auto,
+    gameplay: (
+        battle_mode: Global(PvP),
+        safe_spawn: false,
+        explosion_burn_marks: true,
+    ),
+    moderation: (
+        banned_words_files: [],
+        automod: false,
+        admins_exempt: true,
+    ),
+)
