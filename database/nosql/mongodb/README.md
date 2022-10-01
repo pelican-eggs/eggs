@@ -4,6 +4,10 @@
 
 MongoDB is a general purpose, document-based, distributed database built for modern application developers and for the cloud era.
 
+### MongoDB free monitoring.
+
+To disable the message about free monitoring you can run `db.disableFreeMonitoring()`.
+
 ## Minimum RAM warning
 
 MongoDB requires approximately 1GB of RAM per 100.000 assets. If the system has to start swapping memory to disk, this will have a severely negative impact on performance, and should be avoided.

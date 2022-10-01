@@ -16,7 +16,7 @@
     "startup": ".\/${EXECUTABLE}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",,
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
