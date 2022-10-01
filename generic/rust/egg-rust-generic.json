@@ -4,22 +4,22 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-25T14:36:57-04:00",
+    "exported_at": "2022-10-01T18:32:46+01:00",
     "name": "rust generic",
-    "author": "ethan.coward@icloud.com",
+    "author": "ethan@ethancoward.dev",
     "description": "Creates a container that runs rust with cargo.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:rust_1.31": "ghcr.io\/parkervcp\/yolks:rust_1.31",
-        "ghcr.io\/parkervcp\/yolks:rust_1.56": "ghcr.io\/parkervcp\/yolks:rust_1.56",
+        "ghcr.io\/parkervcp\/yolks:rust_latest": "ghcr.io\/parkervcp\/yolks:rust_latest",
         "ghcr.io\/parkervcp\/yolks:rust_1.60": "ghcr.io\/parkervcp\/yolks:rust_1.60",
-        "ghcr.io\/parkervcp\/yolks:rust_latest": "ghcr.io\/parkervcp\/yolks:rust_latest"
+        "ghcr.io\/parkervcp\/yolks:rust_1.56": "ghcr.io\/parkervcp\/yolks:rust_1.56",
+        "ghcr.io\/parkervcp\/yolks:rust_1.31": "ghcr.io\/parkervcp\/yolks:rust_1.31"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cargo run --release",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": [\r\n        \"Finished\"\r\n    ]\r\n}",
+        "startup": "{\r\n    \"done\": [\r\n        \"change this part\"\r\n    ]\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
