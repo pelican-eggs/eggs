@@ -42,7 +42,7 @@
             "name": "Mongo Admin Password",
             "description": "",
             "env_variable": "MONGO_USER_PASS",
-            "default_value": "NewPa55w0rd",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
