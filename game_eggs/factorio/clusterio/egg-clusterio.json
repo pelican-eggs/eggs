@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-05T12:57:53+01:00",
+    "exported_at": "2022-10-05T14:47:36+01:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
     "description": "a generic node.js egg\r\n\r\nThis will clone a git repo. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
@@ -19,7 +19,7 @@
     "file_denylist": [],
     "startup": "exec .\/node_modules\/.bin\/clusterio{{SERVER_MODE}} run",
     "config": {
-        "files": "{\r\n    \"config-master.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.http_port\": \"{{server.build.default.port}}\",\r\n\t\t\t\"groups[0].fields.name\": \"{{server.build.env.CLUSTER_NAME}}\"\r\n        }\r\n    },\r\n\t\"config-slave.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.master_url\": \"{{server.build.env.MASTER_URL}}\",\r\n\t\t\t\"groups[0].fields.master_token\": \"{{server.build.env.MASTER_TOKEN}}\",\r\n\t\t\t\"groups[0].fields.public_address\": \"{{server.build.default.ip}}:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config-master.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.http_port\": \"{{server.build.default.port}}\",\r\n            \"groups[0].fields.name\": \"{{server.build.env.CLUSTER_NAME}}\"\r\n        }\r\n    },\r\n    \"config-slave.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.master_url\": \"{{server.build.env.MASTER_URL}}\",\r\n            \"groups[0].fields.master_token\": \"{{server.build.env.MASTER_TOKEN}}\",\r\n            \"groups[0].fields.public_address\": \"{{server.build.default.ip}}:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Started\"\r\n}",
         "logs": "{}",
         "stop": "^c"
@@ -34,7 +34,7 @@
     "variables": [
         {
             "name": "Server Mode",
-            "description": "Set's the cluster operation mode of the server, can be either \"master\" or \"slave\".\r\n\r\nRequired on:\r\nAll",
+            "description": "Set's the cluster operation mode of the server, can be either \"master\" or \"slave\". This is better thought of as Management or Gameserver nodes.\r\n\r\nRequired on:\r\nAll",
             "env_variable": "SERVER_MODE",
             "default_value": "master",
             "user_viewable": true,
