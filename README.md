@@ -167,6 +167,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Technic](game_eggs/minecraft/java/technic)
   * [VanillaCord](game_eggs/minecraft/java/vanillacord)
 
+* [Crossplay](game_eggs/minecraft/crossplay/) servers for crossplay between Bedrock and Java edition
+  * [Purpur-GeyserMC-Floodgate](game_eggs/minecraft/crossplay/purpur-geysermc-floodgate/)
+
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
     * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
