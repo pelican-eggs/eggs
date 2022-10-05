@@ -113,6 +113,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Vanilla](game_eggs/factorio/factorio)
 * [ModUpdate](game_eggs/factorio/factorio-modupdate)
+* [Clusterio](game_eggs/factorio/clusterio)
 
 [Grand Theft Auto](game_eggs/gta)
 
