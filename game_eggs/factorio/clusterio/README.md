@@ -1,5 +1,7 @@
 # Clusterio
 
+*A Note on terminology. The developers of Clustorio are using the rather outdated Master/Slave terms for Primary/Secondary or Management/Processing nodes. We will use them in this guide and egg to avoid confusion, but would prefer a more modern set of terminology.*
+
 ## Introduction
 
 Clusterio (https://github.com/clusterio/clusterio) is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio.
