@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-05T16:32:34+01:00",
+    "exported_at": "2022-10-05T16:33:36+01:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
-    "description": "a generic node.js egg\r\n\r\nThis will clone a git repo. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
+    "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.",
     "features": null,
     "docker_images": {
         "ghcr.io\/parkervcp\/yolks:nodejs_17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
