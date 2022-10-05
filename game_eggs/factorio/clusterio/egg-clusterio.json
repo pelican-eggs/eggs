@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-05T14:47:36+01:00",
+    "exported_at": "2022-10-05T16:32:34+01:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
     "description": "a generic node.js egg\r\n\r\nThis will clone a git repo. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
@@ -19,14 +19,14 @@
     "file_denylist": [],
     "startup": "exec .\/node_modules\/.bin\/clusterio{{SERVER_MODE}} run",
     "config": {
-        "files": "{\r\n    \"config-master.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.http_port\": \"{{server.build.default.port}}\",\r\n            \"groups[0].fields.name\": \"{{server.build.env.CLUSTER_NAME}}\"\r\n        }\r\n    },\r\n    \"config-slave.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.master_url\": \"{{server.build.env.MASTER_URL}}\",\r\n            \"groups[0].fields.master_token\": \"{{server.build.env.MASTER_TOKEN}}\",\r\n            \"groups[0].fields.public_address\": \"{{server.build.default.ip}}:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config-master.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.http_port\": \"{{server.build.default.port}}\",\r\n            \"groups[0].fields.name\": \"{{server.build.env.CLUSTER_NAME}}\"\r\n        }\r\n    },\r\n    \"config-slave.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.master_url\": \"{{server.build.env.MASTER_URL}}\",\r\n            \"groups[0].fields.master_token\": \"{{server.build.env.MASTER_TOKEN}}\",\r\n            \"groups[0].fields.public_address\": \"{{server.build.default.ip}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Started\"\r\n}",
         "logs": "{}",
         "stop": "^c"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Clusterio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\ncase \"${SERVER_MODE}\" in\r\n\r\n  \"master\")\r\n    echo -e \"Initialising Clustorio In Master mode\"\r\n        npm init \"@clusterio\" --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --admin \"${ADMIN_STRING}\" --public-address \"${SERVER_IP}\":\"${SERVER_PORT}\" --plugins ${PLUGINS}\r\n\t;;\r\n\r\n  \"slave\")\r\n    echo -e \"Initialising Clustorio In Slave mode\"\r\n\tnpm init \"@clusterio\" --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --slave-name \"${SLAVE_NAME}\" --public-address \"${SERVER_IP}\":\"${SERVER_PORT}\" --master-url \"${MASTER_URL}\" --master-token \"${MASTER_TOKEN}\" --plugins ${PLUGINS}\r\n    ;;\r\n    \r\nesac\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "script": "#!\/bin\/bash\r\n# Clusterio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\ncase \"${SERVER_MODE}\" in\r\n\r\n  \"master\")\r\n    echo -e \"Initialising Clustorio In Master mode\"\r\n        npm init \"@clusterio\" --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --admin \"${ADMIN_STRING}\" --public-address \"${SERVER_IP}\":\"${SERVER_PORT}\" --plugins ${PLUGINS}\r\n\t;;\r\n\r\n  \"slave\")\r\n    echo -e \"Initialising Clustorio In Slave mode\"\r\n\tnpm init \"@clusterio\" --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --slave-name \"${SLAVE_NAME}\" --public-address \"${SERVER_IP}\" --master-url \"${MASTER_URL}\" --master-token \"${MASTER_TOKEN}\" --plugins ${PLUGINS}\r\n    ;;\r\n    \r\nesac\r\n\r\necho -e \"install complete\"\r\nexit 0",
             "container": "node:14-buster-slim",
             "entrypoint": "bash"
         }
@@ -74,7 +74,7 @@
         },
         {
             "name": "Master URL",
-            "description": "Connection URL to the Master server, can be an internal address if you have allocated an additional internal port to the Master Server.\r\n\r\nRequired on:\r\nSlave",
+            "description": "Connection URL to the Master server, can be an internal address if you have allocated an additional internal port to the Master Server.\r\nExample: http:\/\/yourip:yourport\r\nRequired on:\r\nSlave",
             "env_variable": "MASTER_URL",
             "default_value": "",
             "user_viewable": true,
