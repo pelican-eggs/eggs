@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-05T16:34:47+01:00",
+    "exported_at": "2022-10-05T18:37:01-04:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
     "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.\r\n\r\nA Note on terminology. The developers of Clustorio are using the rather outdated Master\/Slave terms for Primary\/Secondary or Management\/Processing nodes. We will use them in this guide and egg to avoid confusion, but would prefer a more modern set of terminology.",
@@ -74,7 +74,7 @@
         },
         {
             "name": "Master URL",
-            "description": "Connection URL to the Master server, can be an internal address if you have allocated an additional internal port to the Master Server.\r\nExample: http:\/\/yourip:yourport\r\nRequired on:\r\nSlave",
+            "description": "Connection URL to the Master server, can be an internal address if you have allocated an additional internal port to the Master Server.\r\n\r\nExample: http:\/\/yourip:yourport\/\r\n\r\nRequired on:\r\nSlave",
             "env_variable": "MASTER_URL",
             "default_value": "",
             "user_viewable": true,
@@ -84,7 +84,7 @@
         },
         {
             "name": "Master Token",
-            "description": "Authentication token used to connect to the Master server, generated through the Master Web UI.\r\n\r\nRequired on:\r\nSlave",
+            "description": "Authentication token used to connect to the Master server, Must be generated through the Master Web UI after setting up and logging into the Master Web UI using the admin auth token generated when setting up the Master.\r\n\r\nRequired on:\r\nSlave",
             "env_variable": "MASTER_TOKEN",
             "default_value": "",
             "user_viewable": true,
@@ -94,7 +94,7 @@
         },
         {
             "name": "Plugins",
-            "description": "Clusterio Plugins to install, space separate list.\r\n\r\nExample:\r\n@clusterio\/plugin-subspace_storage @clusterio\/plugin-global_chat @clusterio\/plugin-research_sync @clusterio\/plugin-inventory_sync\r\n\r\nRequired on:\r\nAll",
+            "description": "Clusterio Plugins to install, space separate list.\r\n\r\nExample:\r\n@clusterio\/plugin-global_chat @clusterio\/plugin-research_sync @clusterio\/plugin-statistics_exporter @clusterio\/plugin-player_auth @clusterio\/plugin-inventory_sync @hornwitser\/server_select \r\nOptional Extras:\r\n@clusterio\/plugin-subspace_storage (requires the mod to be downloaded)\r\n\r\nRequired on:\r\nAll",
             "env_variable": "PLUGINS",
             "default_value": "",
             "user_viewable": true,
@@ -104,7 +104,7 @@
         },
         {
             "name": "Cluster Name",
-            "description": "The Name of your Master server cluster.\r\n\r\nRequired:\r\nMaster",
+            "description": "The Name of your Cluster Master server.\r\n\r\nRequired:\r\nMaster",
             "env_variable": "CLUSTER_NAME",
             "default_value": "Your Cluster",
             "user_viewable": true,
