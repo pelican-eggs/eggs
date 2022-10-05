@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-05T18:37:01-04:00",
+    "exported_at": "2022-10-05T19:06:42-04:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
     "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.\r\n\r\nA Note on terminology. The developers of Clustorio are using the rather outdated Master\/Slave terms for Primary\/Secondary or Management\/Processing nodes. We will use them in this guide and egg to avoid confusion, but would prefer a more modern set of terminology.",
@@ -94,7 +94,7 @@
         },
         {
             "name": "Plugins",
-            "description": "Clusterio Plugins to install, space separate list.\r\n\r\nExample:\r\n@clusterio\/plugin-global_chat @clusterio\/plugin-research_sync @clusterio\/plugin-statistics_exporter @clusterio\/plugin-player_auth @clusterio\/plugin-inventory_sync @hornwitser\/server_select \r\nOptional Extras:\r\n@clusterio\/plugin-subspace_storage (requires the mod to be downloaded)\r\n\r\nRequired on:\r\nAll",
+            "description": "Clusterio Plugins to install, space separate list.\r\n\r\nExample:\r\n@clusterio\/plugin-global_chat\r\n@clusterio\/plugin-research_sync\r\n@clusterio\/plugin-statistics_exporter\r\n\r\nCurrent available clusterio plugins include:\r\n@clusterio\/plugin-global_chat\r\n@clusterio\/plugin-research_sync\r\n@clusterio\/plugin-statistics_exporter\r\n@clusterio\/plugin-subspace_storage (requires the mod to be installed on the slave)\r\n@clusterio\/plugin-player_auth\r\n@clusterio\/plugin-inventory_sync\r\n@hornwitser\/server_select\r\n\r\nRequired on:\r\nAll",
             "env_variable": "PLUGINS",
             "default_value": "",
             "user_viewable": true,
