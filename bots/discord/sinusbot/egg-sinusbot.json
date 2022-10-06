@@ -10,7 +10,7 @@
     "description": "Musicbot for Discord and Teamspeak.",
     "features": null,
     "docker_images": {
-        "sinusbot": "ghcr.io\/parkervcp\/yolks:bot_sinusbot"
+        "sinusbot": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:bot_sinusbot"
     },
     "file_denylist": [],
     "startup": ".\/sinusbot --override-password=\"${OVERRIDE_PASSWORD}\"",

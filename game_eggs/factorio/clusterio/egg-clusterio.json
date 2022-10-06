@@ -10,11 +10,11 @@
     "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.\r\n\r\nA Note on terminology. The developers of Clustorio are using the rather outdated Master\/Slave terms for Primary\/Secondary or Management\/Processing nodes. We will use them in this guide and egg to avoid confusion, but would prefer a more modern set of terminology.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:nodejs_17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
-        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16",
-        "ghcr.io\/parkervcp\/yolks:nodejs_15": "ghcr.io\/parkervcp\/yolks:nodejs_15",
-        "ghcr.io\/parkervcp\/yolks:nodejs_14": "ghcr.io\/parkervcp\/yolks:nodejs_14",
-        "ghcr.io\/parkervcp\/yolks:nodejs_12": "ghcr.io\/parkervcp\/yolks:nodejs_12"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_17": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_17",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_16": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_16",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_15": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_15",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_14": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_14",
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_12": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:nodejs_12"
     },
     "file_denylist": [],
     "startup": "exec .\/node_modules\/.bin\/clusterio{{SERVER_MODE}} run",

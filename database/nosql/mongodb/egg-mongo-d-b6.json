@@ -10,7 +10,7 @@
     "description": "MongoDB is a general purpose, document-based, distributed database built for modern application developers and for my butt era.",
     "features": null,
     "docker_images": {
-        "MongoDB_6": "ghcr.io\/parkervcp\/yolks:mongodb_6"
+        "MongoDB_6": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:mongodb_6"
     },
     "file_denylist": [],
     "startup": "mongod --fork --dbpath \/home\/container\/mongodb\/ --port ${SERVER_PORT} --bind_ip 0.0.0.0 --logpath \/home\/container\/logs\/mongo.log -f \/home\/container\/mongod.conf; until nc -z -v -w5 127.0.0.1 ${SERVER_PORT}; do echo 'Waiting for mongodb connection...'; sleep 5; done; mongosh --username ${MONGO_USER} --password ${MONGO_USER_PASS} --host 127.0.0.1:${SERVER_PORT} && mongosh --eval \"db.getSiblingDB('admin').shutdownServer()\" 127.0.0.1:${SERVER_PORT}",

@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Vanilla Xonotic Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add rsync --no-cache\r\n\r\ncd \/mnt\/server\r\n\r\nwget http:\/\/dl.xonotic.org\/xonotic-0.8.2.zip\r\n\r\nunzip xonotic-0.8.2.zip\r\n\r\nmv Xonotic\/* .\/\r\n\r\n.\/misc\/tools\/rsync-updater\/update-to-autobuild.sh\r\n\r\n# create initial folder structure to copy the default config to, because it only gets created on first startup\r\nmkdir -p .xonotic\/data\r\ncp-n server\/server.cfg .xonotic\/data\/server.cfg || true # do not overwrite existing config file\r\n\r\nrm -rf COPYING Makefile *glx* *glx *sdl* *sdl *linux32* *exe *.app *.sh bin* GPL* Docs\/ gmqcc\/ source\/ misc\/ Xonotic\/ xonotic-0.8.2.zip",
-            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "container": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/installers:alpine",
             "entrypoint": "ash"
         }
     },
