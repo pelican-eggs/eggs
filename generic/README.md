@@ -1,5 +1,10 @@
 # Generic Language
 
+### [Dart](dart)
+
+[dart](https://dart.dev/)
+A generic dart egg
+
 ### [Deno](deno)
 
 [deno](https://deno.land/)
