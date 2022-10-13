@@ -29,15 +29,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
-* [discordgo](bots/discord/discordgo) Golang generic
-* [discord.java](bots/discord/discord.java) Java generic
-* [discord.js](bots/discord/discord.js) Node JS generic
-* [discord.py](bots/discord/discord.py) Python generic
-* [discord.rs](bots/discord/discord.rs) Rust generic
 * [Dynamica](/bots/discord/dynamica) Node JS
 * [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
-* [nodemon.js](bots/discord/nodemon.js) Nodemon JS generic
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
@@ -56,6 +50,18 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [JTS3ServerMod](/bots/teamspeak3/jts3servermod)
 
+## [Generic Languages](/generic)
+
+* [dart](/generic/dart/)
+* [deno](/generic/deno/)
+* [golang](/generic/golang/)
+* [java](/generic/java/)
+* [lua](/generic/lua/)
+* [nodejs](/generic/nodejs/)
+* [nodemon](/generic/nodemon/)
+* [python](/generic/python/)
+* [rust](/generic/rust/)
+
 ## [Database](/database)
 
 ### In-Memory Databases
@@ -64,6 +70,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Redis 5](/database/redis/redis-5)
 * [Redis 6](/database/redis/redis-6)
+* [Redis 7](/database/redis/redis-7)
 
 ### noSQL
 
@@ -85,8 +92,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Among Us](game_eggs/among_us)
 
-* [Impostor Server](game_eggs/among_us/impostor_server)
+* [BetterCrewLink Server](game_eggs/among_us/bettercrewlink_server)
 * [CrewLink Server](game_eggs/among_us/crewlink_server)
+* [Impostor Server](game_eggs/among_us/impostor_server)
 
 [BeamNG.drive](game_eggs/beamng)
 
@@ -107,6 +115,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Vanilla](game_eggs/factorio/factorio)
 * [ModUpdate](game_eggs/factorio/factorio-modupdate)
+* [Clusterio](game_eggs/factorio/clusterio)
 
 [Grand Theft Auto](game_eggs/gta)
 
@@ -122,11 +131,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
+[League Sandbox](game_eggs/leaguesandbox)
+
+[Los Angeles Crimes](game_eggs/losangelescrimes)
+
 [Mindustry](game_eggs/mindustry)
 
 * [Mindustry](game_eggs/mindustry/mindustry)
-
-[League Sandbox](game_eggs/leaguesandbox)
 
 [Minetest](game_eggs/minetest) (including MTG)
 
@@ -141,7 +152,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
-  * [Airplane](game_eggs/minecraft/java/airplane)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
   * [Fabric](game_eggs/minecraft/java/fabric)
   * [Feather](game_eggs/minecraft/java/feather)
@@ -159,11 +169,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Technic](game_eggs/minecraft/java/technic)
   * [VanillaCord](game_eggs/minecraft/java/vanillacord)
 
+* [Crossplay](game_eggs/minecraft/crossplay/) servers for crossplay between Bedrock and Java edition
+  * [Purpur-GeyserMC-Floodgate](game_eggs/minecraft/crossplay/purpur-geysermc-floodgate/)
+
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
     * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](game_eggs/minecraft/proxy/java/typhoonlimbo)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
   * [Bedrock](game_eggs/minecraft/proxy/bedrock)
@@ -196,6 +208,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
+* [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
@@ -215,6 +228,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
+* [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
@@ -228,6 +242,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
+  * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
@@ -311,8 +326,22 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [haste-server](/software/haste-server)
 
+### LanguageTool
+
+* [languagetool](/software/languagetool)
+
+### Owncast
+
+* [owncast](/software/owncast)
+
 ### RabbitMQ
 
 * [rabbitmq](/software/rabbitmq)
+
+### Reposilite
+
+* [Reposilite](/software/reposilite)
+
 ### 5e Tools
+
 * [5e Tools](/software/5e-tools)

@@ -14,8 +14,6 @@
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Call of Duty 4X](cod/cod4x)
-
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)
@@ -39,6 +37,8 @@
 * GTA
   * [GTAC](gta/gtac)
 
+[Los Angeles Crimes](losangelescrimes)
+
 [League Sandbox](leaguesandbox)
 
 [Mindustry](mindustry)
@@ -52,7 +52,6 @@
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
-  * [Airplane](minecraft/java/airplane)
   * [Cuberite](minecraft/java/cuberite)
   * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
   * [Fabric](minecraft/java/fabric)
@@ -81,7 +80,6 @@
   * [Java](minecraft/proxy/java)
     * [FlameCord](minecraft/proxy/java/flamecord)
     * [Travertine](minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](minecraft/proxy/java/typhoonlimbo)
     * [Velocity](minecraft/proxy/java/velocity)
     * [VIAaas](minecraft/proxy/java/viaaas)
     * [Waterfall](minecraft/proxy/java/waterfall)
@@ -112,6 +110,7 @@
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
+* [Black Mesa](steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
 * [CryoFall](steamcmd_servers/cryofall)
@@ -130,6 +129,7 @@
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [Onset](steamcmd_servers/onset)
+* [Open Fortress](steamcmd_servers/open_fortress)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
 * [Post Scriptum](steamcmd_servers/post_scriptum)

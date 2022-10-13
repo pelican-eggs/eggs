@@ -11,3 +11,7 @@ The minecraft server requires a single port for access (default 25565) but plugi
 | Port  | default |
 |-------|---------|
 | Game  | 25565   |
+
+## Notes
+Providing a Minecraft version of ``latest`` or an empty value will default to 1.18.2 as this is the latest version that Magma supports at this time.
+There is no API to query to find the true latest supported version.

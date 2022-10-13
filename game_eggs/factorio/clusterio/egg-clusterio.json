@@ -1,0 +1,116 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-10-05T19:06:42-04:00",
+    "name": "Clusterio",
+    "author": "psychoalex@thevcbc.com",
+    "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.\r\n\r\nA Note on terminology. The developers of Clustorio are using the rather outdated Master\/Slave terms for Primary\/Secondary or Management\/Processing nodes. We will use them in this guide and egg to avoid confusion, but would prefer a more modern set of terminology.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:nodejs_17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
+        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16",
+        "ghcr.io\/parkervcp\/yolks:nodejs_15": "ghcr.io\/parkervcp\/yolks:nodejs_15",
+        "ghcr.io\/parkervcp\/yolks:nodejs_14": "ghcr.io\/parkervcp\/yolks:nodejs_14",
+        "ghcr.io\/parkervcp\/yolks:nodejs_12": "ghcr.io\/parkervcp\/yolks:nodejs_12"
+    },
+    "file_denylist": [],
+    "startup": "exec .\/node_modules\/.bin\/clusterio{{SERVER_MODE}} run",
+    "config": {
+        "files": "{\r\n    \"config-master.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.http_port\": \"{{server.build.default.port}}\",\r\n            \"groups[0].fields.name\": \"{{server.build.env.CLUSTER_NAME}}\"\r\n        }\r\n    },\r\n    \"config-slave.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"groups[0].fields.master_url\": \"{{server.build.env.MASTER_URL}}\",\r\n            \"groups[0].fields.master_token\": \"{{server.build.env.MASTER_TOKEN}}\",\r\n            \"groups[0].fields.public_address\": \"{{server.build.default.ip}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Started\"\r\n}",
+        "logs": "{}",
+        "stop": "^c"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Clusterio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\ncase \"${SERVER_MODE}\" in\r\n\r\n  \"master\")\r\n    echo -e \"Initialising Clustorio In Master mode\"\r\n        npm init \"@clusterio\" --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --admin \"${ADMIN_STRING}\" --public-address \"${SERVER_IP}\":\"${SERVER_PORT}\" --plugins ${PLUGINS}\r\n\t;;\r\n\r\n  \"slave\")\r\n    echo -e \"Initialising Clustorio In Slave mode\"\r\n\tnpm init \"@clusterio\" --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --slave-name \"${SLAVE_NAME}\" --public-address \"${SERVER_IP}\" --master-url \"${MASTER_URL}\" --master-token \"${MASTER_TOKEN}\" --plugins ${PLUGINS}\r\n    ;;\r\n    \r\nesac\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "node:14-buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Mode",
+            "description": "Set's the cluster operation mode of the server, can be either \"master\" or \"slave\". This is better thought of as Management or Gameserver nodes.\r\n\r\nRequired on:\r\nAll",
+            "env_variable": "SERVER_MODE",
+            "default_value": "master",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:master,slave",
+            "field_type": "text"
+        },
+        {
+            "name": "Log Level",
+            "description": "Options: \"none\", \"fatal\", \"error\", \"warn\", \"audit\", \"info\", \"verbose\"\r\n\r\nRequired on:\r\nAll",
+            "env_variable": "LOG_LEVEL",
+            "default_value": "info",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:none,fatal,error,warn,audit,info,verbose",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Admin",
+            "description": "Superadmin account name\r\n\r\nRequired on:\r\nMaster",
+            "env_variable": "ADMIN_STRING",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Slave Name",
+            "description": "Slave name in the Master Web UI\r\n\r\nRequired on:\r\nSlave",
+            "env_variable": "SLAVE_NAME",
+            "default_value": "Your Sub-Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Master URL",
+            "description": "Connection URL to the Master server, can be an internal address if you have allocated an additional internal port to the Master Server.\r\n\r\nExample: http:\/\/yourip:yourport\/\r\n\r\nRequired on:\r\nSlave",
+            "env_variable": "MASTER_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Master Token",
+            "description": "Authentication token used to connect to the Master server, Must be generated through the Master Web UI after setting up and logging into the Master Web UI using the admin auth token generated when setting up the Master.\r\n\r\nRequired on:\r\nSlave",
+            "env_variable": "MASTER_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "Plugins",
+            "description": "Clusterio Plugins to install, space separate list.\r\n\r\nExample:\r\n@clusterio\/plugin-global_chat\r\n@clusterio\/plugin-research_sync\r\n@clusterio\/plugin-statistics_exporter\r\n\r\nCurrent available clusterio plugins include:\r\n@clusterio\/plugin-global_chat\r\n@clusterio\/plugin-research_sync\r\n@clusterio\/plugin-statistics_exporter\r\n@clusterio\/plugin-subspace_storage (requires the mod to be installed on the slave)\r\n@clusterio\/plugin-player_auth\r\n@clusterio\/plugin-inventory_sync\r\n@hornwitser\/server_select\r\n\r\nRequired on:\r\nAll",
+            "env_variable": "PLUGINS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Cluster Name",
+            "description": "The Name of your Cluster Master server.\r\n\r\nRequired:\r\nMaster",
+            "env_variable": "CLUSTER_NAME",
+            "default_value": "Your Cluster",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

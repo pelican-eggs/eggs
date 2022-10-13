@@ -1,7 +1,7 @@
 name: 🐛 Bug Report
-description: Report an issue for an egg
-title: "[Bug]: "
-labels: [Bug]
+description: Report an Egg issue
+title: "[Bug]: <Egg Name>"
+labels: ["bug", "not confirmed"]
 body:
   - type: markdown
     attributes:
