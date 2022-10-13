@@ -10,7 +10,7 @@
     "description": "A standalone audio sending node based on Lavaplayer and Koe. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/freyacodes\/Lavalink",
     "features": null,
     "images": [
-        "ghcr.io/parkervcp/yolks:java_11"
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-images/yolks:java_11"
     ],
     "file_denylist": [],
     "startup": "java -jar Lavalink.jar",

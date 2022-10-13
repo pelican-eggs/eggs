@@ -2,7 +2,7 @@
 # steamcmd Base Installation Script
 #
 # Server Files: /mnt/server
-# Image to install with is 'ghcr.io/parkervcp/installers:debian'
+# Image to install with is 'registry.cn-shanghai.aliyuncs.com/pterodactyl-images/installers:debian'
 
 ##
 #

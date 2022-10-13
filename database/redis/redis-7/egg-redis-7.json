@@ -10,7 +10,7 @@
     "description": "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. It supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes with radius queries and streams.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:redis_7": "ghcr.io\/parkervcp\/yolks:redis_7"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:redis_7": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:redis_7"
     },
     "file_denylist": [],
     "startup": "\/usr\/local\/bin\/redis-server \/home\/container\/redis.conf --save 60 1 --dir \/home\/container\/ --bind 0.0.0.0 --port {{SERVER_PORT}} --requirepass {{SERVER_PASSWORD}} --maxmemory {{SERVER_MEMORY}}mb --daemonize yes && redis-cli -p {{SERVER_PORT}}; redis-cli -p {{SERVER_PORT}} -a {{SERVER_PASSWORD}} shutdown save",

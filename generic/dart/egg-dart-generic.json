@@ -10,7 +10,7 @@
     "description": "A generic dart CLI egg.\r\n\r\nThis will clone a dart CLI application. it defaults to master if no branch is specified.\r\n\r\nInstalls the pubspec.yaml packages on run. If you set user_upload then I assume you know what you are doing.",
     "features": null,
     "docker_images": {
-        "ghcr.io/parkervcp/yolks:dart_2.17": "ghcr.io/parkervcp/yolks:dart_2.17"
+        "registry.cn-shanghai.aliyuncs.com/pterodactyl-images/yolks:dart_2.17": "registry.cn-shanghai.aliyuncs.com/pterodactyl-images/yolks:dart_2.17"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; dart pub get; dart run",
