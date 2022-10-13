@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-08-07T02:06:14-04:00",
+    "exported_at": "2022-09-29T14:19:56-04:00",
     "name": "Venice Unleashed [With Mount]",
     "author": "me@itsmemac.com",
     "description": "Experience Battlefield 3 like never before\r\nVU \/vi:ju:\/ is a community-oriented Battlefield 3 modding platform that gives you back control of your gaming experience.",
@@ -13,7 +13,7 @@
         "Wine Stable": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "if [ ! -f \/home\/container\/activated ]; then wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -activate -o_mail ${EMAIL} -o_pass ${PASSWORD}; touch \/home\/container\/activated; else wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -serverInstancePath \"$(winepath -w ~\/vu\/instance)\" -server -dedicated -listen 0.0.0.0:$SERVER_PORT -mHarmonyPort ${HARMONY} -RemoteAdminPort 0.0.0.0:${RCON}; fi",
+    "startup": "if [ ! -f \/home\/container\/activated ]; then wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -activate -o_mail ${EMAIL} -o_pass ${PASSWORD}; touch \/home\/container\/activated; else wine ~\/vu\/client\/vu.com -gamepath ~\/bf3 -serverInstancePath \"$(winepath -w ~\/vu\/instance)\" -server -dedicated -noUpdate -${FREQUENCY} -listen 0.0.0.0:$SERVER_PORT -mHarmonyPort ${HARMONY} -RemoteAdminPort 0.0.0.0:${RCON}; fi",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Game successfully registered with Zeus\"\r\n}",
@@ -76,6 +76,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Frequency",
+            "description": "30 - 30Hz (Default) \/\/ high60 - 60Hz High frequency mode \/\/ high120 - 120Hz High frequency mode",
+            "env_variable": "FREQUENCY",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "in:30,high60,high120",
             "field_type": "text"
         }
     ]
