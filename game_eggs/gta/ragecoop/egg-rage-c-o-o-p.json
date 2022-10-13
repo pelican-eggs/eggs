@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-09-23T20:11:15+02:00",
+    "name": "RageCOOP",
+    "author": "josdekurk@gmail.com",
+    "description": "Drive around the interstate with your buddy, enjoy GTAs environment, make own missions and events or just chill in Grove Street! \ud83c\udf10",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/RageCoop.Server",
+    "config": {
+        "files": "{\r\n    \"Settings.xml\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"Settings.Port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Listening for clients\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl wget git zip unzip jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/RAGECOOP\/RAGECOOP-V\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/RAGECOOP\/RAGECOOP-V\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i RageCoop.Server-linux-x64.zip)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i RageCoop.Server-linux-x64.zip)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i RageCoop.Server-linux-x64.zip)\r\n    fi\r\nfi\r\n\r\necho ${DOWNLOAD_URL}\r\nwget ${DOWNLOAD_URL} -O RageCoop.Server-linux.zip\r\nRageCoop.Server-linux.zip\r\n\r\nunzip RageCoop.Server-linux.zip\r\n\r\nrm RageCoop.Server-linux.zip\r\n\r\nchmod +x RageCoop.Server\r\n\r\ncat <<EOF > Settings.xml\r\n<Settings xmlns:xsi=\"http:\/\/www.w3.org\/2001\/XMLSchema-instance\" xmlns:xsd=\"http:\/\/www.w3.org\/2001\/XMLSchema\">\r\n\t<Port>4499<\/Port>\r\n\t<MaxPlayers>32<\/MaxPlayers>\r\n\t<MaxLatency>500<\/MaxLatency>\r\n\t<Name>RAGECOOP server<\/Name>\r\n\t<Website>https:\/\/ragecoop.online\/<\/Website>\r\n\t<Description>RAGECOOP server<\/Description>\r\n\t<GameMode>FreeRoam<\/GameMode>\r\n\t<Language>English<\/Language>\r\n\t<WelcomeMessage>Welcome on this server :)<\/WelcomeMessage>\r\n\t<AnnounceSelf>false<\/AnnounceSelf>\r\n\t<MasterServer>https:\/\/masterserver.ragecoop.online\/<\/MasterServer>\r\n\t<LogLevel>0<\/LogLevel>\r\n\t<NpcStreamingDistance>500<\/NpcStreamingDistance>\r\n\t<PlayerStreamingDistance>-1<\/PlayerStreamingDistance>\r\n\t<WeatherTimeSync>true<\/WeatherTimeSync>\r\n\t<AllowedUsernameChars>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_<\/AllowedUsernameChars>\r\n\t<UseP2P>false<\/UseP2P>\r\n\t<UseZeroTier>false<\/UseZeroTier>\r\n\t<UseVoice>false<\/UseVoice>\r\n\t<ZeroTierNetworkID>8056c2e21c000001<\/ZeroTierNetworkID>\r\n\t<AutoUpdate>false<\/AutoUpdate>\r\n\t<KickGodMode>false<\/KickGodMode>\r\n\t<KickSpamming>true<\/KickSpamming>\r\n<\/Settings>\r\nEOF\r\n\r\necho \"done\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "The version you want of RAGECOOP-V\r\n\r\nExample: latest, nightly , 1.5.3",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
