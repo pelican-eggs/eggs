@@ -121,6 +121,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * GTA V
   * [FiveM](game_eggs/gta/fivem)
+  * [ragecoop](game_eggs/gta/ragecoop)  
   * [RageMP](game_eggs/gta/ragemp)
   * [alt:V](game_eggs/gta/altv)
 
