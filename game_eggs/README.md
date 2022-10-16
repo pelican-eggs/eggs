@@ -10,9 +10,9 @@
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
-[ClassiCube](game_eggs/classicube)
+[ClassiCube](classicube)
 
-* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+* [MCGalaxy](classicube/mcgalaxy)
 
 [ET Legacy](enemy_territory/etlegacy)
 
