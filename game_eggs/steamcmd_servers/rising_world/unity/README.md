@@ -14,5 +14,6 @@ Rising World requires up to 3 ports.
 | Port    | default       |
 |---------|---------------|
 | Game    |  4255         |
-| RCON    |  4253         |
 | Query   |  4254         |
+| RCON    |  4253         |
+
