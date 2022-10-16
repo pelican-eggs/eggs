@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-16T10:44:01+02:00",
+    "exported_at": "2022-10-16T17:49:35+02:00",
     "name": "Rising World Unity",
     "author": "info@goover.de",
     "description": "Rising World is a voxel based open-world sandbox game, featuring a procedurally generated world, playable in single and multi-player.",
@@ -17,7 +17,7 @@
     "file_denylist": [],
     "startup": ".\/RisingWorldServer.x64 +Server_Port={{SERVER.PORT}}",
     "config": {
-        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Server_Name=\": \"Server_Name={{server.build.env.SRV_NAME}}\",\r\n            \"Server_Password=\": \"Server_Password={{server.build.env.SRV_PW}}\",\r\n            \"Password=\": \"Password={{server.build.env.SRV_PW}}\",\r\n            \"RCON_Enabled=\": \"RCON_Enabled={{server.build.env.RCON}}\",\r\n            \"RCON_Password=\": \"RCON_Password={{server.build.env.RCON_PORT}}\",\r\n            \"RCON_Port=\": \"RCON_Port={{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Server_Name=\": \"Server_Name={{server.build.env.SRV_NAME}}\",\r\n            \"Server_Password=\": \"Server_Password={{server.build.env.SRV_PW}}\",\r\n            \"Password=\": \"Password={{server.build.env.SRV_PW}}\",\r\n            \"RCON_Enabled=\": \"RCON_Enabled={{server.build.env.RCON}}\",\r\n            \"RCON_Password=\": \"RCON_Password={{server.build.env.RCON_PASS}}\",\r\n            \"RCON_Port=\": \"RCON_Port={{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Dedicated server is ready!\"\r\n}",
         "logs": "{}",
         "stop": "^C"
