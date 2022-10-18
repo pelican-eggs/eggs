@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-10-17T22:24:46-04:00",
+    "name": "Yarr",
+    "author": "sotoluis90@gmail.com",
+    "description": "Yarr is a selfhosted feed aggregator",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": "echo \"{{USERNAME}}:{{PASSWORD}} > .\/auth.conf && .\/yarr -addr 0.0.0.0:{{SERVER_PORT}} -auth-file=.\/auth.conf -db=.\/feed.sql",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"starting server\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt install -y git make gcc curl tar\r\n\r\ncd\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\necho ${ARCH}\r\n\r\ncurl -O https:\/\/dl.google.com\/go\/go1.19.2.linux-${ARCH}.tar.gz\r\nls\r\ntar xvf go1.19.2.linux-${ARCH}.tar.gz\r\n\r\nchown -R root:root .\/go\r\nmv go \/usr\/local\r\n\r\nexport GOPATH=$HOME\/work\r\nexport PATH=$PATH:\/usr\/local\/go\/bin:$GOPATH\/bin\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr.git yarr_source\r\n\r\ncd yarr_source\r\n\r\nexport CGO_ENABLED=1\r\nsed -i -r \"s\/amd64\/$ARCH\/g\" makefile\r\n\r\nmake build_linux    # -> _output\/linux\/yarr\r\n\r\ncp _output\/linux\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\ntouch auth.conf\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Username",
+            "description": "The username used to log in to yarr",
+            "env_variable": "USERNAME",
+            "default_value": "username",
+            "user_viewable": false,
+            "user_editable": true,
+            "rules": "required|string|max:20|alpha_dash",
+            "field_type": "text"
+        },
+        {
+            "name": "Password",
+            "description": "The password needed to log in to yarr",
+            "env_variable": "PASSWORD",
+            "default_value": "password",
+            "user_viewable": false,
+            "user_editable": true,
+            "rules": "required|string|max:20|alpha_dash",
+            "field_type": "text"
+        }
+    ]
+}
