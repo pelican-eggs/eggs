@@ -189,6 +189,11 @@ This is a collection of servers that use SteamCMD to install.
 
 [The Forest](the_forest)
 
+## The Isle
+
+* [The Isle](the_isle)
+  * [Evrima](the_isle/evrima/)
+
 ## Tower Unite
 
 [Tower Unite](tower_unite)
