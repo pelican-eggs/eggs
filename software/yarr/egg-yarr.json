@@ -35,7 +35,7 @@
             "default_value": "username",
             "user_viewable": false,
             "user_editable": true,
-            "rules": "required|string|max:20|alpha_dash",
+            "rules": "required|string|alpha_dash",
             "field_type": "text"
         },
         {
@@ -45,7 +45,7 @@
             "default_value": "password",
             "user_viewable": false,
             "user_editable": true,
-            "rules": "required|string|max:20|alpha_dash",
+            "rules": "required|string|alpha_dash",
             "field_type": "text"
         }
     ]
