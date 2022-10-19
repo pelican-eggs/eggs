@@ -10,9 +10,9 @@
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
-[ClassiCube](game_eggs/classicube)
+[ClassiCube](classicube)
 
-* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+* [MCGalaxy](classicube/mcgalaxy)
 
 [ET Legacy](enemy_territory/etlegacy)
 
@@ -156,6 +156,8 @@
 * [Sven Co-op](steamcmd_servers/svencoop)
 * [Team Fortress 2 Classic](steamcmd_servers/team_fortress_2_classic)
 * [The Forest](steamcmd_servers/the_forest)
+* [The Isle](steamcmd_servers/the_isle)
+  * [Evrima](steamcmd_servers/the_isle/evrima)
 * [Tower Unite](steamcmd_servers/tower_unite)
 * [Unturned](steamcmd_servers/unturned)
 * [V Rising](steamcmd_servers/v_rising)

@@ -1,18 +1,23 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-05-18T21:16:19-04:00",
+    "exported_at": "2022-10-15T14:09:35+02:00",
     "name": "tshock",
     "author": "parker@parkervcp.com",
     "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
-    "image": "quay.io\/pterodactyl\/core:mono",
+    "features": null,
+    "docker_images": {
+        "mono": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:mono_latest"
+    },
+    "file_denylist": [],
     "startup": "mono TerrariaServer.exe -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -world {{WORLD_NAME}}.wld -autocreate {{WORLD_SIZE}}",
     "config": {
-        "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"ServerLog.txt\"\r\n}",
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\"\r\n}",
+        "logs": "{}",
         "stop": "exit"
     },
     "scripts": {
@@ -28,36 +33,40 @@
             "description": "The maximum number of players a server will hold.",
             "env_variable": "MAX_PLAYERS",
             "default_value": "8",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|numeric|digits_between:1,3"
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
         },
         {
             "name": "World Size",
             "description": "Defines the worlds size. 3 sizes 1 (small), 2 (medium), 3 (large).",
             "env_variable": "WORLD_SIZE",
             "default_value": "1",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|numeric|digits_between:1,3"
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
         },
         {
             "name": "World Name",
             "description": "The name for the world file.",
             "env_variable": "WORLD_NAME",
             "default_value": "world",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Tshock Version",
             "description": "The version on tshock that will be installed. default is latest non-pre-release",
             "env_variable": "TSHOCK_VERSION",
             "default_value": "latest",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|string|max:20"
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
