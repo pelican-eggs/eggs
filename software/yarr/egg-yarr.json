@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt install -y git make gcc curl tar\r\n\r\ncd\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\necho ${ARCH}\r\n\r\ncurl -O https:\/\/dl.google.com\/go\/go1.19.2.linux-${ARCH}.tar.gz\r\nls\r\ntar xvf go1.19.2.linux-${ARCH}.tar.gz\r\n\r\nchown -R root:root .\/go\r\nmv go \/usr\/local\r\n\r\nexport GOPATH=$HOME\/work\r\nexport PATH=$PATH:\/usr\/local\/go\/bin:$GOPATH\/bin\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr.git yarr_source\r\n\r\ncd yarr_source\r\n\r\nexport CGO_ENABLED=1\r\nsed -i -r \"s\/amd64\/$ARCH\/g\" makefile\r\n\r\nmake build_linux    # -> _output\/linux\/yarr\r\n\r\ncp _output\/linux\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\ntouch auth.conf\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+			"script": "cd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr yarr_source\r\n\r\ncd yarr_source\r\n\r\nmake build_default  # -> _output\/yarr\r\n\r\ncp _output\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
+            "container": "golang:1.19.2-bullseye",
             "entrypoint": "bash"
         }
     },
