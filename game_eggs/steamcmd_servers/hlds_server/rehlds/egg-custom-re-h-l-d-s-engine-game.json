@@ -1,7 +1,7 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
     "exported_at": "2022-10-19T16:26:34+11:00",
@@ -11,9 +11,9 @@
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
-    ],
+    "docker_images": {
+        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+    },
     "file_denylist": [],
     "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
     "config": {
@@ -37,7 +37,8 @@
             "default_value": "90",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,6"
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
         },
         {
             "name": "Game Name",
@@ -46,7 +47,8 @@
             "default_value": "cstrike",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|alpha_dash|between:1,100"
+            "rules": "required|alpha_dash|between:1,100",
+            "field_type": "text"
         },
         {
             "name": "Map",
@@ -55,7 +57,8 @@
             "default_value": "de_dust2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|alpha_dash"
+            "rules": "required|string|alpha_dash",
+            "field_type": "text"
         },
         {
             "name": "VAC port",
@@ -64,7 +67,8 @@
             "default_value": "26900",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,5"
+            "rules": "required|numeric|digits_between:1,5",
+            "field_type": "text"
         },
         {
             "name": "Github Package",
@@ -73,7 +77,8 @@
             "default_value": "dreamstalker\/rehlds",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "ReHLDS Version",
@@ -82,7 +87,8 @@
             "default_value": "latest",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Match",
@@ -91,7 +97,8 @@
             "default_value": "rehlds-bin",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         }
     ]
 }
