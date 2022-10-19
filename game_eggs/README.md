@@ -120,6 +120,8 @@
 * [ECO](steamcmd_servers/eco)
 * [Fistful of Frags](steamcmd_servers/fof)
 * [HLDS Server](steamcmd_servers/hlds_server)
+  * [HLDS Vanilla](steamcmd_servers/hlds_server/vanilla)
+  * [ReHLDS](steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](steamcmd_servers/holdfast)
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
