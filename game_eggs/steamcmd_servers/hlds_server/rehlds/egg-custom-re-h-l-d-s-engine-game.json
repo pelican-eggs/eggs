@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
     },
     "file_denylist": [],
     "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
@@ -98,6 +98,16 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Validate",
+            "description": "Validate game files on update. Recommended to turn off with ReHLDS due to SteamCMD overwriting its changes",
+            "env_variable": "VALIDATE",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
