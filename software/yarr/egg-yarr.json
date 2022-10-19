@@ -42,7 +42,7 @@
             "name": "Password",
             "description": "The password needed to log in to yarr",
             "env_variable": "PASSWORD",
-            "default_value": "password",
+            "default_value": "",
             "user_viewable": false,
             "user_editable": true,
             "rules": "required|string|alpha_dash",
