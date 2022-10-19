@@ -33,7 +33,7 @@
             "description": "The username used to log in to yarr",
             "env_variable": "USERNAME",
             "default_value": "username",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|alpha_dash",
             "field_type": "text"
@@ -43,7 +43,7 @@
             "description": "The password needed to log in to yarr",
             "env_variable": "PASSWORD",
             "default_value": "",
-            "user_viewable": false,
+            "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|alpha_dash",
             "field_type": "text"
