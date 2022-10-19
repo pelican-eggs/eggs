@@ -5,7 +5,8 @@ This is for older games like CS 1.6 (default game) and other servers that still 
 # ReHLDS
 
 ReHLDS is a reverse engineered build of the original HLDS (build 6152/6153), and provides a number of fixes and improvements over the vanilla engine files, while remaining compatible with vanilla clients.
-Github:https://github.com/dreamstalker/rehlds
+
+Github: https://github.com/dreamstalker/rehlds
 
 ## Server Ports
 
