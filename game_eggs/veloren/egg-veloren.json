@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-09-30T19:32:46+02:00",
+    "exported_at": "2022-10-22T11:26:09+02:00",
     "name": "Veloren",
     "author": "parker@parkervcp.com",
     "description": "Veloren is a multiplayer voxel RPG written in Rust. It is inspired by games such as Cube World, Legend of Zelda: Breath of the Wild, Dwarf Fortress and Minecraft.",
@@ -15,14 +15,14 @@
     "file_denylist": [],
     "startup": ".\/veloren-server-cli",
     "config": {
-        "files": "{\r\n    \"userdata\/server\/server_config\/settings.ron\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    address\": \"    address: \\\"0.0.0.0:{{server.build.default.port}}\\\",\",\r\n            \"    metrics_address\": \"    metrics_address: \\\"0.0.0.0:{{server.build.env.METRICS_PORT}}\\\",\",\r\n            \"    server_name\": \"    server_name: \\\"{{server.build.env.SERVER_NAME}}\\\",\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"userdata\/server\/server_config\/settings.ron\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"    metrics_address\": \"    metrics_address: \\\"0.0.0.0:{{server.build.env.METRICS_PORT}}\\\",\",\r\n            \"    server_name\": \"    server_name: \\\"{{server.build.env.SERVER_NAME}}\\\",\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server is ready to accept connections\"\r\n}",
         "logs": "{}",
         "stop": "shutdown graceful 10"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl wget unzip git jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/veloren\/veloren\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/veloren\/veloren\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x86_64\" || echo \"linux-aarch64\")\r\nPART=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"-linux-x86_64-\" || echo \"-linux-aarch64-\")\r\nMATCH_AND_SPACES=$(echo \"weekly\" && echo ${PART} && echo ${RELEASE_DATE})\r\nMATCH=$(echo ${MATCH_AND_SPACES} | sed 's\/ \/\/g')\r\n\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"weekly\" ]; then\r\n    echo -e \"weekly\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${ARCH}\" | tail -n 1)\r\nelif [ \"${VERSION}\" == \"nightly\" ]; then\r\n    echo -e \"nightly\"\r\n    DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"nightly\" '.[] | select(.tag_name==\"nightly\") | .assets[].browser_download_url' | grep -i \"${ARCH}\" | tail -n 1)\r\nelif [ \"${VERSION}\" == \"dated_weekly\" ]; then\r\n    echo -e ${MATCH} \r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${MATCH}\")\r\nelse\r\n    echo -e  \"something went wrong\"\r\nfi\r\n\r\necho -e \"download url: ${DOWNLOAD_URL}\"\r\nwget ${DOWNLOAD_URL} -O files.zip\r\n\r\nunzip -o files.zip\r\nrm files.zip\r\n\r\nchmod +x veloren-server-cli\r\n\r\n## generate config because there is no better way to get it.\r\nmkdir -p \/mnt\/server\/userdata\/server\/server_config\/\r\nif [ ! -f \/mnt\/server\/userdata\/server\/server_config\/settings.ron ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/veloren\/settings.ron \/mnt\/server\/userdata\/server\/server_config\/settings.ron\r\n    echo \"config file pulled\"\r\nfi\r\n\r\necho -e \"install complete\"",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl wget unzip git jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/veloren\/veloren\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/veloren\/veloren\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x86_64\" || echo \"linux-aarch64\")\r\nPART=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"-linux-x86_64-\" || echo \"-linux-aarch64-\")\r\nMATCH_AND_SPACES=$(echo \"weekly\" && echo ${PART} && echo ${RELEASE_DATE})\r\nMATCH=$(echo ${MATCH_AND_SPACES} | sed 's\/ \/\/g')\r\n\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"weekly\" ]; then\r\n    echo -e \"weekly\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${ARCH}\" | tail -n 1)\r\nelif [ \"${VERSION}\" == \"nightly\" ]; then\r\n    echo -e \"nightly\"\r\n    DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"nightly\" '.[] | select(.tag_name==\"nightly\") | .assets[].browser_download_url' | grep -i \"${ARCH}\" | tail -n 1)\r\nelif [ \"${VERSION}\" == \"dated_weekly\" ]; then\r\n    echo -e ${MATCH} \r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${MATCH}\")\r\nelse\r\n    echo -e  \"something went wrong\"\r\nfi\r\n\r\necho -e \"download url: ${DOWNLOAD_URL}\"\r\nwget ${DOWNLOAD_URL} -O files.zip\r\n\r\nunzip -o files.zip\r\nrm files.zip\r\n\r\nchmod +x veloren-server-cli\r\n\r\n## generate config because there is no better way to get it.\r\nmkdir -p \/mnt\/server\/userdata\/server\/server_config\/\r\nif [ ! -f \/mnt\/server\/userdata\/server\/server_config\/settings.ron ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/veloren\/settings.ron \/tmp\/settings.ron\r\n    sed \"s\/14004\/${SERVER_PORT}\/g\" \/tmp\/settings.ron > \/mnt\/server\/userdata\/server\/server_config\/settings.ron\r\n    rm \/tmp\/settings.ron\r\n    echo \"config file pulled\"\r\nfi\r\n\r\necho -e \"install complete\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
@@ -42,7 +42,7 @@
             "name": "Weekly specific build date",
             "description": "The date of the weekly version you want. \r\nOnly used if Version is set to dated_weekly!\r\nhttps:\/\/github.com\/veloren\/veloren\/releases\r\n\r\nEverything after the x86_64 but not the first -\r\nand not the .zip extention\r\n\r\nexample:\r\n2022-08-31T08_26 or 2022-09-26T13_34",
             "env_variable": "RELEASE_DATE",
-            "default_value": "2022-09-26T13_34",
+            "default_value": "2022-10-19T22_03",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:40",
@@ -52,7 +52,7 @@
             "name": "Server name",
             "description": "The name your server will be displaying",
             "env_variable": "SERVER_NAME",
-            "default_value": "A ptero hosted server",
+            "default_value": "A pterodactyl hosted server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:64",
