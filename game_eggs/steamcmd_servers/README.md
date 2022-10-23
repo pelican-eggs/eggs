@@ -126,7 +126,9 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Rising World
 
-[Rising World](rising_world)
+* [Rising World](rising_world)
+  * [Legacy Java](rising_world/legacy)
+  * [Unity](rising_world/unity)
 
 ## Risk of Rain 2
 
