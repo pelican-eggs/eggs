@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-			"script": "cd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr yarr_source\r\n\r\ncd yarr_source\r\n\r\nmake build_default  # -> _output\/yarr\r\n\r\ncp _output\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
+            "script": "#!\/bin\/bash\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr yarr_source\r\n\r\ncd yarr_source\r\n\r\nmake build_default  # -> _output\/yarr\r\n\r\ncp _output\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
             "container": "golang:1.19.2-bullseye",
             "entrypoint": "bash"
         }
