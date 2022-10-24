@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-23T14:05:03+02:00",
+    "exported_at": "2022-10-24T20:12:31+02:00",
     "name": "Solace Crafting",
     "author": "info@goover.de",
     "description": "Open-world fantasy survival RPG. Borderless distance-based difficulty with player built fast-travel, modular-building, and town management.",
@@ -32,20 +32,10 @@
             "name": "SRCDS_APPID",
             "description": "",
             "env_variable": "SRCDS_APPID",
-            "default_value": "670260",
+            "default_value": "1086950",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:20",
-            "field_type": "text"
-        },
-        {
-            "name": "SRCDS_BETAID",
-            "description": "",
-            "env_variable": "SRCDS_BETAID",
-            "default_value": "dedicatedserver",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:50",
             "field_type": "text"
         },
         {
@@ -53,36 +43,6 @@
             "description": "",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20",
-            "field_type": "text"
-        },
-        {
-            "name": "STEAM_USER",
-            "description": "",
-            "env_variable": "STEAM_USER",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "max:200",
-            "field_type": "text"
-        },
-        {
-            "name": "STEAM_PASS",
-            "description": "",
-            "env_variable": "STEAM_PASS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "max:50",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam Auth",
-            "description": "",
-            "env_variable": "STEAM_AUTH",
-            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20",
