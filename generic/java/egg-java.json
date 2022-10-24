@@ -10,11 +10,8 @@
     "description": "Creates a container that runs java.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:java_7": "ghcr.io\/parkervcp\/yolks:java_7",
         "ghcr.io\/parkervcp\/yolks:java_8": "ghcr.io\/parkervcp\/yolks:java_8",
-        "ghcr.io\/parkervcp\/yolks:java_9": "ghcr.io\/parkervcp\/yolks:java_9",
         "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11",
-        "ghcr.io\/parkervcp\/yolks:java_14": "ghcr.io\/parkervcp\/yolks:java_14",
         "ghcr.io\/parkervcp\/yolks:java_16": "ghcr.io\/parkervcp\/yolks:java_16",
         "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17",
         "ghcr.io\/parkervcp\/yolks:java_19": "ghcr.io\/parkervcp\/yolks:java_19"
