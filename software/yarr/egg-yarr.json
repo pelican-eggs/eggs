@@ -16,7 +16,7 @@
     "startup": ".\/yarr -addr 0.0.0.0:{{SERVER_PORT}} -auth=\"{{USERNAME}}:{{PASSWORD}}\" -db=.\/feed.sql",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"starting server\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"starting server\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
