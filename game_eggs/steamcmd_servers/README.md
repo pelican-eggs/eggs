@@ -151,6 +151,10 @@ This is a collection of servers that use SteamCMD to install.
   * [exiled](scpsl/exiled)
   * [multiadmin](scpsl/multiadmin)
 
+## Solace Crafting
+
+[Solace Crafting](solace_crafting)
+
 ## Soldat
 
 [Soldat](soldat)
