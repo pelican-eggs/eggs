@@ -8,7 +8,3 @@ Open-world fantasy survival role-playing game. Limitless distance-based difficul
 |-------|---------|
 | Game  | 27015   |
 | Query | 27016   |
-
-### SteamGuard
-
-To start this Server, Steam Login is needed
