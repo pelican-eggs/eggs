@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-20T18:39:16+02:00",
+    "exported_at": "2022-10-26T17:21:51+02:00",
     "name": "LeagueSandbox",
     "author": "domi@imagine.team",
     "description": "A simple egg to run LeagueSandbox server in pterodactyl",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y zip unzip jq curl wget git\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/LeagueSandbox\/GameServer.git\r\nrm .git -rf\r\n\r\ncd GameServer\/\r\n\r\ngit submodule init\r\ngit submodule update\r\n\r\n#wget https:\/\/packages.microsoft.com\/config\/debian\/11\/packages-microsoft-prod.deb -O packages-microsoft-prod.deb\r\n#dpkg -i packages-microsoft-prod.deb\r\n#rm packages-microsoft-prod.deb\r\n#apt-get update\r\n#apt-get install -y apt-transport-https\r\n#apt-get update\r\n#apt-get install -y dotnet-sdk-5.0\r\n\r\ndotnet build .\r\ncp -r GameServerConsole\/bin\/Debug\/net6.0\/* \/mnt\/server\/\r\ncp -r Content \/mnt\/server\/Content\r\necho \"done\"",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y zip unzip jq curl wget git\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/LeagueSandbox\/GameServer.git\r\nrm .git -rf\r\n\r\ncd GameServer\/\r\n\r\ngit submodule init\r\ngit submodule update\r\n\r\ndotnet build .\r\ncp -r GameServerConsole\/bin\/Debug\/net6.0\/* \/mnt\/server\/\r\ncp -r Content \/mnt\/server\/Content\r\necho \"done\"",
             "container": "bitnami\/dotnet-sdk:6-debian-11",
             "entrypoint": "bash"
         }
