@@ -63,6 +63,8 @@ This is a collection of servers that use SteamCMD to install.
 ## HLDS Server
 
 [HLDS Server](hlds_server)
+  * [HLDS Vanilla](hlds_server/vanilla)
+  * [ReHLDS](hlds_server/rehlds)
 
 ## Holdfast: Nations At War
 
