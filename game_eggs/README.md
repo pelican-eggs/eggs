@@ -20,6 +20,7 @@
 
 * [Vanilla](factorio/factorio)
 * [ModUpdate](factorio/factorio-modupdate)
+* [Clusterio](game_eggs/factorio/clusterio)
 
 [FTL: Tachyon](ftl/tachyon)
 
