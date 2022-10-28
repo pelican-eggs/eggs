@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-26T14:56:05-06:00",
+    "exported_at": "2022-10-27T20:06:01-06:00",
     "name": "Stormworks: Build and Rescue",
     "author": "iamkubi@gmail.com",
     "description": "Join a world where you design, create and pilot your own air sea rescue service. Release your inner hero as you battle fierce storms out at sea to rescue those in need.",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+        "wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
     "startup": "xvfb-run wine server64.exe +server_dir \/home\/container\/server_data",
@@ -57,7 +57,7 @@
             "default_value": "0",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
