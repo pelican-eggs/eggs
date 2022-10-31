@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source"
     },
     "file_denylist": [],
     "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",

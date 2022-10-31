@@ -27,7 +27,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Java Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nPROJECT=java\r\n\r\napt update\r\napt install -y curl jq\r\n\r\ncd \/mnt\/server",
-            "container": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/yolks:debian",
+            "container": "debian:buster-slim",
             "entrypoint": "bash"
         }
     },
