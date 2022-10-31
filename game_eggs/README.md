@@ -20,6 +20,7 @@
 
 * [Vanilla](factorio/factorio)
 * [ModUpdate](factorio/factorio-modupdate)
+* [Clusterio](game_eggs/factorio/clusterio)
 
 [FTL: Tachyon](ftl/tachyon)
 
@@ -120,6 +121,8 @@
 * [ECO](steamcmd_servers/eco)
 * [Fistful of Frags](steamcmd_servers/fof)
 * [HLDS Server](steamcmd_servers/hlds_server)
+  * [HLDS Vanilla](steamcmd_servers/hlds_server/vanilla)
+  * [ReHLDS](steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](steamcmd_servers/holdfast)
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
@@ -137,11 +140,14 @@
 * [Project Zomboid](steamcmd_servers/project_zomboid)
 * [Quake Live](steamcmd_servers/quake_live)
 * [Rising World](steamcmd_servers/rising_world)
+  * [Legacy Java](steamcmd_servers/rising_world/legacy)
+  * [Unity](steamcmd_servers/rising_world/unity)
 * [Risk Of Rain 2](steamcmd_servers/risk_of_rain_2)
 * [Rust](steamcmd_servers/rust)
   * [Autowipe](steamcmd_servers/rust/rust_autowipe)
   * [Staging](steamcmd_servers/rust/rust_staging)
 * [Satisfactory](steamcmd_servers/satisfactory)
+* [Solace Crafting](steamcmd_servers/solace_crafting)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [Dedicated](steamcmd_servers/scpsl/dedicated)
   * [Exiled](steamcmd_servers/scpsl/exiled)
@@ -174,6 +180,7 @@
 * [Vanilla](terraria/vanilla)
 
 [Tycoon Games](tycoon_games)
+
 * [OpenRCT2](tycoon_games/openrct2)
 * [OpenTTD](tycoon_games/openttd)
 

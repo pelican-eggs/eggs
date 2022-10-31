@@ -55,3 +55,10 @@ cp -v linux32/steamclient.so ../.steam/sdk32/steamclient.so
 ## set up 64 bit libraries
 mkdir -p /mnt/server/.steam/sdk64
 cp -v linux64/steamclient.so ../.steam/sdk64/steamclient.so
+
+## add below your custom commands if needed
+
+## install end
+echo "-----------------------------------------"
+echo "Installation completed..."
+echo "-----------------------------------------"

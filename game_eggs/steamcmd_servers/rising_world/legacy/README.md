@@ -1,4 +1,4 @@
-# Rising World
+# Rising World Legacy Java
 
 Rising World is a voxel based open-world sandbox game, featuring a procedurally generated world, playable in single and multi-player.
 

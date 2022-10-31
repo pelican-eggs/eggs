@@ -63,6 +63,8 @@ This is a collection of servers that use SteamCMD to install.
 ## HLDS Server
 
 [HLDS Server](hlds_server)
+  * [HLDS Vanilla](hlds_server/vanilla)
+  * [ReHLDS](hlds_server/rehlds)
 
 ## Holdfast: Nations At War
 
@@ -126,7 +128,9 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Rising World
 
-[Rising World](rising_world)
+* [Rising World](rising_world)
+  * [Legacy Java](rising_world/legacy)
+  * [Unity](rising_world/unity)
 
 ## Risk of Rain 2
 
@@ -148,6 +152,10 @@ This is a collection of servers that use SteamCMD to install.
   * [dedicated](scpsl/dedicated)
   * [exiled](scpsl/exiled)
   * [multiadmin](scpsl/multiadmin)
+
+## Solace Crafting
+
+[Solace Crafting](solace_crafting)
 
 ## Soldat
 

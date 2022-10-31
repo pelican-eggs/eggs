@@ -20,4 +20,4 @@ Stormworks requires 3 consecutive ports in order to run.  The default ports are 
 
 ## Console output
 
-The Stormworks server will constantly output updates to the server console when run under Wine.  Natively this results in text that updates in place, however there is no way to disable or limit the frequency of this output.  A [feature request](http://mcro.org/issues/view_issue/21739) was filed with the developer in hopes of improving the Linux support however it was rejected without comment.  At this time there is no known solution.
+Due to the move to the wine staging branch, the console will no longer spit out updates infinitely. It will remain consistant, and update according to player-count, vehicles loaded, etc. However, there is one thing to note. It seems that the console will misreport TPS, always appearing at a steady 60-64. Ignore this reading. If you wish to check your server TPS, join your server and press the backquote/tilda key (`/~). 

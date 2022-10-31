@@ -8,6 +8,12 @@ Veloren is fully open-source, licensed under GPL 3. It uses original graphics, m
 
 ## Server Ports
 
+**Due to there new config file you have to set the game port manual in the config file!!**
+
+`/home/container/userdata/server/server_config/settings.ron`
+- Line 4:             `address: "[::]:14004",` -> `            address: "[::]:<port>",`
+- Line 7:             `address: "0.0.0.0:14004",`->           `address: "0.0.0.0:<port>",`
+
 Ports required to run the server in a table format.
 
 | Port    | default |
