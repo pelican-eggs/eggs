@@ -11,6 +11,8 @@ The default steam query port is 27015
 
 ## ARK Survival Evolved
 
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/source-engine/egg-ark--survival-evolved.json)
+
 ### Port Requirements
 
 The ARK server requires 4 ports minimum.
@@ -26,6 +28,8 @@ Please note the server may not show up on steam game server lists due to this re
 
 ## Counter Strike: Global Offensive
 
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/source-engine/egg-counter--strike--global-offensive.json)
+
 Counter-Strike: Global Offensive (CS: GO) expands upon the team-based action gameplay that it pioneered when it was launched 19 years ago. CS: GO features new maps, characters, weapons, and game modes, and delivers updated versions of the classic CS content (de_dust2, etc.).
 
 ### Port Requirements
@@ -35,6 +39,8 @@ Counter-Strike: Global Offensive (CS: GO) expands upon the team-based action gam
 |   Game   | 27015   |
 
 ## Custom Source Engine Game
+
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/source-engine/egg-custom-source-engine-game.json)
 
 This is a generic one size fit's all egg that supports srcds game servers.
 
@@ -48,6 +54,8 @@ This is not for games like Counter Strike 1.6 which is an HLDS title. See [HLDS 
 
 ## Garry's Mod
 
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/source-engine/egg-garrys-mod.json)
+
 Garry's Mod is a physics sandbox. There aren't any predefined aims or goals. We give you the tools and leave you to play.
 
 ### Port Requirements
@@ -58,6 +66,8 @@ Garry's Mod is a physics sandbox. There aren't any predefined aims or goals. We 
 
 ## Insurgency
 
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/source-engine/egg-insurgency.json)
+
 Take to the streets for intense close quarters combat, where a team's survival depends upon securing crucial strongholds and destroying enemy supply in this multiplayer and cooperative Source Engine based experience.
 
 ### Port Requirements
@@ -67,6 +77,8 @@ Take to the streets for intense close quarters combat, where a team's survival d
 |   Game   | 27015   |
 
 ## Team Fortress 2
+
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/source-engine/egg-team-fortress2.json)
 
 Nine distinct classes provide a broad range of tactical abilities and personalities. Constantly updated with new game modes, maps, equipment and, most importantly, hats!
 

@@ -1,6 +1,7 @@
 # Voice Servers
 
 ## Mumble
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/voice-servers/egg-mumble-server.json)
 
 Mumble is an open source, low-latency, high quality voice chat software primarily intended for use while gaming.
 
@@ -13,6 +14,8 @@ Mumble only requires a single port to run. The default is 64738
 | Game    | 64738   |
 
 ## Teamspeak 3
+
+[Click here to download](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/voice-servers/egg-teamspeak3-server.json)
 
 Use crystal clear sound to communicate with your team mates cross-platform with military-grade security, lag-free performance & unparalleled reliability and uptime.
 
