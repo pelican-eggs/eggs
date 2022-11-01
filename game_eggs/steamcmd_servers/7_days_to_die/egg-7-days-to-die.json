@@ -1,13 +1,13 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-12-22T12:58:29+01:00",
+    "exported_at": "2022-11-1T21:14:30+01:00",
     "name": "7 Days To Die",
-    "author": "kristoffer.norman@bahnhof.se",
-    "description": "7 days to die server",
+    "author": "kano@wapriaily.com",
+    "description": "《7 Days To Die》是一款开放世界游戏，独具特色地融合了第一人称射击、生存恐怖、塔防和角色扮演等多种游戏的特征。快来体验这款具有开创性的终极丧尸生存沙盒角色扮演游戏吧。",
     "features": [
         "steam_disk_space"
     ],
@@ -31,26 +31,26 @@
     },
     "variables": [
         {
-            "name": "Max Players",
-            "description": "Maximum Concurrent Players",
+            "name": "最大玩家数",
+            "description": "服务器最大能容纳的玩家数",
             "env_variable": "MAX_PLAYERS",
             "default_value": "8",
             "user_viewable": true,
-            "user_editable": false,
+            "user_editable": true,
             "rules": "required|string|max:20"
         },
         {
-            "name": "Game Difficulty",
-            "description": "0 - 5, 0=easiest, 5=hardest",
+            "name": "游戏难度",
+            "description": "0 - 5，0=最简单，5=最难",
             "env_variable": "GAME_DIFFICULTY",
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|between:0,5"
+            "rules": "required|string|in:0,1,2,3,4,5"
         },
         {
-            "name": "Source AppID",
-            "description": "This is the app id for 7dtd please no step on snek.",
+            "name": "App ID",
+            "description": "这是7 Days To Die的应用程序ID，请勿修改。",
             "env_variable": "SRCDS_APPID",
             "default_value": "294420",
             "user_viewable": false,
@@ -58,8 +58,8 @@
             "rules": "required|string|max:20"
         },
         {
-            "name": "Auto Update",
-            "description": "This is to auto update the server on start.\r\n\r\nOptions are 0 or 1\r\nDefault is 1",
+            "name": "自动更新",
+            "description": "这是为了在启动时自动更新服务器。",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
@@ -68,7 +68,7 @@
         },
         {
             "name": "ld lib path",
-            "description": "This is really annoying that more games are doing this.",
+            "description": "环境变量",
             "env_variable": "LD_LIBRARY_PATH",
             "default_value": ".",
             "user_viewable": false,
@@ -76,8 +76,8 @@
             "rules": "required|string|max:20"
         },
         {
-            "name": "Beta Branch",
-            "description": "Installs beta branch if specified. For example, latest_experimental would install the latest experimental branch release. Requires a reinstall to switch branches properly.",
+            "name": "测试服",
+            "description": "安装测试服（如果已指定）。例如：latest_experimental将安装最新的测试服版本。需要重新安装才能正确切换。",
             "env_variable": "SRCDS_BETAID",
             "default_value": "",
             "user_viewable": true,
@@ -85,8 +85,8 @@
             "rules": "nullable|string|max:20"
         },
         {
-            "name": "Telnet Password",
-            "description": "Telnet listens on a local interface by default without a password. However, you can specify a password if  you wish to expose telnet.",
+            "name": "Telnet密码",
+            "description": "默认情况下，Telnet在本地接口上进行侦听，而不使用密码。但是如果您希望公开telnet，则可以指定密码。",
             "env_variable": "PASSWORD",
             "default_value": "",
             "user_viewable": true,
@@ -94,7 +94,7 @@
             "rules": "nullable|string|max:30"
         },
         {
-            "name": "Telnet Port",
+            "name": "Telnet端口",
             "description": "",
             "env_variable": "TELNET_PORT",
             "default_value": "8081",

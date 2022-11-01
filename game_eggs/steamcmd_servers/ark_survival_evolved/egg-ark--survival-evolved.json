@@ -1,13 +1,13 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-11-26T13:48:52+01:00",
+    "exported_at": "2022-11-1T21:18:30+01:00",
     "name": "Ark: Survival Evolved",
-    "author": "dev@shepper.fr",
-    "description": "As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. Hunt, harvest resources, craft items, grow crops, research technologies, and build shelters to withstand the elements and store valuables, all while teaming up with (or preying upon) hundreds of other players to survive, dominate... and escape! \u2014 Gamepedia: ARK",
+    "author": "kano@wapriaily.com",
+    "description": "《方舟：生存进化》故事主要讲述，一群男女从在岸边醒来后，发现自己身处一个充满恐龙的神秘岛屿“ARK”。游戏中除了狩猎、资源搜刮、物品打造、种植、科研、调查技术和建造房子来抵抗炎热的白天，冰冷的夜晚，易变的天气系统，危险的野外和潜在的敌人等之外，玩家还必须面对其他玩家所扮演的幸存者，合作或者是相互厮杀。并且有80多种恐龙和其他史前生物，玩家们可以驯服这些庞大的生物，并利用它们来和更强的敌人战斗。当然恐龙并非岛上的危险生物，其他的玩家也正在组织自己的部落，积累各种资源和经验来建立庞大的村庄和城市，他们还能不断发展技术来跨越原始的石器时代并进入现代的电气时代，而且他们还会不断战斗来摧毁威胁到他们的人。",
     "features": [
         "steam_disk_space"
     ],
@@ -31,8 +31,8 @@
     },
     "variables": [
         {
-            "name": "Server Password",
-            "description": "If specified, players must provide this password to join the server.",
+            "name": "服务器密码",
+            "description": "如果指定，玩家必须提供此密码才能加入服务器。",
             "env_variable": "ARK_PASSWORD",
             "default_value": "",
             "user_viewable": true,
@@ -40,8 +40,8 @@
             "rules": "nullable|alpha_dash|between:1,100"
         },
         {
-            "name": "Admin Password",
-            "description": "If specified, players must provide this password (via the in-game console) to gain access to administrator commands on the server.",
+            "name": "管理员密码",
+            "description": "如果指定，玩家必须提供此密码（通过游戏内控制台）才能访问使用管理员命令。",
             "env_variable": "ARK_ADMIN_PASSWORD",
             "default_value": "PleaseChangeMe",
             "user_viewable": true,
@@ -49,17 +49,17 @@
             "rules": "required|alpha_dash|between:1,100"
         },
         {
-            "name": "Server Map",
-            "description": "Available Maps: TheIsland, TheCenter, Ragnarok, ScorchedEarth_P, Aberration_P, Extinction, Valguero_P, Genesis, CrystalIsles, Gen2, Fjordur",
+            "name": "服务器地图",
+            "description": "可用地图: TheIsland, TheCenter, Ragnarok, ScorchedEarth_P, Aberration_P, Extinction, Valguero_P, Genesis, CrystalIsles, Gen2, Fjordur",
             "env_variable": "SERVER_MAP",
             "default_value": "TheIsland",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|in:TheIsland,TheCenter,Ragnarok,ScorchedEarth_P,Aberration_P,Extinction,Valguero_P,Genesis,CrystalIsles,Gen2,LostIsland,Fjordur"
         },
         {
-            "name": "Server Name",
-            "description": "ARK server name",
+            "name": "服务器名称",
+            "description": "设置展示在服务器列表的名称",
             "env_variable": "SESSION_NAME",
             "default_value": "A Pterodactyl Hosted ARK Server",
             "user_viewable": true,
@@ -67,8 +67,8 @@
             "rules": "required|string|max:128"
         },
         {
-            "name": "Rcon Port",
-            "description": "ARK rcon port used by rcon tools.",
+            "name": "Rcon端口",
+            "description": "连接至方舟远程管理的Rcon端口",
             "env_variable": "RCON_PORT",
             "default_value": "27020",
             "user_viewable": true,
@@ -76,8 +76,8 @@
             "rules": "required|numeric"
         },
         {
-            "name": "Query Port",
-            "description": "ARK query port used by steam server browser and ark client server browser.",
+            "name": "Query端口",
+            "description": "Steam服务器列表和方舟客户端服务器列表使用的方舟查询端口。",
             "env_variable": "QUERY_PORT",
             "default_value": "27015",
             "user_viewable": true,
@@ -85,8 +85,8 @@
             "rules": "required|numeric"
         },
         {
-            "name": "Auto-update server",
-            "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 0. Set to 1 to update",
+            "name": "自动更新",
+            "description": "服务器是否启用自动更新。",
             "env_variable": "AUTO_UPDATE",
             "default_value": "0",
             "user_viewable": true,
@@ -95,7 +95,7 @@
         },
         {
             "name": "Battle Eye",
-            "description": "Enable BattleEye\r\n\r\n0 to disable\r\n1 to enable\r\n\r\ndefault=\"1\"",
+            "description": "是否启用BattleEye反作弊程序",
             "env_variable": "BATTLE_EYE",
             "default_value": "1",
             "user_viewable": true,
@@ -104,7 +104,7 @@
         },
         {
             "name": "App ID",
-            "description": "ARK steam app id for auto updates. Leave blank to avoid auto update.",
+            "description": "这是Ark: Survival Evolved的应用程序ID，请勿修改。",
             "env_variable": "SRCDS_APPID",
             "default_value": "376030",
             "user_viewable": true,
@@ -112,8 +112,8 @@
             "rules": "nullable|numeric"
         },
         {
-            "name": "Additional Arguments",
-            "description": "Specify additional launch parameters such as -crossplay. You must include a dash - and separate each parameter with space: -crossplay -exclusivejoin",
+            "name": "附加参数",
+            "description": "指定额外的启动参数，例如 -crossplay。您必须包含破折号 - 并用空格分隔每个参数：-crossplay -exclusivejoin",
             "env_variable": "ARGS",
             "default_value": "",
             "user_viewable": true,
