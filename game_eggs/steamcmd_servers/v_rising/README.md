@@ -89,7 +89,7 @@ Standardized game settings can be applied via the "Game Settings Preset" startup
 
 #### Becoming an Administrator
 
-To become an administrator in the game you will first need to open the `adminlist.txt` file under `~/VRisingServer_Data/StreamingAssets/Settings/` and add your [steamID64](https://steamid.io/) (one steamID64 per line). This can be done without restarting your server. To become an administrator in the game you need to enable the console in the options menu, bring it down with `~` and authenticate using the `adminauth` console command. Once an administrator you can use a number of administrative commands like `banuser`, `bancharacter`, `banned`, `unban` and `kick`.
+To become an administrator in the game you will first need to open the `adminlist.txt` file under `~/VRisingServer_Data/StreamingAssets/Settings/` and add your [steamID64](https://steamid.io/) (one steamID64 per line). This can be done without restarting your server. To become an administrator in the game you need to enable the console in the options menu, bring it down with `` ` `` and authenticate using the `adminauth` console command. Once an administrator you can use a number of administrative commands like `banuser`, `bancharacter`, `banned`, `unban` and `kick`.
 
 If you ban users through the in-game console the server will automatically modify the `banlist.txt` file, but you can also modify this manually (one steamID64 per line).
 
