@@ -1,5 +1,7 @@
 # Voice Servers
 
+[Click here to go to the download page](https://github.com/pterodactyl/panel/tree/1.0-develop/database/Seeders/eggs/voice-servers)
+
 ## Mumble
 
 Mumble is an open source, low-latency, high quality voice chat software primarily intended for use while gaming.
