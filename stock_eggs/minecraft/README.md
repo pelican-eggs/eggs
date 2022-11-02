@@ -1,17 +1,8 @@
 # Minecraft
 
+[Click here to go to the download page](https://github.com/pterodactyl/panel/tree/1.0-develop/database/Seeders/eggs/minecraft)
+
 All the default minecraft things
-
-[Click here to download bungeecord](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/minecraft/egg-bungeecord.json)
-
-[Click here to download forge](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/minecraft/egg-forge-minecraft.json)
-
-[Click here to download paper](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/minecraft/egg-paper.json)
-
-[Click here to download sponge vanilla](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/minecraft/egg-sponge--sponge-vanilla.json)
-
-[Click here to download vanilla](https://raw.githubusercontent.com/pterodactyl/panel/1.0-develop/database/Seeders/eggs/minecraft/egg-vanilla-minecraft.json)
-
 
 ## Server Ports
 
