@@ -1,19 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-1T21:14:30+01:00",
+    "exported_at": "2022-11-03T20:42:35+08:00",
     "name": "7 Days To Die",
     "author": "kano@wapriaily.com",
-    "description": "\u300A7 Days To Die\u300B\u662F\u4E00\u6B3E\u5F00\u653E\u4E16\u754C\u6E38\u620F\uFF0C\u72EC\u5177\u7279\u8272\u5730\u878D\u5408\u4E86\u7B2C\u4E00\u4EBA\u79F0\u5C04\u51FB\u3001\u751F\u5B58\u6050\u6016\u3001\u5854\u9632\u548C\u89D2\u8272\u626E\u6F14\u7B49\u591A\u79CD\u6E38\u620F\u7684\u7279\u5F81\u3002\u5FEB\u6765\u4F53\u9A8C\u8FD9\u6B3E\u5177\u6709\u5F00\u521B\u6027\u7684\u7EC8\u6781\u4E27\u5C38\u751F\u5B58\u6C99\u76D2\u89D2\u8272\u626E\u6F14\u6E38\u620F\u5427\u3002",
+    "description": "\u300a7 Days To Die\u300b\u662f\u4e00\u6b3e\u5f00\u653e\u4e16\u754c\u6e38\u620f\uff0c\u72ec\u5177\u7279\u8272\u5730\u878d\u5408\u4e86\u7b2c\u4e00\u4eba\u79f0\u5c04\u51fb\u3001\u751f\u5b58\u6050\u6016\u3001\u5854\u9632\u548c\u89d2\u8272\u626e\u6f14\u7b49\u591a\u79cd\u6e38\u620f\u7684\u7279\u5f81\u3002\u5feb\u6765\u4f53\u9a8c\u8fd9\u6b3e\u5177\u6709\u5f00\u521b\u6027\u7684\u7ec8\u6781\u4e27\u5c38\u751f\u5b58\u6c99\u76d2\u89d2\u8272\u626e\u6f14\u6e38\u620f\u5427\u3002",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source"
-    ],
+    "docker_images": {
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source"
+    },
     "file_denylist": [],
     "startup": ".\/7DaysToDieServer.x86_64 -configfile=serverconfig.xml -quit -batchmode -nographics -dedicated -ServerPort=${SERVER_PORT} -ServerMaxPlayerCount=${MAX_PLAYERS} -GameDifficulty=${GAME_DIFFICULTY} -ControlPanelEnabled=false -TelnetEnabled=true -TelnetPort=${TELNET_PORT} -TelnetPassword=${PASSWORD} -logfile logs\/latest.log & echo -e \"Checking on telnet connection\" && until nc -z -v -w5 127.0.0.1 ${TELNET_PORT}; do echo \"Waiting for telnet connection...\"; sleep 5; done && $( [[ -z ${PASSWORD} ]] && printf %s \"telnet -E 127.0.0.1 ${TELNET_PORT}\" || printf %s \"rcon -t telnet -a 127.0.0.1:${TELNET_PORT} -p {{PASSWORD}}\" )",
     "config": {
@@ -31,76 +31,84 @@
     },
     "variables": [
         {
-            "name": "\u6700\u5927\u73A9\u5BB6\u6570",
-            "description": "\u670D\u52A1\u5668\u6700\u5927\u80FD\u5BB9\u7EB3\u7684\u73A9\u5BB6\u6570",
+            "name": "\u6700\u5927\u73a9\u5bb6\u6570",
+            "description": "\u8bbe\u7f6e\u670d\u52a1\u5668\u6700\u5927\u73a9\u5bb6\u6570",
             "env_variable": "MAX_PLAYERS",
             "default_value": "8",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
-            "name": "\u6E38\u620F\u96BE\u5EA6",
-            "description": "0 - 5\uFF0C0=\u6700\u7B80\u5355\uFF0C5=\u6700\u96BE",
+            "name": "\u6e38\u620f\u96be\u5ea6",
+            "description": "0 - 5\uff0c0=\u6700\u7b80\u5355\uff0c5=\u6700\u96be",
             "env_variable": "GAME_DIFFICULTY",
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:0,1,2,3,4,5"
+            "rules": "required|string|in:0,1,2,3,4,5",
+            "field_type": "text"
         },
         {
-            "name": "App ID",
-            "description": "\u8FD9\u662F7 Days To Die\u7684\u5E94\u7528\u7A0B\u5E8FID\uFF0C\u8BF7\u52FF\u4FEE\u6539\u3002",
+            "name": "\u6e38\u620fID",
+            "description": "\u4e03\u65e5\u6740\u7684\u5e94\u7528\u7a0b\u5e8fID",
             "env_variable": "SRCDS_APPID",
             "default_value": "294420",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
-            "name": "\u81EA\u52A8\u66F4\u65B0",
-            "description": "\u8FD9\u662F\u4E3A\u4E86\u5728\u542F\u52A8\u65F6\u81EA\u52A8\u66F4\u65B0\u670D\u52A1\u5668\u3002",
+            "name": "\u81ea\u52a8\u66f4\u65b0",
+            "description": "\u8fd9\u662f\u4e3a\u4e86\u5728\u542f\u52a8\u65f6\u81ea\u52a8\u66f4\u65b0\u670d\u52a1\u5668\u3002",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean"
+            "rules": "required|boolean",
+            "field_type": "text"
         },
         {
             "name": "ld lib path",
-            "description": "\u73AF\u5883\u53D8\u91CF",
+            "description": "\u73af\u5883\u53d8\u91cf\uff08\u4e00\u822c\u4e0d\u7528\u6539\uff09",
             "env_variable": "LD_LIBRARY_PATH",
             "default_value": ".",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
-            "name": "\u6D4B\u8BD5\u670D",
-            "description": "\u5B89\u88C5\u6D4B\u8BD5\u670D\uFF08\u5982\u679C\u5DF2\u6307\u5B9A\uFF09\u3002\u4F8B\u5982\uFF1Alatest_experimental\u5C06\u5B89\u88C5\u6700\u65B0\u7684\u6D4B\u8BD5\u670D\u7248\u672C\u3002\u9700\u8981\u91CD\u65B0\u5B89\u88C5\u624D\u80FD\u6B63\u786E\u5207\u6362\u3002",
+            "name": "\u6d4b\u8bd5\u670d",
+            "description": "\u5b89\u88c5\u6d4b\u8bd5\u670d\uff08\u5982\u679c\u5df2\u6307\u5b9a\uff09\u3002\u4f8b\u5982\uff1alatest_experimental\u5c06\u5b89\u88c5\u6700\u65b0\u7684\u6d4b\u8bd5\u670d\u7248\u672c\u3002\u9700\u8981\u91cd\u65b0\u5b89\u88c5\u624d\u80fd\u6b63\u786e\u5207\u6362\u3002",
             "env_variable": "SRCDS_BETAID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20"
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         },
         {
-            "name": "Telnet\u5BC6\u7801",
-            "description": "\u9ED8\u8BA4\u60C5\u51B5\u4E0B\uFF0CTelnet\u5728\u672C\u5730\u63A5\u53E3\u4E0A\u8FDB\u884C\u4FA6\u542C\uFF0C\u800C\u4E0D\u4F7F\u7528\u5BC6\u7801\u3002\u4F46\u662F\u5982\u679C\u60A8\u5E0C\u671B\u516C\u5F00telnet\uFF0C\u5219\u53EF\u4EE5\u6307\u5B9A\u5BC6\u7801\u3002",
+            "name": "Telnet\u5bc6\u7801",
+            "description": "\u9ed8\u8ba4\u60c5\u51b5\u4e0b\uff0cTelnet \u5728\u672c\u5730\u63a5\u53e3\u4e0a\u8fdb\u884c\u4fa6\u542c\uff0c\u800c\u4e0d\u4f7f\u7528\u5bc6\u7801\u3002\u4f46\u662f\uff0c\u5982\u679c\u60a8\u5e0c\u671b\u516c\u5f00 telnet\uff0c\u5219\u53ef\u4ee5\u6307\u5b9a\u5bc6\u7801\u3002",
             "env_variable": "PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:30"
+            "rules": "nullable|string|max:30",
+            "field_type": "text"
         },
         {
-            "name": "Telnet\u7AEF\u53E3",
-            "description": "",
+            "name": "Telnet\u7aef\u53e3",
+            "description": "\u9ed8\u8ba48081\uff0c\u66f4\u6539\u4e3a\u5df2\u62e5\u6709\u672a\u88ab\u5360\u7528\u7684\u7aef\u53e3\u5373\u53ef\u3002",
             "env_variable": "TELNET_PORT",
             "default_value": "8081",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
