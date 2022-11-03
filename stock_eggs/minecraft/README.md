@@ -1,5 +1,7 @@
 # Minecraft
 
+[Click here to go to the download page](https://github.com/pterodactyl/panel/tree/1.0-develop/database/Seeders/eggs/minecraft)
+
 All the default minecraft things
 
 ## Server Ports
