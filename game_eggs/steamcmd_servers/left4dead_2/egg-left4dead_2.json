@@ -1,21 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-10-13T23:28:59+02:00",
+    "exported_at": "2022-11-03T18:01:39+08:00",
     "name": "Left 4 Dead 2",
-    "author": "pterodactyl@mazoyer.eu",
-    "description": "Left 4 Dead 2 is set in the aftermath of a worldwide pandemic of a disease nicknamed the \"Green Flu\", which rapidly transforms humans into zombie-like creatures and mutated forms that demonstrate extreme aggression towards non-infected beings. A few humans are immune to the disease, while some of those who are infected have no symptoms. The Civil Emergency and Defense Agency (CEDA) and the U.S. military create safe zones to attempt to evacuate as many survivors as possible.",
+    "author": "kano@wapriaily.com",
+    "description": "\u300a\u6c42\u751f\u4e4b\u8def2\u300b\u662f\u7531Valve\u5f00\u53d1\u7684\u4e00\u6b3e\u4ee5\u4e27\u5c38\u4e3a\u4e3b\u9898\u7684\u6050\u6016\u5c04\u51fb\u7c7b\u6e38\u620f\uff0c\u4e8e2009\u5e7411\u670818\u65e5\u53d1\u884c\u3002\r\n\u6e38\u620f\u6545\u4e8b\u53d1\u751f\u7684\u65f6\u95f4\u4e0e\u539f\u4f5c\u51e0\u4e4e\u76f8\u540c\uff0c\u5c06\u5448\u73b0\u53e6\u5916\u56db\u540d\u5e78\u5b58\u8005\u5728\u50f5\u5c38\u6a2a\u884c\u7684\u56db\u4e2a\u573a\u666f\u4e2d\u594b\u529b\u6c42\u751f\u7684\u8270\u8f9b\u5386\u7a0b\uff0c\u5730\u70b9\u53ca\u65f6\u95f4\u80cc\u666f\u4e0e\u5f53\u524d\u7684L4D\u4e00\u81f4\uff0c\u53ea\u4e0d\u8fc7\u89d2\u8272\u662f\u65b0\u89d2\u8272\uff0c\u573a\u666f\u662f\u540c\u4e00\u5730\u70b9\u7684\u53e6\u4e00\u4f4d\u9762\uff0c\u654c\u4eba\u4e2d\u4e5f\u5c06\u51fa\u73b0\u65b0\u7684\u50f5\u5c38\uff0c\u65b0\u7684\u8fd1\u6218\u6b66\u5668\uff0c\u65b0\u7684\u5bf9\u6297\u50f5\u5c38\u6b66\u5668\u548c\u7535\u952f\u3002",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source"
-    ],
+    "docker_images": {
+        "\u6c42\u751f\u4e4b\u8def2": "registry.cn-shanghai.aliyuncs.com\/pterodactyl-images\/games:source"
+    },
     "file_denylist": [],
-    "startup": ".\/srcds_run -console -port {{SERVER_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
+    "startup": ".\/srcds_run -console -port {{SERVER_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart {{ARGS}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful.\",\r\n    \"userInteraction\": []\r\n}",
@@ -31,22 +31,34 @@
     },
     "variables": [
         {
-            "name": "Game ID",
-            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "name": "\u6e38\u620fID",
+            "description": "\u4e0b\u8f7d\u548c\u8fd0\u884c\u7684\u6e38\u620f\u5bf9\u5e94\u7684ID",
             "env_variable": "SRCDS_APPID",
             "default_value": "222860",
-            "user_viewable": true,
+            "user_viewable": false,
             "user_editable": false,
-            "rules": "required|regex:\/^(222860)$\/"
+            "rules": "required|regex:\/^(222860)$\/",
+            "field_type": "text"
         },
         {
-            "name": "Default Map",
-            "description": "Default map used when starting the server.",
+            "name": "\u9ed8\u8ba4\u5730\u56fe",
+            "description": "\u9ed8\u8ba4c1m1_hotel\uff08\u65c5\u9986\uff09",
             "env_variable": "SRCDS_MAP",
             "default_value": "c1m1_hotel",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:40"
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "\u9644\u52a0\u53c2\u6570",
+            "description": "\u5411\u670d\u52a1\u5668\u6dfb\u52a0\u5176\u4ed6\u542f\u52a8\u53c2\u6570\u3002",
+            "env_variable": "ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }
