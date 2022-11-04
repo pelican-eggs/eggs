@@ -12,6 +12,10 @@
 
     https://www.mongodb.com/
 
+### [rethinkdb](nosql/rethinkdb)
+
+    https://rethinkdb.com/
+
 ## SQL Databases
 
 ### [mariadb](sql/mariadb)
