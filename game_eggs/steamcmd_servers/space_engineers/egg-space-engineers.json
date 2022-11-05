@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-05T08:33:11+01:00",
+    "exported_at": "2022-11-05T09:51:58+01:00",
     "name": "Space Engineers",
     "author": "tueye@tuworld.de",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
@@ -198,6 +198,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDLLOVERRIDES",
+            "description": "",
+            "env_variable": "WINEDLLOVERRIDES",
+            "default_value": "mscoree=n,b;mshtml=n,b",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
             "field_type": "text"
         }
     ]
