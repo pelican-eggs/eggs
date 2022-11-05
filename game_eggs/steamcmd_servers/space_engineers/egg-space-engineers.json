@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-05T15:35:34+01:00",
+    "exported_at": "2022-11-05T15:52:51+01:00",
     "name": "Space Engineers",
     "author": "tueye@tuworld.de",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
-    "startup": "winetricks sound=disabled; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/DedicatedServer64\/SpaceEngineersDedicated.exe -path Z:\\\\home\\\\container\\\\config -noconsole -ignorelastsession",
+    "startup": "winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/DedicatedServer64\/SpaceEngineersDedicated.exe -path Z:\\\\home\\\\container\\\\config -noconsole -ignorelastsession",
     "config": {
         "files": "{\r\n    \"config\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\config\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\\\\Sandbox.sbc\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Game ready...\"\r\n}",
@@ -138,26 +138,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|numeric|max:65535",
-            "field_type": "text"
-        },
-        {
-            "name": "WINEARCH",
-            "description": "WINEARCH. win32 or win64",
-            "env_variable": "WINEARCH",
-            "default_value": "win64",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|in:win32,win64",
-            "field_type": "text"
-        },
-        {
-            "name": "WINEPREFIX",
-            "description": "WINEPREFIX",
-            "env_variable": "WINEPREFIX",
-            "default_value": "\/home\/container\/.wine",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:64",
             "field_type": "text"
         },
         {
