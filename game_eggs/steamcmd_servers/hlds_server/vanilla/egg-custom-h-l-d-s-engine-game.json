@@ -1,19 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-01-20T12:52:11-05:00",
+    "exported_at": "2022-11-08T16:06:14+01:00",
     "name": "Custom HLDS Engine Game",
     "author": "parker@parkervcp.com",
     "description": "This option allows modifying the startup arguments and other details to run a custom HLDS based game on the panel.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
     "file_denylist": [],
     "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart",
     "config": {
@@ -24,8 +24,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login anonymous +app_update ${SRCDS_APPID} +app_set_config 90 mod ${HLDS_GAME} +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\n# SRCDS Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login anonymous +app_update ${SRCDS_APPID} +app_set_config 90 mod ${HLDS_GAME} +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -37,7 +37,8 @@
             "default_value": "90",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,6"
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
         },
         {
             "name": "Game Name",
@@ -45,8 +46,9 @@
             "env_variable": "HLDS_GAME",
             "default_value": "cstrike",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|alpha_dash|between:1,100"
+            "user_editable": true,
+            "rules": "required|alpha_dash|between:1,100",
+            "field_type": "text"
         },
         {
             "name": "Map",
@@ -55,7 +57,8 @@
             "default_value": "de_dust2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|alpha_dash"
+            "rules": "required|string|alpha_dash",
+            "field_type": "text"
         },
         {
             "name": "VAC port",
@@ -64,7 +67,8 @@
             "default_value": "26900",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,5"
+            "rules": "required|numeric|digits_between:1,5",
+            "field_type": "text"
         }
     ]
 }
