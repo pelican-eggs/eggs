@@ -75,6 +75,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### noSQL
 
 * [MongoDB](/database/nosql/mongodb)
+* [rethinkdb](/database/nosql/rethinkdb)
 
 ### SQL Databases
 
