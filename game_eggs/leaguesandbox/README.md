@@ -1,6 +1,6 @@
 # League Sandbox
 
-## From their [Github](https://github.com/LeagueSandbox/leaguesandbox.github.io)
+## From their [Github](https://github.com/LeagueSandbox/GameServer)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/7olahkndcs3r295p/branch/indev?svg=true)](https://ci.appveyor.com/project/MythicManiac/gameserver/branch/indev)
 [![Build Status](https://travis-ci.org/LeagueSandbox/GameServer.svg?branch=indev)](https://travis-ci.org/LeagueSandbox/GameServer)
