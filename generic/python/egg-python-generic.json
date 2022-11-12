@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-25T14:17:50-04:00",
+    "exported_at": "2022-11-12T12:05:40+00:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
     "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
@@ -17,7 +17,7 @@
         "ghcr.io\/parkervcp\/yolks:python_2.7": "ghcr.io\/parkervcp\/yolks:python_2.7"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z {{PY_PACKAGES}} ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; \/usr\/local\/bin\/python \/home\/container\/{{PY_FILE}}",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; \/usr\/local\/bin\/python \/home\/container\/{{PY_FILE}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
