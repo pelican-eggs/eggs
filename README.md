@@ -251,6 +251,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
+  * [default](game_eggs/steamcmd_servers/space_engineers/default)
+  * [torch](game_eggs/steamcmd_servers/space_engineers/torch)
 * [Squad](game_eggs/steamcmd_servers/squad)
 * [Starbound](game_eggs/steamcmd_servers/starbound)
 * [Stationeers](game_eggs/steamcmd_servers/stationeers)

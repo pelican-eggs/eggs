@@ -154,6 +154,8 @@
   * [Multiadmin](steamcmd_servers/scpsl/multiadmin)
 * [Soldat](steamcmd_servers/soldat)
 * [Space Engineers](steamcmd_servers/space_engineers)
+  * [default](steamcmd_servers/space_engineers/default)
+  * [torch](steamcmd_servers/space_engineers/torch)
 * [Squad](steamcmd_servers/squad)
 * [Starbound](steamcmd_servers/starbound)
 * [Stationeers](steamcmd_servers/stationeers)
