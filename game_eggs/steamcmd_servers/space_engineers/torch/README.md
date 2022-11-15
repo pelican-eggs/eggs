@@ -12,12 +12,13 @@ Torch is the successor to SE Server Extender and gives server admins the tools t
 **NOTE**
 Because of the winetricks installation, the install process could take some time. Likewise, the first start of the server takes its time.
 
-When installed, the Server loads a base World and config from this repo. New world must be generated with the Windows Dedicated Server and then uploaded to the /config/Saves folder.
-Everything which is not defined in a variable could be edited directy in the config file /config/SpaceEngineers-Dedicated.cfg and config/Saves/{{WORLD}}/Sandbox.sbc
+**SPECIAL NOTE**
+When installed, the Server loads a base World and config from this repo. ONLY THIS WORLD IS SUPPORTED.
+Everything which is not defined in a variable could be edited directy in the config file /config/SpaceEngineers-Dedicated.cfg and config/Saves/World/Sandbox.sbc
 
 ## Server Ports
 
-Default server ports are listed below, but the Main, STEAm and API port can be any port. 
+Default server ports are listed below, but the Main, STEAM and API port can be any port. 
 
 | Port  | default |
 |-------|---------|

@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-14T07:35:36+01:00",
+    "exported_at": "2022-11-15T16:23:46+01:00",
     "name": "Space Engineers",
-    "author": "tueye@tuworld.de",
+    "author": "info@goover.de",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
     "features": [
         "steam_disk_space"
@@ -17,7 +17,7 @@
     "file_denylist": [],
     "startup": "winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/DedicatedServer64\/SpaceEngineersDedicated.exe -path Z:\\\\home\\\\container\\\\config -noconsole -ignorelastsession",
     "config": {
-        "files": "{\r\n    \"config\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\config\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\\\\Sandbox.sbc\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\config\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\\\\Sandbox.sbc\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n\t},\r\n\t\"config\/Saves\/World\/Sandbox.sbc\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Game ready...\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -44,7 +44,7 @@
             "name": "Server Name",
             "description": "Name of the server, appears in Steam browser.",
             "env_variable": "SERVER_NAME",
-            "default_value": "Pterodactyl Space Engineer Server",
+            "default_value": "A Pterodactyl hosted Space Engineer Server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:64",
@@ -52,11 +52,11 @@
         },
         {
             "name": "World Name",
-            "description": "Name of your world (and of your save folder)",
+            "description": "Name of your world (and of your save folder)  !!!!! DO NOT EDIT OR SERVER WILL NOT START !!!!!",
             "env_variable": "WORLD_NAME",
             "default_value": "World",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|string|max:20",
             "field_type": "text"
         },
@@ -64,7 +64,7 @@
             "name": "Server Description",
             "description": "Description of the game",
             "env_variable": "SERVER_DESC",
-            "default_value": "Pterodactyl Space Engineer Server",
+            "default_value": "A Pterodactyl hosted Space Engineer Server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:200",
@@ -121,8 +121,8 @@
             "field_type": "text"
         },
         {
-            "name": "Enable Remote Api",
-            "description": "Enable Remote Api",
+            "name": "Enable Remote API",
+            "description": "Enable Remote API",
             "env_variable": "REMOTEAPI_ENABLE",
             "default_value": "false",
             "user_viewable": true,
@@ -131,8 +131,8 @@
             "field_type": "text"
         },
         {
-            "name": "Remote Api Port",
-            "description": "Remote Api Port",
+            "name": "Remote API Port",
+            "description": "Remote API Port",
             "env_variable": "REMOTEAPI_PORT",
             "default_value": "8081",
             "user_viewable": true,
