@@ -1,6 +1,6 @@
-# discord.py generic
+# Python Language Generic
 
-This egg is designed to run any generic Python application, allowing users to pull their own Python discord bot from a Github repository.
+This egg is designed to run any generic Python application, allowing users to pull their own Python source code from a Github repository.
 
 There is an option to allow a user to upload their own files to run a bot.
 

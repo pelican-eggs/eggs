@@ -1,6 +1,6 @@
-# rust generic
+# Rust Language Generic
 
-This egg is designed to run any generic Rust application with cargo, allowing users to pull their own Rust discord bot from a GitHub repository.
+This egg is designed to run any generic Rust application with Cargo, allowing users to pull their own Rust source code from a GitHub repository.
 
 ## Configuration
 

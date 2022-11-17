@@ -1,8 +1,8 @@
-# Deno generic
+# Deno - JavaScript & TypeScript Generic
 
 ## From their [site](https://deno.land/)
 
-This egg is designed to run any generic Deno application, allowing users to pull their own Deno discord bot from a Github repository.
+This egg is designed to run any generic Deno application, allowing users to pull their own Deno source code from a Github repository.
 
 There is an option to allow a user to upload their own files to run a server.
 
