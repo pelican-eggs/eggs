@@ -164,6 +164,8 @@ This is a collection of servers that use SteamCMD to install.
 ## Space Engineers
 
 [Space Engineers](space_engineers)
+  * [default](space_engineers/default)
+  * [torch](space_engineers/torch)
 
 ## Squad
 
@@ -199,7 +201,7 @@ This is a collection of servers that use SteamCMD to install.
 
 ## The Isle
 
-* [The Isle](the_isle)
+[The Isle](the_isle)
   * [Evrima](the_isle/evrima/)
 
 ## Tower Unite
@@ -216,6 +218,6 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Valheim
 
-* [Valheim](valheim)
+[Valheim](valheim)
   * [Valheim Vanilla](valheim/valheim_vanilla)
   * [Valheim Plus Mod](valheim/valheim_plus)
