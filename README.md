@@ -198,6 +198,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [OpenRA Red Alert](game_eggs/openra/openra_red_alert)
 * [OpenRA Tiberian Dawn](game_eggs/openra/openra_tiberian_dawn)
 
+[Path of Titans](game_eggs/pot)
+
+* [Path of Titans](game_eggs/pot)
+
 [Red Dead Redemption](game_eggs/rdr)
 
 * [RedM](game_eggs/rdr/redm)
