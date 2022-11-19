@@ -4,13 +4,12 @@ Frozen Flame is a Survival RPG set in the vast world of Arсana, an ancient land
 
 ## Server Ports
 
-At this moment you cannot change the server ports. These are the default ports:
 
 | Port      | default |
 |-----------|---------|
 | Game      | 7777    |
 | Query     | 27015   |
-| ?         | 25575   |
+| RCON      | 25575   |
 
 ## Server configuration
 The documentation can be found here: [Dedicated server documentation](https://github.com/DreamsideInteractive/FrozenFlameServer)
