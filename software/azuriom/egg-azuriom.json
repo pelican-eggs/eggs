@@ -10,7 +10,7 @@
     "description": "Azuriom is a game oriented CMS.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/mlhnono68\/azuriom-egg:v0.0.2": "ghcr.io\/mlhnono68\/azuriom-egg:v0.0.2",
+        "ghcr.io\/mlhnono68\/azuriom-egg:v0.0.3": "ghcr.io\/mlhnono68\/azuriom-egg:v0.0.3",
         "ghcr.io\/mlhnono68\/azuriom-egg:main": "ghcr.io\/mlhnono68\/azuriom-egg:main"
     },
     "file_denylist": [],
