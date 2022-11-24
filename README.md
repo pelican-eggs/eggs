@@ -315,6 +315,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## [Software](/software/)
 
+### Azuriom CMS
+
+* [Azuriom](/software/azuriom)
+
 ### Code Server
 
 * [Code-Server](/software/code-server)

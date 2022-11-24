@@ -1,0 +1,43 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-10-10T06:53:04+01:00",
+    "name": "Azuriom",
+    "author": "aaubert@magesi.com",
+    "description": "Azuriom is a game oriented CMS.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/mlhnono68\/azuriom-egg:v0.0.2": "ghcr.io\/mlhnono68\/azuriom-egg:v0.0.2",
+        "ghcr.io\/mlhnono68\/azuriom-egg:main": "ghcr.io\/mlhnono68\/azuriom-egg:main"
+    },
+    "file_denylist": [],
+    "startup": "\/entrypoint.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"ready to handle connections\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\necho \"Installation will be handled in container startup...\"\r\nexit 0",
+            "container": "alpine:3.4",
+            "entrypoint": "sh"
+        }
+    },
+    "variables": [
+        {
+            "name": "Embedded mySQL password",
+            "description": "Define a password assuming you want to embed a dedicated mySQL server on 127.0.0.1:3006 for Azuriom and user azuriom",
+            "env_variable": "EMBEDDED_MYSQL_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
