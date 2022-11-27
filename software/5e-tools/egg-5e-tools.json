@@ -1,22 +1,22 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-11-15T13:39:55-08:00",
+    "exported_at": "2022-11-27T17:50:04+01:00",
     "name": "5e Tools",
     "author": "pterodactyl@demi.cloud",
     "description": "A suite of tools for 5th Edition Dungeons & Dragons players and Dungeon Masters.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
     "file_denylist": [],
-    "startup": "cd ~\/5e-tools && git pull && cd && .\/caddy run -config ~\/caddy.json",
+    "startup": "cd ~\/5e-tools && git pull && cd && .\/caddy run --config ~\/caddy.json",
     "config": {
         "files": "{\r\n    \"caddy.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"apps.http.servers.srv0.listen.0\": \":{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"serving initial configuration\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"serving initial configuration\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -35,7 +35,8 @@
             "default_value": "https:\/\/github.com\/5etools-mirror-1\/5etools-mirror-1.github.io",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|url"
+            "rules": "required|url",
+            "field_type": "text"
         }
     ]
 }
