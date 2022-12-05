@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-01T15:59:26+00:00",
+    "exported_at": "2022-12-05T11:22:21+00:00",
     "name": "Open World",
     "author": "kyle@williquette.us",
     "description": "The Open World mod allows you to create and join servers to play with people all around the world, it introduces plenty of new features including trading, gifting, bartering, PvP and so much more!\r\n\r\nhttps:\/\/github.com\/TastyLollipop\/OpenWorld",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": "DOTNET_ROOT=\/home\/container;\/home\/container\/\"Open World Server\"",
+    "startup": "\/home\/container\/\"Open World Server\"",
     "config": {
         "files": "{\r\n    \"Server Settings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Server Name:\": \"Server Name: {{env.NAME}}\",\r\n            \"Server Port:\": \"Server Port: {{server.build.default.port}}\",\r\n            \"Max Players:\": \"Max Players: {{env.MAX_PLAYERS}}\",\r\n            \"Server Description:\": \"Server Description: {{env.SERVER_DESCRIPTION}}\",\r\n            \"Allow Dev Mode:\": \"Allow Dev Mode: {{env.DEV_MODE}}\",\r\n            \"Use Whitelist:\": \"Use Whitelist: {{env.WHITELIST}}\",\r\n            \"Use Enforced Difficulty:\": \"Use Enforced Difficulty: {{env.ENFORCED_DIFFICULTY}}\",\r\n            \"Use Modlist Match:\": \"Use Modlist Match: {{env.MODLIST_MATCH}}\",\r\n            \"Use Modlist Config Match (WIP):\": \"Use Modlist Config Match (WIP): {{env.CONFIG_MATCH}}\",\r\n            \"Force Mod Verification:\": \"Force Mod Verification: {{env.MOD_VERIFY}}\",\r\n            \"Use Chat:\": \"Use Chat: {{env.USE_CHAT}}\",\r\n            \"Use Profanity filter:\": \"Use Profanity filter: {{env.PROFANITY_FILTER}}\",\r\n            \"Use Wealth System:\": \"Use Wealth System: {{env.WEALTH_SYSTEM}}\",\r\n            \"Wealth Warning Threshold:\": \"Wealth Warning Threshold: {{env.WEALTH_WARNING}}\",\r\n            \"Wealth Ban Threshold:\": \"Wealth Ban Threshold: {{env.WEALTH_BAN}}\",\r\n            \"Use Idle System:\": \"Use Idle System: {{env.IDLE_ALLOWED}}\",\r\n            \"Idle Threshold (days):\": \"Idle Threshold (days): {{env.IDLE_THRESHOLD}}\",\r\n            \"Use Road System:\": \"Use Road System: {{env.ROAD_SYSTEM}}\",\r\n            \"Aggressive Road Mode (WIP):\": \"Aggressive Road Mode (WIP): {{env.AGGRESSIVE_ROADS}}\"\r\n        }\r\n    },\r\n    \"World Settings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Globe Coverage (0.3, 0.5, 1.0):\": \"Globe Coverage (0.3, 0.5, 1.0): {{env.GLOBE_COVERAGE}}\",\r\n            \"Seed:\": \"Seed: {{env.SEED}}\",\r\n            \"Overall Rainfall (0-6):\": \"Overall Rainfall (0-6): {{env.RAINFALL}}\",\r\n            \"Overall Temperature (0-6):\": \"Overall Temperature (0-6): {{env.TEMPERATURE}}\",\r\n            \"Overall Population (0-6):\": \"Overall Population (0-6): {{env.POPULATION}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Network Line Started\"\r\n}",
@@ -55,7 +55,7 @@
             "default_value": "300",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|int|max:3",
+            "rules": "required|int",
             "field_type": "text"
         },
         {
@@ -266,6 +266,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer|between:0,6",
+            "field_type": "text"
+        },
+        {
+            "name": "DotNET Core Root Location",
+            "description": "",
+            "env_variable": "DOTNET_ROOT",
+            "default_value": "\/home\/container",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:50",
             "field_type": "text"
         }
     ]
