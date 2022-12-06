@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-12-06T21:43:40+08:00",
+    "name": "Liteloader Bedrock Dedicated Server",
+    "author": "frizth_tatierra@informatics.edu.ph",
+    "description": "LiteLoaderBDS - Epoch-making & Cross-language Bedrock Dedicated Servers Plugin Loader\r\nLiteLoaderBDS is an unofficial plugin loader that provides basic API support for Bedrock Dedicated Server, with a massive API, lots of packed utility interfaces, a rich event system and powerful basic interface support.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": ".\/lae-ll-launcher",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-ip\": \"0.0.0.0\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[LiteLoader]\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Liteloader First-time Install Script\r\n\r\nrm -r \/mnt\/server\r\nmkdir \/mnt\/server\r\ncd \/mnt\/server\r\nwget https:\/\/minecraft.azureedge.net\/bin-win\/bedrock-server-${BDS_VERSION}.zip -O bds.zip\r\nwget https:\/\/github.com\/LiteLDev\/LiteLoaderBDS\/releases\/download\/${LL_VERSION}\/LiteLoader-${LL_VERSION}.zip -O LiteLoader.zip\r\nwget https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/LiteLoader\/lae-ll-launcher\r\nchmod +x lae-ll-launcher\r\nunzip -o bds.zip\r\nunzip -o LiteLoader.zip\r\nrm LiteLoader.zip\r\nrm bds.zip\r\necho \"Finished Downloading Liteloader...\"",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Bedrock Dedicated Server Version",
+            "description": "Insert BDS Version",
+            "env_variable": "BDS_VERSION",
+            "default_value": "1.19.41.01",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Liteloader Version",
+            "description": "Insert Liteloader Version from Github Releases",
+            "env_variable": "LL_VERSION",
+            "default_value": "2.8.1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Wine",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
