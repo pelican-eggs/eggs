@@ -60,6 +60,9 @@ This is a collection of servers that use SteamCMD to install.
 
 [ECO](eco)
 
+## Frozen Flame
+[Frozen Flame](frozen_flame)
+
 ## HLDS Server
 
 [HLDS Server](hlds_server)

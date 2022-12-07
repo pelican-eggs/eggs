@@ -221,6 +221,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
+* [Frozen Flame](game_eggs/steamcmd_servers/frozen_flame)
 * [HLDS Server](game_eggs/steamcmd_servers/hlds_server)
   * [HLDS Vanilla](game_eggs/steamcmd_servers/hlds_server/vanilla)
   * [ReHLDS](game_eggs/steamcmd_servers/hlds_server/rehlds)
