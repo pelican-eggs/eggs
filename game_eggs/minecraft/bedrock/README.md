@@ -20,3 +20,6 @@ Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition
 
 [PocketMine MP](https://github.com/pmmp/PocketMine-MP)
 A server software for Minecraft: Bedrock Edition in PHP
+
+## [LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)\
+LiteLoaderBDS is an unofficial plugin loader that provides basic API support for Bedrock Dedicated Server.

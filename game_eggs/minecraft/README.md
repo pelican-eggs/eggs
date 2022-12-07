@@ -10,6 +10,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [gomint](bedrock/gomint)
 * [Nukkit](bedrock/nukkit)
 * [PocketMine MP](bedrock/pocketmine_mp)
+* [LiteLoaderBDS](bedrock/LiteLoader-bedrock)
 
 ## [Java](java) Servers for Java Minecraft
 
