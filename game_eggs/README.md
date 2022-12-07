@@ -50,7 +50,7 @@
 * [Bedrock](minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](minecraft/bedrock/bedrock)
   * [gomint](minecraft/bedrock/gomint)
-  * [LiteLoaderBDS](bedrock/LiteLoader-bedrock)
+  * [LiteLoaderBDS](minecraft/bedrock/LiteLoader-bedrock)
   * [Nukkit](minecraft/bedrock/nukkit)
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
