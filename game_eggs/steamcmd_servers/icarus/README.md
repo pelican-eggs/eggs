@@ -11,7 +11,7 @@ ___
     <tr>
         <td align="center">
             <a href="https://github.com/BolverBlitz">
-                <img src="https://avatars.githubusercontent.com/u/35345288" width="50px;" alt=""/><br /><sub><b>Red-Thirten</b></sub>
+                <img src="https://avatars.githubusercontent.com/u/35345288" width="50px;" alt=""/><br /><sub><b>BolverBlitz</b></sub>
             </a>
             <br />
             <a href="https://github.com/BolverBlitz" title="Codes">💻</a>
