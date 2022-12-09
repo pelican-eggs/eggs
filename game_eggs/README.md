@@ -125,6 +125,7 @@
   * [ReHLDS](steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](steamcmd_servers/holdfast)
 * [Hurtworld](steamcmd_servers/hurtworld)
+* [Icarus](steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](steamcmd_servers/left4dead)

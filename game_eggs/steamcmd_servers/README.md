@@ -77,6 +77,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Hurtworld](hurtworld)
 
+## Icarus 
+
+* [Icarus](icarus)
+
 ## Insurgency: Sandstorm
 
 [Insurgency: Sandstorm](insurgency_sandstorm)
