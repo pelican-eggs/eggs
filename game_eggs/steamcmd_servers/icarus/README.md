@@ -43,20 +43,20 @@ ___
 - Default server ports are listed below, but all three ports can be changed freely.
 - Clients connect via the server list in game.
 
-| Port | Default | Protocol |
-|---------|---------|---------|
-| Game | 17777 | UDP |
-| Query | 27015 | UDP |
+| Port    | Default | Protocol |
+|---------|---------|----------|
+| Game    | 17777   | UDP      |
+| Query   | 27015   | UDP      |
 
 ___
 
 ### Installation/System Requirements
 
-|  |  Recommended |
-|---------|---------|
+|           | Recommended  | Extra info  |
+|-----------|--------------|-------------|
 | Processor | Recent x86/64 (AMD/Intel) processor. No 32 bit or ARM support. | Unsubstantiated reports say that RCON uses significantly more CPU when enabled, but I have not been able to replicate myself. |
-| RAM |  8-16 GB |
-| Storage |  14 GB (or more, depending on save size or frequency) |
+| RAM       |  8-16 GB     |
+| Storage   |  14 GB (or more, depending on save size or frequency) |
 
 ___
 
