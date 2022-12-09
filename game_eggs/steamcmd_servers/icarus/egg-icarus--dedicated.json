@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-09T16:22:17+01:00",
+    "exported_at": "2022-12-09T16:28:51+01:00",
     "name": "Icarus-Dedicated",
     "author": "bolverblitz@ebg.pw",
     "description": "Icarus is a survival game that with dedicated servers as a public beta",
@@ -88,7 +88,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:0,1",
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
