@@ -168,6 +168,8 @@
 * [The Isle](steamcmd_servers/the_isle)
   * [Evrima](steamcmd_servers/the_isle/evrima)
 * [Tower Unite](steamcmd_servers/tower_unite)
+* [Truck Sim](truck-simulator)
+  * [American Truck Simulator](truck-simulator/american-truck-simulator/)
 * [Unturned](steamcmd_servers/unturned)
 * [V Rising](steamcmd_servers/v_rising)
 * [Valheim](steamcmd_servers/valheim)
