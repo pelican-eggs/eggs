@@ -72,6 +72,15 @@ server_config : *randomly generated string* {
 }
 
 ```
+To add moderators to your server instance you have to also add them to this file.  An example seen below:
+
+```
+moderator_list: 3
+moderator_list[0]: "Steam64 ID Here"
+moderator_list[1]: "Steam64 ID Here"
+moderator_list[2]: "Steam64 ID Here",
+^^^ Can be found by googling Steam ID Lookup
+```
 
 # Enjoy your server
 Once those files have been uploaded and configured you are free to start up your server.  When the sever is started look for the line: Session search id: 00000000000000000/101  The number before the / is your search term.  This is number to search for in the convoy screen to find your server.  You can **NOT** search by the server name at this time.  Example: if your number before the / is 987654321 then you would search for 987654321 on your convoy screen in game.
