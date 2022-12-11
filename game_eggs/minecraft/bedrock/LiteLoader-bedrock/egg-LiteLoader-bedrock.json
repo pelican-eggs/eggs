@@ -16,7 +16,7 @@
     "startup": ".\/lae-ll-launcher",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"max-players\": \"{{server.build.env.MAXPLAYERS}}\",\r\n            \"level-name\": \"{{server.build.env.WORLDNAME}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"[LiteLoader]\"\r\n}",
+        "startup": "{\r\n    \"done\": \"IPv4 supported\"\r\n}",
         "logs": "{}",
         "stop": "stop"
     },
