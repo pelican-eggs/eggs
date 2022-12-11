@@ -193,6 +193,11 @@ This is a collection of servers that use SteamCMD to install.
 
 [Tower Unite](tower_unite)
 
+## Truck Sim
+
+* [Truck Sim](truck-simulator)
+  * [American Truck Simulator](truck-simulator/american-truck-simulator/)
+
 ## Unturned
 
 [Unturned](unturned)
