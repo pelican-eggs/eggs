@@ -4,7 +4,7 @@
       "version": "PTDL_v2",
       "update_url": null
   },
-  "exported_at": "2022-12-11T04:10:41-05:00",
+  "exported_at": "2022-12-11T04:51:01-05:00",
   "name": "American Truck Simulator Dedicated Server",
   "author": "chase@cstmgames.com",
   "description": "This will set up SteamCMD and all the required files for the newly released American Truck Simulator Dedicated server.  Simply placed the exported server config from your ATS instance to the .local\/share\/American Truck Simulator\/ folder and select start.  Make sure that auto start is off on server creation to allow you to upload your config files.",
@@ -17,7 +17,7 @@
   "file_denylist": [],
   "startup": ".\/bin\/linux_x64\/amtrucks_server",
   "config": {
-      "files": "{}",
+      "files": "{\r\n    \"\/.local\/share\/American Truck Simulator 2\/server_config.sii\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \" connection_dedicated_port:\": \" connection_dedicated_port: {{server.build.default.port}}\",\r\n            \" query_dedicated_port:\": \" query_dedicated_port: {{env.QUERY_PORT}}\",\r\n            \" server_logon_token:\": \" server_logon_token: \\\"{{env.STEAM_TOKEN}}\\\"\",\r\n            \" lobby_name:\": \" lobby_name: \\\"{{env.LOBBY_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
       "startup": "{\r\n    \"done\": \"[MP] Session running.\"\r\n}",
       "logs": "{}",
       "stop": "^C"
@@ -48,6 +48,36 @@
           "user_viewable": false,
           "user_editable": false,
           "rules": "required|string|in:2239530",
+          "field_type": "text"
+      },
+      {
+          "name": "STEAM_TOKEN",
+          "description": "",
+          "env_variable": "STEAM_TOKEN",
+          "default_value": "",
+          "user_viewable": true,
+          "user_editable": true,
+          "rules": "nullable|string|max:64",
+          "field_type": "text"
+      },
+      {
+          "name": "Query Port",
+          "description": "This is the port the sever will use to listen for and respond to queries.",
+          "env_variable": "QUERY_PORT",
+          "default_value": "27016",
+          "user_viewable": true,
+          "user_editable": true,
+          "rules": "required|string|between:27015,27020",
+          "field_type": "text"
+      },
+      {
+          "name": "LOBBY_NAME",
+          "description": "Used as the name of the server lobby",
+          "env_variable": "LOBBY_NAME",
+          "default_value": "American Truck Simulator",
+          "user_viewable": true,
+          "user_editable": true,
+          "rules": "required|string|max:20",
           "field_type": "text"
       }
   ]
