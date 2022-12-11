@@ -91,3 +91,4 @@ Once those files have been uploaded and configured you are free to start up your
 # Disclaimer
 I do not claim to know everything about this setup as I just got it reliably working myself and will update the egg if anything changes.  That being said, if you have problems open up an issue and I will do my best to help if when I have the time.  
 
+**Readme made by: https://github.com/kj4lxc**
