@@ -4,7 +4,7 @@
       "version": "PTDL_v2",
       "update_url": null
   },
-  "exported_at": "2022-12-11T04:51:01-05:00",
+  "exported_at": "2022-12-11T05:02:58-05:00",
   "name": "American Truck Simulator Dedicated Server",
   "author": "chase@cstmgames.com",
   "description": "This will set up SteamCMD and all the required files for the newly released American Truck Simulator Dedicated server.  Simply placed the exported server config from your ATS instance to the .local\/share\/American Truck Simulator\/ folder and select start.  Make sure that auto start is off on server creation to allow you to upload your config files.",
@@ -17,7 +17,7 @@
   "file_denylist": [],
   "startup": ".\/bin\/linux_x64\/amtrucks_server",
   "config": {
-      "files": "{\r\n    \"\/.local\/share\/American Truck Simulator 2\/server_config.sii\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \" connection_dedicated_port:\": \" connection_dedicated_port: {{server.build.default.port}}\",\r\n            \" query_dedicated_port:\": \" query_dedicated_port: {{env.QUERY_PORT}}\",\r\n            \" server_logon_token:\": \" server_logon_token: \\\"{{env.STEAM_TOKEN}}\\\"\",\r\n            \" lobby_name:\": \" lobby_name: \\\"{{env.LOBBY_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
+      "files": "{\r\n    \"\/.local\/share\/American Truck Simulator\/server_config.sii\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \" connection_dedicated_port:\": \" connection_dedicated_port: {{server.build.default.port}}\",\r\n            \" query_dedicated_port:\": \" query_dedicated_port: {{env.QUERY_PORT}}\",\r\n            \" server_logon_token:\": \" server_logon_token: \\\"{{env.STEAM_TOKEN}}\\\"\",\r\n            \" lobby_name:\": \" lobby_name: \\\"{{env.LOBBY_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
       "startup": "{\r\n    \"done\": \"[MP] Session running.\"\r\n}",
       "logs": "{}",
       "stop": "^C"
