@@ -11,6 +11,11 @@ The official Minecraft Bedrock (Formerly Minecraft Pocket Edition) server.
 No longer actively maintained.
 GoMint is a modern Minecraft Bedrock Edition server enabling you to make your visions come true
 
+## [LiteLoaderBDS](/game_eggs/minecraft/bedrock/LiteLoader-bedrock/)
+
+[LiteLoaderBDS](https://github.com/LiteLDev/LiteLoaderBDS)
+LiteLoaderBDS is an unofficial plugin loader that provides basic API support for Bedrock Dedicated Server.
+
 ## [Nukkit](/game_eggs/minecraft/bedrock/nukkit)
 
 [Nukkit GitHub](https://github.com/Nukkit/Nukkit)
