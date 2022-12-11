@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-11T10:30:09+01:00",
+    "exported_at": "2022-12-11T11:11:17+01:00",
     "name": "Euro Truck Simulator 2 Dedicated server.",
     "author": "josdekurk@gmail.com",
     "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
@@ -72,12 +72,12 @@
         },
         {
             "name": "query port",
-            "description": "",
+            "description": "Must be between 27015 and 27020!",
             "env_variable": "QUERY_PORT",
             "default_value": "27016",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|between:27015,27020",
+            "rules": "required|string",
             "field_type": "text"
         },
         {

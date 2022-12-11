@@ -4,7 +4,7 @@
       "version": "PTDL_v2",
       "update_url": null
   },
-  "exported_at": "2022-12-11T05:02:58-05:00",
+  "exported_at": "2022-12-11T11:11:17+01:00",
   "name": "American Truck Simulator Dedicated Server",
   "author": "chase@cstmgames.com",
   "description": "This will set up SteamCMD and all the required files for the newly released American Truck Simulator Dedicated server.  Simply placed the exported server config from your ATS instance to the .local\/share\/American Truck Simulator\/ folder and select start.  Make sure that auto start is off on server creation to allow you to upload your config files.",
@@ -61,15 +61,15 @@
           "field_type": "text"
       },
       {
-          "name": "Query Port",
-          "description": "This is the port the sever will use to listen for and respond to queries.",
-          "env_variable": "QUERY_PORT",
-          "default_value": "27016",
-          "user_viewable": true,
-          "user_editable": true,
-          "rules": "required|string|between:27015,27020",
-          "field_type": "text"
-      },
+        "name": "query port",
+        "description": "Must be between 27015 and 27020!",
+        "env_variable": "QUERY_PORT",
+        "default_value": "27016",
+        "user_viewable": true,
+        "user_editable": false,
+        "rules": "required|string",
+        "field_type": "text"
+    },
       {
           "name": "LOBBY_NAME",
           "description": "Used as the name of the server lobby",
