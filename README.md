@@ -256,6 +256,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [The Forest](game_eggs/steamcmd_servers/the_forest)
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
+* [Truck Sim](game_eggs/steamcmd_servers/truck-simulator/)
+  * [American Truck Simulator](game_eggs/steamcmd_servers/truck-simulator/american-truck-simulator/)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
 * [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
