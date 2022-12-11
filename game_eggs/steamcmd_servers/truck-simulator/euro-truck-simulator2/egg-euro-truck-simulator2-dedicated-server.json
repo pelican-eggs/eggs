@@ -8,7 +8,9 @@
     "name": "Euro Truck Simulator 2 Dedicated server",
     "author": "josdekurk@gmail.com",
     "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
-    "features": null,
+    "features": [
+          "steam_disk_space"
+    ],
     "docker_images": {
         "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
     },
