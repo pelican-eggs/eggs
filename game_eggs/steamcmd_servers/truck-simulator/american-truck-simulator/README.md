@@ -7,6 +7,8 @@ Ports below are the default ports that are associated with the ATS dedicated ser
 | Dedicated| 27015 |
 | Query    | 27016   |
 
+--**Make sure during server setup that the autostart server box is unchecked**--
+
 # Setup
 You must generate the required server config files necessary to run the server in game on ATS.  To do so you **MUST** have console enabled.  
 
