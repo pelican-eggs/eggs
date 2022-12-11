@@ -218,9 +218,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Truck Sim
 
 * [Truck Sim](truck-simulator)
+  * [American Truck Simulator](truck-simulator/american-truck-simulator/)
   * [Euro Truck Simulator 2](truck-simulator/euro-truck-simulator2/)
-
-
+  
 ## Unturned
 
 [Unturned](unturned)
