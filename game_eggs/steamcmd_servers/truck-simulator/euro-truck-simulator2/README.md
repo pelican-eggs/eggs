@@ -2,6 +2,7 @@
 
 
 Ports below are the default ports that are associated with the ETS2 dedicated server.  If you change them in server setup be sure to change them in the .local/share/Euro Truck Simulator 2/server_config.sii file. (See Server_Config Directions below)
+
 | Port     | default       |
 |----------|---------------|
 | Dedicated| 27015         |
@@ -36,44 +37,13 @@ Navigate to the folder that contains your clients config.cfg file that you chang
 
 With your newly set up files its time to copy them over to the Pterodactyl Panel.  Simply upload them through either your preferred SCP program or the file browser in the server panel to the .local/share/Euro Truck Simulator 2/ folder.
 
-On the panel select start server and the server will then start up and create a default server_config.sii file.  Proceed to the .local/share/Euro Truck Simulator 2/folder.
+On the panel select start server and the server will then start up and create a default server_config.sii file.  Proceed to the .local/share/Euro Truck Simulator 2/ folder.
 
-Edit the server_config.sii using your favorite text editor and set it up as you need, making any changes to name, password etc.  This is also where you would change your default ports if needed to suit your Pterodactyl settings.  It should look something like this when you are finished:
+Edit the server_config.sii using your favorite text editor and set it up as you need, making any changes to name, password etc. 
 
-```
-SiiNunit
-{
-server_config : *randomly generated string* {
- lobby_name: "Euro Truck Simulator 2 server"
- description: ""
- welcome_message: ""
- password: 
- max_players: 8
- max_vehicles_total: 100
- max_ai_vehicles_player: 50
- max_ai_vehicles_player_spawn: 50
- connection_virtual_port: 100
- query_virtual_port: 101
- connection_dedicated_port: 27015
- query_dedicated_port: 27016
- server_logon_token: ""
- player_damage: true
- traffic: true
- hide_in_company: false
- hide_colliding: true
- force_speed_limiter: false
- mods_optioning: false
- service_no_collision: false
- in_menu_ghosting: false
- name_tags: true
- friends_only: false
- show_server: true
- moderator_list: 0
-}
+**Important** coppy line 3 of your uploaded `server_packages.sii` and replace line 3 of the pregenerate config located in (.local/share/Euro Truck Simulator 2/server_config.sii) with that line.
 
-}
 
-```
 To add moderators to your server instance you have to also add them to this file.  An example seen below:
 
 ```
