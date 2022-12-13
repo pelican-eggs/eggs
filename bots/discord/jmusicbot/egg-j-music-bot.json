@@ -1,16 +1,16 @@
 {
     "_comment": "Pterodactyl JMusicBot Egg ~ parkervcp, Software-Noob, Proxymiity, and Red-Thirten ~ 2021-11-29",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "features": null,
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_16"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp/yolks:java_16": "ghcr.io\/parkervcp/yolks:java_16"
+    },
     "file_denylist": [],
     "startup": "java -Dnogui=true -jar JMusicBot.jar",
     "config": {
