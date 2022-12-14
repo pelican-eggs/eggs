@@ -1,15 +1,13 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v2"
+        "version": "PTDL_v1"
     },
     "exported_at": "2020-04-03T12:50:58-04:00",
     "name": "parkertron",
     "author": "parker@parkervcp.com",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
-    "docker_images": {
-        "parkertron": "ghcr.io\/parkervcp\/yolks:bot_parkertron"
-    },
+    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_parkertron",
     "startup": ".\/parkertron",
     "config": {
         "files": "{}",
