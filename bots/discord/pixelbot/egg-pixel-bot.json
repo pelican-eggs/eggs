@@ -8,11 +8,7 @@
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:python_3.7": "ghcr.io\/parkervcp\/yolks:python_3.7",
-        "ghcr.io\/parkervcp\/yolks:python_3.8": "ghcr.io\/parkervcp\/yolks:python_3.8",
-        "ghcr.io\/parkervcp\/yolks:python_3.9": "ghcr.io\/parkervcp\/yolks:python_3.9",
-        "ghcr.io\/parkervcp\/yolks:python_3.10": "ghcr.io\/parkervcp\/yolks:python_3.10",
-        "ghcr.io\/parkervcp\/yolks:python_3.11": "ghcr.io\/parkervcp\/yolks:python_3.11"
+        "ghcr.io\/parkervcp\/yolks:python_3.7": "ghcr.io\/parkervcp\/yolks:python_3.7"
     },
     "startup": "python bot.py",
     "config": {
