@@ -1,22 +1,24 @@
-### All Submissions:
+# Description
 
-* [ ] Have you followed the guidelines in our Contributing document?
+<!-- Please explain what is being changed or added as a short overview for this PR. Also, link existing relevant issues if they exist with resolves # -->
+
+## Checklist for all submissions
+
+<!-- insert X into the brackets to mark it as done. You can click preview to make the links appear clickable. -->
+
+* [ ] Have you followed the guidelines in our [Contributing document](https://github.com/parkervcp/eggs/blob/master/CONTRIBUTING.md)?
 * [ ] Have you checked to ensure there aren't other open [Pull Requests](../pulls) for the same update/change?
+* [ ] Have you tested and reviewed your changes with confidence that everything works?
 * [ ] Did you branch your changes and PR from that branch and not from your master branch?
   * If not, why?:
 
-<!-- You can erase any parts of this template not applicable to your Pull Request. -->
+<!-- You can erase the new egg submission template if you're not adding a completely new egg -->
 
-### New Server Submissions:
+## New egg Submissions
 
 1. [ ] Does your submission pass tests (server is connectable)?
-2. [ ] Does your server use a custom docker image?
+2. [ ] Does your egg use a custom docker image?
     * [ ] Have you tried to use a generic image?
     * [ ] Did you PR the necessary changes to make it work?
-3. [ ] Have you added the server to the main README.md?
-4. [ ] Have you added a unique README.md for the server you are adding?
-
-### Changes to an existing Egg:
-
-1. [ ] Have you added an explanation of what your changes do and why you'd like us to include them?
-2. [ ] Have you tested your Egg changes?
+3. [ ] Have you added the egg to the main README.md and any other README files in subdirectories of the egg (e.g /game_eggs) according to the alphabetical order?
+4. [ ] Have you added a unique README.md for the egg you are adding according to the alphabetical order?

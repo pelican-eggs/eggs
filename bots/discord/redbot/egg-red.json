@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-08-04T04:19:56+03:00",
+    "exported_at": "2022-11-06T11:14:23+01:00",
     "name": "Red",
     "author": "parker@parkervcp.com",
     "description": "A multifunction Discord bot \r\n\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
     "features": null,
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:bot_red"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:bot_red": "ghcr.io\/parkervcp\/yolks:bot_red"
+    },
     "file_denylist": [],
     "startup": "PATH=$PATH:\/home\/container\/.local\/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}}",
     "config": {
@@ -35,7 +35,8 @@
             "default_value": "GET_YOUR_OWN",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Command Prefix",
@@ -44,7 +45,8 @@
             "default_value": ".",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         }
     ]
 }

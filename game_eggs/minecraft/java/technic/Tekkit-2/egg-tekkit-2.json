@@ -1,0 +1,46 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-08-29T15:07:44+02:00",
+    "name": "Tekkit 2",
+    "author": "josdekurk@gmail.com",
+    "description": "Those of you who are nostalgic for the early days of Tekkit (now known as Tekkit Classic), will love what awaits you in Tekkit 2!\r\n\r\nWith a collection of nostalgic mods and plenty of new improvements, Tekkit 2 is sure to capture the feeling of possibility and consequence that you felt while exploring the world of machines and contraptions that made the original fun. Keep an eye out for classics such as IndustrialCraft, ProjectE (Equivalent Exchange), Project Red (RedPower) and BuildCraft, alongside additions such as Galacticraft and Tekkit Jaffa Cakes! The world is yours to bend and exploit to your will, whether through alchemy or sprawling factories and mines.\r\n\r\nWhat fresh horrors will you create?",
+    "features": [
+        "eula",
+        "java_version"
+    ],
+    "docker_images": {
+        "Java8": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "Java11": "ghcr.io\/pterodactyl\/yolks:java_11"
+    },
+    "file_denylist": [],
+    "startup": "java -server  -Xms128M -Xmx{{SERVER_MEMORY}}M -Dfml.queryResult=confirm -jar forge.jar nogui",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server tick complete! \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Tekkit Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl zip unzip\r\n\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sSL https:\/\/servers.technicpack.net\/Technic\/servers\/tekkit-2\/Tekkit-2_Server_$MODPACK_VERSION.zip -o Tekkit-2_Server_$MODPACK_VERSION.zip\r\n\r\nunzip -o Tekkit-2_Server_$MODPACK_VERSION.zip\r\n\r\nrm -rf Tekkit-2_Server_$MODPACK_VERSION.zip\r\n\r\nrm RestoreBackup.bat\r\n\r\nrm LaunchServer.bat\r\n\r\nrm LaunchServer.sh\r\n\r\nrm RestoreBackup.sh\r\n\r\nmv forge-1.12.2-*.jar forge.jar\r\n\r\nif [ ! -f server.properties ]; then\r\n    echo -e \"Downloading MC server.properties\"\r\n    curl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/java\/server.properties\r\nfi\r\n\r\necho \"done\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Modpack Version",
+            "description": "",
+            "env_variable": "MODPACK_VERSION",
+            "default_value": "v1.0.5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:10",
+            "field_type": "text"
+        }
+    ]
+}

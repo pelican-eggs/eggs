@@ -28,6 +28,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Barotrauma](barotrauma)
 
+## Black Mesa
+
+[Black Mesa](black_mesa)
+
 ## Citadel: Forged with Fire
 
 [citadel](citadel)
@@ -56,9 +60,14 @@ This is a collection of servers that use SteamCMD to install.
 
 [ECO](eco)
 
+## Frozen Flame
+[Frozen Flame](frozen_flame)
+
 ## HLDS Server
 
 [HLDS Server](hlds_server)
+  * [HLDS Vanilla](hlds_server/vanilla)
+  * [ReHLDS](hlds_server/rehlds)
 
 ## Holdfast: Nations At War
 
@@ -67,6 +76,10 @@ This is a collection of servers that use SteamCMD to install.
 ## Hurtworld
 
 [Hurtworld](hurtworld)
+
+## Icarus 
+
+* [Icarus](icarus)
 
 ## Insurgency: Sandstorm
 
@@ -96,6 +109,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Onset](onset)
 
+## Open Fortress
+
+[Open Fortress](open_fortress)
+
 ## Pavlov VR
 
 [Pavlov VR](pavlov_vr)
@@ -118,7 +135,9 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Rising World
 
-[Rising World](rising_world)
+* [Rising World](rising_world)
+  * [Legacy Java](rising_world/legacy)
+  * [Unity](rising_world/unity)
 
 ## Risk of Rain 2
 
@@ -141,6 +160,10 @@ This is a collection of servers that use SteamCMD to install.
   * [exiled](scpsl/exiled)
   * [multiadmin](scpsl/multiadmin)
 
+## Solace Crafting
+
+[Solace Crafting](solace_crafting)
+
 ## Soldat
 
 [Soldat](soldat)
@@ -148,6 +171,8 @@ This is a collection of servers that use SteamCMD to install.
 ## Space Engineers
 
 [Space Engineers](space_engineers)
+  * [default](space_engineers/default)
+  * [torch](space_engineers/torch)
 
 ## Squad
 
@@ -181,9 +206,19 @@ This is a collection of servers that use SteamCMD to install.
 
 [The Forest](the_forest)
 
+## The Isle
+
+[The Isle](the_isle)
+  * [Evrima](the_isle/evrima/)
+
 ## Tower Unite
 
 [Tower Unite](tower_unite)
+
+## Truck Sim
+
+* [Truck Sim](truck-simulator)
+  * [American Truck Simulator](truck-simulator/american-truck-simulator/)
 
 ## Unturned
 
@@ -195,6 +230,6 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Valheim
 
-* [Valheim](valheim)
+[Valheim](valheim)
   * [Valheim Vanilla](valheim/valheim_vanilla)
   * [Valheim Plus Mod](valheim/valheim_plus)

@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-10-17T22:24:46-04:00",
+    "name": "Yarr",
+    "author": "sotoluis90@gmail.com",
+    "description": "Yarr is a selfhosted feed aggregator",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/yarr -addr 0.0.0.0:{{SERVER_PORT}} -auth=\"{{USERNAME}}:{{PASSWORD}}\" -db=.\/feed.sql",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"starting server\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr yarr_source\r\n\r\ncd yarr_source\r\n\r\nmake build_default  # -> _output\/yarr\r\n\r\ncp _output\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
+            "container": "golang:1.19.2-bullseye",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Username",
+            "description": "The username used to log in to yarr",
+            "env_variable": "USERNAME",
+            "default_value": "username",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|alpha_dash",
+            "field_type": "text"
+        },
+        {
+            "name": "Password",
+            "description": "The password needed to log in to yarr",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|alpha_dash",
+            "field_type": "text"
+        }
+    ]
+}

@@ -1,0 +1,102 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-11-19T18:35:39+01:00",
+    "name": "Frozen Flame",
+    "author": "theblitzbat@gmail.com",
+    "description": "Frozen Flame Dedicated Server",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/FrozenFlame\/Binaries\/Linux\/FrozenFlameServer -log -MetaGameServerName={{SERVER_NAME}} -port {{SERVER_PORT}} -queryPort {{QUERY_PORT}}",
+    "config": {
+        "files": "{\r\n    \"FrozenFlame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"ServerPassword\": \"ServerPassword=\\\"{{server.build.env.SERVER_PASSWORD}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"LogWorld: Bringing up level for play took\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n\r\n## just in case someone removed the defaults.\r\n\r\nSTEAM_USER=anonymous\r\nSTEAM_PASS=\"\"\r\nSTEAM_AUTH=\"\"\r\n\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nmkdir -p \/mnt\/server\/FrozenFlame\/Saved\/Config\/LinuxServer\r\n\r\ncd \/mnt\/server\/FrozenFlame\/Saved\/Config\/LinuxServer\r\n\r\ncat > Game.ini << EOF\r\n[\/Script\/Engine.GameSession]\r\nMaxPlayers=${MAX_PLAYERS}\r\n\r\n[\/Script\/FrozenFlame.FGameSession]\r\nServerPassword=\"${SERVER_PASSWORD}\"\r\n\r\n[\/Script\/FrozenFlame.GameBalance]\r\n\r\n# Enable PVP for non-friends\r\nbFreePVP=True\r\n\r\n# How long a day lasts\r\nDurationOfDay=3600\r\n\r\n\r\n# Health after death\r\nHealthAfterRespawn=0.5\r\n\r\n# Restore health on level up\r\nbRestoreHealthOnLevelUp=True\r\n\r\n# Stamina cost at jumping\r\nJumpStaminaCost=6\r\n\r\n# Stamina cost at sprinting\r\nSprintStaminaCost=1\r\n\r\n# Loss of armor durability after death\r\nArmorDurabilityReducementAfterDeath=25\r\n\r\n# Weapon durability loss speed\r\nDefaultWeaponDurabilityCost=0.5\r\n\r\n\r\n# Allow to teleport with overweight\r\nbIsAllowedToTeleportWithOverweight=False\r\n\r\n# Allow to fly with overweight\r\nbIsAllowedToGlideWithOverweight=False\r\n\r\n\r\n# Drop of items after level X\r\nMinimalLevelToDropItemAfterDeath=2147483647\r\n\r\n# Drop equipped items after death\r\nbDropEquippedItems=False\r\n\r\n# Drop equipable items after death\r\nbDropEquipableItems=False\r\n\r\n# Drop food on death\r\nbDropFoodItems=False\r\n\r\n\r\n#Flame rate from everything\r\nFlameRate=1\r\n\r\n#Player damage multiplier\r\nPlayerDamageMultiplier=1\r\n\r\n#Monsters health multiplier\r\nMonstersHealthMultiplier=1\r\n\r\n#Monsters damage multiplier\r\nMonstersDamageMultiplier=1\r\n\r\n\r\n\r\n#Bulding without material costs\r\nbNoModuleCost=False\r\n\r\n#Building without restrictions\r\nbLimitlessSupport=False\r\n\r\n#Bulding without decay\r\nbInvulnerableModules=False\r\n\r\n\r\n[\/Script\/FrozenFlame.DecaySubsystemSettings]\r\n#A minimum durability that keeps after weather decay system damage\r\nMinDurability=0.300000\r\nEOF\r\n\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "App ID",
+            "description": "Frozen Flame steam app id for auto updates. Leave blank to avoid auto update.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1348640",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Additional Arguments",
+            "description": "Specify additional launch parameters such as -crossplay. You must include a dash - and separate each parameter with space: -crossplay -exclusivejoin",
+            "env_variable": "ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The server nane",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My Frozen Flame Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "The server password",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum player count",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto update server software",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "The query port.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        }
+    ]
+}

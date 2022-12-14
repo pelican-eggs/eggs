@@ -1,0 +1,104 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-09-29T23:01:20+02:00",
+    "name": "mohaa",
+    "author": "th3dilli@gmx.at",
+    "description": null,
+    "features": null,
+    "images": [
+        "ghcr.io\/parkervcp\/games:mohaa"
+    ],
+    "file_denylist": [],
+    "startup": ".\/mohaa_lnxded +set sv_punkbuster 0 +set fs_basepath {{BASE_PATH}} +set fs_outputpath {{LOG_DIR}} +set dedicated 2 +set sv_maxclients {{SERVER_MAXCLIENTS}} +set net_ip 0.0.0.0 +set net_port {{SERVER_PORT}} +exec server.cfg",
+    "config": {
+        "files": "{\r\n    \"main\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"seta sv_hostname\": \"seta sv_hostname \\\"{{env.SERVER_NAME}}\\\"\",\r\n            \"seta sv_maxClients\": \"seta sv_maxClients \\\"{{env.SERVER_MAXCLIENTS}}\\\"\",\r\n            \"seta rconPassword\": \"seta rconPassword \\\"{{env.RCON_PASSWORD}}\\\"\",\r\n            \"seta g_password\": \"seta g_password \\\"{{env.SERVER_PASSWORD}}\\\"\",\r\n            \"Map\": \"Map {{env.SERVER_MAP}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"------ Server Initialization Complete ------\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apk --no-cache add curl\r\n\r\nif [[ ! -d \/mnt\/server\/ ]]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nDOWNLOAD_URL=https:\/\/linuxgsm.download\/MedalofHonorAlliedAssault\/moh_revival_v1.12_RC3.5.1.tar.xz\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\necho -e \"running 'curl -sSL ${DOWNLOAD_LINK} -o mohaaserver.tar.xz'\" \r\ncurl -sSL ${DOWNLOAD_LINK} -o mohaaserver.tar.xz\r\n\r\necho -e \"Unpacking server files\"\r\ntar xvf mohaaserver.tar.xz\r\n\r\nrm mohaaserver.tar.xz\r\n\r\necho -e \"checking for default server.cfg\"\r\n[[ -f main\/server.cfg ]] || curl -sSL ${CONFIG_URL} -o main\/server.cfg\r\n\r\necho -e \"running 'chmod +x .\/mohaa_lnxded'\"\r\nchmod +x .\/mohaa_lnxded",
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SERVER_MAXCLIENTS",
+            "description": "",
+            "env_variable": "SERVER_MAXCLIENTS",
+            "default_value": "14",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer"
+        },
+        {
+            "name": "CONFIG_URL",
+            "description": "URL from where to get the initial server.cfg",
+            "env_variable": "CONFIG_URL",
+            "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/mohaa\/game_eggs\/mohaa\/server.cfg",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "SERVER_NAME",
+            "description": "The name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "MOHAA Server running on Pterodactyl",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "RCON_PASSWORD",
+            "description": "Admin password for rcon",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "ADMINPASSWORD",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "SERVER_MAP",
+            "description": "Select the map\r\n\r\nobj\/obj_team2\r\ndm\/mohdm7\r\ndm\/mohdm1\r\ndm\/mohdm3\r\ndm\/mohdm2\r\ndm\/mohdm6",
+            "env_variable": "SERVER_MAP",
+            "default_value": "dm\/mohdm7",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "LOG_DIR",
+            "description": "",
+            "env_variable": "LOG_DIR",
+            "default_value": "\/home\/container\/Logs",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "BASE_PATH",
+            "description": "",
+            "env_variable": "BASE_PATH",
+            "default_value": "\/home\/container",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        },
+        {
+            "name": "SERVER_PASSWORD",
+            "description": "",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        }
+    ]
+}
