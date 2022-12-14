@@ -8,7 +8,7 @@
     "author": "jfeldt19@gmail.com",
     "description": "ATLbot in ptero\r\n\r\nhttps:\/\/github.com\/ATLauncher\/discord-bot\/",
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:alpine": "ghcr.io\/parkervcp\/yolks:alpine"
+        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16"
     },
     "startup": "npm run start",
     "config": {
