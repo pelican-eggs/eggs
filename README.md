@@ -271,6 +271,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Truck Sim](game_eggs/steamcmd_servers/truck-simulator/)
   * [American Truck Simulator](game_eggs/steamcmd_servers/truck-simulator/american-truck-simulator/)
+  * [Euro Truck Simulator 2](game_eggs/steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
 * [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
