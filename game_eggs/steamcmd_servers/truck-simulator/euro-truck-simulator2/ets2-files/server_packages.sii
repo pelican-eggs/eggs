@@ -1,0 +1,14 @@
+SiiNunit
+{
+server_packages_info : _nameless.1ce.5a64.0b70 {
+ version: 1
+ dlc_essential_list: 0
+ dlc_non_essential_list: 0
+ mod_list: 0
+ map_name: "/map/europe.mbd"
+ map_dimensions: (-16384000, -16384000, 17408000, 14336000)
+ roads_data_file_name: "/home/server_packages.dat"
+ time_stamp: 1670716814
+}
+
+}

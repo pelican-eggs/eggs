@@ -1,7 +1,7 @@
 SiiNunit
 {
-server_config : <string out of server_packages.sii Line3> {
- lobby_name: "Euro Truck Simulator 2 server"
+server_config : _nameless.44c.eab0 {
+ lobby_name: ""
  description: ""
  welcome_message: ""
  password: ""
