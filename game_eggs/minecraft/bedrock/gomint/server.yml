@@ -1,4 +1,0 @@
-# The host and port to bind the server to
-listener:
-  port: 19132
-  ip: 0.0.0.0

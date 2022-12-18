@@ -3,7 +3,6 @@
 [Among Us](among_us)
 
 * [Impostor Server](among_us/impostor_server)
-* [CrewLink Server](among_us/crewlink_server)
 
 [BeamNG.drive](beamng)
 
@@ -22,8 +21,6 @@
 * [ModUpdate](factorio/factorio-modupdate)
 * [Clusterio](game_eggs/factorio/clusterio)
 
-[FTL: Tachyon](ftl/tachyon)
-
 [Grand Theft Auto](gta)
 
 * GTA V
@@ -41,17 +38,13 @@
 
 [Los Angeles Crimes](losangelescrimes)
 
-[League Sandbox](leaguesandbox)
-
 [Mindustry](mindustry)
 
 [Minecraft](minecraft)
 
 * [Bedrock](minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](minecraft/bedrock/bedrock)
-  * [gomint](minecraft/bedrock/gomint)
   * [LiteLoaderBDS](minecraft/bedrock/LiteLoader-bedrock)
-  * [Nukkit](minecraft/bedrock/nukkit)
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
@@ -100,8 +93,6 @@
 [Red Dead Redemption](rdr)
 
 * [RedM](rdr/redm)
-
-[Starmade](starmade)
 
 [SteamCMD Servers](steamcmd_servers) These eggs use SteamCMD to install
 

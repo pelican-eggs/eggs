@@ -32,16 +32,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
 * [Dynamica](/bots/discord/dynamica) Node JS
-* [fragbot](/bots/discord/fragbot) Golang
 * [JMusicBot](/bots/discord/jmusicbot) Java
 * [parkertron](/bots/discord/parkertron) Golang
-* [pixel-bot](/bots/discord/pixelbot) Python
 * [Redbot](/bots/discord/redbot) Python
 * [SinusBot](/bots/discord/sinusbot)
 
-[Other](/bots/other)
-
-* [Big Brother Bot](/bots/other/bigbrotherbot)
 
 [Twitch](/bots/twitch)
 
@@ -96,7 +91,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Among Us](game_eggs/among_us)
 
 * [BetterCrewLink Server](game_eggs/among_us/bettercrewlink_server)
-* [CrewLink Server](game_eggs/among_us/crewlink_server)
 * [Impostor Server](game_eggs/among_us/impostor_server)
 
 [BeamNG.drive](game_eggs/beamng)
@@ -111,8 +105,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Call of Duty 4X](game_eggs/cod/cod4x)
 
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
-
-[FTL: Tachyon](game_eggs/ftl/tachyon)
 
 [Factorio](game_eggs/factorio)
 
@@ -135,8 +127,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
-[League Sandbox](game_eggs/leaguesandbox)
-
 [Los Angeles Crimes](game_eggs/losangelescrimes)
 
 [Mindustry](game_eggs/mindustry)
@@ -151,9 +141,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](game_eggs/minecraft/bedrock/bedrock)
-  * [gomint](game_eggs/minecraft/bedrock/gomint)
   * [LiteLoaderBDS](game_eggs/bedrock/LiteLoader-bedrock)
-  * [Nukkit](game_eggs/minecraft/bedrock/nukkit)
   * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft

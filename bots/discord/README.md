@@ -17,11 +17,6 @@ Give awesome perks to your Discord server!
 [corpnewt/CorpBot.py](https://github.com/corpnewt/CorpBot.py)
 A very clumsy python bot for discord
 
-### [FragBot](fragbot)
-
-[fragforce/fragbot](https://github.com/fragforce/fragbot)
-The bot that runs as the fragforce `@Fragbot` offering looking-for-group services for now
-
 ### [JMusicBot](jmusicbot)
 
 [jagrosh/MusicBot](https://github.com/jagrosh/MusicBot)
@@ -31,12 +26,6 @@ A Discord music bot that's easy to set up and run yourself!
 
 [parkervcp/parkertron](https://github.com/parkervcp/parkertron)
 The bot that runs as the pterodactyl `@Support Bot`
-
-### [PixelBot](pixelbot)
-
-[possatti/pixelbot](https://github.com/possatti/pixelbot)
-No longer actively developed.
-Was used to test python services.
 
 ### [RedBot](redbot)
 
