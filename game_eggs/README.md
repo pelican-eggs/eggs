@@ -14,6 +14,9 @@
 
 * [MCGalaxy](classicube/mcgalaxy)
 
+[Doom](doom)
+* [Zandronum](doom/zandronum)
+
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)

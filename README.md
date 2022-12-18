@@ -110,6 +110,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Call of Duty 4X](game_eggs/cod/cod4x)
 
+[Doom](game_eggs/doom)
+* [Zandronum](game_eggs/doom/zandronum)
+
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
 [FTL: Tachyon](game_eggs/ftl/tachyon)
