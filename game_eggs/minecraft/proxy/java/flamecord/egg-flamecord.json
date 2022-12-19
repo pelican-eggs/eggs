@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-13T12:25:46+00:00",
+    "exported_at": "2022-12-19T17:57:16+01:00",
     "name": "Flamecord",
     "author": "admin@softwarenoob.com",
     "description": "FlameCord is a patch for Travertine to fix possible exploits and add useful functionalities. FlameCord aims to fix Netty related exploits to keep your server safe from attacks.",
@@ -16,8 +16,7 @@
     "docker_images": {
         "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17",
         "ghcr.io\/pterodactyl\/yolks:java_16": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_8": "ghcr.io\/pterodactyl\/yolks:java_8"
+        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
@@ -29,8 +28,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# FlameCord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl unzip\r\n# Get download link\r\necho -e \"Downloading latest FlameCord build\"\r\nDOWNLOAD_URL=https:\/\/nightly.link\/Permanently\/FlameCord\/workflows\/flamecord-build\/master\/FlameCord-JDK11.zip\r\ncd \/mnt\/server\r\necho -e \"curl -L ${DOWNLOAD_URL} -o flamecord.zip\"\r\ncurl -L ${DOWNLOAD_URL} -o flamecord.zip\r\nif [ -f ${SERVER_JARFILE} ]; then\r\nmv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\nunzip flamecord.zip\r\nmv FlameCord.jar ${SERVER_JARFILE}\r\nrm flamecord.zip\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# FlameCord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl git \r\n\r\nmkdir -p \/mnt\/server\/tmp\r\ncd \/mnt\/server\/tmp\r\n\r\nrm \/mnt\/server\/${SERVER_JARFILE}\r\n# set some needed variables\r\ngit config --global user.email \"you@example.com\"\r\ngit config --global user.name \"Your Name\"\r\n\r\n# Clone the repo \r\necho \"git clone https:\/\/github.com\/2lstudios-mc\/FlameCord.git\"\r\ngit clone https:\/\/github.com\/2lstudios-mc\/FlameCord.git \r\ncd FlameCord\/\r\nchmod +x scripts\/build.sh\r\n\r\n#build the jar\r\necho \"start building\"\r\n.\/scripts\/build.sh --jar\r\n\r\n# Find the jar file and move it\r\nJAR_PATH=$(find . -name FlameCord.jar)\r\nmv ${JAR_PATH} \/mnt\/server\/${SERVER_JARFILE}\r\nrm -rf \/mnt\/server\/tmp\r\n\r\necho \"Install complete\"",
+            "container": "maven:3.8.6-openjdk-11-slim",
             "entrypoint": "bash"
         }
     },
