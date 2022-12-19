@@ -1,10 +1,10 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-05-06T10:20:32+02:00",
+    "exported_at": "2022-12-19T17:57:16+01:00",
     "name": "Flamecord",
     "author": "admin@softwarenoob.com",
     "description": "FlameCord is a patch for Travertine to fix possible exploits and add useful functionalities. FlameCord aims to fix Netty related exploits to keep your server safe from attacks.",
@@ -13,12 +13,11 @@
         "java_version",
         "pid_limit"
     ],
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_17",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_8"
-    ],
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "ghcr.io\/pterodactyl\/yolks:java_16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11"
+    },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
@@ -29,21 +28,12 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# FlameCord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl\r\n\r\n# Get download link\r\nif [ -z \"${FLAMECORD_VERSION}\" ] || [ \"${FLAMECORD_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Downloading latest FlameCord build\"\r\n    DOWNLOAD_URL=https:\/\/ci.2lstudios.dev\/job\/FlameCord\/lastSuccessfulBuild\/artifact\/FlameCord-Proxy\/bootstrap\/target\/FlameCord.jar\r\nelse \r\n    echo -e \"Downloading FlameCord build ${FLAMECORD_VERSION}\"\r\n    DOWNLOAD_URL=https:\/\/ci.2lstudios.dev\/job\/FlameCord\/${FLAMECORD_VERSION}\/artifact\/FlameCord-Proxy\/bootstrap\/target\/FlameCord.jar\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"curl -L ${DOWNLOAD_URL} -o ${SERVER_JARFILE}\"\r\n\r\nif [ -f ${SERVER_JARFILE} ]; then\r\n\tmv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\n\r\ncurl -L ${DOWNLOAD_URL} -o ${SERVER_JARFILE}\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# FlameCord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl git \r\n\r\nmkdir -p \/mnt\/server\/tmp\r\ncd \/mnt\/server\/tmp\r\n\r\nrm \/mnt\/server\/${SERVER_JARFILE}\r\n# set some needed variables\r\ngit config --global user.email \"you@example.com\"\r\ngit config --global user.name \"Your Name\"\r\n\r\n# Clone the repo \r\necho \"git clone https:\/\/github.com\/2lstudios-mc\/FlameCord.git\"\r\ngit clone https:\/\/github.com\/2lstudios-mc\/FlameCord.git \r\ncd FlameCord\/\r\nchmod +x scripts\/build.sh\r\n\r\n#build the jar\r\necho \"start building\"\r\n.\/scripts\/build.sh --jar\r\n\r\n# Find the jar file and move it\r\nJAR_PATH=$(find . -name FlameCord.jar)\r\nmv ${JAR_PATH} \/mnt\/server\/${SERVER_JARFILE}\r\nrm -rf \/mnt\/server\/tmp\r\n\r\necho \"Install complete\"",
+            "container": "maven:3.8.6-openjdk-11-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
-        {
-            "name": "Flamecord Version",
-            "description": "The build to pull and install. (Ex. 97), or set to latest.\r\n\r\nYou can find all builds on https:\/\/ci.2lstudios.dev\/job\/FlameCord\/",
-            "env_variable": "FLAMECORD_VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string"
-        },
         {
             "name": "FlameCord Jar File",
             "description": "The name of the jar file to use when running FlameCord.",
@@ -51,7 +41,8 @@
             "default_value": "flamecord.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
         }
     ]
 }
