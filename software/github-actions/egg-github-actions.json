@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-23T21:13:13-05:00",
+    "exported_at": "2022-12-24T15:03:37+01:00",
     "name": "GitHub Actions",
     "author": "raymond@reflexian.com",
     "description": "Allows your to host your GitHub Self-Hosted Action runners on Pterodactyl",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/sh\r\n\r\ncd \/mnt\/server\r\n\r\n\r\napt-get update\r\napt-get install -y curl\r\napt-get install -y node-shasum\r\napt-get install -y libdigest-sha-perl\r\napt-get install -y expect\r\n\r\n# Download dependencies\r\n\r\n\r\n\r\n# Make directory\r\n\r\ncurl -O -J -L https:\/\/github.com\/actions\/runner\/releases\/download\/v2.299.1\/actions-runner-linux-x64-2.299.1.tar.gz --output actions-runner-linux-x64-2.299.1.tar.gz\r\n\r\ntar xzf .\/actions-runner-linux-x64-2.299.1.tar.gz\r\n\r\nsed -i 's\/user_id=`id -u`\/user_id=1\/g' .\/config.sh\r\n\r\n.\/config.sh --unattended --url ${GITHUB_URL} --token ${GITHUB_TOKEN} --name ${RUNNER_NAME}",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\napt update\r\napt install -y curl jq tar node-shasum libdigest-sha-perl expect\r\n\r\n# Download dependencies\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\n# Get download URL\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/actions\/runner\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/actions\/runner\/releases\")\r\n\r\nawk '{print length($1), $1}' | sort -nk 1 | head -1\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    TEMP_DOWNLOAD_URL=\"$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCH} | awk '{print length($1), $1}' | sort -nk 1 | head -1)\"\r\n    DOWNLOAD_URL=${TEMP_DOWNLOAD_URL:4}\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        TEMP_DOWNLOAD_URL=\"$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${ARCH} | awk '{print length($1), $1}' | sort -nk 1 | head -1)\"\r\n        DOWNLOAD_URL=${TEMP_DOWNLOAD_URL:4}\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        TEMP_DOWNLOAD_URL=\"$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCH} | awk '{print length($1), $1}' | sort -nk 1 | head -1)\"\r\n        DOWNLOAD_URL=${TEMP_DOWNLOAD_URL:4}\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_URL} -o runner-linux.tar.gz\r\ntar xzf runner-linux.tar.gz\r\n\r\nsed -i 's\/user_id=`id -u`\/user_id=1\/g' .\/config.sh\r\n\r\n.\/config.sh --unattended --url ${GITHUB_URL} --token ${GITHUB_TOKEN} --name ${RUNNER_NAME}\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -55,6 +55,16 @@
             "default_value": "homebaseRunner",
             "user_viewable": true,
             "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|string|max:20",
             "field_type": "text"
         }
