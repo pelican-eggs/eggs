@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-12-23T21:13:13-05:00",
+    "name": "GitHub Actions",
+    "author": "raymond@reflexian.com",
+    "description": "Allows your to host your GitHub Self-Hosted Action runners on Pterodactyl",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/run.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Listening for Jobs\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\n\r\ncd \/mnt\/server\r\n\r\n\r\napt-get update\r\napt-get install -y curl\r\napt-get install -y node-shasum\r\napt-get install -y libdigest-sha-perl\r\napt-get install -y expect\r\n\r\n# Download dependencies\r\n\r\n\r\n\r\n# Make directory\r\n\r\ncurl -O -J -L https:\/\/github.com\/actions\/runner\/releases\/download\/v2.299.1\/actions-runner-linux-x64-2.299.1.tar.gz --output actions-runner-linux-x64-2.299.1.tar.gz\r\n\r\ntar xzf .\/actions-runner-linux-x64-2.299.1.tar.gz\r\n\r\nsed -i 's\/user_id=`id -u`\/user_id=1\/g' .\/config.sh\r\n\r\n.\/config.sh --unattended --url ${GITHUB_URL} --token ${GITHUB_TOKEN} --name ${RUNNER_NAME}",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "GitHub Token",
+            "description": "GitHub Runner Token",
+            "env_variable": "GITHUB_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "GitHub URL",
+            "description": "",
+            "env_variable": "GITHUB_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Runner Name",
+            "description": "",
+            "env_variable": "RUNNER_NAME",
+            "default_value": "homebaseRunner",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
