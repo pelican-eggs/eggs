@@ -14,6 +14,9 @@
 
 * [MCGalaxy](classicube/mcgalaxy)
 
+[Doom](doom)
+* [Zandronum](doom/zandronum)
+
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)
@@ -50,6 +53,7 @@
 * [Bedrock](minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](minecraft/bedrock/bedrock)
   * [gomint](minecraft/bedrock/gomint)
+  * [LiteLoaderBDS](minecraft/bedrock/LiteLoader-bedrock)
   * [Nukkit](minecraft/bedrock/nukkit)
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
@@ -125,6 +129,7 @@
   * [ReHLDS](steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](steamcmd_servers/holdfast)
 * [Hurtworld](steamcmd_servers/hurtworld)
+* [Icarus](steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](steamcmd_servers/left4dead)
@@ -167,6 +172,9 @@
 * [The Isle](steamcmd_servers/the_isle)
   * [Evrima](steamcmd_servers/the_isle/evrima)
 * [Tower Unite](steamcmd_servers/tower_unite)
+* [Truck Sim](steamcmd_servers/truck-simulator)
+  * [American Truck Simulator](steamcmd_servers/truck-simulator/american-truck-simulator/)
+  * [Euro Truck Simulator 2](steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](steamcmd_servers/unturned)
 * [V Rising](steamcmd_servers/v_rising)
 * [Valheim](steamcmd_servers/valheim)

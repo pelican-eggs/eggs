@@ -77,6 +77,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Hurtworld](hurtworld)
 
+## Icarus 
+
+* [Icarus](icarus)
+
 ## Insurgency: Sandstorm
 
 [Insurgency: Sandstorm](insurgency_sandstorm)
@@ -211,6 +215,12 @@ This is a collection of servers that use SteamCMD to install.
 
 [Tower Unite](tower_unite)
 
+## Truck Sim
+
+* [Truck Sim](truck-simulator)
+  * [American Truck Simulator](truck-simulator/american-truck-simulator/)
+  * [Euro Truck Simulator 2](truck-simulator/euro-truck-simulator2/)
+  
 ## Unturned
 
 [Unturned](unturned)

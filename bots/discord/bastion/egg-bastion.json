@@ -1,72 +1,122 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-06-20T13:11:43-04:00",
+    "exported_at": "2022-12-15T16:23:16+01:00",
     "name": "Bastion",
     "author": "parker@parkervcp.com",
-    "description": "Bastion is an all-in-one multipurpose Discord bot that can do a whole bunch of things and its features are expanding daily. Bastion does everything most people will ever need it to do. Check out some feature highlights below to get a peek into the vast feature list of Bastion. And if you think Bastion lacks some feature, please send a suggestion and we will add it to Bastion as soon as possible.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:bot_bastion",
-    "startup": "\"rmv() { echo -e \"stopping nodejs\"; for i in $(pgrep node); do kill $i; done; echo -e \"stopping mongo\"; mongo --eval \\\"db.getSiblingDB('admin').shutdownServer()\\\" ; }; trap \\'echo -e \\\"ctrl-c caught\\\" && rmv\\'; mongod --fork --dbpath \/home\/container\/mongodb\/ --port 27017 --logpath \/home\/container\/mongod.log && until nc -z -v -w5 127.0.0.1 27017; do echo 'Waiting for mongodb connection...'; sleep 5; done && yarn start\"",
+    "description": "Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from administration and moderation to keeping the members active through various incentives, games and other fun activities",
+    "features": null,
+    "docker_images": {
+        "Bastion": "ghcr.io\/parkervcp\/yolks:bot_bastion"
+    },
+    "file_denylist": [],
+    "startup": "{{STARTUP_CMD}}",
     "config": {
-        "files": "{\r\n    \"settings\/credentials.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"token\": \"{{server.build.env.BOT_TOKEN}}\"\r\n        }\r\n    },\r\n    \"settings\/configurations.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"presence.status\": \"{{server.build.env.STATUS}}\",\r\n            \"presence.activity.type\": \"{{server.build.env.ACTIVITY}}\",\r\n            \"presence.activity.name\": \"{{server.build.env.PLAYING}}\",\r\n            \"presence.activity.url\": \"{{server.build.env.STREAM_URL}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Systems Ready!\"\r\n}",
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Ready\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Bastion Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## Move to install folder\r\ncd \/mnt\/server\/\r\n\r\n## Clone repo\r\ngit clone -q --depth 1 https:\/\/github.com\/TheBastionBot\/Bastion.git .\/\r\n\r\n## Install node_modules\r\nyarn install --only=production\r\n\r\n## Move config files.\r\nmv settings\/credentials.example.yaml settings\/credentials.yaml\r\nmv settings\/configurations.example.yaml settings\/configurations.yaml\r\n\r\n## make folders for mongodb\r\nmkdir mongodb\/",
-            "container": "node:12-buster",
+            "script": "#!\/bin\/bash\r\n# Bastion Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## Move to install folder\r\napt update\r\napt install -y build-essential libtool python git tar\r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\/\r\n\r\nif [ -d \"\/mnt\/server\/mongodb\" ]\r\nthen\r\n    cd \/mnt\/server\/\r\n    echo \"backing up mongodb\"\r\n    REINSTALL=true\r\n    tar -czf mongodb_backup.tar.gz mongodb\/\r\n    mv mongodb_backup.tar.gz \/tmp\r\nfi\r\n\r\ntar -czf mongodb_back.tar.gz mongodb\/\r\nmv mongodb_back.tar.gz \/tmp\r\n\r\ncd \/mnt\/server\r\nrm -rf * .git\/ .github\/ .env.example .eslintrc.yml .gitattributes .gitignore .npm\/\r\n\r\n\r\n## Clone repo\r\necho \"cloning Bastion bot\"\r\ngit clone -q --depth 1 https:\/\/github.com\/TheBastionBot\/Bastion.git .\/\r\n\r\necho \"npm install --no-package-lock\"\r\nnpm install --no-package-lock\r\necho \"npm run build\"\r\nnpm run build\r\n\r\n## Move config files.\r\nmv settings.example.yaml settings.yaml\r\nrm bastion.cmd .env.example bastion.sh\r\n\r\n\r\nmkdir mongodb\/\r\nif [ \"$REINSTALL\" == \"true\" ]\r\nthen\r\n    cd \/mnt\/server\r\n    echo \"reinstall\"\r\n    mv \/tmp\/mongodb_backup.tar.gz \/mnt\/server\r\n    tar xf mongodb_backup.tar.gz\r\n    rm mongodb_backup.tar.gz\r\nelse\r\n    echo \"fresh install\"\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "node:18-bullseye",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
             "name": "Bot Token",
-            "description": "The Bot ID you get from https:\/\/discordapp.com\/developers\/applications\/",
-            "env_variable": "BOT_TOKEN",
+            "description": "The Bot Token you get from https:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "TESSERACT_BOT_TOKEN",
             "default_value": "GETABOTTOKEN",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:64"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:80",
+            "field_type": "text"
         },
         {
-            "name": "Bot Status",
-            "description": "valid values are `online`, `idle`, `dnd` and `invisible`",
-            "env_variable": "STATUS",
-            "default_value": "online",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
-        },
-        {
-            "name": "Activity Type",
-            "description": "valid options are `PLAYING`, `LISTENING`, `WATCHING` and `STREAMING`",
-            "env_variable": "ACTIVITY",
-            "default_value": "PLAYING",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:9"
-        },
-        {
-            "name": "ACTIVITY",
-            "description": "What the bot is doing",
-            "env_variable": "PLAYING",
-            "default_value": "on a pterodactyl server",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:64"
-        },
-        {
-            "name": "Stream URL",
-            "description": "If the bot activity is set to `STREAMING`",
-            "env_variable": "STREAM_URL",
+            "name": "Bot Client ID",
+            "description": "The Bot ID you get from https:\/\/discordapp.com\/developers\/applications\/",
+            "env_variable": "TESSERACT_BOT_ID",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "nullable|string|max:64"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Mongo URL",
+            "description": "use `mongodb:\/\/127.0.0.1:27017\/bastion` for using the build in mongodb server",
+            "env_variable": "TESSERACT_MONGO_URI",
+            "default_value": "mongodb:\/\/127.0.0.1:27017\/bastion",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Music Activity",
+            "description": "When enabled, Bastion updates the activity to the currently playing track",
+            "env_variable": "BASTION_MUSIC_ACTIVITY",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Relay Direct Messages",
+            "description": "When enabled, Bastion will relay any direct messages it receives to the owner of the bot application \/ team.",
+            "env_variable": "BASTION_RELAY_DMS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Safe Mode",
+            "description": "When enabled, this disables usage of unsafe commands like `exec` and `eval`.",
+            "env_variable": "TESSERACT_UNSAFE_MODE",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Bastion API Port",
+            "description": "Port used for Bastion API Server",
+            "env_variable": "BASTION_API_PORT",
+            "default_value": "8377",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:10",
+            "field_type": "text"
+        },
+        {
+            "name": "Bastion API Auth",
+            "description": "Auth for accessing the Bastion API Server.",
+            "env_variable": "BASTION_API_AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Startup cmd",
+            "description": "set to `npm start` if you just want to start the bot.\r\nset to `npm run commands` to activate the slash commands",
+            "env_variable": "STARTUP_CMD",
+            "default_value": "npm start",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:npm start,npm run commands",
+            "field_type": "text"
         }
     ]
 }
