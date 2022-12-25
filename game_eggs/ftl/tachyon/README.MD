@@ -12,4 +12,4 @@ The Tachyon server requires a single port for access.
 
 ## Server Specific
 
-Latest client and standalone server can be found at https://github.com/Dav-Edward/TachyonsCE/releases
+Latest client and standalone server can be found at <https://github.com/Dav-Edward/TachyonsCE/releases>

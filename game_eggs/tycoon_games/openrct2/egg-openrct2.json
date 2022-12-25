@@ -1,0 +1,221 @@
+{
+    "_comment": "Pterodactyl OpenRCT2 Egg ~ Red-Thirten and parkervcp ~ 2022-06-28",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "name": "OpenRCT2",
+    "author": "rehlmgaming@gmail.com",
+    "description": "OpenRCT2 is an open-source re-implementation of RollerCoaster Tycoon 2 (RCT2), expanding the game with new features, fixing bugs and raising game limits.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/OpenRCT2\/openrct2-cli --version && .\/OpenRCT2\/openrct2-cli host $(if {{LOAD_AUTOSAVE}} && [ -d ServerData\/save\/autosave\/ ]; then find ServerData\/save\/autosave\/ | sort -r | head -1; else echo \"{{SAVE_URI}}\"; fi) --port {{SERVER_PORT}} --user-data-path \/home\/container\/ServerData\/",
+    "config": {
+        "files": "{\r\n    \"ServerData\/config.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"general.autosave\": \"{{server.build.env.AUTOSAVE_INTERVAL}}\",\r\n            \"general.autosave_amount\": \"{{server.build.env.AUTOSAVE_AMOUNT}}\",\r\n            \"network.player_name\": \"\\\"{{server.build.env.SERVER_PLAYER_NAME}}\\\"\",\r\n            \"network.default_port\": \"{{server.build.default.port}}\",\r\n            \"network.default_password\": \"\\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"network.advertise\": \"{{server.build.env.SERVER_ADVERTISE}}\",\r\n            \"network.maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"network.server_name\": \"\\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"network.server_description\": \"\\\"{{server.build.env.SERVER_DESCRIPTION}}\\\"\",\r\n            \"network.server_greeting\": \"\\\"{{server.build.env.SERVER_GREETING}}\\\"\",\r\n            \"network.provider_name\": \"\\\"{{server.build.env.PROVIDER_NAME}}\\\"\",\r\n            \"network.provider_email\": \"\\\"{{server.build.env.PROVIDER_EMAIL}}\\\"\",\r\n            \"network.provider_website\": \"\\\"{{server.build.env.PROVIDER_WEBSITE}}\\\"\",\r\n            \"network.log_chat\": \"{{server.build.env.LOG_CHAT}}\",\r\n            \"network.log_server_actions\": \"{{server.build.env.LOG_SERVER_ACTIONS}}\",\r\n            \"network.pause_server_if_no_clients\": \"{{server.build.env.PAUSE_NO_CLIENTS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Listening for clients on\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl OpenRCT2 Egg - egg-openrct2.json\r\n## Authors: David Wolfe (Red-Thirten), parkervcp\r\n## Date: 2022\/06\/28\r\n## License: MIT License\r\n\r\nGITHUB_PACKAGE=\"OpenRCT2\/OpenRCT2\"\r\nMATCH=\"linux-x86_64.AppImage\"\r\nDEFAULT_SAVE=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/tycoon_games\/openrct2\/save.park\"\r\n\r\n## OpenRCT2 Install\r\napt -y update\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\n# Remove existing installation if present\r\n[ -d OpenRCT2 ] && rm -rf OpenRCT2\r\n# Setup OpenRCT2 directory\r\nmkdir -p OpenRCT2\/data\r\n# Setup temp directory for building and move to it\r\n[ -d temp ] && rm -rf temp\r\nmkdir temp && cd temp\r\n\r\n# Determine if installing from source or from release\r\nif [ \"${VERSION}\" == \"develop\" ]; then\r\n    # Get required packages\r\n    apt -y install curl git make cmake gcc build-essential libicu-dev pkg-config libcurl4-openssl-dev libcrypto++-dev libpng-dev libssl-dev libzip-dev duktape-dev nlohmann-json3-dev\r\n    echo -e \"\\nInstalling\/Updating OpenRCT2 from source...\\n\"\r\n    \r\n    # Clone the branch and check if successful\r\n    git clone --branch \"${VERSION}\" https:\/\/github.com\/${GITHUB_PACKAGE}\r\n    if [ ! -d OpenRCT2 ]; then\r\n        echo -e \"\\nFailed to clone \\\"${VERSION}\\\" branch from https:\/\/github.com\/${GITHUB_PACKAGE}\\n\"\r\n        exit 1\r\n    fi\r\n    \r\n    cd OpenRCT2\r\n    mkdir build && cd build\r\n    # Prepare CMake files for a lightweight and CLI-only build of OpenRCT2, using the appropriate flags\r\n    cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DPORTABLE=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_CXX_FLAGS=\"-g -gz\" -DDISABLE_TTF=ON -DDISABLE_GOOGLE_BENCHMARK=ON -DDISABLE_DISCORD_RPC=ON -DDISABLE_GUI=ON\r\n    echo -e \"\\nBuilding OpenRCT2 package from source...\\n\\tThis process can take quite some time. Grab a coffee :)\\n\"\r\n    # Build OpenRCT2\r\n    DESTDIR=. make install\r\n    # Check if build was successful\r\n    if [ ! -d usr\/local ]; then\r\n        echo -e \"\\nFailed to successfully build OpenRCT2!\\n\"\r\n        exit 1\r\n    fi\r\n    \r\n    # Make executable-ready package by moving compiled files to the correct locations\r\n    cd usr\/local\r\n    mv bin\/* \/mnt\/server\/OpenRCT2\/\r\n    mv share\/openrct2\/* share\/openrct2-cli\/* \/mnt\/server\/OpenRCT2\/data\/\r\n    mv share\/doc \/mnt\/server\/OpenRCT2\/\r\n    echo -e \"\\nBuild of OpenRCT2 package complete!\"\r\nelse\r\n    # Get required packages\r\n    apt install -y curl jq\r\n    echo -e \"\\nInstalling\/Updating OpenRCT2 from release tag \\\"${VERSION}\\\"...\\n\"\r\n    \r\n    # This is a simple script to use the GitHub API for release versions.\r\n    # This requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (MATCH is to match the filename in some way).\r\n    # Get release info and download links\r\n    LATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\n    RELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n    if [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\n    else\r\n        VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n        if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n            DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n        else\r\n            DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n        fi\r\n    fi\r\n    # Download the release and check if successful\r\n    curl -L ${DOWNLOAD_URL} -o OpenRCT2.AppImage\r\n    if [ ! -f OpenRCT2.AppImage ]; then\r\n        echo -e \"\\nFailed to download release: ${DOWNLOAD_URL}\\n\"\r\n        exit 1\r\n    fi\r\n    \r\n    chmod +x OpenRCT2.AppImage\r\n    # Extract AppImage and check if successful\r\n    echo -e \"Extracting AppImage files...\"\r\n    .\/OpenRCT2.AppImage --appimage-extract\r\n    if [ ! -d squashfs-root\/usr ]; then\r\n        echo -e \"\\nFailed to extract AppImage!\\n\\t(Is the `MATCH` variable set to download an AppImage?)\\n\"\r\n        exit 1\r\n    fi\r\n    \r\n    # Move needed files to correct directories\r\n    cd squashfs-root\/usr\r\n    mv lib bin\/openrct2-cli \/mnt\/server\/OpenRCT2\/\r\n    mv share\/openrct2\/* \/mnt\/server\/OpenRCT2\/data\/\r\n    mkdir \/mnt\/server\/OpenRCT2\/doc && mv share\/doc\/openrct2 $_\r\n    echo -e \"\\nDownload\/Update of OpenRCT2 release successful!\"\r\nfi\r\n\r\ncd \/mnt\/server\r\nrm -rf temp # Clean up temp building directory\r\n\r\n## OpenRCT2 Setup\r\n# Setup ServerData\/save directory\r\n[ ! -d ServerData\/save ] && mkdir -p ServerData\/save\r\ncd ServerData\/save\r\n# Download default save.park if missing\r\nif [ ! -f save.park ]; then\r\n    echo -e \"Downloading default save.park file from ${DEFAULT_SAVE}\"\r\n    curl -sSLO ${DEFAULT_SAVE}\r\nfi\r\n\r\necho -e \"\\nOpenRCT2 Successfully Installed!\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Save File",
+            "description": "Save file (.sv4 \/ .sv6 \/ .park) to load. Can be a file path or can be a webhosted file URL. An existing save file must be specified; the server cannot generate a new scenario\/save from scratch.",
+            "env_variable": "SAVE_URI",
+            "default_value": "ServerData\/save\/save.park",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:4",
+            "field_type": "text"
+        },
+        {
+            "name": "Load Latest Autosave",
+            "description": "Will load the latest autosave (assuming one is present) *instead* of the Save File when the server is started. Useful for loading the latest progress of a park after a reboot. Set to \"false\" to \"lock\" progress of the park, and always load the original Save File on start up.",
+            "env_variable": "LOAD_AUTOSAVE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Autosave Interval",
+            "description": "0 = Every 1 min, 1 = Every 5 min, 2 = Every 15 min, 3 = Every 30 min, 4 = Every hour, 5 = Never",
+            "env_variable": "AUTOSAVE_INTERVAL",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:0,5",
+            "field_type": "text"
+        },
+        {
+            "name": "Autosaves To Keep",
+            "description": "Number of autosaves to keep before rolling over and deleting the oldest one. Set to 0 to disable autosaving.",
+            "env_variable": "AUTOSAVE_AMOUNT",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum players allowed to connect to the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password requested by the server for clients to connect. Admins do not have to enter password to join. Leave empty for no password.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Advertise Server",
+            "description": "If set to \"false\", the server will not be advertised in the master server list, and clients must manually connect.",
+            "env_variable": "SERVER_ADVERTISE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Pause Server If No Clients",
+            "description": "Set to \"true\" to have the server pause simulation if no clients are on the server.",
+            "env_variable": "PAUSE_NO_CLIENTS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server that appears in the server list.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "Description of the server that appears when hovering over the server in the server list.",
+            "env_variable": "SERVER_DESCRIPTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Player Name",
+            "description": "The server appears as a player in the player list. This is the name it will have.",
+            "env_variable": "SERVER_PLAYER_NAME",
+            "default_value": "Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Greeting",
+            "description": "The \"Message of the Day\" that gets sent to all clients who join.",
+            "env_variable": "SERVER_GREETING",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Provider Name",
+            "description": "Server provider name that appears in server information window.",
+            "env_variable": "PROVIDER_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Provider E-Mail",
+            "description": "Server provider e-mail that appears in server information window.",
+            "env_variable": "PROVIDER_EMAIL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Provider Website",
+            "description": "Server provider website that appears in server information window.",
+            "env_variable": "PROVIDER_WEBSITE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Log Chat",
+            "description": "Set to \"true\" if you would like in-game chat logged to file in Data\/chatlogs.",
+            "env_variable": "LOG_CHAT",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Log Server Actions",
+            "description": "Set to \"true\" if you would like in-game actions logged to file in Data\/serverlogs.",
+            "env_variable": "LOG_SERVER_ACTIONS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "OpenRCT2 Version",
+            "description": "The release tag (version) of OpenRCT2 to download and install from their official Github (ie. \"v0.3.5.1\"). Use \"latest\" to download the latest release, or \"develop\" to build from the latest source (takes longer to install but is the most up to date).",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Library Path",
+            "description": "What path to load libraries from for release binaries. Rarely needs to be changed.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/OpenRCT2\/lib",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}

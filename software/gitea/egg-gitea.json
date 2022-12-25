@@ -4,13 +4,13 @@
         "version": "PTDL_v1",
         "update_url": null
     },
-    "exported_at": "2021-07-07T21:58:54+02:00",
+    "exported_at": "2022-05-16T16:53:24+02:00",
     "name": "Gitea",
     "author": "mario.franze@gmail.com",
     "description": "Gitea is a community managed lightweight code hosting solution written in Go. It is published under the MIT license.",
     "features": null,
     "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
+        "ghcr.io\/parkervcp\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/gitea web -p {{SERVER_PORT}} -c .\/app.ini",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nwget -O gitea https:\/\/dl.gitea.io\/gitea\/main\/gitea-main-linux-amd64\r\nchmod +x gitea\r\n\r\nmkdir custom\r\n\r\necho \"[server]\r\nLOCAL_ROOT_URL = http:\/\/localhost:${SERVER_PORT}\/\r\nDOMAIN           = ${SERVER_IP}\r\nHTTP_PORT        = ${SERVER_PORT}\r\nDISABLE_SSH      = ${DISABLE_SSH}\r\nSSH_PORT         = ${SSH_PORT}\" > \/mnt\/server\/custom\/app.ini\r\n\r\necho \"Install complete\"",
+            "script": "apt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\n\r\nwget -O gitea https:\/\/dl.gitea.io\/gitea\/main\/gitea-main-linux-${ARCH}\r\nchmod +x gitea\r\n\r\nmkdir custom\r\n\r\necho \"[server]\r\nLOCAL_ROOT_URL = http:\/\/localhost:${SERVER_PORT}\/\r\nDOMAIN           = ${SERVER_IP}\r\nHTTP_PORT        = ${SERVER_PORT}\r\nDISABLE_SSH      = ${DISABLE_SSH}\r\nSSH_PORT         = ${SSH_PORT}\" > \/mnt\/server\/custom\/app.ini\r\n\r\necho \"Install complete\"",
             "container": "debian:buster-slim",
             "entrypoint": "bash"
         }

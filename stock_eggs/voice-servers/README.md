@@ -1,10 +1,13 @@
 # Voice Servers
 
+[Click here to go to the download page](https://github.com/pterodactyl/panel/tree/1.0-develop/database/Seeders/eggs/voice-servers)
+
 ## Mumble
 
 Mumble is an open source, low-latency, high quality voice chat software primarily intended for use while gaming.
 
-## Required Server Ports
+### Required Server Ports
+
 Mumble only requires a single port to run. The default is 64738
 
 | Port    | default |
@@ -15,7 +18,8 @@ Mumble only requires a single port to run. The default is 64738
 
 Use crystal clear sound to communicate with your team mates cross-platform with military-grade security, lag-free performance & unparalleled reliability and uptime.
 
-## Required Server Ports
+### Required Server Ports
+
 Teamspeak 3 only requires a single port to run. The default is 9987
 
 Other ports for ServerQuery and File Transfers are required for specific things.

@@ -7,7 +7,8 @@ Project Zomboid is the ultimate in zombie survival. Alone or in MP: you loot, bu
 Project Zomboid requires one port for Steam and an additional **one port per player**.  Additional ports are allocated as they connect.
 
 For example, when configured with a base allocation of 27016:
-```
+
+```log
 Zomboid Steam Server started, ports 27016 and 27016 must be open on the router
 Connected new client kubi ID # 0 and assigned DL port 27017
 Connected new client kubi2 ID # 1 and assigned DL port 27018

@@ -1,0 +1,102 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-18T08:34:37+02:00",
+    "name": "The Isle",
+    "author": "fredrik.johansenfuun@gmail.com",
+    "description": "The Isle is an open beta with an open-world survival game where players choose from three factions in an attempt to survive a fierce island. Hunt. Prey. Survive.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
+    "file_denylist": [],
+    "startup": "\/home\/container\/steamcmd\/steamcmd.sh +force_install_dir \/home\/container +login Anonymous +app_update 412680 -beta evrima +quit && \/home\/container\/TheIsle\/Binaries\/Linux\/TheIsleServer-Linux-Shipping -Port=$SERVER_PORT -ini:Engine:[EpicOnlineServices]:DedicatedServerClientId=xyza7891gk5PRo3J7G9puCJGFJjmEguW -ini:Engine:[EpicOnlineServices]:DedicatedServerClientSecret=pKWl6t5i9NJK8gTpVlAxzENZ65P8hYzodV8Dqe5Rlc8",
+    "config": {
+        "files": "{\r\n    \"\/TheIsle\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"MaxPlayerCount\": \"MaxPlayerCount={{server.build.env.PLAYER_COUNT}}\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.PLAYER_COUNT}}\",\r\n            \"RconEnabled\": \"RconEnabled={{server.build.env.RCON}}\",\r\n            \"RconPort\": \"RconPort={{server.build.env.RCON_PORT}}\",\r\n            \"RconPassword\": \"RconPassword={{server.build.env.RCON_PASSWORD}}\",\r\n            \"QueuePort\": \"QueuePort={{server.build.env.QUEUE_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Queue system listening on\"\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id ffound here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# EXTRA_FLAGS - when a server has extra glas for things like beta installs or updates.\r\n#\r\n##\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\necho -e \"steam user is not set.\\n\"\r\necho -e \"Using anonymous user.\\n\"\r\nSTEAM_USER=anonymous\r\nSTEAM_PASS=\"\"\r\nSTEAM_AUTH=\"\"\r\nelse\r\necho -e \"user set to ${STEAM_USER}\"\r\nfi\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login Anonymous +app_update 412680 -beta evrima validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n# The Isle\r\nmkdir -p \/mnt\/server\/TheIsle\/Saved\/Config\/LinuxServer\r\n#Config File\r\ncat > \/mnt\/server\/TheIsle\/Saved\/Config\/LinuxServer\/Game.ini << ENDOFFILE\r\n[\/Script\/Engine.Game]\r\nRconEnabled=${RCON}\r\nRconPort=${RCON_PORT}\r\nRconPassword=${RCON_PASSWORD}\r\n-\r\n[\/Script\/TheIsle.TIGameSession]\r\nServerName=${SERVER_NAME}\r\nMaxPlayerCount=${PLAYER_COUNT}\r\nbEnableGlobalChat=true\r\nbGlobalIsSpeciesOnly=false\r\nbLocalIsSpeciesOnly=true\r\nLocalChatRange=20000.f\r\nQueuePort=${QUEUE_PORT}\r\n-\r\n[\/Script\/Engine.GameSession]\r\nMaxPlayers=${PLAYER_COUNT}\r\n-\r\n[\/Script\/TheIsle.TIGameStateBase]\r\nAdminsSteamIDs=${ADMINSTEAMID}\r\nENDOFFILE\r\n#Hotfix\r\ncat > \/mnt\/server\/TheIsle\/Saved\/Config\/LinuxServer\/Engine.ini << ENDOFFILE\r\n[Core.System]\r\nPaths=..\/..\/..\/Engine\/Content\r\nPaths=%GAMEDIR%Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/SoundUtilities\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/Synthesis\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/AudioSynesthesia\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/WebBrowserWidget\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/FX\/Niagara\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/PythonScriptPlugin\/Content\r\nPaths=..\/..\/..\/TheIsle\/Plugins\/SteamCore\/Content\r\nPaths=..\/..\/..\/TheIsle\/Plugins\/RVTObjectLandscapeBlending\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/Nvidia\/DLSS\/Content\r\nPaths=..\/..\/..\/TheIsle\/Plugins\/DonMeshPainting\/Content\r\nPaths=..\/..\/..\/TheIsle\/Plugins\/UIPF\/Content\r\nPaths=..\/..\/..\/TheIsle\/Plugins\/EOSCore\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/ControlRig\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/Nvidia\/DLSSMoviePipelineSupport\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/MovieScene\/MovieRenderPipeline\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Compositing\/OpenColorIO\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/MovieScene\/SequencerScripting\/Content\r\nPaths=..\/..\/..\/TheIsle\/Plugins\/ImpostorBaker\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/2D\/Paper2D\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Developer\/AnimationSharing\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Editor\/GeometryMode\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Editor\/SpeedTreeImporter\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Enterprise\/DatasmithContent\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/ChaosClothEditor\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/GeometryProcessing\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/GeometryCollectionPlugin\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/ChaosSolverPlugin\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/ChaosNiagara\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Experimental\/MotoSynth\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Media\/MediaCompositing\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/OpenXREyeTracker\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/OpenXR\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/Runtime\/OpenXRHandTracking\/Content\r\nPaths=..\/..\/..\/Engine\/Plugins\/VirtualProduction\/Takes\/Content\r\n\r\n[EpicOnlineServices]\r\nDedicatedServerClientId=xyza7891gk5PRo3J7G9puCJGFJjmEguW\r\nDedicatedServerClientSecret=pKWl6t5i9NJK8gTpVlAxzENZ65P8hYzodV8Dqe5Rlc8\r\nENDOFFILE\r\nchmod -R 777 \/mnt\/server\/TheIsle\/Saved\/Config\/LinuxServer",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Sets the name for the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Norden",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40",
+            "field_type": "text"
+        },
+        {
+            "name": "Player Count",
+            "description": "",
+            "env_variable": "PLAYER_COUNT",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server admin",
+            "description": "",
+            "env_variable": "ADMINSTEAMID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON",
+            "description": "",
+            "env_variable": "RCON",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon Port",
+            "description": "",
+            "env_variable": "RCON_PORT",
+            "default_value": "44000",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Password",
+            "description": "",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "RCON_password_is_a_must",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Queue Port",
+            "description": "",
+            "env_variable": "QUEUE_PORT",
+            "default_value": "44000",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        }
+    ]
+}

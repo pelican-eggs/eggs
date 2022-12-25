@@ -9,7 +9,7 @@ As a man or woman stranded naked, freezing and starving on the shores of a myste
 
 This server requires about 4096M to run with no players on a default map. Although it is recommended to run 6144M by the ARK creators, specific DLC maps will increase this requirement, such as Genesis 2 requiring over 13,440M to start.
 
-See the following - https://ark.gamepedia.com/Dedicated_Server_Setup#Hardware
+See the following - <https://ark.gamepedia.com/Dedicated_Server_Setup#Hardware>
 
 ### RCON
 

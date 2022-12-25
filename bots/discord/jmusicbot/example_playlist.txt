@@ -1,0 +1,21 @@
+# This is an example playlist
+# More information about playlists can be found here: https://jmusicbot.com/playlists/
+# Command to play this playlist: @Botname play playlist example_playlist
+# A new playlist can be made by making a new file in this directory called: my_playlist_name.txt
+
+# The following line currently makes the playlist shuffle
+# Remove this line entirely if you don't want shuffling
+#shuffle
+
+# Search Examples:
+ytsearch:gorillaz dare audio
+scsearch:lights metrognome
+
+# Direct Link Example:
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+# YouTube Playlist ID Example:
+PLUib4KwT0DMJaPgg_nr1ia8FY5JcXksvb
+
+# Local File Example:
+# /home/container/music/mysong.mp3

@@ -1,0 +1,184 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-11-26T17:31:15+01:00",
+    "name": "Space Engineers - Torch Server",
+    "author": "info@goover.de",
+    "description": "Torch is the successor to SE Server Extender and gives server admins the tools they need to keep their Space Engineers servers running smoothly. It features a user interface with live management tools and a plugin system so you can run your server exactly how you'd like. Torch is still in early development so there may be bugs and incomplete features.\r\n\r\n!!!!! DO NOT CANCEL THE FIRST START, OR YOU NEED TO DELETE THE SERVER AND CREATE FROM SCRATCH !!!!",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/Torch.Server.exe -noupdate -nogui -console",
+    "config": {
+        "files": "{\r\n    \"Instance\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\Instance\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n    },\r\n    \"config\/Saves\/World\/Sandbox.sbc\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Game ready...\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n\r\n## Define variables\r\ndlurl=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/space_engineers\/default\"\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y install curl lib32gcc-s1 ca-certificates unzip\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Download Torch and unpack\r\ncd \/mnt\/server\/\r\ncurl -sSL -o torch-server.zip https:\/\/build.torchapi.com\/job\/Torch\/job\/master\/lastSuccessfulBuild\/artifact\/bin\/torch-server.zip\r\nunzip -o torch-server.zip -d \/mnt\/server\/\r\nrm -fR $HOME\/torch-server.zip\r\n\r\n## Create world and Instance\r\nmkdir -p $HOME\/Instance\/Saves\r\nif [ ! -d $HOME\/Instance\/Saves\/World ]\r\nthen\r\n    curl $dlurl\/World.zip -o World.zip\r\n    unzip -o World.zip -d $HOME\/Instance\/Saves\/\r\nfi\r\n\r\nif [ ! -f $HOME\/Instance\/SpaceEngineers-Dedicated.cfg ]; then \r\n   curl $dlurl\/SpaceEngineers-Dedicated.cfg -o $HOME\/Instance\/SpaceEngineers-Dedicated.cfg;\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "298740",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Steam browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl hosted Space Engineer Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "World Name",
+            "description": "Name of your world (and of your save folder) DO NOT CHANGE THIS !!!!",
+            "env_variable": "WORLD_NAME",
+            "default_value": "World",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "Description of the game",
+            "env_variable": "SERVER_DESC",
+            "default_value": "A Pterodactyl hosted Space Engineer Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Mode",
+            "description": "Game Mode setting: Survival, Creative",
+            "env_variable": "SERVER_MODE",
+            "default_value": "Survival",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Survival,Creative",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximum Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Saving",
+            "description": "",
+            "env_variable": "SAVE_ENABLED",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save Interval",
+            "description": "Time between auto saves specified in minutes",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Port",
+            "description": "Steam Port",
+            "env_variable": "STEAM_PORT",
+            "default_value": "8766",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:65535",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Remote API",
+            "description": "Enable Remote API",
+            "env_variable": "REMOTEAPI_ENABLE",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Remote API Port",
+            "description": "Remote API Port",
+            "env_variable": "REMOTEAPI_PORT",
+            "default_value": "8081",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:65535",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPREFIX",
+            "description": "WINEPREFIX",
+            "env_variable": "WINEPREFIX",
+            "default_value": "\/home\/container\/.wine",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2013 vcrun2017 corefonts dotnet48",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WINDOWS_INSTALL",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
