@@ -23,7 +23,8 @@ ___
                 <img src="https://avatars.githubusercontent.com/u/4098364" width="50px;" alt=""/><br /><sub><b>Moondarker</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=Moondarker" title="Contributes">🩹</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=Moondarker" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=Moondarker" title="Contributor">💡</a>
         </td>
     </tr>
 </table>
