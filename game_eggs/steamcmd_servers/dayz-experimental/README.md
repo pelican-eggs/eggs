@@ -18,6 +18,13 @@ ___
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Maintains">🔨</a>
         </td>
+        <td align="center">
+            <a href="https://github.com/Moondarker">
+                <img src="https://avatars.githubusercontent.com/u/4098364" width="50px;" alt=""/><br /><sub><b>Moondarker</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Moondarker" title="Contributes">🩹</a>
+        </td>
     </tr>
 </table>
 <!-- markdownlint-enable -->
