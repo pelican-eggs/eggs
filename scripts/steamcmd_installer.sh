@@ -18,8 +18,8 @@
  ##
 
 # Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.
-apt -y update
-apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates
+#apt -y update
+#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates
 
 ## just in case someone removed the defaults.
 if [[ "${STEAM_USER}" == "" ]] || [[ "${STEAM_PASS}" == "" ]]; then
