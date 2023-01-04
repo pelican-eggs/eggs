@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-31T19:48:33+01:00",
+    "exported_at": "2023-01-04T11:28:40+01:00",
     "name": "Eco",
     "author": "info@goover.de",
     "description": "Eco is an online world from Strange Loop Games where players must build civilization using resources from an ecosystem that can be damaged and destroyed. The world of Eco is an incredibly reactive one, and whatever any player does in the world affects the underlying ecosystem.",
@@ -57,7 +57,7 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean|in:true,false",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
