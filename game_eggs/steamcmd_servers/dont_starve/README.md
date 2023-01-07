@@ -14,7 +14,7 @@ Minimum required memory to run the server is around 512mb for a single user..
 
 ## Server Ports
 
-Don't Starve Together only requires a single port to run. The default is 10999
+Don't Starve Together only requires a single port to run. All network communications are proxied through the master. The default is 10999
 
 | Port    | default |
 |---------|---------|
