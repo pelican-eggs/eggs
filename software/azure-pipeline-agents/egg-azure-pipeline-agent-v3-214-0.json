@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-01-07T20:51:55+01:00",
+    "name": "Azure Pipeline Agent v3.214.0",
+    "author": "yannick@netdb.at",
+    "description": "Allows your to host your Azure Pipeline Self-Hosted Agent on Pterodactyl",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:ubuntu": "ghcr.io\/parkervcp\/yolks:ubuntu"
+    },
+    "file_denylist": [],
+    "startup": ".\/run.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Listening for Jobs\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\ncd \/mnt\/server\r\ndpkg --add-architecture i386\r\napt update -y\r\napt upgrade -y\r\necho \"-----------------------------------------\"\r\necho \"Install required packages...\"\r\necho \"-----------------------------------------\"\r\napt install -y apt-transport-https wget iproute2 curl tar ca-certificates\r\nwget https:\/\/packages.microsoft.com\/config\/ubuntu\/22.10\/packages-microsoft-prod.deb -O packages-microsoft-prod.deb\r\ndpkg -i packages-microsoft-prod.deb\r\nrm packages-microsoft-prod.deb\r\napt update -y\r\napt install -y dotnet-runtime-6.0\r\necho \"-----------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-----------------------------------------\"\r\necho \"-----------------------------------------\"\r\necho \"Install azure devops agent...\"\r\necho \"-----------------------------------------\"\r\ncurl -O -J -L https:\/\/vstsagentpackage.azureedge.net\/agent\/3.214.0\/vsts-agent-linux-x64-3.214.0.tar.gz\r\ntar xzf vsts-agent-linux-x64-3.214.0.tar.gz\r\nexport AGENT_ALLOW_RUNASROOT=\"1\"\r\n.\/config.sh --unattended --acceptTeeEula --url ${SERVER_URL} --auth PAT --token ${PAT} --pool ${POOL_NAME} --agent ${AGENT_NAME}\r\necho \"-----------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Url",
+            "description": "",
+            "env_variable": "SERVER_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Personal Access Token (PAT)",
+            "description": "",
+            "env_variable": "PAT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Pool Name",
+            "description": "",
+            "env_variable": "POOL_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Agent Name",
+            "description": "",
+            "env_variable": "AGENT_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        }
+    ]
+}
