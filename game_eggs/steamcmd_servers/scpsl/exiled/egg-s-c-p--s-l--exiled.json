@@ -1,19 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-11-14T10:56:47+01:00",
+    "exported_at": "2023-01-09T13:21:41+01:00",
     "name": "SCP:SL - Exiled",
     "author": "info@goover.de",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server with Exiled Plugin Framework",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:mono_latest"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:mono_latest": "ghcr.io\/parkervcp\/yolks:mono_latest"
+    },
     "file_denylist": [],
     "startup": ".\/LocalAdmin {{SERVER_PORT}}",
     "config": {
@@ -37,7 +37,8 @@
             "default_value": "996560",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Dotnet Bundle",
@@ -46,7 +47,8 @@
             "default_value": ".\/dotnet-bundle",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Github Package",
@@ -55,7 +57,8 @@
             "default_value": "Exiled-Team\/EXILED",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:50"
+            "rules": "required|string|max:50",
+            "field_type": "text"
         },
         {
             "name": "Version",
@@ -64,7 +67,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Match",
@@ -73,7 +77,8 @@
             "default_value": "Exiled.tar.gz",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
