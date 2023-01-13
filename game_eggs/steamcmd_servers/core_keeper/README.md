@@ -22,3 +22,13 @@ Explore an endless cavern of creatures, relics and resources in a mining sandbox
 | Max Players | 100 | Maximum number of players that will be allowed to connect to server. Maximum is 100. Default: 100, |
 | World Mode | 0 | Whether to use normal (0) or hard (1) mode for world. Default: 0. |
 | Auto Update | 1 | Enable automatic updates on boot: Default: true |
+
+## Game Ports
+
+The dedicated server uses two UDP Ports.\
+Game Port: Server Port\
+Query Port: Server Port + 1
+
+Example:\
+Server Port = 4711\
+Make sure you open UDP ports 4711-4712 in your firewall and bind the allocations to the Core Keeper Server.
