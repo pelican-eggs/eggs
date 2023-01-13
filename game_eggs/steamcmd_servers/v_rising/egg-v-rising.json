@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-13T11:14:11+01:00",
+    "exported_at": "2023-01-13T12:18:05+01:00",
     "name": "V Rising",
     "author": "rehlmgaming@gmail.com",
     "description": "Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.",
@@ -251,7 +251,7 @@
             "field_type": "text"
         },
         {
-            "name": "[SYSTM] WINEDEBUG",
+            "name": "[SYSTEM] WINEDEBUG",
             "description": "don't change",
             "env_variable": "WINEDEBUG",
             "default_value": "-all",
