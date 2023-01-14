@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-13T21:33:24+01:00",
+    "exported_at": "2023-01-14T22:17:05+01:00",
     "name": "Core Keeper",
     "author": "karsten@fiedleronline.net",
     "description": "Core Keeper is a survival sandbox game for single or multiplayers.\r\n\r\n--- Drawn towards a mysterious relic, you are an explorer who awakens in an ancient cavern of creatures, resources and trinkets. Trapped deep underground will your survival skills be up to the task? Mine relics and resources to build your base, craft new equipment, survive, and power up the Core. ---",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
-    "startup": "DISPLAY=:0; rm .\/GameID.txt CoreKeeperServerLog.txt; touch CoreKeeperServerLog.txt; .\/CoreKeeperServer -logfile CoreKeeperServerLog.txt -world {{WORLD_INDEX}} -worldname \"{{WORLD_NAME}}\" -worldseed {{WORLD_SEED}} -gameid \"{{GAME_ID}}\" -datapath \"{{DATA_PATH}}\" -maxplayers {{MAX_PLAYERS}} -worldmode {{WORLD_MODE}} -port {{GAME_PORT}} & CKPID=$!; tail -f CoreKeeperServerLog.txt & LOGPID=$!; trap \"kill $CKPID; wait $CKPID; kill $LOGPID; wait $LOGPID\" 15; wait $!",
+    "startup": "DISPLAY=:0; rm .\/GameID.txt .\/CoreKeeperServerLog.txt; touch .\/CoreKeeperServerLog.txt; .\/CoreKeeperServer -logfile CoreKeeperServerLog.txt -world {{WORLD_INDEX}} -worldname \"{{WORLD_NAME}}\" -worldseed {{WORLD_SEED}} $([[ \"{{GAME_ID}}\" != \"\" ]] && echo -n \" -gameid \\\"{{GAME_ID}}\\\"\") -maxplayers {{MAX_PLAYERS}} -worldmode {{WORLD_MODE}} -port {{SERVER_PORT}} & CKPID=$!; tail -f CoreKeeperServerLog.txt & LOGPID=$!; trap \"kill $CKPID; wait $CKPID; kill $LOGPID; wait $LOGPID\" 15; wait $!",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Started server process with pid\"\r\n}",
@@ -68,16 +68,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|min:28",
-            "field_type": "text"
-        },
-        {
-            "name": "Data Path",
-            "description": "Save file location. Defaul: DedicatedServer.",
-            "env_variable": "DATA_PATH",
-            "default_value": "DedicatedServer",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:100",
             "field_type": "text"
         },
         {
@@ -157,16 +147,6 @@
             "default_value": "24",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer",
-            "field_type": "text"
-        },
-        {
-            "name": "Game Port",
-            "description": "What UDP game port to bind to. Note that the UDP Query Port is automaticaly game port + 1. The clients will connect to the server directly and the ports needs to be open. Default: 27015 (27016).",
-            "env_variable": "GAME_PORT",
-            "default_value": "27015",
-            "user_viewable": true,
-            "user_editable": true,
             "rules": "required|integer",
             "field_type": "text"
         }
