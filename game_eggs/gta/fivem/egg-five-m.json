@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-14T12:02:56+01:00",
+    "exported_at": "2023-01-14T18:22:52+01:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "A new FiveM egg for the latest builds due to recent changes in FiveM",
@@ -96,6 +96,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Download Link",
+            "description": "This is the link to download fivem from. This is only used in the install script.\r\n\r\nThe file you link to needs to be an fx.tar.zx file.\r\n\r\nExample:\r\nhttps:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/`6007-f9c407539e79a33772db3cbf47ab8d5e9d57e7a4\/fx.tar.xz",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string|nullable",
             "field_type": "text"
         }
     ]
