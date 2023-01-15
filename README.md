@@ -277,6 +277,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Euro Truck Simulator 2](game_eggs/steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
 * [V Rising](game_eggs/steamcmd_servers/v_rising)
+  * [V Rising Vanilla](game_eggs/steamcmd_servers/v_rising/v_rising_vanilla)
+  * [V Rising BepInex](game_eggs/steamcmd_servers/v_rising/v_rising_bepinex)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
