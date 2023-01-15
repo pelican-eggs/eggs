@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-15T18:34:35+01:00",
+    "exported_at": "2023-01-15T18:45:27+01:00",
     "name": "Empyrion: Galactic Survival",
     "author": "info@goover.de",
     "description": "Empyrion: Galactic Survival dedicated server",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Empyrion Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl unzip\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\n\r\nexport HOME=\/mnt\/server\r\n\r\nmkdir -p \/mnt\/server\/empyrion\r\nmkdir -p \/mnt\/server\/Logs\r\nmkdir -p \/mnt\/server\/empyrion\/logs\r\ntouch \/mnt\/server\/empyrion\/logs\/current.log\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\nif [ \"${VERSION}\" == \"experimental\" ]; then\r\n    .\/steamcmd.sh +force_install_dir \/mnt\/server\/empyrion +login anonymous +@sSteamCmdForcePlatformType windows 530870 +app_update 530870 -beta experimental validate +quit\r\nelse\r\n    .\/steamcmd.sh +force_install_dir \/mnt\/server\/empyrion +login anonymous +@sSteamCmdForcePlatformType windows +app_update 530870 validate +quit\r\nfi\r\n\r\n## setup 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\n## setup 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v \/mnt\/server\/steam\/linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "script": "#!\/bin\/bash\r\n# Empyrion Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl unzip\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\n\r\nexport HOME=\/mnt\/server\r\n\r\nmkdir -p \/mnt\/server\/empyrion\r\nmkdir -p \/mnt\/server\/Logs\r\nmkdir -p \/mnt\/server\/empyrion\/logs\r\ntouch \/mnt\/server\/empyrion\/logs\/current.log\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\nif [ \"${VERSION}\" == \"experimental\" ]; then\r\n    .\/steamcmd.sh +force_install_dir \/mnt\/server\/empyrion +login anonymous +@sSteamCmdForcePlatformType windows 530870 +app_update 530870 -beta experimental validate +quit\r\nelse\r\n    .\/steamcmd.sh +force_install_dir \/mnt\/server\/empyrion +login anonymous +@sSteamCmdForcePlatformType windows +app_update 530870 validate +quit\r\nfi\r\n\r\n## setup 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\n## setup 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v \/mnt\/server\/steam\/linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }

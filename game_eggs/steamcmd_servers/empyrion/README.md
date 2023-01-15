@@ -27,7 +27,7 @@ Empyrion requires up to 2 ports
 | Port    | default       |
 |---------|---------------|
 | Game    |     27015     |
-| Web     |     27020     |
+| Telnet     |     27020     |
 
 ### Installation/System Requirements
 
