@@ -11,7 +11,7 @@ Purpur-GeyserMC-Floodgate is a drop-in replacement for Paper servers designed fo
 
 ## Server Ports
 
-The minecraft server requires a single port for access (default 25565 TCP). GeyserMC requires an additional port (default 19132 UDP). Any other plugins you add may require extra ports to enabled for the server.
+The minecraft server requires a single port for access (default 25565). GeyserMC requires an additional port (default 19132). Any other plugins you add may require extra ports to enabled for the server.
 
 | Port     | default | Protocol |
 |----------|---------|----------|
