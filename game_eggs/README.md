@@ -123,6 +123,7 @@
 * [DayZ (Experimental)](steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
+* [Empyrion - Galactic Survival](steamcmd_servers/empyrion)
 * [Fistful of Frags](steamcmd_servers/fof)
 * [HLDS Server](steamcmd_servers/hlds_server)
   * [HLDS Vanilla](steamcmd_servers/hlds_server/vanilla)

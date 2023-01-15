@@ -60,6 +60,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [ECO](eco)
 
+## Empyrion
+
+[Empyrion - Galactic Survival](empyrion)
+
 ## Frozen Flame
 [Frozen Flame](frozen_flame)
 
