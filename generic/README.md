@@ -40,7 +40,7 @@ A nodemon JavaScript and TypeScript language egg for running and automatically r
 [python](https://www.python.org/)
 A generic Python language egg
 
-### [Rust](python)
+### [Rust](rust)
 
 [rust](https://www.rust-lang.org/)
 A generic Rust language egg

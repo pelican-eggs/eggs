@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-09-29T21:43:06+00:00",
+    "exported_at": "2022-12-27T11:24:35+01:00",
     "name": "Valheim",
     "author": "magi1053@outlook.com",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/games:valheim": "ghcr.io\/parkervcp\/games:valheim"
     },
     "file_denylist": [],
-    "startup": ".\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" $( [[ ${ENABLE_CROSSPLAY} -eq 1 ]] && echo \" -crossplay \") > >(sed -uE \"{{FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
+    "startup": ".\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public {{PUBLIC_SERVER}} -saveinterval {{BACKUP_INTERVAL}} -backups {{BACKUP_COUNT}} -backupshort {{BACKUP_SHORTTIME}} -backuplong {{BACKUP_LONGTIME}} $( [[ {{ENABLE_CROSSPLAY}} -eq 1 ]] && echo \" -crossplay \") > >(sed -uE \"{{CONSOLE_FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
@@ -61,6 +61,16 @@
             "field_type": "text"
         },
         {
+            "name": "Public Server",
+            "description": "Public visibility of your server. Set it to false to make the server invisible and only joinable via the 'Join IP'-button.",
+            "env_variable": "PUBLIC_SERVER",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
             "name": "App ID",
             "description": "Valheim steam app id for auto updates.",
             "env_variable": "SRCDS_APPID",
@@ -81,16 +91,6 @@
             "field_type": "text"
         },
         {
-            "name": "Console Filter",
-            "description": "Remove spam from the console output.",
-            "env_variable": "FILTER",
-            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "string",
-            "field_type": "text"
-        },
-        {
             "name": "Shutdown Command",
             "description": "Commands to trigger a server shutdown.",
             "env_variable": "STOP",
@@ -107,22 +107,62 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean",
+            "rules": "required|boolean",
             "field_type": "text"
         },
         {
             "name": "Enable Crossplay",
-            "description": "Enable crossplay support",
+            "description": "Enable crossplay support.",
             "env_variable": "ENABLE_CROSSPLAY",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean",
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Interval",
+            "description": "Change how often the world will save in seconds. Default: 1800 (30 minutes).",
+            "env_variable": "BACKUP_INTERVAL",
+            "default_value": "1800",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Count",
+            "description": "Sets how many automatic backups will be kept. The first is the 'short' backup length, and the rest are the 'long' backup length. When default values are used means one backup that is 2 hours old, and 3 backups that are 12 hours apart. Default: 4.",
+            "env_variable": "BACKUP_COUNT",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Shorttime",
+            "description": "Sets the interval between the first automatic backups in seconds. Default: 7200 (2 hours).",
+            "env_variable": "BACKUP_SHORTTIME",
+            "default_value": "7200",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Longtime",
+            "description": "Sets the interval between the subsequent automatic backups in seconds. Default: 43200 (12 hours).",
+            "env_variable": "BACKUP_LONGTIME",
+            "default_value": "43200",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
             "field_type": "text"
         },
         {
             "name": "Beta Branch",
-            "description": "",
+            "description": "Beta branch of a steam app. Leave blank to install normal branch.",
             "env_variable": "SRCDS_BETAID",
             "default_value": "",
             "user_viewable": true,
@@ -131,13 +171,23 @@
             "field_type": "text"
         },
         {
-            "name": "Betapassword",
-            "description": "",
+            "name": "Beta Password",
+            "description": "Password for a beta branch should one be required during private or closed testing phases. Leave blank for no password.",
             "env_variable": "SRCDS_BETAPASS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
             "rules": "max:30",
+            "field_type": "text"
+        },
+        {
+            "name": "Console Filter",
+            "description": "Remove unwanted outputs from the console.",
+            "env_variable": "CONSOLE_FILTER",
+            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string",
             "field_type": "text"
         }
     ]

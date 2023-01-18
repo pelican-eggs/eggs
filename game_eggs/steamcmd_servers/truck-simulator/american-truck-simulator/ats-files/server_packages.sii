@@ -1,0 +1,16 @@
+SiiNunit
+{
+server_packages_info : _nameless.21b.d39c.2430 {
+ version: 1
+ dlc_essential_list: 0
+ dlc_non_essential_list: 2
+ dlc_non_essential_list[0]: 1924694473000009
+ dlc_non_essential_list[1]: 49463220153873
+ mod_list: 0
+ map_name: "/map/usa.mbd"
+ map_dimensions: (-31744000, -16384000, -7168000, 10240000)
+ roads_data_file_name: "/home/server_packages.dat"
+ time_stamp: 1670771831
+}
+
+}

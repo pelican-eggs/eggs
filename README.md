@@ -110,6 +110,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Call of Duty 4X](game_eggs/cod/cod4x)
 
+[Doom](game_eggs/doom)
+* [Zandronum](game_eggs/doom/zandronum)
+
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
 [FTL: Tachyon](game_eggs/ftl/tachyon)
@@ -152,6 +155,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](game_eggs/minecraft/bedrock/bedrock)
   * [gomint](game_eggs/minecraft/bedrock/gomint)
+  * [LiteLoaderBDS](game_eggs/bedrock/LiteLoader-bedrock)
   * [Nukkit](game_eggs/minecraft/bedrock/nukkit)
   * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
 
@@ -220,6 +224,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
+* [Empyrion - Galactic Survival](game_eggs/steamcmd_servers/empyrion)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
 * [Frozen Flame](game_eggs/steamcmd_servers/frozen_flame)
 * [HLDS Server](game_eggs/steamcmd_servers/hlds_server)
@@ -227,6 +232,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [ReHLDS](game_eggs/steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](game_eggs/steamcmd_servers/holdfast)
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
+* [Icarus](game_eggs/steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
@@ -267,6 +273,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Evrima](game_eggs/steamcmd_servers/the_isle/evrima)
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
+* [Truck Sim](game_eggs/steamcmd_servers/truck-simulator/)
+  * [American Truck Simulator](game_eggs/steamcmd_servers/truck-simulator/american-truck-simulator/)
+  * [Euro Truck Simulator 2](game_eggs/steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
 * [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
