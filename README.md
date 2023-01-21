@@ -361,6 +361,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Reposilite](/software/reposilite)
 
+### Uptime Kuma
+
+* [Uptime Kuma](/software/uptime-kuma)
+
 ### Yarr
 
 * [yarr](/software/yarr)
