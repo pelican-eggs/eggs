@@ -16,7 +16,7 @@ Github: https://github.com/louislam/uptime-kuma
 After installation and successful start, browse to your <ip>:<port> and setup the Admin.
 
 ## Integrated Cloudflare Tunnel service
-If you want to use the integrated cloudflare Tunnel service, you need an other Image. Contakt me on Discord for the Image:
+If you want to use the integrated cloudflare Tunnel service, you need an other Image. Contact me on Discord for the Image:
 
 gOOvER#9999
 
