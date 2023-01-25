@@ -1,0 +1,172 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-01-21T22:07:33+01:00",
+    "name": "Assetto Corsa Competizione",
+    "author": "sergio120800@gmail.com",
+    "description": "Assetto Corsa Competizione, the official GT World Challenge videogame. Thanks to the extraordinary quality of simulation, you will experience the atmosphere of the GT3 championship. Compete against official drivers, teams, cars and official circuits reproduced to the highest quality ever seen.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "wine server\/accServer.exe",
+    "config": {
+        "files": "{\r\n    \"server\/cfg\/configuration.json\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"maxConnections\": \"maxConnections={{env.MAX_CONNECTIONS}}\"\r\n        }\r\n    },\r\n    \"server\/cfg\/settings.json\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"serverName\": \"serverName={{env.SERVER_NAME}}\",\r\n            \"adminPassword\": \"adminPassword={{env.ADMIN_PASSWORD}}\",\r\n            \"trackMedalsRequirement\": \"trackMedalsRequirement={{env.TRACK_MEDALS}}\",\r\n            \"safetyRatingRequirement\": \"safetyRatingRequirement={{env.SAFETY_RATING}}\",\r\n            \"racecraftRatingRequirement\": \"racecraftRatingRequirement={{env.RACECRAFT}}\",\r\n            \"password\": \"password={{env.PASSWORD}}\",\r\n            \"spectatorSlots\": \"spectatorSlots={{env.SPECTATOR_SLOTS}}\",\r\n            \"spectatorPassword\": \"spectatorPassword={{env.SPECTATOR_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server startup complete\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nif [ \"${STEAM_USER}\" == \"anonymous\" ]; then\r\n    echo -e \"ERROR - STEAM USER NOT SET\\n\"\r\n    echo -e \"Steam account must have the dedicated server in library to install and host the game\\n\"\r\n    echo -e \"You must configure Steam account in the server startup variables, after that reinstall the server\\n\"\r\nfi",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The name of the server.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "ACC Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "The password to access the server as an admin.",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Track Medals",
+            "description": "Defines the amount of track medals that a user has to have for the given track.",
+            "env_variable": "TRACK_MEDALS",
+            "default_value": "-1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Safety Rating",
+            "description": "Defines the Safety Rating (SA) that a user must have to join this server.",
+            "env_variable": "SAFETY_RATING",
+            "default_value": "-1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Racecraft",
+            "description": "Defines the Racecraft Rating (RC) that a user must have to join this server.",
+            "env_variable": "RACECRAFT",
+            "default_value": "-1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password required to enter this server.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Spectator Slots",
+            "description": "The maximum amount of spectator the server will accept at a time.",
+            "env_variable": "SPECTATOR_SLOTS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Spectator Password",
+            "description": "Password to enter the server as spectator. Must be different to \u201cpassword\u201d if both is set.",
+            "env_variable": "SPECTATOR_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Connections",
+            "description": "The maximum amount of connections the server will accept at a time.",
+            "env_variable": "MAX_CONNECTIONS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1430110",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Auth Code",
+            "description": "Steam Auth Code required if the Steam Account is using Steam Auth. Slow installs will cause the code to expire before it can be used.",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Username",
+            "description": "A steam username of an account that owns the game is required",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Windows param",
+            "description": "Required to always install and update the correct version of the game.",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
