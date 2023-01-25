@@ -214,6 +214,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
   * [Arma Reforger](game_eggs/steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
+* [Assetto Corsa Competizione](game_eggs/steamcmd_servers/assetto_corsa_competizione)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)

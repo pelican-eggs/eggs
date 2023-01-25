@@ -114,6 +114,7 @@
   * [Arma 3](steamcmd_servers/arma/arma3)
   * [Arma Reforger](steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
+* [Assetto Corsa Competizione](steamcmd_servers/assetto_corsa_competizione)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
 * [Black Mesa](steamcmd_servers/black_mesa)
