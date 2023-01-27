@@ -148,7 +148,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Minetest](game_eggs/minetest) (including MTG)
 
-* [Minetest](game_eggs/minetest/minetest)
+* [Minetest](game_eggs/minetest)
 
 [Minecraft](game_eggs/minecraft)
 
