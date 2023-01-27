@@ -32,7 +32,7 @@
             "name": "Server Query Admin Password",
             "description": "The password for the server query admin user.",
             "env_variable": "SERVERADMIN_PASSWORD",
-            "default_value": "changeme",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:32",
