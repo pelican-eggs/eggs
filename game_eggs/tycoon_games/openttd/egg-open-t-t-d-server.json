@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-07-02T04:27:03+03:00",
+    "exported_at": "2023-01-08T16:22:11+01:00",
     "name": "OpenTTD Server",
     "author": "admin@justmyrandomstuff.com",
     "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
     "features": null,
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_ubuntu"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
     "file_denylist": [],
     "startup": ".\/openttd -D",
     "config": {
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n\r\napk add --no-cache wget binutils xz curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting file from: https:\/\/proxy.binaries.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-ubuntu-bionic-amd64.deb\"\r\n\r\nwget https:\/\/proxy.binaries.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-ubuntu-bionic-amd64.deb -O openttd.deb\r\n\r\nar -x  openttd.deb\r\n\r\ntar -xvf data.tar.*\r\n\r\nmv usr\/share\/games\/openttd\/* .\/\r\n\r\nmv usr\/games\/openttd .\/\r\n\r\nchmod +x openttd\r\n\r\nwget https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip -O opengfx.zip\r\n\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\n\r\nrm open*zip open*tar open*gz debian-binary open*deb\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/tycoon_games\/openttd\/openttd.cfg > openttd.cfg",
-            "container": "alpine:3.10",
+            "script": "#!\/bin\/ash\r\napk add --no-cache wget binutils xz curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting file from: https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-debian-bullseye-amd64.deb\"\r\nwget https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-debian-bullseye-amd64.deb -O openttd.deb\r\nar -x  openttd.deb\r\ntar -xvf data.tar.*\r\ncp -a usr\/share\/games\/openttd\/* .\/\r\ncp -a usr\/games\/openttd .\/\r\nchmod +x openttd\r\n\r\nrm -fR usr\/share\/games\/openttd\/\r\nrm -fR usr\/games\/openttd\r\n\r\nwget https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip -O opengfx.zip\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\nrm -fR open*zip open*tar open*gz debian-binary open*deb\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/tycoon_games\/openttd\/openttd.cfg > openttd.cfg\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "alpine:3.16",
             "entrypoint": "ash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "OpenTTD Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Show in masterlist?",
@@ -44,25 +45,28 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:5"
+            "rules": "required|string|max:5",
+            "field_type": "text"
         },
         {
             "name": "OpenTTD Version",
             "description": "The version of OpenTTD i.e. 1.10.1",
             "env_variable": "OPENTTD_VERSION",
-            "default_value": "1.11.0",
+            "default_value": "12.2",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "OpenGFX Version",
             "description": "The OpenGFX Version i.e. 0.6.0",
             "env_variable": "OPENGFX_VERSION",
-            "default_value": "0.6.1",
+            "default_value": "7.1",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

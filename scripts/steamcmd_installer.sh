@@ -18,8 +18,8 @@
  ##
 
 # Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.
-apt -y update
-apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates
+#apt -y update
+#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates
 
 ## just in case someone removed the defaults.
 if [[ "${STEAM_USER}" == "" ]] || [[ "${STEAM_PASS}" == "" ]]; then
@@ -55,3 +55,10 @@ cp -v linux32/steamclient.so ../.steam/sdk32/steamclient.so
 ## set up 64 bit libraries
 mkdir -p /mnt/server/.steam/sdk64
 cp -v linux64/steamclient.so ../.steam/sdk64/steamclient.so
+
+## add below your custom commands if needed
+
+## install end
+echo "-----------------------------------------"
+echo "Installation completed..."
+echo "-----------------------------------------"

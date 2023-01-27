@@ -10,11 +10,12 @@
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
-[ClassiCube](game_eggs/classicube)
+[ClassiCube](classicube)
 
-* [MCGalaxy](game_eggs/classicube/mcgalaxy)
+* [MCGalaxy](classicube/mcgalaxy)
 
-[Call of Duty 4X](cod/cod4x)
+[Doom](doom)
+* [Zandronum](doom/zandronum)
 
 [ET Legacy](enemy_territory/etlegacy)
 
@@ -22,6 +23,7 @@
 
 * [Vanilla](factorio/factorio)
 * [ModUpdate](factorio/factorio-modupdate)
+* [Clusterio](game_eggs/factorio/clusterio)
 
 [FTL: Tachyon](ftl/tachyon)
 
@@ -29,6 +31,7 @@
 
 * GTA V
   * [FiveM](gta/fivem)
+  * [ragecoop](gta/ragecoop)
   * [RageMP](gta/ragemp)
   * [alt:V](gta/altv)
 
@@ -39,6 +42,8 @@
 * GTA
   * [GTAC](gta/gtac)
 
+[Los Angeles Crimes](losangelescrimes)
+
 [League Sandbox](leaguesandbox)
 
 [Mindustry](mindustry)
@@ -48,11 +53,11 @@
 * [Bedrock](minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](minecraft/bedrock/bedrock)
   * [gomint](minecraft/bedrock/gomint)
+  * [LiteLoaderBDS](minecraft/bedrock/LiteLoader-bedrock)
   * [Nukkit](minecraft/bedrock/nukkit)
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
-  * [Airplane](minecraft/java/airplane)
   * [Cuberite](minecraft/java/cuberite)
   * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
   * [Fabric](minecraft/java/fabric)
@@ -70,7 +75,6 @@
   * [SpongeForge](minecraft/java/spongeforge)
   * [SpongeVanilla](minecraft/java/spongevanilla)
   * [Technic](minecraft/java/technic)
-  * [Tuinity](minecraft/java/tuinity)
   * [VanillaCord](minecraft/java/vanillacord)
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
@@ -82,7 +86,6 @@
   * [Java](minecraft/proxy/java)
     * [FlameCord](minecraft/proxy/java/flamecord)
     * [Travertine](minecraft/proxy/java/travertine)
-    * [TyphoonLimbo](minecraft/proxy/java/typhoonlimbo)
     * [Velocity](minecraft/proxy/java/velocity)
     * [VIAaas](minecraft/proxy/java/viaaas)
     * [Waterfall](minecraft/proxy/java/waterfall)
@@ -109,18 +112,25 @@
 * [ARK: Survival Evolved](steamcmd_servers/ark_survival_evolved)
 * [Arma](steamcmd_servers/arma)
   * [Arma 3](steamcmd_servers/arma/arma3)
+  * [Arma Reforger](steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
+* [Black Mesa](steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
 * [CryoFall](steamcmd_servers/cryofall)
+* [DayZ (Experimental)](steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
+* [Empyrion - Galactic Survival](steamcmd_servers/empyrion)
 * [Fistful of Frags](steamcmd_servers/fof)
 * [HLDS Server](steamcmd_servers/hlds_server)
+  * [HLDS Vanilla](steamcmd_servers/hlds_server/vanilla)
+  * [ReHLDS](steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](steamcmd_servers/holdfast)
 * [Hurtworld](steamcmd_servers/hurtworld)
+* [Icarus](steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](steamcmd_servers/left4dead)
@@ -129,23 +139,29 @@
 * [Mordhau](steamcmd_servers/mordhau)
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [Onset](steamcmd_servers/onset)
+* [Open Fortress](steamcmd_servers/open_fortress)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
 * [Post Scriptum](steamcmd_servers/post_scriptum)
 * [Project Zomboid](steamcmd_servers/project_zomboid)
 * [Quake Live](steamcmd_servers/quake_live)
 * [Rising World](steamcmd_servers/rising_world)
+  * [Legacy Java](steamcmd_servers/rising_world/legacy)
+  * [Unity](steamcmd_servers/rising_world/unity)
 * [Risk Of Rain 2](steamcmd_servers/risk_of_rain_2)
 * [Rust](steamcmd_servers/rust)
   * [Autowipe](steamcmd_servers/rust/rust_autowipe)
   * [Staging](steamcmd_servers/rust/rust_staging)
 * [Satisfactory](steamcmd_servers/satisfactory)
+* [Solace Crafting](steamcmd_servers/solace_crafting)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [Dedicated](steamcmd_servers/scpsl/dedicated)
   * [Exiled](steamcmd_servers/scpsl/exiled)
   * [Multiadmin](steamcmd_servers/scpsl/multiadmin)
 * [Soldat](steamcmd_servers/soldat)
 * [Space Engineers](steamcmd_servers/space_engineers)
+  * [default](steamcmd_servers/space_engineers/default)
+  * [torch](steamcmd_servers/space_engineers/torch)
 * [Squad](steamcmd_servers/squad)
 * [Starbound](steamcmd_servers/starbound)
 * [Stationeers](steamcmd_servers/stationeers)
@@ -154,8 +170,14 @@
 * [Sven Co-op](steamcmd_servers/svencoop)
 * [Team Fortress 2 Classic](steamcmd_servers/team_fortress_2_classic)
 * [The Forest](steamcmd_servers/the_forest)
+* [The Isle](steamcmd_servers/the_isle)
+  * [Evrima](steamcmd_servers/the_isle/evrima)
 * [Tower Unite](steamcmd_servers/tower_unite)
+* [Truck Sim](steamcmd_servers/truck-simulator)
+  * [American Truck Simulator](steamcmd_servers/truck-simulator/american-truck-simulator/)
+  * [Euro Truck Simulator 2](steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](steamcmd_servers/unturned)
+* [V Rising](steamcmd_servers/v_rising)
 * [Valheim](steamcmd_servers/valheim)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
@@ -169,6 +191,7 @@
 * [Vanilla](terraria/vanilla)
 
 [Tycoon Games](tycoon_games)
+
 * [OpenRCT2](tycoon_games/openrct2)
 * [OpenTTD](tycoon_games/openttd)
 
@@ -177,3 +200,5 @@
 [Vintage Story](vintage_story)
 
 [Xonotic](xonotic/xonotic)
+
+[FoundryVTT](FoundryVTT)

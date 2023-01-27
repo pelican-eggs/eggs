@@ -12,7 +12,9 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Arma
 
-[Arma 3](arma/arma3)
+* [Arma](arma)
+  * [Arma 3](arma/arma3)
+  * [Arma Reforger](arma/arma_reforger)
 
 ## Assetto Corsa
 
@@ -26,6 +28,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Barotrauma](barotrauma)
 
+## Black Mesa
+
+[Black Mesa](black_mesa)
+
 ## Citadel: Forged with Fire
 
 [citadel](citadel)
@@ -35,11 +41,16 @@ This is a collection of servers that use SteamCMD to install.
 [Conan Exiles](conan_exiles)
 
 ## Craftopia
+
 [Craftopia](craftopia)
 
 ## CryoFall
 
 [Cryofall](cryofall)
+
+## DayZ (Experimental)
+
+[DayZ (Experimental)](dayz-experimental)
 
 ## Don't Starve Together
 
@@ -49,9 +60,19 @@ This is a collection of servers that use SteamCMD to install.
 
 [ECO](eco)
 
+## Empyrion
+
+[Empyrion - Galactic Survival](empyrion)
+
+## Frozen Flame
+
+[Frozen Flame](frozen_flame)
+
 ## HLDS Server
 
 [HLDS Server](hlds_server)
+  * [HLDS Vanilla](hlds_server/vanilla)
+  * [ReHLDS](hlds_server/rehlds)
 
 ## Holdfast: Nations At War
 
@@ -60,6 +81,10 @@ This is a collection of servers that use SteamCMD to install.
 ## Hurtworld
 
 [Hurtworld](hurtworld)
+
+## Icarus 
+
+* [Icarus](icarus)
 
 ## Insurgency: Sandstorm
 
@@ -70,9 +95,11 @@ This is a collection of servers that use SteamCMD to install.
 [Killing Floor 2](killing_floor_2)
 
 ## Left 4 Dead
+
 [Left 4 Dead](left4dead)
 
 ## Left 4 Dead 2
+
 [Left 4 Dead](left4dead_2)
 
 ## Modiverse
@@ -86,6 +113,10 @@ This is a collection of servers that use SteamCMD to install.
 ## Onset
 
 [Onset](onset)
+
+## Open Fortress
+
+[Open Fortress](open_fortress)
 
 ## Pavlov VR
 
@@ -109,7 +140,9 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Rising World
 
-[Rising World](rising_world)
+* [Rising World](rising_world)
+  * [Legacy Java](rising_world/legacy)
+  * [Unity](rising_world/unity)
 
 ## Risk of Rain 2
 
@@ -132,6 +165,10 @@ This is a collection of servers that use SteamCMD to install.
   * [exiled](scpsl/exiled)
   * [multiadmin](scpsl/multiadmin)
 
+## Solace Crafting
+
+[Solace Crafting](solace_crafting)
+
 ## Soldat
 
 [Soldat](soldat)
@@ -139,6 +176,8 @@ This is a collection of servers that use SteamCMD to install.
 ## Space Engineers
 
 [Space Engineers](space_engineers)
+  * [default](space_engineers/default)
+  * [torch](space_engineers/torch)
 
 ## Squad
 
@@ -172,17 +211,31 @@ This is a collection of servers that use SteamCMD to install.
 
 [The Forest](the_forest)
 
+## The Isle
+
+[The Isle](the_isle)
+  * [Evrima](the_isle/evrima/)
+
 ## Tower Unite
 
 [Tower Unite](tower_unite)
 
+## Truck Sim
+
+* [Truck Sim](truck-simulator)
+  * [American Truck Simulator](truck-simulator/american-truck-simulator/)
+  * [Euro Truck Simulator 2](truck-simulator/euro-truck-simulator2/)
+  
 ## Unturned
 
 [Unturned](unturned)
 
+## V Rising
+
+[V Rising](v_rising)
+
 ## Valheim
 
 [Valheim](valheim)
-
-* [Valheim Vanilla](valheim/valheim_vanilla)
-* [Valheim Plus Mod](valheim/valheim_plus)
+  * [Valheim Vanilla](valheim/valheim_vanilla)
+  * [Valheim Plus Mod](valheim/valheim_plus)

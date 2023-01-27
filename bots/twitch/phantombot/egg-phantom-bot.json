@@ -1,25 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-12-16T19:18:24+02:00",
+    "exported_at": "2022-10-02T18:28:42+02:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_openjdk-11",
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
+    },
+    "file_denylist": [],
     "startup": "java --add-opens java.base\/java.lang=ALL-UNNAMED -Djava.security.policy=config\/security -Dinteractive -Xms1m -Dfile.encoding=UTF-8 -jar PhantomBot.jar",
     "config": {
-        "files": "{\r\n    \"config\/botlogin.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"baseport\": \"{{server.build.default.port}}\",\r\n            \"channel\": \"{{server.build.env.CHANNEL_NAME}}\",\r\n            \"owner\": \"{{server.build.env.CHANNEL_OWNER}}\",\r\n            \"apioauth\": \"{{server.build.env.USER_OAUTH_TOKEN}}\",\r\n            \"oauth\": \"{{server.build.env.BOT_OAUTH_TOKEN}}\",\r\n            \"paneluser\": \"{{server.build.env.WEBPANEL_USERNAME}}\",\r\n            \"panelpassword\": \"{{server.build.env.WEBPANEL_PASSWORD}}\",\r\n            \"user\": \"{{server.build.env.BOT_TWITCH_USERNAME}}\",\r\n            \"youtubekey\": \"{{server.build.env.YOUTUBE_API_KEY}}\",\r\n            \"discord_token\": \"{{server.build.env.DISCORD_BOT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Connecting to Twitch WS-IRC Server\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
+        "files": "{\r\n    \"config\/botlogin.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"baseport\": \"{{server.build.default.port}}\",\r\n            \"channel\": \"{{server.build.env.CHANNEL_NAME}}\",\r\n            \"owner\": \"{{server.build.env.CHANNEL_OWNER}}\",\r\n            \"paneluser\": \"{{server.build.env.WEBPANEL_USERNAME}}\",\r\n            \"panelpassword\": \"{{server.build.env.WEBPANEL_PASSWORD}}\",\r\n            \"user\": \"{{server.build.env.BOT_TWITCH_USERNAME}}\",\r\n            \"youtubekey\": \"{{server.build.env.YOUTUBE_API_KEY}}\",\r\n            \"discord_token\": \"{{server.build.env.DISCORD_BOT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Joined \"\r\n}",
+        "logs": "{}",
         "stop": "exit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# PhantomBot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl ca-certificates unzip\r\n\r\ncd \/tmp\r\n\r\n# Fetching latest github release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n        echo -e \"Using latest Github Master version\"\r\n        DOWNLOAD_URL=https:\/\/raw.githubusercontent.com\/PhantomBot\/nightly-build\/master\/PhantomBot-nightly-lin.zip\r\nelse\r\n    if [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        echo -e \"Using latest release version\"\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/latest\" | grep -o '[0-9].[0-9].[0-9]')\r\n    fi\r\n    DOWNLOAD_URL=https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/download\/v${RELEASE_VERSION}\/PhantomBot-${RELEASE_VERSION}.zip\r\nfi\r\n\r\n# Download files\r\ncd \/mnt\/server\r\ncurl -LJO ${DOWNLOAD_URL}\r\nunzip -o PhantomBot-*.zip\r\n\r\n# Move unzipped files into the server folder\r\ncp -f -r .\/PhantomBot-*\/* \/mnt\/server\/\r\n\r\n# Creating default config\r\nif [ ! -f \/mnt\/server\/config\/botlogin.txt ]; then\r\n    echo -e \"Creating config\/botlogin.txt\"\r\n    cat << EOF > \/mnt\/server\/config\/botlogin.txt\r\n    #PhantomBot Configuration File\r\n    #\r\n    # Here is a list wiht all config values:\r\n    # https:\/\/community.phantom.bot\/t\/settings-for-botlogin-txt\/78\r\n    #\r\n    apioauth=\r\n    baseport=\r\n    channel=\r\n    oauth=\r\n    owner=\r\n    panelpassword=\r\n    paneluser=\r\n    user=\r\n    youtubekey=\r\n    discord_token=\r\nEOF\r\nfi",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# PhantomBot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y --no-install-recommends install curl wget ca-certificates unzip\r\n\r\ncd \/tmp\r\n\r\n# Fetching latest github release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"master\" ]; then\r\n        echo -e \"Using latest Github Master version\"\r\n        DOWNLOAD_URL=https:\/\/raw.githubusercontent.com\/PhantomBot\/nightly-build\/master\/PhantomBot-nightly-lin.zip\r\nelse\r\n    if [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n        echo -e \"Using latest release version\"\r\n        RELEASE_VERSION=$(curl -s \"https:\/\/api.github.com\/repos\/PhantomBot\/PhantomBot\/releases\/latest\" | grep -e '\"tag_name\"' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | sed 's\/^.\/\/')\r\n    fi\r\n    DOWNLOAD_URL=https:\/\/github.com\/PhantomBot\/PhantomBot\/releases\/download\/v${RELEASE_VERSION}\/PhantomBot-${RELEASE_VERSION}-lin.zip\r\n    echo -e \"${DOWNLOAD_URL}\"\r\nfi\r\n\r\n# Download files\r\ncd \/mnt\/server\r\nwget ${DOWNLOAD_URL} -O PhantomBot.zip\r\n\r\n# Unzip files and delete the archive\r\nunzip -o PhantomBot.zip\r\nrm PhantomBot.zip\r\n\r\n# Move unzipped files into the server folder and delete the folder \r\ncp -f -r .\/PhantomBot-*\/* \/mnt\/server\/\r\nrm -rf PhantomBot-*\/\r\n\r\n# Creating default config\r\nif [ ! -f \/mnt\/server\/config\/botlogin.txt ]; then\r\n    echo -e \"Creating config\/botlogin.txt\"\r\n    cat << EOF > \/mnt\/server\/config\/botlogin.txt\r\n    #PhantomBot Configuration File\r\n    #\r\n    # Here is a list wiht all config values:\r\n    # https:\/\/community.phantom.bot\/t\/settings-for-botlogin-txt\/78\r\n    #\r\n    apioauth=\r\n    baseport=\r\n    channel=\r\n    oauth=\r\n    owner=\r\n    panelpassword=\r\n    paneluser=\r\n    user=\r\n    youtubekey=\r\n    discord_token=\r\nEOF\r\nfi\r\necho \"install finished\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -31,7 +35,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:9"
+            "rules": "required|string|max:9",
+            "field_type": "text"
         },
         {
             "name": "Twitch Channel Name",
@@ -40,7 +45,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:26"
+            "rules": "required|string|max:26",
+            "field_type": "text"
         },
         {
             "name": "Channel Owner",
@@ -49,25 +55,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:26"
-        },
-        {
-            "name": "Bot OAuth Token",
-            "description": "Please note, this OAuth token needs to be generated while you're logged in into the bot's Twitch account.\r\nIf you're not logged in as the bot, please go to https:\/\/twitch.tv\/ and login as the bot.\r\nGet the bot's OAuth token here: https:\/\/twitchapps.com\/tmi\/",
-            "env_variable": "BOT_OAUTH_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:64"
-        },
-        {
-            "name": "Your OAuth Token",
-            "description": "Please note, this OAuth token needs to be generated while you're logged in into your caster account.\r\nIf you're not logged in as the caster, please go to https:\/\/twitch.tv\/ and login as the caster.\r\nGet the your OAuth token here: https:\/\/phantombot.github.io\/PhantomBot\/oauth\/",
-            "env_variable": "USER_OAUTH_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:26",
+            "field_type": "text"
         },
         {
             "name": "Bot Twitch Username",
@@ -76,7 +65,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:26"
+            "rules": "required|string|max:26",
+            "field_type": "text"
         },
         {
             "name": "Webpanel Username",
@@ -85,7 +75,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Webpanel Password",
@@ -94,25 +85,28 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:2000"
+            "rules": "required|string|max:2000",
+            "field_type": "text"
         },
         {
             "name": "Youtube API Key",
-            "description": "https:\/\/community.phantom.bot\/t\/acquire-youtube-api-key\/222",
+            "description": "https:\/\/phantombot.dev\/guides\/#guide=content\/integrations\/youtubesetup",
             "env_variable": "YOUTUBE_API_KEY",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "max:64"
+            "rules": "max:128",
+            "field_type": "text"
         },
         {
             "name": "Discord Bot Token",
-            "description": "https:\/\/community.phantom.bot\/t\/discord-integration-setup\/64",
+            "description": "https:\/\/phantombot.dev\/guides\/#guide=content\/integrations\/discordintegrationsetup",
             "env_variable": "DISCORD_BOT_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "max:64"
+            "rules": "max:128",
+            "field_type": "text"
         }
     ]
 }
