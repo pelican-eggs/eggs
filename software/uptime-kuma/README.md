@@ -15,14 +15,6 @@ Github: https://github.com/louislam/uptime-kuma
 ## Admin & login
 After installation and successful start, browse to your <ip>:<port> and setup the Admin.
 
-## Integrated Cloudflare Tunnel service
-If you want to use the integrated cloudflare Tunnel service, you need an other Image. Contact me on Discord for the Image:
-
-gOOvER#9999
-
-More infos:
-https://github.com/louislam/uptime-kuma/wiki/Reverse-Proxy-with-Cloudflare-Tunnel
-
 ## Server Ports
 
 Uptime Kuma requires 1 port. You can choose every port you want
