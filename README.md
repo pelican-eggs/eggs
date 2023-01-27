@@ -323,6 +323,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [minio](/storage/minio)
 
+### SFTP Storage Share ("Empty Egg")
+
+* [SFTP Storage Share](/storage/sftp_storage_share)
+
 ## [Software](/software/)
 
 ### Code Server
