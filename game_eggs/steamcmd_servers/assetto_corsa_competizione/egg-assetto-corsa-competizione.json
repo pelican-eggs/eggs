@@ -8,7 +8,9 @@
     "name": "Assetto Corsa Competizione",
     "author": "sergio120800@gmail.com",
     "description": "Assetto Corsa Competizione, the official GT World Challenge videogame. Thanks to the extraordinary quality of simulation, you will experience the atmosphere of the GT3 championship. Compete against official drivers, teams, cars and official circuits reproduced to the highest quality ever seen.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "docker_images": {
         "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
