@@ -4,9 +4,11 @@
 
 ## Checklist for all submissions
 
-<!-- insert X into the brackets to mark it as done. You can click preview to make the links appear clickable. -->
+<!-- insert X into the brackets to mark it as done (i.e. [x]). You can click preview to make the links appear clickable. -->
 
 * [ ] Have you followed the guidelines in our [Contributing document](https://github.com/parkervcp/eggs/blob/master/CONTRIBUTING.md)?
+* [ ] You verify that the start command applied does not use a shell script
+  * [ ] If some script is needed then it is part of a current yolk or a PR to add one
 * [ ] Have you checked to ensure there aren't other open [Pull Requests](../pulls) for the same update/change?
 * [ ] Have you tested and reviewed your changes with confidence that everything works?
 * [ ] Did you branch your changes and PR from that branch and not from your master branch?
