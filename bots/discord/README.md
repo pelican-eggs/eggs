@@ -47,3 +47,8 @@ A multifunction Discord bot
 
 [SinusBot](https://www.sinusbot.com/)
 Please Check their site for an in depth on the bot.
+
+## [PyGPT-3](PyGPT-3)
+
+[PyGPT-3](https://github.com/Loki-101/PyGPT-3)
+Please check out their Github for more in-depth instructions and overview
