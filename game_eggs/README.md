@@ -123,6 +123,7 @@
 * [Holdfast: Nations At War](steamcmd_servers/holdfast)
 * [Hurtworld](steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](steamcmd_servers/insurgency_sandstorm)
+* [iosoccer](steamcmd_servers/iosoccer)
 * [Killing Floor 2](steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](steamcmd_servers/left4dead)
 * [Left 4 Dead 2](steamcmd_servers/left4dead_2)

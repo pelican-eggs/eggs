@@ -72,6 +72,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Insurgency: Sandstorm](insurgency_sandstorm)
 
+## Iosoccer
+
+[iosoccer](iosoccer)
+
 ## Killing Floor 2
 
 [Killing Floor 2](killing_floor_2)

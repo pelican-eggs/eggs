@@ -206,6 +206,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Holdfast: Nations At War](game_eggs/steamcmd_servers/holdfast)
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
+* [iosoccer](game_eggs/steamcmd_servers/iosoccer)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
 * [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
@@ -243,7 +244,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
-* [iosoccer](game_eggs/steamcmd_servers/iosoccer)
+
 
 [Teeworlds](game_eggs/teeworlds)
 
