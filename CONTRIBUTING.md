@@ -13,7 +13,9 @@ You can contribute by either creating a new pull request or testing [existing pu
 3. Use the stock images.
     If you need something in an image, open a PR in [my yolks repo](https://github.com/parkervcp/yolks) where it can be reviewed and built. Self-hosted or third-party images won't be accepted for security reasons.
 
-4. Don't be afraid to submit PR's to the egg repo.
+4. The egg startup cmd cannot be a user editable script.
+
+5. Don't be afraid to submit PR's to the egg repo.
     I don't bite. I will work with you on the egg and the required things to run it. Feel free to open a draft PR if you don't quite have the egg finished yet by yourself.
 
 ### Sources for working on a new egg
@@ -62,6 +64,10 @@ This is to maintain a clean repo that others can pull and be fully aware of what
 ### Make a branch and do your work in there
 
 I have been getting messy PR's due to people always PRing from their master branch. Please make a separate branch and PR from there.
+
+All changes made to an existing egg must be done on the panel and exported.
+
+**Do not edit the .json file directly!**
 
 ## Step 4
 
