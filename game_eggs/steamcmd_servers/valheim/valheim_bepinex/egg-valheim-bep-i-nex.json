@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-29T11:28:22+01:00",
+    "exported_at": "2023-01-29T11:38:42+01:00",
     "name": "Valheim  BepINex",
     "author": "info@goover.de",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture incl the Plugin Framework BepInEx",
@@ -181,7 +181,7 @@
             "field_type": "text"
         },
         {
-            "name": "Shutdown Command",
+            "name": "[System] Shutdown Command",
             "description": "",
             "env_variable": "STOP",
             "default_value": "kill -2 $!; wait;",
