@@ -238,4 +238,5 @@ This is a collection of servers that use SteamCMD to install.
 
 [Valheim](valheim)
   * [Valheim Vanilla](valheim/valheim_vanilla)
+  * [Valheim BepInEx](valheim/valheim_bepinex)
   * [Valheim Plus Mod](valheim/valheim_plus)
