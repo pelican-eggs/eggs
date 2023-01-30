@@ -280,6 +280,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [V Rising](game_eggs/steamcmd_servers/v_rising)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
+  * [Valheim BepInEx](game_eggs/steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
 
 [Teeworlds](game_eggs/teeworlds)

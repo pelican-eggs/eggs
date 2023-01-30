@@ -179,8 +179,9 @@
 * [Unturned](steamcmd_servers/unturned)
 * [V Rising](steamcmd_servers/v_rising)
 * [Valheim](steamcmd_servers/valheim)
-  * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
+  * [Valheim BepInEx](steamcmd_servers/valheim/valheim_bepinex)
+  * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
 
 [Teeworlds](teeworlds)
 
