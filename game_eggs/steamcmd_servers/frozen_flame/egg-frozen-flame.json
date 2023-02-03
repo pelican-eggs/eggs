@@ -50,7 +50,7 @@
         },
         {
             "name": "Server Name",
-            "description": "The server nane",
+            "description": "The server name",
             "env_variable": "SERVER_NAME",
             "default_value": "My Frozen Flame Server",
             "user_viewable": true,
