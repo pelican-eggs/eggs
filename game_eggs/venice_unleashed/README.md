@@ -1,8 +1,12 @@
-﻿
 # [Venice Unleashed](https://veniceunleashed.net/)
 
 Experience Battlefield 3 like never before
 VU /vi:ju:/ is a community-oriented Battlefield 3 modding platform that gives you back control of your gaming experience.
+
+## PREREQUISITES
+ - Venice Unleashed Account linked to EA/Origin Account. [Refer here on how to link](https://docs.veniceunleashed.net/general/playing/#creating-an-account-and-linking-your-origin-account)
+ - Server key generated from Venice Unleashed [key management portal](https://veniceunleashed.net/keys) (Download the generated key file)
+ - Copy of Battlefield 3 (full and up-to-date installation)
 
 ## PORTS
 
@@ -44,6 +48,7 @@ This type of server uses more than 35GB in space where you have to upload the BF
 
 - Server takes sometime to mark as running status since server has to connect to Zeus backend for listing. Wait for this message in console [Game successfully registered with Zeus. The server is now accepting connections.]
 - Email and Password should be provided in startup before starting the server for 1st time to activate the instance (Only required for initial startup. Once the server is activated, you can remove your credentials and replace with default credentials [example@example.com|Password@123])
+- Before you start the server, transfer the key downloaded from VU key management portal to `~/vu/instance` directory, and name it `server.key`
 - If you start the server with default credentials, server will create `activated` file in your server directory with default credentials and server will not work. Delete `activated` file, provide your credentials in startup and restart server to activate.
 - 2FA should be disabled in your EA Account to successfully verify the installation (You can enable 2FA after activation)
 - Mount should be linked to the egg for mounts to work (Edit the mount and assign it to VU with mount Egg as shown in below image)
