@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-26T11:35:12+01:00",
+    "exported_at": "2023-02-03T13:00:17+08:00",
     "name": "Rust Autowipe",
     "author": "support@pterodactyl.io",
     "description": "The only aim in Rust is to survive. To do this you will need to overcome struggles such as hunger, thirst and cold. Build a fire. Build a shelter. Kill animals for meat. Protect yourself from other players, and kill them for meat. Create alliances with other players and form a town. Do whatever it takes to survive.",
@@ -15,7 +15,7 @@
         "ghcr.io\/pterodactyl\/games:rust": "ghcr.io\/pterodactyl\/games:rust"
     },
     "file_denylist": [],
-    "startup": "\".\/RustDedicated -batchmode +server.port {{SERVER_PORT}} +server.identity \"rust\" +rcon.ip 0.0.0.0 +rcon.port {{RCON_PORT}} +rcon.web true +server.hostname \\\"{{HOSTNAME}}\\\" +server.level \\\"{{LEVEL}}\\\" +server.description \\\"{{DESCRIPTION}}\\\" +server.url \\\"{{SERVER_URL}}\\\" +server.headerimage \\\"{{SERVER_IMG}}\\\" +server.worldsize \\\"{{WORLD_SIZE}}\\\" +server.seed \\\"$( if [ -f seed.txt ] && [[ ${WORLD_SEED} == \"0\" ]]; then printf %s $(cat seed.txt); else printf %s '${WORLD_SEED}'; fi )\\\" +server.maxplayers {{MAX_PLAYERS}} +rcon.password \\\"{{RCON_PASS}}\\\" +server.saveinterval {{SAVEINTERVAL}} {{ADDITIONAL_ARGS}}\"",
+    "startup": "\".\/RustDedicated -batchmode +server.port {{SERVER_PORT}} +server.queryport {{QUERY_PORT}} +server.identity \"rust\" +rcon.ip 0.0.0.0 +rcon.port {{RCON_PORT}} +rcon.web true +server.hostname \\\"{{HOSTNAME}}\\\" +server.level \\\"{{LEVEL}}\\\" +server.description \\\"{{DESCRIPTION}}\\\" +server.url \\\"{{SERVER_URL}}\\\" +server.headerimage \\\"{{SERVER_IMG}}\\\" +server.worldsize \\\"{{WORLD_SIZE}}\\\" +server.seed \\\"$( if [ -f seed.txt ] && [[ ${WORLD_SEED} == \"0\" ]]; then printf %s $(cat seed.txt); else printf %s '${WORLD_SEED}'; fi )\\\" +server.maxplayers {{MAX_PLAYERS}} +rcon.password \\\"{{RCON_PASS}}\\\" +app.port {{APP_PORT}} +server.saveinterval {{SAVEINTERVAL}} {{ADDITIONAL_ARGS}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server startup complete\"\r\n}",
@@ -30,6 +30,26 @@
         }
     },
     "variables": [
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "258550",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum amount of players allowed in the server at once.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "40",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
         {
             "name": "Server Name",
             "description": "The name of your server in the public server list.",
@@ -98,16 +118,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Max Players",
-            "description": "The maximum amount of players allowed in the server at once.",
-            "env_variable": "MAX_PLAYERS",
-            "default_value": "40",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer",
             "field_type": "text"
         },
         {
@@ -181,13 +191,23 @@
             "field_type": "text"
         },
         {
-            "name": "SRCDS_APPID",
-            "description": "",
-            "env_variable": "SRCDS_APPID",
-            "default_value": "258550",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:20",
+            "name": "QUERY PORT",
+            "description": "Port for QUERY connections.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "28017",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "APP PORT",
+            "description": "Port for Rust+ applications. -1 to disable.",
+            "env_variable": "APP_PORT",
+            "default_value": "28082",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
             "field_type": "text"
         }
     ]
