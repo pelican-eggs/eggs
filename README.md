@@ -183,10 +183,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
     * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
+    * [MCDReforged](game_eggs/minecraft/proxy/java/mcdreforged)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
-    * [MCDReforged](game_eggs/minecraft/proxy/java/mcdreforged)
   * [Bedrock](game_eggs/minecraft/proxy/bedrock)
     * [Waterdog PE](game_eggs/minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](game_eggs/minecraft/proxy/cross_platform)
