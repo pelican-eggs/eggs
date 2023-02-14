@@ -4,26 +4,27 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-11T17:31:26+01:00",
+    "exported_at": "2023-02-14T17:31:46+01:00",
     "name": "Rage.MP",
     "author": "noreply.waypointhosting@gmail.com",
     "description": "https:\/\/rage.mp\/\r\n\r\nModified to work with the latest version of RAGE:MP\r\nWill automatically install linux bridge.\r\n**This server requires 2 ports to be added for the server. the main port and the next (port+1) as ports for the server.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+        "AMD64": "ghcr.io\/parkervcp\/yolks:debian",
+        "ARM64": "ghcr.io\/parkervcp\/yolks:box64"
     },
     "file_denylist": [],
-    "startup": ".\/ragemp-server",
+    "startup": "$(if [ \"${ARCH}\" == \"arm64\" ]; then echo -n \"box64 .\/ragemp-server\"; else echo -n \".\/ragemp-server\"; fi)",
     "config": {
-        "files": "{\r\n    \"conf.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"bind\":\"0.0.0.0\",\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"conf.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"bind\": \"0.0.0.0\",\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"The server is ready to accept connections\"\r\n}",
         "logs": "{}",
         "stop": "^X"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\/tmp\r\ncd \/mnt\/server\r\n\r\nrm -rf bin\/\r\nrm -rf dotnet\/\r\nrm ragemp-server\r\n\r\ncd \/mnt\/server\/tmp\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o linux_x64.tar.gz https:\/\/cdn.rage.mp\/updater\/prerelease\/server-files\/linux_x64.tar.gz\r\ntar -xzvf linux_x64.tar.gz\r\nrm linux_x64.tar.gz\r\ncd \/mnt\/server\/tmp\/ragemp-srv\/\r\nmv * \/mnt\/server\r\n\r\ncd \/mnt\/server\r\nchmod +x .\/ragemp-server\r\nrm -rf \/mnt\/server\/tmp\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/gta\/ragemp\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
-            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl tar\r\n\r\nmkdir -p \/mnt\/server\/tmp\r\ncd \/mnt\/server\r\n\r\nrm -rf bin\/\r\nrm -rf dotnet\/\r\nrm ragemp-server\r\n\r\ncd \/mnt\/server\/tmp\r\necho \"Downloading rage.mp\"\r\ncurl -sSL -o linux_x64.tar.gz https:\/\/cdn.rage.mp\/updater\/prerelease\/server-files\/linux_x64.tar.gz\r\ntar -xzvf linux_x64.tar.gz\r\nrm linux_x64.tar.gz\r\ncd \/mnt\/server\/tmp\/ragemp-srv\/\r\nmv * \/mnt\/server\r\n\r\ncd \/mnt\/server\r\nchmod +x .\/ragemp-server\r\nrm -rf \/mnt\/server\/tmp\r\n\r\nif [ -e conf.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default rage.mp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/gta\/ragemp\/conf.json >> conf.json\r\nfi\r\n\r\necho \"install complete\"\r\n\r\nexit 0",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -46,6 +47,16 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|between:1,100",
+            "field_type": "text"
+        },
+        {
+            "name": "System Arch",
+            "description": "",
+            "env_variable": "ARCH",
+            "default_value": "amd64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:amd64,arm64",
             "field_type": "text"
         }
     ]
