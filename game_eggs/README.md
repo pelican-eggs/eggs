@@ -178,6 +178,8 @@
   * [Euro Truck Simulator 2](steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](steamcmd_servers/unturned)
 * [V Rising](steamcmd_servers/v_rising)
+  * [V Rising Vanilla](steamcmd_servers/v_rising/v_rising_vanilla)
+  * [V Rising BepInex](steamcmd_servers/v_rising/v_rising_bepinex)
 * [Valheim](steamcmd_servers/valheim)
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim BepInEx](steamcmd_servers/valheim/valheim_bepinex)

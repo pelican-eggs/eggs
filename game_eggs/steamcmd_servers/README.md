@@ -233,6 +233,8 @@ This is a collection of servers that use SteamCMD to install.
 ## V Rising
 
 [V Rising](v_rising)
+  * [V Rising Vanilla](v_rising/v_rising_vanilla)
+  * [V Rising BepInex](v_rising/v_rising_bepinex)
 
 ## Valheim
 
