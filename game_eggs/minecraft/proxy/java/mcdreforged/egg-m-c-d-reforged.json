@@ -13,7 +13,8 @@
         "MCDR_java8": "ghcr.io\/parkervcp\/games:mcdr_java_8",
         "MCDR_java11": "ghcr.io\/parkervcp\/games:mcdr_java_11",
         "MCDR_java16": "ghcr.io\/parkervcp\/games:mcdr_java_16",
-        "MCDR_java17": "ghcr.io\/parkervcp\/games:mcdr_java_17"
+        "MCDR_java17": "ghcr.io\/parkervcp\/games:mcdr_java_17",
+        "MCDR_java19": "ghcr.io\/parkervcp\/games:mcdr_java_19"
     },
     "file_denylist": [],
     "startup": "python -m mcdreforged",
