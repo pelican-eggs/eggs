@@ -84,7 +84,6 @@
     * [GeyserMC](minecraft/proxy/cross_platform/geyser)
     * [Waterdog](minecraft/proxy/cross_platform/waterdog)
   * [Java](minecraft/proxy/java)
-    * [FlameCord](minecraft/proxy/java/flamecord)
     * [Travertine](minecraft/proxy/java/travertine)
     * [Velocity](minecraft/proxy/java/velocity)
     * [VIAaas](minecraft/proxy/java/viaaas)

@@ -1,7 +1,6 @@
 # Minecraft Proxies
 
 * [Java](/game_eggs/minecraft/proxy/java/)
-  * [FlameCord](/game_eggs/minecraft/proxy/java/flamecord)
   * [Travertine](/game_eggs/minecraft/proxy/java/travertine)
   * [Velocity](/game_eggs/minecraft/proxy/java/velocity)
   * [VIAaaS](/game_eggs/minecraft/proxy/java/viaaas)

@@ -42,7 +42,6 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
   * [GeyserMC](proxy/cross_platform/geyser)
   * [Waterdog](proxy/cross_platform/waterdog)
 * [Java](proxy/java)
-  * [FlameCord](proxy/java/flamecord)
   * [Travertine](proxy/java/travertine)
   * [Velocity](proxy/java/velocity)
   * [VIAaas](proxy/java/viaaas)
