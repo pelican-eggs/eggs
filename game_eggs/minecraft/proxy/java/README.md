@@ -1,10 +1,6 @@
 # Minecraft Java Proxies
 
 
-#### FlameCord
-[FlameCord](https://github.com/2lstudios-mc/FlameCord)
-FlameCord is a patch for Travertine to fix possible exploits and add useful functionalities.
-
 #### Travertine
 [Travertine](https://papermc.io/downloads#Travertine)
 Waterfall, with additional support for Minecraft 1.7.10. 
