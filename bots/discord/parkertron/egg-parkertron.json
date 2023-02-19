@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-18T22:37:44-05:00",
+    "exported_at": "2023-02-19T13:09:14+01:00",
     "name": "parkertron",
     "author": "parker@parkervcp.com",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
@@ -17,7 +17,7 @@
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Bot is now running\"\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{}",
         "stop": "shutdown"
     },
     "scripts": {
