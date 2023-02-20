@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-18T21:10:19+01:00",
+    "exported_at": "2023-02-20T02:33:05+01:00",
     "name": "7 Days To Die",
     "author": "kristoffer.norman@bahnhof.se",
     "description": "7 days to die server",
@@ -114,10 +114,10 @@
             "name": "Network Protocols",
             "description": "Networking protocols that should NOT be used. Separated by comma. Possible values: LiteNetLib, SteamNetworking. Dedicated servers should disable SteamNetworking if there is no NAT router in between your users and the server or when port-forwarding is set up correctly. lets it empty if you are connecting your self hosted server behind a NAT",
             "env_variable": "SERVER_DISABLED_NETWORK_PROTOCOLS",
-            "default_value": "SteamNetworking",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "nullable|string|max:20",
             "field_type": "text"
         }
     ]
