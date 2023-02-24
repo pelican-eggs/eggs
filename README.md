@@ -310,6 +310,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Xonotic](game_eggs/xonotic/xonotic)
 
+[YuzuEmu](game_eggs/yuzu-emu)
+
 [FoundryVTT](game_eggs/FoundryVTT)
 
 ## [Monitoring](/monitoring/)
