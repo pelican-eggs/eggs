@@ -4,13 +4,15 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-07T16:11:46-07:00",
+    "exported_at": "2023-02-24T17:58:34+01:00",
     "name": "dart generic",
     "author": "alden@knoban.com",
     "description": "A generic dart CLI egg.\r\n\r\nThis will clone a dart CLI application. it defaults to master if no branch is specified.\r\n\r\nInstalls the pubspec.yaml packages on run. If you set user_upload then I assume you know what you are doing.",
     "features": null,
     "docker_images": {
-        "ghcr.io/parkervcp/yolks:dart_2.17": "ghcr.io/parkervcp/yolks:dart_2.17"
+        "Dart_2.19": "ghcr.io\/parkervcp\/yolks:dart_2.19",
+        "Dart_2.18": "ghcr.io\/parkervcp\/yolks:dart_2.18",
+        "Dart_2.17": "ghcr.io\/parkervcp\/yolks:dart_2.17"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; dart pub get; dart run",
