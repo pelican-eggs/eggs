@@ -90,6 +90,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Insurgency: Sandstorm](insurgency_sandstorm)
 
+## Iosoccer
+
+[iosoccer](iosoccer)
+
 ## Killing Floor 2
 
 [Killing Floor 2](killing_floor_2)
@@ -233,6 +237,8 @@ This is a collection of servers that use SteamCMD to install.
 ## V Rising
 
 [V Rising](v_rising)
+  * [V Rising Vanilla](v_rising/v_rising_vanilla)
+  * [V Rising BepInex](v_rising/v_rising_bepinex)
 
 ## Valheim
 

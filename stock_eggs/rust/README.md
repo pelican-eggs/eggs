@@ -15,6 +15,7 @@ Ports required to run the server.
 
 | Port           | default   |
 |----------------|-----------|
-| Game and Query | 28015 UDP |
+| Game           | 28015 UDP |
 | RCON           | 28016 TCP |
+| Query          | 28017 UDP |
 | Rust+ App      | 28082 TCP |

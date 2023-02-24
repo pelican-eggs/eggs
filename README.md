@@ -182,7 +182,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
-    * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [MCDReforged](game_eggs/minecraft/proxy/java/mcdreforged)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
@@ -215,6 +214,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
   * [Arma Reforger](game_eggs/steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
+* [Astroneer](game_eggs/steamcmd_servers/astroneer)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
@@ -235,6 +235,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Icarus](game_eggs/steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
+* [iosoccer](game_eggs/steamcmd_servers/iosoccer)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
 * [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
@@ -279,10 +280,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Euro Truck Simulator 2](game_eggs/steamcmd_servers/truck-simulator/euro-truck-simulator2/)
 * [Unturned](game_eggs/steamcmd_servers/unturned)
 * [V Rising](game_eggs/steamcmd_servers/v_rising)
+  * [V Rising Vanilla](game_eggs/steamcmd_servers/v_rising/v_rising_vanilla)
+  * [V Rising BepInex](game_eggs/steamcmd_servers/v_rising/v_rising_bepinex)
 * [Valheim](game_eggs/steamcmd_servers/valheim)
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim BepInEx](game_eggs/steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
+
 
 [Teeworlds](game_eggs/teeworlds)
 

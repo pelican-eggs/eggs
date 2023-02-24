@@ -1,26 +1,52 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-10-28T13:03:46+00:00",
+    "exported_at": "2023-02-08T14:50:39+01:00",
     "name": "SA-MP",
     "author": "bl4ckspr4y@protonmail.com",
     "description": "SA-MP is a free Massively Multiplayer Online game mod for the PC version of Rockstar Games Grand Theft Auto: San Andreas (tm).",
-    "image": "ghcr.io\/parkervcp\/games:samp",
+    "features": null,
+    "docker_images": {
+        "Samp": "ghcr.io\/parkervcp\/games:samp"
+    },
+    "file_denylist": [],
     "startup": ".\/samp03svr",
     "config": {
-        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port {{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Started server on \",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"samp.log\"\r\n}",
-        "stop": "^C"
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port {{server.build.default.port}}\",\r\n            \"rcon_password\": \"rcon_password {{server.build.env.RCON_PASS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Started server on \"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -sSL -o samp.tar.gz http:\/\/files.sa-mp.com\/samp037svr_R2-1.tar.gz\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf samp.tar.gz -C \/mnt\/server\/\r\ncp -r \/mnt\/server\/samp03\/* \/mnt\/server\r\nrm -rf \/mnt\/server\/samp03\/\r\ncd \/mnt\/server\r\nsed -i '3d' \/mnt\/server\/server.cfg\r\necho \"rcon_password changemeplease\" >> \/mnt\/server\/server.cfg\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server",
-            "container": "ubuntu:16.04",
+            "script": "#!\/bin\/bash\r\n\r\ncd \/tmp || exit\r\necho \"running: curl -sSL -o samp.tar.gz http:\/\/files.sa-mp.com\/samp037svr_${VERSION}.tar.gz\"\r\ncurl -sSL -o samp.tar.gz http:\/\/files.sa-mp.com\/samp037svr_\"${VERSION}\".tar.gz\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf samp.tar.gz --strip-components=1 -C \/mnt\/server\/\r\n\r\ncd \/mnt\/server || exit\r\n\r\nsed -i '3d' \/mnt\/server\/server.cfg\r\necho \"rcon_password ${RCON_PASS}\" >> \/mnt\/server\/server.cfg\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "Version",
+            "description": "example: if the download url is http:\/\/files.sa-mp.com\/samp037svr_R2-1.tar.gz then the variable should be: `R2-1`",
+            "env_variable": "Version",
+            "default_value": "R2-1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon password",
+            "description": "The password used for rcon",
+            "env_variable": "RCON_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        }
+    ]
 }
