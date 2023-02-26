@@ -14,7 +14,7 @@
     "file_denylist": [],
     "startup": "java -Dnogui=true -jar Ree6.jar",
     "config": {
-        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\ntokens.release: \"{{server.build.env.BOT_TOKEN}\"\n}\r\n}",
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\ntokens.release: \"{{server.build.env.BOT_TOKEN}}\"\n}\n}\r\n}",
         "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
         "logs": "{}",
         "stop": "^C"
