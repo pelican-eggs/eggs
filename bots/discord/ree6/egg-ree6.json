@@ -1,0 +1,40 @@
+{
+    "_comment": "Pterodactyl Ree6 Egg ~ parkervcp, Software-Noob, Proxymiity, and Red-Thirten ~ 2021-11-29",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "name": "Ree6",
+    "author": "parker@parkervcp.com",
+    "description": "A all in one Discord Bot!",
+    "features": null,
+    "images": [
+        "ghcr.io\/pterodactyl\/yolks:java_17"
+    ],
+    "file_denylist": [],
+    "startup": "java -Dnogui=true -jar Ree6.jar",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {# ################################\n# #                              #\n# # Ree6 Config File             #\n# # by Presti                    #\n# #                              #\n# ################################\n# \n\nconfig:\n  version: 2.1.0\n  creation: 1675970769277\nhikari:\n  sql:\n    user: root\n    db: root\n    pw: yourpw\n    host: localhost\n    port: 3306\n  misc:\n    storage: sqlite\n    storageFile: storage/Ree6.db\n    poolSize: 10\ndagpi:\n  apitoken: yourdagpixyztokenhere\nsentry:\n  dsn: yourSentryDSNHere\nspotify:\n  client:\n    id: yourspotifyclientid\n    secret: yourspotifyclientsecret\ntwitch:\n  client:\n    id: yourtwitchclientidhere\n    secret: yourtwitchclientsecrethere\ntwitter:\n  consumer:\n    key: yourTwitterConsumerKey\n    secret: yourTwitterConsumerSecret\n  access:\n    key: yourTwitterAccessKey\n    secret: yourTwitterAccessSecret\nreddit:\n  client:\n    id: yourredditclientid\n    secret: yourredditclientsecret\ninstagram:\n  username: yourInstagramUsername\n  password: yourInstagramPassword\nbot:\n  tokens:\n    release: \\\"{{server.build.env.BOT_TOKEN}}\\\"\n    beta: BetaTokenhere\n    dev: DevTokenhere\n}\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\n## this is a simple script to use the github API for release versions.\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\n\napt update\napt install -y jq curl\n\nGITHUB_PACKAGE=\"Ree6-Applications\/Ree6\"\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/ree6\/config.yml\"\n\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\n    echo -e \"No Github user set. Using anonymous API call...\"\nelse\n    echo -e \"User and OAuth token set.\"\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\nfi\n\n# get release info and download links\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\n\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq -r '.assets[] |  select(.name | test(\"^Ree6-.*-jar-with-dependencies.jar$\"))  | .browser_download_url')\nelse\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[] |  select(.name | test(\"^Ree6-.*-jar-with-dependencies.jar$\")) | .browser_download_url' | grep -i config)\n    else\n        echo -e \"Defaulting to the latest release.\"\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\n    fi\nfi\n\n## Ree6 Setup\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\ncd \/mnt\/server\necho -e \"\\nInstalling\/Updating Ree6...\\n\"\n\nif [ -f Ree6.jar ]; then\n    echo -e \"Updating Ree6.jar to latest version...\"\n    echo -e '\\t(Old version can be found at \"Ree6.jar-old\")'\n    mv -f Ree6.jar Ree6.jar-old\nfi\necho -e \"Running: curl -sSLo Ree6.jar ${DOWNLOAD_LINK}\\n\"\ncurl -sSLo Ree6.jar ${DOWNLOAD_LINK}\n\nif [ -f config.txt ]; then\n    echo -e \"Updating config.yml to latest version...\"\n    echo -e '\\t(Old version can be found at \"config.yml-old\")'\n    mv -f config.yml config.yml-old\nfi\necho -e \"Running: curl -sSLo config.yml ${CONFIG_LINK}\\n\"\ncurl -sSLo config.yml ${CONFIG_LINK}\n\necho -e \"\\nRee6 Successfully Installed!\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Discord Bot Token",
+            "description": "The token for your Discord bot. Learn how to obtain a token and configure your bot application properly here: https:\/\/jmusicbot.com\/getting-a-bot-token\/",
+            "env_variable": "BOT_TOKEN",
+            "default_value": "You need to get a token",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string"
+        }
+    ]
+}

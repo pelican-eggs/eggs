@@ -1,0 +1,53 @@
+# ################################
+# #                              #
+# # Ree6 Config File             #
+# # by Presti                    #
+# #                              #
+# ################################
+#
+
+config:
+    version: 2.1.0
+    creation: 1675970769277
+hikari:
+    sql:
+        user: root
+        db: root
+        pw: yourpw
+        host: localhost
+        port: 3306
+    misc:
+        storage: sqlite
+        storageFile: storage/Ree6.db
+        poolSize: 10
+dagpi:
+    apitoken: yourdagpixyztokenhere
+sentry:
+    dsn: yourSentryDSNHere
+spotify:
+    client:
+        id: yourspotifyclientid
+        secret: yourspotifyclientsecret
+twitch:
+    client:
+        id: yourtwitchclientidhere
+        secret: yourtwitchclientsecrethere
+twitter:
+    consumer:
+        key: yourTwitterConsumerKey
+        secret: yourTwitterConsumerSecret
+    access:
+        key: yourTwitterAccessKey
+        secret: yourTwitterAccessSecret
+reddit:
+    client:
+        id: yourredditclientid
+        secret: yourredditclientsecret
+instagram:
+    username: yourInstagramUsername
+    password: yourInstagramPassword
+bot:
+    tokens:
+        release: ReleaseTokenhere
+        beta: BetaTokenhere
+        dev: DevTokenhere
