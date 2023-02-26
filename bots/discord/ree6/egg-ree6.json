@@ -14,7 +14,7 @@
     "file_denylist": [],
     "startup": "java -Dnogui=true -jar Ree6.jar",
     "config": {
-        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {# ################################\n# #                              #\n# # Ree6 Config File             #\n# # by Presti                    #\n# #                              #\n# ################################\n# \n\nconfig:\n  version: 2.1.0\n  creation: 1675970769277\nhikari:\n  sql:\n    user: root\n    db: root\n    pw: yourpw\n    host: localhost\n    port: 3306\n  misc:\n    storage: sqlite\n    storageFile: storage/Ree6.db\n    poolSize: 10\ndagpi:\n  apitoken: yourdagpixyztokenhere\nsentry:\n  dsn: yourSentryDSNHere\nspotify:\n  client:\n    id: yourspotifyclientid\n    secret: yourspotifyclientsecret\ntwitch:\n  client:\n    id: yourtwitchclientidhere\n    secret: yourtwitchclientsecrethere\ntwitter:\n  consumer:\n    key: yourTwitterConsumerKey\n    secret: yourTwitterConsumerSecret\n  access:\n    key: yourTwitterAccessKey\n    secret: yourTwitterAccessSecret\nreddit:\n  client:\n    id: yourredditclientid\n    secret: yourredditclientsecret\ninstagram:\n  username: yourInstagramUsername\n  password: yourInstagramPassword\nbot:\n  tokens:\n    release: \\\"{{server.build.env.BOT_TOKEN}}\\\"\n    beta: BetaTokenhere\n    dev: DevTokenhere\n}\r\n    }\r\n}",
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\ntokens.release: \"{{server.build.env.BOT_TOKEN}\"\n}\r\n}",
         "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
         "logs": "{}",
         "stop": "^C"
