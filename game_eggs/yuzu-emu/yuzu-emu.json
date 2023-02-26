@@ -75,7 +75,7 @@
             "default_value": "4",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|int|max:4|min:1",
+            "rules": "required|int|max:12|min:1",
             "field_type": "text"
         },
         {
@@ -95,7 +95,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20",
+            "rules": "nullable|string|max:60",
             "field_type": "text"
         }
     ]
