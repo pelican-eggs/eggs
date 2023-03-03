@@ -109,8 +109,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Call of Duty 4X](game_eggs/cod/cod4x)
-
 [Doom](game_eggs/doom)
 * [Zandronum](game_eggs/doom/zandronum)
 
@@ -169,7 +167,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Glowstone](game_eggs/minecraft/java/glowstone)
   * [Magma](game_eggs/minecraft/java/magma)
   * [Mohist](game_eggs/minecraft/java/mohist)
-  * [NanoLimbo](/game_eggs/minecraft/java/nanolimbo)
+  * [NanoLimbo](game_eggs/minecraft/java/nanolimbo)
   * [Paper](game_eggs/minecraft/java/paper)
   * [Purpur](game_eggs/minecraft/java/purpur)
   * [Spigot](game_eggs/minecraft/java/spigot)
