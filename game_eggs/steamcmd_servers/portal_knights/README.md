@@ -12,6 +12,10 @@ Because the server files are not in a dedicated Steam app id this egg installs t
 
 The server is running with wine. So the console output can be a litte strange but it does work.
 
+## Storage
+
+This server will at least needs 12GB of storage allocated to be able to start
+
 ## Server Ports
 
 Portal Knights requires 1 port
