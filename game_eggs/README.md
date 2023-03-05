@@ -143,6 +143,7 @@
 * [Open Fortress](steamcmd_servers/open_fortress)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
+* [Portal Knights](steamcmd_servers/portal_knights)
 * [Post Scriptum](steamcmd_servers/post_scriptum)
 * [Project Zomboid](steamcmd_servers/project_zomboid)
 * [Quake Live](steamcmd_servers/quake_live)

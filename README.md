@@ -243,6 +243,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
+* [Portal Knights](game_eggs/steamcmd_servers/portal_knights)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
 * [Project Zomboid](game_eggs/steamcmd_servers/project_zomboid)
 * [Quake Live](game_eggs/steamcmd_servers/quake_live)
