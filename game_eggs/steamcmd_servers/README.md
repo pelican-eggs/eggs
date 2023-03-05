@@ -130,6 +130,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [PixARK](pixark)
 
+## Portal Knights
+
+[Portal Knights](portal_knights)
+
 ## Post Scriptum
 
 [Post Scriptum](post_scriptum)
