@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-09T18:23:31+00:00",
+    "exported_at": "2023-03-09T19:41:11+01:00",
     "name": "Vintage Story",
     "author": "mail@wuffy.eu",
     "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
@@ -16,14 +16,14 @@
     "startup": "mono VintagestoryServer.exe --dataPath .\/data --port={{SERVER_PORT}} --maxclients={{MAX_CLIENTS}} {{OPTIONS}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Dedicated Server now running on Port \",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \".\/data\/Logs\/server-debug.txt\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Dedicated Server now running on Port \"\r\n}",
+        "logs": "{}",
         "stop": "\/stop"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install wget curl jq\r\n\r\nBRANCH=\"${FILES_BRANCH}\"\r\n\r\n# Fetching latest stable server release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n case \"${BRANCH}\" in\r\n \"stable\")\r\n API_URL=\"http:\/\/api.vintagestory.at\/stable.json\"\r\n ;;\r\n \"unstable\")\r\n API_URL=\"http:\/\/api.vintagestory.at\/unstable.json\"\r\n ;;\r\n \"pre\")\r\n API_URL=\"http:\/\/api.vintagestory.at\/pre.json\"\r\n ;;\r\n *)\r\n echo \"Invalid stage; fallback to stable\"\r\n API_URL=\"http:\/\/api.vintagestory.at\/stable.json\"\r\n ;;\r\n esac\r\n DOWNLOAD_URL=$(curl -SsL \"$API_URL\" | jq -r 'if ([.[]] | .[0].server.urls.cdn) != null then [.[]] | .[0].server.urls.cdn else [.[]] | .[0].server.urls.local end');\r\n# Use specified server release\r\nelse\r\n case \"${BRANCH}\" in\r\n \"stable\")\r\n DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n \"unstable\")\r\n DOWNLOAD_URL=https:\/\/account.vintagestory.at\/files\/unstable\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n \"pre\")\r\n DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/pre\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n *)\r\n echo \"Invalid stage; fallback to stable\"\r\n DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n esac\r\nfi\r\n\r\ncd \/mnt\/server\/ || exit\r\n\r\ncurl -o vs_server.tar.gz \"${DOWNLOAD_URL}\"\r\ntar -xzf vs_server.tar.gz\r\n\r\nrm vs_server.tar.gz\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl jq\r\n\r\nBRANCH=\"${FILES_BRANCH}\"\r\n\r\n# Fetching latest stable server release\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n case \"${BRANCH}\" in\r\n \"stable\")\r\n API_URL=\"http:\/\/api.vintagestory.at\/stable.json\"\r\n ;;\r\n \"unstable\")\r\n API_URL=\"http:\/\/api.vintagestory.at\/unstable.json\"\r\n ;;\r\n \"pre\")\r\n API_URL=\"http:\/\/api.vintagestory.at\/pre.json\"\r\n ;;\r\n *)\r\n echo \"Invalid stage; fallback to stable\"\r\n API_URL=\"http:\/\/api.vintagestory.at\/stable.json\"\r\n ;;\r\n esac\r\n DOWNLOAD_URL=$(curl -SsL \"$API_URL\" | jq -r 'if ([.[]] | .[0].server.urls.cdn) != null then [.[]] | .[0].server.urls.cdn else [.[]] | .[0].server.urls.local end');\r\n# Use specified server release\r\nelse\r\n case \"${BRANCH}\" in\r\n \"stable\")\r\n DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n \"unstable\")\r\n DOWNLOAD_URL=https:\/\/account.vintagestory.at\/files\/unstable\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n \"pre\")\r\n DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/pre\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n *)\r\n echo \"Invalid stage; fallback to stable\"\r\n DOWNLOAD_URL=https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\r\n ;;\r\n esac\r\nfi\r\n\r\ncd \/mnt\/server\/ || exit\r\n\r\ncurl -o vs_server.tar.gz \"${DOWNLOAD_URL}\"\r\ntar -xzf vs_server.tar.gz\r\n\r\nrm vs_server.tar.gz\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "max:200",
+            "rules": "nullable|string|max:200",
             "field_type": "text"
         },
         {
