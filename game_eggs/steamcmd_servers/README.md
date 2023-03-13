@@ -40,6 +40,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Conan Exiles](conan_exiles)
 
+## Core Keeper
+
+[Core Keeper](core_keeper)
+
 ## Craftopia
 
 [Craftopia](craftopia)

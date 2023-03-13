@@ -217,6 +217,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
+* [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
