@@ -18,7 +18,7 @@
     "startup": "export DISPLAY=:0; rm .\/GameID.txt .\/CoreKeeperServerLog.txt; touch .\/CoreKeeperServerLog.txt; xvfb-run -s \"-screen 0 {{DISPLAY_WIDTH}}x{{DISPLAY_HEIGHT}}x{{DISPLAY_DEPTH}} -ac -nolisten tcp -nolisten unix\" .\/CoreKeeperServer -logfile CoreKeeperServerLog.txt -world {{WORLD_INDEX}} -worldname \"{{WORLD_NAME}}\" -worldseed {{WORLD_SEED}} $([[ \"{{GAME_ID}}\" != \"\" ]] && echo -n \" -gameid {{GAME_ID}}\") -maxplayers {{MAX_PLAYERS}} -worldmode {{WORLD_MODE}} -port {{SERVER_PORT}} & CKPID=$!; tail -f CoreKeeperServerLog.txt & LOGPID=$!; trap \"kill ${CKPID}; wait ${CKPID}; kill ${LOGPID}; wait ${LOGPID}\" 15; wait $!",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Started server process with pid\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Started session\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
