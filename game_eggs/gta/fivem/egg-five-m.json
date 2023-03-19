@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-14T18:22:52+01:00",
+    "exported_at": "2023-02-19T12:54:36+01:00",
     "name": "FiveM",
     "author": "parker@parkervcp.com",
     "description": "A new FiveM egg for the latest builds due to recent changes in FiveM",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update -y\r\napt install -y tar xz-utils file jq\r\n\r\nmkdir -p \/mnt\/server\/resources\r\n\r\ncd \/mnt\/server\r\n\r\necho \"updating citizenfx resource files\"\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/tmp\r\ncp -Rf \/tmp\/resources\/* resources\/\r\n\r\n\r\nRELEASE_PAGE=$(curl -sSL https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/)\r\n\r\nif [[ \"${FIVEM_VERSION}\" == \"recommended\" ]] || [[ -z ${FIVEM_VERSION} ]]; then\r\n  TEMP_LINK=$(echo $RELEASE_PAGE | grep -B 1 -i recommended |  grep -o '<a href= \".*\">' | grep -Eo \"\/[a-zA-Z0-9.\/?=_%:-]*\" | head -1)\r\n  DOWNLOAD_URL=$(echo -n \"https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master$TEMP_LINK\")\r\nelif [[ \"${FIVEM_VERSION}\" == \"latest\" ]]; then\r\n  TEMP_LINK=$(echo $RELEASE_PAGE | grep -B 1 -i latest | grep -o '<a href= \".*\">' | grep -Eo \"\/[a-zA-Z0-9.\/?=_%:-]*\" | head -1)\r\n  DOWNLOAD_URL=$(echo -n \"https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master$TEMP_LINK\")\r\nelse\r\n  VERSION_LINK=$(echo $RELEASE_PAGE | grep -i ${FIVEM_VERSION} | grep -o 'href=\".*\"' | grep -Eo \"\/[a-zA-Z0-9.\/?=_%:-]*\"  | head -1)\r\n  if [[ \"${VERSION_LINK}\" == \"\" ]]; then\r\n    echo -e \"defaulting to recommedned as the version requested was invalid.\"\r\n    TEMP_LINK=$(echo $RELEASE_PAGE | grep -B 1 -i recommended |  grep -o '<a href= \".*\">' | grep -Eo \"\/[a-zA-Z0-9.\/?=_%:-]*\" | head -1)\r\n    DOWNLOAD_URL=$(echo -n \"https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master$TEMP_LINK\")\r\n  else\r\n    DOWNLOAD_LINK=$(echo https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${VERSION_LINK})\r\n  fi\r\nfi\r\n\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then\r\n  if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n    echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n    DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n  else\r\n    echo -e \"link is invalid closing out\"\r\n    exit 2\r\n  fi\r\nfi\r\n\r\necho -e \"Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\"\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\necho \"Extracting fivem files\"\r\n\r\n\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n  tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n  unzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n  tar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\n  echo -e \"unknown filetype. Exiting\"\r\n  exit 2\r\nfi\r\n\r\n## removing the compresed file and run.sh\r\nrm -rf ${DOWNLOAD_LINK##*\/} run.sh\r\n\r\nif [ -e server.cfg ]; then\r\n  echo \"Skipping downloading default server config file as one already exists\"\r\nelse\r\n  echo \"Downloading default fivem config\"\r\n  curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/gta\/fivem\/server.cfg >>server.cfg\r\nfi\r\n\r\nmkdir -p logs\/\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n# FiveM Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update -y\r\napt install -y tar xz-utils file jq\r\n\r\nmkdir -p \/mnt\/server\/resources\r\n\r\ncd \/mnt\/server\r\n\r\necho \"updating citizenfx resource files\"\r\ngit clone https:\/\/github.com\/citizenfx\/cfx-server-data.git \/tmp\r\ncp -Rf \/tmp\/resources\/* resources\/\r\n\r\nRELEASE_PAGE=$(curl -sSL https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/)\r\nCHANGELOGS_PAGE=$(curl -sSL https:\/\/changelogs-live.fivem.net\/api\/changelog\/versions\/linux\/server)\r\n\r\nif [[ \"${FIVEM_VERSION}\" == \"recommended\" ]] || [[ -z ${FIVEM_VERSION} ]]; then\r\n  DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.recommended_download')\r\nelif [[ \"${FIVEM_VERSION}\" == \"latest\" ]]; then\r\n  DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.latest_download')\r\nelse\r\n  VERSION_LINK=$(echo -e \"${RELEASE_PAGE}\" | grep -Eo '\".*\/*.tar.xz\"' | grep -Eo '\".*\/*.tar.xz\"' | sed 's\/\\\"\/\/g'  | sed 's\/\\.\\\/\/\/1' | grep -i \"${FIVEM_VERSION}\" | grep -o =.* |  tr -d '=')\r\n  if [[ \"${VERSION_LINK}\" == \"\" ]]; then\r\n    echo -e \"defaulting to recommedned as the version requested was invalid.\"\r\n    DOWNLOAD_LINK=$(echo $CHANGELOGS_PAGE | jq -r '.recommended_download')\r\n  else\r\n    DOWNLOAD_LINK=$(echo https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/${VERSION_LINK})\r\n  fi\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then\r\n  if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n    echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n    DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n  else\r\n    echo -e \"link is invalid closing out\"\r\n    exit 2\r\n  fi\r\nfi\r\n\r\necho -e \"Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\"\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\necho \"Extracting fivem files\"\r\n\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n  tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n  unzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n  tar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\n  echo -e \"unknown filetype. Exiting\"\r\n  exit 2\r\nfi\r\n\r\nrm -rf ${DOWNLOAD_LINK##*\/} run.sh\r\n\r\nif [ -e server.cfg ]; then\r\n  echo \"Skipping downloading default server config file as one already exists\"\r\nelse\r\n  echo \"Downloading default fivem config\"\r\n  curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/gta\/fivem\/server.cfg >>server.cfg\r\nfi\r\n\r\nmkdir -p logs\/\r\n\r\necho \"install complete\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -60,12 +60,22 @@
         },
         {
             "name": "fivem version",
-            "description": "The fivem version that is to be installed. Invalid versions will default to recommended.\r\n\r\nAn example is `6007-f9c407539e79a33772db3cbf47ab8d5e9d57e7a4`\r\n\r\nYou can get the latest version from here - https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/",
+            "description": "The fivem version that is to be installed. Invalid versions will default to recommended.\r\n\r\nAn example is `6013-d8ae399d15680da569022f57ab7f2474d307c821`\r\n\r\nYou can get the latest version from here - https:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/",
             "env_variable": "FIVEM_VERSION",
             "default_value": "recommended",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Download Link",
+            "description": "This is the link to download fivem from. This is only used in the install script.\r\n\r\nThe file you link to needs to be an fx.tar.zx file.\r\n\r\nExample:\r\nhttps:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/6013-d8ae399d15680da569022f57ab7f2474d307c821\/fx.tar.xz",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string|nullable",
             "field_type": "text"
         },
         {
@@ -96,16 +106,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "Download Link",
-            "description": "This is the link to download fivem from. This is only used in the install script.\r\n\r\nThe file you link to needs to be an fx.tar.zx file.\r\n\r\nExample:\r\nhttps:\/\/runtime.fivem.net\/artifacts\/fivem\/build_proot_linux\/master\/`6007-f9c407539e79a33772db3cbf47ab8d5e9d57e7a4\/fx.tar.xz",
-            "env_variable": "DOWNLOAD_URL",
-            "default_value": "",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "string|nullable",
             "field_type": "text"
         }
     ]

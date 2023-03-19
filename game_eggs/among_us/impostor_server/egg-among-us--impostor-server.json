@@ -1,17 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-07-23T12:00:05+03:00",
+    "exported_at": "2023-03-04T15:04:21+01:00",
     "name": "Among Us - Impostor Server",
     "author": "info@goover.de",
-    "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThe latest version supported is 2022.4.19, both desktop and mobile.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
+    "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
     "features": null,
-    "images": [
-        "ghcr.io/parkervcp/yolks:dotnet_6"
-    ],
+    "docker_images": {
+        "Dotnet_7": "ghcr.io\/parkervcp\/yolks:dotnet_7",
+        "Dotnet_6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
+    },
     "file_denylist": [],
     "startup": ".\/Impostor.Server",
     "config": {
@@ -22,20 +23,21 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt -y update\r\napt -y --no-install-recommends install wget curl jq unzip tar redis-server file ca-certificates apt-utils\r\nGITHUB_PACKAGE=Impostor\/Impostor\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\necho -e \"Latest release is $LATEST_RELEASE\"\r\nLATEST_VERSION_TAG=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\n# Remove the first letter v from the version tag that is not present in the download URL\r\nLATEST_VERSION=$(echo $LATEST_VERSION_TAG | cut -c 2-)\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$LATEST_VERSION\/Impostor-Server_${LATEST_VERSION}_linux-x64.tar.gz\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/Impostor-Server_${VERSION}_linux-x64.tar.gz\"\r\nfi\r\n\r\necho -e \"\\nDownloading from $DOWNLOAD_LINK\"\r\ncurl -L $DOWNLOAD_LINK -o Impostor-Server-linux-x64.tar.gz\r\n\r\ntar xvf Impostor-Server-linux-x64.tar.gz\r\nrm Impostor-Server-linux-x64.tar.gz\r\nchmod +x Impostor.Server\r\n\r\necho -e \"\\nInstall completed\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl jq tar\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/Impostor\/Impostor\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/Impostor\/Impostor\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"\\nDownloading from $DOWNLOAD_URL\"\r\ncurl -sSL -o imposter-server.tar.gz $DOWNLOAD_URL\r\n\r\n\r\necho -e \"\\nUnpacking .tar.gz\"\r\ntar xvf imposter-server.tar.gz\r\n\r\nrm imposter-server.tar.gz\r\nchmod +x Impostor.Server\r\n\r\necho -e \"\\nInstall completed\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
             "name": "Download Version",
-            "description": "Version to Download. Leave latest for the latest release.\r\n\r\nFind all releases at https:\/\/github.com\/Impostor\/Impostor\/releases",
+            "description": "Version to Download. Leave latest for the latest release.\r\n\r\nFind all releases at https:\/\/github.com\/Impostor\/Impostor\/releases\r\nNote: versions start with a v, example: v1.8.0",
             "env_variable": "VERSION",
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:30"
+            "rules": "required|string|max:30",
+            "field_type": "text"
         }
     ]
 }

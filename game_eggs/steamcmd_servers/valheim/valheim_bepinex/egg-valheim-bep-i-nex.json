@@ -1,0 +1,194 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-03-03T16:16:01+01:00",
+    "name": "Valheim  BepINex",
+    "author": "info@goover.de",
+    "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture incl the Plugin Framework BepInEx",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:valheim": "ghcr.io\/parkervcp\/games:valheim"
+    },
+    "file_denylist": [],
+    "startup": "export DOORSTOP_ENABLE=TRUE; export DOORSTOP_INVOKE_DLL_PATH=.\/BepInEx\/core\/BepInEx.Preloader.dll; export DOORSTOP_CORLIB_OVERRIDE_PATH=.\/unstripped_corlib; export LD_LIBRARY_PATH=\".\/doorstop_libs:$LD_LIBRARY_PATH\"; export LD_PRELOAD=\"libdoorstop_x64.so:$LD_PRELOAD\"; export templdpath=$LD_LIBRARY_PATH; export LD_LIBRARY_PATH=\".\/linux64:$LD_LIBRARY_PATH\"; export SteamAppId=892970; export LD_LIBRARY_PATH=$templdpath; .\/valheim_server.x86_64 -nographics -batchmode -name \"{{SERVER_NAME}}\" -port {{SERVER_PORT}} -world \"{{WORLD}}\" -password \"{{PASSWORD}}\" -public {{PUBLIC_SERVER}} -saveinterval {{BACKUP_INTERVAL}} -backups {{BACKUP_COUNT}} -backupshort {{BACKUP_SHORTTIME}} -backuplong {{BACKUP_LONGTIME}} $( [[ {{ENABLE_CROSSPLAY}} -eq 1 ]] && echo \" -crossplay \") > >(sed -uE \"{{CONSOLE_FILTER}}\") & trap \"{{STOP}}\" 15; wait $!",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"DungeonDB Start\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Valheim Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install wget\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"installing BepInEx...\"\r\necho \"-------------------------------------------------------\"\r\nif ! api_response=$(curl -sfSL -H \"accept: application\/json\" \"https:\/\/valheim.thunderstore.io\/api\/experimental\/package\/denikson\/BepInExPack_Valheim\/\"); then\r\n        fatal \"Error: could not retrieve BepInEx release info from Thunderstore.io API\"\r\nfi\r\n\r\ndownload_url=$(jq -r  \".latest.download_url\" <<< \"$api_response\" )\r\nversion_number=$(jq -r  \".latest.version_number\" <<< \"$api_response\" )\r\n    \r\ncd \/mnt\/server\r\n#echo $download_url\r\nwget --content-disposition $download_url\r\nunzip -o denikson-BepInExPack_Valheim-${version_number}.zip\r\ncp -r \/mnt\/server\/BepInExPack_Valheim\/* \/mnt\/server\r\n\r\n\r\n##cleanup\r\necho \"-------------------------------------------------------\"\r\necho \"cleanup files...\"\r\necho \"-------------------------------------------------------\"\r\nrm -fR BepInExPack_Valheim\r\nrm -fR icon.png\r\nrm -fR denikson-BepInExPack_Valheim-*\r\nrm -fR manifest.json\r\nrm -fR README.m\r\n\r\n#rm -fR start_*\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-------------------------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name that appears in server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:60",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password.",
+            "env_variable": "PASSWORD",
+            "default_value": "secret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:5|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "World Name",
+            "description": "Name to load if switching between multiple saved worlds.",
+            "env_variable": "WORLD",
+            "default_value": "Dedicated",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Public Server",
+            "description": "",
+            "env_variable": "PUBLIC_SERVER",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Crossplay",
+            "description": "Enable crossplay support",
+            "env_variable": "ENABLE_CROSSPLAY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta Branch",
+            "description": "",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:30",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta Password",
+            "description": "",
+            "env_variable": "SRCDS_BETAPASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:30",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Interval",
+            "description": "Change how often the world will save in seconds. Default: 1800 (30 minutes).",
+            "env_variable": "BACKUP_INTERVAL",
+            "default_value": "1800",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Count",
+            "description": "Sets how many automatic backups will be kept. The first is the 'short' backup length, and the rest are the 'long' backup length. When default values are used means one backup that is 2 hours old, and 3 backups that are 12 hours apart. Default: 4.",
+            "env_variable": "BACKUP_COUNT",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Shorttime",
+            "description": "Sets the interval between the first automatic backups in seconds. Default: 7200 (2 hours).",
+            "env_variable": "BACKUP_SHORTTIME",
+            "default_value": "7200",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Backup Longtime",
+            "description": "Sets the interval between the subsequent automatic backups in seconds. Default: 43200 (12 hours).",
+            "env_variable": "BACKUP_LONGTIME",
+            "default_value": "43200",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] Console Filter",
+            "description": "Remove unwanted outputs from the console.",
+            "env_variable": "CONSOLE_FILTER",
+            "default_value": "\/^\\(Filename:.*Line:[[:space:]]+[[:digit:]]+\\)$\/d; \/^([[:space:]]+)?$\/d",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] App ID",
+            "description": "Valheim steam app id for auto updates.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "896660",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] LD Library Path",
+            "description": "Required to load server libraries.",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/linux64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] Shutdown Command",
+            "description": "",
+            "env_variable": "STOP",
+            "default_value": "kill -2 $!; wait;",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

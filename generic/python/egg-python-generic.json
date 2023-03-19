@@ -4,12 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-28T13:21:01-05:00",
+    "exported_at": "2023-01-27T23:37:50-08:00",
     "name": "python generic",
     "author": "parker@parkervcp.com",
     "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
     "features": null,
     "docker_images": {
+        "Python 3.11": "ghcr.io\/parkervcp\/yolks:python_3.11",
         "Python 3.10": "ghcr.io\/parkervcp\/yolks:python_3.10",
         "Python 3.9": "ghcr.io\/parkervcp\/yolks:python_3.9",
         "Python 3.8": "ghcr.io\/parkervcp\/yolks:python_3.8",

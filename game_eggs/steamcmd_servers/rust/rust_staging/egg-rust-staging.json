@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-26T11:35:36+01:00",
+    "exported_at": "2023-01-30T15:13:30+11:00",
     "name": "Rust Staging",
     "author": "root@smc.li",
     "description": "The only aim in Rust is to survive. To do this you will need to overcome struggles such as hunger, thirst and cold. Build a fire. Build a shelter. Kill animals for meat. Protect yourself from other players, and kill them for meat. Create alliances with other players and form a town. Do whatever it takes to survive.",
@@ -143,7 +143,7 @@
         {
             "name": "Branch",
             "description": "Select the branch to install, such as staging or workcart",
-            "env_variable": "BRANCH",
+            "env_variable": "SRCDS_BETAID",
             "default_value": "staging",
             "user_viewable": true,
             "user_editable": true,

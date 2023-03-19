@@ -4,6 +4,8 @@
 
 The server supports mods
 
+Egg supports following branches for server files: [pre](http://api.vintagestory.at/pre.json), [unstable](http://api.vintagestory.at/unstable.json), [stable](http://api.vintagestory.at/stable.json)
+
 ### from the developers
 
 Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes.

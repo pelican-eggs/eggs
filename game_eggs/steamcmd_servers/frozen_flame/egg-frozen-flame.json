@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-19T18:35:39+01:00",
+    "exported_at": "2023-02-03T14:32:26+08:00",
     "name": "Frozen Flame",
     "author": "theblitzbat@gmail.com",
     "description": "Frozen Flame Dedicated Server",
@@ -39,6 +39,26 @@
             "field_type": "text"
         },
         {
+            "name": "Max Players",
+            "description": "Maximum player count",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "The query port.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
             "name": "Additional Arguments",
             "description": "Specify additional launch parameters such as -crossplay. You must include a dash - and separate each parameter with space: -crossplay -exclusivejoin",
             "env_variable": "ARGS",
@@ -50,7 +70,7 @@
         },
         {
             "name": "Server Name",
-            "description": "The server nane",
+            "description": "The server name",
             "env_variable": "SERVER_NAME",
             "default_value": "My Frozen Flame Server",
             "user_viewable": true,
@@ -69,16 +89,6 @@
             "field_type": "text"
         },
         {
-            "name": "Max Players",
-            "description": "Maximum player count",
-            "env_variable": "MAX_PLAYERS",
-            "default_value": "10",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|numeric",
-            "field_type": "text"
-        },
-        {
             "name": "Auto Update",
             "description": "Auto update server software",
             "env_variable": "AUTO_UPDATE",
@@ -86,16 +96,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "Query Port",
-            "description": "The query port.",
-            "env_variable": "QUERY_PORT",
-            "default_value": "27015",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|between:1024,65536",
             "field_type": "text"
         }
     ]

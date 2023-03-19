@@ -40,6 +40,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Conan Exiles](conan_exiles)
 
+## Core Keeper
+
+[Core Keeper](core_keeper)
+
 ## Craftopia
 
 [Craftopia](craftopia)
@@ -90,6 +94,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Insurgency: Sandstorm](insurgency_sandstorm)
 
+## Iosoccer
+
+[iosoccer](iosoccer)
+
 ## Killing Floor 2
 
 [Killing Floor 2](killing_floor_2)
@@ -125,6 +133,10 @@ This is a collection of servers that use SteamCMD to install.
 ## PixARK
 
 [PixARK](pixark)
+
+## Portal Knights
+
+[Portal Knights](portal_knights)
 
 ## Post Scriptum
 
@@ -233,9 +245,12 @@ This is a collection of servers that use SteamCMD to install.
 ## V Rising
 
 [V Rising](v_rising)
+  * [V Rising Vanilla](v_rising/v_rising_vanilla)
+  * [V Rising BepInex](v_rising/v_rising_bepinex)
 
 ## Valheim
 
 [Valheim](valheim)
   * [Valheim Vanilla](valheim/valheim_vanilla)
+  * [Valheim BepInEx](valheim/valheim_bepinex)
   * [Valheim Plus Mod](valheim/valheim_plus)
