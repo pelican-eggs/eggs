@@ -1,4 +1,4 @@
-﻿# Game Eggs
+# Game Eggs
 
 [Among Us](among_us)
 
@@ -64,6 +64,7 @@
   * [Feed The Beast](minecraft/java/ftb)
   * [Forge](minecraft/java/forge)
   * [Glowstone](minecraft/java/glowstone)
+  * [Limbo](minecraft/java/limbo)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
   * [NanoLimbo](minecraft/java/nanolimbo)
