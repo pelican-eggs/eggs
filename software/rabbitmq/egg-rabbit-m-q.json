@@ -1,19 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-08-02T15:24:45+02:00",
+    "exported_at": "2023-03-17T19:22:21+01:00",
     "name": "RabbitMQ",
     "author": "p.zarrad@outlook.de",
     "description": "RabbitMQ is a feature rich, multi-protocol messaging broker.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:erlang_24",
-        "ghcr.io\/parkervcp\/yolks:erlang_23",
-        "ghcr.io\/parkervcp\/yolks:erlang_22"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:erlang_26": "ghcr.io\/parkervcp\/yolks:erlang_26",
+        "ghcr.io\/parkervcp\/yolks:erlang_25": "ghcr.io\/parkervcp\/yolks:erlang_25",
+        "ghcr.io\/parkervcp\/yolks:erlang_24": "ghcr.io\/parkervcp\/yolks:erlang_24",
+        "ghcr.io\/parkervcp\/yolks:erlang_23": "ghcr.io\/parkervcp\/yolks:erlang_23",
+        "ghcr.io\/parkervcp\/yolks:erlang_22": "ghcr.io\/parkervcp\/yolks:erlang_22"
+    },
     "file_denylist": [],
     "startup": ".\/sbin\/rabbitmq-server",
     "config": {
@@ -37,7 +39,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

@@ -108,8 +108,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
-[Call of Duty 4X](game_eggs/cod/cod4x)
-
 [Doom](game_eggs/doom)
 * [Zandronum](game_eggs/doom/zandronum)
 
@@ -166,9 +164,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Feed The Beast](game_eggs/minecraft/java/ftb)
   * [Forge](game_eggs/minecraft/java/forge)
   * [Glowstone](game_eggs/minecraft/java/glowstone)
+  * [Limbo](game_eggs/minecraft/java/limbo)
   * [Magma](game_eggs/minecraft/java/magma)
   * [Mohist](game_eggs/minecraft/java/mohist)
-  * [NanoLimbo](/game_eggs/minecraft/java/nanolimbo)
+  * [NanoLimbo](game_eggs/minecraft/java/nanolimbo)
   * [Paper](game_eggs/minecraft/java/paper)
   * [Purpur](game_eggs/minecraft/java/purpur)
   * [Spigot](game_eggs/minecraft/java/spigot)
@@ -182,7 +181,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
-    * [FlameCord](game_eggs/minecraft/proxy/java/flamecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
@@ -214,11 +212,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
   * [Arma Reforger](game_eggs/steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
+* [Astroneer](game_eggs/steamcmd_servers/astroneer)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
+* [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
@@ -245,6 +245,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
+* [Portal Knights](game_eggs/steamcmd_servers/portal_knights)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
 * [Project Zomboid](game_eggs/steamcmd_servers/project_zomboid)
 * [Quake Live](game_eggs/steamcmd_servers/quake_live)
@@ -309,6 +310,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Wine Generic](game_eggs/wine/generic)
 
 [Xonotic](game_eggs/xonotic/xonotic)
+
+[YuzuEmu](game_eggs/yuzu-emu)
 
 [FoundryVTT](game_eggs/FoundryVTT)
 

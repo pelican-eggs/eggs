@@ -1,4 +1,4 @@
-﻿# Game Eggs
+# Game Eggs
 
 [Among Us](among_us)
 
@@ -23,7 +23,7 @@
 
 * [Vanilla](factorio/factorio)
 * [ModUpdate](factorio/factorio-modupdate)
-* [Clusterio](game_eggs/factorio/clusterio)
+* [Clusterio](factorio/clusterio)
 
 [FTL: Tachyon](ftl/tachyon)
 
@@ -53,22 +53,21 @@
 * [Bedrock](minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
   * [Bedrock](minecraft/bedrock/bedrock)
   * [gomint](minecraft/bedrock/gomint)
-  * [LiteLoaderBDS](minecraft/bedrock/LiteLoader-bedrock)
+  * [LiteLoaderBDS](bedrock/LiteLoader-bedrock)
   * [Nukkit](minecraft/bedrock/nukkit)
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
   * [Cuberite](minecraft/java/cuberite)
-  * [CusreForge Generic](minecraft/java/forge/curseforge-generic)
   * [Fabric](minecraft/java/fabric)
   * [Feather](minecraft/java/feather)
+  * [Feed The Beast](minecraft/java/ftb)
   * [Forge](minecraft/java/forge)
   * [Glowstone](minecraft/java/glowstone)
-  * [Feed The Beast](minecraft/java/ftb)
-  * [Krypton](/minecraft/java/krypton)
+  * [Limbo](minecraft/java/limbo)
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
-  * [NanoLimbo](/minecraft/java/nanolimbo)
+  * [NanoLimbo](minecraft/java/nanolimbo)
   * [Paper](minecraft/java/paper)
   * [Purpur](minecraft/java/purpur)
   * [Spigot](minecraft/java/spigot)
@@ -77,18 +76,19 @@
   * [Technic](minecraft/java/technic)
   * [VanillaCord](minecraft/java/vanillacord)
 
+* [Crossplay](minecraft/crossplay/) servers for crossplay between Bedrock and Java edition
+  * [Purpur-GeyserMC-Floodgate](minecraft/crossplay/purpur-geysermc-floodgate/)
+
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
+  * [Java](minecraft/proxy/java)
+    * [Travertine](minecraft/proxy/java/travertine)
+    * [Velocity](minecraft/proxy/java/velocity)
+    * [Waterfall](minecraft/proxy/java/waterfall)
   * [Bedrock](minecraft/proxy/bedrock)
     * [Waterdog PE](minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](minecraft/proxy/cross_platform)
     * [GeyserMC](minecraft/proxy/cross_platform/geyser)
     * [Waterdog](minecraft/proxy/cross_platform/waterdog)
-  * [Java](minecraft/proxy/java)
-    * [FlameCord](minecraft/proxy/java/flamecord)
-    * [Travertine](minecraft/proxy/java/travertine)
-    * [Velocity](minecraft/proxy/java/velocity)
-    * [VIAaas](minecraft/proxy/java/viaaas)
-    * [Waterfall](minecraft/proxy/java/waterfall)
 
 [Minetest](minetest) (including MTG)
 
@@ -114,11 +114,13 @@
   * [Arma 3](steamcmd_servers/arma/arma3)
   * [Arma Reforger](steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
+* [Astroneer](steamcmd_servers/astroneer)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
 * [Black Mesa](steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
+* [Core Keeper](steamcmd_servers/core_keeper)
 * [CryoFall](steamcmd_servers/cryofall)
 * [DayZ (Experimental)](steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
@@ -143,6 +145,7 @@
 * [Open Fortress](steamcmd_servers/open_fortress)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
+* [Portal Knights](steamcmd_servers/portal_knights)
 * [Post Scriptum](steamcmd_servers/post_scriptum)
 * [Project Zomboid](steamcmd_servers/project_zomboid)
 * [Quake Live](steamcmd_servers/quake_live)
@@ -204,5 +207,7 @@
 [Vintage Story](vintage_story)
 
 [Xonotic](xonotic/xonotic)
+
+[YuzuEmu](yuzu-emu)
 
 [FoundryVTT](FoundryVTT)

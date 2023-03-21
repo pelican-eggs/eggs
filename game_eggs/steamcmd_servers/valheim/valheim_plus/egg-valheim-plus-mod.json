@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-15T11:43:15+01:00",
+    "exported_at": "2023-03-03T16:15:23+01:00",
     "name": "Valheim Plus Mod",
     "author": "info@goover.de",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
@@ -63,7 +63,7 @@
         {
             "name": "Public Server",
             "description": "Public visibility of your server. Set it to false to make the server invisible and only joinable via the 'Join IP'-button.",
-            "env_variable": "PUBLIC",
+            "env_variable": "PUBLIC_SERVER",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
