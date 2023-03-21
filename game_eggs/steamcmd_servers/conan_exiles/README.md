@@ -15,6 +15,7 @@ Ports required to run the server in a table format.
 | Port    | default |
 |---------|---------|
 | Game    | 7777 |
+| UDP Query | 7778 |
 | Steam Query | 27015 |
 
 ## More information can be found [here](https://forums.funcom.com/t/conan-exiles-dedicated-server-app-latest-version-1-0-21/21699)
