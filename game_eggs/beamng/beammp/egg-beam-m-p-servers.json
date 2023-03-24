@@ -18,7 +18,7 @@
         "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.NAME}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "exit"
     },
     "scripts": {
         "installation": {
