@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-08T16:22:11+01:00",
+    "exported_at": "2023-03-26T16:13:26+02:00",
     "name": "OpenTTD Server",
     "author": "admin@justmyrandomstuff.com",
     "description": "OpenTTD is an open source simulation game based upon the popular Microprose game \"Transport Tycoon Deluxe\", written by Chris Sawyer. It attempts to mimic the original game as closely as possible while extending it with new features.\r\n\r\nOpenTTD is modelled after the original Transport Tycoon game by Chris Sawyer and enhances the game experience dramatically. Many features were inspired by TTDPatch while others are original.",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\napk add --no-cache wget binutils xz curl\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"getting file from: https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-debian-bullseye-amd64.deb\"\r\nwget https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-debian-bullseye-amd64.deb -O openttd.deb\r\nar -x  openttd.deb\r\ntar -xvf data.tar.*\r\ncp -a usr\/share\/games\/openttd\/* .\/\r\ncp -a usr\/games\/openttd .\/\r\nchmod +x openttd\r\n\r\nrm -fR usr\/share\/games\/openttd\/\r\nrm -fR usr\/games\/openttd\r\n\r\nwget https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip -O opengfx.zip\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\nrm -fR open*zip open*tar open*gz debian-binary open*deb\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/tycoon_games\/openttd\/openttd.cfg > openttd.cfg\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "alpine:3.16",
+            "script": "#!\/bin\/ash\r\napk add --no-cache xz curl tar unzip\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"\\ncurl -SsL -o openttd-linux.tar.xz https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-generic-amd64.tar.xz\"\r\ncurl -SsL -o openttd-linux.tar.xz https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-generic-amd64.tar.xz \r\n\r\necho -e \"\\nUnpacking tar\"\r\ntar -xf openttd-linux.tar.xz --strip-components=1\r\nrm openttd-linux.tar.xz\r\nchmod +x openttd\r\n\r\necho -e \"\\nRunning curl -sSL -o opengfx.zip https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip\"\r\ncurl -sSL -o opengfx.zip https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\nrm -fR open*zip open*tar open*gz\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/tycoon_games\/openttd\/openttd.cfg > openttd.cfg\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "alpine:latest",
             "entrypoint": "ash"
         }
     },
@@ -45,14 +45,14 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:5",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
             "name": "OpenTTD Version",
-            "description": "The version of OpenTTD i.e. 1.10.1",
+            "description": "The version of OpenTTD i.e. 12.2",
             "env_variable": "OPENTTD_VERSION",
-            "default_value": "12.2",
+            "default_value": "13.0-RC2",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|string|max:20",
@@ -60,7 +60,7 @@
         },
         {
             "name": "OpenGFX Version",
-            "description": "The OpenGFX Version i.e. 0.6.0",
+            "description": "The OpenGFX Version i.e. 7.1",
             "env_variable": "OPENGFX_VERSION",
             "default_value": "7.1",
             "user_viewable": true,
