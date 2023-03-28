@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-18T23:18:52+01:00",
+    "exported_at": "2023-03-28T22:32:36+02:00",
     "name": "Core Keeper",
     "author": "karsten@fiedleronline.net",
     "description": "Core Keeper is a survival sandbox game for single or multiplayers.\r\n\r\n--- Drawn towards a mysterious relic, you are an explorer who awakens in an ancient cavern of creatures, resources and trinkets. Trapped deep underground will your survival skills be up to the task? Mine relics and resources to build your base, craft new equipment, survive, and power up the Core. ---",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": "export DISPLAY=:0; rm .\/GameID.txt .\/CoreKeeperServerLog.txt; touch .\/CoreKeeperServerLog.txt; xvfb-run -s \"-screen 0 {{DISPLAY_WIDTH}}x{{DISPLAY_HEIGHT}}x{{DISPLAY_DEPTH}} -ac -nolisten tcp -nolisten unix\" .\/CoreKeeperServer -logfile CoreKeeperServerLog.txt -world {{WORLD_INDEX}} -worldname \"{{WORLD_NAME}}\" -worldseed {{WORLD_SEED}} $([[ \"{{GAME_ID}}\" != \"\" ]] && echo -n \" -gameid {{GAME_ID}}\") -maxplayers {{MAX_PLAYERS}} -worldmode {{WORLD_MODE}} -port {{SERVER_PORT}} & CKPID=$!; tail -f CoreKeeperServerLog.txt & LOGPID=$!; trap \"kill ${CKPID}; wait ${CKPID}; kill ${LOGPID}; wait ${LOGPID}\" 15; wait $!",
+    "startup": "export DISPLAY=:0; rm .\/GameID.txt .\/CoreKeeperServerLog.txt; touch .\/CoreKeeperServerLog.txt; xvfb-run -s \"-screen 0 {{DISPLAY_WIDTH}}x{{DISPLAY_HEIGHT}}x{{DISPLAY_DEPTH}} -ac -nolisten tcp -nolisten unix\" .\/CoreKeeperServer -batchmode -logfile CoreKeeperServerLog.txt -world {{WORLD_INDEX}} -worldname \"{{WORLD_NAME}}\" -worldseed {{WORLD_SEED}} $([[ \"{{GAME_ID}}\" != \"\" ]] && echo -n \" -gameid {{GAME_ID}}\") -maxplayers {{MAX_PLAYERS}} -worldmode {{WORLD_MODE}} -port {{SERVER_PORT}} & CKPID=$!; tail -f CoreKeeperServerLog.txt | grep -e '^\\[userid:[0-9]*\\] player' -e '^[^\\[]' & LOGPID=$!; trap \"kill ${CKPID}; wait ${CKPID}; kill ${LOGPID}; wait ${LOGPID}\" 15; wait $!",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Started session\"\r\n}",
