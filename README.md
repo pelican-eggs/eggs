@@ -150,7 +150,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Minecraft](game_eggs/minecraft)
 
-* [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
+* [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10/11, mobile, console)
   * [Bedrock](game_eggs/minecraft/bedrock/bedrock)
   * [gomint](game_eggs/minecraft/bedrock/gomint)
   * [LiteLoaderBDS](game_eggs/bedrock/LiteLoader-bedrock)
