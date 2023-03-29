@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-18T11:27:40+01:00",
+    "exported_at": "2023-03-29T10:33:50+02:00",
     "name": "Bastion",
     "author": "parker@parkervcp.com",
     "description": "Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from administration and moderation to keeping the members active through various incentives, games and other fun activities",
@@ -31,7 +31,7 @@
         {
             "name": "Bot Token",
             "description": "The Bot Token you get from https:\/\/discordapp.com\/developers\/applications\/",
-            "env_variable": "TESSERACT_BOT_TOKEN",
+            "env_variable": "BOT_TOKEN",
             "default_value": "GETABOTTOKEN",
             "user_viewable": true,
             "user_editable": true,
@@ -41,7 +41,7 @@
         {
             "name": "Bot Client ID",
             "description": "The Bot ID you get from https:\/\/discordapp.com\/developers\/applications\/",
-            "env_variable": "TESSERACT_BOT_ID",
+            "env_variable": "BOT_ID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -51,7 +51,7 @@
         {
             "name": "Mongo URL",
             "description": "use `mongodb:\/\/127.0.0.1:27017\/bastion` for using the build in mongodb server",
-            "env_variable": "TESSERACT_MONGO_URI",
+            "env_variable": "MONGO_URI",
             "default_value": "mongodb:\/\/127.0.0.1:27017\/bastion",
             "user_viewable": true,
             "user_editable": true,
@@ -81,7 +81,7 @@
         {
             "name": "Safe Mode",
             "description": "When enabled, this disables usage of unsafe commands like `exec` and `eval`.",
-            "env_variable": "TESSERACT_UNSAFE_MODE",
+            "env_variable": "UNSAFE_MODE",
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
