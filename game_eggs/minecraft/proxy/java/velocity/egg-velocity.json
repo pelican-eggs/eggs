@@ -51,7 +51,7 @@
             "default_value": "velocity.jar",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:31"
         },
         {
             "name": "Download Path",
