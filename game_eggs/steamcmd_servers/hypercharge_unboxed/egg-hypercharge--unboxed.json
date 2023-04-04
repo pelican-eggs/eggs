@@ -1,0 +1,112 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-04-04T12:35:16+00:00",
+    "name": "Hypercharge: Unboxed",
+    "author": "support@hostari.com",
+    "description": "Hypercharge: Unboxed - Dedicated Server",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/UnboxedServer.sh {{MAP_NAME}}?Difficulty={{DIFFICULTY}}?Game={{GAME_MODE}}?MapList=Garage,Garden,ToyPalace,Hallway_Hard,Attic_Daytime,Bathroom,Airhockey_Shuffle,Kitchen,KidsBedroom?MaxPlayers={{MAX_PLAYERS}}?WeaponTypes={{WEAPON_TYPES}} -ServerName=\u201d{{SERVER_NAME}}\u201d -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -unattended -ini:Engine:[\/script\/engine.gamenetworkmanager]:ClientAuthorativePosition=1",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"LogNet: GameNetDriver EOSNetDriver\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:18.04'\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## create a symbolic link for loading mods\r\ncd \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nln -sf ..\/..\/..\/..\/..\/Steam\/steamapps steamapps\r\ncd \/mnt\/server",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "HyperCharge: Unboxed Server Name",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Hostari Unboxed Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:30",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Mode",
+            "description": "Game Modes is as follows:\r\n`WV` for Wave Defense\r\n`DM` for Death Match\r\n`PL` for Plague Mode",
+            "env_variable": "GAME_MODE",
+            "default_value": "WV",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:2",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players allowed on the server",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "8",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "Hypercharge: Unboxed query port used by steam server browser",
+            "env_variable": "QUERY_PORT",
+            "default_value": "9999",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Difficulty Level:\r\n`0` = Casual\r\n`1` = Normal\r\n`2` = Expert\r\n`3` = Nightmare",
+            "env_variable": "DIFFICULTY",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Map",
+            "description": "Selected map to play on; \r\nGarage\r\nGarden\r\nToyPalace\r\nHallway_Hard\r\nAttic_Daytime\r\nBathroom\r\nAirhockey_Shuffle\r\nKitchen\r\nKidsBedroom",
+            "env_variable": "MAP_NAME",
+            "default_value": "Garage",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:30",
+            "field_type": "text"
+        },
+        {
+            "name": "App ID",
+            "description": "Unboxed App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1045940",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Weapon Types",
+            "description": "Weapon Type selections (Only valid for DM and PL game modes):\r\n`0` = Default\r\n`1` = MachineGuns\r\n`2` = Shotguns\r\n`3` = Snipers\r\n`4` = Launchers\r\n`5` = Lasers\r\n`6` = Miniguns\r\n`7` = Random",
+            "env_variable": "WEAPON_TYPES",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:7",
+            "field_type": "text"
+        }
+    ]
+}
