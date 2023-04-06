@@ -18,7 +18,7 @@
         "Python 2.7": "ghcr.io\/parkervcp\/yolks:python_2.7"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r \"${REQUIREMENTS_FILE}\"; fi; exec \/usr\/local\/bin\/python \"\/home\/container\/{{PY_FILE}}\@",
+    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r \"${REQUIREMENTS_FILE}\"; fi; exec \/usr\/local\/bin\/python \"\/home\/container\/${PY_FILE}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
