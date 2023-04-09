@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-04T11:17:39+01:00",
+    "exported_at": "2023-04-09T04:34:42+02:00",
     "name": "tModloader",
     "author": "parker@parkervcp.com",
     "description": "tModLoader is essentially a mod that provides a way to load your own mods without having to work directly with Terraria's source code itself. This means you can easily make mods that are compatible with other people's mods, save yourself the trouble of having to decompile and recompile Terraria.exe, and escape from having to understand all of the obscure \"intricacies\" of Terraria's source code. It is made to work for Terraria 1.3+.",
@@ -13,7 +13,7 @@
         "Dotnet 6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
     },
     "file_denylist": [],
-    "startup": ".\/tModLoaderServer -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -password \"{{SERVER_PASSWORD}}\" -motd \"{{MOTD}}\" -lang {{LANGUAGE}} -world ~\/saves\/Worlds\/{{WORLD_NAME}}.wld -worldname {{WORLD_NAME}} -autocreate {{WORLD_SIZE}} -savedirectory ~\/ -tmlsavedirectory ~\/saves -modpath ~\/mods",
+    "startup": ".\/tModLoaderServer -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -password \"{{SERVER_PASSWORD}}\" -motd \"{{MOTD}}\" -lang {{LANGUAGE}} -world ~\/saves\/Worlds\/{{WORLD_NAME}}.wld -worldname {{WORLD_NAME}} -autocreate {{WORLD_SIZE}} -config serverconfig.txt -savedirectory ~\/ -tmlsavedirectory ~\/saves -modpath ~\/mods",
     "config": {
         "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"difficulty\": \"difficulty={{server.build.env.DIFFICULTY}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\"\r\n}",
