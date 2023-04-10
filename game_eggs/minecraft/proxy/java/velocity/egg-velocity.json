@@ -1,10 +1,10 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-12-02T16:47:41+00:00",
+    "exported_at": "2023-04-03T16:55:25+02:00",
     "name": "Velocity",
     "author": "parker@parkervcp.com",
     "description": "Velocity is a Minecraft server proxy with unparalleled server support, scalability, and flexibility.",
@@ -13,12 +13,12 @@
         "java_version",
         "pid_limit"
     ],
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_17",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_8"
-    ],
+    "docker_images": {
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8"
+    },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 -jar {{SERVER_JARFILE}}",
     "config": {
@@ -29,7 +29,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nPROJECT=velocity\r\nif [[ -z ${VELOCITY_VERSION} ]] || [[ ${VELOCITY_VERSION} == \"latest\" ]]; then\r\nVELOCITY_VERSION=\"latest\"\r\nfi\r\nif [[ -n \"${DOWNLOAD_LINK}\" ]]; then\r\necho -e \"Using supplied download url: ${DOWNLOAD_LINK}\"\r\nDOWNLOAD_URL=$(eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g'))\r\nelse\r\nVER_EXISTS=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT} | jq -r --arg VERSION $VELOCITY_VERSION '.versions[] | contains($VERSION)' | grep true)\r\nLATEST_VERSION=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT} | jq -r '.versions' | jq -r '.[-1]')\r\nif [[ \"${VER_EXISTS}\" == \"true\" ]]; then\r\necho -e \"Version is valid. Using version ${VELOCITY_VERSION}\"\r\nelse\r\necho -e \"Using the latest ${PROJECT} version\"\r\nVELOCITY_VERSION=${LATEST_VERSION}\r\nfi\r\nBUILD_EXISTS=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT}\/versions\/${VELOCITY_VERSION} | jq -r --arg BUILD ${BUILD_NUMBER} '.builds[] | tostring | contains($BUILD)' | grep true)\r\nLATEST_BUILD=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT}\/versions\/${VELOCITY_VERSION} | jq -r '.builds' | jq -r '.[-1]')\r\nif [[ \"${BUILD_EXISTS}\" == \"true\" ]]; then\r\necho -e \"Build is valid for version ${VELOCITY_VERSION}. Using build ${BUILD_NUMBER}\"\r\nelse\r\necho -e \"Using the latest ${PROJECT} build for version ${VELOCITY_VERSION}\"\r\nBUILD_NUMBER=${LATEST_BUILD}\r\nfi\r\nJAR_NAME=${PROJECT}-${VELOCITY_VERSION}-${BUILD_NUMBER}.jar\r\necho \"Version being downloaded\"\r\necho -e \"Velocity Version: ${VELOCITY_VERSION}\"\r\necho -e \"Build: ${BUILD_NUMBER}\"\r\necho -e \"JAR Name of Build: ${JAR_NAME}\"\r\nDOWNLOAD_URL=https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT}\/versions\/${VELOCITY_VERSION}\/builds\/${BUILD_NUMBER}\/downloads\/${JAR_NAME}\r\nfi\r\ncd \/mnt\/server\r\necho -e \"Running curl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\"\r\nif [[ -f ${SERVER_JARFILE} ]]; then\r\nmv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\ncurl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\r\nif [[ -f velocity.toml ]]; then\r\necho -e \"velocity config file exists\"\r\nelse\r\necho -e \"downloading velocity config file.\"\r\ncurl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/proxy\/java\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\nif [[ -f forwarding.secret ]]; then\r\necho -e \"velocity forwarding secret file already exists\"\r\nelse\r\necho -e \"creating forwarding secret file\"\r\ntouch forwarding.secret\r\ndate +%s | sha256sum | base64 | head -c 12 > forwarding.secret\r\nfi\r\necho -e \"install complete\"",
+            "script": "#!\/bin\/ash\r\n# Velocity Proxy Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nPROJECT=velocity\r\n\r\nif [[ -z ${VELOCITY_VERSION} ]] || [[ ${VELOCITY_VERSION} == \"latest\" ]]; then\r\n    VELOCITY_VERSION=\"latest\"\r\nfi\r\n\r\nif [[ -n \"${DOWNLOAD_LINK}\" ]]; then\r\n    echo -e \"Using supplied download url: ${DOWNLOAD_LINK}\"\r\n    DOWNLOAD_URL=$(eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g'))\r\nelse\r\n    VER_EXISTS=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT} | jq -r --arg VERSION $VELOCITY_VERSION '.versions[] | contains($VERSION)' | grep true)\r\n    LATEST_VERSION=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT} | jq -r '.versions' | jq -r '.[-1]')\r\n\r\nif [[ \"${VER_EXISTS}\" == \"true\" ]]; then\r\n    echo -e \"Version is valid. Using version ${VELOCITY_VERSION}\"\r\nelse\r\n    echo -e \"Using the latest ${PROJECT} version\"\r\n    VELOCITY_VERSION=${LATEST_VERSION}\r\nfi\r\n\r\nBUILD_EXISTS=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT}\/versions\/${VELOCITY_VERSION} | jq -r --arg BUILD ${BUILD_NUMBER} '.builds[] | tostring | contains($BUILD)' | grep true)\r\nLATEST_BUILD=$(curl -s https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT}\/versions\/${VELOCITY_VERSION} | jq -r '.builds' | jq -r '.[-1]')\r\n\r\nif [[ \"${BUILD_EXISTS}\" == \"true\" ]]; then\r\n    echo -e \"Build is valid for version ${VELOCITY_VERSION}. Using build ${BUILD_NUMBER}\"\r\nelse\r\n    echo -e \"Using the latest ${PROJECT} build for version ${VELOCITY_VERSION}\"\r\n    BUILD_NUMBER=${LATEST_BUILD}\r\nfi\r\n\r\nJAR_NAME=${PROJECT}-${VELOCITY_VERSION}-${BUILD_NUMBER}.jar\r\necho \"Version being downloaded\"\r\necho -e \"Velocity Version: ${VELOCITY_VERSION}\"\r\necho -e \"Build: ${BUILD_NUMBER}\"\r\necho -e \"JAR Name of Build: ${JAR_NAME}\"\r\nDOWNLOAD_URL=https:\/\/papermc.io\/api\/v2\/projects\/${PROJECT}\/versions\/${VELOCITY_VERSION}\/builds\/${BUILD_NUMBER}\/downloads\/${JAR_NAME}\r\n\r\nfi\r\ncd \/mnt\/server\r\necho -e \"Running curl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\"\r\n\r\nif [[ -f ${SERVER_JARFILE} ]]; then\r\nmv ${SERVER_JARFILE} ${SERVER_JARFILE}.old\r\nfi\r\n\r\ncurl -o ${SERVER_JARFILE} ${DOWNLOAD_URL}\r\n\r\nif [[ -f velocity.toml ]]; then\r\n    echo -e \"velocity config file exists\"\r\nelse\r\n    echo -e \"downloading velocity config file.\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/proxy\/java\/velocity\/velocity.toml -o velocity.toml\r\nfi\r\n\r\nif [[ -f forwarding.secret ]]; then\r\n    echo -e \"velocity forwarding secret file already exists\"\r\nelse\r\n    echo -e \"creating forwarding secret file\"\r\n    touch forwarding.secret\r\n    date +%s | sha256sum | base64 | head -c 12 > forwarding.secret\r\nfi\r\n\r\necho -e \"install complete\"",
             "container": "ghcr.io\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
@@ -42,7 +42,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Server Jar File",
@@ -51,7 +52,8 @@
             "default_value": "velocity.jar",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:32|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
         },
         {
             "name": "Download Path",
@@ -60,7 +62,8 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Build Number",
@@ -69,7 +72,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

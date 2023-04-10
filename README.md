@@ -151,7 +151,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Minecraft](game_eggs/minecraft)
 
-* [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows 10, mobile, console)
+* [Bedrock](game_eggs/minecraft/bedrock) Servers for Bedrock Minecraft (Windows, mobile, console)
   * [Bedrock](game_eggs/minecraft/bedrock/bedrock)
   * [gomint](game_eggs/minecraft/bedrock/gomint)
   * [LiteLoaderBDS](game_eggs/bedrock/LiteLoader-bedrock)
@@ -165,6 +165,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Feed The Beast](game_eggs/minecraft/java/ftb)
   * [Forge](game_eggs/minecraft/java/forge)
   * [Glowstone](game_eggs/minecraft/java/glowstone)
+  * [Limbo](game_eggs/minecraft/java/limbo)
   * [Magma](game_eggs/minecraft/java/magma)
   * [Mohist](game_eggs/minecraft/java/mohist)
   * [NanoLimbo](game_eggs/minecraft/java/nanolimbo)
@@ -218,6 +219,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
+* [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
@@ -244,6 +246,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
+* [Portal Knights](game_eggs/steamcmd_servers/portal_knights)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
 * [Project Zomboid](game_eggs/steamcmd_servers/project_zomboid)
 * [Quake Live](game_eggs/steamcmd_servers/quake_live)
