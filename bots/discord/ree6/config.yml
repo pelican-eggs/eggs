@@ -4,50 +4,79 @@
 # # by Presti                    #
 # #                              #
 # ################################
-#
+# 
 
+# Do not change this!
 config:
-    version: 2.1.0
-    creation: 1675970769277
+  version: 2.4.3
+  creation: 1681169485237
+
+# HikariCP Configuration
 hikari:
-    sql:
-        user: root
-        db: root
-        pw: yourpw
-        host: localhost
-        port: 3306
-    misc:
-        storage: sqlite
-        storageFile: storage/Ree6.db
-        poolSize: 10
+  
+  # SQL Configuration
+  sql:
+    user: root
+    db: root
+    pw: yourpw
+    host: localhost
+    port: 3306
+  
+  # Misc Configuration
+  misc:
+    storage: sqlite
+    storageFile: storage/Ree6.db
+    poolSize: 10
+
+# Heartbeat Configuration, for status reporting
+heartbeat:
+  url: none # The URL to the Heartbeat-Server
+  interval: 60
+
 dagpi:
-    apitoken: yourdagpixyztokenhere
+  apitoken: yourdagpixyztokenhere # Your Dagpi.xyz API-Token, for tweet image generation!
+
+amari:
+  apitoken: Amari API-Token # Your Amari API-Token, for Amari Level imports!
+
 sentry:
-    dsn: yourSentryDSNHere
+  dsn: yourSentryDSNHere # Your Sentry DSN, for error reporting!
+
+# Spotify Application Configuration, used to parse Spotify Tracks/Playlists to YouTube search queries.
 spotify:
-    client:
-        id: yourspotifyclientid
-        secret: yourspotifyclientsecret
+  client:
+    id: yourspotifyclientid
+    secret: yourspotifyclientsecret
+
+# Twitch Application Configuration, used for the StreamTools and Twitch Notifications.
 twitch:
-    client:
-        id: yourtwitchclientidhere
-        secret: yourtwitchclientsecrethere
+  client:
+    id: yourtwitchclientidhere
+    secret: yourtwitchclientsecrethere
+
+# Twitter Application Configuration, used for the Twitter Notifications.
 twitter:
-    consumer:
-        key: yourTwitterConsumerKey
-        secret: yourTwitterConsumerSecret
-    access:
-        key: yourTwitterAccessKey
-        secret: yourTwitterAccessSecret
+  consumer:
+    key: yourTwitterConsumerKey
+    secret: yourTwitterConsumerSecret
+  access:
+    key: yourTwitterAccessKey
+    secret: yourTwitterAccessSecret
+
+# Reddit Application Configuration, used for the Reddit Notification.
 reddit:
-    client:
-        id: yourredditclientid
-        secret: yourredditclientsecret
+  client:
+    id: yourredditclientid
+    secret: yourredditclientsecret
+
+# Instagram Application Configuration, used for the Instagram Notification.
 instagram:
-    username: yourInstagramUsername
-    password: yourInstagramPassword
+  username: yourInstagramUsername
+  password: yourInstagramPassword
+
+# Discord Application Configuration, used for OAuth and Bot Authentication.
 bot:
-    tokens:
-        release: ReleaseTokenhere
-        beta: BetaTokenhere
-        dev: DevTokenhere
+  tokens:
+    release: ReleaseTokenhere # Token used when set to release build.
+    beta: BetaTokenhere # Token used when set to beta build.
+    dev: DevTokenhere # Token used when set to dev build.
