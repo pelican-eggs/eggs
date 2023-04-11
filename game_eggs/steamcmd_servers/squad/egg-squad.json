@@ -101,7 +101,7 @@
             "field_type": "text"
         },
         {
-            "name": "Reserved Slows",
+            "name": "Reserved Slots",
             "description": "The number of reserved slots for admins \/ mods",
             "env_variable": "reservedslots",
             "default_value": "0",
