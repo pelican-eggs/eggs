@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-13T11:04:16+01:00",
+    "exported_at": "2023-04-11T11:41:50-06:00",
     "name": "Squad",
     "author": "brycea@terrahost.cloud",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
@@ -101,7 +101,7 @@
             "field_type": "text"
         },
         {
-            "name": "Reserved Slows",
+            "name": "Reserved Slots",
             "description": "The number of reserved slots for admins \/ mods",
             "env_variable": "reservedslots",
             "default_value": "0",
