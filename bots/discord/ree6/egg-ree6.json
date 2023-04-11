@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-26T18:17:01+01:00",
+    "exported_at": "2023-04-11T02:06:32+02:00",
     "name": "Ree6",
-    "author": "josdekurk@gmail.com",
+    "author": "presti@presti.me",
     "description": "All-in-one, open source and 100% free Discord Bot!",
     "features": null,
     "docker_images": {
@@ -15,14 +15,14 @@
     "file_denylist": [],
     "startup": "java -Dnogui=true -jar Ree6.jar",
     "config": {
-        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"dagpi.apitoken\": \"{{server.build.env.DAGPI_TOKEN}}\",\r\n            \"sentry.dsn\": \"{{server.build.env.SENTRY_DSN}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"hikari.sql.user\": \"{{server.build.env.DATABASE_USER}}\",\r\n            \"hikari.sql.db\": \"{{server.build.env.DATABASE_DB}}\",\r\n            \"hikari.sql.pw\": \"{{server.build.env.DATABASE_PW}}\",\r\n            \"hikari.sql.host\": \"{{server.build.env.DATABASE_HOST}}\",\r\n            \"hikari.sql.port\": \"{{server.build.env.DATABASE_PORT}}\",\r\n            \"hikari.misc.storage\": \"{{server.build.env.DATABASE_TYP}}\",\r\n            \"hikari.misc.storageFile\": \"{{server.build.env.DATABASE_FILE}}\",\r\n            \"hikari.misc.poolSize\": \"{{server.build.env.DATABASE_POOL}}\",\r\n            \"heartbeat.url\": \"{{server.build.env.HEARTBEAT_URL}}\",\r\n            \"heartbeat.interval\": \"{{server.build.env.HEARTBEAT_INTERVAL}}\",\r\n            \"dagpi.apitoken\": \"{{server.build.env.DAGPI_TOKEN}}\",\r\n            \"amari.apitoken\": \"{{server.build.env.AMARI_TOKEN}}\",\r\n            \"sentry.dsn\": \"{{server.build.env.SENTRY_DSN}}\",\r\n            \"spotify.client.id\": \"{{server.build.env.SPOTIFY_CLIENT_ID}}\",\r\n            \"spotify.client.secret\": \"{{server.build.env.SPOTIFY_CLIENT_SECRET}}\",\r\n            \"twitch.client.id\": \"{{server.build.env.TWITCH_CLIENT_ID}}\",\r\n            \"twitch.client.secret\": \"{{server.build.env.TWITCH_CLIENT_SECRET}}\",\r\n            \"twitter.consumer.key\": \"{{server.build.env.TWITTER_CONSUMER_ID}}\",\r\n            \"twitter.consumer.secret\": \"{{server.build.env.TWITTER_CONSUMER_SECRET}}\",\r\n            \"twitter.access.key\": \"{{server.build.env.TWITTER_ACCESS_ID}}\",\r\n            \"twitter.access.secret\": \"{{server.build.env.TWITTER_ACCESS_SECRET}}\",\r\n            \"reddit.client.id\": \"{{server.build.env.REDDIT_CLIENT_ID}}\",\r\n            \"reddit.client.secret\": \"{{server.build.env.REDDIT_CLIENT_SECRET}}\",\r\n            \"instagram.username\": \"{{server.build.env.INSTAGRAM_USERNAME}}\",\r\n            \"instagram.password\": \"{{server.build.env.INSTAGRAM_PASSWORD}}\",\r\n            \"bot.tokens.release\": \"{{server.build.env.BOT_TOKEN}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y jq curl\r\n\r\n\r\nCONFIG_LINK=\"https:\/\/pteropaste.com\/0z244lpj9ku6\"\r\nMATCH=jar-with-dependencies.jar\r\n\r\n\r\n# get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/Ree6-Applications\/Ree6\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/Ree6-Applications\/Ree6\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH}| head -1)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH} | head -1)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH}| head -1)\r\n    fi\r\nfi\r\n\r\n## Ree6 Setup\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating Ree6...\\n\"\r\n\r\nif [ -f Ree6.jar ]; then\r\n    echo -e \"Updating Ree6.jar to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"Ree6.jar-old\")'\r\n    mv -f Ree6.jar Ree6.jar-old\r\nfi\r\n\r\necho -e \"Running: curl -sSL -o Ree6.jar ${DOWNLOAD_LINK}\\n\"\r\ncurl -sSL -o Ree6.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.yml ]; then\r\n    echo -e \"Updating config.yml to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"config.yml-old\")'\r\n    mv -f config.yml config.yml-old\r\nfi\r\necho -e \"Running: curl -sSL -o config.yml ${CONFIG_LINK}\\n\"\r\ncurl -sSL -o config.yml ${CONFIG_LINK}\r\n\r\necho -e \"\\nRee6 Successfully Installed!\"",
+            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\napt update\r\napt install -y jq curl\r\nGITHUB_PACKAGE=\"Ree6-Applications\/Ree6\"\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/DxsSucuk\/eggs\/master\/bots\/discord\/ree6\/config.yml\"\r\nMATCH=\"^Ree6-.*-jar-with-dependencies\\\\.jar$\"\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\necho -e \"No Github user set. Using anonymous API call...\"\r\nelse\r\necho -e \"User and OAuth token set.\"\r\nalias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n# get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\nDOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq -r --arg MATCH \"$MATCH\" '.assets[] | select(.name | test($MATCH)) | .browser_download_url' | head -1)\r\nelse\r\nVERSION_CHECK=$(echo ${RELEASES} | jq -r --arg MATCH \"$MATCH\" --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\nif [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\nDOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg MATCH \"$MATCH\" --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[] | select(.name | test($MATCH)) | .browser_download_url' | head -1)\r\nelse\r\necho -e \"Defaulting to the latest release.\"\r\nDOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r --arg MATCH \"$MATCH\" '.[]| .assets[] | select(.name | test($MATCH)) | .browser_download_url' | head -1)\r\nfi\r\nfi\r\n## Ree6 Setup\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating Ree6...\\n\"\r\nif [ -f Ree6.jar ]; then\r\necho -e \"Updating Ree6.jar to latest version...\"\r\necho -e '\\t(Old version can be found at \"Ree6.jar-old\")'\r\nmv -f Ree6.jar Ree6.jar-old\r\nfi\r\necho -e \"Running: curl -sSLo Ree6.jar ${DOWNLOAD_LINK}\\n\"\r\ncurl -sSLo Ree6.jar ${DOWNLOAD_LINK}\r\nif [ -f config.yml ]; then\r\necho -e \"Updating config.yml to latest version...\"\r\necho -e '\\t(Old version can be found at \"config.yml-old\")'\r\nmv -f config.yml config.yml-old\r\nfi\r\necho -e \"Running: curl -sSLo config.yml ${CONFIG_LINK}\\n\"\r\ncurl -sSLo config.yml ${CONFIG_LINK}\r\necho -e \"\\nRee6 Successfully Installed!\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
@@ -35,47 +35,257 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|",
+            "rules": "required|string",
             "field_type": "text"
         },
         {
             "name": "Dagpi token",
-            "description": "https:\/\/dagpi.xyz\/",
+            "description": "Your Dagpi.xyz API-Token, for tweet image generation!",
             "env_variable": "DAGPI_TOKEN",
-            "default_value": "",
+            "default_value": "DAGPI.xyz API-Token",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "string",
             "field_type": "text"
         },
         {
-            "name": "Sentry api token",
-            "description": "",
+            "name": "Sentry DSN",
+            "description": "Your Sentry DSN, for error reporting!",
             "env_variable": "SENTRY_DSN",
-            "default_value": "",
+            "default_value": "yourSentryDSNHere",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
             "field_type": "text"
         },
         {
-            "name": "spotify client id",
-            "description": "",
-            "env_variable": "SPOT_CLIENT_ID",
-            "default_value": "",
+            "name": "Spotify Client Id",
+            "description": "Spotify Application Configuration, used to parse Spotify Tracks\/Playlists to YouTube search queries.",
+            "env_variable": "SPOTIFY_CLIENT_ID",
+            "default_value": "yourspotifyclientid",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Spotify Client Secret",
+            "description": "Spotify Application Configuration, used to parse Spotify Tracks\/Playlists to YouTube search queries.",
+            "env_variable": "SPOTIFY_CLIENT_SECRET",
+            "default_value": "yourspotifyclientsecret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Heartbeat Url",
+            "description": "The URL to the Heartbeat-Server",
+            "env_variable": "HEARTBEAT_URL",
+            "default_value": "none",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Heartbeat Interval",
+            "description": "The interval between the heartbeats.",
+            "env_variable": "HEARTBEAT_INTERVAL",
+            "default_value": "60",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Amari Token",
+            "description": "Your Amari API-Token, for Amari Level imports!",
+            "env_variable": "AMARI_TOKEN",
+            "default_value": "Amari API-Token",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitch Client Id",
+            "description": "Twitch Application Configuration, used for the StreamTools and Twitch Notifications.",
+            "env_variable": "TWITCH_CLIENT_ID",
+            "default_value": "yourtwitchclientidhere",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitch Client Secret",
+            "description": "Twitch Application Configuration, used for the StreamTools and Twitch Notifications.",
+            "env_variable": "TWITCH_CLIENT_SECRET",
+            "default_value": "yourtwitchclientsecrethere",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitter Consumer Key",
+            "description": "Twitter Application Configuration, used for the Twitter Notifications.",
+            "env_variable": "TWITTER_CONSUMER_KEY",
+            "default_value": "yourTwitterConsumerKey",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitter Consumer Secret",
+            "description": "Twitter Application Configuration, used for the Twitter Notifications.",
+            "env_variable": "TWITTER_CONSUMER_SECRET",
+            "default_value": "yourTwitterConsumerSecret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitter Access Key",
+            "description": "Twitter Application Configuration, used for the Twitter Notifications.",
+            "env_variable": "TWITTER_ACCESS_KEY",
+            "default_value": "yourTwitterAccessKey",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitter Access Secret",
+            "description": "Twitter Application Configuration, used for the Twitter Notifications.",
+            "env_variable": "TWITTER_ACCESS_SECRET",
+            "default_value": "yourTwitterAccessSecret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Reddit Client Id",
+            "description": "Reddit Application Configuration, used for the Reddit Notification.",
+            "env_variable": "REDDIT_CLIENT_ID",
+            "default_value": "yourredditclientid",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Reddit Client Secret",
+            "description": "Reddit Application Configuration, used for the Reddit Notification.",
+            "env_variable": "REDDIT_CLIENT_SECRET",
+            "default_value": "yourredditclientsecret",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Instagram Username",
+            "description": "Instagram Application Configuration, used for the Instagram Notification.",
+            "env_variable": "INSTAGRAM_USERNAME",
+            "default_value": "yourInstagramUsername",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Instagram Password",
+            "description": "Instagram Application Configuration, used for the Instagram Notification.",
+            "env_variable": "INSTAGRAM_PASSWORD",
+            "default_value": "yourInstagramPassword",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Username",
+            "description": "Username for the SQL connection.",
+            "env_variable": "SQL_USER",
+            "default_value": "root",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Database",
+            "description": "Database for the SQL Connection",
+            "env_variable": "SQL_DB",
+            "default_value": "root",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Password",
+            "description": "Password for the SQL connection.",
+            "env_variable": "SQL_PW",
+            "default_value": "yourpw",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Port",
+            "description": "Port for the SQL connection.",
+            "env_variable": "SQL_PORT",
+            "default_value": "3306",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Database Typ",
+            "description": "The Typ of the Database Ree6 should use!\r\nPossible typs:\r\n- mariadb\r\n- sqlite",
+            "env_variable": "DATABASE_TYP",
+            "default_value": "sqlite",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Database Storagefile",
+            "description": "The location of the storagefile if sqlite is being used.",
+            "env_variable": "DATABASE_FILE",
+            "default_value": "storage\/Ree6.db",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
             "field_type": "text"
         },
         {
-            "name": "spotify client secret",
-            "description": "",
-            "env_variable": "SPOT_CLIENT_SECRET",
-            "default_value": "",
+            "name": "[DEVELOPER-STUFF] Database Poolsize",
+            "description": "The Database connection pool size!",
+            "env_variable": "DATABASE_POOL",
+            "default_value": "10",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|",
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Database host",
+            "description": "The Host address of the Database connection.",
+            "env_variable": "DATABASE_HOST",
+            "default_value": "localhost",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
             "field_type": "text"
         }
     ]
