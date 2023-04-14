@@ -1,0 +1,102 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-04-14T17:26:50+02:00",
+    "name": "Folding@Home",
+    "author": "noreply@krk-gaming.de",
+    "description": "Folding@home is a distributed computing project aimed to help scientists develop new therapeutics for a variety of diseases by the means of simulating protein dynamics. This includes the process of protein folding and the movements of proteins, and is reliant on simulations run on volunteers' personal computers",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/FAHClient --user={{FAH_USERNAME}} --team={{FAH_TEAM}} --passkey={{FAH_PASSKEY}} $(if {{FAH_ANON}}; then echo \"--fold-anon=true\"; fi) --command-port={{SERVER_PORT}} --password={{FAH_PASSWORD}} --power={{FAH_POWER}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Started FahCore\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n#\r\n# Folding@Home install script\r\n#\r\n# Created by Fuggschen\r\n\r\nexport DEBIAN_FRONTEND=noninteractive\r\ncd \/tmp\r\n\r\necho \"Removing previous Version\"\r\nmv \/mnt\/server\/config.xml \/tmp\/config.xml\r\nrm -rf \/mnt\/server\/*\r\n\r\necho \"Installing dependencies\"\r\napt update && apt upgrade -y && apt install bzip2 -y\r\n\r\necho \"Downloading FAHClient\"\r\ncurl -sSL -o fahclient.tar.bz2 https:\/\/download.foldingathome.org\/releases\/public\/release\/fahclient\/debian-stable-64bit\/${FAH_VERSION}\/latest.tar.bz2\r\n\r\necho \"Installing FAHClient\"\r\ntar -xjf fahclient.tar.bz2 -C \/mnt\/server --strip-components=1\r\n\r\necho \"Cleaning up..\"\r\nrm -f fahclient.tar.bz2\r\nrm -f \/mnt\/server\/sample-config.xml\r\nmv \/tmp\/config.xml \/mnt\/server\/config.xml\r\n\r\necho \"Done!\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "FaH Username",
+            "description": "Your Folding@Home Username",
+            "env_variable": "FAH_USERNAME",
+            "default_value": "Anonymous",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "FaH Team",
+            "description": "Your Folding@Home Team that you are folding for. For reference look here: https:\/\/stats.foldingathome.org\/team",
+            "env_variable": "FAH_TEAM",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int",
+            "field_type": "text"
+        },
+        {
+            "name": "FaH Passkey",
+            "description": "Your Folding@Home Passkey for your Username if not Anonymous",
+            "env_variable": "FAH_PASSKEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "FaH Anonymous Mode",
+            "description": "Set to true if you are folding Anonymously",
+            "env_variable": "FAH_ANON",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "FaH Version",
+            "description": "Set to wanted major Folding@Home Version. Check here: https:\/\/download.foldingathome.org\/releases\/public\/release\/fahclient\/debian-stable-64bit\/",
+            "env_variable": "FAH_VERSION",
+            "default_value": "v7.6",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "FaHControl Password",
+            "description": "Set a WebUI Password",
+            "env_variable": "FAH_PASSWORD",
+            "default_value": "SetPasswordHere",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "FaH Power",
+            "description": "The Powerlevel it should use:\r\n- light (only half the cpu power is used)\r\n- medium (full cpu power)\r\n- full (full cpu and gpu power but gpu is not supported)",
+            "env_variable": "FAH_POWER",
+            "default_value": "medium",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:light,medium,full",
+            "field_type": "text"
+        }
+    ]
+}
