@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-14T17:26:50+02:00",
+    "exported_at": "2023-04-15T10:39:28+02:00",
     "name": "Folding@Home",
     "author": "noreply@krk-gaming.de",
     "description": "Folding@home is a distributed computing project aimed to help scientists develop new therapeutics for a variety of diseases by the means of simulating protein dynamics. This includes the process of protein folding and the movements of proteins, and is reliant on simulations run on volunteers' personal computers",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n#\r\n# Folding@Home install script\r\n#\r\n# Created by Fuggschen\r\n\r\nexport DEBIAN_FRONTEND=noninteractive\r\ncd \/tmp\r\n\r\necho \"Removing previous Version\"\r\nmv \/mnt\/server\/config.xml \/tmp\/config.xml\r\nrm -rf \/mnt\/server\/*\r\n\r\necho \"Installing dependencies\"\r\napt update && apt upgrade -y && apt install bzip2 -y\r\n\r\necho \"Downloading FAHClient\"\r\ncurl -sSL -o fahclient.tar.bz2 https:\/\/download.foldingathome.org\/releases\/public\/release\/fahclient\/debian-stable-64bit\/${FAH_VERSION}\/latest.tar.bz2\r\n\r\necho \"Installing FAHClient\"\r\ntar -xjf fahclient.tar.bz2 -C \/mnt\/server --strip-components=1\r\n\r\necho \"Cleaning up..\"\r\nrm -f fahclient.tar.bz2\r\nrm -f \/mnt\/server\/sample-config.xml\r\nmv \/tmp\/config.xml \/mnt\/server\/config.xml\r\n\r\necho \"Done!\"",
+            "script": "#!\/bin\/bash\r\n#\r\n# Folding@Home install script\r\n#\r\n# Created by Fuggschen\r\n\r\nexport DEBIAN_FRONTEND=noninteractive\r\ncd \/tmp\r\n\r\necho \"Removing previous Version\"\r\nmv \/mnt\/server\/config.xml \/tmp\/config.xml\r\nrm -rf \/mnt\/server\/*\r\n\r\necho \"Installing dependencies\"\r\napt update && apt upgrade -y && apt install bzip2 -y\r\n\r\necho \"Downloading FAHClient\"\r\ncurl -sSL -o fahclient.tar.bz2 https:\/\/download.foldingathome.org\/releases\/public\/release\/fahclient\/debian-stable-64bit\/${FAH_VERSION}\/latest.tar.bz2\r\n\r\necho \"Installing FAHClient\"\r\ntar -xjf fahclient.tar.bz2 -C \/mnt\/server --strip-components=1\r\n\r\necho \"Cleaning up..\"\r\nrm -f fahclient.tar.bz2\r\nrm -f \/mnt\/server\/sample-config.xml\r\nmv \/tmp\/config.xml \/mnt\/server\/config.xml\r\n\r\nFILE=\/mnt\/server\/config.xml\r\nif [[ ! -f  $FILE ]]\r\nthen\r\necho \"Setting up config.xml\"\r\ncat > $FILE << EOF\r\n<config>\r\n  <!-- Folding Slots -->\r\n  <slot id='0' type='CPU'\/>\r\n  <!-- Maximum CPU Cores to use. Can't be more than 64 -->\r\n  <cpus v='64'\/>\r\n<\/config>\r\nEOF\r\nfi\r\n\r\n\r\necho \"Done!\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
