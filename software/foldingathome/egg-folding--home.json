@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-15T10:39:28+02:00",
+    "exported_at": "2023-04-15T19:27:24+02:00",
     "name": "Folding@Home",
-    "author": "fuggschen@krk-gaming.de",
+    "author": "noreply@krk-gaming.de",
     "description": "Folding@home is a distributed computing project aimed to help scientists develop new therapeutics for a variety of diseases by the means of simulating protein dynamics. This includes the process of protein folding and the movements of proteins, and is reliant on simulations run on volunteers' personal computers",
     "features": null,
     "docker_images": {
@@ -50,7 +50,7 @@
         },
         {
             "name": "FaH Passkey",
-            "description": "Your Folding@Home Passkey for your Username if not Anonymous",
+            "description": "Your Folding@Home Passkey for your Username, if not Anonymous. Get your Passkey here: https:\/\/apps.foldingathome.org\/getpasskey",
             "env_variable": "FAH_PASSKEY",
             "default_value": "",
             "user_viewable": true,

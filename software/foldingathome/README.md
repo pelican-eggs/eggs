@@ -2,6 +2,14 @@
 
 [Folding@Home](https://foldingathome.org/) is a distributed computing project aimed at simulating protein folding and other molecular dynamics.
 
+## User Account
+
+You can setup an User Account to track your PPD (Points per Day) and done WUs (Work Units). To get a Passkey visit the [Folding@home Passkey Site](https://apps.foldingathome.org/getpasskey)
+
+## Teams
+
+You can add your earned Points to a Team that you support. This is not nessesary as the points are just to track how much work was done (with some exeptions). Here is the [full List of the Teams](https://stats.foldingathome.org/team)
+
 ## Remote Control
 
 You can connect via FAHControl to your instance. WebUI is not supported because it wouldn't be password protected.
@@ -14,7 +22,7 @@ There are three power modes:
 - full
 
 Only light and medium are useful because full enables gpu which is not supported in this egg.
-Light uses half of the available cpu cores **of your system**. Full uses **all of your cpu cores.** You can still limit the cpu usage via the panel.
+Light uses half of the available **cpu cores of your system**. Full uses **all of your cpu cores.** You can still limit the cpu usage via the panel.
 
 ## Supported Versions
 
