@@ -6,7 +6,7 @@
     },
     "exported_at": "2023-04-15T19:27:24+02:00",
     "name": "Folding@Home",
-    "author": "noreply@krk-gaming.de",
+    "author": "fuggschen@krk-gaming.de",
     "description": "Folding@home is a distributed computing project aimed to help scientists develop new therapeutics for a variety of diseases by the means of simulating protein dynamics. This includes the process of protein folding and the movements of proteins, and is reliant on simulations run on volunteers' personal computers",
     "features": null,
     "docker_images": {
