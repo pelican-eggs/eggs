@@ -166,6 +166,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Glowstone](game_eggs/minecraft/java/glowstone)
   * [Limbo](game_eggs/minecraft/java/limbo)
   * [Magma](game_eggs/minecraft/java/magma)
+  * [Modrinth](game_eggs/minecraft/java/modrinth)
   * [Mohist](game_eggs/minecraft/java/mohist)
   * [NanoLimbo](game_eggs/minecraft/java/nanolimbo)
   * [Paper](game_eggs/minecraft/java/paper)

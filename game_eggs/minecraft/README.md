@@ -25,6 +25,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Limbo](java/limbo)
 * [Krypton](java/krypton)
 * [Magma](java/magma)
+* [Modrinth](java/modrinth)
 * [Mohist](java/mohist)
 * [NanoLimbo](java/nanolimbo)
 * [Paper](java/paper)
