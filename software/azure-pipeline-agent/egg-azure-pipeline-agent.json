@@ -1,0 +1,82 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-01-15T23:01:12+01:00",
+    "name": "Azure Pipeline Agent",
+    "author": "yannick@netdb.at",
+    "description": "Allows your to host your Azure Pipeline Self-Hosted Agent on Pterodactyl",
+    "features": null,
+    "docker_images": {
+        "Debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/run.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Listening for Jobs\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\nmkdir -p \/mnt\/server\r\napt update\r\napt install -y curl tar jq git\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/microsoft\/azure-pipelines-agent\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/microsoft\/azure-pipelines-agent\/releases\")\r\nMATCH=assets.json\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\nDOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\nVERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\nif [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\nDOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\nelse\r\necho -e \"defaulting to latest release\"\r\nDOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\nfi\r\nfi\r\ncd \/tmp\r\ncurl -sSL -o assets.json ${DOWNLOAD_URL}\r\nREAL_DOWNLOAD_URL=$(cat assets.json | jq -r .[].downloadUrl | grep -i vsts-agent | grep -i ${ARCH})\r\ncd \/mnt\/server\r\n\r\ncurl -o vsts-agent.tar.gz -sSL ${REAL_DOWNLOAD_URL}\r\ntar xzf vsts-agent.tar.gz\r\nrm vsts-agent.tar.gz\r\n\r\nexport AGENT_ALLOW_RUNASROOT=\"1\"\r\n.\/config.sh --unattended --acceptTeeEula --url ${SERVER_URL} --auth PAT --token ${PAT} --pool ${POOL_NAME} --agent ${AGENT_NAME}\r\necho \"-----------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-----------------------------------------\"",
+            "container": "bitnami\/dotnet-sdk:6-debian-11",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Url",
+            "description": "The server url should look like this: https:\/\/<your company>.visualstudio.com",
+            "env_variable": "SERVER_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Personal Access Token (PAT)",
+            "description": "https:\/\/learn.microsoft.com\/en-us\/azure\/devops\/organizations\/accounts\/use-personal-access-tokens-to-authenticate",
+            "env_variable": "PAT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Pool Name",
+            "description": "",
+            "env_variable": "POOL_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Agent Name",
+            "description": "",
+            "env_variable": "AGENT_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

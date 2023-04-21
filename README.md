@@ -345,6 +345,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Elasticsearch](/software/elasticsearch)
 
+### Azure Pipeline Agent
+
+* [Azure Pipeline Agent](/software/azure-pipeline-agent)
+
 ### Gitea
 
 * [Gitea](/software/gitea)
