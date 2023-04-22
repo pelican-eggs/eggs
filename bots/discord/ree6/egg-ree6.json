@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-11T02:06:32+02:00",
+    "exported_at": "2023-04-22T20:23:22+02:00",
     "name": "Ree6",
     "author": "presti@presti.me",
     "description": "All-in-one, open source and 100% free Discord Bot!",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\napt update\r\napt install -y jq curl\r\nGITHUB_PACKAGE=\"Ree6-Applications\/Ree6\"\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/DxsSucuk\/eggs\/master\/bots\/discord\/ree6\/config.yml\"\r\nMATCH=\"^Ree6-.*-jar-with-dependencies\\\\.jar$\"\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\necho -e \"No Github user set. Using anonymous API call...\"\r\nelse\r\necho -e \"User and OAuth token set.\"\r\nalias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n# get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\nDOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq -r --arg MATCH \"$MATCH\" '.assets[] | select(.name | test($MATCH)) | .browser_download_url' | head -1)\r\nelse\r\nVERSION_CHECK=$(echo ${RELEASES} | jq -r --arg MATCH \"$MATCH\" --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\nif [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\nDOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg MATCH \"$MATCH\" --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[] | select(.name | test($MATCH)) | .browser_download_url' | head -1)\r\nelse\r\necho -e \"Defaulting to the latest release.\"\r\nDOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r --arg MATCH \"$MATCH\" '.[]| .assets[] | select(.name | test($MATCH)) | .browser_download_url' | head -1)\r\nfi\r\nfi\r\n## Ree6 Setup\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating Ree6...\\n\"\r\nif [ -f Ree6.jar ]; then\r\necho -e \"Updating Ree6.jar to latest version...\"\r\necho -e '\\t(Old version can be found at \"Ree6.jar-old\")'\r\nmv -f Ree6.jar Ree6.jar-old\r\nfi\r\necho -e \"Running: curl -sSLo Ree6.jar ${DOWNLOAD_LINK}\\n\"\r\ncurl -sSLo Ree6.jar ${DOWNLOAD_LINK}\r\nif [ -f config.yml ]; then\r\necho -e \"Updating config.yml to latest version...\"\r\necho -e '\\t(Old version can be found at \"config.yml-old\")'\r\nmv -f config.yml config.yml-old\r\nfi\r\necho -e \"Running: curl -sSLo config.yml ${CONFIG_LINK}\\n\"\r\ncurl -sSLo config.yml ${CONFIG_LINK}\r\necho -e \"\\nRee6 Successfully Installed!\"",
+            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\napt update\r\napt install -y jq curl\r\n\r\n\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/ree6\/config.yml\"\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/Ree6-Applications\/Ree6\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/Ree6-Applications\/Ree6\/releases\")\r\nMATCH=jar-with-dependencies.jar\r\n\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${MATCH}\" | head -1 )\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i \"${MATCH}\" | head -1)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i *.jar)\r\n    fi\r\nfi\r\n\r\n## Ree6 Setup\r\n[ ! -d \/mnt\/server ] && mkdir -p \/mnt\/server\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating Ree6...\\n\"\r\n\r\nif [ -f Ree6.jar ]; then\r\n    echo -e \"Updating Ree6.jar to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"Ree6.jar-old\")'\r\n    mv -f Ree6.jar Ree6.jar-old\r\nfi\r\n\r\necho -e \"Running: curl -sSL -o Ree6.jar ${DOWNLOAD_LINK}\\n\"\r\ncurl -sSL -o  Ree6.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.yml ]; then\r\n    echo -e \"Updating config.yml to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"config.yml-old\")'\r\n    mv -f config.yml config.yml-old\r\nfi\r\n\r\necho -e \"Running: curl -sSL -o config.yml ${CONFIG_LINK}\\n\"\r\ncurl -sSL -o config.yml ${CONFIG_LINK}\r\n    \r\n\r\necho -e \"\\nRee6 Successfully Installed!\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
@@ -42,40 +42,40 @@
             "name": "Dagpi token",
             "description": "Your Dagpi.xyz API-Token, for tweet image generation!",
             "env_variable": "DAGPI_TOKEN",
-            "default_value": "DAGPI.xyz API-Token",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Sentry DSN",
             "description": "Your Sentry DSN, for error reporting!",
             "env_variable": "SENTRY_DSN",
-            "default_value": "yourSentryDSNHere",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Spotify Client Id",
             "description": "Spotify Application Configuration, used to parse Spotify Tracks\/Playlists to YouTube search queries.",
             "env_variable": "SPOTIFY_CLIENT_ID",
-            "default_value": "yourspotifyclientid",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Spotify Client Secret",
             "description": "Spotify Application Configuration, used to parse Spotify Tracks\/Playlists to YouTube search queries.",
             "env_variable": "SPOTIFY_CLIENT_SECRET",
-            "default_value": "yourspotifyclientsecret",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
@@ -102,110 +102,110 @@
             "name": "Amari Token",
             "description": "Your Amari API-Token, for Amari Level imports!",
             "env_variable": "AMARI_TOKEN",
-            "default_value": "Amari API-Token",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Twitch Client Id",
             "description": "Twitch Application Configuration, used for the StreamTools and Twitch Notifications.",
             "env_variable": "TWITCH_CLIENT_ID",
-            "default_value": "yourtwitchclientidhere",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Twitch Client Secret",
             "description": "Twitch Application Configuration, used for the StreamTools and Twitch Notifications.",
             "env_variable": "TWITCH_CLIENT_SECRET",
-            "default_value": "yourtwitchclientsecrethere",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Twitter Consumer Key",
             "description": "Twitter Application Configuration, used for the Twitter Notifications.",
             "env_variable": "TWITTER_CONSUMER_KEY",
-            "default_value": "yourTwitterConsumerKey",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Twitter Consumer Secret",
             "description": "Twitter Application Configuration, used for the Twitter Notifications.",
             "env_variable": "TWITTER_CONSUMER_SECRET",
-            "default_value": "yourTwitterConsumerSecret",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Twitter Access Key",
             "description": "Twitter Application Configuration, used for the Twitter Notifications.",
             "env_variable": "TWITTER_ACCESS_KEY",
-            "default_value": "yourTwitterAccessKey",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Twitter Access Secret",
             "description": "Twitter Application Configuration, used for the Twitter Notifications.",
             "env_variable": "TWITTER_ACCESS_SECRET",
-            "default_value": "yourTwitterAccessSecret",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Reddit Client Id",
             "description": "Reddit Application Configuration, used for the Reddit Notification.",
             "env_variable": "REDDIT_CLIENT_ID",
-            "default_value": "yourredditclientid",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Reddit Client Secret",
             "description": "Reddit Application Configuration, used for the Reddit Notification.",
             "env_variable": "REDDIT_CLIENT_SECRET",
-            "default_value": "yourredditclientsecret",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Instagram Username",
             "description": "Instagram Application Configuration, used for the Instagram Notification.",
             "env_variable": "INSTAGRAM_USERNAME",
-            "default_value": "yourInstagramUsername",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Instagram Password",
             "description": "Instagram Application Configuration, used for the Instagram Notification.",
             "env_variable": "INSTAGRAM_PASSWORD",
-            "default_value": "yourInstagramPassword",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
@@ -215,7 +215,7 @@
             "default_value": "root",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "string|max:32",
             "field_type": "text"
         },
         {
@@ -225,17 +225,17 @@
             "default_value": "root",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "string|max:64",
             "field_type": "text"
         },
         {
             "name": "SQL Password",
             "description": "Password for the SQL connection.",
             "env_variable": "SQL_PW",
-            "default_value": "yourpw",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         },
         {
@@ -255,7 +255,7 @@
             "default_value": "sqlite",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:mariadb,sqlite",
             "field_type": "text"
         },
         {
@@ -265,7 +265,7 @@
             "default_value": "storage\/Ree6.db",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "required|string|max:32",
             "field_type": "text"
         },
         {
@@ -285,7 +285,7 @@
             "default_value": "localhost",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string",
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         }
     ]
