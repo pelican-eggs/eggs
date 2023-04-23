@@ -43,6 +43,11 @@ Was used to test python services.
 [Cog-Creators/Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot)
 A multifunction Discord bot
 
+### [Ree6](ree6)
+
+[Ree6-Applications](https://github.com/Ree6-Applications/Ree6)
+All-in-one, open source and 100% free Discord Bot! 
+
 ### [SinusBot](sinusbot)
 
 [SinusBot](https://www.sinusbot.com/)
