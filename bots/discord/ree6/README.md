@@ -67,3 +67,7 @@ ___
 Re-Installing the server via the panel will do the following:
 
 1. Update the bot to the latest version.
+
+
+## API keys
+This bot uses a lot of api keys. It will print some errors to the console if you don't have some filled in but the bot should still function as normal with the api keys you entered.
