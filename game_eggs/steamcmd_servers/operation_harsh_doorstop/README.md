@@ -11,6 +11,9 @@ This does not account for any future MODS installed to the server.
 
 ## Server Ports:
 These ports are mandatory for the server to run sucessfully.
+The 'Steam' port is locked to configured +1 of the 'Game port'
+from within internal server programming and cannot be detacted.
+Changing port from original 7777 must account for +1 from desired port.
 
 | Port  |Default|Protocol|
 |-------|-------|----|
