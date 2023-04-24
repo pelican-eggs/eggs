@@ -4,55 +4,63 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-11T19:59:13+01:00",
-    "name": "Operation Harsh Doorstop",
-    "author": "josdekurk@gmail.com",
+    "exported_at": "2023-04-23T02:14:14-05:00",
+    "name": "Operation: Harsh Doorstop - Dedicated Server",
+    "author": "admin@idmcommunity.com",
     "description": "Operation: Harsh Doorstop is an Unreal Engine powered shooter sandbox similar to mod-friendly games like Ravenfield and Garry's Mod but with roots in tactical shooters like Squad and Arma III. Our game is entirely donation funded, completely free, and has full Steam workshop support!",
-    "features": [
-        "steam_disk_space"
-    ],
+    "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+        "SteamCMD": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": ".\/HarshDoorstop\/Binaries\/Linux\/HarshDoorstopServer-Linux-Shipping HarshDoorstop AAS-TestMap?MaxPlayers={{MAX_PLAYERS}} -SteamServerName=\"{{SERVER_NAME}}\" -Port={{SERVER_PORT}} -MULTIHOME=0.0.0.0 -QueryPort={{QUERY_PORT}} -RCONPort={{RCON_PORT}} -EnableRCON -RCONMaxAuthAttempts={{RCON_MAX_AUTH_ATTEMPTS}} -RCONPassword=\"{{RCON_PASSWORD}}\" -RCONMaxActiveConnections={{RCON_MAX_CONNECTIONS}}",
+    "startup": "HarshDoorstop\/Binaries\/Linux\/HarshDoorstopServer-Linux-Shipping HarshDoorstop {{STARTING_MAP}}?MaxPlayers={{MAX_PLAYERS}}?MinPlayers={{MIN_PLAYERS}}$( [ {{SERVER_PASSWORD}} ] && printf %s \"?Password=\\\"{{SERVER_PASSWORD}}\\\"\" )$( [ ! -z {{BLU_FACTION}} ] && printf %s \"?BluforFaction={{BLU_FACTION}}\" )$( [ ! -z {{OP_FACTION}} ] && printf %s \"?OpforFaction={{OPFOR_FACTION}}\" )$( [ ! -z {{BLU_TICKETS}} ] && printf %s \"?BluforNumTickets={{BLU_TICKETS}}\" )$( [ ! -z {{OP_TICKETS}} ] && printf %s \"?OpforNumTickets={{OP_TICKETS}}\" )$( [ {{BOT_FILL}} -eq 1 ] && printf %s \"?BotAutofill=\\\"{{BOT_FILL}}\\\"\" )$( [ ! -z {{AUTO_ASSIGN}} ] && printf %s \"?AutoAssignHuman=\\\"{{AUTO_ASSIGN}}\\\"\" )$( [ {{KIT_RESTRICT}} -eq 1 ] && printf %s \"?DisableKitRestrictions\" ) $( [ {{ENABLE_LOG}} -eq 1 ] && printf %s \"-log\" ) -MULTIHOME=0.0.0.0 -Port={{SERVER_PORT}} -QueryPort={{SERVER_QUERYPORT}} $( [ {{ENABLE_RCON}} -eq 1 ] && printf %s \"-EnableRCON\" ) -RCONPort={{SERVER_RCONPORT}} -RCONMaxAuthAttempts={{RCON_ATTEMPTS}} -RCONPassword=\"{{RCON_PASSWORD}}\" -RCONMaxActiveConnections=3 -SteamServerName=\"{{HOSTNAME}}\" -MapCycle=\"MapCycle.cfg\" -Whitelist=\"Whitelist.cfg\" -AdminList=\"Adminlist.cfg\"$( [ {{SUPPORTERS_ONLY}} -eq 1 ] && printf %s \" -SupportersOnly\" )",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"LogRCON: RCON server listening on\"\r\n}",
+        "startup": "{\r\n    \"done\": \"LogGameMode: === SERVER IS HIBERNATING ===\"\r\n}",
         "logs": "{}",
         "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\nmkdir -p \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/\r\ncd \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/\r\ntouch Game.ini\r\ntee -a mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/Game.ini << END\r\n[\/Script\/RCON.RCONServerSystem]\r\nbEnabled=True\r\nListenPort=7779\r\nPassword=\"LetMeIn\"\r\nMaxActiveConnections=5\r\nMaxAuthAttempts=3\r\n\r\n[\/Script\/Engine.GameSession]\r\nMaxPlayers=32\r\nServerName=\"My Awesome Server\"\r\nPassword=\"cookies\"\r\nEND\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "script": "#!\/bin\/bash\r\n## Server Work Directory: \/mnt\/server\r\n\r\nSRCDS_APPID=950900\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## Download && Install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit \r\n\r\n## Setup 32-bit Libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## Setup 64-bit Libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nif [ ! -f \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/ ]\r\n{\r\nmkdir -p \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/\r\ncd \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/\r\nif \r\ntouch Game.ini\r\ntee -a mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/Game.ini << END\r\n[\/Script\/Engine.GameSession]\r\nMaxPlayers=32\r\nServerName=\"My Server\"\r\nPassword=\"Cookies\"\r\nEND\r\n}",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Autop update",
-            "description": "Auto update the server on startup",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "1",
+            "name": "Server Hostname",
+            "description": "The server's public hostname.",
+            "env_variable": "HOSTNAME",
+            "default_value": "IDM Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean",
+            "rules": "string|max:32|required",
             "field_type": "text"
         },
         {
-            "name": "app id",
-            "description": "",
-            "env_variable": "SRCDS_APPID",
-            "default_value": "950900",
-            "user_viewable": false,
+            "name": "Query Port",
+            "description": "The server's game browser querry port.",
+            "env_variable": "SERVER_QUERYPORT",
+            "default_value": "28082",
+            "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|in:950900",
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto-Fill Bots",
+            "description": "Whether or not server fills with bots to MIN player level.",
+            "env_variable": "BOT_FILL",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
             "field_type": "text"
         },
         {
             "name": "Max Players",
-            "description": "Maximum number of players allowed by this server.",
+            "description": "Maximum allowed player count.",
             "env_variable": "MAX_PLAYERS",
             "default_value": "32",
             "user_viewable": true,
@@ -61,39 +69,49 @@
             "field_type": "text"
         },
         {
-            "name": "Server name",
-            "description": "Defines the display or host name of the game server when listed in a server browser",
-            "env_variable": "SERVER_NAME",
-            "default_value": "Harsh Doorstop Dedicated Server",
+            "name": "Minimum Players",
+            "description": "Used to determin how many players are required for a game session to start:\r\n(Will autofill server with bots)\r\n(Set \"Auto-Fill Bots\" to enabled)\r\n(Set to 1 For Co-Op Gamemode)",
+            "env_variable": "MIN_PLAYERS",
+            "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:200",
+            "rules": "required|numeric",
             "field_type": "text"
         },
         {
-            "name": "Query port",
-            "description": "Defines port for Steam master server traffic",
-            "env_variable": "QUERY_PORT",
-            "default_value": "27005",
+            "name": "Server Password",
+            "description": "Add a password prompt in order for players to join the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "alpha-num|max:32|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Password",
+            "description": "Set the Server's RCON Password.",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "ChangeMe123",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:24",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Port",
+            "description": "Server's RCON communication port.",
+            "env_variable": "SERVER_RCONPORT",
+            "default_value": "28093",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|",
+            "rules": "required|numeric",
             "field_type": "text"
         },
         {
-            "name": "Rcon Port",
-            "description": "Defines port for RCON server traffic",
-            "env_variable": "RCON_PORT",
-            "default_value": "7779",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|string|",
-            "field_type": "text"
-        },
-        {
-            "name": "Rcon Max Auth Attempts",
-            "description": "Defines the maximum number of authentication attempts an RCON connection can make before being forcibly disconnected",
-            "env_variable": "RCON_MAX_AUTH_ATTEMPTS",
+            "name": "RCON Max Attempts",
+            "description": "How many maximum wrong RCON password attemps are allowed before IP address is blacklisted.",
+            "env_variable": "RCON_ATTEMPTS",
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
@@ -101,23 +119,123 @@
             "field_type": "text"
         },
         {
-            "name": "Rcon Password",
-            "description": "Defines the password used for authenticating with the RCON server",
-            "env_variable": "RCON_PASSWORD",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:32",
+            "name": "Application ID",
+            "description": "The required and locked-in Application ID for Operation Harsh Doorstop.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "950900",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|in:950900",
             "field_type": "text"
         },
         {
-            "name": "Rcon Max Connections",
-            "description": "Maximum number of concurrent RCON connections",
-            "env_variable": "RCON_MAX_CONNECTIONS",
-            "default_value": "5",
+            "name": "Auto Update",
+            "description": "Whether or not to auto-update the server.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Blufor Faction Name",
+            "description": "Used to Override the Blufor Faction Name.",
+            "env_variable": "BLU_FACTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:24|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Opfor Faction Name",
+            "description": "Used to Override the Opfor Faction Name.",
+            "env_variable": "OP_FACTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:24|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Blufor Faction Tickets",
+            "description": "Override the Default Blufor Faction Tickets Count.",
+            "env_variable": "BLU_TICKETS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Opfor Faction Tickets",
+            "description": "Override the Default Opfor Faction Tickets Count.",
+            "env_variable": "OP_TICKETS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Assign Humans",
+            "description": "Enable or Disable the Auto Assign Humans Players.\r\n0 for OpFor, 1 for BluFor.\r\n(CO-OP Mode)",
+            "env_variable": "AUTO_ASSIGN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "numeric|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Kit Restriction",
+            "description": "Disable the default Enabled Kit Restriction setting.",
+            "env_variable": "KIT_RESTRICT",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Log Enable",
+            "description": "Enable Server Logging.",
+            "env_variable": "ENABLE_LOG",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Enable",
+            "description": "Enable RCON Connections.",
+            "env_variable": "ENABLE_RCON",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Supporters Only",
+            "description": "Enable the Supporters Only Setting.",
+            "env_variable": "SUPPORTERS_ONLY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Starting Map",
+            "description": "Change the Server's Starting Map. (\r\nrisala\r\nkhafji_p\r\nlamdong\r\nmontecassino\r\nargonne )",
+            "env_variable": "STARTING_MAP",
+            "default_value": "Risala",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
             "field_type": "text"
         }
     ]
