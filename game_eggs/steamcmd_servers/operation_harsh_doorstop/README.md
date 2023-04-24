@@ -9,6 +9,11 @@ Our game is entirely donation funded, completely free, and has full Steam worksh
 The base server requires 1024MB to run properly with breathing room.
 This does not account for any future MODS installed to the server.
 
+
+## Server IP:
+"Force Outgoing IP" option is required in order for server
+to properly bind to host server IP address allocated.
+
 ## Server Ports:
 These ports are mandatory for the server to run sucessfully.
 The 'Steam' port is locked to configured +1 of the 'Game port'
