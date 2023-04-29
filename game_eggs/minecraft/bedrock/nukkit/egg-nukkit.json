@@ -1,26 +1,26 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-12-16T13:31:45-05:00",
+    "exported_at": "2023-04-29T11:05:36+01:00",
     "name": "Nukkit",
     "author": "parker@parkervcp.com",
     "description": "Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition\r\n\r\nhttps:\/\/cloudburstmc.org",
     "features": null,
-    "images": [
-        "quay.io\/pterodactyl\/core:java-glibc",
-        "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_17"
-    ],
+    "docker_images": {
+        "quay.io\/pterodactyl\/core:java-glibc": "quay.io\/pterodactyl\/core:java-glibc",
+        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_8": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+    },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "startup": "{\r\n    \"done\": [\r\n        \")! For help, type \",\r\n        \")! Para ver a ajuda, escreva\",\r\n        \")\uff01\u5982\u9700\u5e2e\u52a9\uff0c\u8bf7\u8f93\u5165\",\r\n        \")\uff01\u5982\u9700\u5e6b\u52a9\uff0c\u8acb\u8f38\u5165\",\r\n        \")! Pro pomoc, napis\",\r\n        \")! F\u00fcr Hilfe, tippe\",\r\n        \")! Kirjoita\",\r\n        \")\\uFF01 \\\"help\\\"\\u307E\\u305F\\u306F\\\"?\\\"\\u3067\\u30D8\\u30EB\\u30D7\\u3092\\u8868\\u793A\",\r\n        \")! \ub3c4\uc6c0\ub9d0\uc744 \ucc38\uc870\ud558\uc2dc\ub824\uba74\",\r\n        \")! Jeigu reikia pagalbos, ra\u0161ykite\",\r\n        \")! Aby uzyskac pomoc wpisz\",\r\n        \")! \u0414\u043b\u044f \u0441\u043f\u0440\u0430\u0432\u043a\u0438 \u0432\u0432\u0435\u0434\u0438\u0442\u0435\",\r\n        \")! Escribe\",\r\n        \")! \u0414\u043b\u044f \u0434\u043e\u043f\u043e\u043c\u043e\u0433\u0438, \u043d\u0430\u0431\u0435\u0440\u0456\u0442\u044c\"\r\n    ]\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
         "stop": "stop"
     },
@@ -39,7 +39,8 @@
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
         },
         {
             "name": "Download Path",
@@ -48,7 +49,8 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "nukkit version",
@@ -57,7 +59,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
