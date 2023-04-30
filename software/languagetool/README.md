@@ -4,6 +4,6 @@ LanguageTool is an Open Source proofreading software for English, French, German
 
 View https://languagetool.org for more information.
 
-Requires one prt for comunication.
+Requires one port for comunication.
 
 Try `addr:port/v2/check?language=en-US&text=this+is+a+test` to test
