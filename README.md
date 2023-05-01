@@ -205,6 +205,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [RedM](game_eggs/rdr/redm)
 
+[Rimworld](game_eggs/rimworld)
+
+* [Open World](game_eggs/rimworld/open_world)
+
 [SteamCMD Servers](game_eggs/steamcmd_servers) These eggs use SteamCMD to install
 
 * [7 Days to Die](game_eggs/steamcmd_servers/7_days_to_die)

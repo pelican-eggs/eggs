@@ -104,6 +104,10 @@
 
 * [RedM](rdr/redm)
 
+[Rimworld](rimworld)
+
+* [Open World](rimworld/open_world)
+
 [Starmade](starmade)
 
 [SteamCMD Servers](steamcmd_servers) These eggs use SteamCMD to install
