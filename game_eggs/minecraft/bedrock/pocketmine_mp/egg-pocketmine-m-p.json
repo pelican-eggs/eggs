@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-29T11:05:30+01:00",
+    "exported_at": "2023-05-01T16:49:09+01:00",
     "name": "PocketmineMP",
     "author": "info@swisscrafting.ch",
     "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
@@ -16,7 +16,7 @@
     "startup": ".\/bin\/php7\/bin\/php .\/PocketMine-MP.phar --no-wizard --disable-ansi",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": [\r\n        \")! For help, type \",\r\n        \")! Escribe \",\r\n        \")! F\u00fcr Hilfe\",\r\n        \")! Pour afficher l\",\r\n        \")! \u30d8\u30eb\u30d7\u3092\u8868\u793a\u3059\u308b\u306b\u306f\",\r\n        \")! \ub3c4\uc6c0\ub9d0\uc744 \ubcf4\ub824\uba74\",\r\n        \")! Priek\u0161 pal\u012bdz\u012bbas\",\r\n        \")! Voor hulp, typ\",\r\n        \")! \u0414\u043b\u044f \u0441\u043f\u0440\u0430\u0432\u043a\u0438, \u0432\u0432\u0435\u0434\u0438\u0442\u0435\",\r\n        \")! Escribe \",\r\n        \")! \u0110\u1ec3 \u0111\u01b0\u1ee3c tr\u1ee3 gi\u00fap, h\u00e3y nh\u1eadp\"\r\n    ]\r\n}",
+        "startup": "{\r\n    \"done\": \")! \"\r\n}",
         "logs": "{}",
         "stop": "stop"
     },
