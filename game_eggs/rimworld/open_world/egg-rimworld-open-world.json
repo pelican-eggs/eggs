@@ -4,26 +4,27 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-05T11:22:21+00:00",
-    "name": "Open World",
+    "exported_at": "2023-05-01T11:19:44+02:00",
+    "name": "Rimworld: Open World",
     "author": "kyle@williquette.us",
-    "description": "The Open World mod allows you to create and join servers to play with people all around the world, it introduces plenty of new features including trading, gifting, bartering, PvP and so much more!\r\n\r\nhttps:\/\/github.com\/TastyLollipop\/OpenWorld",
+    "description": "The Open World mod allows you to create and join servers to play with people all around the world, it introduces plenty of new features including trading, gifting, bartering, PvP and so much more!\r\n\r\nhttps:\/\/github.com\/mypassowordisntweak\/OpenWorld",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+        "Dotnet 3.1": "ghcr.io\/parkervcp\/yolks:dotnet_3.1",
+        "Dotnet 6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
     },
     "file_denylist": [],
-    "startup": "\/home\/container\/\"Open World Server\"",
+    "startup": ".\/OpenWorldServer",
     "config": {
-        "files": "{\r\n    \"Server Settings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Server Name:\": \"Server Name: {{env.NAME}}\",\r\n            \"Server Port:\": \"Server Port: {{server.build.default.port}}\",\r\n            \"Max Players:\": \"Max Players: {{env.MAX_PLAYERS}}\",\r\n            \"Server Description:\": \"Server Description: {{env.SERVER_DESCRIPTION}}\",\r\n            \"Allow Dev Mode:\": \"Allow Dev Mode: {{env.DEV_MODE}}\",\r\n            \"Use Whitelist:\": \"Use Whitelist: {{env.WHITELIST}}\",\r\n            \"Use Enforced Difficulty:\": \"Use Enforced Difficulty: {{env.ENFORCED_DIFFICULTY}}\",\r\n            \"Use Modlist Match:\": \"Use Modlist Match: {{env.MODLIST_MATCH}}\",\r\n            \"Use Modlist Config Match (WIP):\": \"Use Modlist Config Match (WIP): {{env.CONFIG_MATCH}}\",\r\n            \"Force Mod Verification:\": \"Force Mod Verification: {{env.MOD_VERIFY}}\",\r\n            \"Use Chat:\": \"Use Chat: {{env.USE_CHAT}}\",\r\n            \"Use Profanity filter:\": \"Use Profanity filter: {{env.PROFANITY_FILTER}}\",\r\n            \"Use Wealth System:\": \"Use Wealth System: {{env.WEALTH_SYSTEM}}\",\r\n            \"Wealth Warning Threshold:\": \"Wealth Warning Threshold: {{env.WEALTH_WARNING}}\",\r\n            \"Wealth Ban Threshold:\": \"Wealth Ban Threshold: {{env.WEALTH_BAN}}\",\r\n            \"Use Idle System:\": \"Use Idle System: {{env.IDLE_ALLOWED}}\",\r\n            \"Idle Threshold (days):\": \"Idle Threshold (days): {{env.IDLE_THRESHOLD}}\",\r\n            \"Use Road System:\": \"Use Road System: {{env.ROAD_SYSTEM}}\",\r\n            \"Aggressive Road Mode (WIP):\": \"Aggressive Road Mode (WIP): {{env.AGGRESSIVE_ROADS}}\"\r\n        }\r\n    },\r\n    \"World Settings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Globe Coverage (0.3, 0.5, 1.0):\": \"Globe Coverage (0.3, 0.5, 1.0): {{env.GLOBE_COVERAGE}}\",\r\n            \"Seed:\": \"Seed: {{env.SEED}}\",\r\n            \"Overall Rainfall (0-6):\": \"Overall Rainfall (0-6): {{env.RAINFALL}}\",\r\n            \"Overall Temperature (0-6):\": \"Overall Temperature (0-6): {{env.TEMPERATURE}}\",\r\n            \"Overall Population (0-6):\": \"Overall Population (0-6): {{env.POPULATION}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Network Line Started\"\r\n}",
+        "files": "{\r\n    \"Data\/Config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"LocalAddress\": \"0.0.0.0\",\r\n            \"ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"EnforceMods\": \"{{server.build.env.ENFORCE_MODS}}\",\r\n            \"UseModBlacklist\": \"{{server.build.env.USE_MOD_BLACKLIST}}\",\r\n            \"UseCustomDifficulty\": \"{{server.build.env.USE_CUSTOM_DIFF}}\",\r\n            \"UseWhitelist\": \"{{server.build.env.WHITELIST}}\",\r\n            \"AllowCustomScenarios\": \"{{server.build.env.CUSTOM_SCEN}}\",\r\n            \"PlayerVersion\": \"{{server.build.env.PLAYER_VERSION}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \" Server Launched\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#Create the server directory\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\napt update\r\napt install -y liblua5.3-0 lua-socket curl jq unzip\r\n\r\n#Remove any old versions\r\nrm -f LinuxX64.zip\r\n\r\n#DotNet Core Download Location\r\nDOTNET_DOWNLOAD=\"https:\/\/download.visualstudio.microsoft.com\/download\/pr\/046afe25-7b88-48ad-a06c-1c3625115c63\/6814f9ca777bc7e2cb4b373027dcdd76\/dotnet-runtime-3.1.31-linux-x64.tar.gz\"\r\n\r\n#Check for latest release & download URLs\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/TastyLollipop\/OpenWorld\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/TastyLollipop\/OpenWorld\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo \"Using latest Rimworld Open World server version\"\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i LinuxX64)\r\nelse\r\n    DOWNLOAD_URL=\"https:\/\/github.com\/TastyLollipop\/OpenWorld\/releases\/download\/${VERSION}\/LinuxX64.zip\"\r\nfi\r\n\r\n#Download DotNET Core\r\necho -e \"Running curl -sSL ${DOTNET_DOWNLOAD} -o dotnet.tar.gz\"\r\ncurl -sSL ${DOTNET_DOWNLOAD} -o dotnet.tar.gz\r\ntar -xvf dotnet.tar.gz\r\nchmod +x dotnet\r\n\r\n#Download the Rimworld Open World server\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o LinuxX64.zip\"\r\ncurl -sSL ${DOWNLOAD_URL} -o LinuxX64.zip\r\necho -e \"Unzipping LinuxX64.zip\"\r\nunzip -o LinuxX64.zip\r\nchmod +x \"Open World Server\"\r\n\r\necho -e \"Generating server settings\"\r\ncat << EOF > \"Server Settings.txt\"\r\nServer Details -\r\nServer Name: My Server Name\r\nServer Description: My Server Description\r\nServer Local IP: 0.0.0.0\r\nServer Port: 25555\r\nMax Players: 300\r\nAllow Dev Mode: False\r\nUse Whitelist: False\r\nUse Enforced Difficulty: False\r\n\r\n- Mod System Details -\r\nUse Modlist Match: True\r\nUse Modlist Config Match (WIP): False\r\nForce Mod Verification: False\r\n\r\n- Chat System Details -\r\nUse Chat: True\r\nUse Profanity filter: True\r\n\r\n- Wealth System Details -\r\nUse Wealth System: False\r\nWealth Warning Threshold: 10000\r\nWealth Ban Threshold: 100000\r\n\r\n- Idle System Details -\r\nUse Idle System: True\r\nIdle Threshold (days): 7\r\n\r\n- Road System Details -\r\nUse Road System: True\r\nAggressive Road Mode (WIP): False\r\nEOF\r\n\r\necho -e \"Generating World Settings\"\r\ncat << EOF > \"World Settings.txt\"\r\n- World Settings -\r\nGlobe Coverage (0.3, 0.5, 1.0): 0.3\r\nSeed: Seed\r\nOverall Rainfall (0-6): 3\r\nOverall Temperature (0-6): 3\r\nOverall Population (0-6): 3\r\nEOF",
-            "container": "ghcr.io\/parkervcp\/yolks:debian",
+            "script": "#!\/bin\/bash\r\n\r\n#Create the server directory\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\napt update\r\napt -y install curl jq unzip git\r\n\r\n\r\n#Check for latest release & download URLs\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/mypassowordisntweak\/OpenWorld\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/mypassowordisntweak\/OpenWorld\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCH} | head -1)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${ARCH} | head -1)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCH}| head -1)\r\n    fi\r\nfi\r\n\r\n\r\n#Download the Rimworld Open World server\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o ${ARCH}.zip\"\r\ncurl -sSL ${DOWNLOAD_URL} -o ${ARCH}.zip\r\necho -e \"Unzipping ${ARCH}.zip\"\r\nunzip -o ${ARCH}.zip\r\nmv ${ARCH}\/* \/mnt\/server\r\nchmod +x \"OpenWorldServer\"\r\nrm -rf ${ARCH}.zip ${ARCH}\/\r\n\r\n\r\n\r\ncd \/mnt\/server\r\nFILE=\/mnt\/server\/Data\/Config.json\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"config already exists.\"\r\nelse \r\n    echo \"Config does not exist, making one\"\r\n    mkdir -p \/mnt\/server\/Data\r\n    cd \/mnt\/server\/Data\r\ncat << EOF > \"Config.json\"\r\n{\r\n  \"LocalAddress\": \"0.0.0.0\",\r\n  \"ServerPort\": 25555,\r\n  \"MaxPlayers\": 10,\r\n  \"PlayerVersion\": \"1.2\",\r\n  \"EnforceMods\": false,\r\n  \"UseModBlacklist\": false,\r\n  \"UseCustomDifficulty\": false,\r\n  \"UseWhitelist\": false,\r\n  \"AllowCustomScenarios\": false\r\n}\r\nEOF\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -32,250 +33,80 @@
             "name": "Open World Version",
             "description": "",
             "env_variable": "VERSION",
-            "default_value": "1.4.2",
+            "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:8",
             "field_type": "text"
         },
         {
-            "name": "Server Name",
-            "description": "",
-            "env_variable": "NAME",
-            "default_value": "My Server",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20",
-            "field_type": "text"
-        },
-        {
             "name": "Max Players",
-            "description": "",
+            "description": "sets the maximum number of players allowed to connect at once.",
             "env_variable": "MAX_PLAYERS",
-            "default_value": "300",
+            "default_value": "10",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|int",
             "field_type": "text"
         },
         {
-            "name": "Server Description",
-            "description": "",
-            "env_variable": "SERVER_DESCRIPTION",
-            "default_value": "Sample Server Description",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:1000",
-            "field_type": "text"
-        },
-        {
-            "name": "Allow Dev Mode",
-            "description": "",
-            "env_variable": "DEV_MODE",
+            "name": "Enforce Mods",
+            "description": "This forces players to use the mods listed in the the \"Mods Enforced\" folder, with this disabled it will allow players to join with any mods they would like",
+            "env_variable": "ENFORCE_MODS",
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Use Mod Blacklist",
+            "description": "enabled you to blacklist mods from being used, usually used when enforced mods are disabled.",
+            "env_variable": "USE_MOD_BLACKLIST",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Use Custom Difficulty",
+            "description": "forces all players to use the difficulty setting set in the \"Difficulty\" file. MAKE SURE YOU GIVE A VALUE TO EVERYTHING OR IT WILL BE AT 0%",
+            "env_variable": "USE_CUSTOM_DIFF",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
             "name": "Use Whitelist",
-            "description": "",
+            "description": "allows only the usernames listed in the \"Whitelist\" file to join the server.",
             "env_variable": "WHITELIST",
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
-            "name": "Use Enforced Difficulty",
-            "description": "",
-            "env_variable": "ENFORCED_DIFFICULTY",
-            "default_value": "False",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Modlist Match",
-            "description": "",
-            "env_variable": "MODLIST_MATCH",
-            "default_value": "True",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Modlist Config Match (WIP)",
-            "description": "",
-            "env_variable": "CONFIG_MATCH",
+            "name": "Allow Custom Scenarios",
+            "description": "allows people to create custom scenarios when creating their save on the server.",
+            "env_variable": "CUSTOM_SCEN",
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
-            "name": "Force Mod Verification",
-            "description": "",
-            "env_variable": "MOD_VERIFY",
-            "default_value": "false",
+            "name": "Player Version",
+            "description": "version the server will accept clients joining in with.\r\n\r\nTO see the latest:\r\nhttps:\/\/discord.com\/channels\/992806266109964319\/992881103071354890\r\n\r\nfor example for v1.12 you would write 1.12",
+            "env_variable": "PLAYER_VERSION",
+            "default_value": "1.2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Chat",
-            "description": "",
-            "env_variable": "USE_CHAT",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Profanity filter",
-            "description": "",
-            "env_variable": "PROFANITY_FILTER",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Wealth System",
-            "description": "",
-            "env_variable": "WEALTH_SYSTEM",
-            "default_value": "false",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Wealth Warning Threshold",
-            "description": "",
-            "env_variable": "WEALTH_WARNING",
-            "default_value": "10000",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer",
-            "field_type": "text"
-        },
-        {
-            "name": "Wealth Ban Threshold",
-            "description": "",
-            "env_variable": "WEALTH_BAN",
-            "default_value": "100000",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Idle System",
-            "description": "",
-            "env_variable": "IDLE_ALLOWED",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Idle Threshold (days)",
-            "description": "",
-            "env_variable": "IDLE_THRESHOLD",
-            "default_value": "7",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer",
-            "field_type": "text"
-        },
-        {
-            "name": "Use Road System",
-            "description": "",
-            "env_variable": "ROAD_SYSTEM",
-            "default_value": "true",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Aggressive Road Mode (WIP)",
-            "description": "",
-            "env_variable": "AGGRESSIVE_ROADS",
-            "default_value": "false",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Globe Coverage (0.3, 0.5, 1.0)",
-            "description": "",
-            "env_variable": "GLOBE_COVERAGE",
-            "default_value": "0.3",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|lte:1.0",
-            "field_type": "text"
-        },
-        {
-            "name": "World Seed",
-            "description": "",
-            "env_variable": "SEED",
-            "default_value": "Seed",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:60",
-            "field_type": "text"
-        },
-        {
-            "name": "Overall Rainfall",
-            "description": "",
-            "env_variable": "RAINFALL",
-            "default_value": "3",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|between:0,6",
-            "field_type": "text"
-        },
-        {
-            "name": "Overall Temperature",
-            "description": "",
-            "env_variable": "TEMPERATURE",
-            "default_value": "3",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|between:0,6",
-            "field_type": "text"
-        },
-        {
-            "name": "Overall Population",
-            "description": "",
-            "env_variable": "POPULATION",
-            "default_value": "3",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|integer|between:0,6",
-            "field_type": "text"
-        },
-        {
-            "name": "DotNET Core Root Location",
-            "description": "",
-            "env_variable": "DOTNET_ROOT",
-            "default_value": "\/home\/container",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|string|max:50",
+            "rules": "required|string|max:10",
             "field_type": "text"
         }
     ]
