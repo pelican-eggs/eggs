@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-12T02:53:07-05:00",
+    "exported_at": "2023-05-01T16:49:09+01:00",
     "name": "PocketmineMP",
     "author": "info@swisscrafting.ch",
     "description": "Pocketmine Egg\r\nby onekintaro from swisscrafting.ch\r\nwith the nice help from #eggs Channel on Pterodactyl-Discord :)",
@@ -16,7 +16,7 @@
     "startup": ".\/bin\/php7\/bin\/php .\/PocketMine-MP.phar --no-wizard --disable-ansi",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "startup": "{\r\n    \"done\": \")! \"\r\n}",
         "logs": "{}",
         "stop": "stop"
     },
