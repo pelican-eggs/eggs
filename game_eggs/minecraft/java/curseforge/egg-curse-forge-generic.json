@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-05T19:03:39-07:00",
+    "exported_at": "2023-05-05T19:34:12-07:00",
     "name": "CurseForge Generic",
     "author": "contact@chromozone.dev",
     "description": "A generic egg for a CurseForge modpack.",
@@ -42,7 +42,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|string",
             "field_type": "text"
         },
         {
@@ -52,7 +52,7 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "numeric",
+            "rules": "string",
             "field_type": "text"
         },
         {
