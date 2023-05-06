@@ -58,6 +58,7 @@
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
+  * [CurseForge](minecraft/java/curseforge)
   * [Cuberite](minecraft/java/cuberite)
   * [Fabric](minecraft/java/fabric)
   * [Feather](minecraft/java/feather)
