@@ -215,6 +215,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Sven Co-op](svencoop)
 
+## Swords 'n Magic and Stuff
+
+[Swords 'n Magic and Stuff](Swords_'n_Magic_and_Stuff)
+
 ## Team Fortress 2 Classic
 
 [Team Fortress 2 Classic](team_fortress_2_classic)
