@@ -32,7 +32,7 @@ This is a direct fork of the default forge service
 
 - Has a version detection fix for "latest"
 
-### [CurseForge Generic](forge/curseforge-generic)
+### [CurseForge Generic](curseforge)
 
 [CurseForge Generic Website](https://www.curseforge.com)
 A generic service to pull forge mod packs from the curseforge site.
