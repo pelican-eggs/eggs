@@ -217,7 +217,7 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Swords 'n Magic and Stuff
 
-[Swords 'n Magic and Stuff](Swords_'n_Magic_and_Stuff)
+[Swords 'n Magic and Stuff](swords_'n_Magic_and_Stuff)
 
 ## Team Fortress 2 Classic
 
