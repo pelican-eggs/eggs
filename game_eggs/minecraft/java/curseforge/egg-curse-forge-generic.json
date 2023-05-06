@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-05T19:34:12-07:00",
+    "exported_at": "2023-05-06T12:13:41-07:00",
     "name": "CurseForge Generic",
     "author": "contact@chromozone.dev",
     "description": "A generic egg for a CurseForge modpack.",
@@ -20,7 +20,7 @@
         "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17"
     },
     "file_denylist": [],
-    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true $([[ ! -f unix_args.txt ]] && printf %s \"-jar `cat .serverjar`\" || printf %s \"@unix_args.txt\")",
+    "startup": "java $([[ -f user_jvm_args.txt ]] && printf %s \"@user_jvm_args.txt\") -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true $([[ ! -f unix_args.txt ]] && printf %s \"-jar `cat .serverjar`\" || printf %s \"@unix_args.txt\")",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
