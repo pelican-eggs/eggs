@@ -8,7 +8,7 @@
 #include <time.h>
 #include <sys/stat.h>
 
-void print_latest_log(const char* log_directory, off_t* last_pos, off_t* last_size) {
+void print_latest_log(const char* log_directory, off_t* last_pos, time_t* last_time) {
     DIR *dir;
     struct dirent *entry;
     time_t latest_time = 0;
@@ -39,55 +39,54 @@ void print_latest_log(const char* log_directory, off_t* last_pos, off_t* last_si
         return;
     }
 
+    if (latest_time <= *last_time) {
+        return;
+    }
+
     int fd = open(latest_file, O_RDONLY);
     if (fd < 0) {
         printf("Error opening file %s\n", latest_file);
         return;
     }
 
-    // Get the size of the file
-    off_t size = lseek(fd, 0, SEEK_END);
+    // Move the file pointer to the last printed position
+    lseek(fd, *last_pos, SEEK_SET);
 
-    // Check if the file size has increased since the last read
-    if (size > *last_size) {
-        // Move the file pointer to the beginning of the file
-        lseek(fd, 0, SEEK_SET);
-
-        char buffer[4096];
-        int bytes_read;
-        int last_line_printed = 0; // Flag to check whether we have printed the last line
-        do {
-            bytes_read = read(fd, buffer, sizeof(buffer));
-            if (bytes_read > 0) {
-                // Check if the last character is a newline
-                if (buffer[bytes_read - 1] == '\n') {
-                    fwrite(buffer, 1, bytes_read, stdout);
-                    fflush(stdout);
-                } else {
-                    // If the last character is not a newline, add one
-                    char* temp = (char*) malloc(bytes_read + 1);
-                    memcpy(temp, buffer, bytes_read);
-                    temp[bytes_read] = '\n';
-                    fwrite(temp, 1, bytes_read + 1, stdout);
-                    fflush(stdout);
-                    free(temp);
-                }
-                last_line_printed = (buffer[bytes_read - 1] == '\n');
+    char buffer[4096];
+    int bytes_read;
+    int last_line_printed = 0; // Flag to check whether we have printed the last line
+    do {
+        bytes_read = read(fd, buffer, sizeof(buffer));
+        if (bytes_read > 0) {
+            // Check if the last character is a newline
+            if (buffer[bytes_read - 1] == '\n') {
+                fwrite(buffer, 1, bytes_read, stdout);
+                fflush(stdout);
+            } else {
+                // If the last character is not a newline, add one
+                char* temp = (char*) malloc(bytes_read + 1);
+                memcpy(temp, buffer, bytes_read);
+                temp[bytes_read] = '\n';
+                fwrite(temp, 1, bytes_read + 1, stdout);
+                fflush(stdout);
+                free(temp);
             }
-        } while (bytes_read > 0);
-
-         // If the last line was not printed, print it now
-        if (!last_line_printed) {
-            printf("\n");
+            last_line_printed = (buffer[bytes_read - 1] == '\n');
         }
+    } while (bytes_read > 0);
 
-    // Remember the last position and size that was read
-        *last_pos = lseek(fd, 0, SEEK_CUR);
-        *last_size = size;
+    // If the last line was not printed, print it now
+    if (!last_line_printed) {
+        printf("\n");
     }
-    close(fd);
 
+    // Remember the last position and time that was read
+    *last_pos = lseek(fd, 0, SEEK_CUR);
+    *last_time = latest_time;
+
+    close(fd);
 }
+
 
 
 
@@ -116,13 +115,13 @@ int main(int argc, char** argv) {
     }
 
     sleep(30);
-
+    
     off_t last_pos = 0;
     off_t last_size = 0;
     char* log_directory = "/home/container/SNM2020/Saved/Logs";
     print_latest_log(log_directory, &last_pos, &last_size);
 
-
+    
     while (1) {
         sleep(1);
         print_latest_log(log_directory, &last_pos, &last_size);
