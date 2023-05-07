@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-07T12:10:34+02:00",
+    "exported_at": "2023-05-07T19:05:11+02:00",
     "name": "Frozen Flame",
     "author": "theblitzbat@gmail.com",
     "description": "Frozen Flame Dedicated Server",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": ".\/FrozenFlame\/Binaries\/Linux\/FrozenFlameServer-Linux-Shipping -log -MetaGameServerName={{SERVER_NAME}} -port {{SERVER_PORT}} -queryPort {{QUERY_PORT}} -RconPort={{RCON_PORT}} -RconPassword={{RCON_PASSWORD}}",
+    "startup": ".\/FrozenFlame\/Binaries\/Linux\/FrozenFlameServer-Linux-Shipping -log -MetaGameServerName=\"{{SERVER_NAME}}\" -port={{SERVER_PORT}} -queryPort={{QUERY_PORT}} -RconPort={{RCON_PORT}} -RconPassword=\"{{RCON_PASSWORD}}\"",
     "config": {
         "files": "{\r\n    \"FrozenFlame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"ServerPassword\": \"ServerPassword=\\\"{{server.build.env.SERVER_PASSWORD}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"LogWorld: Bringing up level for play took\"\r\n}",
@@ -52,7 +52,7 @@
             "name": "Query Port",
             "description": "The query port.",
             "env_variable": "QUERY_PORT",
-            "default_value": "27015",
+            "default_value": "25575",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer|between:1024,65536",
