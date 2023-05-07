@@ -8,8 +8,8 @@ Frozen Flame is a Survival RPG set in the vast world of Arсana, an ancient land
 | Port      | default |
 |-----------|---------|
 | Game      | 7777    |
-| Query     | 27015   |
-| RCON      | 25575   |
+| Query     | 25575   |
+| RCON      | 27015   |
 
 ## Server configuration
 The documentation can be found here: [Dedicated server documentation](https://github.com/DreamsideInteractive/FrozenFlameServer)
