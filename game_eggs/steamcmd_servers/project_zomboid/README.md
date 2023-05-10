@@ -4,21 +4,16 @@ Project Zomboid is the ultimate in zombie survival. Alone or in MP: you loot, bu
 
 ## Server Ports
 
-Project Zomboid requires one port for Steam and an additional **one port per player**.  Additional ports are allocated as they connect.
-
-For example, when configured with a base allocation of 27016:
+Project Zomboid requires one port for game data and one port for Steam.
 
 ```log
-Zomboid Steam Server started, ports 27016 and 27016 must be open on the router
-Connected new client kubi ID # 0 and assigned DL port 27017
-Connected new client kubi2 ID # 1 and assigned DL port 27018
+> *** SERVER STARTED ****.
+> *** Steam is enabled.
+> Server is listening on port 16261 (for Steam connection) and port 16262 (for UDPRakNet connection).
+> Clients should use 16261 port for connections.
 ```
-
-If you're experiencing issues with players connecting it's likely because you have not allocated enough ports.  These ports **must be in order** following the Steam port.
 
 | Port        | default |
 |-------------|---------|
-| Game        | 8766    |
-| Player1     | 8767    |
-| Player2     | 8768    |
-| ...         | 8769    |
+| DefaultPort | 16261   |
+| UDPPort     | 16262   |
