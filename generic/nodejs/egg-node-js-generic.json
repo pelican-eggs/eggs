@@ -4,12 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-27T20:19:13+01:00",
+    "exported_at": "2023-05-19T17:43:09+02:00",
     "name": "node.js generic",
     "author": "parker@parkervcp.com",
     "description": "a generic node.js egg\r\n\r\nThis will clone a git repo. it defaults to master if no branch is specified.\r\n\r\nInstalls the node_modules on install. If you set user_upload then I assume you know what you are doing.",
     "features": null,
     "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:nodejs_19": "ghcr.io\/parkervcp\/yolks:nodejs_19",
         "ghcr.io\/parkervcp\/yolks:nodejs_18": "ghcr.io\/parkervcp\/yolks:nodejs_18",
         "ghcr.io\/parkervcp\/yolks:nodejs_17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
         "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16",
