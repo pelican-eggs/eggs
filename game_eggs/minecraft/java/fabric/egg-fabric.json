@@ -30,7 +30,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Enable snapshots\r\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== true )|.version' | head -n1)\r\nelif [ \"$MC_VERSION\" == \"snapshot\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\n\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\n  FABRIC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/installer | jq -r '.[0].version')\r\nfi\r\n\r\nif [ -z \"$LOADER_VERSION\" ] || [ \"$LOADER_VERSION\" == \"latest\" ]; then\r\n  LOADER_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/loader | jq -r '.[] | select(.stable== true )|.version' | head -n1)\r\nelif [ \"$LOADER_VERSION\" == \"snapshot\" ]; then\r\n  LOADER_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/loader | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\n\r\nwget -O fabric-installer.jar https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\njava -jar fabric-installer.jar server -mcversion $MC_VERSION -loader $LOADER_VERSION -downloadMinecraft\r\necho -e \"Install Complete\"",
+            "script": "#!\/bin\/bash\r\n# Fabric MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl jq unzip dos2unix wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Enable snapshots\r\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== true )|.version' | head -n1)\r\nelif [ \"$MC_VERSION\" == \"snapshot\" ]; then\r\n  MC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/game | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\n\r\nif [ -z \"$FABRIC_VERSION\" ] || [ \"$FABRIC_VERSION\" == \"latest\" ]; then\r\n  FABRIC_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/installer | jq -r '.[0].version')\r\nfi\r\n\r\nif [ -z \"$LOADER_VERSION\" ] || [ \"$LOADER_VERSION\" == \"latest\" ]; then\r\n  LOADER_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/loader | jq -r '.[] | select(.stable== true )|.version' | head -n1)\r\nelif [ \"$LOADER_VERSION\" == \"snapshot\" ]; then\r\n  LOADER_VERSION=$(curl -sSL https:\/\/meta.fabricmc.net\/v2\/versions\/loader | jq -r '.[] | select(.stable== false )|.version' | head -n1)\r\nfi\r\n\r\nwget -O fabric-installer.jar https:\/\/maven.fabricmc.net\/net\/fabricmc\/fabric-installer\/$FABRIC_VERSION\/fabric-installer-$FABRIC_VERSION.jar\r\njava -jar fabric-installer.jar server -mcversion $MC_VERSION -loader $LOADER_VERSION -downloadMinecraft\r\nmv server.jar minecraft-server.jar\r\nmv fabric-server-launch.jar server.jar\r\necho \"serverJar=minecraft-server.jar\" > fabric-server-launcher.properties\r\necho -e \"Install Complete\"",
             "container": "openjdk:11-jdk-slim",
             "entrypoint": "bash"
         }
@@ -40,10 +40,11 @@
             "name": "Server Jar File",
             "description": "The name of the server jarfile to run the server with.",
             "env_variable": "SERVER_JARFILE",
-            "default_value": "fabric-server-launch.jar",
+            "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
         },
         {
             "name": "Minecraft Version",
@@ -52,7 +53,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|between:3,15"
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
         },
         {
             "name": "Fabric Version",
@@ -61,7 +63,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|between:3,15"
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
         },
         {
             "name": "Fabric Loader Version",
@@ -70,7 +73,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|between:3,15"
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
         }
     ]
 }
