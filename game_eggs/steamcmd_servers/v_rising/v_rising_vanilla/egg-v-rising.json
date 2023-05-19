@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-13T12:18:05+01:00",
+    "exported_at": "2023-05-18T09:31:34+00:00",
     "name": "V Rising",
     "author": "rehlmgaming@gmail.com",
     "description": "Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.",
@@ -17,14 +17,14 @@
     "file_denylist": [],
     "startup": "wine .\/VRisingServer.exe -persistentDataPath save-data -address 0.0.0.0",
     "config": {
-        "files": "{\r\n    \"save-data\/Settings\/ServerHostSettings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"Description\": \"{{server.build.env.DESCRIPTION}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"QueryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"MaxConnectedUsers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MaxConnectedAdmins\": \"{{server.build.env.MAX_ADMINS}}\",\r\n            \"ServerFps\": \"{{server.build.env.FPS}}\",\r\n            \"SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"Password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"Secure\": \"{{server.build.env.SERVER_SECURE}}\",\r\n            \"ListOnMasterServer\": \"{{server.build.env.SERVER_LIST}}\",\r\n            \"AutoSaveCount\": \"{{server.build.env.SAVE_COUNT}}\",\r\n            \"AutoSaveInterval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"GameSettingsPreset\": \"{{server.build.env.GAME_SETTINGS_PRESET}}\",\r\n            \"AdminOnlyDebugEvents\": \"{{server.build.env.ADMIN_ONLY_DEBUG_EVENTS}}\",\r\n            \"DisableDebugEvents\": \"{{server.build.env.DEBUG_EVENTS}}\",\r\n            \"Rcon.Enabled\": \"{{server.build.env.RCON}}\",\r\n            \"Rcon.Password\": \"{{server.build.env.RCON_PASS}}\",\r\n            \"Rcon.Port\": \"{{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"save-data\/Settings\/ServerHostSettings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"Description\": \"{{server.build.env.DESCRIPTION}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"QueryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"MaxConnectedUsers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MaxConnectedAdmins\": \"{{server.build.env.MAX_ADMINS}}\",\r\n            \"ServerFps\": \"{{server.build.env.FPS}}\",\r\n            \"SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"Password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"Secure\": \"{{server.build.env.SERVER_SECURE}}\",\r\n            \"ListOnSteam\": \"{{server.build.env.LIST_STEAM}}\",\r\n            \"ListOnEOS\": \"{{server.build.env.LIST_EOS}}\",\r\n            \"AutoSaveCount\": \"{{server.build.env.SAVE_COUNT}}\",\r\n            \"AutoSaveInterval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"CompressSaveFiles\": \"{{server.build.env.COMPRESS_SAVES}}\",\r\n            \"GameSettingsPreset\": \"{{server.build.env.GAME_SETTINGS_PRESET}}\",\r\n            \"AdminOnlyDebugEvents\": \"{{server.build.env.ADMIN_ONLY_DEBUG_EVENTS}}\",\r\n            \"DisableDebugEvents\": \"{{server.build.env.DEBUG_EVENTS}}\",\r\n            \"API.Enabled\": \"{{server.build.env.ENABLE_API}}\",\r\n            \"Rcon.Enabled\": \"{{server.build.env.RCON}}\",\r\n            \"Rcon.Password\": \"{{server.build.env.RCON_PASS}}\",\r\n            \"Rcon.Port\": \"{{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Loaded ServerGameSettings\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl V Rising Egg - egg-v-rising.json\r\n## Authors: David Wolfe (Red-Thirten), Kapatheus\r\n## Date: 2022\/05\/28\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\nexport HOME=\/mnt\/server\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd $HOME\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir $HOME +login anonymous $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so $HOME\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so $HOME\/.steam\/sdk64\/steamclient.so\r\n\r\n## V Rising Setup\r\nmkdir -p $HOME\/save-data\/Settings && cd \"$_\"\r\ncat > ServerHostSettings.json << EOF\r\n{\r\n  \"Name\": \"${SERVER_NAME}\",\r\n  \"Description\": \"${DESCRIPTION}\",\r\n  \"Port\": ${SERVER_PORT},\r\n  \"QueryPort\": ${QUERY_PORT},\r\n  \"MaxConnectedUsers\": ${MAX_PLAYERS},\r\n  \"MaxConnectedAdmins\": ${MAX_ADMINS},\r\n  \"ServerFps\": ${FPS},\r\n  \"SaveName\": \"${SAVE_NAME}\",\r\n  \"Password\": \"${SERVER_PASSWORD}\",\r\n  \"Secure\": ${SERVER_SECURE},\r\n  \"ListOnMasterServer\": ${SERVER_LIST},\r\n  \"AutoSaveCount\": ${SAVE_COUNT},\r\n  \"AutoSaveInterval\": ${SAVE_INTERVAL},\r\n  \"GameSettingsPreset\": \"${GAME_SETTINGS_PRESET}\",\r\n  \"AdminOnlyDebugEvents\": ${ADMIN_ONLY_DEBUG_EVENTS},\r\n  \"DisableDebugEvents\": ${DEBUG_EVENTS},\r\n  \"Rcon\": {\r\n    \"Enabled\": ${RCON},\r\n    \"Password\": \"${RCON_PASS}\",\r\n    \"Port\": ${RCON_PORT}\r\n  }\r\n}\r\nEOF\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl V Rising Egg - egg-v-rising.json\r\n## Authors: David Wolfe (Red-Thirten), Kapatheus\r\n## Date: 2023\/05\/18\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/pterodactyl\/installers:debian'\r\n\r\n# Install required packages.\r\napt -y update && apt -y --no-install-recommends install dos2unix\r\n\r\n# Download and install SteamCMD\r\nexport HOME=\/mnt\/server\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd $HOME\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir $HOME +login anonymous $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so $HOME\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so $HOME\/.steam\/sdk64\/steamclient.so\r\n\r\n## V Rising Setup\r\nmkdir -p $HOME\/save-data\/Settings\r\n# Check for successful installation.\r\ncd $HOME\/VRisingServer_Data\/StreamingAssets\/Settings\r\nif [[ -f ServerHostSettings.json ]]; then\r\n    # Copies default ServerHostSettings file to save-data directory.\r\n    # Also converts the contents to use Unix newlines so Ptero's JSON parser does not fail.\r\n    dos2unix -n ServerHostSettings.json $HOME\/save-data\/Settings\/ServerHostSettings.json\r\nelse\r\n    echo -e \"\\n\\nSteamCMD failed to install the V Rising Dedicated Server!\"\r\n    echo -e \"\\tTry reinstalling the server again.\\n\"\r\n    exit 1\r\nfi\r\n\r\necho -e \"\\nV Rising Dedicated Server successfully installed!\\n\"",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
@@ -141,9 +141,19 @@
             "field_type": "text"
         },
         {
-            "name": "List On Master Server",
-            "description": "Set to true to list on the server list, else set to false.",
-            "env_variable": "SERVER_LIST",
+            "name": "List On Steam",
+            "description": "Set to true to list on the Steam server list, else set to false.",
+            "env_variable": "LIST_STEAM",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "List On Epic",
+            "description": "Set to true to list on the Epic Online Services server list, else set to false.",
+            "env_variable": "LIST_EOS",
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
@@ -168,6 +178,26 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Compress Save Files",
+            "description": "Set to true to compress world save files, else set to false.",
+            "env_variable": "COMPRESS_SAVES",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Enable API",
+            "description": "Set to true to allow responses to public API requests to the server, else set to false.",
+            "env_variable": "ENABLE_API",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
@@ -252,32 +282,32 @@
         },
         {
             "name": "[SYSTEM] WINEDEBUG",
-            "description": "don't change",
+            "description": "Used to suppress WINE FIXME messages. Rarely needs to be changed.",
             "env_variable": "WINEDEBUG",
             "default_value": "-all",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string",
             "field_type": "text"
         },
         {
             "name": "[SYSTEM] WINEARCH",
-            "description": "don't change",
+            "description": "Used for compatibility. Cannot be changed.",
             "env_variable": "WINEARCH",
             "default_value": "win64",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:win64",
             "field_type": "text"
         },
         {
             "name": "[SYSTEM] WINEPATH",
-            "description": "don't change",
+            "description": "Used for compatibility. Cannot be changed.",
             "env_variable": "WINEPATH",
             "default_value": "\/home\/container",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:\/home\/container",
             "field_type": "text"
         }
     ]
