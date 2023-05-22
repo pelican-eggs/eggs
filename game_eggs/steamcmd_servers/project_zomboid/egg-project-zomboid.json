@@ -1,21 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-05-06T10:50:50+02:00",
+    "exported_at": "2023-05-10T03:31:04+02:00",
     "name": "Project Zomboid",
     "author": "iamkubi@gmail.com",
     "description": "Project Zomboid is an open world survival horror video game in alpha stage development by British and Canadian independent developer, The Indie Stone. The game is set in a post apocalyptic, zombie infested world where the player is challenged to survive for as long as possible before inevitably dying.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/games:source"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
     "file_denylist": [],
-    "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -steamport1 {{STEAM_PORT}} -cachedir=\/home\/container\/.cache -servername \"{{SERVER_NAME}}\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
+    "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -udpport {{STEAM_PORT}} -cachedir=\/home\/container\/.cache -servername \"{{SERVER_NAME}}\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"SERVER STARTED\"\r\n}",
@@ -37,7 +37,8 @@
             "default_value": "Pterodactyl",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|alpha_num|max:64"
+            "rules": "required|alpha_num|max:64",
+            "field_type": "text"
         },
         {
             "name": "Admin Username",
@@ -46,7 +47,8 @@
             "default_value": "admin",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Admin Password",
@@ -55,16 +57,18 @@
             "default_value": "password",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32"
+            "rules": "required|string|max:32",
+            "field_type": "text"
         },
         {
             "name": "SteamPort",
-            "description": "Sets the SteamPort1 option",
+            "description": "Sets the UDPPort option",
             "env_variable": "STEAM_PORT",
-            "default_value": "8766",
+            "default_value": "16262",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|string|max:20"
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Max Players",
@@ -73,7 +77,8 @@
             "default_value": "10",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "PZ Steam App ID",
@@ -82,7 +87,8 @@
             "default_value": "380870",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Steam Beta Branch [requires reinstall]",
@@ -91,7 +97,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:64"
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Steam Auto Update",
@@ -100,7 +107,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
