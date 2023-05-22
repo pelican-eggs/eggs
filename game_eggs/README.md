@@ -148,6 +148,7 @@
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [Onset](steamcmd_servers/onset)
 * [Open Fortress](steamcmd_servers/open_fortress)
+* [Operation Harsh Doorstop](steamcmd_servers/operation_harsh_doorstop)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
 * [Portal Knights](steamcmd_servers/portal_knights)
