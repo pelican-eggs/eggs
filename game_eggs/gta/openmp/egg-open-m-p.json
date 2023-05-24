@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-05-24T23:05:58+02:00",
+    "name": "OpenMP",
+    "author": "vedranv673@gmail.com",
+    "description": "A multiplayer mod for Grand Theft Auto: San Andreas that is fully backwards compatible with San Andreas Multiplayer.",
+    "features": null,
+    "docker_images": {
+        "Samp": "ghcr.io\/parkervcp\/games:samp"
+    },
+    "file_denylist": [],
+    "startup": ".\/omp-server",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"network.port\": \"{{server.build.default.port}}\",\r\n            \"rcon.password\": \"{{server.build.env.RCON_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\necho \"running: curl -sSL -o openmp.tar.gz https:\/\/github.com\/openmultiplayer\/open.mp\/releases\/download\/v1-RC2\/open.mp-linux-x86-dynssl.tar.gz\"\r\ncurl -sSL -o openmp.tar.gz https:\/\/github.com\/openmultiplayer\/open.mp\/releases\/download\/v1-RC2\/open.mp-linux-x86-dynssl.tar.gz\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf openmp.tar.gz --strip-components=1 -C \/mnt\/server\/\r\n\r\ncd \/mnt\/server || exit\r\n\r\necho \"creating default config\"\r\n\r\necho '{\r\n    \"announce\": true,\r\n    \"artwork\": {\r\n        \"cdn\": \"\",\r\n        \"enable\": true,\r\n        \"models_path\": \"models\"\r\n    },\r\n    \"chat_input_filter\": true,\r\n    \"enable_query\": true,\r\n    \"game\": {\r\n        \"allow_interior_weapons\": true,\r\n        \"chat_radius\": 200.0,\r\n        \"death_drop_amount\": 0,\r\n        \"gravity\": 0.008,\r\n        \"group_player_objects\": false,\r\n        \"lag_compensation_mode\": 1,\r\n        \"map\": \"\",\r\n        \"mode\": \"\",\r\n        \"nametag_draw_radius\": 70.0,\r\n        \"player_marker_draw_radius\": 250.0,\r\n        \"player_marker_mode\": 1,\r\n        \"time\": 12,\r\n        \"use_all_animations\": false,\r\n        \"use_chat_radius\": false,\r\n        \"use_entry_exit_markers\": true,\r\n        \"use_instagib\": false,\r\n        \"use_manual_engine_and_lights\": false,\r\n        \"use_nametag_los\": true,\r\n        \"use_nametags\": true,\r\n        \"use_player_marker_draw_radius\": false,\r\n        \"use_player_ped_anims\": false,\r\n        \"use_stunt_bonuses\": true,\r\n        \"use_vehicle_friendly_fire\": false,\r\n        \"use_zone_names\": false,\r\n        \"vehicle_respawn_time\": 10000,\r\n        \"weather\": 10\r\n    },\r\n    \"language\": \"\",\r\n    \"logging\": {\r\n        \"enable\": true,\r\n        \"log_chat\": true,\r\n        \"log_cookies\": false,\r\n        \"log_deaths\": true,\r\n        \"log_queries\": false,\r\n        \"log_sqlite\": false,\r\n        \"log_sqlite_queries\": false,\r\n        \"timestamp_format\": \"[%Y-%m-%dT%H:%M:%S%z]\",\r\n        \"use_prefix\": true,\r\n        \"use_timestamp\": true\r\n    },\r\n    \"max_bots\": 0,\r\n    \"max_players\": 50,\r\n    \"name\": \"open.mp server\",\r\n    \"network\": {\r\n        \"acks_limit\": 3000,\r\n        \"aiming_sync_rate\": 30,\r\n        \"allow_037_clients\": true,\r\n        \"bind\": \"\",\r\n        \"cookie_reseed_time\": 300000,\r\n        \"in_vehicle_sync_rate\": 30,\r\n        \"limits_ban_time\": 60000,\r\n        \"message_hole_limit\": 3000,\r\n        \"messages_limit\": 500,\r\n        \"minimum_connection_time\": 0,\r\n        \"mtu\": 576,\r\n        \"multiplier\": 10,\r\n        \"on_foot_sync_rate\": 30,\r\n        \"player_marker_sync_rate\": 2500,\r\n        \"player_timeout\": 10000,\r\n        \"port\": 7777,\r\n        \"public_addr\": \"\",\r\n        \"stream_radius\": 200.0,\r\n        \"stream_rate\": 1000,\r\n        \"time_sync_rate\": 30000,\r\n        \"use_lan_mode\": false\r\n    },\r\n    \"password\": \"\",\r\n    \"pawn\": {\r\n        \"legacy_plugins\": [],\r\n        \"main_scripts\": [\r\n            \"test 1\"\r\n        ],\r\n        \"side_scripts\": []\r\n    },\r\n    \"rcon\": {\r\n        \"allow_teleport\": false,\r\n        \"enable\": false,\r\n        \"password\": \"changeme\"\r\n    },\r\n    \"sleep\": 5.0,\r\n    \"use_dyn_ticks\": true,\r\n    \"website\": \"open.mp\"\r\n}\r\n' | tee config.json\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "RCON_PASSWORD",
+            "description": "RCON_PASSWORD",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "rconpassword",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
