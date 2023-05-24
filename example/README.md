@@ -18,17 +18,16 @@ The description of the server usually provided by the game/server maker.
 <!--Make a note if the user needs to get any keys or other items to run/use the server-->
 Due to rate limiting the console on the panel, it cannot keep up with the game console and the build will complete before the panel console may show it. Reloading the console will load it to the latest part of the log.
 
-## Minimum RAM warning
-
-Minimum required memory to run the server.
-<!--Example: 2GB is recommended. 4GB+ is preferred-->
-
-## Minumim Sorage warning
-
-Minimum required storage to run the server.
-<!--Example: 10GB is recommended. 25GB+ is preferred-->
-
-<!--Make a note if the install script would require more then the above amounts-->
+## Installation/System Requirements
+<!--Make changes to reflect the server minimum/recommended hardware specs-->
+|  | Bare Minimum | Recommended |
+|---------|---------|---------|
+| Processor | *Main info (32/64 bit or ARM support)* | *More info about egg's preferred processor* |
+| RAM | *Minimum amount of RAM* | *Recommended amount of RAM* |
+| Storage | *Minimum amount of Storage* | *Recommended amount of Storage* |
+| Network | *Minimum network speed* | *Recommended network speed* |
+| Host OS | *What will just run it?* | *Is there a kernel or a distro that will run it better?* |
+| Game Ownership | *Can the server start without it?* | *Is it needed for any other features?* |
 
 ## Server Ports
 
