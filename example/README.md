@@ -23,9 +23,9 @@ Due to rate limiting the console on the panel, it cannot keep up with the game c
 |  | Bare Minimum | Recommended |
 |---------|---------|---------|
 | Processor | *Main info (32/64 bit or ARM support)* | *More info about egg's preferred processor* |
-| RAM | *Minimum amount of RAM* | *Recommended amount of RAM* |
-| Storage | *Minimum amount of Storage* | *Recommended amount of Storage* |
-| Network | *Minimum network speed* | *Recommended network speed* |
+| RAM | *Minimum amount of RAM (in MiB/GiB)* | *Recommended amount of RAM (in MiB/GiB)* |
+| Storage | *Minimum amount of Storage (in MiB/GiB)* | *Recommended amount of Storage (in MiB/GiB)* |
+| Network | *Minimum network speed (in Mbit/s)* | *Recommended network speed (in Mbit/s)* |
 | Host OS | *What will just run it?* | *Is there a kernel or a distro that will run it better?* |
 | Game Ownership | *Can the server start without it?* | *Is it needed for any other features?* |
 
