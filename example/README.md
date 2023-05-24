@@ -26,7 +26,6 @@ Due to rate limiting the console on the panel, it cannot keep up with the game c
 | RAM | *Minimum amount of RAM (in MiB/GiB)* | *Recommended amount of RAM (in MiB/GiB)* |
 | Storage | *Minimum amount of Storage (in MiB/GiB)* | *Recommended amount of Storage (in MiB/GiB)* |
 | Network | *Minimum network speed (in Mbit/s)* | *Recommended network speed (in Mbit/s)* |
-| Host OS | *What will just run it?* | *Is there a kernel or a distro that will run it better?* |
 | Game Ownership | *Can the server start without it?* | *Is it needed for any other features?* |
 
 ## Server Ports
