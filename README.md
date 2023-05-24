@@ -133,6 +133,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA SA
   * [Multi Theft Auto](game_eggs/gta/mtasa)
   * [SA-MP](game_eggs/gta/samp)
+  * [OpenMp](game_eggs/gta/openmp)
 
 * GTA
   * [GTAC](game_eggs/gta/gtac)

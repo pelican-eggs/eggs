@@ -38,6 +38,7 @@
 * GTA SA
   * [Multi Theft Auto](gta/mtasa)
   * [SA-MP](gta/samp)
+  * [OpenMp](gta/openmp)
 
 * GTA
   * [GTAC](gta/gtac)
