@@ -234,6 +234,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Empyrion - Galactic Survival](game_eggs/steamcmd_servers/empyrion)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
 * [Frozen Flame](game_eggs/steamcmd_servers/frozen_flame)
+* [Ground Branch](game_eggs/steamcmd_servers/ground_branch)
 * [HLDS Server](game_eggs/steamcmd_servers/hlds_server)
   * [HLDS Vanilla](game_eggs/steamcmd_servers/hlds_server/vanilla)
   * [ReHLDS](game_eggs/steamcmd_servers/hlds_server/rehlds)

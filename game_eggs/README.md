@@ -132,6 +132,8 @@
 * [ECO](steamcmd_servers/eco)
 * [Empyrion - Galactic Survival](steamcmd_servers/empyrion)
 * [Fistful of Frags](steamcmd_servers/fof)
+* [Frozen Flame](steamcmd_servers/frozen_flame)
+* [Ground Branch](steamcmd_servers/ground_branch)
 * [HLDS Server](steamcmd_servers/hlds_server)
   * [HLDS Vanilla](steamcmd_servers/hlds_server/vanilla)
   * [ReHLDS](steamcmd_servers/hlds_server/rehlds)
