@@ -11,10 +11,10 @@ The egg is not fully ready right now, but it's usable already, you still need to
 ## Installation/System Requirements
 |  | Bare Minimum | Recommended |
 |---------|---------|---------|
-| Processor | *Main info (32/64 bit or ARM support)* | *More info about egg's preferred processor* |
-| RAM | *Minimum amount of RAM* | *Recommended amount of RAM* |
-| Storage | *Minimum amount of Storage* | *Recommended amount of Storage* |
-| Network | *Minimum network speed* | *Recommended network speed* |
+| Processor | Almost any proccessor will work | -|
+| RAM | 100 MiB | 256 MiB |
+| Storage | 70 MiB | 1024 MiB |
+| Network | Any reasonable speed |- |
 | Game Ownership | Not needed | The game is free, and server doesn't need the game to work. |
 
 ## Server Ports
