@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-26T20:23:27+03:00",
+    "exported_at": "2023-05-27T13:25:26+03:00",
     "name": "DDRaceNetwork",
     "author": "diedyesterdaywashere@gmail.com",
     "description": "DDraceNetwork (DDNet) is an actively maintained version of DDRace, a Teeworlds modification with a unique cooperative gameplay.",
@@ -18,11 +18,11 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \" server name is \"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl xz-utils tar\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | head -1)\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nelse\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | grep -i ${VERSION})\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o ddnet_linux_x86_64.tar.xz ${DOWNLOAD_URL}\r\ntar -xf ddnet_linux_x86_64.tar.xz\r\nrm ddnet_linux_x86_64.tar.xz\r\n\r\ncd DDNet-*\r\nmv * \/mnt\/server\r\ncd ..\r\nrmdir DDNet-*\r\n\r\necho \"done\"",
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl xz-utils tar\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | head -1)\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nelse\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | grep -i ${VERSION})\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o ddnet_linux_x86_64.tar.xz ${DOWNLOAD_URL}\r\ntar -xf ddnet_linux_x86_64.tar.xz\r\nrm ddnet_linux_x86_64.tar.xz\r\n\r\ncd DDNet-*\r\nmv * \/mnt\/server\r\ncd ..\r\nrmdir DDNet-*\r\necho \"# Check \/data\/autoexec_config.cfg for more info!\" >> myServerconfig.cfg\r\necho \"done\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }

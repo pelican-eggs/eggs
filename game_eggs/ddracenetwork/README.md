@@ -4,10 +4,6 @@
 
 DDraceNetwork (DDNet) is an actively maintained version of DDRace, a Teeworlds modification with a unique cooperative gameplay..
 
-## Install notes
-
-The egg is not fully ready right now, but it's usable already, you still need to create a config file yourself, or edit data/autoexec_config.cfg (reset on upd).
-
 ## Installation/System Requirements
 |  | Bare Minimum | Recommended |
 |---------|---------|---------|
@@ -15,7 +11,7 @@ The egg is not fully ready right now, but it's usable already, you still need to
 | RAM | 100 MiB | 256 MiB |
 | Storage | 70 MiB | 1024 MiB |
 | Network | Any reasonable speed |- |
-| Game Ownership | Not needed | The game is free, and server doesn't need the game to work. |
+| Game Ownership | Not needed | The game is free, and server doesn't need the game to work. |   
 
 ## Server Ports
 
