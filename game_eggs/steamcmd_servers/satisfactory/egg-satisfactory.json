@@ -1,0 +1,173 @@
+{
+    "_comment": "Pterodactyl Satisfactory Egg ~ Red-Thirten, Kubi, matthewp, Software-Noob, and Zarklord ~ 2022-10-13",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "name": "Satisfactory",
+    "author": "rehlmgaming@gmail.com",
+    "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/Engine\/Binaries\/Linux\/UE4Server-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0 $(if {{DISABLE_SEASONAL}}; then echo \"-DisableSeasonalEvents\"; fi)",
+    "config": {
+        "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mNumRotatingAutosaves\": \"mNumRotatingAutosaves={{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"bImplicitSend\": \"bImplicitSend={{server.build.env.UPLOAD_CRASH_REPORT}}\",\r\n            \"InitialConnectTimeout\": \"InitialConnectTimeout={{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"ConnectionTimeout\": \"ConnectionTimeout={{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/GameUserSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mFloatValues\": \"mFloatValues=((\\\"FG.AutosaveInterval\\\", {{server.build.env.AUTOSAVE_INTERVAL}}))\",\r\n            \"mIntValues\": \"mIntValues=((\\\"FG.NetworkQuality\\\", {{server.build.env.NETWORK_QUALITY}}))\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# File: Pterodactyl Satisfactory Egg - egg-satisfactory.json\r\n# Authors: Red-Thirten, Kubi, matthewp, Software-Noob, and Zarklord\r\n# Date: 2022\/10\/13\r\n# License: MIT License\r\n\r\n## Download and install SteamCMD\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steamcmd\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login anonymous +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) validate +exit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n## Satisfactory setup\r\n# Check for successful installation and make the core binary executable.\r\ncd \/mnt\/server\/Engine\/Binaries\/Linux\r\nif [[ ! -f UE4Server-Linux-Shipping ]]; then\r\n    echo -e \"\\n\\nSteamCMD failed to install the Satisfactory Dedicated Server!\"\r\n    echo -e \"\\tTry reinstalling the server again.\\n\"\r\n    exit 1\r\nelse\r\n    chmod +x UE4Server-Linux-Shipping\r\nfi\r\n\r\n# Make Config directory and default .ini files (since they are not initially present before first server start)\r\nmkdir -p \/mnt\/server\/FactoryGame\/Saved\/Config\/LinuxServer\/ && cd \"$_\"\r\n# Currently, this will delete & re-create certain .ini files during a re-install if they are already present.\r\n# While undesirable, this is required due to a current Pterodactyl ini config parser limitation.\r\n# When the patch to this limitation hits the production branch, this will be updated.\r\nrm -f Engine.ini Game.ini GameUserSettings.ini\r\n\r\necho -e '\\nCreating default \"Engine.ini\" configuration file...'\r\ncat > Engine.ini << EOF\r\n[\/Script\/FactoryGame.FGSaveSession]\r\nmNumRotatingAutosaves=${NUM_AUTOSAVES}\r\n\r\n[CrashReportClient]\r\nbImplicitSend=${UPLOAD_CRASH_REPORT}\r\n\r\n[\/Script\/OnlineSubsystemUtils.IpNetDriver]\r\nInitialConnectTimeout=${INIT_CONNECT_TIMEOUT}\r\nConnectionTimeout=${CONNECT_TIMEOUT}\r\nEOF\r\n\r\necho -e 'Creating default \"Game.ini\" configuration file...'\r\ncat > Game.ini << EOF\r\n[\/Script\/Engine.GameSession]\r\nMaxPlayers=${MAX_PLAYERS}\r\nEOF\r\n\r\necho -e 'Creating default \"GameUserSettings.ini\" configuration file...'\r\ncat > GameUserSettings.ini << EOF\r\n[\/Script\/FactoryGame.FGGameUserSettings]\r\nmIntValues=((\"FG.NetworkQuality\", ${NETWORK_QUALITY}))\r\nmFloatValues=((\"FG.AutosaveInterval\", ${AUTOSAVE_INTERVAL}))\r\nmAutoDetectSettingsHandled=False\r\nmPrimaryLanguage=\r\nCurrentFGGameUserSettingsVersion=0\r\nbUseVSync=False\r\nbUseDynamicResolution=False\r\nResolutionSizeX=1280\r\nResolutionSizeY=720\r\nLastUserConfirmedResolutionSizeX=1280\r\nLastUserConfirmedResolutionSizeY=720\r\nWindowPosX=-1\r\nWindowPosY=-1\r\nFullscreenMode=1\r\nLastConfirmedFullscreenMode=1\r\nPreferredFullscreenMode=1\r\nVersion=5\r\nAudioQualityLevel=0\r\nLastConfirmedAudioQualityLevel=0\r\nFrameRateLimit=0.000000\r\nDesiredScreenWidth=1280\r\nDesiredScreenHeight=720\r\nLastUserConfirmedDesiredScreenWidth=1280\r\nLastUserConfirmedDesiredScreenHeight=720\r\nLastRecommendedScreenWidth=-1.000000\r\nLastRecommendedScreenHeight=-1.000000\r\nLastCPUBenchmarkResult=-1.000000\r\nLastGPUBenchmarkResult=-1.000000\r\nLastGPUBenchmarkMultiplier=1.000000\r\nbUseHDRDisplayOutput=False\r\nHDRDisplayOutputNits=1000\r\n\r\n[ScalabilityGroups]\r\nsg.ResolutionQuality=100.000000\r\nsg.ViewDistanceQuality=3\r\nsg.AntiAliasingQuality=3\r\nsg.ShadowQuality=3\r\nsg.PostProcessQuality=3\r\nsg.TextureQuality=3\r\nsg.EffectsQuality=3\r\nsg.FoliageQuality=3\r\nsg.ShadingQuality=3\r\n\r\n[\/Script\/Engine.GameUserSettings]\r\nbUseDesiredScreenHeight=False\r\n\r\n\r\nEOF\r\n\r\necho -e \"\\nSatisfactory Dedicated Server successfully installed!\\n\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Server Query Port",
+            "description": "This is the port that your clients will type in and use to connect to the lobby (not the game world). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended). This is also true for the Primary\/Game Port!",
+            "env_variable": "QUERY_PORT",
+            "default_value": "15777",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Beacon Port",
+            "description": "This port provides a lightweight way for clients to contact a server and interact with it without committing to a normal game connection (likely used for client administration). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended).",
+            "env_variable": "BEACON_PORT",
+            "default_value": "15000",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "Automatic Updates",
+            "description": "Quickly checks for any server updates on startup, and updates if necessary. (1 Enable | 0 Disable)",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[Repair] Validate Server Files",
+            "description": "Leave empty (no value) for OFF or type \"true\" or \"1\" for ON. Validates all server files when Automatic Updates is enabled. Note: This will significantly increase server startup times, so it is recommended to only enable this when needed.",
+            "env_variable": "VALIDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Autosave Interval",
+            "description": "How often, in seconds, the server should generate a new autosave (ex. 300 = 5 min). Keep in mind that shorter times mean that while the server will save the game more often, it also means a potential drop in server performance. NOTE: This overrides any \"FG.AutosaveInterval\" commands made to the console!",
+            "env_variable": "AUTOSAVE_INTERVAL",
+            "default_value": "300",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Number of Rotating Autosaves",
+            "description": "Number of session auto-saves for the server to keep before the oldest save is deleted and the others are moved down the list.",
+            "env_variable": "NUM_AUTOSAVES",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Upload Crash Reports",
+            "description": "Accepted values are \"true\" or \"false\". Determines if the server should upload any crash reports to the developer to help pinpoint issues for future patches.",
+            "env_variable": "UPLOAD_CRASH_REPORT",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Disable Seasonal Events",
+            "description": "Accepted values are \"true\" or \"false\". Setting to \"true\" will disable any currently active seasonal events.",
+            "env_variable": "DISABLE_SEASONAL",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Experimental] Max Players",
+            "description": "[Requires server re-install to change default value!] The server and client are currently not optimized to support more than 4 players. However, you can override this value here at your own risk of poor performance.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Client Initial Connection Timeout",
+            "description": "Time in seconds to wait for a new client connection to be established before destroying the connection.",
+            "env_variable": "INIT_CONNECT_TIMEOUT",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Client Established Connection Timeout",
+            "description": "Time in seconds to wait before considering an established client connection timed out. Typically shorter than the time to wait on an initial connection because this connection should already have been setup and any interruption should be trapped quicker.",
+            "env_variable": "CONNECT_TIMEOUT",
+            "default_value": "20",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Network Quality",
+            "description": "[0 = Low, 1 = Medium, 2 = High, 3 = Ultra] Sets the network configuration for the game server (shouldn't need to be changed). NOTE: This overrides any \"FG.NetworkQuality\" commands made to the console!",
+            "env_variable": "NETWORK_QUALITY",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:0,3",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Branch Name",
+            "description": "[Accepted Values: \"public\", \"experimental\", or leave empty to use the primary branch of the server] Used to download or switch to a non-primary branch of the game server. \"Automatic Updates\" and \"Validate Server Files\" must be set to \"1\" to switch branches if the server is already installed. NOTE: Any non-primary branches may not be fully compatible\/stable!",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable|in:public,experimental",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Satisfactory Dedicated Server App ID",
+            "description": "Steam App ID used for installation and updates. Rarely needs to be changed.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1690800",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        }
+    ]
+}

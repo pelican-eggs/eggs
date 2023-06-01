@@ -8,7 +8,9 @@
     "name": "Post Scriptum",
     "author": "admin@softwarenoob.com",
     "description": "Post Scriptum is a WW2-themed first-person tactical shooter that provides an authentic WWII combat experience. Focusing on historical accuracy, large-scale battles, and a challenging battlefield demands an intense need for cohesion, communication, and teamwork.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/pterodactyl\/core:source"
     ],

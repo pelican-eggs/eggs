@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-01-31T11:59:34+01:00",
+    "name": "Foundry VTT",
+    "author": "pterodactyl@demi.cloud",
+    "description": "Foundry VTT is a standalone application built for experiencing multiplayer tabletop RPGs using a feature-rich and modern self-hosted application where your players connect directly through the browser.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:nodejs_18": "ghcr.io\/parkervcp\/yolks:nodejs_18"
+    },
+    "file_denylist": [],
+    "startup": "node .\/app\/resources\/app\/main.js --dataPath=\"\/home\/container\/data\"",
+    "config": {
+        "files": "{\r\n    \"data\/Config\/options.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"language\": \"{{server.build.env.FOUNDRY_LANGUAGE}}\",\r\n            \"updateChannel\": \"{{server.build.env.UPDATE_CHANNEL}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started and listening on port\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# FoundryVTT install script\r\n#\r\n# Server Files: \/mnt\/server\r\ndeclare -r DIR_ROOT=\"\/mnt\/server\"\r\ndeclare -r DIR_APP=\"${DIR_ROOT}\/app\"\r\ndeclare -r DIR_DATA=\"${DIR_ROOT}\/data\"\r\ndeclare -r ZIP_FILE_NAME=\"foundryvtt.zip\"\r\n\r\nmain() {\r\n  apt update\r\n  apt install -y unzip\r\n\r\n  printf \"\\nBuilding directory structure...\\n\"\r\n  mkdir -p \"${DIR_ROOT}\/data\/Config\"\r\n  mkdir -p \"${DIR_ROOT}\/app\"\r\n  # shellcheck disable=SC2164\r\n  cd \"${DIR_APP}\"\r\n  printf \"\\nDownloading FoundryVTT files...\\n\"\r\n  wget \"${TIMED_URL}\" -O \"${ZIP_FILE_NAME}\"\r\n  printf \"\\nunzipping FoundryVTT files...\\n\"\r\n  unzip \"${ZIP_FILE_NAME}\" -d \"${DIR_APP}\"\r\n  #rm \"${ZIP_FILE_NAME}\"\r\n\r\n  printf \"\\nGenerating default configuration...\\n\"\r\n  cat <<EOF >\"${DIR_DATA}\/Config\/options.json\"\r\n{\r\n  \"port\": 30000,\r\n  \"upnp\": false,\r\n  \"fullscreen\": false,\r\n  \"hostname\": null,\r\n  \"localHostname\": null,\r\n  \"routePrefix\": null,\r\n  \"sslCert\": null,\r\n  \"sslKey\": null,\r\n  \"awsConfig\": null,\r\n  \"dataPath\": \"\/home\/container\/data\",\r\n  \"passwordSalt\": null,\r\n  \"proxySSL\": false,\r\n  \"proxyPort\": null,\r\n  \"minifyStaticFiles\": true,\r\n  \"updateChannel\": \"release\",\r\n  \"language\": \"en.core\",\r\n  \"upnpLeaseDuration\": null,\r\n  \"world\": null\r\n} \r\nEOF\r\n  printf \"Installation Done.\\n\"\r\n}\r\nmain \"@\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Timed URL",
+            "description": "This is required to download the foundry files. Available in your https:\/\/foundryvtt.com\/ profile after you've purchased a license. This link generally lasts for about 5 minutes.",
+            "env_variable": "TIMED_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|url",
+            "field_type": "text"
+        },
+        {
+            "name": "Language",
+            "description": "As may be expected, this setting configures the localization of the program and can be leveraged by localization modules to ensure that the interface is translated to the language of your choosing wherever possible.",
+            "env_variable": "FOUNDRY_LANGUAGE",
+            "default_value": "en.core",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Update Channel",
+            "description": "Select what channel you want to use for automatic updates",
+            "env_variable": "UPDATE_CHANNEL",
+            "default_value": "release",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:256",
+            "field_type": "text"
+        }
+    ]
+}

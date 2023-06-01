@@ -8,12 +8,15 @@
     "name": "GoMint",
     "author": "parker@parkervcp.com",
     "description": "A performant and stable Minecraft server software for the Bedrock Edition that comes with a modern API and support for Java 11 LTS.",
-    "features": null,
+    "features": [
+        "eula",
+        "java_version"
+    ],
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_11",
         "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_14",
-        "ghcr.io\/pterodactyl\/yolks:java_16"
+        "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17"
     ],
     "file_denylist": [],
     "startup": "java --add-opens java.base\/java.nio=io.netty.common --add-exports java.base\/jdk.internal.misc=io.netty.common -p modules -m gomint.server\/io.gomint.server.Bootstrap",

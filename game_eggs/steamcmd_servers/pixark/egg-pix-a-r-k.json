@@ -8,7 +8,9 @@
     "name": "PixARK",
     "author": "hello@venatus.digital",
     "description": "A simple Docker container with Wine to run PixARK using Pterodactyl Panel",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/parkervcp\/pterodactyl-images:ubuntu_wine-source"
     ],

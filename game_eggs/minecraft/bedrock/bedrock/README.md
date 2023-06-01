@@ -19,3 +19,6 @@ Also see the [Mojang Issue tracker](https://bugs.mojang.com/projects/BDS/issues/
 * Constant `NO LOG FILE` in the console before every log line.
 * Server chat is not printed to the console.
 * when you set ops in game they do not get saved.
+
+### arm64
+* The arm64 may not perform as expected due to the amd64 to arm emulaton.

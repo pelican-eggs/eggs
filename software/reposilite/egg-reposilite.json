@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-02-06T18:51:07+01:00",
+    "name": "Reposilite",
+    "author": "mk@kcra.me",
+    "description": "Lightweight and easy-to-use repository management software dedicated for Maven based artifacts in the JVM ecosystem.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/yolks:java_8": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "ghcr.io\/pterodactyl\/yolks:java_16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+    },
+    "file_denylist": [],
+    "startup": "java -Xmx{{SERVER_MEMORY}}M -Dreposilite.port={{SERVER_PORT}} -jar reposilite.jar --port {{SERVER_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Done (\"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Find latest Reposilite version, if needed\r\nif [ \"$REPOSILITE_VERSION\" == \"latest\" ]; then\r\n    REPOSILITE_VERSION=$(grep -oPm1 \"(?<=<latest>)[^<]+\" <<< \"$(curl -s https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/maven-metadata.xml)\")\r\nfi\r\n# Check if -all suffixed jar is available\r\nstatus_code=$(curl --write-out '%{http_code}' -X HEAD -s -o \/dev\/null https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar)\r\n# Download new Reposilite\r\nif [ \"$status_code\" == 200 ]; then\r\n    curl -o reposilite.jar https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar\r\nelse\r\n    curl -o reposilite.jar https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}.jar\r\nfi",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Reposilite version",
+            "description": "The version of Reposilite.",
+            "env_variable": "REPOSILITE_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}

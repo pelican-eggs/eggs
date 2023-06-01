@@ -8,7 +8,9 @@
     "name": "nmrih",
     "author": "avalongamecs@gmail.com",
     "description": "No More Room In Hell",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "images": [
         "quay.io\/pterodactyl\/core:source"
     ],

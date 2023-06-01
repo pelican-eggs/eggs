@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-08-27T01:20:58-04:00",
+    "name": "ClassiCube(MGC)",
+    "author": "panel@qoutsy.33mail.com",
+    "description": "Debian based MCGalaxy Egg.",
+    "features": null,
+    "images": [
+        "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete"
+    ],
+    "file_denylist": [],
+    "startup": "mono MCGalaxyCLI.exe",
+    "config": {
+        "files": "{\r\n    \"\/properties\/server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-name\": \"{{server.build.env.HOSTNAME}}\",\r\n            \"motd\": \"{{server.build.env.MOTD}}\",\r\n            \"public\": \"true\",\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Finished setting up server\"\r\n}",
+        "logs": "{}",
+        "stop": "\/shutdown 3 SIGTERM Server shutting down..."
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update \r\napt -y install curl jq unzip\r\n\r\nMATCH=mcgalaxy_\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"Specified install version not found. Defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n\r\necho -e \"Downloading ClassiCube version ${VERSION}\"\r\necho -e \"Download URL is ${DOWNLOAD_URL}\"\r\ncurl -ssL -o mcgalaxy.zip ${DOWNLOAD_URL}\r\nunzip -j mcgalaxy.zip\r\nrm mcgalaxy.zip\r\nchmod +X *.dll *.exe\r\necho \"Install complete\"",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Install Version",
+            "description": "Specify the version to install from https:\/\/github.com\/UnknownShadow200\/MCGalaxy\/releases. Leave latest to install the latest version.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Server Name",
+            "description": "Specify the server name",
+            "env_variable": "HOSTNAME",
+            "default_value": "Pterodactyl Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:30"
+        },
+        {
+            "name": "MOTD",
+            "description": "Specify the message of the day",
+            "env_variable": "MOTD",
+            "default_value": "Welcome to the server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        }
+    ]
+}

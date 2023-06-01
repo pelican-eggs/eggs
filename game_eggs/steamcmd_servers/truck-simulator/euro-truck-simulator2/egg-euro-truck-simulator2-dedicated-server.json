@@ -1,0 +1,84 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-04-24T17:19:01+02:00",
+    "name": "Euro Truck Simulator 2 Dedicated server",
+    "author": "josdekurk@gmail.com",
+    "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin\/linux_x64\/eurotrucks2_server",
+    "config": {
+        "files": "{\r\n    \"\/.local\/share\/Euro Truck Simulator 2\/server_config.sii\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \" connection_dedicated_port:\": \" connection_dedicated_port: {{server.build.default.port}}\",\r\n            \" query_dedicated_port:\": \" query_dedicated_port: {{env.QUERY_PORT}}\",\r\n            \" server_logon_token:\": \" server_logon_token: \\\"{{env.STEAM_TOKEN}}\\\"\",\r\n            \" lobby_name:\": \" lobby_name: \\\"{{env.LOBBY_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"[MP] State: running\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nmkdir -p \/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/\r\n\r\nCONFIG_FILE=\/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/server_config.sii\r\nif [ ! -f \"$CONFIG_FILE\" ]; then\r\n    cd \/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/\r\n    echo \"a config file does not yet exist making one!\"\r\n    curl -sSL -o server_config.sii https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/truck-simulator\/server_config.sii\r\nfi\r\n\r\nPACKAGE_FILE=\/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/server_packages.sii\r\nif [ ! -f \"$PACKAGE_FILE\" ]; then\r\n    cd \/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/\r\n    echo \"a server_packages.sii file does not yet exist making one!\"\r\n    curl -sSL -o server_packages.sii https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/truck-simulator\/euro-truck-simulator2\/ets2-files\/server_packages.sii\r\nfi\r\n\r\nDATA_FILE=\/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/server_packages.dat\r\nif [ ! -f \"$DATA_FILE\" ]; then\r\n    cd \/mnt\/server\/.local\/share\/\"Euro Truck Simulator 2\"\/\r\n    echo \"a server_packages.dat file does not yet exist making one!\"\r\n    curl -sSL -o server_packages.dat https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/truck-simulator\/euro-truck-simulator2\/ets2-files\/server_packages.dat\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Auto update",
+            "description": "Auto update the server on startup",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "App ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1948160",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:1948160",
+            "field_type": "text"
+        },
+        {
+            "name": "Query port",
+            "description": "By there readme of the game the query port must be between 27015-27020, but from our testing this port can be any port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Auth token",
+            "description": "By default, whenever a dedicated server is launched it is using an anonymous account. For such an account non-persistent server id is generated (used for direct search). To avoid this you can acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required)",
+            "env_variable": "STEAM_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Lobby name",
+            "description": "",
+            "env_variable": "LOBBY_NAME",
+            "default_value": "Euro Truck Simulator 2 server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        }
+    ]
+}

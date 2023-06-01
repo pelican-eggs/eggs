@@ -1,0 +1,162 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-04-25T19:31:11+02:00",
+    "name": "Empyrion: Galactic Survival",
+    "author": "info@goover.de",
+    "description": "Empyrion: Galactic Survival dedicated server",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "cd empyrion; WINEDLLOVERRIDES=\"mscoree,mshtml=\" wine .\/DedicatedServer\/EmpyrionDedicated.exe -batchmode -log -logFile .\/logs\/current.log & echo -e \"Checking on telnet connection\" && until nc -z 127.0.0.1 ${TELNET_PORT}; do echo -e \"Waiting on telnet connection...\"; sleep 5; done && $( [[ -z ${TELNET_PWD} ]] && printf %s \"telnet -E 127.0.0.1 ${TELNET_PORT}\")",
+    "config": {
+        "files": "{\r\n    \"empyrion\/dedicated.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"ServerConfig.Srv_Port\": \"{{server.build.default.port}}\",\r\n            \"ServerConfig.Srv_Name\": \"{{env.SRV_NAME}}\",\r\n            \"ServerConfig.Srv_Password\": \"{{env.SRV_PWD}}\",\r\n            \"ServerConfig.Srv_MaxPlayers\": \"{{env.MAX_PLAYERS}}\",\r\n            \"ServerConfig.Tel_Enabled\": \"{{env.TELNET_ENABLED}}\",\r\n            \"ServerConfig.Tel_Port\": \"{{env.TELNET_PORT}}\",\r\n            \"ServerConfig.Srv_Description\": \"{{env.SRV_DESC}}\",\r\n            \"GameConfig.Seed\": \"{{env.SEED}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Connected to 127.0.0.1.\"\r\n}",
+        "logs": "{}",
+        "stop": "saveandexit 0"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Empyrion Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update\r\napt -y install curl unzip\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\nmkdir -p \/mnt\/server\/steam\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steam\r\n\r\nexport HOME=\/mnt\/server\r\n\r\nmkdir -p \/mnt\/server\/empyrion\r\nmkdir -p \/mnt\/server\/Logs\r\nmkdir -p \/mnt\/server\/empyrion\/logs\r\ntouch \/mnt\/server\/empyrion\/logs\/current.log\r\n\r\ncd \/mnt\/server\/steam\r\nchown -R root:root \/mnt\r\n\r\nif [ \"${VERSION}\" == \"experimental\" ]; then\r\n    .\/steamcmd.sh +force_install_dir \/mnt\/server\/empyrion +login anonymous +@sSteamCmdForcePlatformType windows +app_update 530870 -beta experimental validate +quit\r\nelse\r\n    .\/steamcmd.sh +force_install_dir \/mnt\/server\/empyrion +login anonymous +@sSteamCmdForcePlatformType windows +app_update 530870 validate +quit\r\nfi\r\n\r\n## setup 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\n\r\n## setup 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v \/mnt\/server\/steam\/linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name that will be shown in the Server Browser.",
+            "env_variable": "SRV_NAME",
+            "default_value": "My Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password used to connect to the server - Optional, defaults to no password.",
+            "env_variable": "SRV_PWD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of player allowed to join simultaneously in the server. Defaults to 20.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "20",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Telnet",
+            "description": "Telnet access to control the server.",
+            "env_variable": "TELNET_ENABLED",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|regex:\/^(?:true)?(?:false)?\\b\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Telnet Port",
+            "description": "Telnet Server Port DO NOT EXPOSE THIS TO THE INTERNET.",
+            "env_variable": "TELNET_PORT",
+            "default_value": "30004",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Seed",
+            "description": "World generation seed. Numeric between 1 and 7 characters.",
+            "env_variable": "SEED",
+            "default_value": "1011345",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "Server info between the \" \", can contain [b]bold[\/b] text or a [u][url=empyriongame.com]link[\/url][\/u] up to 127 chars.",
+            "env_variable": "SRV_DESC",
+            "default_value": "Empyrion Galactic Survival Dedicated Server running on Pterodactyl Panel",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:127",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "Enable 'experimental'. Optional, defaults to public branch.",
+            "env_variable": "VERSION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2019 dotnet48",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "530870",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

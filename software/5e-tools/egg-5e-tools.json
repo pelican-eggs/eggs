@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-11-27T17:50:04+01:00",
+    "name": "5e Tools",
+    "author": "pterodactyl@demi.cloud",
+    "description": "A suite of tools for 5th Edition Dungeons & Dragons players and Dungeon Masters.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": "cd ~\/5e-tools && git pull && cd && .\/caddy run --config ~\/caddy.json",
+    "config": {
+        "files": "{\r\n    \"caddy.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"apps.http.servers.srv0.listen.0\": \":{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"serving initial configuration\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# 5e Tools install script\r\n#\r\n# Server Files: \/mnt\/server\r\ndeclare -r DIR=\"\/mnt\/server\"\r\ndeclare -r CADDY_INSTALL_URL=\"https:\/\/caddyserver.com\/api\/download?os=linux&arch=amd64&idempotency=41554620449867\"\r\ndeclare -r LOCAL_REPO=\"${DIR}\/5e-tools\"\r\n\r\ndie() {\r\n  local message=\"$1\"\r\n  printf \"\\n%s\\n\" \"${message}\"\r\n  exit 2\r\n}\r\ncd_error() {\r\n  die \"ERROR: installation encountered an error while trying to change directory\"\r\n}\r\n\r\nmain() {\r\n  local git_origin\r\n  apt update\r\n  apt install -y wget\r\n  cd \"${DIR}\" || cd_error\r\n  printf \"\\nInstalling Caddy...\\n\"\r\n  wget \"${CADDY_INSTALL_URL}\" -O .\/caddy\r\n  chmod +x .\/caddy\r\n  printf \"\\nGenerating Caddy configuration...\\n\"\r\n  # this is a default config\r\n  # key variables, such as the port, will get overwritten with the pterodactyl\r\n  # configuration parser\r\n  cat <<EOF >\"${DIR}\/caddy.json\"\r\n{\r\n  \"apps\": {\r\n    \"http\": {\r\n      \"servers\": {\r\n        \"srv0\": {\r\n          \"listen\": [\r\n            \":8080\"\r\n          ],\r\n          \"routes\": [\r\n            {\r\n              \"handle\": [\r\n                {\r\n                  \"handler\": \"vars\",\r\n                  \"root\": \"\/home\/container\/5e-tools\"\r\n                },\r\n                {\r\n                  \"encodings\": {\r\n                    \"gzip\": {},\r\n                    \"zstd\": {}\r\n                  },\r\n                  \"handler\": \"encode\",\r\n                  \"prefer\": [\r\n                    \"zstd\",\r\n                    \"gzip\"\r\n                  ]\r\n                },\r\n                {\r\n                  \"handler\": \"file_server\"\r\n                }\r\n              ]\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\nEOF\r\n  git config --global pull.ff only\r\n  if [[ ! -d \"${LOCAL_REPO}\" ]]; then\r\n    printf \"\\nCloning latest version (this may take a while)...\\n\"\r\n    # $REPOSITORY is passed via environment variable from pterodactyl\r\n    git clone \"${REPOSITORY}\" \"${LOCAL_REPO}\"\r\n  else\r\n    cd \"${LOCAL_REPO}\" || cd_error\r\n    git_origin=\"$(git config --get remote.origin.url)\"\r\n    cd \"${DIR}\" || cd_error\r\n    printf \"\\n\\ngit origin is %s\\n\\n\" \"${git_origin}\"\r\n    # if the user hasn't change the repository variable\r\n    if [[ \"${git_origin}\" == \"${REPOSITORY}\" ]]; then\r\n      cd \"${LOCAL_REPO}\" || cd_error\r\n      printf \"\\nRepository already installed - updating...\\n\"\r\n      git fetch --all\r\n      git reset --hard origin\/master\r\n      git pull\r\n      cd \"${DIR}\" || cd_error\r\n    else\r\n      printf \"\\nRepository variable changed since last update\\n...\\n\"\r\n      rm -rf \"${LOCAL_REPO}\"\r\n      git clone \"${REPOSITORY}\" \"${LOCAL_REPO}\"\r\n    fi\r\n  fi\r\n  printf \"\\nInstallation Complete\\n\"\r\n}\r\nmain \"@\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "5e Tools Repository",
+            "description": "Git Repository to use for cloning 5e Tools",
+            "env_variable": "REPOSITORY",
+            "default_value": "https:\/\/github.com\/5etools-mirror-1\/5etools-mirror-1.github.io",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|url",
+            "field_type": "text"
+        }
+    ]
+}

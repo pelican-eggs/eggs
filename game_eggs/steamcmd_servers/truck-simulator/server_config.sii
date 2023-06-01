@@ -1,0 +1,32 @@
+SiiNunit
+{
+server_config : _nameless.54e.4440 {
+ lobby_name: ""
+ description: ""
+ welcome_message: ""
+ password: ""
+ max_players: 8
+ max_vehicles_total: 100
+ max_ai_vehicles_player: 50
+ max_ai_vehicles_player_spawn: 50
+ connection_virtual_port: 100
+ query_virtual_port: 101
+ connection_dedicated_port: 27015
+ query_dedicated_port: 27016
+ server_logon_token: ""
+ player_damage: true
+ traffic: true
+ hide_in_company: false
+ hide_colliding: true
+ force_speed_limiter: false
+ mods_optioning: false
+ timezones: 0
+ service_no_collision: false
+ in_menu_ghosting: false
+ name_tags: true
+ friends_only: false
+ show_server: true
+ moderator_list: 0
+}
+
+}

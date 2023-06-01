@@ -1,0 +1,58 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+},
+"exported_at": "2023-05-17T23:20:29+01:00",
+  "name": "Krypton",
+  "author": "callum.seabrook@prevarinite.com",
+  "description": "A fast, lightweight Minecraft server written in Kotlin",
+  "features": [
+    "eula",
+    "java_version",
+    "pid_limit"
+],
+"docker_images": {
+  "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
+  "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+  "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+  "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+  "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
+},
+  "file_denylist": "",
+  "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JAR}}",
+  "config": {
+    "files": "{\r\n    \"config.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"  port\": \"  port = {{server.build.default.port}}\",\r\n            \"  ip\": \"  ip = \\\"0.0.0.0\\\"\"\r\n        }\r\n    }\r\n}",
+    "startup": "{\r\n    \"done\": \")! Type \\\"help\\\" for help.\"\r\n}",
+    "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+    "stop": "stop"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!\/bin\/bash\r\n#\r\n# Krypton installation script for Pterodactyl\r\n# Created by BomBardyGamer\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt-get update\r\napt-get install -y curl jq unzip\r\n\r\ncd \/mnt\/server\r\nif [ -z \"${KRYPTON_VERSION}\" ] || [ \"${KRYPTON_VERSION}\" == \"latest\" ]; then\r\n    KRYPTON_VERSION=\"lastSuccessfulBuild\"\r\nfi\r\n\r\nBASE_URL=\"https:\/\/ci.kryptonmc.org\/job\/Krypton\/${KRYPTON_VERSION}\"\r\nARTIFACT=`curl \"${BASE_URL}\/api\/json?tree=artifacts%5BrelativePath%5D\" | jq '.artifacts[0].relativePath' | sed 's\/\"\/\/g'`\r\n\r\ncurl -o ${SERVER_JAR} ${BASE_URL}\/artifact\/${ARTIFACT}\r\nunzip ${SERVER_JAR} \"config.conf\"",
+      "container": "debian:buster-slim",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Server JAR File",
+      "description": "The name of the server JAR to run the server with.",
+      "env_variable": "SERVER_JAR",
+      "default_value": "Krypton.jar",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|max:20"
+    },
+    {
+      "name": "Krypton Version",
+      "description": "The version of Krypton to download and use.",
+      "env_variable": "KRYPTON_VERSION",
+      "default_value": "latest",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|alpha_num|between:1,6"
+    }
+  ]
+}

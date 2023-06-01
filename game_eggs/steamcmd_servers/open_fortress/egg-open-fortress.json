@@ -1,0 +1,74 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-04-13T00:19:22+00:00",
+    "name": "Open Fortress",
+    "author": "espeon@espeon.dev",
+    "description": "Open Fortress is a free Team Fortress 2 mod that introduces new gamemodes, weapons, characters, maps, and more to the world of TF2.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:games_source": "ghcr.io\/parkervcp\/yolks:games_source"
+    },
+    "file_denylist": [],
+    "startup": ".\/srcds_run -game {{SRCDS_GAME}} -console -port {{SERVER_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart -debug +maxplayers {{MAXPLAYERS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"gameserver Steam ID\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:18.04'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates p7zip-full wget\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\nSTEAM_USER=anonymous\r\nSTEAM_PASS=\"\"\r\nSTEAM_AUTH=\"\"\r\nfi\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n## install tf2 content using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server\/tf2 +app_update 232250 ${EXTRA_FLAGS} +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n## download OpenFortress\r\ncd \/mnt\/server\r\nmv bin bin_dontdeleteme\r\nwget https:\/\/git.sr.ht\/~webb\/murse\/refs\/download\/v0.4.0\/murse-v0.4.0-linux-amd64.tar.gz -O murse.tgz 2> \/dev\/null\r\ntar xvfz murse.tgz\r\nrm -rf murse.tgz\r\nchmod +x murse\r\n.\/murse upgrade -u https:\/\/toast.openfortress.fun:8443\/toast asdrggvead\/open_fortress\r\nmv \/mnt\/server\/asdrggvead\/open_fortress \/mnt\/server\/open_fortress\r\nrm -rf asdrggvead\r\nmv bin_dontdeleteme bin\r\n## add fixed gameinfo\r\ncd \/mnt\/server\/open_fortress\r\nrm -rf gameinfo.txt\r\ncat >> gameinfo.txt << EOF\r\n\"GameInfo\"\r\n{\r\ngame \"Open Fortress\"\r\ntitle \"\"\r\ntitle2 \"\"\r\ngamelogo \"1\"\r\ndeveloper \"https:\/\/github.com\/AgitationSkeleton\/open_fortress\/blob\/master\/credits.txt\"\r\ndeveloper_url\t\"https:\/\/github.com\/KaidemonLP\/Open-Fortress-Source\"\r\nmanual \"\"\r\ntype \"multiplayer_only\"\r\nhasportals \"0\" \/\/ gameui.dll\r\nhashdcontent\t\"0\" \/\/ gameui.dll\r\nnomodels \"0\" \/\/ gameui.dll\r\nnohimodel \"0\" \/\/ gameui.dll\r\nnocrosshair \"0\" \/\/ gameui.dll\r\nadvcrosshair \"1\" \/\/ gameui.dll\r\nnodifficulty\t\"1\" \/\/ gameui.dll\r\nsupportsvr \"0\" \/\/ engine.dll + gameui.dll\r\nbots \"0\" \/\/ gameui.dll\r\nnodegraph \"1\" \/\/ engine.dll\r\nperfwizard \"0\" \/\/ unused\r\nSupportsDX8 \"0\" \/\/ unused\r\nSupportsDX9 \"1\" \/\/ unused\r\nSupportsDX10\t\"0\" \/\/ unused\r\nSupportsDX11\t\"0\" \/\/ unused\r\nSupportsXbox\t\"0\" \/\/ unused\r\nSupportsXbox360\t\"0\" \/\/ unused\r\nSupportsXboxOne\t\"0\" \/\/ unused\r\nSupportsPS3 \"0\" \/\/ unused\r\nSupportsPS4 \"0\" \/\/ unused\r\nicon \"resource\/game\"\r\nGameData \"ofd_fic2.fgd\"\r\nInstancePath\t\"maps\/instances\/\"\r\nhidden_maps\r\n{\r\n\"test_speakers\" 1\r\n\"test_hardware\" 1\r\n\"background01\" 1\r\n\"background02\" 1\r\n\"background03\" 1\r\n\"background04\" 1\r\n\"background05\" 1\r\n\"background06\" 1\r\n\"background07\" 1\r\n\"background08\" 1\r\n\"background09\" 1\r\n\"background12\" 1\r\n\"background15\" 1\r\n\"ep1_c17_00\" 1\r\n\"ep1_c17_00a\" 1\r\n\"ep1_c17_01\" 1\r\n\"ep1_c17_01a\" 1\r\n\"ep1_c17_02\" 1\r\n\"ep1_c17_02a\" 1\r\n\"ep1_c17_02b\" 1\r\n\"ep1_c17_05\" 1\r\n\"ep1_c17_06\" 1\r\n\"ep1_citadel_00\"\t1\r\n\"ep1_citadel_00_demo\" 1\r\n\"ep1_citadel_01\"\t1\r\n\"ep1_citadel_02\"\t1\r\n\"ep1_citadel_02b\"\t1\r\n\"ep1_citadel_03\"\t1\r\n\"ep1_citadel_04\"\t1\r\n\"ep1_background01\"\t1\r\n\"ep1_background01a\"\t1\r\n\"ep1_background02\"\t1\r\n\"ep2_outland_01\"\t1\r\n\"ep2_outland_01a\"\t1\r\n\"ep2_outland_02\"\t1\r\n\"ep2_outland_03\"\t1\r\n\"ep2_outland_04\"\t1\r\n\"ep2_outland_05\"\t1\r\n\"ep2_outland_06\"\t1\r\n\"ep2_outland_06a\"\t1\r\n\"ep2_outland_07\"\t1\r\n\"ep2_outland_08\"\t1\r\n\"ep2_outland_09\"\t1\r\n\"ep2_outland_10\"\t1\r\n\"ep2_outland_10a\"\t1\r\n\"ep2_outland_11\"\t1\r\n\"ep2_outland_11a\"\t1\r\n\"ep2_outland_11b\"\t1\r\n\"ep2_outland_12\"\t1\r\n\"ep2_outland_12a\"\t1\r\n\"ep2_background01\"\t1\r\n\"ep2_background02\"\t1\r\n\"ep2_background02a\"\t1\r\n\"ep2_background03\"\t1\r\n\"credits\" 1\r\n\"vst_lostcoast\" 1\r\n\"test\" 1\r\n\"sdk_vehicles\" 1\r\n}\r\nFileSystem\r\n{\r\nSteamAppId 243750\r\nSearchPaths\r\n{\r\ngame+mod |gameinfo_path|custom\/*\r\ngame+game_write+mod+mod_write+default_write_path |gameinfo_path|.\r\ngamebin |gameinfo_path|bin\r\n\/\/ The lines below until the BREAK comment are responsible for the game resources to work properly\r\n\/\/ in Hammer and other Source tools. The default setup assumes that you have everything (Steam, TF2,\r\n\/\/ Source SDK and OF) in the same drive letter\/partition. If you have a different storage configuration,\r\n\/\/ feel free to modify the paths below between quotes (example: D:\\Steam\\steamapps\\common\\Team Fortress 2\\tf).\r\ngame \"\/home\/container\/tf2\/tf\/tf2_misc.vpk\"\r\ngame \"\/home\/container\/tf2\/tf\/tf2_sound_misc.vpk\"\r\ngame \"\/home\/container\/tf2\/tf\/tf2_sound_vo_english.vpk\"\r\ngame \"\/home\/container\/tf2\/tf\/tf2_textures.vpk\"\r\ngame \"\/home\/container\/tf2\/tf\"\r\ngame \"\/home\/container\/tf2\/hl2\/hl2_textures.vpk\"\r\ngame \"\/home\/container\/tf2\/hl2\/hl2_sound_vo_english.vpk\"\r\ngame \"\/home\/container\/tf2\/hl2\/hl2_sound_misc.vpk\"\r\n\/\/ The hl2 folder here is from Source SDK Base 2013 Multiplayer.\r\ngame \"|all_source_engine_paths|hl2\\hl2_misc.vpk\"\r\ngame \"|all_source_engine_paths|hl2\"\r\n\/\/ ========== BREAK ==========\r\nplatform |all_source_engine_paths|platform\/platform_misc.vpk\r\nplatform |all_source_engine_paths|platform\r\ngame+download |gameinfo_path|download\r\n}\r\n}\r\n}\r\nEOF\r\n## fix issue \/w symlink\r\ncd \/mnt\/server\/bin\r\nln -s datacache_srv.so datacache.so\r\nln -s dedicated_srv.so dedicated.so\r\nln -s engine_srv.so engine.so\r\nln -s materialsystem_srv.so materialsystem.so\r\nln -s replay_srv.so replay.so\r\nln -s scenefilecache_srv.so scenefilecache.so\r\nln -s shaderapiempty_srv.so shaderapiempty.so\r\nln -s soundemittersystem_srv.so soundemittersystem.so\r\nln -s studiorender_srv.so studiorender.so\r\nln -s vphysics_srv.so vphysics.so\r\n## more symlink fixes\r\ncd \/mnt\/server\/open_fortress\/bin\r\nln -s server.so server_srv.so\r\n## fix issue with libstdc++.so\r\nrm -rf \/mnt\/server\/bin\/libstdc++.so.6",
+            "container": "ubuntu:18.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "244310",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|regex:\/^(244310)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Name",
+            "description": "The name corresponding to the game to download and run using SRCDS.",
+            "env_variable": "SRCDS_GAME",
+            "default_value": "open_fortress",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|regex:\/^(open_fortress)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Default Map",
+            "description": "The default map to use when starting the server.",
+            "env_variable": "SRCDS_MAP",
+            "default_value": "dm_2fort",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^(\\w{1,20})$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum amount of players allowed on the server.",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "24",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        }
+    ]
+}

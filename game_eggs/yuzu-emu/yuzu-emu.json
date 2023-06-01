@@ -1,0 +1,102 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-02-26T13:57:20+01:00",
+    "name": "YuzuEmu",
+    "author": "me@basvandenboom.dev",
+    "description": "Egg for hosting dedicated Yuzu multiplayer rooms.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/yuzu-room --room-name \"{{ROOM_NAME}}\"  --room-description \"{{ROOM_DESCRIPTION}}\"  --preferred-game \"{{PREFERRED_GAME}}\"  --preferred-game-id {{PREFERRED_GAME_ID}}  --port {{SERVER_PORT}}  --max_members {{MAX_MEMBERS}} --password \"{{PASSWORD}}\" --token \"{{YUZU_TOKEN}}\" --web-api-url \"https:\/\/api.yuzu-emu.org\/\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Room is open\"\r\n}",
+        "logs": "{}",
+        "stop": "Q"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Install build tools\r\necho \"deb http:\/\/deb.debian.org\/debian bullseye-backports main\" >> \/etc\/apt\/sources.list && \\\r\napt-get update && apt-get -y full-upgrade && \\\r\n    apt-get install -y build-essential wget git ccache ninja-build libssl-dev pkg-config libarchive-tools \\\r\n    cmake\/bullseye-backports cmake-data\/bullseye-backports\r\n\r\n\r\n# Shallow clone yuzu repository, since we delete the local copy afterwards\r\ngit clone --depth 1 -j4 --recursive --shallow-submodules https:\/\/github.com\/yuzu-emu\/yuzu-mainline.git \/mnt\/server\/yuzu-mainline\r\n\r\n# Download build tools and build\r\ngit clone --depth 1 https:\/\/github.com\/yuzu-emu\/yuzu-multiplayer-dedicated.git \/mnt\/server\/build-files\r\ncd \/mnt\/server\/yuzu-mainline && \/mnt\/server\/build-files\/.ci\/build.sh\r\n\r\n# Copy server binary to container root\r\ncp \/mnt\/server\/yuzu-mainline\/build\/bin\/yuzu-room \/mnt\/server\/yuzu-room\r\n\r\n# Delete git repo's to save disk space.\r\nrm -rf \/mnt\/server\/yuzu-mainline && rm -rf \/mnt\/server\/build-files",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Room name",
+            "description": "",
+            "env_variable": "ROOM_NAME",
+            "default_value": "My Yuzu Room",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Room description",
+            "description": "",
+            "env_variable": "ROOM_DESCRIPTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:60",
+            "field_type": "text"
+        },
+        {
+            "name": "Preferred game",
+            "description": "",
+            "env_variable": "PREFERRED_GAME",
+            "default_value": "Mario Kart 8 Deluxe",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Preferred game ID",
+            "description": "",
+            "env_variable": "PREFERRED_GAME_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20|alphanum",
+            "field_type": "text"
+        },
+        {
+            "name": "Max members",
+            "description": "",
+            "env_variable": "MAX_MEMBERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int|max:12|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Room password",
+            "description": "Room password. Leave empty for no password.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Yuzu token",
+            "description": "Yuzu account token (retrieve yours at https:\/\/profile.yuzu-emu.org\/). Necessary when creating a public (listed) room. Leave empty to create a private room.",
+            "env_variable": "YUZU_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:60",
+            "field_type": "text"
+        }
+    ]
+}

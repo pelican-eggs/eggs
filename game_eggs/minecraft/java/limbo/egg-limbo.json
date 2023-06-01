@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-05-17T23:20:29+01:00",
+    "name": "Limbo",
+    "author": "xEfinax@protonmail.com",
+    "description": "Standalone server program Limbo.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Limbo server listening on \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Limbo Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nmkdir -p \/mnt\/server\r\n\r\nLATEST_LIMBO_NAME=$(curl -s https:\/\/ci.loohpjames.com\/job\/Limbo\/lastSuccessfulBuild\/api\/json | jq -r .artifacts[1].displayPath)\r\n\r\ncd \/mnt\/server || exit\r\n\r\nif [ -f \"${SERVER_JARFILE}\" ]; then\r\n\tmv \"${SERVER_JARFILE}\" \"${SERVER_JARFILE}\".old\r\nfi\r\n\r\necho \"Downloading Limbo server jar...\"\r\ncurl -o \"${SERVER_JARFILE}\" https:\/\/ci.loohpjames.com\/job\/Limbo\/lastSuccessfulBuild\/artifact\/target\/$LATEST_LIMBO_NAME\r\n\r\nif [ ! -f server.properties ]; then\r\n    echo \"Downloading Limbo server.properties\"\r\n    curl -o server.properties https:\/\/raw.githubusercontent.com\/LOOHP\/Limbo\/master\/src\/main\/resources\/server.properties\r\nfi",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the Limbo server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "Limbo.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        }
+    ]
+}

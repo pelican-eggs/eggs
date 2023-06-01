@@ -1,0 +1,112 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-05-17T20:11:37+02:00",
+    "name": "Liteloader Bedrock Dedicated Server",
+    "author": "frizth_tatierra@informatics.edu.ph",
+    "description": "LiteLoaderBDS - Epoch-making & Cross-language Bedrock Dedicated Servers Plugin Loader\r\n\r\nLiteLoaderBDS is an unofficial plugin loader that provides basic API support for Bedrock Dedicated Server, with a massive API, lots of packed utility interfaces, a rich event system and powerful basic interface support.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": ".\/lae-ll-launcher bedrock_server_mod.exe",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"max-players\": \"{{server.build.env.MAXPLAYERS}}\",\r\n            \"level-name\": \"{{server.build.env.WORLDNAME}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"IPv4 supported\"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Liteloader First-time Install Script\r\n\r\napk update\r\napk add gzip jq curl wine\r\ncd \/mnt\/server\r\n\r\nfor file in *; do\r\n    if [ \"$file\" != \"allowlist.json\" ] && [ \"$file\" != \"permissions.json\" ] && [ \"$file\" != \"server.properties\" ] && [ \"$file\" != \"plugins\" ] && [ \"$file\" != \"world\" ]; then\r\n        if [ -d \"$file\" ]; then\r\n            rm -rf \"$file\"  # Remove directories recursively\r\n        else\r\n            rm \"$file\"  # Remove files\r\n        fi\r\n    fi\r\ndone\r\n\r\n# Download Minecraft BDS\r\nRANDVERSION=$(echo $((1 + $RANDOM % 4000)))\r\n\r\nif [ -z \"${BDS_VERSION}\" ] || [ \"${BDS_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest Bedrock server\"\r\n    curl -L -A \"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/90.0.$RANDVERSION.212 Safari\/537.36\" -H \"Accept-Language: en\" -H \"Accept-Encoding: gzip, deflate\" -o versions.html.gz https:\/\/www.minecraft.net\/en-us\/download\/server\/bedrock\r\n    DOWNLOAD_URL=$(zgrep -o 'https:\/\/minecraft.azureedge.net\/bin-win\/[^\"]*' versions.html.gz)\r\nelse \r\n    echo -e \"\\n Downloading ${BDS_VERSION} Bedrock server\"\r\n    DOWNLOAD_URL=https:\/\/minecraft.azureedge.net\/bin-win\/bedrock-server-$BDS_VERSION.zip\r\nfi\r\n\r\nDOWNLOAD_FILE=$(echo ${DOWNLOAD_URL} | cut -d\"\/\" -f5) # Retrieve archive name\r\n\r\necho -e \"Downloading files from: $DOWNLOAD_URL\"\r\n\r\ncurl -L -A \"Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/90.0.$RANDVERSION.212 Safari\/537.36\" -H \"Accept-Language: en\" -o $DOWNLOAD_FILE $DOWNLOAD_URL\r\n\r\necho -e \"Unpacking server files\"\r\nunzip -o $DOWNLOAD_FILE\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm $DOWNLOAD_FILE\r\nrm versions.html.gz\r\n\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/LiteLDev\/LiteLoaderBDS\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/LiteLDev\/LiteLoaderBDS\/releases\")\r\n\r\nif [ -z \"${LL_VERSION}\" ] || [ \"${LL_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"\\n Downloading latest LiteLoaderBDS from GitHub\"\r\n    DOWNLOAD_GIT_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | head -1)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${LL_VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        echo -e \"\\n Downloading ${LL_VERSION} LiteLoaderBDS from GitHub\"\r\n        DOWNLOAD_GIT_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${LL_VERSION}\" '.[] | select(.tag_name==$LL_VERSION) | .assets[].browser_download_url' | head -1)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_GIT_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | head -1)\r\n    fi\r\nfi\r\n\r\ncurl -sSL -o LiteLoader.zip ${DOWNLOAD_GIT_URL}\r\nunzip -o LiteLoader.zip\r\nmv -f LiteLoaderBDS\/* \/mnt\/server\r\nrm LiteLoader.zip\r\ntimeout 30s wine PeEditor.exe\r\nrm -rf '\/root\/.wine' \/mnt\/server\/LiteLoaderBDS\/\r\n\r\n# Downloading Launcher and finishing touches\r\nwget https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/LiteLoader\/lae-ll-launcher\r\nchmod +x lae-ll-launcher\r\necho \"Finished Downloading Liteloader...\"",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Bedrock Dedicated Server Version",
+            "description": "Insert BDS Version",
+            "env_variable": "BDS_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Liteloader Version",
+            "description": "Insert Liteloader Version from Github Releases",
+            "env_variable": "LL_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Wine",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name for the server",
+            "env_variable": "SERVERNAME",
+            "default_value": "Bedrock Dedicated Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Gamemode",
+            "description": "Allowed values: \"survival\", \"creative\", or \"adventure\"",
+            "env_variable": "GAMEMODE",
+            "default_value": "survival",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Allowed values: \"peaceful\", \"easy\", \"normal\", or \"hard\"",
+            "env_variable": "DIFFICULTY",
+            "default_value": "easy",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximum Players",
+            "description": "Maximum players to join on the server",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "World Name",
+            "description": "World\/Level name to use for the server",
+            "env_variable": "WORLDNAME",
+            "default_value": "Bedrock level",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}
