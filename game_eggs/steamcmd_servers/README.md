@@ -118,6 +118,14 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mordhau](mordhau)
 
+## No More Room in Hell
+
+[No More Room in Hell](nmrih)
+
+## No One Survived
+
+[No One Survived](no_one_survived)
+
 ## Onset
 
 [Onset](onset)
