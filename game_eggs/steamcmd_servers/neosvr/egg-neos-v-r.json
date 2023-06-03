@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-03T18:51:27+02:00",
+    "exported_at": "2023-06-03T13:33:19-04:00",
     "name": "NeosVR",
     "author": "espeon@espeon.dev",
     "description": "Neos VR is a metaverse engineered for the unknown! It\u2019s one of the most versatile and feature rich metaverses for virtual reality, designed so everybody can find something interesting or useful to do in a social setting.",
@@ -96,6 +96,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "740250",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
             "field_type": "text"
         }
     ]
