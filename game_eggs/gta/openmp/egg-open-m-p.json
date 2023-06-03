@@ -32,7 +32,7 @@
             "name": "RCON_PASSWORD",
             "description": "RCON_PASSWORD",
             "env_variable": "RCON_PASSWORD",
-            "default_value": "changeme",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:32",
