@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-03T10:59:04-04:00",
+    "exported_at": "2023-06-03T12:21:23-04:00",
     "name": "NeosVR",
     "author": "espeon@espeon.dev",
     "description": "Neos VR is a metaverse engineered for the unknown! It\u2019s one of the most versatile and feature rich metaverses for virtual reality, designed so everybody can find something interesting or useful to do in a social setting.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:mono_latest": "ghcr.io\/parkervcp\/yolks:mono_latest"
     },
     "file_denylist": [],
-    "startup": "exec mono Neos.exe -c .\/Config\/Config.json -l .\/Logs $(if {{ENABLE_MODLOADER}}; then echo \"-LoadAssembly .\/NeosModLoaderHeadless.dll\"; fi)",
+    "startup": "mono Neos.exe -c .\/Config\/Config.json -l .\/Logs $(if {{ENABLE_MODLOADER}}; then echo \"-LoadAssembly .\/NeosModLoaderHeadless.dll\"; fi)",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"World running...\",\r\n    \"userInteraction\": []\r\n}",
