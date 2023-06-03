@@ -247,6 +247,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
+* [Neos VR](game_eggs/steamcmd_servers/neosvr)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)

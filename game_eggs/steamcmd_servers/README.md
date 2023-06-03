@@ -118,6 +118,9 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mordhau](mordhau)
 
+## Neos VR
+[Neos VR](neosvr)
+
 ## Onset
 
 [Onset](onset)
