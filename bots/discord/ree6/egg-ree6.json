@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-14T12:57:56+02:00",
+    "exported_at": "2023-06-14T13:03:27+02:00",
     "name": "Ree6",
     "author": "presti@presti.me",
     "description": "All-in-one, open source and 100% free Discord Bot!",
@@ -220,12 +220,12 @@
         },
         {
             "name": "Database Typ",
-            "description": "The Typ of the Database Ree6 should use!\r\nPossible typs:\r\n- mariadb\r\n- sqlite",
+            "description": "The Typ of the Database Ree6 should use!\r\nPossible typs:\r\n- mariadb\r\n- sqlite\r\n- h2\r\n- postgres",
             "env_variable": "DATABASE_TYP",
             "default_value": "sqlite",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:mariadb,sqlite",
+            "rules": "required|string|in:mariadb,sqlite,postgres,postregsql,h2",
             "field_type": "text"
         },
         {
@@ -256,16 +256,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:128",
-            "field_type": "text"
-        },
-        {
-            "name": "SQL Embedded Server",
-            "description": "Let the Bot run a embedded H2-Server.",
-            "env_variable": "DATABASE_EMBEDDED",
-            "default_value": "false",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "boolean",
             "field_type": "text"
         },
         {
