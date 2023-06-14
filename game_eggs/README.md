@@ -58,6 +58,7 @@
   * [PocketMine MP](minecraft/bedrock/pocketmine_mp)
 
 * [Java](minecraft/java) Servers for Java Minecraft
+  * [CurseForge](minecraft/java/curseforge)
   * [Cuberite](minecraft/java/cuberite)
   * [Fabric](minecraft/java/fabric)
   * [Feather](minecraft/java/feather)
@@ -104,6 +105,10 @@
 
 * [RedM](rdr/redm)
 
+[Rimworld](rimworld)
+
+* [Open World](rimworld/open_world)
+
 [Starmade](starmade)
 
 [SteamCMD Servers](steamcmd_servers) These eggs use SteamCMD to install
@@ -143,6 +148,7 @@
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [Onset](steamcmd_servers/onset)
 * [Open Fortress](steamcmd_servers/open_fortress)
+* [Operation Harsh Doorstop](steamcmd_servers/operation_harsh_doorstop)
 * [Pavlov VR](steamcmd_servers/pavlov_vr)
 * [PixARK](steamcmd_servers/pixark)
 * [Portal Knights](steamcmd_servers/portal_knights)

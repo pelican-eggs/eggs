@@ -15,16 +15,17 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 ## [Java](java) Servers for Java Minecraft
 
 * [Cuberite](java/cuberite)
+* [CurseForge](java/curseforge)
 * [Fabric](java/fabric)
 * [Feather](java/feather)
 * [Forge](java/forge)
   * [Forge](java/forge/forge)
-  * [CurseForge Generic](java/forge/curseforge-generic)
 * [Feed The Beast](java/ftb)
 * [Glowstone](java/glowstone)
 * [Limbo](java/limbo)
 * [Krypton](java/krypton)
 * [Magma](java/magma)
+* [Modrinth](java/modrinth)
 * [Mohist](java/mohist)
 * [NanoLimbo](java/nanolimbo)
 * [Paper](java/paper)

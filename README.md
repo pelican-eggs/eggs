@@ -159,6 +159,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
+  * [CurseForge](game_eggs/minecraft/java/curseforge)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
   * [Fabric](game_eggs/minecraft/java/fabric)
   * [Feather](game_eggs/minecraft/java/feather)
@@ -167,6 +168,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Glowstone](game_eggs/minecraft/java/glowstone)
   * [Limbo](game_eggs/minecraft/java/limbo)
   * [Magma](game_eggs/minecraft/java/magma)
+  * [Modrinth](game_eggs/minecraft/java/modrinth)
   * [Mohist](game_eggs/minecraft/java/mohist)
   * [NanoLimbo](game_eggs/minecraft/java/nanolimbo)
   * [Paper](game_eggs/minecraft/java/paper)
@@ -204,6 +206,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Red Dead Redemption](game_eggs/rdr)
 
 * [RedM](game_eggs/rdr/redm)
+
+[Rimworld](game_eggs/rimworld)
+
+* [Open World](game_eggs/rimworld/open_world)
 
 [SteamCMD Servers](game_eggs/steamcmd_servers) These eggs use SteamCMD to install
 
@@ -244,6 +250,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [Onset](game_eggs/steamcmd_servers/onset)
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
+* [Operation Harsh Doorstop](game_eggs/steamcmd_servers/operation_harsh_doorstop)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
 * [Portal Knights](game_eggs/steamcmd_servers/portal_knights)
@@ -345,6 +352,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### Elasticsearch
 
 * [Elasticsearch](/software/elasticsearch)
+
+### Folding@Home
+
+* [Folding@Home](/software/foldingathome)
 
 ### Gitea
 

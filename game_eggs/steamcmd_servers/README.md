@@ -126,6 +126,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Open Fortress](open_fortress)
 
+## Operation Harsh Doorstop
+
+[Operation Harsh Doorstop](operation_harsh_doorstop)
+
 ## Pavlov VR
 
 [Pavlov VR](pavlov_vr)

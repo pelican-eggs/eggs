@@ -32,7 +32,7 @@ This is a direct fork of the default forge service
 
 - Has a version detection fix for "latest"
 
-### [CurseForge Generic](forge/curseforge-generic)
+### [CurseForge Generic](curseforge)
 
 [CurseForge Generic Website](https://www.curseforge.com)
 A generic service to pull forge mod packs from the curseforge site.
@@ -45,6 +45,13 @@ Glowstone is an open-source replacement for CraftBukkit, Spigot, and Paper.
 
 [Magma Website](https://magmafoundation.org)
 Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.
+
+### [Modrinth](modrinth)
+
+A generic service to pull modpacks from Modrinth.
+
+[Modrinth Website](https://modrinth.com)
+Discover, play, and share Minecraft content through our open-source platform built for the community.
 
 ### [Krypton](krypton)
 

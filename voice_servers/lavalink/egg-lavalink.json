@@ -1,24 +1,24 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-04-11T13:56:42+02:00",
+    "exported_at": "2023-05-06T17:07:59+00:00",
     "name": "Lavalink",
     "author": "damuffin36@gmail.com",
     "description": "A standalone audio sending node based on Lavaplayer and Koe. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/freyacodes\/Lavalink",
     "features": null,
-    "images": [
-        "ghcr.io/parkervcp/yolks:java_11"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
+    },
     "file_denylist": [],
     "startup": "java -jar Lavalink.jar",
     "config": {
         "files": "{\r\n    \"application.yml\": {\r\n        \"parser\": \"yml\",\r\n        \"find\": {\r\n            \"server.address\": \"0.0.0.0\",\r\n            \"server.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Started Launcher in \"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {

@@ -4,9 +4,6 @@
 
 Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from administration and moderation to keeping the members active through various incentives, games and other fun activities.
 
-## Install notes
-
-There will be a tar error on first install. You can safly ignore this.
 
 ## Running the bot
 
