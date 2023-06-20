@@ -12,7 +12,9 @@
 
 [ClassiCube](classicube)
 
-* [MCGalaxy](classicube/mcgalaxy)
+[ClassiCube](classicube)
+
+* [CS2D](cs2d)
 
 [Doom](doom)
 * [Zandronum](doom/zandronum)
