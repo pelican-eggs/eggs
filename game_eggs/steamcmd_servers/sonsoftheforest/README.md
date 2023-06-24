@@ -1,4 +1,4 @@
-# Sons of the Forrest
+# Sons of the Forest
 
 ### Game Description
 

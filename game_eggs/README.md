@@ -171,7 +171,7 @@
   * [Exiled](steamcmd_servers/scpsl/exiled)
   * [Multiadmin](steamcmd_servers/scpsl/multiadmin)
 * [Soldat](steamcmd_servers/soldat)
-* [Sons of the Forrest](steamcmd_servers/sonsoftheforrest)
+* [Sons of the Forrest](steamcmd_servers/sonsoftheforest)
 * [Space Engineers](steamcmd_servers/space_engineers)
   * [default](steamcmd_servers/space_engineers/default)
   * [torch](steamcmd_servers/space_engineers/torch)
