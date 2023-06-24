@@ -189,6 +189,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Soldat](soldat)
 
+## Sons of the Forrest
+
+[Sons of the Forrest](sonsoftheforrest)
+
 ## Space Engineers
 
 [Space Engineers](space_engineers)
