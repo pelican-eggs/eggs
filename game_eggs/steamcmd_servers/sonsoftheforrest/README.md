@@ -23,3 +23,7 @@ Sons of the Forrest requires up to 3 ports. You can choose every port you want.
 | Game    |     8766     |
 | Query     |     27016     |
 | BlobSyncPort | 9700       |
+
+## Special Note
+
+you need a minimum of 8GB RAM for the Server to run
