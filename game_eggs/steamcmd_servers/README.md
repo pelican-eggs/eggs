@@ -191,7 +191,7 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Sons of the Forrest
 
-[Sons of the Forrest](sonsoftheforrest)
+[Sons of the Forest](sonsoftheforest)
 
 ## Space Engineers
 
