@@ -31,26 +31,6 @@
     },
     "variables": [
         {
-            "name": "SRCDS_APPID",
-            "description": "",
-            "env_variable": "SRCDS_APPID",
-            "default_value": "2465200",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:20",
-            "field_type": "text"
-        },
-        {
-            "name": "Server Name",
-            "description": "Name of the server visible in the server list, and in the Steam contacts.",
-            "env_variable": "SRV_NAME",
-            "default_value": "Pterodactyl hosted Server",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:60",
-            "field_type": "text"
-        },
-        {
             "name": "QueryPort",
             "description": "UDP port used by Steam to list the server and enable the discovery services.",
             "env_variable": "QUERY_PORT",
@@ -68,6 +48,16 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server visible in the server list, and in the Steam contacts.",
+            "env_variable": "SRV_NAME",
+            "default_value": "Pterodactyl hosted Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:60",
             "field_type": "text"
         },
         {
@@ -98,6 +88,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "string|in:normal,hard,hardsurvival,peaceful,custom",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2465200",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
             "field_type": "text"
         },
         {
