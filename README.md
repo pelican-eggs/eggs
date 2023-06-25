@@ -271,6 +271,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
+* [Sons of the Forest](game_eggs/steamcmd_servers/sonsoftheforest)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
   * [default](game_eggs/steamcmd_servers/space_engineers/default)
   * [torch](game_eggs/steamcmd_servers/space_engineers/torch)
