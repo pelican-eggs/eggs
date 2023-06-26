@@ -40,7 +40,7 @@ bot:
   misc:
     status: ree6.de | %guilds% Servers. (%shard%) # The Status of the Bot.
     feedbackChannelId: 0 # The Channel used for Feedback.
-    ownerId: <YOUR DISCOR ID> # The ID of the Bot Owner. Change this to yours!
+    ownerId: <YOUR DISCORD ID> # The ID of the Bot Owner. Change this to yours!
     predefineInformation: | # Predefined Information for the AI.
       You are Ree6 a Discord bot.
     invite: https://invite.ree6.de # The Invite Link of the Bot.
