@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-02T20:29:13+02:00",
+    "exported_at": "2023-06-29T10:42:53+02:00",
     "name": "No One Survived",
     "author": "josdekurk@gmail.com",
     "description": "This is a multiplayer cooperative open world construction survival sandbox game, where you and your friends must find supplies and build shelters in this world. You have to keep an eye on your character's needs state at all times, a bad state is likely to lead to death.",
@@ -110,7 +110,7 @@
         },
         {
             "name": "Steam Networking",
-            "description": "Enable or disable steam networking",
+            "description": "Enable or disable steam networking.\r\nLeave this to False as with True it will fail to start!",
             "env_variable": "STEAM_NETWORKING",
             "default_value": "False",
             "user_viewable": true,
