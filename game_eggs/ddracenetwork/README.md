@@ -15,8 +15,6 @@ DDraceNetwork (DDNet) is an actively maintained version of DDRace, a Teeworlds m
 
 ## Server Ports
 
-Ports required to run the server in a table format.
-
 | Port    | default |
 |---------|---------|
-| Game    | 8303   |
+| Game    | 8303    |
