@@ -212,6 +212,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [RedM](game_eggs/rdr/redm)
 
+[Spacestation 14](game_eggs/spacestation_14)
+
 [Rimworld](game_eggs/rimworld)
 
 * [Open World](game_eggs/rimworld/open_world)
