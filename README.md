@@ -111,6 +111,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
+[DDRaceNetwork](game_eggs/ddracenetwork)
+
 [Doom](game_eggs/doom)
 * [Zandronum](game_eggs/doom/zandronum)
 
