@@ -12,9 +12,9 @@
 
 [ClassiCube](classicube)
 
-[ClassiCube](classicube)
+[Clone Hero](clone_hero)
 
-* [CS2D](cs2d)
+[CS2D](cs2d)
 
 [DDRaceNetwork](ddracenetwork/)
 

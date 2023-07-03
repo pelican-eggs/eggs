@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-03T16:24:37+02:00",
+    "name": "Clone Hero",
+    "author": "josdekurk@gmail.com",
+    "description": "Clone Hero is a classic instrument based rhythm game for Windows, Mac, Linux, and Android. It's playable with any 5 or 6 fret guitar controller, any midi drum kit, any game controller and even your keyboard! Jam out with Drums, 5-fret Guitar, or 6-fret Guitar online or local!",
+    "features": null,
+    "docker_images": {
+        "Debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/Server -l {{LOG_LEVEL}} -n \"{{SERVER_DISPLAY_NAME}}\" -p {{SERVER_PORT}} -a 0.0.0.0 $([[ -z \"{{SERVER_PASSWORD}}\" ]] && echo -np || echo  \"-ps {{SERVER_PASSWORD}}\")",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server running...\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl unzip\r\n\r\nV=$(curl -s https:\/\/clonehero.net\/ | grep -i \"Latest version\" | grep -oP '(?<=<b>).+?(?=<\\\/b>)' | sed -e 's\/^[[:space:]]*\/\/' -e 's\/[[:space:]]*$\/\/') #v1.0.0.4080\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Running: curl -sSL -o ChStandaloneServer.zip https:\/\/pubdl.clonehero.net\/chserver\/ChStandaloneServer-${V}-final.zip\"\r\ncurl -sSL -o ChStandaloneServer.zip https:\/\/pubdl.clonehero.net\/chserver\/ChStandaloneServer-${V}-final.zip\r\n\r\nunzip -o ChStandaloneServer.zip\r\nrm ChStandaloneServer.zip\r\nmv ChStandaloneServer-${V}-final\/${ARCH}\/* .\r\nrm -rf ChStandaloneServer-${V}-final\/\r\n\r\nchmod +x Server\r\n\r\n\r\nif [ ! -f \/mnt\/server\/settings.ini ]\r\nthen\r\n\tcurl -sSL -o settings.ini https:\/\/pastebin.com\/raw\/rhcv0hvi\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server name",
+            "description": "The name of the server",
+            "env_variable": "SERVER_DISPLAY_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:80",
+            "field_type": "text"
+        },
+        {
+            "name": "Server password",
+            "description": "The password of the server",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|regex:\/^[a-zA-Z0-9_]+$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Log level",
+            "description": "Set max logging level",
+            "env_variable": "LOG_LEVEL",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:0,1,2,3,4",
+            "field_type": "text"
+        }
+    ]
+}
