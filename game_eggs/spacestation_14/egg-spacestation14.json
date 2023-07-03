@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-01T18:30:46+02:00",
+    "exported_at": "2023-07-03T16:22:48+02:00",
     "name": "Spacestation 14",
     "author": "josdekurk@gmail.com",
     "description": "Space Station 14 tells the story of an ordinary shift on a space station gone wrong. Immerse yourself into your role, tinker with detailed systems, and survive the chaos in this round-based multiplayer role playing game.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl unzip\r\n\r\nV=$(curl -sSL https:\/\/central.spacestation14.io\/builds\/wizards\/builds.html | grep \"The version is\"  | sed -n 's\/.*<span class=\"versionNumber\">\\([^<]*\\)<\\\/span>.*\/\\1\/p')\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-x64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Running: curl -sSL -o server_linux.zip https:\/\/cdn.centcomm.spacestation14.com\/builds\/wizards\/builds\/${V}\/SS14.Server_${ARCH}.zip\"\r\ncurl -sSL -o server_linux.zip \"https:\/\/cdn.centcomm.spacestation14.com\/builds\/wizards\/builds\/${V}\/SS14.Server_${ARCH}.zip\"\r\nunzip -o server_linux.zip\r\nrm server_linux.zip\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl unzip\r\n\r\nV=$(curl -sSL https:\/\/central.spacestation14.io\/builds\/wizards\/builds.html | grep \"The version is\"  | sed -n 's\/.*<span class=\"versionNumber\">\\([^<]*\\)<\\\/span>.*\/\\1\/p')\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Running: curl -sSL -o server_linux.zip https:\/\/cdn.centcomm.spacestation14.com\/builds\/wizards\/builds\/${V}\/SS14.Server_${ARCH}.zip\"\r\ncurl -sSL -o server_linux.zip \"https:\/\/cdn.centcomm.spacestation14.com\/builds\/wizards\/builds\/${V}\/SS14.Server_${ARCH}.zip\"\r\nunzip -o server_linux.zip\r\nrm server_linux.zip\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
