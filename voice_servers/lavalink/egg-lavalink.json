@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-04T21:42:36+02:00",
+    "exported_at": "2023-07-04T22:10:59+02:00",
     "name": "Lavalink",
     "author": "damuffin36@gmail.com",
     "description": "A standalone audio sending node based on Lavaplayer and Koe. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/freyacodes\/Lavalink",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:java_18": "ghcr.io\/parkervcp\/yolks:java_18"
+        "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -jar Lavalink.jar",
