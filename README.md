@@ -107,6 +107,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [ClassiCube](game_eggs/classicube)
 
+[Clone Hero](game_eggs/clone_hero)
+
 [CS2D](game_eggs/cs2d)
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
