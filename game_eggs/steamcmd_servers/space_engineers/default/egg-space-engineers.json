@@ -17,7 +17,7 @@
     "file_denylist": [],
     "startup": "winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/DedicatedServer64\/SpaceEngineersDedicated.exe -path Z:\\\\home\\\\container\\\\config -noconsole -ignorelastsession",
     "config": {
-        "files": "{\r\n    \"config\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\config\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\\\\Sandbox.sbc\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n\t},\r\n\t\"config\/Saves\/World\/Sandbox.sbc\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\n    \"config/SpaceEngineers-Dedicated.cfg\": {\n        \"parser\": \"xml\",\n        \"find\": {\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\n            \"MyConfigDedicated.SessionSettings.ExperimentalMode\": \"{{server.build.env.EXPERIMENTAL_ENABLED}}\",\n            \"MyConfigDedicated.SessionSettings.EnableIngameScripts\": \"{{server.build.env.SCRIPTS_ENABLED}}\",\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\config\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\\\\Sandbox.sbc\",\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\",\n        }\n\t},\n\t\"config/Saves/World/Sandbox.sbc\": {\n        \"parser\": \"xml\",\n        \"find\": {\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\"\n        }\n    }\n}",
         "startup": "{\r\n    \"done\": \"Game ready...\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -95,6 +95,26 @@
             "description": "",
             "env_variable": "SAVE_ENABLED",
             "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Experimental",
+            "description": "Experimental mode is required to run mods",
+            "env_variable": "EXPERIMENTAL_ENABLED",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable In Game Scripts",
+            "description": "Enable in game scripts",
+            "env_variable": "SCRIPTS_ENABLED",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
