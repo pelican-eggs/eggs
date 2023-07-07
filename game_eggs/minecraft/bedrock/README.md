@@ -21,6 +21,11 @@ LiteLoaderBDS is an unofficial plugin loader that provides basic API support for
 [Nukkit GitHub](https://github.com/Nukkit/Nukkit)
 Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition
 
+## [PowerNukkitX](/game_eggs/minecraft/bedrock/PowerNukkitX)
+
+[PowerNukkitX](https://github.com/PowerNukkitX/PowerNukkitX)
+PowerNukkitX is a software for minecraft bedrock edition in Java which is a fork of PowerNukkit
+
 ## [PocketMine MP](/game_eggs/minecraft/bedrock/pocketmine_mp)
 
 [PocketMine MP](https://github.com/pmmp/PocketMine-MP)
