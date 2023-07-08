@@ -100,6 +100,10 @@ A lightweight minecraft limbo server, written on Java with Netty. The main goal 
 [Limbo GitHub](https://github.com/LOOHP/Limbo)
 Standalone server program Limbo.
 
+## [Quilt](quilt)
+[Quilt Website](https://quiltmc.org/)
+The Quilt project is an open-source, community-driven modding toolchain designed primarily for Minecraft. By focusing on speed, ease of use and modularity, Quilt aims to provide a sleek and modern modding toolchain with an open ecosystem.
+
 ## Spigot Based
 
 A collection of spigot and forked spigot eggs.
