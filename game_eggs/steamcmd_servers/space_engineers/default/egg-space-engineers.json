@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-08T13:37:42-06:00",
+    "exported_at": "2023-07-08T23:42:02-06:00",
     "name": "Space Engineers",
     "author": "info@goover.de",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
@@ -194,7 +194,7 @@
             "name": "Enable In-Game Scripts",
             "description": "Allow players to run In-Game Scripts",
             "env_variable": "INGAMESCRIPTS_ENABLED",
-            "default_value": "true",
+            "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
