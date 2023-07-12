@@ -28,6 +28,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Barotrauma](barotrauma)
 
+## BATTALION: Legacy
+
+[BATTALION: Legacy](/battalion_legacy)
+
 ## Black Mesa
 
 [Black Mesa](black_mesa)
