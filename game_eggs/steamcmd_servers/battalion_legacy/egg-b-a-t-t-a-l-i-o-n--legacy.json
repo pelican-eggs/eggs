@@ -4,11 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-12T19:03:06+03:00",
+    "exported_at": "2023-07-12T20:31:30+03:00",
     "name": "BATTALION: Legacy",
     "author": "diedyesterdaywashere@gmail.com",
     "description": "BATTALION: Legacy recaptures the core of classic shooters in the final iteration of Battalion 1944. Return to the simple days of playing first person shooters with your friends. Grab your bolt action rifle in 'rifles only' mode or compete in 5v5 Search and Destroy.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "docker_images": {
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
