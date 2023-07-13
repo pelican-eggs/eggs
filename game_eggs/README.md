@@ -129,6 +129,7 @@
 * [Astroneer](steamcmd_servers/astroneer)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)
+* [BATTALION: Legacy](steamcmd_servers/battalion_legacy)
 * [Black Mesa](steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
