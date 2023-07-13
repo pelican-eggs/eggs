@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-12T20:31:30+03:00",
+    "exported_at": "2023-07-13T20:14:32+03:00",
     "name": "BATTALION: Legacy",
     "author": "diedyesterdaywashere@gmail.com",
     "description": "BATTALION: Legacy recaptures the core of classic shooters in the final iteration of Battalion 1944. Return to the simple days of playing first person shooters with your friends. Grab your bolt action rifle in 'rifles only' mode or compete in 5v5 Search and Destroy.",
@@ -37,12 +37,12 @@
             "default_value": "805140",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:805140",
             "field_type": "text"
         },
         {
             "name": "Auto Update",
-            "description": "",
+            "description": "Server will check for updates on every restart. Use 0 to disable.",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
