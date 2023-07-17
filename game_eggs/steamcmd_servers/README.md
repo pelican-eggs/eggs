@@ -72,9 +72,17 @@ This is a collection of servers that use SteamCMD to install.
 
 [Empyrion - Galactic Survival](empyrion)
 
+## Fistful of Frags
+
+[Fistful of Frags](fof)
+
 ## Frozen Flame
 
 [Frozen Flame](frozen_flame)
+
+## Ground Branch
+
+[Ground Branch](ground_branch)
 
 ## HLDS Server
 
