@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-06-20T12:12:15+02:00",
+    "name": "CS2D",
+    "author": "josdekurk@gmail.com",
+    "description": "Plant and defuse bombs, rescue hostages or accomplish new missions like capture the flag or domination! Use a huge arsenal of weapons and equipment including crazy stuff like portal guns, lasers, RPGs, turrets and much more! You can even build things!",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/cs2d_dedicated",
+    "config": {
+        "files": "{\r\n    \"sys\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_hostport \": \"sv_hostport {{server.build.default.port}}\",\r\n            \"sv_name\": \"sv_name {{server.build.env.SERVER_NAME}}\",\r\n            \"sv_password\": \"sv_password {{server.build.env.SERVER_PASSWORD}}\",\r\n            \"sv_maxplayers\": \"sv_maxplayers {{server.build.env.SERVER_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"----- Server started -----\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nv=$(curl -s https:\/\/www.cs2d.com\/download.php |  grep -Eo \"https?:\/\/\\S+?\\\"\" | grep -i \"get.php?get=cs2d_\" | grep -i \"linux\") # https:\/\/www.unrealsoftware.de\/get.php?get=cs2d_1013_linux.zip\"\r\nn=$(echo ${v#*=} | sed 's\/\"\/\/' ) # cs2d_1013_linux.zip\r\n\r\nc=$(curl -s https:\/\/www.unrealsoftware.de\/get.php?get=${n}  |  grep -o '<a class=\"l_dl\" href=\"get.php?.*\">' | cut -f2 -d \"<\"  | awk '{print $3}' | grep -o '\"[^\"]*\"')  # \"get.php?get=cs2d_1013_linux.zip&amp;p=1&amp;cid=15745\"\r\ncid=$(echo ${c\/\/\\\"\/} | cut -f4 -d '=') #15745\r\n\r\nDOWNLOAD_URL=\"https:\/\/www.unrealsoftware.de\/get.php?get=${n}&p=1&cid=${cid}\"\r\n\r\necho \"${DOWNLOAD_URL}\"\r\n\r\ncurl -sSL -o client.zip \"${DOWNLOAD_URL}\"\r\n\r\nunzip -o client.zip\r\nrm client.zip\r\n\r\ncurl -sSL -o dedicated.zip \"https:\/\/www.unrealsoftware.de\/files_pub\/cs2d_dedicated_linux.zip\"\r\nunzip -o dedicated.zip\r\nrm dedicated.zip\r\n\r\nchmod +x cs2d_dedicated\r\n\r\necho \"install finished\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "",
+            "env_variable": "SERVER_NAME",
+            "default_value": "CS2D Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "SERVER_PLAYERS",
+            "default_value": "12",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}

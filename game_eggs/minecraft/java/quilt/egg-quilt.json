@@ -1,0 +1,55 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-08T19:05:09+03:00",
+    "name": "Quilt",
+    "author": "diedyesterdaywashere@gmail.com",
+    "description": "The Quilt project is an open-source, community-driven modding toolchain designed primarily for Minecraft. By focusing on speed, ease of use and modularity, Quilt aims to provide a sleek and modern modding toolchain with an open ecosystem.",
+    "features": null,
+    "docker_images": {
+        "Java 8: 1.14 - 1.16.5": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "Java 16: 1.17 - 1.17.1": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 17: 1.18 - Newest": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 18: Newest": "ghcr.io\/pterodactyl\/yolks:java_18"
+    },
+    "file_denylist": [],
+    "startup": "java -jar {{SERVER_JARFILE}} nogui -Xms128M -XX:MaxRAMPercentage=95.0",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Quilt Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y wget\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nwget -O quilt.jar https:\/\/quiltmc.org\/api\/v1\/download-latest-installer\/java-universal\r\njava -jar quilt.jar \\\r\n  install server $MC_VERSION \\\r\n  --download-server\r\ncd \/mnt\/server\/server\r\nmv * \/mnt\/server\r\ncd ..\r\nrm quilt.jar\r\nrmdir \/mnt\/server\/server\r\nmv server.jar minecraft.jar\r\nmv quilt-server-launch.jar server.jar\r\necho \"serverJar=minecraft.jar\" > quilt-server-launcher.properties\r\necho -e \"Server is Ready!\"",
+            "container": "eclipse-temurin:18-jdk-jammy",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Minecraft Version",
+            "description": "Version of Minecraft that will be installed. You can only choose the exact version number, for example \"1.19.2\", \"latest\" won't work!",
+            "env_variable": "MC_VERSION",
+            "default_value": "1.19.2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Jar File",
+            "description": "The name of the jarfile that will be ran on server launch.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        }
+    ]
+}

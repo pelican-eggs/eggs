@@ -1,5 +1,10 @@
 # Generic Language
 
+### [C#](c#)
+
+[C#](https://learn.microsoft.com/en-us/dotnet/csharp//)
+A generic C# language egg running with dotnet
+
 ### [Dart](dart)
 
 [dart](https://dart.dev/)

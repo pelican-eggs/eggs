@@ -55,6 +55,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ## [Generic Languages](/generic)
 
+* [C#](/generic/c#/)
 * [dart](/generic/dart/)
 * [deno](/generic/deno/)
 * [golang](/generic/golang/)
@@ -107,7 +108,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [ClassiCube](game_eggs/classicube)
 
+[Clone Hero](game_eggs/clone_hero)
+
+[CS2D](game_eggs/cs2d)
+
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
+
+[DDRaceNetwork](game_eggs/ddracenetwork)
 
 [Doom](game_eggs/doom)
 * [Zandronum](game_eggs/doom/zandronum)
@@ -133,6 +140,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA SA
   * [Multi Theft Auto](game_eggs/gta/mtasa)
   * [SA-MP](game_eggs/gta/samp)
+  * [OpenMp](game_eggs/gta/openmp)
 
 * GTA
   * [GTAC](game_eggs/gta/gtac)
@@ -207,6 +215,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [RedM](game_eggs/rdr/redm)
 
+[Spacestation 14](game_eggs/spacestation_14)
+
 [Rimworld](game_eggs/rimworld)
 
 * [Open World](game_eggs/rimworld/open_world)
@@ -222,10 +232,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Astroneer](game_eggs/steamcmd_servers/astroneer)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
+* [BATTALION: Legacy](game_eggs/steamcmd_servers/battalion_legacy)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
+* [Counter-Strike](game_eggs/steamcmd_servers/counter_strike/)
+  * [Counter-Strike: Source](game_eggs/steamcmd_servers/counter_strike/counter_strike_source/)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
@@ -234,6 +247,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Empyrion - Galactic Survival](game_eggs/steamcmd_servers/empyrion)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
 * [Frozen Flame](game_eggs/steamcmd_servers/frozen_flame)
+* [Ground Branch](game_eggs/steamcmd_servers/ground_branch)
 * [HLDS Server](game_eggs/steamcmd_servers/hlds_server)
   * [HLDS Vanilla](game_eggs/steamcmd_servers/hlds_server/vanilla)
   * [ReHLDS](game_eggs/steamcmd_servers/hlds_server/rehlds)
@@ -249,6 +263,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [Neos VR](game_eggs/steamcmd_servers/neosvr)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
+* [No One Survived](game_eggs/steamcmd_servers/no_one_survived)
 * [Onset](game_eggs/steamcmd_servers/onset)
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Operation Harsh Doorstop](game_eggs/steamcmd_servers/operation_harsh_doorstop)
@@ -270,6 +285,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
   * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
+* [Sons of the Forest](game_eggs/steamcmd_servers/sonsoftheforest)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
   * [default](game_eggs/steamcmd_servers/space_engineers/default)
   * [torch](game_eggs/steamcmd_servers/space_engineers/torch)
