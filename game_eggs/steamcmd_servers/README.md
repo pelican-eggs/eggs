@@ -130,6 +130,9 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mordhau](mordhau)
 
+## Neos VR
+[Neos VR](neosvr)
+
 ## No More Room in Hell
 
 [No More Room in Hell](nmrih)
