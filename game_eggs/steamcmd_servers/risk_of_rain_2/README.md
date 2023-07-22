@@ -5,7 +5,7 @@ Escape a chaotic alien planet by fighting through hordes of frenzied monsters â€
 ### Author & Contributers
 | Name        | Github Profile  | Buy me a Coffee |
 | ------------- |-------------|-------------|
-|   alex.chang-lam@protonmail.com| | |
+|   acl1704 | https://github.com/acl1704 | |
 |   gOOvER   | https://github.com/gOOvER | [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B351D0Q) |
 
 
