@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-22T09:00:30+02:00",
+    "exported_at": "2023-07-22T11:23:29+02:00",
     "name": "Risk of Rain 2",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Risk of Rain 2 dedicated server.",
@@ -95,8 +95,8 @@
             "description": "",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean",
             "field_type": "text"
         },
