@@ -144,10 +144,10 @@
             "name": "Max Players",
             "description": "Specifies the maximum amount of players able to join the server.",
             "env_variable": "MAX_PLAYERS",
-            "default_value": "",
+            "default_value": "12",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|numeric",
+            "rules": "numeric",
             "field_type": "text"
         }
     ]
