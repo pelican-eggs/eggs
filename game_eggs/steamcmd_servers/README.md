@@ -28,6 +28,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Barotrauma](barotrauma)
 
+## BATTALION: Legacy
+
+[BATTALION: Legacy](/battalion_legacy)
+
 ## Black Mesa
 
 [Black Mesa](black_mesa)
@@ -68,9 +72,17 @@ This is a collection of servers that use SteamCMD to install.
 
 [Empyrion - Galactic Survival](empyrion)
 
+## Fistful of Frags
+
+[Fistful of Frags](fof)
+
 ## Frozen Flame
 
 [Frozen Flame](frozen_flame)
+
+## Ground Branch
+
+[Ground Branch](ground_branch)
 
 ## HLDS Server
 
@@ -117,6 +129,9 @@ This is a collection of servers that use SteamCMD to install.
 ## Mordhau
 
 [Mordhau](mordhau)
+
+## Neos VR
+[Neos VR](neosvr)
 
 ## No More Room in Hell
 
