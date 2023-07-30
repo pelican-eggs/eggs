@@ -119,11 +119,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [AssaultCube](cubeengine/assaultcube)
 * [Cube 2: Sauerbraten](cubeengine/cube2)
 
-* [MCGalaxy](game_eggs/classicube/mcgalaxy)
-
-[Cube Engine](game_eggs/cubeengine)
-* [AssaultCube](game_eggs/cubeengine/assaultcube)
-
 [DDRaceNetwork](game_eggs/ddracenetwork)
 
 [Doom](game_eggs/doom)
