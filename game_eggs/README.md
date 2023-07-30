@@ -16,6 +16,9 @@
 
 [CS2D](cs2d)
 
+[Cube Engine](cubeengine)
+* [AssaultCube](cubeengine/assualtcube)
+
 [DDRaceNetwork](ddracenetwork/)
 
 [Doom](doom)
