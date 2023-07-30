@@ -114,6 +114,12 @@ A collection of spigot and forked spigot eggs.
 High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies
 Currently the default on pterodactyl for many reasons. First being that you don't need to build the jar.
 
+### [Folia](folia)
+
+[Folia GitHub](https://github.com/PaperMC/Folia)
+High performance Fork of Paper which adds regionised multithreading to the dedicated server. designed for many players.
+Spigot Plugins are not compatible with this fork. unless they are optimised for Folia.
+
 ### [Purpur](purpur)
 
 [Purpur Website](https://purpurmc.org/)

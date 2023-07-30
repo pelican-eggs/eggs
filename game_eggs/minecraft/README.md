@@ -29,6 +29,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 * [Mohist](java/mohist)
 * [NanoLimbo](java/nanolimbo)
 * [Paper](java/paper)
+* [Folia](java/folia)
 * [Purpur](java/purpur)
 * [Quilt](java/quilt/)
 * [Spigot](java/spigot)

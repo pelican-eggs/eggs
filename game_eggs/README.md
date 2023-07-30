@@ -80,6 +80,7 @@
   * [Mohist](minecraft/java/mohist)
   * [NanoLimbo](minecraft/java/nanolimbo)
   * [Paper](minecraft/java/paper)
+  * [Folia](minecraft/java/folia)
   * [Purpur](minecraft/java/purpur)
   * [Spigot](minecraft/java/spigot)
   * [SpongeForge](minecraft/java/spongeforge)
