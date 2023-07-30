@@ -12,6 +12,8 @@
 
 [ClassiCube](classicube)
 
+* [MCGalaxy](classicube/mcgalaxy)
+
 [Clone Hero](clone_hero)
 
 [CS2D](cs2d)
