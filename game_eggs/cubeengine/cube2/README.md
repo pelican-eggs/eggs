@@ -20,5 +20,5 @@ The second port is only used for the server master list to be able to update the
 ### Notes
 
 <!--Notes about the server ports.-->
-28785 & 28786 is the default port, but any port can be used.
+28785 & 28786 is the default ports, but any port can be used.
 Port 28784 must be available for pinging servers over a LAN to work.
