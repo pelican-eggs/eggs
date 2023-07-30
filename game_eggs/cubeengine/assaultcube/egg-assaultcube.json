@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-29T22:14:05-05:00",
-    "name": "AssaultCube ( REQUIRES 2 CONSECUTIVE PORTS )",
+    "exported_at": "2023-07-30T10:56:35+02:00",
+    "name": "AssaultCube",
     "author": "holeintheseat@gmail.com",
-    "description": "REQUIRES 2 CONSECUTIVE PORTS (DEFAULT PORTS: 28763 and 28764)\r\n                                                                                  Game port ^        |        ^ Server Info Broadcast\r\n\r\nAssaultCube is a FREE, multiplayer, first-person shooter game, based on the CUBE engine.\r\n\r\nTaking place in realistic environments, with fast, arcade gameplay, it's addictive and fun!\r\n\r\nWith efficient bandwidth usage, it's low-latency and can even run over a 56 Kbps connection.\r\nIt's tiny too, weighing in at a lightweight about 50 MB package available for Windows, Mac and Linux.\r\nOn the correct settings, it can even run on old hardware (Pentium III and above).",
+    "description": "AssaultCube is a FREE, multiplayer, first-person shooter game, based on the CUBE engine.\r\n\r\nTaking place in realistic environments, with fast, arcade gameplay, it's addictive and fun!",
     "features": null,
     "docker_images": {
         "Debian": "ghcr.io\/parkervcp\/yolks:debian"
@@ -22,15 +22,15 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# AssaultCube Server Egg (By HoleInTheSeat) <|-|> (https:\/\/assault.cubers.net\/)\r\n#\r\n# Server Files: \/mnt\/server\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n#######-|Init|-#######\r\napt-get update -y\r\n#######-|Dependencies|-#######\r\napt-get install -y tar make wget bzip2 build-essential clang libclang-dev libclang1 llvm llvm-dev clang-tools libz-dev\r\n#######-|Downloading files|-#######\r\ncd \/mnt\/server\r\nwget https:\/\/github.com\/assaultcube\/AC\/releases\/download\/v1.3.0.2\/AssaultCube_v1.3.0.2_LockdownEdition_RC1.tar.bz2 -O - | tar -xj\r\n#######-|Setting Up Server|-#######\r\ncd\r\nif [ \"$(uname -m)\" = \"aarch64\" ]; then\r\ncd \/mnt\/server\/source\/src\r\nmake server_install\r\nelse\r\necho -e \"x86 System\" \r\nfi\r\n#######-|Enable Execution|-#######\r\ncd \/mnt\/server\r\nchmod +x server_wizard.sh\r\nchmod +x server.sh\r\n#######-|Insert Server Authkey|-#######\r\ncd \/mnt\/server\r\nsed -i 's\/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\/{{ASSAULT_SERVER_KEY}}\/' .\/config\/servercmdline.txt\r\n#######-|Alert Completion|-#######\r\necho -e \"####################\"\r\necho -e \"##Install Complete##\"\r\necho -e \"####################\"",
-            "container": "debian:stable",
+            "script": "#!\/bin\/bash\r\n# AssaultCube Server Egg (By HoleInTheSeat) <|-|> (https:\/\/assault.cubers.net\/)\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n#######-|Dependencies|-#######\r\napt update\r\napt -y install tar make bzip2 build-essential clang libclang-dev libclang1 llvm llvm-dev clang-tools libz-dev curl jq\r\n\r\n#######-|Downloading files|-#######\r\ncd \/mnt\/server\r\n## get release info and download links\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/assaultcube\/AC\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/assaultcube\/AC\/releases\")\r\nMATCH=tar.bz2\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | head -1)\r\n    fi\r\nfi\r\n\r\n\r\ncurl -sSL -o AssaultCube.tar.bz2 ${DOWNLOAD_URL}\r\ntar -xf AssaultCube.tar.bz2\r\nrm AssaultCube.tar.bz2\r\n\r\n#######-|Setting Up Server|-#######\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf bin_win32\/ *.sh\r\n\r\nif [ \"$(uname -m)\" = \"x86_64\" ]; then\r\n    echo -e \"x86 System\"\r\nelse\r\n    cd \/mnt\/server\/source\/src\r\n    make server_install\r\nfi\r\n#######-|Insert Server Authkey|-#######\r\ncd \/mnt\/server\r\nsed -i 's\/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\/{{ASSAULT_SERVER_KEY}}\/' .\/config\/servercmdline.txt\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
             "name": "Server Auth Key",
-            "description": "With the 1.3 release servers (and players) have identity keys. You must provide your own key for the server to register on the masterserver. Without any key the server will be LAN only.\r\n\r\nA key must be 64 characters long and may contain all hexadecimal characters 0-9 and a-f. To generate a key you can run the client and issue the command:\r\n\r\n            authkey new server\r\n          \r\nThe third argument is only a name given that key, use quotes if you want e.g. authkey new \"server alpha three\". You can then copy your key from the file config\/authkeys.cfg - there are five lines (4 of which are comments) for your named authkey. The line which starts with '\/\/ priv ' or the one starting with 'authkey add ' contain the private key - do not include the name string. (https:\/\/assault.cubers.net\/docs\/server.html)",
+            "description": "You must provide your own key for the server to register on the masterserver.\r\nTo generate a key you can run the client and issue the command:\r\n\r\n            authkey new server \r\n        \r\nSee: (https:\/\/assault.cubers.net\/docs\/server.html)",
             "env_variable": "ASSAULT_SERVER_KEY",
             "default_value": "",
             "user_viewable": true,
@@ -72,7 +72,7 @@
             "name": "Admin Password",
             "description": "",
             "env_variable": "ASSAULT_SERVER_ADMINPASSWORD",
-            "default_value": "armchairsavages",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:512|min:5",
@@ -96,6 +96,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "The version of the engine you want to download.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
             "field_type": "text"
         }
     ]

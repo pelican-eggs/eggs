@@ -11,7 +11,20 @@ On the correct settings, it can even run on old hardware (Pentium III and above)
 
 ---
 
-## AssaultCube requires 2 CONSECUTIVE Ports!
-When selecting a port, the assaultcube server will use the exact next consecutive port of the game port.
-So if you give the server port 25510, the server will also need 25511.
+## Server Ports
+
+Ports required to run the server.
+
+| Port    | default |
+|---------|---------|
+| Game    | 25510   |
+| Game +1 | 255101  |
+
 The second port is only used for the server master list to be able to update the server info. (Description, player count, etc.)
+
+**Must be Game +1!**
+
+### Notes
+
+<!--Notes about the server ports.-->
+25510 is the default port, but any port can be used.
