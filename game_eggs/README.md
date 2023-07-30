@@ -18,6 +18,11 @@
 
 [CS2D](cs2d)
 
+[Cube Engine](cubeengine)
+* [AssaultCube](cubeengine/assaultcube)
+* [Cube 2: Sauerbraten](cubeengine/cube2)
+
+
 [DDRaceNetwork](ddracenetwork/)
 
 [Doom](doom)
