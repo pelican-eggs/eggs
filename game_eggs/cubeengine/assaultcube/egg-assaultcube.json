@@ -18,7 +18,7 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"dedicated server started, waiting for clients...\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
