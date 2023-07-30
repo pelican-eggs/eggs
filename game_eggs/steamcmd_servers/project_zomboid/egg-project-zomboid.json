@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
     },
     "file_denylist": [],
-    "startup": "\/home\/container\/start-server.sh -port {{SERVER_PORT}} -udpport {{STEAM_PORT}} -cachedir=\/home\/container\/.cache -servername \"{{SERVER_NAME}}\" -adminusername {{ADMIN_USER}} -adminpassword \"{{ADMIN_PASSWORD}}\"",
+    "startup": "\export PATH="./jre64/bin:$PATH" ; export LD_LIBRARY_PATH="./linux64:./natives:.:./jre64/lib/amd64:${LD_LIBRARY_PATH}" ; JSIG="libjsig.so" ; LD_PRELOAD="${LD_PRELOAD}:${JSIG}" ./ProjectZomboid64  -port {{SERVER_PORT}} -udpport {{STEAM_PORT}} -cachedir=/home/container/.cache -servername "{{SERVER_NAME}}" -adminusername {{ADMIN_USER}} -adminpassword "{{ADMIN_PASSWORD}}""",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"SERVER STARTED\"\r\n}",
