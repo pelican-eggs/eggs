@@ -1,6 +1,6 @@
 # Generic Language
 
-### [C#](c#)
+### [C#](c%23)
 
 [C#](https://learn.microsoft.com/en-us/dotnet/csharp//)
 A generic C# language egg running with dotnet
