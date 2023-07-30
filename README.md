@@ -112,6 +112,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [CS2D](game_eggs/cs2d)
 
+[Cube Engine](cubeengine)
+
+* [AssaultCube](cubeengine/assaultcube)
+* [Cube 2: Sauerbraten](cubeengine/cube2)
+
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
 
 [Cube Engine](game_eggs/cubeengine)
