@@ -13,7 +13,7 @@
         "Debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/server.sh -Y{{ASSAULT_SERVER_KEY}} -n\"{{ASSAULT_SERVER_DESCRIPTION}}\" -o\"{{ASSAULT_SERVER_MOTD}}\" -c{{ASSAULT_SERVER_MAXPLAYERS}} -x{{ASSAULT_SERVER_ADMINPASSWORD}} -f{{SERVER_PORT}} -p{{ASSAULT_SERVER_PLAYERPASSWORD}} -m{{ASSAULT_SERVER_MASTERSERVER}}",
+    "startup": ".\/bin_unix\/linux_64_server -Y{{ASSAULT_SERVER_KEY}} -n\"{{ASSAULT_SERVER_DESCRIPTION}}\" -o\"{{ASSAULT_SERVER_MOTD}}\" -c{{ASSAULT_SERVER_MAXPLAYERS}} -x{{ASSAULT_SERVER_ADMINPASSWORD}} -f{{SERVER_PORT}} -p{{ASSAULT_SERVER_PLAYERPASSWORD}} -m{{ASSAULT_SERVER_MASTERSERVER}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"dedicated server started, waiting for clients...\"\r\n}",
