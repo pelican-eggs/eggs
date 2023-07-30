@@ -12,6 +12,8 @@
 
 [ClassiCube](classicube)
 
+* [MCGalaxy](classicube/mcgalaxy)
+
 [Clone Hero](clone_hero)
 
 [CS2D](cs2d)
@@ -19,7 +21,6 @@
 [Cube Engine](cubeengine)
 * [AssaultCube](cubeengine/assaultcube)
 * [Cube 2: Sauerbraten](cubeengine/cube2)
-
 
 [DDRaceNetwork](ddracenetwork/)
 

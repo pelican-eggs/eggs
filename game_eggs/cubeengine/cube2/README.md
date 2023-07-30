@@ -10,8 +10,8 @@ Ports required to run the server.
 
 | Port    | default |
 |---------|---------|
-| Game    | 25510   |
-| Game +1 | 255101  |
+| Game    | 28785   |
+| Game +1 | 28786   |
 
 The second port is only used for the server master list to be able to update the server info. (Description, player count, etc.)
 
@@ -20,4 +20,5 @@ The second port is only used for the server master list to be able to update the
 ### Notes
 
 <!--Notes about the server ports.-->
-25510 is the default port, but any port can be used.
+28785 & 28786 is the default ports, but any port can be used.
+Port 28784 must be available for pinging servers over a LAN to work.
