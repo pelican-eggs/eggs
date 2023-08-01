@@ -89,10 +89,4 @@ ___
 
 ### Modding
 
-Modding has not been adequately explored at this time. If you have information on modding you would like to share, please submit a PR to update this README.
-
-What is currently known about modding:
-
-- The server seems to automatically look at the following directory for any available mods to load: `/home/workshop/content/16900/`
-- This directory is un-accessible to Pterodactyl end-users, and I am unaware of a way to point the server to look in a different directory for mods.
-- However, you may be able to set up a mount to this directory with mods in SteamCMD format.
+At the time of writing this (2023/08/01), no workshop mods for Ground Branch exist. However, if they were to be introduced or you would like to install a mod, mods can be installed to `/home/container/steamapps/workshop/content/16900/`. The server should then stage them to `/home/container/GroundBranch/Mods` and show up as "Mod ID #" in the in-game modding menu.
