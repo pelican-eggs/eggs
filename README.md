@@ -170,6 +170,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [LiteLoaderBDS](game_eggs/bedrock/LiteLoader-bedrock)
   * [Nukkit](game_eggs/minecraft/bedrock/nukkit)
   * [PocketMine MP](game_eggs/minecraft/bedrock/pocketmine_mp)
+  * [PowerNukkitX](game_eggs/minecraft/bedrock/PowerNukkitX)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
   * [CurseForge](game_eggs/minecraft/java/curseforge)
