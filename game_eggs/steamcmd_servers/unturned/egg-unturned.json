@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-02T17:36:50+02:00",
+    "exported_at": "2023-08-03T09:39:35+02:00",
     "name": "Unturned",
     "author": "parker@parkervcp.com",
     "description": "Vanilla Unturned with the included RockerMod.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": ".\/Unturned_Headless.x86_64 -batchmode -nographics -bind 0.0.0.0 -port {{SERVER_PORT}}",
+    "startup": ".\/Unturned_Headless.x86_64 -batchmode -nographics -bind 0.0.0.0 -port {{SERVER_PORT}} -GSLT {{GSLT}} -Name \"{{SRV_NAME}}\" -Password {{SRV_PW}} +InternetServer\/{{SRV_ID}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Loading level: 100%\"\r\n}",
@@ -30,6 +30,56 @@
         }
     },
     "variables": [
+        {
+            "name": "Server Name",
+            "description": "",
+            "env_variable": "SRV_NAME",
+            "default_value": "Pterodactyl hosted Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "SRV_PW",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "GSLT",
+            "description": "",
+            "env_variable": "GSLT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server ID",
+            "description": "ID of the server for savegames",
+            "env_variable": "SRV_ID",
+            "default_value": "PterodactylUnturned",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto update",
+            "description": "Auto update on restart",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
         {
             "name": "Steam App ID",
             "description": "Steam App ID require for install and startup update",
@@ -48,36 +98,6 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam User",
-            "description": "Should be left blank for anon user",
-            "env_variable": "STEAM_USER",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam Password",
-            "description": "",
-            "env_variable": "STEAM_PASS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Auto update",
-            "description": "Auto update on restart",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "1",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
