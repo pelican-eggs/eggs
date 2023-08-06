@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-06T19:26:29+00:00",
+    "exported_at": "2023-08-06T20:16:08+00:00",
     "name": "Muse",
     "author": "hello@apollo.moe",
     "description": "\ud83c\udfa7 a self-hosted midwestern Discord music bot that doesn't suck",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "apt-get update\r\napt-get install openssl git ffmpeg -y -qq\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/codetheweb\/muse.git .;\r\nfi;\r\ncp .env.example .env\r\nyarn install --frozen-lockfile",
+            "script": "apt-get update\r\napt-get install openssl git ffmpeg -y -qq\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/codetheweb\/muse.git .;\r\nfi;\r\ncp .env.example .env\r\nyarn install --frozen-lockfile\r\nsed -i 's\/of filterWrapper[)]\/of filterWrapper|| [])\/g' \/mnt\/server\/node_modules\/ytsr\/lib\/utils.js",
             "container": "node:lts-bullseye-slim",
             "entrypoint": "bash"
         }
