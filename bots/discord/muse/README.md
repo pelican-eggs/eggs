@@ -1,4 +1,4 @@
-# ATLBot
+# Muse
 
 ## Their [Github](https://github.com/codetheweb/muse)
 
