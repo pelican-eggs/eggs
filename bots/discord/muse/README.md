@@ -6,4 +6,4 @@ Muse is a highly-opinionated midwestern self-hosted Discord music bot that doesn
 
 ## Server Ports
 
-There are no ports required for the atl bot
+There are no ports required for the Muse bot
