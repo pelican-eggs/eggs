@@ -1,3 +1,5 @@
+# Muse
+
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
@@ -23,8 +25,6 @@
 </table>
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
-# Muse
 
 ## Their [Github](https://github.com/codetheweb/muse)
 
