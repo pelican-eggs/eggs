@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-23T13:08:22+02:00",
+    "exported_at": "2022-11-24T09:47:43+01:00",
     "name": "Conan Exiles",
     "author": "brycea@terrahost.cloud",
     "description": "Conan Exiles is an open-world survival game set in the brutal lands of Conan the Barbarian. Survive in a savage world, build your kingdom, and dominate your enemies in brutal combat and epic warfare.",
@@ -15,7 +15,7 @@
         "Wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
-    "startup": "export WINEDEBUG=-all; xvfb-run --auto-servernum wine \/home\/container\/ConanSandboxServer.exe ConanSandbox?listen?PVPEnabled={{PVP}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}} -ServerName=\"{{SRV_NAME}}\" -ServerPassword={{SRV_PW}}  -console -log",
+    "startup": "export WINEDEBUG=-all; xvfb-run --auto-servernum wine \/home\/container\/ConanSandboxServer.exe$( [ \"$SERVER_MAP\" == \"Siptah\" ] && printf %s ' \/Game\/DLC_EXT\/DLC_Siptah\/Maps\/DLC_Isle_of_Siptah' ) $( [ \"$SERVER_MAP\" == \"ExiledLands\" ] && printf %s ' \/Game\/Maps\/ConanSandbox\/ConanSandbox' )  ConanSandbox?listen?PVPEnabled={{PVP}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}} -ServerName=\"{{SRV_NAME}}\" -ServerPassword={{SRV_PW}}  -console -log",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Started SourceServerQueries\"\r\n}",
@@ -108,6 +108,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Map",
+            "description": "Available Maps: ExiledLands, Siptah",
+            "env_variable": "SERVER_MAP",
+            "default_value": "ExiledLands",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:ExiledLands,Siptah",
             "field_type": "text"
         }
     ]
