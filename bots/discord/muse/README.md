@@ -21,6 +21,14 @@
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Contributor">💡</a>
         </td>
+        <td align="center">
+            <a href="https://github.com/QuintenQVD0">
+                <img src="https://avatars.githubusercontent.com/u/67589015" width="50px;" alt=""/><br /><sub><b>Red-Thirten</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=QuintenQVD0" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=QuintenQVD0" title="Contributor">💡</a>
+        </td>        
     </tr>
 </table>
 <!-- markdownlint-enable -->
