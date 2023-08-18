@@ -1,29 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-12-13T10:34:52+11:00",
+    "exported_at": "2023-08-18T17:01:43+02:00",
     "name": "Dynamica",
     "author": "sebastian.pietschner@gmail.com",
-    "description": "The dynamica discord bot",
+    "description": "An easy-to-use dynamic voice channel bot.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:nodejs_16"
-    ],
+    "docker_images": {
+        "Nodejs 18": "ghcr.io\/parkervcp\/yolks:nodejs_18"
+    },
     "file_denylist": [],
-    "startup": "yarn deploy && yarn prisma migrate deploy && yarn start",
+    "startup": "npx prisma migrate deploy && yarn start",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Ready! Logged in as \"\r\n}",
+        "startup": "{\r\n    \"done\": \"Bot logged in as \"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "apt-get update\r\napt-get install openssl git -y -qq\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/dynamicabot\/dynamica.git .;\r\nfi;\r\nyarn install --frozen-lockfile",
-            "container": "node:lts-buster-slim",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install tar curl jq git\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nGITHUB_PACKAGE=\"DynamicaBot\/Dynamica-V2\"\r\n\r\n# Find GitHub download URL for Muse for specified version\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Could not find version \\\"${VERSION}\\\" of Muse. Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\n    fi\r\nfi\r\n\r\ncurl -sSL -o dynamica.tar.gz ${DOWNLOAD_URL}\r\ntar xvf dynamica.tar.gz --strip-components=1\r\nrm dynamica.tar.gz\r\n\r\n#curl -sSL -o tsconfig.json https:\/\/pteropaste.com\/xqhjja443pbm\r\n\r\nyarn add tsup --dev\r\nyarn install  --frozen-lockfile\r\n\r\nyarn generate\r\nyarn build\r\n\r\nrm -rf .github\/ .vscode\/ Dockerfile partial.Dockerfile entrypoint.sh dynamica-egg.json\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "node:18-bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "file:\/home\/container\/dynamica\/db.sqlite",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Token",
@@ -44,16 +45,58 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
-            "name": "Client ID",
-            "description": "The client ID of your discord bot.",
-            "env_variable": "CLIENT_ID",
+            "name": "Guild ID",
+            "description": "Add only if using the bot in a single guild.",
+            "env_variable": "GUILD_ID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|size:18"
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "Sentry DSN",
+            "description": "The DSN for Sentry.",
+            "env_variable": "SENTRY_DSN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "MQTT URL",
+            "description": "The URL for the MQTT broker.",
+            "env_variable": "MQTT_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "MQTT Username",
+            "description": "The username for the MQTT broker.",
+            "env_variable": "MQTT_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "MQTT Password",
+            "description": "The password for the MQTT broker.",
+            "env_variable": "MQTT_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
         }
     ]
 }
