@@ -63,6 +63,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [java](/generic/java/)
 * [lua](/generic/lua/)
 * [nodejs](/generic/nodejs/)
+* [bun](/generic/bun/)
 * [nodemon](/generic/nodemon/)
 * [python](/generic/python/)
 * [rust](/generic/rust/)
