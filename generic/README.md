@@ -35,6 +35,11 @@ A generic Lua (Luvit) language egg
 [nodejs](https://nodejs.org)
 A generic Node.JS egg
 
+### [Bun](bun)
+
+[bun](https://bun.sh)
+A generic Bun egg
+
 ### [nodemon](nodemon)
 
 [nodemon](https://nodemon.io/)
