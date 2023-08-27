@@ -66,6 +66,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [bun](/generic/bun/)
 * [nodemon](/generic/nodemon/)
 * [python](/generic/python/)
+* [pypy](/generic/pypy)
 * [rust](/generic/rust/)
 
 ## [Database](/database)
