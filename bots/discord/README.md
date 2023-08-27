@@ -22,6 +22,11 @@ A very clumsy python bot for discord
 [fragforce/fragbot](https://github.com/fragforce/fragbot)
 The bot that runs as the fragforce `@Fragbot` offering looking-for-group services for now
 
+### [Game Server Watcher](game-server-watcher)
+
+[a-sync/game-server-watcher](https://github.com/a-sync/game-server-watcher)
+A simple discord/telegram/slack bot that can be hosted on a free service to monitor your game servers and players in style. 😎
+
 ### [JMusicBot](jmusicbot)
 
 [jagrosh/MusicBot](https://github.com/jagrosh/MusicBot)
