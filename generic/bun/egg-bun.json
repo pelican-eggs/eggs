@@ -10,7 +10,7 @@
     "description": "Bun is an incredibly fast JavaScript runtime, transpiler bundler, and npm package manager all-in-one.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/mratox\/images:bun": "ghcr.io\/mratox\/images:bun"
+        "ghcr.io\/parkervcp\/yolks:bun": "ghcr.io\/parkervcp\/yolks:bun"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ ! -z ${BUN_PACKAGES} ]]; then bun install ${BUN_PACKAGES}; fi; if [[ ! -z ${RMBUN_PACKAGES} ]]; then bun remove ${RMBUN_PACKAGES}; fi; if [ -f \/home\/container\/package.json ]; then bun install; fi; {{STARTUP_COMMAND}};",
