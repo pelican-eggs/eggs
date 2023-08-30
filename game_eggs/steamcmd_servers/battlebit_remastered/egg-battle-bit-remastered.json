@@ -1,0 +1,204 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-08-30T20:53:10+02:00",
+    "name": "BattleBit Remastered",
+    "author": "contact@clan-rmg.com",
+    "description": "BattleBit Remastered Dedicated Server Wine Debian",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "cd \/home\/container\/ ; winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/BattleBit.exe -batchmode -nographics \"-Name=\"{{SERVER_NAME}}\"\" \"-Port={{SERVER_PORT}}\" \"-Hz=60\" \"-AntiCheat=EAC\" \"-MaxPing=500\" \"-VoxelMode=false\" \"-ApiEndPoint=0.0.0.0:{{SERVER_APIPORT}}\" \"-FirstMap={{SERVER_FIRSTMAP}}\" \"-FirstGamemode={{SERVER_FIRSTGAMEMODE}}\" \"-FixedSize={{SERVER_FIXEDSIZE}}\" \"-FirstSize={{SERVER_FIRSTSIZE}}\" \"-MaxSize={{SERVER_MAXSIZE}}\" \"-Password=\"{{SERVER_PASSWORD}}\"\" \"-MaxPlayers={{SERVER_MAXPLAYERS}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Successfully registered to steam servers\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n#\r\n\r\n## Define variables\r\ndlurl=\"https:\/\/fastdl.clan-rmg.com\/BattleBit\/\"\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y install curl lib32gcc-s1 ca-certificates unzip\r\n\r\n\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Admin Files\r\ntouch $HOME\/Permissions.txt\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "APP ID",
+            "description": "The ID corresponding to the game to download.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "671860",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
+        },
+        {
+            "name": "WINDOWS_INSTALL",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2013 vcrun2017 corefonts dotnet48",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPREFIX",
+            "description": "WINEPREFIX",
+            "env_variable": "WINEPREFIX",
+            "default_value": "\/home\/container\/.wine",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Steam browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl hosted Battlebit Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "SERVER_MAXPLAYERS",
+            "default_value": "128",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Username",
+            "description": "",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Password",
+            "description": "",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Default Size Map",
+            "description": "",
+            "env_variable": "SERVER_FIXEDSIZE",
+            "default_value": "tiny",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "First Max Size",
+            "description": "",
+            "env_variable": "SERVER_FIRSTSIZE",
+            "default_value": "tiny",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Size Map",
+            "description": "",
+            "env_variable": "SERVER_MAXSIZE",
+            "default_value": "tiny",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "First GameMode",
+            "description": "",
+            "env_variable": "SERVER_FIRSTGAMEMODE",
+            "default_value": "CONQ",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "First Map",
+            "description": "",
+            "env_variable": "SERVER_FIRSTMAP",
+            "default_value": "Eduardovo",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "SteamCMD Branch",
+            "description": "",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "community-testing",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:community-testing,community-server",
+            "field_type": "text"
+        },
+        {
+            "name": "Port API",
+            "description": "Port for API",
+            "env_variable": "SERVER_APIPORT",
+            "default_value": "29294",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:65535",
+            "field_type": "text"
+        }
+    ]
+}
