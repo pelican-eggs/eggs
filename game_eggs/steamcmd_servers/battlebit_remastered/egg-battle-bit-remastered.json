@@ -4,7 +4,7 @@
     "version": "PTDL_v2",
     "update_url": null
   },
-  "exported_at": "2023-08-30T22:44:12+02:00",
+  "exported_at": "2023-08-30T22:56:27+02:00",
   "name": "BattleBit Remastered",
   "author": "contact@clan-rmg.com",
   "description": "BattleBit Remastered Dedicated Server Wine Debian",
@@ -15,7 +15,7 @@
     "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
   },
   "file_denylist": [],
-  "startup": "cd \/home\/container\/ ; winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/BattleBit.exe -batchmode -nographics \"-Name=\"{{SERVER_NAME}}\"\" \"-Port={{SERVER_PORT}}\" \"-Hz={{SERVER_RATEHZ}}\" \"-AntiCheat=EAC\" \"-MaxPing={{SERVER_MAXPING}}\" \"-VoxelMode={{SERVER_VOXELMODE}}\" \"-ApiEndPoint=0.0.0.0:{{SERVER_APIPORT}}\" \"-apitoken={{SERVER_APITOCKEN}}\" \"-FirstMap={{SERVER_FIRSTMAP}}\" \"-FirstGamemode={{SERVER_FIRSTGAMEMODE}}\" \"-FixedSize={{SERVER_FIXEDSIZE}}\" \"-FirstSize={{SERVER_FIRSTSIZE}}\" \"-MaxSize={{SERVER_MAXSIZE}}\" \"-Password=\"{{SERVER_PASSWORD}}\"\" \"-MaxPlayers={{SERVER_MAXPLAYERS}}\"",
+  "startup": "cd \/home\/container\/ ; winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/BattleBit.exe -batchmode -nographics \"-Name=\"{{SERVER_NAME}}\"\" \"-Port={{SERVER_PORT}}\" \"-Hz={{SERVER_RATEHZ}}\" \"-AntiCheat=EAC\" \"-MaxPing={{SERVER_MAXPING}}\" \"-VoxelMode={{SERVER_VOXELMODE}}\" \"-ApiEndPoint={{SERVER_APIENDPOINT}}\" \"-apitoken={{SERVER_APITOCKEN}}\" \"-FirstMap={{SERVER_FIRSTMAP}}\" \"-FirstGamemode={{SERVER_FIRSTGAMEMODE}}\" \"-FixedSize={{SERVER_FIXEDSIZE}}\" \"-FirstSize={{SERVER_FIRSTSIZE}}\" \"-MaxSize={{SERVER_MAXSIZE}}\" \"-Password=\"{{SERVER_PASSWORD}}\"\" \"-MaxPlayers={{SERVER_MAXPLAYERS}}\"",
   "config": {
     "files": "{}",
     "startup": "{\r\n    \"done\": \"Successfully registered to steam servers\"\r\n}",
@@ -191,13 +191,13 @@
       "field_type": "text"
     },
     {
-      "name": "Port API",
-      "description": "Port for API",
-      "env_variable": "SERVER_APIPORT",
-      "default_value": "29294",
+      "name": "Server API Endpoint",
+      "description": "IP + PORT where is the api",
+      "env_variable": "SERVER_APIENDPOINT",
+      "default_value": "127.0.0.1:29294",
       "user_viewable": true,
       "user_editable": true,
-      "rules": "required|numeric|max:65535",
+      "rules": "nullable|string",
       "field_type": "text"
     },
     {
@@ -237,7 +237,7 @@
       "default_value": "",
       "user_viewable": true,
       "user_editable": true,
-      "rules": "required|string|max:20",
+      "rules": "nullable|string|max:20",
       "field_type": "text"
     }
   ]
