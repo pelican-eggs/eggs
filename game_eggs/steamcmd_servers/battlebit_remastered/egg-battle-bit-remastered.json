@@ -4,7 +4,7 @@
     "version": "PTDL_v2",
     "update_url": null
   },
-  "exported_at": "2023-08-30T22:56:27+02:00",
+  "exported_at": "2023-08-30T23:03:00+02:00",
   "name": "BattleBit Remastered",
   "author": "contact@clan-rmg.com",
   "description": "BattleBit Remastered Dedicated Server Wine Debian",
@@ -238,6 +238,16 @@
       "user_viewable": true,
       "user_editable": true,
       "rules": "nullable|string|max:20",
+      "field_type": "text"
+    },
+    {
+      "name": "STEAM_AUTH_URL",
+      "description": "Should return the current 2FA code in plain text (Only used in installation)",
+      "env_variable": "STEAM_AUTH_URL",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|string",
       "field_type": "text"
     }
   ]
