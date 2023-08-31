@@ -57,6 +57,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Generic Languages](/generic)
 
 * [C#](/generic/c%23/)
+* [elixir](/generic/elixir/)
 * [dart](/generic/dart/)
 * [deno](/generic/deno/)
 * [golang](/generic/golang/)
