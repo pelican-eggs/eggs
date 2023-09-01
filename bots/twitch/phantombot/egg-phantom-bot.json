@@ -10,7 +10,7 @@
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
+        "ghcr.io\/parkervcp\/yolks:java_19": "ghcr.io\/parkervcp\/yolks:java_19"
     },
     "file_denylist": [],
     "startup": "java --add-opens java.base\/java.lang=ALL-UNNAMED -Djava.security.policy=config\/security -Dinteractive -Xms1m -Dfile.encoding=UTF-8 -jar PhantomBot.jar",
