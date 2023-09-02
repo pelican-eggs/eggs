@@ -36,7 +36,7 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:latest,master,3.9.0.7",
+            "rules": "required|string|max:9",
             "field_type": "text"
         },
         {
