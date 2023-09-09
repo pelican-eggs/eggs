@@ -10,6 +10,7 @@ On Linux the server becomes unstable around 80-90 players !
 ## Server Ports
 
 BattleBit Remastered servers require 2 ports to be open (Server and Query)
+
 BattleBitAPIRunner require 1 port to be open
 
 | Port      | default |
