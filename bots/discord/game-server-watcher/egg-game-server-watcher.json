@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\napt-get update && apt-get install ca-certificates git -yq --no-install-suggests --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages\r\ncd \/mnt\/server\r\ngit config --global --add safe.directory \/mnt\/server\r\ngit clone https:\/\/github.com\/a-sync\/game-server-watcher.git . || git pull\r\nnpm install && npm run build\r\nnpm prune --omit=dev",
-            "container": "node:20-bookworm-slim",
+            "container": "node:20-bullseye-slim",
             "entrypoint": "bash"
         }
     },
