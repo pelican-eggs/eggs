@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-15T04:20:09+02:00",
+    "exported_at": "2023-09-13T18:34:19+00:00",
     "name": "Game Server Watcher",
     "author": "a-sync@devs.space",
-    "description": "A simple discord\/telegram\/slack bot that can be hosted on a free service to monitor your game servers and players in style. 😎",
+    "description": "A simple discord\/telegram\/slack bot that can be hosted on a free service to monitor your game servers and players in style. \ud83d\ude0e",
     "features": null,
     "docker_images": {
         "Node.js 20": "ghcr.io\/parkervcp\/yolks:nodejs_20"
@@ -35,7 +35,8 @@
             "default_value": "secret",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|min:1|max:255"
+            "rules": "required|string|min:1|max:255",
+            "field_type": "text"
         },
         {
             "name": "DATA_PATH",
@@ -44,7 +45,8 @@
             "default_value": ".\/data\/",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|min:1|max:255"
+            "rules": "required|string|min:1|max:255",
+            "field_type": "text"
         },
         {
             "name": "REFRESH_TIME_MINUTES",
@@ -53,8 +55,8 @@
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
-            "field_type": "integer",
-            "rules": "required|integer|min:1"
+            "rules": "required|integer|min:1",
+            "field_type": "text"
         },
         {
             "name": "DISCORD_BOT_TOKEN",
@@ -63,7 +65,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "TELEGRAM_BOT_TOKEN",
@@ -72,25 +75,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
-        },
-        {
-            "name": "SLACK_BOT_TOKEN",
-            "description": "Slack bot token",
-            "env_variable": "SLACK_BOT_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string"
-        },
-        {
-            "name": "SLACK_APP_TOKEN",
-            "description": "Slack app token",
-            "env_variable": "SLACK_APP_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "STEAM_WEB_API_KEY",
@@ -99,7 +85,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Debug Mode",
@@ -108,7 +95,28 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|in:0,1"
+            "rules": "required|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "SLACK_BOT_TOKEN",
+            "description": "Slack bot token",
+            "env_variable": "SLACK_BOT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SLACK_APP_TOKEN",
+            "description": "Slack app token",
+            "env_variable": "SLACK_APP_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }
