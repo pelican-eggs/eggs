@@ -42,7 +42,7 @@
         {
             "name": "Git Branch",
             "description": "The Git branch to install.",
-            "env_variable": "GIT_BRANCH",
+            "env_variable": "BRANCH",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -72,7 +72,7 @@
         {
             "name": "Git Username",
             "description": "Git username for authentication.",
-            "env_variable": "GIT_USERNAME",
+            "env_variable": "USERNAME",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -82,7 +82,7 @@
         {
             "name": "Git Access Token",
             "description": "Git access token for authentication.",
-            "env_variable": "GIT_ACCESS_TOKEN",
+            "env_variable": "ACCESS_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
