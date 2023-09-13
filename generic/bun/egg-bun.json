@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-27T11:46:37+02:00",
+    "exported_at": "2023-09-13T17:51:41+02:00",
     "name": "Bun",
     "author": "mratox@protonmail.com",
     "description": "Bun is an incredibly fast JavaScript runtime, transpiler bundler, and npm package manager all-in-one.",
@@ -40,16 +40,6 @@
             "field_type": "text"
         },
         {
-            "name": "Git Branch",
-            "description": "The Git branch to install.",
-            "env_variable": "GIT_BRANCH",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
             "name": "User Uploaded Files",
             "description": "Skip all the install stuff if you are letting a user upload files.\r\n0 = false (default)\r\n1 = true",
             "env_variable": "USER_UPLOAD",
@@ -67,26 +57,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "Git Username",
-            "description": "Git username for authentication.",
-            "env_variable": "GIT_USERNAME",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Git Access Token",
-            "description": "Git access token for authentication.",
-            "env_variable": "GIT_ACCESS_TOKEN",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
             "field_type": "text"
         },
         {
@@ -113,6 +83,36 @@
             "name": "Uninstall Bun Packages",
             "description": "Uninstall bun packages.\r\nUse spaces to separate",
             "env_variable": "RMBUN_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Branch",
+            "description": "The Git branch to install.",
+            "env_variable": "BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Username",
+            "description": "Git username for authentication.",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Access Token",
+            "description": "Git access token for authentication.",
+            "env_variable": "ACCESS_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
