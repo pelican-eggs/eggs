@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-09-20T19:43:32-07:00",
+    "name": "KSP DMP Server",
+    "author": "rufanyin29@gmail.com",
+    "description": "Dark Multiplayer mod server for Kerbal Space Program",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:mono_latest": "ghcr.io\/parkervcp\/yolks:mono_latest"
+    },
+    "file_denylist": [],
+    "startup": "mono DMPServer.exe",
+    "config": {
+        "files": "{\r\n    \"Config\/Settings.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Ready!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt install -y unzip wget\r\nwget https:\/\/d-mp.org\/builds\/release\/v0.3.8.3\/DMPServer.zip\r\nmv DMPServer.zip \/mnt\/server\/\r\ncd \/mnt\/server\/\r\nunzip DMPServer.zip\r\nmv DMPServer\/* .\/\r\nrm -rf DMPServer\r\nrm DMPServer.zip",
+            "container": "ghcr.io\/parkervcp\/installers:ubuntu",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
