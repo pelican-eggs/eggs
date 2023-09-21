@@ -53,6 +53,8 @@
 * GTA
   * [GTAC](gta/gtac)
 
+[Kerbal Space Program](ksp)
+
 [Los Angeles Crimes](losangelescrimes)
 
 [League Sandbox](leaguesandbox)
