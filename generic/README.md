@@ -5,6 +5,11 @@
 [C#](https://learn.microsoft.com/en-us/dotnet/csharp//)
 A generic C# language egg running with dotnet
 
+### [Elixir](elixir)
+
+[elixir](https://elixir-lang.org/)
+A generic Elixir language egg
+
 ### [Dart](dart)
 
 [dart](https://dart.dev/)
