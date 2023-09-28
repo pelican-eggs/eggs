@@ -403,6 +403,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [languagetool](/software/languagetool)
 
+### Meilisearch
+
+* [Meilisearch](/software/meilisearch)
+
 ### Owncast
 
 * [owncast](/software/owncast)
