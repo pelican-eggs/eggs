@@ -27,13 +27,16 @@ Uptime Kuma requires 1 port. You can choose any port you want
 
 The latest image provides support for Cloudflared and Apprise.
 
+### Cloudflared
 With Cloudflared it is possible to create a proxy over Cloudflare without having to use an nginx proxy. More info here:
 https://github.com/louislam/uptime-kuma/wiki/Reverse-Proxy-with-Cloudflare-Tunnel
 
+### Apprise
 Apprise provides notifications for all kinds of services. Uptime Kuma has a built-in support for Apprise.
 More info's here:
 https://github.com/caronc/apprise#supported-notifications
 
+### Monitor HTTP(s) - Browser Engine (Chromium) 
 The image supports the monitor "HTTP(s) - Browser Engine". 
 To use this monitor, enter the following path in the settings under "General -> Chrome/Chromium Executable" (at the bottom):
 
