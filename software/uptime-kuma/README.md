@@ -22,3 +22,16 @@ Uptime Kuma requires 1 port. You can choose any port you want
 | Port    | default       |
 |---------|---------------|
 | default |     3000      |
+
+## Cloudflared & apprise
+
+The latest image provides support for Cloudflared and Apprise.
+
+With Cloudflared it is possible to create a proxy over Cloudflare without having to use an nginx proxy. More info here:
+https://github.com/louislam/uptime-kuma/wiki/Reverse-Proxy-with-Cloudflare-Tunnel
+
+Apprise provides notifications for all kinds of services. Uptime Kuma has a built-in support for Apprise.
+More info's here:
+https://github.com/caronc/apprise#supported-notifications
+
+Translated with www.DeepL.com/Translator (free version)
