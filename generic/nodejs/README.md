@@ -22,4 +22,4 @@ You can use arrays to have multiple different values when different bots are bei
 }
 ```
 ## Connecting to a Github Repository
-You can connect your server to automatically pull from a github repository, however the credentials for the repository must be provided and setup when the server is being installed.
+The GitHub repository is cloned during the initial installation process. Therefore, if new credentials are provided afterward, a server reinstallation will be necessary
