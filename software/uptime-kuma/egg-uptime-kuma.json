@@ -77,6 +77,16 @@
             "user_editable": false,
             "rules": "nullable|string",
             "field_type": "text"
+        },
+        {
+            "name": "Data Directory",
+            "description": "The directory that Uptime Kuma will look for the kuma.db in.",
+            "env_variable": "DATA_DIR",
+            "default_value": ".\/db\/",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
