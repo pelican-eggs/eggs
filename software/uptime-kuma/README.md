@@ -33,5 +33,3 @@ https://github.com/louislam/uptime-kuma/wiki/Reverse-Proxy-with-Cloudflare-Tunne
 Apprise provides notifications for all kinds of services. Uptime Kuma has a built-in support for Apprise.
 More info's here:
 https://github.com/caronc/apprise#supported-notifications
-
-Translated with www.DeepL.com/Translator (free version)
