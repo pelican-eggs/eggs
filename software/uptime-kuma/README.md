@@ -17,7 +17,7 @@ After installation and successful start, browse to your <ip>:<port> and setup th
 
 ## Server Ports
 
-Uptime Kuma requires 1 port. You can choose every port you want
+Uptime Kuma requires 1 port. You can choose any port you want
 
 | Port    | default       |
 |---------|---------------|
