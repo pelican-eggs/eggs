@@ -20,3 +20,6 @@ You can use arrays to have multiple different values when different bots are bei
     "change this text 2"
   ]
 }
+```
+## Connecting to a Github Repository
+You can connect your server to automatically pull from a github repository, however the credentials for the repository must be provided and setup when the server is being installed.
