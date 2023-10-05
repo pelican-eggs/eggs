@@ -6,7 +6,7 @@
     },
     "exported_at": "2023-03-04T15:04:21+01:00",
     "name": "Among Us - Impostor Server",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "Impostor is one of the first Among Us private servers, written in C#.\r\n\r\nThere are no special features at this moment, the goal is aiming to be as close as possible to the real server, for now. In a later stage, making modifications to game logic by modifying GameData packets can be looked at.",
     "features": null,
     "docker_images": {

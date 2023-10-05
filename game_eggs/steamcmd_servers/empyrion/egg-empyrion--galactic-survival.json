@@ -6,7 +6,7 @@
     },
     "exported_at": "2023-04-25T19:31:11+02:00",
     "name": "Empyrion: Galactic Survival",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "Empyrion: Galactic Survival dedicated server",
     "features": null,
     "docker_images": {

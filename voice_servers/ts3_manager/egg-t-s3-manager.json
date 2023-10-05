@@ -5,7 +5,7 @@
     },
     "exported_at": "2020-12-05T08:58:33+01:00",
     "name": "TS3 Manager",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "The Open Source Webinterface For TeamSpeak Servers",
     "features": null,
     "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
