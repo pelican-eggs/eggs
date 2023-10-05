@@ -6,7 +6,7 @@
     },
     "exported_at": "2021-11-14T11:16:57+01:00",
     "name": "SCP:SL",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server",
     "features": [
         "steam_disk_space"
