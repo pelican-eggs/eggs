@@ -40,6 +40,12 @@ This is a collection of servers that use SteamCMD to install.
 
 [citadel](citadel)
 
+## Counter-Strike
+
+[Counter-Strike](counter_strike)
+  * [Counter-Strike: Source](counter_strike/counter_strike_source/)
+  * [Counter-Strike 2](counter_strike/counter_strike_2/)
+  
 ## Conan Exiles
 
 [Conan Exiles](conan_exiles)
