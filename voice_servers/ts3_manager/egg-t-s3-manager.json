@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-07T08:41:21+02:00",
+    "exported_at": "2023-10-07T18:01:49+02:00",
     "name": "TS3 Manager",
     "author": "eggs@goover.dev",
     "description": "The Open Source Webinterface For TeamSpeak Servers",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Valheim Installation Script\r\n\r\n## install needed packages\r\napt update\r\napt install -y git unzip jq wget tar curl\r\n\r\n## env\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/$LATEST_VERSION\/$MATCH-$LATEST_VERSION\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/$MATCH-$VERSION-v$VERSION\"\r\nfi\r\n\r\necho $DOWNLOAD_LINK\r\nwget $DOWNLOAD_LINK\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    mv -f $MATCH-$LATEST_VERSION $HOME\/start_ts3-manager\r\n    chmod +x start_ts3-manager\r\nelse\r\n    mv -f $MATCH-v$VERSION $HOME\/start_ts3-manager\r\n    chmod start_ts3-manager\r\nfi\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-------------------------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\n## install needed packages\r\napt update\r\napt install -y git unzip jq wget tar curl\r\n\r\n## env\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/$LATEST_VERSION\/$MATCH-$LATEST_VERSION\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/$MATCH-$VERSION-v$VERSION\"\r\nfi\r\n\r\necho $DOWNLOAD_LINK\r\nwget $DOWNLOAD_LINK\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    mv -f $MATCH-$LATEST_VERSION $HOME\/start_ts3-manager\r\n    chmod +x start_ts3-manager\r\nelse\r\n    mv -f $MATCH-v$VERSION $HOME\/start_ts3-manager\r\n    chmod start_ts3-manager\r\nfi\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-------------------------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
