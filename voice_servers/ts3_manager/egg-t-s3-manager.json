@@ -6,7 +6,7 @@
     },
     "exported_at": "2023-10-07T08:41:21+02:00",
     "name": "TS3 Manager",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "The Open Source Webinterface For TeamSpeak Servers",
     "features": null,
     "docker_images": {
