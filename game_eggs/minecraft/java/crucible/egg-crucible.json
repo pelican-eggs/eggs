@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-09T13:00:16-03:00",
+    "name": "Crucible",
+    "author": "ryanpereira.profissional@gmail.com",
+    "description": "Crucible server implementation",
+    "features": null,
+    "docker_images": {
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Crucible Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n#!\/bin\/bash\r\n# CRUCIBLE_VERSION=\"staging-81fcb90\"\r\n# SERVER_JARFILE=\"server.jar\"\r\n[[ ${CRUCIBLE_VERSION} =~ \"staging-\" ]] && JAR_NAME=\"Crucible-1.7.10-${CRUCIBLE_VERSION}-server.jar\" || JAR_NAME=\"Crucible-1.7.10-${CRUCIBLE_VERSION}.jar\"\r\n[[ ${CRUCIBLE_VERSION} =~ \"staging-\" ]] && RELEASE_NAME=\"${CRUCIBLE_VERSION%?}\" || RELEASE_NAME=\"v${CRUCIBLE_VERSION}\"\r\ncurl -fsSL \"https:\/\/github.com\/CrucibleMC\/Crucible\/releases\/download\/${RELEASE_NAME}\/${JAR_NAME}\" -o ${SERVER_JARFILE}",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Jar File",
+            "description": "The name of the Jarfile to use when running Crucible.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Crucible Version",
+            "description": "The release of Crucible to download and use.",
+            "env_variable": "CRUCIBLE_VERSION",
+            "default_value": "5.4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required",
+            "field_type": "text"
+        }
+    ]
+}
