@@ -1,16 +1,15 @@
-# Crucible Egg
-This is a custom Egg for the server with Plugins & Mods [Crucible](https://cruciblemc.github.io/) in [Pterodactyl Panel](https://pterodactyl.io/).
+# Crucible
 
-# Who to use
+This is a custom Egg for the server with Plugins & Mods for 1.7.10
+[Crucible](https://cruciblemc.github.io/)
 
-1. Log in to your Pterodactyl Dashboard.
+## Server Ports
 
-2. Navigate to the `Admin` section and click on `Nests`.
+The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
 
-3. Click the `Import Egg` button to import a new Egg.
+| Port  | default |
+|-------|---------|
+| Game  | 25565   |
 
-4. Select the file.
-
-5. Select the Minecraft option under `Associated Nest`
-
-6. End.
+## Notes
+By default the downloaded version is `4.5`, versions must follow the pattern `x.x` or `staging-XXXXX` for branch builds
