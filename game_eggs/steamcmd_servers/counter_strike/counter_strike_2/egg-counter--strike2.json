@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-09T23:36:14+02:00",
+    "exported_at": "2023-10-10T10:30:39+02:00",
     "name": "Counter-Strike 2",
     "author": "admin@ballaual.de",
     "description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
@@ -13,7 +13,7 @@
         "ghcr.io\/pterodactyl\/games:source": "ghcr.io\/pterodactyl\/games:source"
     },
     "file_denylist": [],
-    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated +ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} +game_alias {{SRCDS_GAMEMODE}} +map {{SRCDS_MAP}}",
+    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated +ip 0.0.0.0 -port {{SERVER_PORT}} tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} +game_alias {{SRCDS_GAMEMODE}} +map {{SRCDS_MAP}} +exec autoexec",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\"\r\n}",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Installation Script\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\nGUARDCODE=\"${STEAM_AUTH}\"\r\nif [ -z $GUARDCODE ]\r\nthen\r\n    echo \"\"\r\n    echo \"### You did not specify a Steam Guardcode\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    timeout 60 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n.\/steamcmd.sh +force_install_dir $HOME +set_steam_guard_code ${STEAM_AUTH} +login ${STEAM_USER} ${STEAM_PASS} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit\r\nstatus=$?\r\n\r\nif [ $status -ne 0 ]\r\nthen\r\n    echo \"\"\r\n    echo \"### The Download was not successful\"\r\n    echo \"### Probably the entered Guardcode was wrong\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    sleep 10\r\n    timeout 30 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n## set up 32 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nCONFIG=\/mnt\/server\/game\/csgo\/cfg\/server.cfg\r\nif [ -f \"$CONFIG\" ]; then\r\n    echo \"Removing existing server.cfg\"\r\n    rm \"$CONFIG\"\r\n    echo \"Downloading server.cfg template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o server.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/server.cfg\r\nelse \r\n    echo \"server.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o server.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/server.cfg\r\nfi",
+            "script": "#!\/bin\/bash\r\n# Installation Script\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\nGUARDCODE=\"${STEAM_AUTH}\"\r\nif [ -z $GUARDCODE ]\r\nthen\r\n    echo \"\"\r\n    echo \"### You did not specify a Steam Guardcode\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    timeout 60 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n.\/steamcmd.sh +force_install_dir $HOME +set_steam_guard_code ${STEAM_AUTH} +login ${STEAM_USER} ${STEAM_PASS} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit\r\nstatus=$?\r\n\r\nif [ $status -ne 0 ]\r\nthen\r\n    echo \"\"\r\n    echo \"### The Download was not successful\"\r\n    echo \"### Probably the entered Guardcode was wrong\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    sleep 10\r\n    timeout 30 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n## set up 32 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nCONFIG=\/mnt\/server\/game\/csgo\/cfg\/autoexec.cfg\r\nif [ -f \"$CONFIG\" ]; then\r\n    echo \"Removing existing autoexec.cfg\"\r\n    rm \"$CONFIG\"\r\n    echo \"Downloading autoexec.cfg template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o server.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nelse \r\n    echo \"autoexec.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o server.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nfi",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "bash"
         }
@@ -46,6 +46,16 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Gamemode",
+            "description": "The default gamemode for the server.",
+            "env_variable": "SRCDS_GAMEMODE",
+            "default_value": "competitive",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:competitive,wingman,casual,deathmatch,custom",
             "field_type": "text"
         },
         {
@@ -89,16 +99,6 @@
             "field_type": "text"
         },
         {
-            "name": "Gamemode",
-            "description": "The default gamemode for the server.",
-            "env_variable": "SRCDS_GAMEMODE",
-            "default_value": "competitive",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:competitive,wingman,casual,deathmatch,custom",
-            "field_type": "text"
-        },
-        {
             "name": "Auto-update server",
             "description": "This is to enable \/ disable auto-updating your server when restarting.\r\n\r\nDefault is 1 (enabled). Set it to 0 to disable automatic updates.",
             "env_variable": "AUTO_UPDATE",
@@ -106,6 +106,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "SourceTV Port",
+            "description": "SourceTV port used for connections to spectates games on your server.",
+            "env_variable": "TV_PORT",
+            "default_value": "27020",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
             "field_type": "text"
         }
     ]

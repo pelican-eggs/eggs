@@ -40,13 +40,13 @@ While installing the server it uses up to 5 GB of RAM.<br>
 ## Server Ports
 
 The default game server port for CS2 is 27015 but any other port can be used.<br>
-If you want to use Source TV you need to allocate a second port, the default one for this is 27020.<br>
-As of now i do not have a confirmation that Source TV is working within this installation.
+For the use of SourceTV you need to allocate a second port, the default one for this is 27020 but any other port can be used.<br>
+By default SourceTV is disabled in srctv.cfg. Please keep in mind that the use of SourceTV might cause in higher CPU and RAM usage!<br>
 
 ## Notes
 
-This egg is WIP (work in progress). I will add more functionalities, e.g. Workshop collections over time.<br> 
-The default server.cfg is empty, so i added a very basic server.cfg to this repository.<br> 
-As of October 5th 2023 RCON is not working correctly or is bugged when joining the server.<br> 
+This egg is WIP (work in progress). I will add more functionalities, e.g. Workshop collections over time.<br>
+The default server.cfg is empty, so i added a very basic autoexec.cfg to this repository, which is is executed at startup.<br>
+As of October 5th 2023 RCON is not working correctly or is bugged when joining the server.<br>
 You need to use the server console or external rcon tool to be able to execute rcon commands. This might be fixed in a future update.<br>
 Source: <https://www.reddit.com/r/GlobalOffensive/comments/167spzi/cs2_rcon/>
