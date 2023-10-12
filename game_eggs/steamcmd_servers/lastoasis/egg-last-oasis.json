@@ -1,0 +1,125 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-12T11:22:57+02:00",
+    "name": "Last Oasis",
+    "author": "webmaster@crazy-dev.de",
+    "description": "Last Oasis is a Nomadic Survival MMO. Earth has stopped rotating, and the last human survivors need to outrun the scorching Sun in a massive Open World. Traverse the world on wooden wind-powered, walking machines. Walkers can be adapted for travel, transportation, harvesting, combat, or used as mobile bases.",
+    "features": [
+        "steam_disk_space",
+        "pid_limit"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/Mist\/Binaries\/Linux\/$( [[ \"{{SRCDS_BETAID}}\" == \"classic\" ]] && echo \"MistServer-Linux-Shipping\" || echo \"MistServer \") -log -force_steamclient_link -messaging -NoLiveServer -EnableCheats -backendapiurloverride=\"$( [[ \"{{SRCDS_BETAID}}\" == \"classic\" ]] && echo \"classic-\" || echo \"\")backend.last-oasis.com\" -identifier={{SRV_NAME}} -port={{SERVER_PORT}}  -CustomerKey={{CUSTOMER_KEY}} -ProviderKey={{PROVIDER_KEY}} -slots={{SLOTS}} -QueryPort={{QUERY_PORT}} -OverrideConnectionAddress={{SERVER_IP}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \" Started hosting tile\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id ffound here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# INSTALL_FLAGS - when a server has extra glas for things like beta installs or updates.\r\n#\r\n##\r\n\r\napt -y update\r\ndpkg --add-architecture i386\r\napt -y update\r\napt -y --no-install-recommends install curl ca-certificates libgcc-s1\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\nchmod -R 755 \/mnt\/server\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n## Fix for Linuxservers\r\nrm -fR $HOME\/Mist\/Binaries\/Linux\/steam_appid.txt\r\ncat <<EOT > $HOME\/Mist\/Binaries\/Linux\/steam_appid.txt\r\n903950\r\nEOT",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "920720",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "",
+            "env_variable": "SRV_NAME",
+            "default_value": "Ptero_Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:6",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Slots",
+            "description": "Limited to 100",
+            "env_variable": "SLOTS",
+            "default_value": "5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Provider Key",
+            "description": "You will need to login to \r\n\r\nhttps:\/\/myrealm.lastoasis.gg\/ \r\n\r\nusing Steam, and grab a few keys used for the server setup. Specifically, you will require a CustomerKey, which is used in all servers you\u2019re using on that realm, and a ProviderKey.\r\n\r\nProviderKey can be utilized as many times as you want in as many different servers in the same realm. CustomerKey must be the same across all servers in a realm.",
+            "env_variable": "PROVIDER_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Customer Key",
+            "description": "You will need to login to \r\n\r\nhttps:\/\/myrealm.lastoasis.gg\/ \r\n\r\nusing Steam, and grab a few keys used for the server setup. Specifically, you will require a CustomerKey, which is used in all servers you\u2019re using on that realm, and a ProviderKey.\r\n\r\nProviderKey can be utilized as many times as you want in as many different servers in the same realm. CustomerKey must be the same across all servers in a realm.",
+            "env_variable": "CUSTOMER_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "LD Lib Path",
+            "description": "",
+            "env_variable": "LD_LIBRARY_PATH",
+            "default_value": ".\/linux64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Branch Name",
+            "description": "",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable|in:public,classic",
+            "field_type": "text"
+        }
+    ]
+}
