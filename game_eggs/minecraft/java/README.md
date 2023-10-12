@@ -63,11 +63,6 @@ A fast, lightweight Minecraft server written in Kotlin.
 [Mohist Github](https://github.com/Mohist-Community/Mohist)
 Mohist is a minecraft forge server software that implements the Paper/Spigot/Bukkit API.
 
-### [Crucible](Crucible)
-
-[Crucible Website]([https://magmafoundation.org](https://cruciblemc.github.io/))
-Crucible is a Forge & Bukkit hybrid based on Thermos with several improvements.
-
 ## [FTB Packs](ftb)
 
 [FTB Modpacks API](https://api.modpacks.ch)
@@ -170,6 +165,15 @@ The ancient power of Tekkits past return in this legendary pack!
 
 [Tekkit Classic Modpack Page](https://www.technicpack.net/modpack/tekkit.552560)
 The official Tekkit Classic modpack. Build factories, automate crafting!
+
+## [Thermos Based](https://cyberdynecc.github.io/Thermos/)
+Thermos is a fork of KCauldron, a craftbukkit forge server for Minecraft 1.7.10. After periods of inactivity on KCauldron's GitLab concerning major issues, Thermos was created to allow active members of the Minecraft coding community to optimize it and provide fixes in a timely manner.
+
+### [Crucible](crucible)
+
+[Crucible Website](https://cruciblemc.github.io/)
+Crucible is a Forge & Bukkit hybrid based on Thermos with several improvements.
+
 
 ## [VanillaCord](vanillacord)
 
