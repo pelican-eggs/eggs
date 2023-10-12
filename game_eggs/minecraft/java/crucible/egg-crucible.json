@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-09T13:00:16-03:00",
+    "exported_at": "2023-10-12T13:05:55-03:00",
     "name": "Crucible",
     "author": "ryanpereira.profissional@gmail.com",
-    "description": "Crucible server implementation",
+    "description": "Crucible is a Thermos with several improvements. We aim to close the gaps left by Thermos and extend the support for those still on 1.7.10 by adding support for long broken mods and plugins and fix serious bugs as they appear.",
     "features": null,
     "docker_images": {
         "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8"
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Crucible Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n#!\/bin\/bash\r\n# CRUCIBLE_VERSION=\"staging-81fcb90\"\r\n# SERVER_JARFILE=\"server.jar\"\r\n[[ ${CRUCIBLE_VERSION} =~ \"staging-\" ]] && JAR_NAME=\"Crucible-1.7.10-${CRUCIBLE_VERSION}-server.jar\" || JAR_NAME=\"Crucible-1.7.10-${CRUCIBLE_VERSION}.jar\"\r\n[[ ${CRUCIBLE_VERSION} =~ \"staging-\" ]] && RELEASE_NAME=\"${CRUCIBLE_VERSION%?}\" || RELEASE_NAME=\"v${CRUCIBLE_VERSION}\"\r\ncurl -fsSL \"https:\/\/github.com\/CrucibleMC\/Crucible\/releases\/download\/${RELEASE_NAME}\/${JAR_NAME}\" -o ${SERVER_JARFILE}",
+            "script": "#!\/bin\/ash\r\n# Crucible Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\n#!\/bin\/bash\r\n# CRUCIBLE_VERSION=\"staging-81fcb90\"\r\n# SERVER_JARFILE=\"server.jar\"\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/CrucibleMC\/Crucible\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/CrucibleMC\/Crucible\/releases\")\r\nMATCH=\"Crucible-1\\.7\\.10-.*\\.jar\"\r\nDOWNLOAD_URL=\"\"\r\nDOWNLOAD_URL_LIB=\"\"\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n        DOWNLOAD_URL_LIB=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i libraries.zip\r\n)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\ncurl -sSL $DOWNLOAD_URL -o ${SERVER_JARFILE}\r\nwget $DOWNLOAD_URL_LIB -O temp.zip\r\nunzip temp.zip -d libraries\r\nrm temp.zip",
             "container": "ghcr.io\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
@@ -40,9 +40,9 @@
         },
         {
             "name": "Crucible Version",
-            "description": "The release of Crucible to download and use.",
-            "env_variable": "CRUCIBLE_VERSION",
-            "default_value": "5.4",
+            "description": "The release of Crucible to download and use. Similar as: `v5.4` or `staging-81fcb90`\r\nnote: We do not recommend using this egg to download versions lower than v5.0, these versions may have several bugs and may cause the installation script to crash.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required",
