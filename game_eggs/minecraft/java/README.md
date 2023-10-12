@@ -63,6 +63,11 @@ A fast, lightweight Minecraft server written in Kotlin.
 [Mohist Github](https://github.com/Mohist-Community/Mohist)
 Mohist is a minecraft forge server software that implements the Paper/Spigot/Bukkit API.
 
+### [Crucible](Crucible)
+
+[Crucible Website]([https://magmafoundation.org](https://cruciblemc.github.io/))
+Crucible is a Forge & Bukkit hybrid based on Thermos with several improvements.
+
 ## [FTB Packs](ftb)
 
 [FTB Modpacks API](https://api.modpacks.ch)
