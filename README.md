@@ -269,6 +269,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
 * [iosoccer](game_eggs/steamcmd_servers/iosoccer)
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
+* [Last Oasis](game_eggs/steamcmd_servers/lastoasis)
 * [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
 * [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
