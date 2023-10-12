@@ -73,6 +73,7 @@
 * [Java](minecraft/java) Servers for Java Minecraft
   * [CurseForge](minecraft/java/curseforge)
   * [Cuberite](minecraft/java/cuberite)
+  * [Crucible](minecraft/java/crucible)
   * [Fabric](minecraft/java/fabric)
   * [Feather](minecraft/java/feather)
   * [Feed The Beast](minecraft/java/ftb)
