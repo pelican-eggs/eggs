@@ -178,9 +178,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [PowerNukkitX](game_eggs/minecraft/bedrock/PowerNukkitX)
 
 * [Java](game_eggs/minecraft/java) Servers for Java Minecraft
+  * [Crucible](game_eggs/minecraft/java/crucible)
   * [CurseForge](game_eggs/minecraft/java/curseforge)
   * [Cuberite](game_eggs/minecraft/java/cuberite)
-  * [Crucible](game_eggs/minecraft/java/crucible)
   * [Fabric](game_eggs/minecraft/java/fabric)
   * [Feather](game_eggs/minecraft/java/feather)
   * [Feed The Beast](game_eggs/minecraft/java/ftb)
