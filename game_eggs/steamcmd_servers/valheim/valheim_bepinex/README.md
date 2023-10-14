@@ -28,6 +28,9 @@ In particular, the changes from base BepInEx releases are:
 - Updated Doorstop configuration and BepInEx to allow to load unstripped DLLs without having to overwrite game DLLs.
 - Added scripts necessary to run both game and dedicated server on Linux machines
 
+## Automatic Mod Downloading
+Mods can be downloaded from modpacks automatically by entering the "dependency string" for the modpack from https://valheim.thunderstore.io/
+
 ## Server Ports
 
 | Port  | default |
