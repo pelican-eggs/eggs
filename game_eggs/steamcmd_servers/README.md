@@ -258,6 +258,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [The Forest](the_forest)
 
+## The Front
+
+[The Front](thefront)
+
 ## The Isle
 
 [The Isle](the_isle)
