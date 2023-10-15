@@ -30,4 +30,4 @@ Until the devs fix their linux server, you must reinstall the server on every up
 You need a min of 10GB for the Server.
 
 ## Special Note
-DO NOT ADD STARTUP FLAGS AFTER THE SERVER PASSWORD FLAG, else you are not longer able to login into your server. The Passwort Flag be be everytime the LAST flag
+DO NOT ADD STARTUP FLAGS AFTER THE SERVER PASSWORD FLAG, else you are not longer able to login into your server. The Passwort Flag MUST be everytime the LAST flag
