@@ -31,3 +31,21 @@ You need a min of 10GB for the Server.
 
 ## Special Note
 DO NOT ADD STARTUP FLAGS AFTER THE SERVER PASSWORD FLAG, else you are not longer able to login into your server. The Passwort Flag MUST be everytime the LAST flag
+
+## Server Tags
+
+You can use Server Tags with this Egg. But max is 5
+
+To be used in the variable as follows: 0,1,2,3,4
+
+Available Server Tags
+
+0 = PVP 
+1 = PVE
+2 = EXP Multiplikator
+3 = GatheringRate
+4 = KeepInventory
+5 = 45d wipe
+6 = 15d wipe
+7 = 30d wipe
+8 = 60d wipe
