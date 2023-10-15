@@ -2,11 +2,11 @@
 
 ## Author & Contributers
 | Name        | Github Profile  | Buy me a Coffee |
-| ------------- |-------------|-------------|
-|   gOOvER   | https://github.com/gOOvER | [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B351D0Q) |
+|:-------------:|:-------------:|:-------------:|
+|   gOOvER   | https://github.com/gOOvER | [Donate](https://www.paypal.com/donate/?hosted_button_id=83JB2X6H7DHXJ) |
 
 ## Special Thanks
-Special thanks to [KRServers] (https://krservers.de/) for spending me the Key
+Special thanks to [KRServers](https://krservers.de/) for spending me the Key
 
 ## The Front
 The Front is a survival open-world crafting shooter. You play the role of a resistance fighter sent back in time to stop the rise of a tyrannical empire.
@@ -30,17 +30,18 @@ Until the devs fix their linux server, you must reinstall the server on every up
 You need a min of 10GB for the Server.
 
 ## Special Note
-DO NOT ADD STARTUP FLAGS AFTER THE SERVER PASSWORD FLAG, else you are not longer able to login into your server. The Passwort Flag MUST be everytime the LAST flag
+> [!WARNING]
+> DO NOT ADD STARTUP FLAGS AFTER THE SERVER PASSWORD FLAG, else you are not longer able to login into your server. The Passwort Flag MUST be everytime the LAST flag
+
 
 ## Server Tags
-
 You can use Server Tags with this Egg. But max is 5
 
-To be used in the variable as follows: 0,1,2,3,4
+To be used in the variable as follows: `0,1,2,3,4`
 
 Available Server Tags
 
-0 = PVP 
+0 = PVP
 1 = PVE
 2 = EXP Multiplikator
 3 = GatheringRate
@@ -48,4 +49,4 @@ Available Server Tags
 5 = 45d wipe
 6 = 15d wipe
 7 = 30d wipe
-8 = 60d wipe
+8 = 60d wipeTo be used in the variable as follows:
