@@ -49,4 +49,10 @@ Available Server Tags
 5 = 45d wipe
 6 = 15d wipe
 7 = 30d wipe
-8 = 60d wipeTo be used in the variable as follows:
+8 = 60d wipe
+
+## Troubleshooting
+
+- I get the error "**Server Connection has expired!**"
+    - Allocate and open all ports in your Firewall.
+
