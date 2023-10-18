@@ -1,25 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-12-05T08:58:33+01:00",
+    "exported_at": "2023-10-07T18:01:49+02:00",
     "name": "TS3 Manager",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "The Open Source Webinterface For TeamSpeak Servers",
     "features": null,
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_debian",
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
     "startup": ".\/start_ts3-manager -p ${SERVER_PORT}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Server listening on\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Server listening on\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "apt -y update\r\napt -y upgrade\r\napt install -y git unzip jq wget tar curl\r\n\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/$LATEST_VERSION\/$MATCH-$LATEST_VERSION\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/$MATCH-$VERSION-v$VERSION\"\r\nfi\r\n\r\necho $DOWNLOAD_LINK\r\nwget $DOWNLOAD_LINK\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    mv -f $MATCH-$LATEST_VERSION $HOME\/start_ts3-manager\r\n    chmod +x start_ts3-manager\r\nelse\r\n    mv -f $MATCH-v$VERSION $HOME\/start_ts3-manager\r\n    chmod start_ts3-manager\r\nfi",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n\r\n## install needed packages\r\napt update\r\napt install -y git unzip jq wget tar curl\r\n\r\n## env\r\nexport HOME=\/mnt\/server\r\ncd $HOME\r\n\r\n## get release info and download links\r\nLATEST_RELEASE=$(curl -L -s -H 'Accept: application\/json' https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/latest)\r\nLATEST_VERSION=$(echo $LATEST_RELEASE | sed -e 's\/.*\"tag_name\":\"\\([^\"]*\\)\".*\/\\1\/')\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/$LATEST_VERSION\/$MATCH-$LATEST_VERSION\"\r\nelse \r\n    DOWNLOAD_LINK=\"https:\/\/github.com\/${GITHUB_PACKAGE}\/releases\/download\/v$VERSION\/$MATCH-$VERSION-v$VERSION\"\r\nfi\r\n\r\necho $DOWNLOAD_LINK\r\nwget $DOWNLOAD_LINK\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    mv -f $MATCH-$LATEST_VERSION $HOME\/start_ts3-manager\r\n    chmod +x start_ts3-manager\r\nelse\r\n    mv -f $MATCH-v$VERSION $HOME\/start_ts3-manager\r\n    chmod start_ts3-manager\r\nfi\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-------------------------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -31,7 +35,8 @@
             "default_value": "joni1802\/ts3-manager",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:50"
+            "rules": "required|string|max:50",
+            "field_type": "text"
         },
         {
             "name": "VERSION",
@@ -40,7 +45,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:30"
+            "rules": "required|string|max:30",
+            "field_type": "text"
         },
         {
             "name": "MATCH",
@@ -49,7 +55,8 @@
             "default_value": "ts3-manager-linux-x64",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:50"
+            "rules": "required|string|max:50",
+            "field_type": "text"
         }
     ]
 }

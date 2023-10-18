@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-03T16:15:23+01:00",
+    "exported_at": "2023-10-07T06:47:10+02:00",
     "name": "Valheim Plus Mod",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "A brutal exploration and survival game for 1-10 players, set in a procedurally-generated purgatory inspired by viking culture.",
     "features": [
         "steam_disk_space"
@@ -184,7 +184,7 @@
             "name": "[V+] Github Package",
             "description": "",
             "env_variable": "GITHUB_PACKAGE",
-            "default_value": "valheimPlus\/ValheimPlus",
+            "default_value": "Grantapher\/ValheimPlus",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:40",

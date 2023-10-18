@@ -57,6 +57,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ## [Generic Languages](/generic)
 
 * [C#](/generic/c%23/)
+* [elixir](/generic/elixir/)
 * [dart](/generic/dart/)
 * [deno](/generic/deno/)
 * [golang](/generic/golang/)
@@ -151,6 +152,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * GTA
   * [GTAC](game_eggs/gta/gtac)
+
+[Kerbal Space Program](game_eggs/ksp)
 
 [League Sandbox](game_eggs/leaguesandbox)
 
@@ -400,6 +403,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### LanguageTool
 
 * [languagetool](/software/languagetool)
+
+### Meilisearch
+
+* [Meilisearch](/software/meilisearch)
 
 ### Owncast
 
