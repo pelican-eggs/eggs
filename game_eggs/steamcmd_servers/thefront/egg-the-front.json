@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-18T15:00:33+02:00",
+    "exported_at": "2023-10-18T15:25:17+02:00",
     "name": "The Front",
     "author": "eggs@goover.dev",
     "description": "The Front is a survival open-world crafting shooter. You play the role of a resistance fighter sent back in time to stop the rise of a tyrannical empire.",
@@ -182,11 +182,11 @@
         },
         {
             "name": "[SERVER] Auto Update",
-            "description": "NOTICE: IT will Download the Files on every START \/ RESTART and use a lot of",
+            "description": "Autoupdate your Server on start\/restart",
             "env_variable": "AUTO_UPDATE",
             "default_value": "0",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "required|boolean",
             "field_type": "text"
         },
