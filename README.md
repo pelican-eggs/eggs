@@ -325,7 +325,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim BepInEx](game_eggs/steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
-
+* [VEIN](game_eggs/steamcmd_servers/vein)
 
 [Teeworlds](game_eggs/teeworlds)
 
