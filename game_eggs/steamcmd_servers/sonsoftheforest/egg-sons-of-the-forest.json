@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-23T04:57:30-04:00",
+    "exported_at": "2023-10-18T18:00:26+02:00",
     "name": "Sons Of The Forest",
     "author": "eggs@goover.dev",
     "description": "Sons of the Forest is a horror survival game and sequel to The Forest by Endnight Games, Ltd.. Sent to find a missing billionaire on a remote island, you find yourself in a cannibal-infested hellscape. Craft, build, and struggle to survive, alone or with friends.",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
     "startup": "wine .\/SonsOfTheForestDS.exe -userdatapath \"\/home\/container\/serverconfig\" -dedicatedserver.IpAddress \"0.0.0.0\" -dedicatedserver.GamePort \"{{SERVER_PORT}}\" -dedicatedserver.QueryPort \"{{QUERY_PORT}}\" -dedicatedserver.BlobSyncPort \"{{BLOBSYNC_PORT}}\" -dedicatedserver.MaxPlayers \"{{MAX_PLAYERS}}\" -dedicatedserver.Password \"{{SRV_PW}}\" -dedicatedserver.GameMode \"{{GAME_MODE}}\" -dedicatedserver.SkipNetworkAccessibilityTest \"{{SKIP_TESTS}}\" -dedicatedserver.LogFilesEnabled \"true\" -dedicatedserver.TimestampLogFilenames \"true\"",
@@ -101,16 +101,6 @@
             "field_type": "text"
         },
         {
-            "name": "Skip network Test",
-            "description": "if you have problems to connect to your server, set this to TRUE",
-            "env_variable": "SKIP_TESTS",
-            "default_value": "false",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|in:true,false",
-            "field_type": "text"
-        },
-        {
             "name": "SRCDS_APPID",
             "description": "",
             "env_variable": "SRCDS_APPID",
@@ -157,7 +147,7 @@
             "default_value": "mono vcrun2019",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string",
             "field_type": "text"
         },
         {
@@ -168,6 +158,16 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Skip network Test",
+            "description": "if you have problems to connect to your server, set this to TRUE",
+            "env_variable": "SKIP_TESTS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         }
     ]
