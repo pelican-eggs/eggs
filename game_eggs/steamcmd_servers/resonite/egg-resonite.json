@@ -82,7 +82,7 @@
             "name": "Beta branch name",
             "description": "",
             "env_variable": "SRCDS_BETAID",
-            "default_value": "headless-client",
+            "default_value": "headless",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|",
