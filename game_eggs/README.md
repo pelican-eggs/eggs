@@ -167,6 +167,7 @@
 * [Left 4 Dead 2](steamcmd_servers/left4dead_2)
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
+* [Mount & Blade II: Bannerlord](steamcmd_servers/mount_blade_II_bannerlord)
 * [Neos VR](steamcmd_servers/neosvr)
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [No One Survived](steamcmd_servers/no_one_survived)
