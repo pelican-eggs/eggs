@@ -32,10 +32,10 @@
             "name": "SECRET",
             "description": "Admin secret",
             "env_variable": "SECRET",
-            "default_value": "secret",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|min:1|max:255",
+            "rules": "required|string|min:8|max:255",
             "field_type": "text"
         },
         {
