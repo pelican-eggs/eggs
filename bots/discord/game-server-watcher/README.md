@@ -16,3 +16,7 @@ Refer to the wiki on how to acquire tokens for:
 ## Server Ports
 GSW Control Panel requires one port for http traffic.  
 (It can be any port.)  
+
+| Port    | default |
+|---------|---------|
+| Web     | 8080    |
