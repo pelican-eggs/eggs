@@ -33,6 +33,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [CorpBot](/bots/discord/corpbot) Python
 * [Dynamica](/bots/discord/dynamica) Node JS
 * [fragbot](/bots/discord/fragbot) Golang
+* [Game Server Watcher](/bots/discord/game-server-watcher) Node JS
 * [JMusicBot](/bots/discord/jmusicbot) Java
 * [Muse](/bots/discord/muse) Node JS
 * [parkertron](/bots/discord/parkertron) Golang

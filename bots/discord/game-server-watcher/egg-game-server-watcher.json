@@ -1,0 +1,122 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-24T16:33:47+00:00",
+    "name": "Game Server Watcher",
+    "author": "a-sync@devs.space",
+    "description": "A simple discord\/telegram\/slack bot that can be hosted on a free service to monitor your game servers and players in style. \ud83d\ude0e",
+    "features": null,
+    "docker_images": {
+        "Node.js 20": "ghcr.io\/parkervcp\/yolks:nodejs_20"
+    },
+    "file_denylist": [],
+    "startup": "env PORT={{SERVER_PORT}} \/usr\/local\/bin\/node \/home\/container\/dist\/server.js",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"starting loop...\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt-get update && apt-get install ca-certificates git -yq --no-install-suggests --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages\r\ncd \/mnt\/server\r\ngit config --global --add safe.directory \/mnt\/server\r\ngit clone https:\/\/github.com\/a-sync\/game-server-watcher.git . || git pull\r\nnpm install && npm run build\r\nnpm prune --omit=dev",
+            "container": "node:20-bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SECRET",
+            "description": "Admin secret",
+            "env_variable": "SECRET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:8|max:255",
+            "field_type": "text"
+        },
+        {
+            "name": "DATA_PATH",
+            "description": "Writable folder for data storage",
+            "env_variable": "DATA_PATH",
+            "default_value": ".\/data\/",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:1|max:255",
+            "field_type": "text"
+        },
+        {
+            "name": "REFRESH_TIME_MINUTES",
+            "description": "Game server info refresh interval in minutes",
+            "env_variable": "REFRESH_TIME_MINUTES",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "DISCORD_BOT_TOKEN",
+            "description": "Discord bot token",
+            "env_variable": "DISCORD_BOT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "TELEGRAM_BOT_TOKEN",
+            "description": "Telegram bot token",
+            "env_variable": "TELEGRAM_BOT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "STEAM_WEB_API_KEY",
+            "description": "Steam web API key",
+            "env_variable": "STEAM_WEB_API_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Debug Mode",
+            "description": "Enable or disable debug mode.",
+            "env_variable": "DBG",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "SLACK_BOT_TOKEN",
+            "description": "Slack bot token",
+            "env_variable": "SLACK_BOT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SLACK_APP_TOKEN",
+            "description": "Slack app token",
+            "env_variable": "SLACK_APP_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        }
+    ]
+}
