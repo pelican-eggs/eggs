@@ -19,4 +19,4 @@ GSW Control Panel requires one port for http traffic.
 
 | Port    | default |
 |---------|---------|
-| Web     | 8080    |
+| Web     | 8081    |
