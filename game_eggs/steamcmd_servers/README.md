@@ -130,6 +130,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mordhau](mordhau)
 
+## Mount & Blade II: Bannerlord
+
+[Mount & Blade II: Bannerlord](mount_blade_II_bannerlord)
+
 ## Neos VR
 [Neos VR](neosvr)
 
