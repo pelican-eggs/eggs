@@ -24,6 +24,9 @@ The second method requires you to know the id for both the modpack and version i
 may not get updated with the correct ip address and port at first launch.
 Please restart the server after first launch to fix this.**
 
+## Neoforged
+If you have trouble using an neoforge pack, make sure to select the latest java.
+
 ## Server Ports
 
 The minecraft server requires a single port for access (default 25565) but plugins may require extra ports to enabled for the server.
