@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "images": [
-        "ghcr.io\/parkervcp\/games:source"
+        "ghcr.io\/parkervcp\/steamcmd:ubuntu"
     ],
     "file_denylist": [],
     "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\"",
