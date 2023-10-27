@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-27T09:33:06+02:00",
+    "exported_at": "2023-10-27T09:34:40+02:00",
     "name": "Counter-Strike 2",
     "author": "admin@ballaual.de",
     "description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
@@ -13,7 +13,7 @@
         "ghcr.io\/pterodactyl\/games:source": "ghcr.io\/pterodactyl\/games:source"
     },
     "file_denylist": [],
-    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated +ip 0.0.0.0 -port {{SERVER_PORT}} tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} +game_alias {{SRCDS_GAMEMODE}} +map {{SRCDS_MAP}} +exec autoexec",
+    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated +ip {{SERVER_IP}} -port {{SERVER_PORT}} tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} +game_alias {{SRCDS_GAMEMODE}} +map {{SRCDS_MAP}} +net_public_adr {{SERVER_IP}} +exec autoexec",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\"\r\n}",
