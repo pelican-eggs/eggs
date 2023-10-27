@@ -14,8 +14,7 @@ I recommend not using your main account. Instead please use or create an alterna
 Steamguard enabled with the Authenticator app is not supported yet!<br>
 <br>
 Once the initial installation is complete, you will need to enter the Steamguard code that will be emailed to you and then reinstall the server.<br>
-Within the second installation process the server downloads the game files.<br>
-Now you will need to trigger reinstall a third time to copy the missing steamclient.so files and download the template server.cfg file.<br>
+Now the server starts to login to your account and downloads the server and the additional config files.<br>
 <br>
 Currently you do not need to generate a [Gameserver Login Token](https://steamcommunity.com/dev/managegameservers).<br>
 The server auto generates the GSLT on startup, and stores it locally, and renews when able to.<br>
