@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/steamcmd:ubuntu": "ghcr.io\/parkervcp\/steamcmd:ubuntu"
     },
     "file_denylist": [],
-    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAXPLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\" -GSLTToken={{GSLTT}} -GameStats -GameStatsToken={{GST}} {{ADDSWITCHES}}",
+    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\" -GSLTToken={{GSLTT}} -GameStats -GameStatsToken={{GST}} {{ADDSWITCHES}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"LogGameState: Match State Changed from LoadingAssets to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
@@ -61,7 +61,7 @@
         {
             "name": "Max Players",
             "description": "Sets the maximum number of players.",
-            "env_variable": "MAXPLAYERS",
+            "env_variable": "MAX_PLAYERS",
             "default_value": "28",
             "user_viewable": true,
             "user_editable": true,
@@ -117,6 +117,15 @@
             "user_editable": true,
             "rules": "nullable|string|max:32",
             "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean"
         }
     ]
 }
