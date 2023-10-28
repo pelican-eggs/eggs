@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-27T16:13:34+00:00",
+    "exported_at": "2023-10-28T06:05:04+00:00",
     "name": "Insurgency: Sandstorm",
     "author": "brycea@terrahost.cloud",
     "description": "Insurgency: Sandstorm is a team-based, tactical FPS based on lethal close quarters combat and objective-oriented multiplayer gameplay. Experience the intensity of modern combat where skill is rewarded, and teamwork wins the fight.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/steamcmd:ubuntu": "ghcr.io\/parkervcp\/steamcmd:ubuntu"
     },
     "file_denylist": [],
-    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAXPLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"\\\"{{HOSTNAME}}\\\"\" -GSLTToken={{GSLTT}} -GameStats -GameStatsToken={{GST}} {{ADDSWITCHES}}",
+    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAXPLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname='{{HOSTNAME}}' -GSLTToken={{GSLTT}} -GameStats -GameStatsToken={{GST}} {{ADDSWITCHES}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"LogGameState: Match State Changed from LoadingAssets to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
