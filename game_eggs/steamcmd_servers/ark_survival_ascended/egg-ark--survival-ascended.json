@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe \"{{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName={{SESSION_NAME}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?ServerAdminPassword={{ARK_ADMIN_PASSWORD}}{{ARGS_PARAMS}}\"$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAG}} & ARK_PID=$! ; tail -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log",
+    "startup": "proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe \"{{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName={{SESSION_NAME}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?ServerAdminPassword={{ARK_ADMIN_PASSWORD}}{{ARGS_PARAMS}}\"$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; tail -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"tail: .\/ShooterGame\/Saved\/Logs\/ShooterGame.log: file truncated\"\r\n}",
