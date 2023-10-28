@@ -82,7 +82,7 @@
         },
         {
             "name": "Additional Arguments (PARAMS)",
-            "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -crossplay -mods=1234,1235,1236",
+            "description": "params (?ServerPassword=...) are supported here but params need to be touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd",
             "env_variable": "ARGS_PARAMS",
             "default_value": "",
             "user_viewable": true,
@@ -122,7 +122,7 @@
         },
         {
             "name": "Additional Arguments (FLAGS)",
-            "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -crossplay -mods=1234,1235,1236",
+            "description": "flags (-UseBattleEye) are supported here without them touching. (i.e): -crossplay -mods=1234,1235,1236",
             "env_variable": "ARGS_FLAGS",
             "default_value": "",
             "user_viewable": true,
