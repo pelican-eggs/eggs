@@ -76,7 +76,7 @@
             "env_variable": "SRCDS_APPID",
             "default_value": "2430930",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "nullable|numeric",
             "field_type": "text"
         },
