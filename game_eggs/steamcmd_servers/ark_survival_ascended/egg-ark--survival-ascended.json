@@ -52,7 +52,7 @@
         },
         {
             "name": "Auto-update server",
-            "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 1. Set to 1 to update",
+            "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 1. Set to 0 to disable automatic updates",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
@@ -82,7 +82,7 @@
         },
         {
             "name": "Additional Arguments (PARAMS)",
-            "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -UseBattleEye -cossplay",
+            "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -crossplay -mods=1234,1235,1236",
             "env_variable": "ARGS_PARAMS",
             "default_value": "",
             "user_viewable": true,
@@ -122,7 +122,7 @@
         },
         {
             "name": "Additional Arguments (FLAGS)",
-            "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -UseBattleEye -cossplay",
+            "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -crossplay -mods=1234,1235,1236",
             "env_variable": "ARGS_FLAGS",
             "default_value": "",
             "user_viewable": true,
@@ -132,7 +132,7 @@
         },
         {
             "name": "Server PvE",
-            "description": "player vs environment. default is player-vs-player",
+            "description": "Player-vs-Environment (PvE) or Player-vs-Player (PvP); default is PvE enabled; disabling will enable PvP",
             "env_variable": "SERVER_PVE",
             "default_value": "1",
             "user_viewable": true,
