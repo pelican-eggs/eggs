@@ -6,8 +6,9 @@ This is a collection of servers that use SteamCMD to install.
 
 [7 Days To Die](7_days_to_die)
 
-## ARK: Survival Evolved
+## ARK: Survival Ascended/Evolved
 
+[ARK: Survival Ascended](ark_survival_asceneded)
 [ARK: Survival Evolved](ark_survival_evolved)
 
 ## Arma

@@ -4,8 +4,8 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-28T14:43:36-04:00",
-    "name": "Ark: Survival Ascended",
+    "exported_at": "2023-10-28T17:45:10-04:00",
+    "name": "ARK: Survival Ascended",
     "author": "blood@darkartsgaming.com",
     "description": "ARK is reimagined from the ground-up into the next-generation of video game technology with Unreal Engine 5! Form a tribe, tame & breed hundreds of unique dinosaurs and primeval creatures, explore, craft, build, and fight your way to the top of the food-chain. Your new world awaits!",
     "features": [
@@ -15,16 +15,16 @@
         "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe \"{{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName={{SESSION_NAME}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?ServerAdminPassword={{ARK_ADMIN_PASSWORD}}{{ARGS_PARAMS}}\"$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; tail -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log",
+    "startup": "proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe \"{{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName={{SESSION_NAME}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?ServerAdminPassword={{ARK_ADMIN_PASSWORD}}$( [  \"$SERVER_PVE\" == \"0\" ] || printf %s '?ServerPVE=True' )$( [ -z \"$SERVER_PASSWORD\" ] || printf %s '?ServerPassword={{SERVER_PASSWORD}}' ){{ARGS_PARAMS}}\"$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; sleep 15 ; tail -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"tail: .\/ShooterGame\/Saved\/Logs\/ShooterGame.log: file truncated\"\r\n}",
+        "startup": "{\r\n    \"done\": \"]Full Startup: \"\r\n}",
         "logs": "{}",
         "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:18.04'\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## create a symbolic link for loading mods\r\ncd \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nln -sf ..\/..\/..\/..\/..\/Steam\/steamapps steamapps\r\n\r\n## cleanup movies?\r\nmkdir -p \/mnt\/server\/ShooterGame\/Content\r\nrm -rf Movies\r\n\r\n## touch log file\r\nmkdir -p \/mnt\/server\/ShooterGame\/Saved\/Logs\r\necho \"--fresh install--\" >> \/mnt\/server\/ShooterGame\/Saved\/Logs\/ShooterGame.log\r\n\r\ncd \/mnt\/server",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ubuntu:18.04'\r\napt -y update\r\napt -y --no-install-recommends --no-install-suggests install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\nmkdir -p \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## create a symbolic link for loading mods\r\ncd \/mnt\/server\/Engine\/Binaries\/ThirdParty\/SteamCMD\/Linux\r\nln -sf ..\/..\/..\/..\/..\/Steam\/steamapps steamapps\r\n\r\n## cleanup movies?\r\nrm -rf \/mnt\/server\/ShooterGame\/Content\/Movies\r\n\r\n## touch log file\r\nmkdir -p \/mnt\/server\/ShooterGame\/Saved\/Logs\r\necho \"--fresh install--\" >> \/mnt\/server\/ShooterGame\/Saved\/Logs\/ShooterGame.log\r\n\r\ncd \/mnt\/server",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -124,6 +124,26 @@
             "name": "Additional Arguments (FLAGS)",
             "description": "params (?ServerPassword=...) and flags (-UseBattleEye) are supported here but params need to be first and touching followed by flags without them touching. (i.e): ?ServerPassword=MyP4SsWoRd?ServerAdminPassword=sUpRp4ssW0rd -UseBattleEye -cossplay",
             "env_variable": "ARGS_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server PvE",
+            "description": "player vs environment. default is player-vs-player",
+            "env_variable": "SERVER_PVE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "required password to enter the server, leave blank for public server",
+            "env_variable": "SERVER_PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
