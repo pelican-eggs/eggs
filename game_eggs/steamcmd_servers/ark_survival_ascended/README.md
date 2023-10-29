@@ -5,7 +5,7 @@ ARK is reimagined from the ground-up into the next-generation of video game tech
 
 ## Troubleshooting
 
-Due to using `tail -F ...` to follow the current server log, we are unable to also detect crashing (server stopping). This is obvious when the CPU hits 0% and RAM is around 5MB. However, more details are available in the `ShooterGame/Saved/Crashes/UECC-Windows-*/CrashContext.runtime-xml`
+Crash logs are available in the Files `ShooterGame/Saved/Crashes/UECC-Windows-*/CrashContext.runtime-xml`
 
 
 ## Recommended server settings
@@ -18,11 +18,11 @@ See the following - <https://ark.wiki.gg/wiki/Dedicated_server_setup#RAM>
 
 ## Server Ports
 
-Note: RCON is currently not documented as of 10/28/2023
+Note: RCON doesn't need to be public but is required for console commands (in ptero)
 
 | Port            | Default |
 | --------------- | ------- |
 | Game            | 7777    |
 | Raw UDP         | 7778    |
 | Query           | 27015   |
-| RCON (optional) | 27020   |
+| RCON            | 27020   |
