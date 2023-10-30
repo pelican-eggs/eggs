@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-27T09:34:40+02:00",
+    "exported_at": "2023-10-30T19:46:15+01:00",
     "name": "Counter-Strike 2",
     "author": "admin@ballaual.de",
     "description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
@@ -13,7 +13,7 @@
         "ghcr.io\/pterodactyl\/games:source": "ghcr.io\/pterodactyl\/games:source"
     },
     "file_denylist": [],
-    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated +ip {{SERVER_IP}} -port {{SERVER_PORT}} tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} +game_alias {{SRCDS_GAMEMODE}} +map {{SRCDS_MAP}} +net_public_adr {{SERVER_IP}} +exec autoexec",
+    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated +ip {{SERVER_IP}} -port {{SERVER_PORT}} tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} +game_alias {{SRCDS_GAMEMODE}} +map {{SRCDS_MAP}} +net_public_adr {{SERVER_IP}} +sv_setsteamaccount {{STEAM_ACC}} +exec autoexec",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\"\r\n}",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Installation Script\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n## Install game using steamcmd\r\nGUARDCODE=\"${STEAM_AUTH}\"\r\nif [ -z $GUARDCODE ]\r\nthen\r\n    echo \"\"\r\n    echo \"### You did not specify a Steam Guardcode\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    timeout 60 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +set_steam_guard_code ${STEAM_AUTH} +login ${STEAM_USER} ${STEAM_PASS} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit\r\nstatus=$?\r\n\r\nif [ $status -ne 0 ]\r\nthen\r\n    echo \"\"\r\n    echo \"### The Download was not successful\"\r\n    echo \"### Probably the entered Guardcode was wrong\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    sleep 10\r\n    timeout 30 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nCONFIG=\/mnt\/server\/game\/csgo\/cfg\/autoexec.cfg\r\nif [ -f \"$CONFIG\" ]; then\r\n    echo \"Removing existing autoexec.cfg\"\r\n    rm \"$CONFIG\"\r\n    echo \"Downloading autoexec.cfg template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o autoexec.cfg https:\/\/raw.githubusercontent.com\/Ballaual\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nelse \r\n    echo \"autoexec.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o autoexec.cfg https:\/\/raw.githubusercontent.com\/Ballaual\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nfi\r\n\r\nTVCONFGIG=\/mnt\/server\/game\/csgo\/cfg\/srctv.cfg\r\nif [ -f \"$TVCONFGIG\" ]; then\r\n    echo \"Removing existing srctv.cfg\"\r\n    rm \"$TVCONFGIG\"\r\n    echo \"Downloading srctv.cfg template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o srctv.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/srctv.cfg\r\nelse \r\n    echo \"srctv.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o srctv.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/srctv.cfg\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\nGUARDCODE=\"${STEAM_AUTH}\"\r\nif [ -z $GUARDCODE ]\r\nthen\r\n    echo \"\"\r\n    echo \"### You did not specify a Steam Guardcode\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    timeout 60 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +set_steam_guard_code ${STEAM_AUTH} +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\nstatus=$?\r\n\r\nif [ $status -ne 0 ]\r\nthen\r\n    echo \"\"\r\n    echo \"### The Download was not successful\"\r\n    echo \"### Probably the entered Guardcode was wrong\"\r\n    echo \"### A new one should be send to you shortly\"\r\n    echo \"### Enter it in the startup-config after this installation is finished and reinstall the Server\"\r\n    sleep 10\r\n    sleep 10\r\n    timeout 30 .\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} +quit\r\n    exit 1\r\nfi\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nCONFIG=\/mnt\/server\/game\/csgo\/cfg\/autoexec.cfg\r\nif [ -f \"$CONFIG\" ]; then\r\n    echo \"Removing existing autoexec.cfg\"\r\n    rm \"$CONFIG\"\r\n    echo \"Downloading autoexec.cfg template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o autoexec.cfg https:\/\/raw.githubusercontent.com\/Ballaual\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nelse \r\n    echo \"autoexec.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o autoexec.cfg https:\/\/raw.githubusercontent.com\/Ballaual\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nfi\r\n\r\nTVCONFGIG=\/mnt\/server\/game\/csgo\/cfg\/srctv.cfg\r\nif [ -f \"$TVCONFGIG\" ]; then\r\n    echo \"Removing existing srctv.cfg\"\r\n    rm \"$TVCONFGIG\"\r\n    echo \"Downloading srctv.cfg template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o srctv.cfg https:\/\/raw.githubusercontent.com\/Ballaual\/eggs\/feat-cs2-egg\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/autoexec.cfg\r\nelse \r\n    echo \"srctv.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o srctv.cfg https:\/\/raw.githubusercontent.com\/Ballaual\/eggs\/feat-cs2-egg\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/srctv.cfg\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/games:source",
             "entrypoint": "bash"
         }
     },
@@ -45,7 +45,7 @@
             "default_value": "730",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:730",
             "field_type": "text"
         },
         {
@@ -60,7 +60,7 @@
         },
         {
             "name": "Steam Username",
-            "description": "Your Steam-Account Username",
+            "description": "Your Steam-Account Username.",
             "env_variable": "STEAM_USER",
             "default_value": "",
             "user_viewable": true,
@@ -70,7 +70,7 @@
         },
         {
             "name": "Steam Password",
-            "description": "Your Steam-Account Password",
+            "description": "Your Steam-Account Password.",
             "env_variable": "STEAM_PASS",
             "default_value": "",
             "user_viewable": true,
@@ -80,12 +80,12 @@
         },
         {
             "name": "Steam-GuardCode",
-            "description": "Your Steam Guard Code",
+            "description": "Your Steam Guard Code from mail or backup codes.",
             "env_variable": "STEAM_AUTH",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:6",
+            "rules": "nullable|string|between:6,8",
             "field_type": "text"
         },
         {
@@ -100,7 +100,7 @@
         },
         {
             "name": "Auto-update server",
-            "description": "This is to enable \/ disable auto-updating your server when restarting.\r\n\r\nDefault is 1 (enabled). Set it to 0 to disable automatic updates.",
+            "description": "This is to enable \/ disable auto-updating your server on restart.\r\n\r\nBy default this is set to enabled.",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
@@ -113,9 +113,19 @@
             "description": "SourceTV port used for connections to spectates games on your server.",
             "env_variable": "TV_PORT",
             "default_value": "27020",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Account Token",
+            "description": "The Steam Account Token required for the server to be displayed publicly. The token can be acquired here https:\/\/steamcommunity.com\/dev\/managegameservers",
+            "env_variable": "STEAM_ACC",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|string|alpha_num|size:32",
             "field_type": "text"
         }
     ]
