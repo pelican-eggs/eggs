@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-30T12:50:45-04:00",
+    "exported_at": "2023-10-30T13:56:57-04:00",
     "name": "ARK: Survival Ascended",
     "author": "blood@darkartsgaming.com",
     "description": "ARK is reimagined from the ground-up into the next-generation of video game technology with Unreal Engine 5! Form a tribe, tame & breed hundreds of unique dinosaurs and primeval creatures, explore, craft, build, and fight your way to the top of the food-chain. Your new world awaits!",
@@ -116,7 +116,7 @@
             "env_variable": "QUERY_PORT",
             "default_value": "27015",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|integer|min:1025|max:65535",
             "field_type": "text"
         },
@@ -156,7 +156,7 @@
             "env_variable": "RCON_PORT",
             "default_value": "37015",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|integer|min:1025|max:65535",
             "field_type": "text"
         },
