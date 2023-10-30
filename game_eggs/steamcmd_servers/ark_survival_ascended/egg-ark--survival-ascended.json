@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-29T22:24:13-04:00",
+    "exported_at": "2023-10-30T16:46:57+01:00",
     "name": "ARK: Survival Ascended",
     "author": "blood@darkartsgaming.com",
     "description": "ARK is reimagined from the ground-up into the next-generation of video game technology with Unreal Engine 5! Form a tribe, tame & breed hundreds of unique dinosaurs and primeval creatures, explore, craft, build, and fight your way to the top of the food-chain. Your new world awaits!",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
+        "Proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
     "startup": "rmv() { echo \"stopping server\"; rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} DoExit && wait ${ARK_PID}; echo \"Server Closed\"; exit; }; trap rmv 15 2; proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe {{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName=\"{{SESSION_NAME}}\"?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?RCONPort={{RCON_PORT}}?RCONEnabled=True$( [  \"$SERVER_PVE\" == \"0\" ] || printf %s '?ServerPVE=True' )?ServerPassword=\"{{SERVER_PASSWORD}}\"{{ARGS_PARAMS}}?ServerAdminPassword=\"{{ARK_ADMIN_PASSWORD}}\" -WinLiveMaxPlayers={{MAX_PLAYERS}} -oldconsole -servergamelog$( [ -z \"$MOD_IDS\" ] || printf %s ' -mods=' $MOD_IDS )$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; tail -c0 -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log --pid=$ARK_PID & until echo \"waiting for rcon connection...\"; (rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD})<&0 & wait $!; do sleep 5; done",
@@ -47,12 +47,12 @@
             "default_value": "A Pterodactyl Hosted Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "required|string|max:256",
             "field_type": "text"
         },
         {
-            "name": "Auto-update server",
-            "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 1. Set to 0 to disable automatic updates",
+            "name": "Auto Update",
+            "description": "Auto update the servers on startup.",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
@@ -62,7 +62,7 @@
         },
         {
             "name": "Battle Eye",
-            "description": "Enable BattleEye\r\n\r\n0 to disable\r\n1 to enable\r\n\r\ndefault=\"1\"",
+            "description": "Enable BattleEye\r\n\r\nOFF = disable\r\nON = enable\r\n\r\ndefault=\"ON\"",
             "env_variable": "BATTLE_EYE",
             "default_value": "1",
             "user_viewable": true,
@@ -72,12 +72,12 @@
         },
         {
             "name": "App ID",
-            "description": "ARK steam app id for auto updates. Leave blank to avoid auto update.",
+            "description": "ARK steam app id for auto updates.",
             "env_variable": "SRCDS_APPID",
             "default_value": "2430930",
-            "user_viewable": true,
+            "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|numeric",
+            "rules": "nullable|numeric|in:2430930",
             "field_type": "text"
         },
         {
@@ -87,7 +87,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|max:256",
             "field_type": "text"
         },
         {
@@ -97,17 +97,17 @@
             "default_value": "70",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|numeric|between:1,200",
             "field_type": "text"
         },
         {
             "name": "Server Admin Password",
             "description": "",
             "env_variable": "ARK_ADMIN_PASSWORD",
-            "default_value": "changeme",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|alpha_dash",
+            "rules": "required|alpha_dash|min:8|max:64",
             "field_type": "text"
         },
         {
@@ -116,7 +116,7 @@
             "env_variable": "QUERY_PORT",
             "default_value": "27015",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|numeric|max:65535",
             "field_type": "text"
         },
@@ -127,12 +127,12 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|max:256",
             "field_type": "text"
         },
         {
             "name": "Server PvE",
-            "description": "Player-vs-Environment (PvE) or Player-vs-Player (PvP); default is (1) PvE enabled; disabling (0) will enable PvP",
+            "description": "ON = Player-vs-Environment (PvE) OFF = Player-vs-Player-vs-Environment (PvPvE); By default is on.",
             "env_variable": "SERVER_PVE",
             "default_value": "1",
             "user_viewable": true,
@@ -147,7 +147,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|alpha_dash",
+            "rules": "nullable|alpha_dash|max:256",
             "field_type": "text"
         },
         {
@@ -156,8 +156,8 @@
             "env_variable": "RCON_PORT",
             "default_value": "37015",
             "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|numeric|max:65535",
+            "user_editable": false,
+            "rules": "required|numeric|between:1024,65535",
             "field_type": "text"
         },
         {
@@ -167,7 +167,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|max:256",
             "field_type": "text"
         }
     ]
