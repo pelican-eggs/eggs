@@ -130,6 +130,7 @@
 [SteamCMD Servers](steamcmd_servers) These eggs use SteamCMD to install
 
 * [7 Days to Die](steamcmd_servers/7_days_to_die)
+* [ARK: Survival Ascended](steamcmd_servers/ark_survival_ascended)
 * [ARK: Survival Evolved](steamcmd_servers/ark_survival_evolved)
 * [Arma](steamcmd_servers/arma)
   * [Arma 3](steamcmd_servers/arma/arma3)
