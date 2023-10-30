@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-30T16:46:57+01:00",
+    "exported_at": "2023-10-30T12:50:45-04:00",
     "name": "ARK: Survival Ascended",
     "author": "blood@darkartsgaming.com",
     "description": "ARK is reimagined from the ground-up into the next-generation of video game technology with Unreal Engine 5! Form a tribe, tame & breed hundreds of unique dinosaurs and primeval creatures, explore, craft, build, and fight your way to the top of the food-chain. Your new world awaits!",
@@ -37,7 +37,7 @@
             "default_value": "TheIsland_WP",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string",
+            "rules": "required|string|max:64",
             "field_type": "text"
         },
         {
@@ -51,8 +51,8 @@
             "field_type": "text"
         },
         {
-            "name": "Auto Update",
-            "description": "Auto update the servers on startup.",
+            "name": "Auto-update server",
+            "description": "This is to enable auto-updating for servers on restart\/re-install.",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
@@ -62,7 +62,7 @@
         },
         {
             "name": "Battle Eye",
-            "description": "Enable BattleEye\r\n\r\nOFF = disable\r\nON = enable\r\n\r\ndefault=\"ON\"",
+            "description": "Enable BattleEye \/ Anti-Cheat",
             "env_variable": "BATTLE_EYE",
             "default_value": "1",
             "user_viewable": true,
@@ -72,12 +72,12 @@
         },
         {
             "name": "App ID",
-            "description": "ARK steam app id for auto updates.",
+            "description": "app id required for server download\/updates. end users should not see this.",
             "env_variable": "SRCDS_APPID",
             "default_value": "2430930",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|numeric|in:2430930",
+            "rules": "required|integer|in:2430930",
             "field_type": "text"
         },
         {
@@ -87,7 +87,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:256",
+            "rules": "nullable|string|max:1024",
             "field_type": "text"
         },
         {
@@ -97,17 +97,17 @@
             "default_value": "70",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric|between:1,200",
+            "rules": "required|integer|min:1|max:200",
             "field_type": "text"
         },
         {
             "name": "Server Admin Password",
-            "description": "",
+            "description": "Used for RCON (remote and in-browser console) as well as in-game EnableCheats",
             "env_variable": "ARK_ADMIN_PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|alpha_dash|min:8|max:64",
+            "rules": "required|alpha_dash|max:128",
             "field_type": "text"
         },
         {
@@ -116,8 +116,8 @@
             "env_variable": "QUERY_PORT",
             "default_value": "27015",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|numeric|max:65535",
+            "user_editable": true,
+            "rules": "required|integer|min:1025|max:65535",
             "field_type": "text"
         },
         {
@@ -127,12 +127,12 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:256",
+            "rules": "nullable|string|max:1024",
             "field_type": "text"
         },
         {
             "name": "Server PvE",
-            "description": "ON = Player-vs-Environment (PvE) OFF = Player-vs-Player-vs-Environment (PvPvE); By default is on.",
+            "description": "ON = Player-vs-Environment (PvE), OFF = Player-vs-Player (PvP); Default is ON",
             "env_variable": "SERVER_PVE",
             "default_value": "1",
             "user_viewable": true,
@@ -147,7 +147,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|alpha_dash|max:256",
+            "rules": "nullable|alpha_dash|max:128",
             "field_type": "text"
         },
         {
@@ -156,8 +156,8 @@
             "env_variable": "RCON_PORT",
             "default_value": "37015",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|numeric|between:1024,65535",
+            "user_editable": true,
+            "rules": "required|integer|min:1025|max:65535",
             "field_type": "text"
         },
         {
@@ -167,7 +167,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:256",
+            "rules": "nullable|string|max:512",
             "field_type": "text"
         }
     ]

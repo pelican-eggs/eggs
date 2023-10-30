@@ -25,4 +25,4 @@ Note: RCON doesn't need to be public but is required for console commands (in pt
 | Game            | 7777    |
 | Raw UDP         | 7778    |
 | Query           | 27015   |
-| RCON            | 27020   |
+| RCON            | 37015   |
