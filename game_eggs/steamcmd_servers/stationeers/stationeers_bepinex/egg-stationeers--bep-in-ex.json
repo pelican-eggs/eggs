@@ -6,7 +6,7 @@
     },
     "exported_at": "2023-10-28T19:39:03+02:00",
     "name": "Stationeers (BepInEx)",
-    "author": "m1z@tuta.io",
+    "author": "eggs@goover.dev",
     "description": "Stationeers Server with very basic BepInEx support",
     "features": [
         "steam_disk_space"
