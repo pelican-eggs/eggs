@@ -136,6 +136,7 @@
   * [Arma 3](steamcmd_servers/arma/arma3)
   * [Arma Reforger](steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](steamcmd_servers/assetto_corsa)
+* [Astro Colony](steamcmd_servers/astro_colony)
 * [Astroneer](steamcmd_servers/astroneer)
 * [Avorion](steamcmd_servers/avorion)
 * [Barotrauma](steamcmd_servers/barotrauma)

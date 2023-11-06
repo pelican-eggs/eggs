@@ -24,6 +24,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Assetto Corsa](assetto_corsa)
 
+## Astro Colony
+
+[Astro Colony](astro_colony)
+
 ## Avorion
 
 [Avorion](avorion)
