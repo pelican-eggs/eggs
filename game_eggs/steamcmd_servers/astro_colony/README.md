@@ -7,9 +7,9 @@ Explore endless Universe and create the most efficient constellation of colonies
 Ports required to run the server in a table format.
 
 > [!IMPORTANT]
-> It’s possible to change the query port but changing the game port from **7777** may result in not being able to join the server.
+> It’s possible to change the query port but changing the game port from **7777** will result in not being able to join the server!
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
 | Game    | 7777    |
 | Query   | 27015   |
