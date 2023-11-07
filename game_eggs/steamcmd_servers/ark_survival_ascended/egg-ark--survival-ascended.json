@@ -15,7 +15,7 @@
         "Proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "rmv() { echo \"stopping server\"; rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} KeepAlive && rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} DoExit && wait ${ARK_PID}; echo \"Server Closed\"; exit; }; trap rmv 15 2; proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe {{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName=\"{{SESSION_NAME}}\"?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?RCONPort={{RCON_PORT}}?RCONEnabled=True$( [  \"$SERVER_PVE\" == \"0\" ] || printf %s '?ServerPVE=True' )?ServerPassword=\"{{SERVER_PASSWORD}}\"{{ARGS_PARAMS}}?ServerAdminPassword=\"{{ARK_ADMIN_PASSWORD}}\" -WinLiveMaxPlayers={{MAX_PLAYERS}} -oldconsole -servergamelog$( [ -z \"$MOD_IDS\" ] || printf %s ' -mods=' $MOD_IDS )$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; tail -c0 -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log --pid=$ARK_PID & until echo \"waiting for rcon connection...\"; (rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD})<&0 & wait $!; do sleep 5; done",
+    "startup": "rmv() { echo \"stopping server\"; rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} KeepAlive && rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} DoExit && wait ${ARK_PID}; echo \"Server Closed\"; exit; }; trap rmv 15 2; proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe {{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName=\\\"{{SESSION_NAME}}\\\"?Port={{GAME_PORT}}?RCONPort={{RCON_PORT}}?RCONEnabled=True$( [  \"$SERVER_PVE\" == \"0\" ] || printf %s '?ServerPVE=True' )?ServerPassword=\"{{SERVER_PASSWORD}}\"{{ARGS_PARAMS}}?ServerAdminPassword=\"{{ARK_ADMIN_PASSWORD}}\" -WinLiveMaxPlayers={{MAX_PLAYERS}} -oldconsole -servergamelog$( [ -z \"$MOD_IDS\" ] || printf %s ' -mods=' $MOD_IDS )$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; tail -c0 -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log --pid=$ARK_PID & until echo \"waiting for rcon connection...\"; (rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD})<&0 & wait $!; do sleep 5; done",
     "config": {
         "files": "{\r\n    \"ShooterGame\/Saved\/Config\/WindowsServer\/GameUserSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"ServerAdminPassword=\": \"ServerAdminPassword={{server.build.env.ARK_ADMIN_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Waiting commands for 127.0.0.1:\"\r\n}",
@@ -62,9 +62,9 @@
         },
         {
             "name": "Battle Eye",
-            "description": "Enable BattleEye \/ Anti-Cheat",
+            "description": "Enable BattlEye = 1 \/ Disable BattlEye = 0",
             "env_variable": "BATTLE_EYE",
-            "default_value": "1",
+            "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
@@ -94,7 +94,7 @@
             "name": "Max Players",
             "description": "Specifies the maximum amount of players able to join the server.",
             "env_variable": "MAX_PLAYERS",
-            "default_value": "70",
+            "default_value": "50",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer|min:1|max:200",
@@ -111,10 +111,10 @@
             "field_type": "text"
         },
         {
-            "name": "Query Port",
-            "description": "ARK query port used by steam server browser and ark client server browser.",
-            "env_variable": "QUERY_PORT",
-            "default_value": "27015",
+            "name": "Game Port",
+            "description": "ARK Game Port used by ark client server browser.",
+            "env_variable": "GAME_PORT",
+            "default_value": "7777",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|min:1025|max:65535",
@@ -154,7 +154,7 @@
             "name": "RCON Port",
             "description": "required for console commands and proper server shutdown (saveworld\/exit), doesn't have to be open to the public",
             "env_variable": "RCON_PORT",
-            "default_value": "37015",
+            "default_value": "27020",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|min:1025|max:65535",

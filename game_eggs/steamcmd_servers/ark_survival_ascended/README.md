@@ -23,10 +23,7 @@ The number is in reference to RAM/Memory usage.
 
 ## Known Issues
 
-1) ARK: Survival Ascended, currently, does not support more than one server per IP. 
-These are Windows Server files running on a Linux container; so, we believe this is the issue.
-
-2) ARK's wiki heavily reference A:SE and not all features are available in A:SA.
+1) ARK's wiki heavily reference A:SE and not all features are available in A:SA.
 
 
 ## Recommended server settings
@@ -39,11 +36,26 @@ See the following - <https://ark.wiki.gg/wiki/Dedicated_server_setup#RAM>
 
 ## Server Ports
 
+Only the Game Port needs to be publicly accessible.
 Note: RCON doesn't need to be public but is required for console commands (in ptero)
 
-| Port            | Default |
-| --------------- | ------- |
-| Game            | 7777    |
-| Raw UDP         | 7778    |
-| Query           | 27015   |
-| RCON            | 37015   |
+| Port            | Default | Protocol
+| --------------- | ------- | -------- |
+| Game            | 7777    | UDP	   |
+| RCON            | 27020   |
+
+To host multiple servers, just change the Game and RCON ports. Don't forget to add both Game Ports to your Firewall/ Router/ Port Forwarding/ NAT.
+
+Example:
+
+| Server 1        | Network Port | Panel Port |
+| --------------- | ------------ | ---------- |
+| Game            | 7777         | 7777       |
+| RCON            | 27020        | 27020      |
+
+| Server 2        | Network Port | Panel Port |
+| --------------- | ------------ | ---------- |
+| Game            | 7778         | 7778       |
+| RCON            | 27021        | 27021      |
+
+Make sure that the ports that you allocate to your machine and the ones you use in the panel match.
