@@ -5,16 +5,8 @@ For over two decades, Counter-Strike has offered an elite competitive experience
 
 ## Install notes
 
-The process is a little different from CS:GO’s dedicated server. Instead of downloading a seperate branch made specifically for hosting servers, at the time of CS2’s release: We need to use the same branch as the main release.<br>
-There isn’t a dedicated server branch (740) like there was for CS:GO.<br>
-<br>
-**!!! Important !!!**<br>
-Due to the fact there is no dedicated server application to CS2, you will have to login with your steam account.<br>
-I recommend not using your main account. Instead please use or create an alternative account with disabled or Steamguard.<br>
-<br>
-Once the initial installation is complete, you will need to enter the Steamguard code that will be emailed to you and then reinstall the server.<br>
-If you are using the authenticator app you will need to use one of your Backup-Codes.
-Now the server starts to login to your account and downloads the game and server files and the additional config files.<br>
+As of 07.11.2023 there isn’t a dedicated server branch like there was for CS:GO (740).<br>
+The server files are included inside the game files (730).<br>
 
 ## Installation/System Requirements
 
@@ -27,7 +19,6 @@ While installing the server it uses up to 5 GB of RAM.<br>
 | RAM | 2 GB | 5 GB |
 | Storage | 35 GB | 50 GB |
 | Network | 1 Mbit/s | 5 Mbit/s |
-| Game Ownership | - | See **Install Notes** |
 
 ## Server Ports
 
