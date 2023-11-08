@@ -284,7 +284,7 @@
             "name": "WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2019 dotnet48 dotnet6",
+            "default_value": "mono vcrun2019 dotnet48 dotnet6",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:50",
