@@ -64,7 +64,7 @@
             "name": "Battle Eye",
             "description": "Enable BattleEye \/ Anti-Cheat",
             "env_variable": "BATTLE_EYE",
-            "default_value": "0",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
