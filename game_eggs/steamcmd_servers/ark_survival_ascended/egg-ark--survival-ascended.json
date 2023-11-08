@@ -62,7 +62,7 @@
         },
         {
             "name": "Battle Eye",
-            "description": "Enable BattlEye = 1 \/ Disable BattlEye = 0",
+            "description": "Enable BattleEye \/ Anti-Cheat",
             "env_variable": "BATTLE_EYE",
             "default_value": "0",
             "user_viewable": true,
