@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\game_eggs",
+    "\\game_eggs\\steamcmd_servers",
+    "\\game_eggs\\steamcmd_servers\\ark_survival_ascended"
   ],
-  "SelectedNode": "\\C:\\Users\\Machinegun Marty\\Source\\Repos\\eggs_MGMarty",
+  "SelectedNode": "\\game_eggs\\steamcmd_servers\\ark_survival_ascended\\README.md",
   "PreviewInSolutionExplorer": false
 }

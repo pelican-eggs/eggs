@@ -36,6 +36,7 @@ See the following - <https://ark.wiki.gg/wiki/Dedicated_server_setup#RAM>
 
 ## Server Ports
 
+The Game Port is the Primary Network Port you assign to your machine.
 Only the Game Port needs to be publicly accessible.
 Note: RCON doesn't need to be public but is required for console commands (in ptero)
 
@@ -58,4 +59,4 @@ Example:
 | Game            | 7778         | 7778       |
 | RCON            | 27021        | 27021      |
 
-Make sure that the ports that you allocate to your machine and the ones you use in the panel match.
+Make sure that the RCON port that you allocate to your machine and the one you use in the panel match.
