@@ -43,7 +43,7 @@ Note: RCON doesn't need to be public but is required for console commands (in pt
 | Port            | Default | Protocol
 | --------------- | ------- | -------- |
 | Game            | 7777    | UDP	   |
-| RCON            | 27020   |
+| RCON            | 37015   |
 
 To host multiple servers, just change the Game and RCON ports. Don't forget to add both Game Ports to your Firewall/ Router/ Port Forwarding/ NAT.
 
@@ -52,11 +52,11 @@ Example:
 | Server 1        | Network Port | Panel Port |
 | --------------- | ------------ | ---------- |
 | Game            | 7777         | 7777       |
-| RCON            | 27020        | 27020      |
+| RCON            | 37015        | 37015      |
 
 | Server 2        | Network Port | Panel Port |
 | --------------- | ------------ | ---------- |
 | Game            | 7778         | 7778       |
-| RCON            | 27021        | 27021      |
+| RCON            | 37016        | 37016      |
 
 Make sure that the RCON port that you allocate to your machine and the one you use in the panel match.
