@@ -37,3 +37,6 @@ Mods can be downloaded from modpacks automatically by entering the "dependency s
 |-------|---------|
 | Game  | 2456    |
 | Query | 2457    |
+
+## Updating
+Because the `DOORSTOP_CORLIB_OVERRIDE_PATH=./unstripped_corlib;` has been removed from the startup with the latest update of this egg. If your server is already running, update the startup manually.
