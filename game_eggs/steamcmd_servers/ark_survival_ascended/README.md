@@ -23,11 +23,9 @@ The number is in reference to RAM/Memory usage.
 
 ## Known Issues
 
-1) ARK: Survival Ascended, currently, does not support more than one server per IP. 
-These are Windows Server files running on a Linux container; so, we believe this is the issue.
+1) Proxmox VM(s): You'll need to change your Processor Type to `Host` (Default: kvm64)
 
 2) ARK's wiki heavily reference A:SE and not all features are available in A:SA.
-
 
 ## Recommended server settings
 
@@ -39,11 +37,11 @@ See the following - <https://ark.wiki.gg/wiki/Dedicated_server_setup#RAM>
 
 ## Server Ports
 
-Note: RCON doesn't need to be public but is required for console commands (in ptero)
+Note: The Peer port is not an option that can be set and will always be +1 from the Game Port!
 
 | Port            | Default |
 | --------------- | ------- |
 | Game            | 7777    |
-| Raw UDP         | 7778    |
+| Peer   (Game+1) | 7778    |
 | Query           | 27015   |
-| RCON            | 37015   |
+| RCON (optional) | 37015   |
