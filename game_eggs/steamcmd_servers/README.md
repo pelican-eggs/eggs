@@ -189,6 +189,9 @@ This is a collection of servers that use SteamCMD to install.
 
 [Quake Live](quake_live)
 
+## Resonite
+[Resonite](resonite)
+
 ## Rising World
 
 * [Rising World](rising_world)
