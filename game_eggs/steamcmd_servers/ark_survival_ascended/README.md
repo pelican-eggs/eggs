@@ -3,6 +3,60 @@
 Steam Description :
 ARK is reimagined from the ground-up into the next-generation of video game technology with Unreal Engine 5! Form a tribe, tame & breed hundreds of unique dinosaurs and primeval creatures, explore, craft, build, and fight your way to the top of the food-chain. Your new world awaits!
 
+### Authors / Contributors
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+    <tr>
+        <td align="center">
+            <a href="https://github.com/dagbs">
+                <img src="https://avatars.githubusercontent.com/u/133905860" width="50px;" alt=""/><br /><sub><b>Blood Shot</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=dagbs" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=dagbs" title="Maintains">🔨</a>
+        <td align="center">
+            <a href="https://github.com/gOOvER">
+                <img src="https://avatars.githubusercontent.com/u/116325" width="50px;" alt=""/><br /><sub><b>gOOvER</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=gOOvER" title="Codes">💻</a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/hackles">
+                <img src="https://avatars.githubusercontent.com/u/30584261" width="50px;" alt=""/><br /><sub><b>heckler</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=hackles" title="Codes">💻</a>
+        </td>
+        </td>
+        <td align="center">
+            <a href="https://github.com/Log1x">
+                <img src="https://avatars.githubusercontent.com/u/5745907" width="50px;" alt=""/><br /><sub><b>Brandon</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Log1x" title="Codes">💻</a>
+        </td>  
+        <td align="center">
+            <a href="https://github.com/Ballaual">
+                <img src="https://avatars.githubusercontent.com/u/38478976" width="50px;" alt=""/><br /><sub><b>Alexander Ballauf</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Ballaual" title="Codes">💻</a>
+        </td> 
+        <td align="center">
+            <a href="https://github.com/MachinegunMarty">
+                <img src="https://avatars.githubusercontent.com/u/20025119" width="50px;" alt=""/><br /><sub><b>MachinegunMartyf</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=MachinegunMarty" title="Contributor">💡</a>
+        </td>        
+    </tr>
+</table>
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+
+---
 ## Troubleshooting
 
 1) Try starting the server with no mods on a fresh install.
