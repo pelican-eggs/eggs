@@ -50,7 +50,14 @@ ARK is reimagined from the ground-up into the next-generation of video game tech
             </a>
             <br />
             <a href="https://github.com/parkervcp/eggs/commits?author=MachinegunMarty" title="Contributor">💡</a>
-        </td>        
+        </td>
+        <td align="center">
+            <a href="https://github.com/That411Guy">
+                <img src="https://avatars.githubusercontent.com/u/100328348" width="50px;" alt=""/><br /><sub><b>That411Guy</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=That411Guy" title="Codes">💻</a>
+        </td>         
     </tr>
 </table>
 <!-- markdownlint-enable -->
