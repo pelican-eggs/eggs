@@ -1,30 +1,28 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-11-26T14:52:26+01:00",
+    "exported_at": "2023-11-13T18:26:59+01:00",
     "name": "Insurgency: Sandstorm",
     "author": "brycea@terrahost.cloud",
     "description": "Insurgency: Sandstorm is a team-based, tactical FPS based on lethal close quarters combat and objective-oriented multiplayer gameplay. Experience the intensity of modern combat where skill is rewarded, and teamwork wins the fight.",
-    "features": [
-        "steam_disk_space"
-    ],
-    "images": [
-        "ghcr.io\/parkervcp\/games:source"
-    ],
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:ubuntu": "ghcr.io\/parkervcp\/steamcmd:ubuntu"
+    },
     "file_denylist": [],
-    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\"",
+    "startup": "\/home\/container\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping {{MAP_NAME}}?Scenario={{SCENARIO}}?MaxPlayers={{MAX_PLAYERS}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -log -hostname=\"{{HOSTNAME}}\" -GSLTToken={{GSLTT}} -GameStats -GameStatsToken={{GST}} {{ADDSWITCHES}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"LogGameState: Match State Changed from LoadingAssets to WaitingToStart\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"LogGameState: Match State Changed from LoadingAssets to WaitingToStart\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "apt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\nchmod +x \/mnt\/server\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# SRCDS_BETAID - beta branch of a steam app. Leave blank to install normal branch\r\n# SRCDS_BETAPASS - password for a beta branch should one be required during private or closed testing phases.. Leave blank for no password.\r\n# INSTALL_FLAGS - Any additional SteamCMD  flags to pass during install.. Keep in mind that steamcmd auto update process in the docker image might overwrite or ignore these when it performs update on server boot.\r\n# AUTO_UPDATE - Adding this variable to the egg allows disabling or enabling automated updates on boot. Boolean value. 0 to disable and 1 to enable.\r\n#\r\n ##\r\n\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\ncp -v \/mnt\/server\/steam\/linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\nchmod +x \/mnt\/server\/Insurgency\/Binaries\/Linux\/InsurgencyServer-Linux-Shipping\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -37,7 +35,8 @@
             "default_value": "581330",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "nullable|numeric"
+            "rules": "nullable|numeric",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -46,7 +45,8 @@
             "default_value": "My Insurgency Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Query Port",
@@ -55,7 +55,8 @@
             "default_value": "27131",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric"
+            "rules": "required|numeric",
+            "field_type": "text"
         },
         {
             "name": "Max Players",
@@ -64,7 +65,8 @@
             "default_value": "28",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric"
+            "rules": "required|numeric",
+            "field_type": "text"
         },
         {
             "name": "Default Map",
@@ -73,7 +75,8 @@
             "default_value": "Canyon",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Scenario Name",
@@ -82,7 +85,38 @@
             "default_value": "Scenario_Crossing_Checkpoint_Insurgents",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Additional Switches",
+            "description": "Please see this guide for available switches https:\/\/mod.io\/g\/insurgencysandstorm\/r\/server-admin-guide",
+            "env_variable": "ADDSWITCHES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Stats Token",
+            "description": "Generate your token here https:\/\/gamestats.sandstorm.game\/. This is required to have your server show up in the server browser.",
+            "env_variable": "GST",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "GSLT Authentication",
+            "description": "Generate your token here https:\/\/steamcommunity.com\/dev\/managegameservers. This is required to have your server show up in the server browser.",
+            "env_variable": "GSLTT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
         },
         {
             "name": "Auto Update",
@@ -91,7 +125,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|boolean",
+            "field_type": "text"
         }
     ]
 }
