@@ -1,0 +1,72 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-30T11:20:16+02:00",
+    "name": "Cube 2: Sauerbraten",
+    "author": "holeintheseat@gmail.com",
+    "description": "Cube 2: Sauerbraten is a free multiplayer & singleplayer first person shooter, the successor of the Cube FPS.\r\nMuch like the original Cube, the aim of this game is fun, old school deathmatch gameplay and also to allow map\/geometry editing to be done cooperatively in-game.",
+    "features": null,
+    "docker_images": {
+        "Debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin_unix\/linux_64_server -j{{SERVER_PORT}} -n{{CUBE_SERVERDESCRIPTION}} -c{{CUBE_MAXPLAYERS}} -m{{CUBE_MASTERSERVER}}  -p{{CUBE_ADMINPASSWORD}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"dedicated server started, waiting for clients...\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# AssaultCube Server Egg (By HoleInTheSeat) <|-|> (https:\/\/assault.cubers.net\/)\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update \r\n#######-|Dependencies|-#######\r\napt -y install tar curl bzip2\r\n#######-|Downloading files|-#######\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\n\"\r\necho -e \"\\n\"\r\necho -e \"###############################################\"\r\necho -e \"##  Downloading and unarchiving Sauerbraten  ##\"\r\necho -e \"## THIS WILL TAKE A WHILE. PLEASE BE PATIENT ##\"\r\necho -e \"###############################################\"\r\necho -e \"\\n\"\r\necho -e \"\\n\"\r\ncurl -sSL -o sauerbraten_2020_12_29_linux.tar.bz2 https:\/\/cfhcable.dl.sourceforge.net\/project\/sauerbraten\/sauerbraten\/2020_11_29\/sauerbraten_2020_12_29_linux.tar.bz2\r\ntar -xf sauerbraten_2020_12_29_linux.tar.bz2 -strip-components=1\r\nrm sauerbraten_2020_12_29_linux.tar.bz2\r\nchmod +x bin_unix\/linux_64_server\r\n\r\n#######-|Alert Completion|-#######\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:stable",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Description",
+            "description": "",
+            "env_variable": "CUBE_SERVERDESCRIPTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the max number of clients to N. The default is 4. If you want to set it higher, be aware that bandwidth usage almost doubles with each extra client, so only do this if the server runs on a serious pipe (not your home DSL or Cable connection).",
+            "env_variable": "CUBE_MAXPLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:16",
+            "field_type": "text"
+        },
+        {
+            "name": "Master Server",
+            "description": "Sets the master server to use for either server (registering) and client (updating) to S. (default: sauerbraten.org).",
+            "env_variable": "CUBE_MASTERSERVER",
+            "default_value": "sauerbraten.org",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "",
+            "env_variable": "CUBE_ADMINPASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:512",
+            "field_type": "text"
+        }
+    ]
+}

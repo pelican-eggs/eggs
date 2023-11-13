@@ -18,3 +18,5 @@ ET: Legacy requires a single port
 | Port    | default |
 |---------|---------|
 | Game    | 27960   |
+|---------|---------|
+| Server  | 27950   |

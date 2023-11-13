@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-14T17:26:13+01:00",
+    "exported_at": "2023-04-24T17:19:01+02:00",
     "name": "Euro Truck Simulator 2 Dedicated server",
     "author": "josdekurk@gmail.com",
     "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
@@ -62,12 +62,12 @@
         },
         {
             "name": "Steam Auth token",
-            "description": "Acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required).",
+            "description": "By default, whenever a dedicated server is launched it is using an anonymous account. For such an account non-persistent server id is generated (used for direct search). To avoid this you can acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required)",
             "env_variable": "STEAM_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32",
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         },
         {
@@ -78,26 +78,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:64",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam password",
-            "description": "",
-            "env_variable": "STEAM_PASS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:64",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam username",
-            "description": "",
-            "env_variable": "STEAM_USER",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:32",
             "field_type": "text"
         }
     ]

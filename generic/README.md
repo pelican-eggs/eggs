@@ -1,5 +1,15 @@
 # Generic Language
 
+### [C#](c%23)
+
+[C#](https://learn.microsoft.com/en-us/dotnet/csharp//)
+A generic C# language egg running with dotnet
+
+### [Elixir](elixir)
+
+[elixir](https://elixir-lang.org/)
+A generic Elixir language egg
+
 ### [Dart](dart)
 
 [dart](https://dart.dev/)
@@ -29,6 +39,11 @@ A generic Lua (Luvit) language egg
 
 [nodejs](https://nodejs.org)
 A generic Node.JS egg
+
+### [Bun](bun)
+
+[bun](https://bun.sh)
+A generic Bun egg
 
 ### [nodemon](nodemon)
 

@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-15T18:37:30+01:00",
+    "exported_at": "2023-04-24T17:42:49+02:00",
     "name": "American Truck Simulator Dedicated Server",
     "author": "chase@cstmgames.com",
     "description": "This will set up SteamCMD and all the required files for the newly released American Truck Simulator Dedicated server.  Simply placed the exported server config from your ATS instance to the .local\/share\/American Truck Simulator\/ folder and select start.  Make sure that auto start is off on server creation to allow you to upload your config files.",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
     "startup": ".\/bin\/linux_x64\/amtrucks_server",
@@ -20,7 +20,7 @@
         "files": "{\r\n    \"\/.local\/share\/American Truck Simulator\/server_config.sii\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \" connection_dedicated_port:\": \" connection_dedicated_port: {{server.build.default.port}}\",\r\n            \" query_dedicated_port:\": \" query_dedicated_port: {{env.QUERY_PORT}}\",\r\n            \" server_logon_token:\": \" server_logon_token: \\\"{{env.STEAM_TOKEN}}\\\"\",\r\n            \" lobby_name:\": \" lobby_name: \\\"{{env.LOBBY_NAME}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[MP] Session running.\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
@@ -51,26 +51,6 @@
             "field_type": "text"
         },
         {
-            "name": "Steam username",
-            "description": "",
-            "env_variable": "STEAM_USER",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:32",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam password",
-            "description": "",
-            "env_variable": "STEAM_PASS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:64",
-            "field_type": "text"
-        },
-        {
             "name": "Query port",
             "description": "By there readme of the game the query port must be between 27015-27020, but from our testing this port can be any port",
             "env_variable": "QUERY_PORT",
@@ -82,12 +62,12 @@
         },
         {
             "name": "Steam Auth token",
-            "description": "Acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required).",
+            "description": "By default, whenever a dedicated server is launched it is using an anonymous account. For such an account non-persistent server id is generated (used for direct search). To avoid this you can acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required)",
             "env_variable": "STEAM_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32",
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         },
         {

@@ -1,0 +1,133 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-08-01T20:51:33+00:00",
+    "name": "Ground Branch",
+    "author": "rehlmgaming@gmail.com",
+    "description": "From one of the developers behind the original Rainbow Six\u00ae and Ghost Recon\u00ae games, comes a thinking-man's first-person shooter featuring in-depth character and weapon customization. Take your time. Think ahead. Get the job done.",
+    "features": null,
+    "docker_images": {
+        "Wine [Latest]": "ghcr.io\/parkervcp\/yolks:wine_latest",
+        "Wine [Staging]": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "wine GroundBranch\/Binaries\/Win64\/GroundBranchServer-Win64-Shipping.exe MultiHome=0.0.0.0 Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}} -log",
+    "config": {
+        "files": "{\r\n    \"GroundBranch\/ServerConfig\/Server.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName=\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"GroundBranch\/Config\/DefaultModding.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ModPath=\": \"ModPath=..\/steamapps\/workshop\/content\/16900\/\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Bringing up level for play took\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Ground Branch Egg - egg-ground-branch.json\r\n## Authors: David Wolfe (Red-Thirten)\r\n## Date: 2023\/08\/01\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/pterodactyl\/installers:debian'\r\n\r\n# Download and install SteamCMD\r\nexport HOME=\/mnt\/server\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd $HOME\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir $HOME +login anonymous $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so $HOME\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so $HOME\/.steam\/sdk64\/steamclient.so\r\n\r\n## Ground Branch setup\r\n# Make ServerConfig directory and default Server.ini file (since they are not initially present before first server start)\r\nmkdir -p $HOME\/GroundBranch\/ServerConfig\/ && cd \"$_\"\r\n\r\nif [[ ! -f Server.ini ]]; then\r\n    echo -e '\\nCreating default \"Server.ini\" configuration file...'\r\n    cat > Server.ini << EOF\r\n[\/Script\/RBZooKeeper.ZKServer]\r\n; Name of the server 64 characters max)\r\nServerName=Unnamed Ground Branch Server\r\n\r\n; The message of the day (512 characters max)\r\n; e.g. ServerMOTD=This text here is displayed<br>with the 'admin motd' command.\r\nServerMOTD=\"Welcome!\"\r\n\r\n; Set to a jpg image to act as a server banner in-game where possible.\r\n; (recommended resolution: 788 x 386)\r\nServerWebBanner=\"\"\r\n; e.g. ServerWebPage=www.images.com\/myimage.jpeg\r\n\r\n; Password required to join the server.\r\n;ServerPassword=\r\n\r\n; Password required to join the server as a permanent spectator.\r\n;SpectatorOnlyPassword=\r\n\r\n; Maximum number of players allowed on this server.\r\nMaxPlayers=16\r\nMaxSpectators=0\r\n\r\n; Set default match types for game modes and round limits:\r\n; Match types: Continuous, BestOf, FirstTo, Play, PlayUntilWin, TimeLimit.\r\n; Round limits = number of rounds, except Time Limit match type (minutes).\r\n; PVE \/ Co-op:\r\nPVEMatchType=Continuous\r\nPVERoundLimit=2\r\n; PVP:\r\nPVPMatchType=Continuous\r\nPVPRoundLimit=3\r\n; PVP FFA (Free-for-all):\r\nPVPFFAMatchType=Continuous\r\nPVPFFARoundLimit=1\r\nGameRules=((\"AllowCheats\", False),(\"AllowDeadChat\", True),(\"AllowUnrestrictedRadio\", False),(\"AllowUnrestrictedVoice\", False),(\"SpectateEnemies\", True),(\"SpectateForceFirstPerson\", False),(\"SpectateFreeCam\", True),(\"UseTeamRestrictions\", False))\r\nEOF\r\nfi\r\n\r\necho -e \"\\nGround Branch Dedicated Server successfully installed!\\n\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Server Query Port",
+            "description": "This is the port that your clients will type in and use to connect to the lobby (not the game world). Ensure this port matches your externally forwarded port, and is distanced from other running Ground Branch servers in Pterodactyl (increments of 100 are recommended). This is also true for the Primary\/Game Port!",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "Automatic Updates",
+            "description": "Quickly checks for any server updates on startup, and updates if necessary. (1 ON | 0 OFF)",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name of the server that will appear in the server list.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Unnamed Ground Branch Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:255",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players allowed to connect to the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Repair] Validate Server Files",
+            "description": "Leave empty (no value) for OFF or type \"true\" or \"1\" for ON. Validates all server files when Automatic Updates is enabled. Note: This will significantly increase server startup times, so it is recommended to only enable this when needed.",
+            "env_variable": "VALIDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] Ground Branch Dedicated Server App ID",
+            "description": "Steam App ID used for installation and updates. Cannot be changed.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "476400",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:476400",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] Use Windows Branch",
+            "description": "Tells the installer\/updater to only download the Windows branch of the server (the only branch currently available) so that it can run on Wine. Cannot be changed.",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] WINEDEBUG",
+            "description": "Used to suppress WINE FIXME messages. Rarely needs to be changed.",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] WINEARCH",
+            "description": "Used for compatibility. Cannot be changed.",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:win64",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] WINEPATH",
+            "description": "Used for compatibility. Cannot be changed.",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:\/home\/container",
+            "field_type": "text"
+        }
+    ]
+}

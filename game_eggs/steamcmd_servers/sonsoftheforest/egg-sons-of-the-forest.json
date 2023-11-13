@@ -1,0 +1,174 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-18T18:00:26+02:00",
+    "name": "Sons Of The Forest",
+    "author": "eggs@goover.dev",
+    "description": "Sons of the Forest is a horror survival game and sequel to The Forest by Endnight Games, Ltd.. Sent to find a missing billionaire on a remote island, you find yourself in a cannibal-infested hellscape. Craft, build, and struggle to survive, alone or with friends.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "wine .\/SonsOfTheForestDS.exe -userdatapath \"\/home\/container\/serverconfig\" -dedicatedserver.IpAddress \"0.0.0.0\" -dedicatedserver.GamePort \"{{SERVER_PORT}}\" -dedicatedserver.QueryPort \"{{QUERY_PORT}}\" -dedicatedserver.BlobSyncPort \"{{BLOBSYNC_PORT}}\" -dedicatedserver.MaxPlayers \"{{MAX_PLAYERS}}\" -dedicatedserver.Password \"{{SRV_PW}}\" -dedicatedserver.GameMode \"{{GAME_MODE}}\" -dedicatedserver.SkipNetworkAccessibilityTest \"{{SKIP_TESTS}}\" -dedicatedserver.LogFilesEnabled \"true\" -dedicatedserver.TimestampLogFilenames \"true\"",
+    "config": {
+        "files": "{\r\n    \"serverconfig\/dedicatedserver.cfg\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ServerName\": \"{{server.build.env.SRV_NAME}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"#DSL Dedicated server loaded.\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\nclear\r\nRED='\\033[0;31m'\r\nGREEN='\\033[0;32m'\r\nYELLOW='\\033[1;33m'\r\nBLUE='\\033[0;34m'\r\nNC='\\033[0m'\r\n\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}Sons of the Forest Installscript${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}download and install steamcmd. please wait...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## install game using steamcmd\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}install game using steamcmd. please wait...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\nmkdir -p \/mnt\/server\/serverconfig\r\nFILE=$HOME\/serverconfig\/dedicatedserver.cfg\r\nif [ -f \"$FILE\" ]; then\r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\n  echo -e \"${GREEN}dedicatedserver.cfg found.${NC}\"\r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\nelse  \r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\n  echo -e \"${RED}No dedicatedserver.cfg found. Downloading default...${NC}\"\r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\n  cd $HOME\/serverconfig\/\r\n  curl -sSL -o dedicatedserver.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/sonsoftheforest\/dedicatedserver.cfg\r\nfi\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\nFILE=$HOME\/serverconfig\/ownerswhitelist.txt\r\nif [ -f \"$FILE\" ]; then\r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\n  echo -e \"${GREEN}ownerswhitelist.txt found.${NC}\"\r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\nelse  \r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\n  echo -e \"${RED}No ownerswhitelist.txt found. Downloading default...${NC}\"\r\n  echo -e \"${BLUE}-------------------------------------------------${NC}\"\r\n  cd $HOME\/serverconfig\/\r\n  curl -sSL -o ownerswhitelist.txt https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/sonsoftheforest\/ownerswhitelist.txt\r\nfi\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## install end\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${GREEN}Installation completed...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "QueryPort",
+            "description": "UDP port used by Steam to list the server and enable the discovery services.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "BlobSyncPort",
+            "description": "BlobSyncPort UDP port used by the BlobSync system to initialize game systems and exchange data.",
+            "env_variable": "BLOBSYNC_PORT",
+            "default_value": "9700",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server visible in the server list, and in the Steam contacts.",
+            "env_variable": "SRV_NAME",
+            "default_value": "Pterodactyl hosted Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:60",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "The maximum number of players allowed simultaneously on the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1,8",
+            "field_type": "text"
+        },
+        {
+            "name": "Password",
+            "description": "",
+            "env_variable": "SRV_PW",
+            "default_value": "changeme",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Gamemode",
+            "description": "Sets the difficulty game mode when creating a new save. This parameter is ignored if loading a save (save mode set to \u201ccontinue\u201d with a save that exists on the slot). If the game mode is set to \u201ccustom\u201d, then the custom game mode settings will be read from CustomGameModeSettings option, described later.",
+            "env_variable": "GAME_MODE",
+            "default_value": "normal",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:normal,hard,hardsurvival,peaceful,custom",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2465200",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "mono vcrun2019",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WINDOWS_INSTALL",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Skip network Test",
+            "description": "if you have problems to connect to your server, set this to TRUE",
+            "env_variable": "SKIP_TESTS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        }
+    ]
+}

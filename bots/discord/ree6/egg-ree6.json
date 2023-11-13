@@ -1,0 +1,422 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-06-14T13:03:27+02:00",
+    "name": "Ree6",
+    "author": "presti@presti.me",
+    "description": "All-in-one, open source and 100% free Discord Bot!",
+    "features": null,
+    "docker_images": {
+        "Java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+    },
+    "file_denylist": [],
+    "startup": "java -Dnogui=true -jar Ree6.jar",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"hikari.sql.user\": \"{{server.build.env.DATABASE_USER}}\",\r\n            \"hikari.sql.db\": \"{{server.build.env.DATABASE_DB}}\",\r\n            \"hikari.sql.pw\": \"{{server.build.env.DATABASE_PW}}\",\r\n            \"hikari.sql.host\": \"{{server.build.env.DATABASE_HOST}}\",\r\n            \"hikari.sql.port\": \"{{server.build.env.DATABASE_PORT}}\",\r\n            \"hikari.misc.storage\": \"{{server.build.env.DATABASE_TYP}}\",\r\n            \"hikari.misc.storageFile\": \"{{server.build.env.DATABASE_FILE}}\",\r\n            \"hikari.misc.poolSize\": \"{{server.build.env.DATABASE_POOL}}\",\r\n            \"hikari.misc.createEmbeddedServer\": \"{{server.build.env.DATABASE_EMBEDDED}}\",\r\n            \"heartbeat.url\": \"{{server.build.env.HEARTBEAT_URL}}\",\r\n            \"heartbeat.interval\": \"{{server.build.env.HEARTBEAT_INTERVAL}}\",\r\n            \"dagpi.apitoken\": \"{{server.build.env.DAGPI_TOKEN}}\",\r\n            \"amari.apitoken\": \"{{server.build.env.AMARI_TOKEN}}\",\r\n            \"sentry.dsn\": \"{{server.build.env.SENTRY_DSN}}\",\r\n            \"spotify.client.id\": \"{{server.build.env.SPOTIFY_CLIENT_ID}}\",\r\n            \"spotify.client.secret\": \"{{server.build.env.SPOTIFY_CLIENT_SECRET}}\",\r\n            \"twitch.client.id\": \"{{server.build.env.TWITCH_CLIENT_ID}}\",\r\n            \"twitch.client.secret\": \"{{server.build.env.TWITCH_CLIENT_SECRET}}\",\r\n            \"twitter.consumer.key\": \"{{server.build.env.TWITTER_CONSUMER_ID}}\",\r\n            \"twitter.consumer.secret\": \"{{server.build.env.TWITTER_CONSUMER_SECRET}}\",\r\n            \"twitter.access.key\": \"{{server.build.env.TWITTER_ACCESS_ID}}\",\r\n            \"twitter.access.secret\": \"{{server.build.env.TWITTER_ACCESS_SECRET}}\",\r\n            \"reddit.client.id\": \"{{server.build.env.REDDIT_CLIENT_ID}}\",\r\n            \"reddit.client.secret\": \"{{server.build.env.REDDIT_CLIENT_SECRET}}\",\r\n            \"instagram.username\": \"{{server.build.env.INSTAGRAM_USERNAME}}\",\r\n            \"instagram.password\": \"{{server.build.env.INSTAGRAM_PASSWORD}}\",\r\n            \"bot.tokens.release\": \"{{server.build.env.BOT_TOKEN}}\",\r\n            \"openai.apiToken\": \"{{server.build.env.AI_TOKEN}}\",\r\n            \"openai.apiUrl\": \"{{server.build.env.AI_URL}}\",\r\n            \"openai.model\": \"{{server.build.env.AI_MODEL}}\",\r\n            \"bot.misc.status\": \"{{server.build.env.MISC_STATUS}}\",\r\n            \"bot.misc.feedbackChannelId\": \"{{server.build.env.MISC_FEEDBACK}}\",\r\n            \"bot.misc.ownerId\": \"{{server.build.env.MISC_OWNER}}\",\r\n            \"bot.misc.predefineInformation\": \"{{server.build.env.MISC_PREDEF}}\",\r\n            \"bot.misc.invite\": \"{{server.build.env.MISC_INVITE}}\",\r\n            \"bot.misc.support\": \"{{server.build.env.MISC_SUPPORT}}\",\r\n            \"bot.misc.website\": \"{{server.build.env.MISC_WEB}}\",\r\n            \"bot.misc.webinterface\": \"{{server.build.env.MISC_INTERFACE}}\",\r\n            \"bot.misc.record\": \"{{server.build.env.MISC_RECORD}}\",\r\n            \"bot.misc.twitchAuth\": \"{{server.build.env.MISC_TWITCH}}\",\r\n            \"bot.misc.advertisement\": \"{{server.build.env.MISC_ADV}}\",\r\n            \"bot.misc.name\": \"{{server.build.env.MISC_NAME}}\",\r\n            \"bot.misc.shards\": \"{{server.build.env.MISC_SHARD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Finished Loading\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\napt update\r\napt install -y jq curl\r\n\r\n\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/ree6\/config.yml\"\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/Ree6-Applications\/Ree6\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/Ree6-Applications\/Ree6\/releases\")\r\nMATCH=jar-with-dependencies.jar\r\n\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${MATCH}\" | head -1 )\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i \"${MATCH}\" | head -1)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i *.jar)\r\n    fi\r\nfi\r\n\r\n## Ree6 Setup\r\n[ ! -d \/mnt\/server ] && mkdir -p \/mnt\/server\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating Ree6...\\n\"\r\n\r\nif [ -f Ree6.jar ]; then\r\n    echo -e \"Updating Ree6.jar to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"Ree6.jar-old\")'\r\n    mv -f Ree6.jar Ree6.jar-old\r\nfi\r\n\r\necho -e \"Running: curl -sSL -o Ree6.jar ${DOWNLOAD_LINK}\\n\"\r\ncurl -sSL -o  Ree6.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.yml ]; then\r\n    echo -e \"Updating config.yml to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"config.yml-old\")'\r\n    mv -f config.yml config.yml-old\r\nfi\r\n\r\necho -e \"Running: curl -sSL -o config.yml ${CONFIG_LINK}\\n\"\r\ncurl -sSL -o config.yml ${CONFIG_LINK}\r\n    \r\n\r\necho -e \"\\nRee6 Successfully Installed!\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Discord Bot Token",
+            "description": "The token for your Discord bot. Learn how to obtain a token and configure your bot application properly here: https:\/\/jmusicbot.com\/getting-a-bot-token\/",
+            "env_variable": "BOT_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Dagpi token",
+            "description": "Your Dagpi.xyz API-Token, for tweet image generation!",
+            "env_variable": "DAGPI_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Sentry DSN",
+            "description": "Your Sentry DSN, for error reporting!",
+            "env_variable": "SENTRY_DSN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Spotify Client Id",
+            "description": "Spotify Application Configuration, used to parse Spotify Tracks\/Playlists to YouTube search queries.",
+            "env_variable": "SPOTIFY_CLIENT_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Spotify Client Secret",
+            "description": "Spotify Application Configuration, used to parse Spotify Tracks\/Playlists to YouTube search queries.",
+            "env_variable": "SPOTIFY_CLIENT_SECRET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Heartbeat Url",
+            "description": "The URL to the Heartbeat-Server",
+            "env_variable": "HEARTBEAT_URL",
+            "default_value": "none",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Heartbeat Interval",
+            "description": "The interval between the heartbeats.",
+            "env_variable": "HEARTBEAT_INTERVAL",
+            "default_value": "60",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Amari Token",
+            "description": "Your Amari API-Token, for Amari Level imports!",
+            "env_variable": "AMARI_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitch Client Id",
+            "description": "Twitch Application Configuration, used for the StreamTools and Twitch Notifications.",
+            "env_variable": "TWITCH_CLIENT_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitch Client Secret",
+            "description": "Twitch Application Configuration, used for the StreamTools and Twitch Notifications.",
+            "env_variable": "TWITCH_CLIENT_SECRET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitter Bearer Key",
+            "description": "Twitter Application Configuration, used for the Twitter Notifications.",
+            "env_variable": "TWITTER_BEARER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Reddit Client Id",
+            "description": "Reddit Application Configuration, used for the Reddit Notification.",
+            "env_variable": "REDDIT_CLIENT_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Reddit Client Secret",
+            "description": "Reddit Application Configuration, used for the Reddit Notification.",
+            "env_variable": "REDDIT_CLIENT_SECRET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Instagram Username",
+            "description": "Instagram Application Configuration, used for the Instagram Notification.",
+            "env_variable": "INSTAGRAM_USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Instagram Password",
+            "description": "Instagram Application Configuration, used for the Instagram Notification.",
+            "env_variable": "INSTAGRAM_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Username",
+            "description": "Username for the SQL connection.",
+            "env_variable": "DATABASE_USER",
+            "default_value": "root",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Database",
+            "description": "Database for the SQL Connection",
+            "env_variable": "DATABASE_DB",
+            "default_value": "root",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Password",
+            "description": "Password for the SQL connection.",
+            "env_variable": "DATABASE_PW",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "SQL Port",
+            "description": "Port for the SQL connection.",
+            "env_variable": "DATABASE_PORT",
+            "default_value": "3306",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Database Typ",
+            "description": "The Typ of the Database Ree6 should use!\r\nPossible typs:\r\n- mariadb\r\n- sqlite\r\n- h2\r\n- postgres",
+            "env_variable": "DATABASE_TYP",
+            "default_value": "sqlite",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:mariadb,sqlite,postgres,postregsql,h2",
+            "field_type": "text"
+        },
+        {
+            "name": "Database Storagefile",
+            "description": "The location of the storagefile if sqlite is being used.",
+            "env_variable": "DATABASE_FILE",
+            "default_value": "storage\/Ree6.db",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "[DEVELOPER-STUFF] Database Poolsize",
+            "description": "The Database connection pool size!",
+            "env_variable": "DATABASE_POOL",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Database host",
+            "description": "The Host address of the Database connection.",
+            "env_variable": "DATABASE_HOST",
+            "default_value": "localhost",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "OpenAI Token",
+            "description": "Your Authentication token that should be used in the AI API calls.",
+            "env_variable": "AI_TOKEN",
+            "default_value": "OpenAI API-Token",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "OpenAI Url",
+            "description": "The URL that should receive the API calls.",
+            "env_variable": "AI_URL",
+            "default_value": "https:\/\/api.openai.com\/v1\/chat\/completions",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "OpenAI Model",
+            "description": "The AI model that should be used in the API calls.",
+            "env_variable": "AI_MODEL",
+            "default_value": "gpt-3.5-turbo-0301",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Activity Status",
+            "description": "The Activity status of the Bot that will be shown.",
+            "env_variable": "MISC_STATUS",
+            "default_value": "ree6.de | %guilds% Servers. (%shard%)",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Feedback Channel",
+            "description": "The Channel Id of the Feedback channel.",
+            "env_variable": "MISC_FEEDBACK",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "integer",
+            "field_type": "text"
+        },
+        {
+            "name": "[DEVELOPER-STUFF] Bot Owner Id",
+            "description": "The ID of the Bot Owner, this will be used internally on some checks.",
+            "env_variable": "MISC_OWNER",
+            "default_value": "321580743488831490",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Invite Link",
+            "description": "The Invite link to invite the Bot.",
+            "env_variable": "MISC_INVITE",
+            "default_value": "https:\/\/invite.ree6.de",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Predefined Information for AI",
+            "description": "The Information for the AI.",
+            "env_variable": "MISC_PREDEF",
+            "default_value": "You are Ree6 a Discord bot.",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Support Link",
+            "description": "The Url link for users to receive support.",
+            "env_variable": "MISC_SUPPORT",
+            "default_value": "https:\/\/support.ree6.de",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Website",
+            "description": "The Url to the Website of the Bot.",
+            "env_variable": "MISC_WEB",
+            "default_value": "https:\/\/ree6.de",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Webinterface",
+            "description": "The Url to the Webinterface.",
+            "env_variable": "MISC_INTERFACE",
+            "default_value": "https:\/\/cp.ree6.de",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Record Url",
+            "description": "The Url that uses can access to get their recording.",
+            "env_variable": "MISC_RECORD",
+            "default_value": "https:\/\/cp.ree6.de\/external\/recording",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Twitch Url",
+            "description": "The Url used to connect a Twitch Account with the Ree6 System.",
+            "env_variable": "MISC_TWITCH",
+            "default_value": "https:\/\/cp.ree6.de\/external\/twitch",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Advertisment",
+            "description": "The Advertisement in Embed Footers and the rest.",
+            "env_variable": "MISC_ADV",
+            "default_value": "powered by Tube-hosting",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Name",
+            "description": "The Name of the Bot.",
+            "env_variable": "MISC_NAME",
+            "default_value": "Ree6",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Shards",
+            "description": "The amount of shards that should be created.",
+            "env_variable": "MISC_SHARD",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        }
+    ]
+}

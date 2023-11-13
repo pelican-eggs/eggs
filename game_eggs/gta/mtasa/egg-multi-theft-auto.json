@@ -1,29 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-05-25T15:27:15+02:00",
+    "exported_at": "2023-11-13T18:18:13+01:00",
     "name": "Multi Theft Auto",
     "author": "info@six-gaming.com",
     "description": "What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:ubuntu"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:mta": "ghcr.io\/parkervcp\/games:mta"
+    },
     "file_denylist": [],
     "startup": ".\/mta-server64 --port {{SERVER_PORT}} --httpport {{SERVER_WEBPORT}} -n",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server started and is ready to accept connections\"\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{}",
         "stop": "shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl unzip lib32gcc1 ca-certificates\r\n\r\ncd \/tmp\r\ncurl -L -o multitheftauto_linux_x64.tar.gz https:\/\/linux.mtasa.com\/dl\/multitheftauto_linux_x64.tar.gz\r\ncurl -L -o mta-baseconfig.tar.gz https:\/\/linux.mtasa.com\/dl\/baseconfig.tar.gz\r\ncurl -L -o mtasa-resources-latest.zip http:\/\/mirror.mtasa.com\/mtasa\/resources\/mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xvf multitheftauto_linux_x64.tar.gz\r\ncp -rf multitheftauto_linux_x64\/* \/mnt\/server\r\n\r\nif [ ! -f \/mnt\/server\/x64\/libmysqlclient.so.16 ]; then\r\n    curl -L http:\/\/nightly.mtasa.com\/files\/libmysqlclient.so.16 -o \/mnt\/server\/x64\/libmysqlclient.so.16\r\nfi\r\n\r\nmkdir -p \/mnt\/server\/mods\/deathmatch\/resources\r\nunzip -o -d \/mnt\/server\/mods\/deathmatch\/resources mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server-conf\r\ntar -xvf mta-baseconfig.tar.gz\r\ncp -rf baseconfig\/* \/mnt\/server\/mods\/deathmatch\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\necho \"done\"",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\n\r\ncd \/tmp\r\ncurl -L -o multitheftauto_linux_x64.tar.gz https:\/\/linux.mtasa.com\/dl\/multitheftauto_linux_x64.tar.gz\r\ncurl -L -o mta-baseconfig.tar.gz https:\/\/linux.mtasa.com\/dl\/baseconfig.tar.gz\r\ncurl -L -o mtasa-resources-latest.zip http:\/\/mirror.mtasa.com\/mtasa\/resources\/mtasa-resources-latest.zip\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xvf multitheftauto_linux_x64.tar.gz\r\ncp -rf multitheftauto_linux_x64\/* \/mnt\/server\r\n\r\nif [ ! -f \/mnt\/server\/x64\/libmysqlclient.so.16 ]; then\r\n    curl -L http:\/\/nightly.mtasa.com\/files\/libmysqlclient.so.16 -o \/mnt\/server\/x64\/libmysqlclient.so.16\r\nfi\r\n\r\nmkdir -p \/mnt\/server\/mods\/deathmatch\/resources\r\nunzip -o -d \/mnt\/server\/mods\/deathmatch\/resources mtasa-resources-latest.zip\r\n\r\ntar -xvf mta-baseconfig.tar.gz\r\ncp -rf baseconfig\/* \/mnt\/server\/mods\/deathmatch\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:ubuntu",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "22005",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric"
+            "rules": "required|numeric",
+            "field_type": "text"
         }
     ]
 }

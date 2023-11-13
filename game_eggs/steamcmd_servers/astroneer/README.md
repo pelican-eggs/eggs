@@ -13,7 +13,7 @@ The following variables are required to prevent the server to crash on startup :
 
 Astroneer required at least 700MiB to run. If more than one player will connect, 1GiB seems to be a minimum.
 
-## Minumim Sorage warning
+## Minimum Storage warning
 
 Astroneer required at least 3GiB. The size may increase with larger save file.
 

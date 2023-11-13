@@ -1,32 +1,32 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-01-20T12:55:06-05:00",
+    "exported_at": "2023-10-07T22:46:51+08:00",
     "name": "Hurtworld",
     "author": "brycea@terrahost.cloud",
     "description": "Hurtworld is a hardcore multiplayer survival FPS with a focus on deep survival progression that doesn't become trivial once you establish some basic needs. Built for hardcore gamers, Hurtworld aims to punish.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_source"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
     "file_denylist": [],
-    "startup": ".\/Hurtworld.x86_64 -batchmode -nographics -exec \"host {{SERVER_PORT}};queryport {{QUERY_PORT}};maxplayers {{MAX_PLAYERS}};servername {{HOSTNAME}};creativemode ${CREATIVE_MODE};${ADMINS}\" -logfile $1",
+    "startup": ".\/Hurtworld.x86_64 -batchmode -nographics -exec \"host {{SERVER_PORT}};queryport {{QUERY_PORT}};maxplayers {{MAX_PLAYERS}};servername {{HOSTNAME}};creativemode {{CREATIVE_MODE}};addadmin {{ADMINS}}\" -logfile $1",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"orphaned items\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so",
-            "container": "debian:buster-slim",
-            "entrypoint": "bash"
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## copy 32-bit steamclient.so\r\ncp -v linux32\/steamclient.so ..\/Hurtworld_Data\/Plugins\/x86\/steamclient.so\r\n\r\n## copy 64-bit steamclient.so\r\ncp -v linux64\/steamclient.so ..\/Hurtworld_Data\/Plugins\/x86_64\/steamclient.so\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "\/bin\/bash"
         }
     },
     "variables": [
@@ -37,16 +37,18 @@
             "default_value": "405100",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|regex:\/^(405100)$\/"
+            "rules": "required|in:405100",
+            "field_type": "text"
         },
         {
             "name": "Query Port",
-            "description": "Server Query Default Port",
+            "description": "Server Query Default Port.",
             "env_variable": "QUERY_PORT",
             "default_value": "13871",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Max Players",
@@ -55,7 +57,8 @@
             "default_value": "60",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:60"
+            "rules": "required|string|max:60",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -64,7 +67,38 @@
             "default_value": "A Hurtworld Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:50"
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Owner Guid",
+            "description": "Steam id of the server owner.",
+            "env_variable": "ADMINS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:17",
+            "field_type": "text"
+        },
+        {
+            "name": "Creative Mode",
+            "description": "Turn creative mode on and off (free build). Value as 0 for off, 1 for on.",
+            "env_variable": "CREATIVE_MODE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "AUTO_UPDATE",
+            "description": "Disabling or enabling automated updates on boot.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
         }
     ]
 }

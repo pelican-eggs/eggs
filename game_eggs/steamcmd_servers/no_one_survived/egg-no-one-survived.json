@@ -1,0 +1,202 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-06-29T10:42:53+02:00",
+    "name": "No One Survived",
+    "author": "josdekurk@gmail.com",
+    "description": "This is a multiplayer cooperative open world construction survival sandbox game, where you and your friends must find supplies and build shelters in this world. You have to keep an eye on your character's needs state at all times, a bad state is likely to lead to death.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "wine WRSHServer.exe -server -log -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}}",
+    "config": {
+        "files": "{\r\n    \"WRSH\/Saved\/Config\/WindowsServer\/Engine.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"URL.Port\": \"{{server.build.default.port}}\",\r\n            \"OnlineSubsystemSteam.bUseSteamNetworking\": \"{{server.build.env.STEAM_NETWORKING}}\",\r\n            \"OnlineSubsystemSteam.GameServerQueryPort\": \"{{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    },\r\n    \"WRSH\/Saved\/Config\/WindowsServer\/Game.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"ServerSetting.SaveName\": \"{{server.build.env.SERVER_SAVE_NAME}}\",\r\n            \"ServerSetting.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"ServerSetting.NeedPassword\": \"{{server.build.env.SERVER_NEED_PASSWORD}}\",\r\n            \"ServerSetting.Password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"ServerSetting.MaxPlayers\": \"{{server.build.env.SERVER_PLAYERS}}\",\r\n            \"ServerSetting.NumOfZombieSpawn\": \"{{server.build.env.SERVER_NUM_ZOMBIES}}\",\r\n            \"ServerSetting.Region\": \"{{server.build.env.SERVER_REGION}}\",\r\n            \"ServerSetting.AdminPassword\": \"{{server.build.env.SERVER_ADMIN_PASSWORD}}\"\r\n        }\r\n    }    \r\n}",
+        "startup": "{\r\n    \"done\": \"ServerCreate\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Windows",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "App id",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2329680",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:2329680",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto update",
+            "description": "Auto update the server on restart",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:win64,win32",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2022 corefonts",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Networking",
+            "description": "Enable or disable steam networking.\r\nLeave this to False as with True it will fail to start!",
+            "env_variable": "STEAM_NETWORKING",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:False,True",
+            "field_type": "text"
+        },
+        {
+            "name": "Server save name",
+            "description": "The name of the archive, which is also the archive loaded by default.",
+            "env_variable": "SERVER_SAVE_NAME",
+            "default_value": "MySave",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Server name",
+            "description": "The name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Test",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Toggle server password",
+            "description": "True indicates that the server needs a password and False indicates that it does not need a password.",
+            "env_variable": "SERVER_NEED_PASSWORD",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:False,True",
+            "field_type": "text"
+        },
+        {
+            "name": "Server password",
+            "description": "The password for the server. Only works if 'Toggle server password' is set to True",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Server players",
+            "description": "The maximum amount of players the server can join",
+            "env_variable": "SERVER_PLAYERS",
+            "default_value": "50",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|between:1,100",
+            "field_type": "text"
+        },
+        {
+            "name": "Number of zombies",
+            "description": "Number of zombies generated by the wave of corpse tide (25-100).",
+            "env_variable": "SERVER_NUM_ZOMBIES",
+            "default_value": "50",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:25,100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server region",
+            "description": "All = non-registered region, AF = Africa, AS = Asia, EU = Europe, NA = North America, OC = Oceania, and SA = South America.",
+            "env_variable": "SERVER_REGION",
+            "default_value": "All",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:All,AF,AS,EU,NA,OC,SA",
+            "field_type": "text"
+        },
+        {
+            "name": "Server admin password",
+            "description": "Server administrator password",
+            "env_variable": "SERVER_ADMIN_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        }
+    ]
+}

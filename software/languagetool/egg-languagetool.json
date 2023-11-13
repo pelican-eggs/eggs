@@ -1,19 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-04-06T17:26:12+02:00",
+    "exported_at": "2023-10-07T07:47:03+02:00",
     "name": "LanguageTool",
     "author": "thomasruhl@live.de",
     "description": "This egg installs a LanguageTool server\r\n\r\nLanguageTool is an Open Source proofreading software for English, French, German, Polish, Russian, and more than 20 other languages. It finds many errors that a simple spell checker cannot find.\r\n\r\nView https:\/\/languagetool.org for more information.",
     "features": null,
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_8"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17"
+    },
     "file_denylist": [],
-    "startup": "java -cp languagetool-server.jar org.languagetool.server.HTTPServer --port {{SERVER_PORT}} --allow-origin \\\"*\\\" --public --config config.properties",
+    "startup": "java -cp languagetool-server.jar org.languagetool.server.HTTPServer --port {{SERVER_PORT}} --allow-origin --public --config config.properties",
     "config": {
         "files": "{\r\n    \"config.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"languageModel\": \"models\/\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
@@ -35,7 +35,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }
