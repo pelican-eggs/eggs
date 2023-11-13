@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-11-01T12:21:14-04:00",
+    "exported_at": "2023-11-12T11:57:56+01:00",
     "name": "ARK: Survival Ascended",
     "author": "blood@darkartsgaming.com",
     "description": "ARK is reimagined from the ground-up into the next-generation of video game technology with Unreal Engine 5! Form a tribe, tame & breed hundreds of unique dinosaurs and primeval creatures, explore, craft, build, and fight your way to the top of the food-chain. Your new world awaits!",
@@ -15,7 +15,7 @@
         "Proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "rmv() { echo \"stopping server\"; rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} KeepAlive && rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} DoExit && wait ${ARK_PID}; echo \"Server Closed\"; exit; }; trap rmv 15 2; proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe {{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName=\"{{SESSION_NAME}}\"?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?RCONPort={{RCON_PORT}}?RCONEnabled=True$( [  \"$SERVER_PVE\" == \"0\" ] || printf %s '?ServerPVE=True' )?ServerPassword=\"{{SERVER_PASSWORD}}\"{{ARGS_PARAMS}}?ServerAdminPassword=\"{{ARK_ADMIN_PASSWORD}}\" -WinLiveMaxPlayers={{MAX_PLAYERS}} -oldconsole -servergamelog$( [ -z \"$MOD_IDS\" ] || printf %s ' -mods=' $MOD_IDS )$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) {{ARGS_FLAGS}} & ARK_PID=$! ; tail -c0 -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log --pid=$ARK_PID & until echo \"waiting for rcon connection...\"; (rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD})<&0 & wait $!; do sleep 5; done",
+    "startup": "rmv() { echo \"stopping server\"; rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} KeepAlive && rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD} DoExit && wait ${ARK_PID}; echo \"Server Closed\"; exit; }; trap rmv 15 2; proton run .\/ShooterGame\/Binaries\/Win64\/ArkAscendedServer.exe {{SERVER_MAP}}?listen?MaxPlayers={{MAX_PLAYERS}}?SessionName=\\\"{{SESSION_NAME}}\\\"?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}}?RCONPort={{RCON_PORT}}?RCONEnabled=True$( [  \"$SERVER_PVE\" == \"0\" ] || printf %s '?ServerPVE=True' )?ServerPassword=\"{{SERVER_PASSWORD}}\"{{ARGS_PARAMS}}?ServerAdminPassword=\"{{ARK_ADMIN_PASSWORD}}\" -WinLiveMaxPlayers={{MAX_PLAYERS}} -oldconsole -servergamelog$( [ -z \"$MOD_IDS\" ] || printf %s ' -mods=' $MOD_IDS )$( [ \"$BATTLE_EYE\" == \"1\" ] || printf %s ' -NoBattlEye' ) -Port={{SERVER_PORT}} {{ARGS_FLAGS}} & ARK_PID=$! ; tail -c0 -F .\/ShooterGame\/Saved\/Logs\/ShooterGame.log --pid=$ARK_PID & until echo \"waiting for rcon connection...\"; (rcon -t rcon -a 127.0.0.1:${RCON_PORT} -p ${ARK_ADMIN_PASSWORD})<&0 & wait $!; do sleep 5; done",
     "config": {
         "files": "{\r\n    \"ShooterGame\/Saved\/Config\/WindowsServer\/GameUserSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"ServerAdminPassword=\": \"ServerAdminPassword={{server.build.env.ARK_ADMIN_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Waiting commands for 127.0.0.1:\"\r\n}",
