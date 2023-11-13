@@ -182,6 +182,7 @@
 * [Post Scriptum](steamcmd_servers/post_scriptum)
 * [Project Zomboid](steamcmd_servers/project_zomboid)
 * [Quake Live](steamcmd_servers/quake_live)
+* [Resonite](steamcmd_servers/resonite)
 * [Rising World](steamcmd_servers/rising_world)
   * [Legacy Java](steamcmd_servers/rising_world/legacy)
   * [Unity](steamcmd_servers/rising_world/unity)

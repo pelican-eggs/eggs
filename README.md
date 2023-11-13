@@ -289,6 +289,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
 * [Project Zomboid](game_eggs/steamcmd_servers/project_zomboid)
 * [Quake Live](game_eggs/steamcmd_servers/quake_live)
+* [Resonite](game_eggs/steamcmd_servers/resonite)
 * [Rising World](game_eggs/steamcmd_servers/rising_world)
 * [Risk Of Rain 2](game_eggs/steamcmd_servers/risk_of_rain_2)
 * [Rust](game_eggs/steamcmd_servers/rust)
