@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-11-14T08:29:20-05:00",
+    "exported_at": "2023-11-14T11:03:55-05:00",
     "name": "Hogwarp",
     "author": "imkringle@proton.me",
     "description": "A Pterodactyl egg for the Hogwarts Legacy mod Hogwarp - For more info see their Nexus: https:\/\/www.nexusmods.com\/hogwartslegacy\/mods\/1378",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
     "startup": "wine HogWarpServer.exe",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#Hogwarp Install\r\napt update -y\r\napt install -y curl file unzip\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n# Validate link\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\n# Unpack Server zip\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\n\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n    tar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    exit 2 \r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n#Create the Plugins folder\r\nmkdir plugins\/\r\nchmod 777 *\r\n\r\n\r\n## Install End\r\necho \"-----------------------------------------\"\r\necho \"Hogwarp Is Installed!\"\r\necho \"-----------------------------------------\"",
+            "script": "#Hogwarp Install\r\napt update -y\r\napt install -y curl file unzip\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n# Validate link\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\n# Unpack Server zip\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\n\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n    tar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    exit 2 \r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n#Create the Plugins folder\r\nmkdir plugins\/\r\n\r\n# Check for a config.json, if it is missing; create it\r\nTARGET_FILE=\"config.json\"\r\n\r\nif test -f \"$TARGET_FILE\"; then\r\n    echo \"$TARGET_FILE exists. Skipping config install\"\r\nelse\r\n    echo \"$TARGET_FILE does not exist. Installing!\"\r\n    curl -sSL -o config.json https:\/\/pteropaste.com\/hy2d48dbhtdd\/\r\n    echo \"$TARGET_FILE has been installed\"\r\nfi\r\n\r\n\r\n## Install End\r\necho \"-----------------------------------------\"\r\necho \"Hogwarp Is Installed!\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -100,12 +100,22 @@
         },
         {
             "name": "Download URL",
-            "description": "URL to pull the files from - These are obtainable in their discord in the #releases channel\r\n- https:\/\/discord.com\/invite\/hogwarp",
+            "description": "URL to pull the files from\r\n- Files can be found in their Discord (https:\/\/discord.com\/invite\/hogwarp). Default URL will pull from there as well",
             "env_variable": "DOWNLOAD_URL",
-            "default_value": "",
+            "default_value": "https:\/\/cdn.discordapp.com\/attachments\/1076580539751993444\/1118295980597575810\/Server.zip",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "string",
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable",
             "field_type": "text"
         }
     ]
