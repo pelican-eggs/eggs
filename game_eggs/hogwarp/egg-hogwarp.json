@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-11-14T11:03:55-05:00",
+    "exported_at": "2023-11-14T12:12:21-05:00",
     "name": "Hogwarp",
     "author": "imkringle@proton.me",
     "description": "A Pterodactyl egg for the Hogwarts Legacy mod Hogwarp - For more info see their Nexus: https:\/\/www.nexusmods.com\/hogwartslegacy\/mods\/1378",
@@ -100,7 +100,7 @@
         },
         {
             "name": "Download URL",
-            "description": "URL to pull the files from\r\n- Files can be found in their Discord (https:\/\/discord.com\/invite\/hogwarp). Default URL will pull from there as well",
+            "description": "URL to pull the files from\r\n- Files can be found in their Discord (https:\/\/discord.com\/invite\/hogwarp). Default URL will pull from there as well\r\n- These files can be outdated! Be sure to check for an update in the event it has a version mismatch with the client.",
             "env_variable": "DOWNLOAD_URL",
             "default_value": "https:\/\/cdn.discordapp.com\/attachments\/1076580539751993444\/1118295980597575810\/Server.zip",
             "user_viewable": false,
