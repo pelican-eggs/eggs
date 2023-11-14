@@ -154,7 +154,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
-[Hogwarp](game_eggs/hogwarp)
+* Hogwarts Legacy
+  * [Hogwarp](game_eggs/hogwarp)
 
 [Kerbal Space Program](game_eggs/ksp)
 
