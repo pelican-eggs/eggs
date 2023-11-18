@@ -53,6 +53,8 @@
 * GTA
   * [GTAC](gta/gtac)
 
+[Hogwarp](hogwarp)
+
 [Kerbal Space Program](ksp)
 
 [Los Angeles Crimes](losangelescrimes)

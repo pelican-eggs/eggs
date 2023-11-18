@@ -1,0 +1,122 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-11-14T12:12:21-05:00",
+    "name": "Hogwarp",
+    "author": "imkringle@proton.me",
+    "description": "A Pterodactyl egg for the Hogwarts Legacy mod Hogwarp - For more info see their Nexus: https:\/\/www.nexusmods.com\/hogwartslegacy\/mods\/1378",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "wine HogWarpServer.exe",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ApiKey\": \"{{env.API_KEY}}\",\r\n            \"Name\": \"{{env.SERV_NAME}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"Description\": \"{{env.SERV_DESC}}\",\r\n            \"MaxPlayer\": \"{{env.MAX_PLAYERS}}\",\r\n            \"IconUrl\": \"{{env.SERV_ICON}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \" [HogWarpServer] \"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#Hogwarp Install\r\napt update -y\r\napt install -y curl file unzip\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n# Validate link\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\n# Unpack Server zip\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\n\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n    tar xvf ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    exit 2 \r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\n#Create the Plugins folder\r\nmkdir plugins\/\r\n\r\n# Check for a config.json, if it is missing; create it\r\nTARGET_FILE=\"config.json\"\r\n\r\nif test -f \"$TARGET_FILE\"; then\r\n    echo \"$TARGET_FILE exists. Skipping config install\"\r\nelse\r\n    echo \"$TARGET_FILE does not exist. Installing!\"\r\n    curl -sSL -o config.json https:\/\/pteropaste.com\/hy2d48dbhtdd\/\r\n    echo \"$TARGET_FILE has been installed\"\r\nfi\r\n\r\n\r\n## Install End\r\necho \"-----------------------------------------\"\r\necho \"Hogwarp Is Installed!\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Wine Tricks",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Hogwarp API Key",
+            "description": "A API required to boot - https:\/\/presence.hogwarp.com\/login\r\n- If not set on install it will fail. Set API Key then Reinstall Files",
+            "env_variable": "API_KEY",
+            "default_value": "CHANGEME",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "A name that displays on the Hogwarp list",
+            "env_variable": "SERV_NAME",
+            "default_value": "Ptero Hogwarp Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WineARCH",
+            "description": "Arch type for Wine",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Max players for a server, this depends on your Patreon level for Hogwarp\r\nhttps:\/\/www.patreon.com\/tiltedphoques - ( 4, 8, 16, No Limit ) In that order.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Icon URL",
+            "description": "The icon that displays on Hogwarps multiplayer listing",
+            "env_variable": "SERV_ICON",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "The description that shows on the Multiplayer list",
+            "env_variable": "SERV_DESC",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Download URL",
+            "description": "URL to pull the files from\r\n- Files can be found in their Discord (https:\/\/discord.com\/invite\/hogwarp). Default URL will pull from there as well\r\n- These files can be outdated! Be sure to check for an update in the event it has a version mismatch with the client.",
+            "env_variable": "DOWNLOAD_URL",
+            "default_value": "https:\/\/cdn.discordapp.com\/attachments\/1076580539751993444\/1118295980597575810\/Server.zip",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable",
+            "field_type": "text"
+        }
+    ]
+}
