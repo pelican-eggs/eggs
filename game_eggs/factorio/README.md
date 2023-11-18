@@ -24,3 +24,7 @@ Factorio requires a single port
 | Port    | default |
 |---------|---------|
 | Game    | 34197   |
+
+## ARM64
+There is a factorio egg for ARM64 machines that uses the box64 emulator.
+If you are on **AMD64** Like most of you download the normal non ARM64 egg!

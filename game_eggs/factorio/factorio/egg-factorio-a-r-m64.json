@@ -1,0 +1,192 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-11-18T10:08:36+01:00",
+    "name": "Factorio ARM64",
+    "author": "parker@parkervcp.com",
+    "description": "The vanilla Factorio server.\r\n\r\nhttps:\/\/www.factorio.com\/",
+    "features": null,
+    "docker_images": {
+        "Box64": "ghcr.io\/parkervcp\/yolks:box64"
+    },
+    "file_denylist": [],
+    "startup": "if [ ! -f \".\/saves\/{{SAVE_NAME}}.zip\" ]; then box64 .\/bin\/x64\/factorio --create .\/saves\/{{SAVE_NAME}}.zip --map-gen-settings data\/map-gen-settings.json --map-settings data\/map-settings.json; fi;\r\nbox64 .\/bin\/x64\/factorio --port {{SERVER_PORT}} --server-settings data\/server-settings.json --start-server saves\/{{SAVE_NAME}}.zip",
+    "config": {
+        "files": "{\r\n    \"data\/server-settings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"description\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"max_players\": \"{{server.build.env.MAX_SLOTS}}\",\r\n            \"username\": \"{{server.build.env.SERVER_USERNAME}}\",\r\n            \"token\": \"{{server.build.env.SERVER_TOKEN}}\",\r\n            \"autosave_interval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"autosave_slots\": \"{{server.build.env.SAVE_SLOTS}}\",\r\n            \"afk_autokick_interval\": \"{{server.build.env.AFK_KICK}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Hosting game at\"\r\n}",
+        "logs": "{}",
+        "stop": "\/quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Factorio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update \r\napt install -y curl tar xz-utils jq\r\n\r\nVERSION_JSON=$(curl -sSL https:\/\/factorio.com\/api\/latest-releases)\r\n\r\nlatest_stable=$(echo $VERSION_JSON | jq -r '.stable.headless')\r\nlatest_experimental=$(echo $VERSION_JSON | jq -r '.experimental.headless')\r\n\r\nif [ -z \"${FACTORIO_VERSION}\" ] || [ \"${FACTORIO_VERSION}\" == \"latest\" ]; then\r\n  DL_VERSION=$latest_stable\r\nelif [ \"${FACTORIO_VERSION}\" == \"experimental\" ]; then\r\n  DL_VERSION=$latest_experimental\r\nelse\r\n  DL_VERSION=${FACTORIO_VERSION}\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"\\n running 'curl -sL https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}' \\n\"\r\n\r\ncurl -sL https:\/\/www.factorio.com\/get-download\/${DL_VERSION}\/headless\/linux64 -o factorio-${DL_VERSION}\r\n\r\ntar -xf factorio-${DL_VERSION} --strip-components=1 -C \/mnt\/server\r\n\r\nrm factorio-${DL_VERSION}\r\n\r\nif [ -e data\/map-gen-settings.json ]; then\r\n    echo \"map-gen exists\"\r\nelse\r\n    echo \"copying map-gen default settings\"\r\n    mv data\/map-gen-settings.example.json data\/map-gen-settings.json\r\nfi\r\n\r\nif [ -e data\/server-settings.json ]; then\r\n    echo \"server settings exists\"\r\nelse\r\n    echo \"copying server default settings\"\r\n    mv data\/server-settings.example.json data\/server-settings.json\r\nfi\r\n\r\nif [ -e map-settings.json ]; then\r\n    echo \"map settings exists\"\r\nelse\r\n    echo \"copying map default settings\"\r\n    mv data\/map-settings.example.json data\/map-settings.json\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Factorio Version",
+            "description": "Which version of Factorio to install and use.",
+            "env_variable": "FACTORIO_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,12",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximum Slots",
+            "description": "Total number of slots to allow on the server.",
+            "env_variable": "MAX_SLOTS",
+            "default_value": "20",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Save Name",
+            "description": "The save name for the server.",
+            "env_variable": "SAVE_NAME",
+            "default_value": "gamesave",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "alpha_dash|between:1,100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Token",
+            "description": "Your factorio.com token, it is required for your server to be visible in the public server list.",
+            "env_variable": "SERVER_TOKEN",
+            "default_value": "undefined",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "alpha_num|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the game as it will appear in the game listing",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Factorio Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "Description of the game that will appear in the listing.",
+            "env_variable": "SERVER_DESC",
+            "default_value": "Description",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Username",
+            "description": "Username used for the server",
+            "env_variable": "SERVER_USERNAME",
+            "default_value": "unnamed",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save Interval",
+            "description": "Time between auto saves specified in minutes",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save Slots",
+            "description": "The number of auto saves to keep.",
+            "env_variable": "SAVE_SLOTS",
+            "default_value": "5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "AFK Kick",
+            "description": "Time specified in minutes to kick AFK players.\r\n0 is off",
+            "env_variable": "AFK_KICK",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|digits_between:1,3",
+            "field_type": "text"
+        },
+        {
+            "name": "BOX64_DYNAREC_SAFEFLAGS",
+            "description": "",
+            "env_variable": "BOX64_DYNAREC_SAFEFLAGS",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:0",
+            "field_type": "text"
+        },
+        {
+            "name": "BOX64_DYNAREC_BIGBLOCK",
+            "description": "",
+            "env_variable": "BOX64_DYNAREC_BIGBLOCK",
+            "default_value": "2",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:2",
+            "field_type": "text"
+        },
+        {
+            "name": "BOX64_DYNAREC_FORWARD",
+            "description": "",
+            "env_variable": "BOX64_DYNAREC_FORWARD",
+            "default_value": "1024",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:1024",
+            "field_type": "text"
+        },
+        {
+            "name": "BOX64_DYNAREC_CALLRET",
+            "description": "",
+            "env_variable": "BOX64_DYNAREC_CALLRET",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:1",
+            "field_type": "text"
+        },
+        {
+            "name": "BOX64_DYNAREC_FASTROUND",
+            "description": "",
+            "env_variable": "BOX64_DYNAREC_FASTROUND",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:0",
+            "field_type": "text"
+        },
+        {
+            "name": "BOX64_DYNAREC_ALIGNED_ATOMICS",
+            "description": "",
+            "env_variable": "BOX64_DYNAREC_ALIGNED_ATOMICS",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:1",
+            "field_type": "text"
+        }
+    ]
+}
