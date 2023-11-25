@@ -10,7 +10,7 @@
 Minimum required memory to run the server.
 2GB is recommended. 3GB+ is preferred
 
-## Minumim Sorage warning
+## Minimum Sorage warning
 
 Minimum required storage to run the server.
 Example: 100MiB is recommended. 2GiB+ is preferred
