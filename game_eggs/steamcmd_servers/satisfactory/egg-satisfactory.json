@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-13T23:59:02+00:00",
+    "exported_at": "2023-11-27T01:35:48+01:00",
     "name": "Satisfactory",
     "author": "rehlmgaming@gmail.com",
     "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
     },
     "file_denylist": [],
-    "startup": ".\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame ?listen -Port={{SERVER_PORT}} -ServerQueryPort={{QUERY_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0 $(if {{DISABLE_SEASONAL}}; then echo \"-DisableSeasonalEvents\"; fi)",
+    "startup": ".\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame ?listen -Port={{TELE_PORT}} -ServerQueryPort={{SERVER_PORT}} -BeaconPort={{BEACON_PORT}} -multihome=0.0.0.0 $(if {{DISABLE_SEASONAL}}; then echo \"-DisableSeasonalEvents\"; fi)",
     "config": {
         "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mNumRotatingAutosaves\": \"mNumRotatingAutosaves={{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"bImplicitSend\": \"bImplicitSend={{server.build.env.UPLOAD_CRASH_REPORT}}\",\r\n            \"InitialConnectTimeout\": \"InitialConnectTimeout={{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"ConnectionTimeout\": \"ConnectionTimeout={{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/GameUserSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"mFloatValues\": \"mFloatValues=((\\\"FG.AutosaveInterval\\\", {{server.build.env.AUTOSAVE_INTERVAL}}))\",\r\n            \"mIntValues\": \"mIntValues=((\\\"FG.NetworkQuality\\\", {{server.build.env.NETWORK_QUALITY}}))\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -31,10 +31,10 @@
     },
     "variables": [
         {
-            "name": "[REQUIRED] Server Query Port",
-            "description": "This is the port that your clients will type in and use to connect to the lobby (not the game world). Ensure this port matches your externally forwarded port, and is distanced from other running Satisfactory servers in Pterodactyl (increments of 100 are recommended). This is also true for the Primary\/Game Port!",
-            "env_variable": "QUERY_PORT",
-            "default_value": "15777",
+            "name": "[REQUIRED] Telemetry Port",
+            "description": "This is the primary port used to communicate game telemetry with the client.",
+            "env_variable": "TELE_PORT",
+            "default_value": "7777",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|integer|between:1024,65536",

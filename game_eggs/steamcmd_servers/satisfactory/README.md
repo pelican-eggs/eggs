@@ -87,12 +87,11 @@ ___
 - Default server ports are listed below, but all three ports can be changed freely (\*some exceptions apply below).
     - All three ports must be unique; they cannot currently be shared on one port (this may change in the future).
     - It is recommended to distance ports of other running Satisfactory servers in Pterodactyl by **increments of 100** (it is currently unknown what the minimum increment is, but an increment of +1 caused cross-server talk in testing). Also, your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match).
-- **Note:** The Primary/Default/Game Port for your server in Pterodactyl will be Satisfactory's `-Port=????` game port, even though clients will **connect with the Query port**.
 - ***All three ports are required to be open/allocated for normal server behavior!***
 
 | Port | Default (UDP) |
 |---------|---------|
-| **Game (Primary Port in Pterodactyl)** | 7777 |
+| **Telemetry** | 7777 |
 | Beacon | 15000 |
 | Server Query (Port clients connect with) | 15777 |
 
