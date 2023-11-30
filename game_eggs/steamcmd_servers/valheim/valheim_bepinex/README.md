@@ -28,9 +28,15 @@ In particular, the changes from base BepInEx releases are:
 - Updated Doorstop configuration and BepInEx to allow to load unstripped DLLs without having to overwrite game DLLs.
 - Added scripts necessary to run both game and dedicated server on Linux machines
 
+## Automatic Mod Downloading
+Mods can be downloaded from modpacks automatically by entering the "dependency string" for the modpack from https://valheim.thunderstore.io/
+
 ## Server Ports
 
 | Port  | default |
 |-------|---------|
 | Game  | 2456    |
 | Query | 2457    |
+
+## Updating
+Because the `DOORSTOP_CORLIB_OVERRIDE_PATH=./unstripped_corlib;` has been removed from the startup with the latest update of this egg. If your server is already running, update the startup manually.
