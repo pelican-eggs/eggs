@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-01T17:09:31+01:00",
+    "name": "ntfy",
+    "author": "me@cjstevenson.com",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/ntfy serve --config server\/server.yml",
+    "config": {
+        "files": "{\r\n    \"server\/server.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listen-http\": \":{{server.build.default.port}}\",\r\n            \"cache-file\": \".\/cache.db\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"INFO Listening on\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "## NTFY Installscript\r\n\r\n## update system\r\napt update\r\napt -y install --no-install-recommends curl tar\r\n\r\n## Variables\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\ncd \/mnt\/server\r\n\r\n## install ntfy\r\necho -e \"download url: https:\/\/github.com\/binwiederhier\/ntfy\/releases\/download\/v2.8.0\/ntfy_2.8.0_linux_${ARCH}.tar.gz\"\r\necho -e \"downloading ntfy $VERSION\"\r\ncurl -sSL -o ntfy_2.8.0_linux_${ARCH}.tar.gz https:\/\/github.com\/binwiederhier\/ntfy\/releases\/download\/v2.8.0\/ntfy_2.8.0_linux_${ARCH}.tar.gz\r\n\r\necho -e \"unzipping ntfy exc\"\r\ntar -zxvf .\/ntfy_2.8.0_linux_${ARCH}.tar.gz ntfy\r\n\r\n## clear temp stuff\r\necho -e \"deleting temp files\"\r\nrm .\/ntfy_2.8.0_linux_${ARCH}.tar.gz\r\nrm -r .\/ntfy_2.8.0_linux_${ARCH}\r\n\r\necho -e \"creating cache.db\"\r\ntouch cache.db\r\n\r\necho -e \"-------------------------------------------------\"\r\necho -e \"Installation completed\"\r\necho -e \"-------------------------------------------------\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
