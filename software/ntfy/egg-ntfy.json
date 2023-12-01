@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-01T17:09:31+01:00",
+    "exported_at": "2023-12-01T20:43:46+01:00",
     "name": "ntfy",
     "author": "me@cjstevenson.com",
     "description": null,
@@ -18,14 +18,25 @@
         "files": "{\r\n    \"server\/server.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"listen-http\": \":{{server.build.default.port}}\",\r\n            \"cache-file\": \".\/cache.db\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"INFO Listening on\"\r\n}",
         "logs": "{}",
-        "stop": "^^C"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "## NTFY Installscript\r\n\r\n## update system\r\napt update\r\napt -y install --no-install-recommends curl tar\r\n\r\n## Variables\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\ncd \/mnt\/server\r\n\r\n## install ntfy\r\necho -e \"download url: https:\/\/github.com\/binwiederhier\/ntfy\/releases\/download\/v2.8.0\/ntfy_2.8.0_linux_${ARCH}.tar.gz\"\r\necho -e \"downloading ntfy $VERSION\"\r\ncurl -sSL -o ntfy_2.8.0_linux_${ARCH}.tar.gz https:\/\/github.com\/binwiederhier\/ntfy\/releases\/download\/v2.8.0\/ntfy_2.8.0_linux_${ARCH}.tar.gz\r\n\r\necho -e \"unzipping ntfy exc\"\r\ntar -zxvf .\/ntfy_2.8.0_linux_${ARCH}.tar.gz ntfy\r\n\r\n## clear temp stuff\r\necho -e \"deleting temp files\"\r\nrm .\/ntfy_2.8.0_linux_${ARCH}.tar.gz\r\nrm -r .\/ntfy_2.8.0_linux_${ARCH}\r\n\r\necho -e \"creating cache.db\"\r\ntouch cache.db\r\n\r\necho -e \"-------------------------------------------------\"\r\necho -e \"Installation completed\"\r\necho -e \"-------------------------------------------------\"",
+            "script": "## NTFY Installscript\r\n\r\n## update system\r\napt update\r\napt -y install --no-install-recommends curl tar jq ca-certificates\r\n\r\n## Variables\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\nMATCH=linux_${ARCH}.tar.gz\r\n\r\ncd \/mnt\/server\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/binwiederhier\/ntfy\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/binwiederhier\/ntfy\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n## install ntfy\r\necho -e \"download url: $DOWNLOAD_URL\"\r\necho -e \"downloading ntfy $VERSION\"\r\ncurl -sSL -o ntfy_linux_${ARCH}.tar.gz $DOWNLOAD_URL\r\n\r\necho -e \"unzipping ntfy exc\"\r\ntar -zxvf .\/ntfy_linux_${ARCH}.tar.gz \r\n\r\nmv .\/*_linux_${ARCH}\/ntfy .\r\n\r\n## clear temp stuff\r\necho -e \"deleting temp files\"\r\nrm .\/ntfy_linux_${ARCH}.tar.gz\r\nrm -r .\/*_linux_${ARCH}\r\n\r\necho -e \"creating cache.db\"\r\ntouch cache.db\r\n\r\necho -e \"-------------------------------------------------\"\r\necho -e \"Installation completed\"\r\necho -e \"-------------------------------------------------\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "Version",
+            "description": "Version for (re)installation such as 2.8.0. Defaults to latest version if no valid version is provided",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:20",
+            "field_type": "text"
+        }
+    ]
 }
