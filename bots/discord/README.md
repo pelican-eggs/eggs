@@ -2,6 +2,11 @@
 
 ## Some of these bots support other services but are primarily Discord bots
 
+### [Aoede](aoede)
+
+[codetheweb/aoede](https://github.com/codetheweb/aoede)
+🎧 a self-hosted Spotify → Discord music bot
+
 ### [ATLauncher Discord Bot](atlbot)
 
 [ATLauncher/discord-bot](https://github.com/ATLauncher/discord-bot)
