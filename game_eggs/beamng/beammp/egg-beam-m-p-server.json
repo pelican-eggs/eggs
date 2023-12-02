@@ -60,7 +60,7 @@
         },
         {
             "name": "Authentication Key",
-            "description": "The authentication key for your server. A key can be obtained from the BeamMP keymaster at https:\/\/beamng-mp.com\/k\/dashboard",
+            "description": "The authentication key for your server. A key can be obtained from the BeamMP keymaster at https:\/\/keymaster.beammp.com",
             "env_variable": "AUTHKEY",
             "default_value": "",
             "user_viewable": true,
