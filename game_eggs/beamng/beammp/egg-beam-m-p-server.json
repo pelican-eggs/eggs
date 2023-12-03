@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-14T18:49:02+02:00",
+    "exported_at": "2023-12-03T08:37:49+08:00",
     "name": "BeamMP Servers",
     "author": "noah@noahserver.online",
     "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point through which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
