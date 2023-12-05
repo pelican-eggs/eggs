@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-03T08:37:49+08:00",
+    "exported_at": "2023-12-05T18:28:42+01:00",
     "name": "BeamMP Servers",
     "author": "noah@noahserver.online",
     "description": "This is the server for the multiplayer mod BeamMP for the game BeamNG.drive. The server is the point through which all clients communicate. You can write lua mods for the server, detailed instructions on the BeamMP Wiki.",
@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": ".\/BeamMP-Server",
     "config": {
-        "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.DESCRIPTION}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\",\r\n            \"LogChat =\": \"LogChat = \\\"{{env.LOGCHAT}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"ServerConfig.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Name =\": \"Name = \\\"{{env.NAME}}\\\"\",\r\n            \"Port =\": \"Port = {{server.build.default.port}}\",\r\n            \"AuthKey =\": \"AuthKey = \\\"{{env.AUTHKEY}}\\\"\",\r\n            \"Private =\": \"Private = {{env.PRIVATE}}\",\r\n            \"MaxPlayers =\": \"MaxPlayers = {{server.build.env.MAX_PLAYERS}}\",\r\n            \"Description =\": \"Description = \\\"{{env.DESCRIPTION}}\\\"\",\r\n            \"MaxCars =\": \"MaxCars = {{env.MAX_CARS}}\",\r\n            \"Map =\": \"Map = \\\"{{env.MAP}}\\\"\",\r\n            \"LogChat =\": \"LogChat = {{env.LOGCHAT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[INFO] Vehicle data network online\"\r\n}",
         "logs": "{}",
         "stop": "exit"
@@ -55,7 +55,7 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:8",
+            "rules": "required|string|max:12",
             "field_type": "text"
         },
         {
