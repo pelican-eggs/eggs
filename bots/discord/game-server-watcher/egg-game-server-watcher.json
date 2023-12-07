@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-06T09:05:57+00:00",
+    "exported_at": "2023-12-07T05:10:22+00:00",
     "name": "Game Server Watcher",
     "author": "a-sync@devs.space",
     "description": "A simple discord\/telegram\/slack bot that can be hosted on a free service to monitor your game servers and players in style. \ud83d\ude0e",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt-get update && apt-get install ca-certificates git -yq --no-install-suggests --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages\r\ncd \/mnt\/server\r\ngit config --global --add safe.directory \/mnt\/server\r\ngit clone https:\/\/github.com\/a-sync\/game-server-watcher.git . || git pull\r\nnpm install && npm update gamedig && npm run build\r\nnpm prune --omit=dev",
+            "script": "#!\/bin\/bash\r\napt-get update && apt-get install ca-certificates git -yq --no-install-suggests --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages\r\ncd \/mnt\/server\r\ngit config --global --add safe.directory \/mnt\/server\r\ngit clone https:\/\/github.com\/a-sync\/game-server-watcher.git . || git pull\r\nnpm install --no-save && npm update gamedig && npm run build\r\nnpm prune --omit=dev",
             "container": "node:20-bullseye-slim",
             "entrypoint": "bash"
         }
