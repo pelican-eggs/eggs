@@ -197,7 +197,6 @@
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [Dedicated](steamcmd_servers/scpsl/dedicated)
   * [Exiled](steamcmd_servers/scpsl/exiled)
-  * [Multiadmin](steamcmd_servers/scpsl/multiadmin)
 * [Soldat](steamcmd_servers/soldat)
 * [Sons of the Forest](steamcmd_servers/sonsoftheforest)
 * [Space Engineers](steamcmd_servers/space_engineers)

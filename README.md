@@ -302,7 +302,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
   * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
-  * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
 * [Sons of the Forest](game_eggs/steamcmd_servers/sonsoftheforest)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
