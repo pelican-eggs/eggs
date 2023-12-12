@@ -1,4 +1,4 @@
-# Muse
+# Aoede
 
 ### Authors / Contributors
 <!-- prettier-ignore-start -->
