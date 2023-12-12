@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-05-08T21:54:05+02:00",
-    "name": "Postgres",
+    "exported_at": "2023-12-12T15:32:12+01:00",
+    "name": "Postgres 14",
     "author": "parker@parkervcp.com",
     "description": "A default Postgres install that is not really editable.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:postgres_14"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:postgres_14": "ghcr.io\/parkervcp\/yolks:postgres_14"
+    },
     "file_denylist": [],
     "startup": "postgres  -D \/home\/container\/postgres_db\/",
     "config": {
@@ -35,7 +35,8 @@
             "default_value": "pterodactyl",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Superuser Password",
@@ -44,7 +45,8 @@
             "default_value": "Pl3453Ch4n63M3!",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
