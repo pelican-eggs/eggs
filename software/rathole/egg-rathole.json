@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-15T15:44:13+03:00",
+    "name": "Rathole",
+    "author": "tunayada@gmail.com",
+    "description": "A rathole server egg designed to work with pterodactyl.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:rust_latest": "ghcr.io\/parkervcp\/yolks:rust_latest"
+    },
+    "file_denylist": [],
+    "startup": ".\/rathole server.toml",
+    "config": {
+        "files": "{\r\n    \"server.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"bind_addr=\\\"0.0.0.0:-1\\\"\": \"bind_addr=\\\"0.0.0.0:{{server.build.default.port}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": [\r\n        \"Listening at \"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y unzip wget\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/github.com\/rapiz1\/rathole\/releases\/download\/v0.5.0\/rathole-x86_64-unknown-linux-gnu.zip\r\n\r\nunzip rathole-x86_64-unknown-linux-gnu.zip\r\nrm rathole-x86_64-unknown-linux-gnu.zip\r\ntouch server.toml\r\nprintf \"[server]\\nbind_addr=\\\"0.0.0.0:-1\\\"\\n\\n[server.services.test]\\ntoken=\\\"a_hidden_token\\\"\\nbind_addr=\\\"0.0.0.0:3506\\\"\" > server.toml\r\n\r\nexport HOME=\/mnt\/server\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
