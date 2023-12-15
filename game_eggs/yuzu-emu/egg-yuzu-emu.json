@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-15T18:17:15+01:00",
+    "exported_at": "2023-12-15T21:41:29+01:00",
     "name": "YuzuEmu",
     "author": "me@basvandenboom.dev",
     "description": "Egg for hosting dedicated Yuzu multiplayer rooms.",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\n# Install build tools\r\necho \"deb http:\/\/deb.debian.org\/debian bullseye-backports main\" >> \/etc\/apt\/sources.list && \\\r\napt-get update && apt-get -y full-upgrade && \\\r\n    apt-get install -y build-essential wget git ccache ninja-build libssl-dev pkg-config libarchive-tools \\\r\n    cmake\/bullseye-backports cmake-data\/bullseye-backports\r\n\r\n\r\n# Shallow clone yuzu repository, since we delete the local copy afterwards\r\ngit clone --depth 1 -j4 --recursive --shallow-submodules https:\/\/github.com\/yuzu-emu\/yuzu-mainline.git \/mnt\/server\/yuzu-mainline\r\n\r\n# Download build tools and build\r\ngit clone --depth 1 https:\/\/github.com\/yuzu-emu\/yuzu-multiplayer-dedicated.git \/mnt\/server\/build-files\r\ncd \/mnt\/server\/yuzu-mainline && \/mnt\/server\/build-files\/.ci\/build.sh\r\n\r\n# Copy server binary to container root\r\ncp \/mnt\/server\/yuzu-mainline\/build\/bin\/yuzu-room \/mnt\/server\/yuzu-room\r\n\r\n# Delete git repo's to save disk space.\r\nrm -rf \/mnt\/server\/yuzu-mainline && rm -rf \/mnt\/server\/build-files",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
