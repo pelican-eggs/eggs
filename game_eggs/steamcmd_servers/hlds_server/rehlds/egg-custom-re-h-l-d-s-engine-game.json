@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-14T11:07:10+01:00",
+    "exported_at": "2023-12-16T13:44:48+01:00",
     "name": "Custom ReHLDS Engine Game",
     "author": "shigbeard@ndlee.com",
     "description": "This option allows modifying the startup arguments and other details to run a custom HLDS based game on the panel, substituting the official Valve engine binaries with the ReHLDS binaries.",
@@ -122,12 +122,12 @@
         },
         {
             "name": "Beta branch",
-            "description": "",
+            "description": "Leave empty for the public branch, for the legacy version select steam_legacy.",
             "env_variable": "SRCDS_BETAID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:,steam_legacy",
+            "rules": "nullable|string|in:,steam_legacy",
             "field_type": "text"
         },
         {
