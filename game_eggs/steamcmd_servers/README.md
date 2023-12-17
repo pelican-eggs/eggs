@@ -256,6 +256,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Subnautica: Nitrox Mod](subnautica_nitrox_mod)
 
+## Survive The Nights
+
+[Survive The Nights](survive_the_nights)
+
 ## Sven coop
 
 [Sven Co-op](svencoop)

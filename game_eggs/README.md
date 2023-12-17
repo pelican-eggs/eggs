@@ -207,6 +207,7 @@
 * [Stationeers](steamcmd_servers/stationeers)
 * [Stormworks: Build and Rescue](steamcmd_servers/stormworks)
 * [Subnautica: Nitrox Mod](steamcmd_servers/subnautica_nitrox_mod)
+* [Survive The Nights](steamcmd_servers/survive_the_nights)
 * [Sven Co-op](steamcmd_servers/svencoop)
 * [Swords 'n Magic and Stuff](steamcmd_servers/swords_'n_Magic_and_Stuff)
 * [Team Fortress 2 Classic](steamcmd_servers/team_fortress_2_classic)

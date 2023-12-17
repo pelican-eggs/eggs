@@ -1,0 +1,61 @@
+{
+  
+	"SystemRanks":[
+    {
+	  "Index_DontChange":-2,
+      "Name_DontChange":"Console",
+      "ChatPrefix":"[Console]",
+      "PrefixColour":"white"
+    },
+	{
+	  "Index_DontChange":-1,
+      "Name_DontChange":"Whisper",
+      "ChatPrefix":"[Whisper]",
+      "PrefixColour":"darkgrey"
+    }
+	],
+	"UserRanks":[
+    {
+      "Index":0,
+      "Rank":"User",
+      "ChatPrefix":"[User]",
+      "PrefixColour":"white",
+      "Permissions":["Tell", "Reply", "ServerInfo"]
+    },
+    {
+      "Index":1,
+      "Rank":"Mod",
+      "ChatPrefix":"[Mod]",
+      "PrefixColour":"yellow",
+      "Permissions":["Tell", "Reply", "Mute", "UnMute", "Kick", "GodSelf", "SuperSprint", "cmdGroup.TP", "DropAllSelf", "DropAllOthers",  "Up" ,"ServerInfo"]
+    },
+    {
+      "Index":2,
+      "Rank":"Admin",
+      "ChatPrefix":"[Admin]",
+      "PrefixColour":"darkred",
+      "Permissions":["*"]
+    },
+    {
+      "Index":3,
+      "Rank":"Owner",
+      "ChatPrefix":"[Owner]",
+      "PrefixColour":"purple",
+      "Permissions":["Tell", "Reply", "Mute", "UnMute", "Kick", "SetRank", "Ban", "UnBan", "ServerInfo"]
+    }        
+  ], 
+  "CommandGroups":[
+    {
+      "GroupName":"TP",
+      "Permissions":["TpToLocation","TpToLocation", "TpToPlayer", "TpPlayerToMe", "TpPlayerToPlayer"]
+    },
+    {
+      "GroupName":"Weather",
+      "Permissions":["SetTime", "SetMonth", "SetWeather", "WeatherOnOff"]
+    },
+    {
+      "GroupName":"ExampleGroupNinjaMod",
+      "Permissions":["Kick", "Mute", "GodSelf"]
+    }
+    ]
+}
