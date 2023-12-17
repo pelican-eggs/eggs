@@ -72,9 +72,9 @@ enable-player-address-logging = true
 [servers]
 # Configure your servers here. Each key represents the server's name, and the value
 # represents the IP address of the server to connect to.
-lobby = "127.0.0.1:30066"
-factions = "127.0.0.1:30067"
-minigames = "127.0.0.1:30068"
+lobby = "172.18.0.1:30066"
+factions = "172.18.0.1:30067"
+minigames = "172.18.0.1:30068"
 
 # In what order we should try servers when a player logs in or is kicked from a server.
 try = [
