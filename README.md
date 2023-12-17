@@ -233,6 +233,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Spacestation 14](game_eggs/spacestation_14)
 
+[Sonic Robo Blast 2](srb2)
+
 [Rimworld](game_eggs/rimworld)
 
 * [Open World](game_eggs/rimworld/open_world)

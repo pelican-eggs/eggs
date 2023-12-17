@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-17T19:58:12+01:00",
+    "name": "Sonic Robo Blast 2",
+    "author": "josdekurk@gmail.com",
+    "description": "Sonic Robo Blast 2 is a 3D open-source Sonic the Hedgehog fangame built using a modified version of the Doom Legacy port of Doom. SRB2 is closely inspired by the original Sonic games from the Sega Genesis, and attempts to recreate the design in 3D. While SRB2 isn't fully completed, it already features tons of levels, enemies, speed, and quite a lot of the fun that the original Sonic games provided.",
+    "features": null,
+    "docker_images": {
+        "Wine_Latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "xvfb-run --auto-servernum wine srb2win.exe -dedicated -room {{ROOM_ID}} -password {{SERVER_PASSWORD}} -serverport {{SERVER_PORT}} -clientport {{CLIENT_PORT}} -bindaddr 0.0.0.0 {{SERVER_IP}} -home \/home\/container {{EXTRA_FLAGS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Entering main game loop\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\r\n\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/STJr\/SRB2\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/STJr\/SRB2\/releases\")\r\nMATCH=Full.zip\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i \"${MATCH}\")\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i \"${MATCH}\")\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\ncd \/mnt\/server\r\ncurl -sSL -o SRB2-Full.zip ${DOWNLOAD_URL}\r\nunzip -o SRB2-Full.zip\r\nrm SRB2-Full.zip\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Admin password",
+            "description": "Sets the server password, which players can use to log in as netgame administrators.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64|min:10",
+            "field_type": "text"
+        },
+        {
+            "name": "Client Port",
+            "description": "Specifies the UDP port to use when joining a server.",
+            "env_variable": "CLIENT_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Room ID",
+            "description": "Advertises the server on the Master Server. ID specifies the room in which the server is hosted: 33 is the Standard room, while 28 is the Casual room.",
+            "env_variable": "ROOM_ID",
+            "default_value": "33",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|in:28,33",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:60",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Aditional flags",
+            "description": "Here you can specify extra flags like -ultimatemode",
+            "env_variable": "EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        }
+    ]
+}
