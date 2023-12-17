@@ -28,6 +28,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 **Note:** these are actual Discord bot eggs, NOT language eggs. The old language eggs (discord-js-generic, discord-py-generic, etc) have been moved to the [generic languages section](#generic-languages).
 
+* [Aoede](/bots/discord/aoede) Rust
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python

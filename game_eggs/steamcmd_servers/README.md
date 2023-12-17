@@ -8,7 +8,7 @@ This is a collection of servers that use SteamCMD to install.
 
 ## ARK: Survival Ascended
 
-[ARK: Survival Ascended](ark_survival_asceneded)
+[ARK: Survival Ascended](ark_survival_ascended)
 
 ## ARK: Survival Evolved
 
