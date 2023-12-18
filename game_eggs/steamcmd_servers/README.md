@@ -307,3 +307,6 @@ This is a collection of servers that use SteamCMD to install.
   * [Valheim Vanilla](valheim/valheim_vanilla)
   * [Valheim BepInEx](valheim/valheim_bepinex)
   * [Valheim Plus Mod](valheim/valheim_plus)
+
+## Wurm Unlimited
+* [Wurm Unlimited](wurm_unlimited/)

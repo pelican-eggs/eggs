@@ -226,6 +226,7 @@
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim BepInEx](steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
+* [Wurm Unlimited](steamcmd_servers/wurm_unlimited/)
 
 [Teeworlds](teeworlds)
 
