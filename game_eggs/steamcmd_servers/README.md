@@ -251,6 +251,8 @@ This is a collection of servers that use SteamCMD to install.
 ## Stationeers
 
 [Stationeers](stationeers)
+  * [Stationeers Vanilla](stationeers/stationeers_vanilla)
+  * [Stationeers BepInEx](stationeers/stationeers_bepinex)
 
 ## Stormworks: Build and Rescue
 

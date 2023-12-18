@@ -312,6 +312,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Squad](game_eggs/steamcmd_servers/squad)
 * [Starbound](game_eggs/steamcmd_servers/starbound)
 * [Stationeers](game_eggs/steamcmd_servers/stationeers)
+  * [Stationeers Vanilla](game_eggs/steamcmd_servers/stationeers/stationeers_vanilla)
+  * [Stationeers BepInEx](game_eggs/steamcmd_servers/stationeers/stationeers_bepinex)
 * [Stormworks: Build and Rescue](game_eggs/steamcmd_servers/stormworks)
 * [Subnautica: Nitrox Mod](game_eggs/steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](game_eggs/steamcmd_servers/svencoop)

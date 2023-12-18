@@ -206,6 +206,8 @@
 * [Squad](steamcmd_servers/squad)
 * [Starbound](steamcmd_servers/starbound)
 * [Stationeers](steamcmd_servers/stationeers)
+  * [Stationeers Vanilla](steamcmd_servers/stationeers/stationeers_vanilla)
+  * [Stationeers BepInEx](steamcmd_servers/stationeers/stationeers_bepinex)
 * [Stormworks: Build and Rescue](steamcmd_servers/stormworks)
 * [Subnautica: Nitrox Mod](steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](steamcmd_servers/svencoop)
