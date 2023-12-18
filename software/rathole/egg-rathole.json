@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-16T14:03:42+01:00",
+    "name": "Rathole",
+    "author": "tunayada@gmail.com",
+    "description": "A lightweight and high-performance reverse proxy for NAT traversal, written in Rust. An alternative to frp and ngrok.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:rust_latest": "ghcr.io\/parkervcp\/yolks:rust_latest"
+    },
+    "file_denylist": [],
+    "startup": ".\/rathole server.toml",
+    "config": {
+        "files": "{\r\n    \"server.toml\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"server.bind_addr\": \"\\\"0.0.0.0:{{server.build.default.port}}\\\"\",\r\n            \"server.services.test.token\": \"\\\"{{server.build.env.TOKEN}}\\\"\",\r\n            \"server.services.test.bind_addr\": \"\\\"0.0.0.0:{{server.build.default.port}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": [\r\n        \"Listening at \"\r\n    ]\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## get release info and download links\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/rapiz1\/rathole\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/rapiz1\/rathole\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"aarch64\")\r\n\r\nif [\"${ARCH}\" == \"aarch64\"]; then\r\n    MATCH=rathole-aarch64-unknown-linux-musl.zip\r\nelse\r\n    MATCH=rathole-x86_64-unknown-linux-gnu.zip\r\nfi\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho \"Download url: ${DOWNLOAD_URL}\"\r\ncurl -ssL -o rathole.zip ${DOWNLOAD_URL}\r\nunzip rathole.zip\r\nrm rathole.zip\r\ntouch server.toml\r\n\r\nprintf \"[server]\\nbind_addr=\\\"0.0.0.0:${SERVER_PORT}\\\"\\n\\n[server.services.test]\\ntoken=\\\"${TOKEN}\\\"\\nbind_addr=\\\"0.0.0.0:${SERVER_PORT}\\\"\" > server.toml\r\nchmod +x rathole\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Secret",
+            "description": "Your random token",
+            "env_variable": "TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|min:5|max:60",
+            "field_type": "text"
+        }
+    ]
+}
