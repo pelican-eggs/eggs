@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-18T14:31:49+01:00",
+    "exported_at": "2023-12-18T14:40:15+01:00",
     "name": "Wurm Unlimited",
     "author": "josdekurk@gmail.com",
     "description": "Wurm Unlimited is the standalone version of the fantasy sandbox world Wurm Online, the MMORPG where the players are in charge! A pioneer in the ideas of player influence, crafting and adventure, it is now one of the most deep and feature packed true sandbox experiences available.",
@@ -95,7 +95,7 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|in:true,false",
+            "rules": "required|string|in:true,false",
             "field_type": "text"
         },
         {
