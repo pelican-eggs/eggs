@@ -145,6 +145,7 @@
 * [BATTALION: Legacy](steamcmd_servers/battalion_legacy)
 * [Black Mesa](steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](steamcmd_servers/citadel)
+* [Colony Survival](steamcmd_servers/colony_survival)
 * [Conan Exiles](steamcmd_servers/conan_exiles)
 * [Core Keeper](steamcmd_servers/core_keeper)
 * [Counter-Strike](steamcmd_servers/counter_strike/)

@@ -253,6 +253,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [BATTALION: Legacy](game_eggs/steamcmd_servers/battalion_legacy)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
+* [Colony Survival](game_eggs/steamcmd_servers/colony_survival)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Counter-Strike](game_eggs/steamcmd_servers/counter_strike/)

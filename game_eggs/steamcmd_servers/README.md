@@ -48,6 +48,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [citadel](citadel)
 
+## Colony Survival
+
+[Colony Survival](colony_survival)
+
 ## Conan Exiles
 
 [Conan Exiles](conan_exiles)
