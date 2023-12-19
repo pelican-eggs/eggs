@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-18T18:44:14+01:00",
-    "name": "MariaDB",
+    "exported_at": "2023-12-19T09:54:17+01:00",
+    "name": "MariaDB 10.3",
     "author": "parker@parkervcp.com",
     "description": "One of the most popular database servers. Made by the original developers of MySQL. Guaranteed to stay open source.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:mariadb_10.3": "ghcr.io\/parkervcp\/yolks:mariadb_10.3"
+        "MariaDB 10.3": "ghcr.io\/parkervcp\/yolks:mariadb_10.3"
     },
     "file_denylist": [],
     "startup": "{ \/usr\/sbin\/mysqld & } && sleep 5 && mysql -u root",
