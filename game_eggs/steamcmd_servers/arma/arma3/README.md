@@ -75,14 +75,14 @@ ___
 
 ### Installation Requirements
 
-- A valid, **real** Steam account, with **Steam Guard turned off**, is required to install the server (default "anonymous" login cannot be used). For security reasons it is [recommended by Valve](https://developer.valvesoftware.com/wiki/SteamCMD#With_a_Steam_account) that you create a new Steam account just for your dedicated servers. This account *does not* need to own Arma 3.
+- A valid, **real** Steam account, with **Steam Guard turned off**, is required to install the server (default "anonymous" login cannot be used). This account *does not* need to own Arma 3. For security reasons it is [recommended by Valve](https://developer.valvesoftware.com/wiki/SteamCMD#With_a_Steam_account) that you create a new Steam account just for your dedicated servers.
 - For automatic Steam Workshop mod downloading to work, the Steam account *does* need to own Arma 3. However, this is optional functionality, and mods can be manually uploaded to the server if desired. Hosts may feel free to change the "Disable Mod Downloads/Updates" variable to `1` if they would not like to offer it's functionality to clients.
 
 ___
 
 ### Server Ports
 
-Default server ports are listed below, but the Main port can be any port. There are three more ports after the Main port are relative to the Main port (For example: The BattlEye port is always 4 ports higher than the main port). **All four ports are required for normal server behavior.** It is [recommended](https://community.bistudio.com/wiki/Arma_3:_Dedicated_Server#Port_Forwarding) that each server be 100 ports separate from each other.
+Default server ports are listed below, but the Main port can be any port. There are three more ports after the Main port that are relative to the Main port (For example: The BattlEye port is always 4 ports higher than the Main port). **All four ports are required for normal server behavior.** It is [recommended](https://community.bistudio.com/wiki/Arma_3:_Dedicated_Server#Port_Forwarding) that each server be 100 ports separate from each other.
 
 | Port | Default (UDP) |
 |---------|---------|
@@ -102,6 +102,26 @@ ___
 | Storage | 10 GB | 50+ GB (depends on how many mods are installed) |
 | Network | 0.512 Mbit/s/player | 1-5 Mbit/s/player |
 | Host OS | Most stable Linux OS branches should work | Using the latest kernel version for your installed OS can prevent some edge-case installation/boot issues. |
+
+___
+
+### RCON
+
+External/Compatible RCON clients can be used to connect to the server if the following requirements are met:
+
+1. An extra port is forwarded and assigned to the server in Pterodactyl. It is recommended to use the +5 port from the Main port (ie. if Main port is 2032, RCON port would be 2037). The +3 port **cannot** be used as it is reserved.
+2. `server.cfg` has `BattlEye = 1;`. Unfortunately, RCON cannot be used with BattlEye off.
+3. A `beserver_x64.cfg` file (or `beserver.cfg` if using 32-bit) is added to `/home/container/battleye/launch` with the following content:
+```
+RConPassword your_rcon_password
+RConPort your_rcon_port
+```
+
+___
+
+### Mounting Workshop Mods
+
+Server hosts may wish to save space and avoid download issues by mounting large and/or common mods. Unfortunately, Arma only allows mods to be loaded from directories down-stream of the server binary (ie. `/home/container/*`. Docker limitations disallow Pterodactyl from mounting mounts into `/home/container/*`. The only way around this that I can think of is to create a symlink with a destination that is outside of this location. If anyone knows a way around this, please open an Issue to let us know.
 
 ___
 
