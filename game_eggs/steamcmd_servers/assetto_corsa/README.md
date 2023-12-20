@@ -8,5 +8,8 @@ Asseto Corsa requires two ports, game port is UDP and WEB HTTP port is TCP.
 
 | Port        | default |
 |-------------|---------|
-| Game        | 9600   |
-| HTTP       | 8081   |
+| Game        | 9600    |
+| HTTP        | 8081    |
+
+## Freeroam + AI
+This egg uses: [GitHub](https://github.com/compujuckel/AssettoServer) [Website](https://assettoserver.org/)
