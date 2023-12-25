@@ -12,8 +12,6 @@ The current version of the server software is slightly buggy, and as of this wri
 
 They include a `README.txt` file with the server software, that includes a description of most of the variables, but not more than that. This is only obtainable via the SteamCMD tool.
 
-The `README.txt` also specifies that you can use variables such as `-steamservername` appended to the launch command, but that doesn't work properly. Therefore this egg is designed to manually parse/edit the `GameServerSettings.ini` file, with the values entered in the variables in Pterodactyl.
-
 ## Installation/System Requirements
 
 Requires a 64-bit processor and operating system
