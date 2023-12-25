@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-25T01:52:34+01:00",
+    "exported_at": "2023-12-25T11:27:01+01:00",
     "name": "HumanitZ",
     "author": "admin@marx.ps",
     "description": "HumanitZ is a co-op, isometric, open world survival game in a world ended by the zombie outbreak. As one of the few human survivors, try to last as long as \u201chumanly\u201d possible. The past can\u2019t be changed, but you can make a difference today for the future of humanity.",
@@ -13,9 +13,9 @@
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": ".\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping TSSGame -log -port={{SERVER_PORT}} -queryport={{QUERY_PORT}}",
+    "startup": ".\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping TSSGame -log -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -steamservername=\"{{SERVER_NAME}}\"",
     "config": {
-        "files": "{\r\n    \"TSSGame\/GameServerSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName=\": \"ServerName={{server.build.env.ServerName}}\",\r\n            \"Password=\\\"\\\"\": \"Password=\\\"{{server.build.env.Password}}\\\"\",\r\n            \"SaveName=\\\"\\\"\": \"SaveName=\\\"{{server.build.env.SaveName}}\\\"\",\r\n            \"AdminPass=\\\"\\\"\": \"AdminPass=\\\"{{server.build.env.AdminPass}}\\\"\",\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MaxPlayers}}\",\r\n            \"OnlyAllowedPlayers=\": \"OnlyAllowedPlayers={{server.build.env.OnlyAllowedPlayers}}\",\r\n            \"SaveIntervalSec=\": \"SaveIntervalSec={{server.build.env.SaveIntervalSec}}\",\r\n            \"NoDeathFeedback=\": \"NoDeathFeedback={{server.build.env.NoDeathFeedback}}\",\r\n            \"PermaDeath=\": \"PermaDeath={{server.build.env.PermaDeath}}\",\r\n            \"OnDeath=\": \"OnDeath={{server.build.env.OnDeath}}\",\r\n            \"PVP=\": \"PVP={{server.build.env.PVP}}\",\r\n            \"ClearInfection=\": \"ClearInfection={{server.build.env.ClearInfection}}\",\r\n            \"EagleEye=\": \"EagleEye={{server.build.env.EagleEye}}\",\r\n            \"AirDrop=\": \"AirDrop={{server.build.env.AirDrop}}\",\r\n            \"WeaponBreak=\": \"WeaponBreak={{server.build.env.WeaponBreak}}\",\r\n            \"MultiplayerSleep=\": \"MultiplayerSleep={{server.build.env.MultiplayerSleep}}\",\r\n            \"LootRespawn=\": \"LootRespawn={{server.build.env.LootRespawn}}\",\r\n            \"LootRespawnTimer=\": \"LootRespawnTimer={{server.build.env.LootRespawnTimer}}\",\r\n            \"LootRarity=\": \"LootRarity={{server.build.env.LootRarity}}\",\r\n            \"AirDropInterval=\": \"AirDropInterval={{server.build.env.AirDropInterval}}\",\r\n            \"ZombieDiffHealth=\": \"ZombieDiffHealth={{server.build.env.ZombieDiffHealth}}\",\r\n            \"ZombieDiffSpeed=\": \"ZombieDiffSpeed={{server.build.env.ZombieDiffSpeed}}\",\r\n            \"ZombieDiffDamage=\": \"ZombieDiffDamage={{server.build.env.ZombieDiffDamage}}\",\r\n            \"HumanDifficulty=\": \"HumanDifficulty={{server.build.env.HumanDifficulty}}\",\r\n            \"ZombieAmountMulti=\": \"ZombieAmountMulti={{server.build.env.ZombieAmountMulti}}\",\r\n            \"HumanAmountMulti=\": \"HumanAmountMulti={{server.build.env.HumanAmountMulti}}\",\r\n            \"ZombieDogMulti=\": \"ZombieDogMulti={{server.build.env.ZombieDogMulti}}\",\r\n            \"ZombieRespawnTimer=\": \"ZombieRespawnTimer={{server.build.env.ZombieRespawnTimer}}\",\r\n            \"HumanRespawnTimer=\": \"HumanRespawnTimer={{server.build.env.HumanRespawnTimer}}\",\r\n            \"AnimalRespawnTimer=\": \"AnimalRespawnTimer={{server.build.env.AnimalRespawnTimer}}\",\r\n            \"StartingSeason=\": \"StartingSeason={{server.build.env.StartingSeason}}\",\r\n            \"DaysPerSeason=\": \"DaysPerSeason={{server.build.env.DaysPerSeason}}\",\r\n            \"DayDur=\": \"DayDur={{server.build.env.DayDur}}\",\r\n            \"NightDur=\": \"NightDur={{server.build.env.NightDur}}\",\r\n            \"VitalDrain=\": \"VitalDrain={{server.build.env.VitalDrain}}\",\r\n            \"DogEnabled=\": \"DogEnabled={{server.build.env.DogEnabled}}\",\r\n            \"DogNum=\": \"DogNum={{server.build.env.DogNum}}\",\r\n            \"RecruitDog=\": \"RecruitDog={{server.build.env.RecruitDog}}\",\r\n            \"BuildingHealth=\": \"BuildingHealth={{server.build.env.BuildingHealth}}\",\r\n            \"CompanionHealth=\": \"CompanionHealth={{server.build.env.CompanionHealth}}\",\r\n            \"CompanionDmg=\": \"CompanionDmg={{server.build.env.CompanionDmg}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"TSSGame\/GameServerSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName=\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"Password=\\\"\\\"\": \"Password=\\\"{{server.build.env.PASSWORD}}\\\"\",\r\n            \"SaveName=\\\"\\\"\": \"SaveName=\\\"{{server.build.env.SAVE_NAME}}\\\"\",\r\n            \"AdminPass=\\\"\\\"\": \"AdminPass=\\\"{{server.build.env.ADMIN_PASS}}\\\"\",\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"OnlyAllowedPlayers=\": \"OnlyAllowedPlayers={{server.build.env.ONLY_ALLOWED_PLAYERS}}\",\r\n            \"SaveIntervalSec=\": \"SaveIntervalSec={{server.build.env.SAVE_INTERVAL_SEC}}\",\r\n            \"NoDeathFeedback=\": \"NoDeathFeedback={{server.build.env.NO_DEATH_FEEDBACK}}\",\r\n            \"PermaDeath=\": \"PermaDeath={{server.build.env.PERMA_DEATH}}\",\r\n            \"OnDeath=\": \"OnDeath={{server.build.env.ON_DEATH}}\",\r\n            \"PVP=\": \"PVP={{server.build.env.PVP}}\",\r\n            \"ClearInfection=\": \"ClearInfection={{server.build.env.CLEAR_INFECTION}}\",\r\n            \"EagleEye=\": \"EagleEye={{server.build.env.EAGLE_EYE}}\",\r\n            \"AirDrop=\": \"AirDrop={{server.build.env.AIR_DROP}}\",\r\n            \"WeaponBreak=\": \"WeaponBreak={{server.build.env.WEAPON_BREAK}}\",\r\n            \"MultiplayerSleep=\": \"MultiplayerSleep={{server.build.env.MULTIPLAYER_SLEEP}}\",\r\n            \"LootRespawn=\": \"LootRespawn={{server.build.env.LOOT_RESPAWN}}\",\r\n            \"LootRespawnTimer=\": \"LootRespawnTimer={{server.build.env.LOOT_RESPAWN_TIMER}}\",\r\n            \"LootRarity=\": \"LootRarity={{server.build.env.LOOT_RARITY}}\",\r\n            \"AirDropInterval=\": \"AirDropInterval={{server.build.env.AIR_DROP_INTERVAL}}\",\r\n            \"ZombieDiffHealth=\": \"ZombieDiffHealth={{server.build.env.ZOMBIE_DIFF_HEALTH}}\",\r\n            \"ZombieDiffSpeed=\": \"ZombieDiffSpeed={{server.build.env.ZOMBIE_DIFF_SPEED}}\",\r\n            \"ZombieDiffDamage=\": \"ZombieDiffDamage={{server.build.env.ZOMBIE_DIFF_DAMAGE}}\",\r\n            \"HumanDifficulty=\": \"HumanDifficulty={{server.build.env.HUMAN_DIFFICULTY}}\",\r\n            \"ZombieAmountMulti=\": \"ZombieAmountMulti={{server.build.env.ZOMBIE_AMOUNT_MULTI}}\",\r\n            \"HumanAmountMulti=\": \"HumanAmountMulti={{server.build.env.HUMAN_AMOUNT_MULTI}}\",\r\n            \"ZombieDogMulti=\": \"ZombieDogMulti={{server.build.env.ZOMBIE_DOG_MULTI}}\",\r\n            \"ZombieRespawnTimer=\": \"ZombieRespawnTimer={{server.build.env.ZOMBIE_RESPAWN_TIMER}}\",\r\n            \"HumanRespawnTimer=\": \"HumanRespawnTimer={{server.build.env.HUMAN_RESPAWN_TIMER}}\",\r\n            \"AnimalRespawnTimer=\": \"AnimalRespawnTimer={{server.build.env.ANIMAL_RESPAWN_TIMER}}\",\r\n            \"StartingSeason=\": \"StartingSeason={{server.build.env.STARTING_SEASON}}\",\r\n            \"DaysPerSeason=\": \"DaysPerSeason={{server.build.env.DAYS_PER_SEASON}}\",\r\n            \"DayDur=\": \"DayDur={{server.build.env.DAY_DUR}}\",\r\n            \"NightDur=\": \"NightDur={{server.build.env.NIGHT_DUR}}\",\r\n            \"VitalDrain=\": \"VitalDrain={{server.build.env.VITAL_DRAIN}}\",\r\n            \"DogEnabled=\": \"DogEnabled={{server.build.env.DOG_ENABLED}}\",\r\n            \"DogNum=\": \"DogNum={{server.build.env.DOG_NUM}}\",\r\n            \"RecruitDog=\": \"RecruitDog={{server.build.env.RECRUIT_DOG}}\",\r\n            \"BuildingHealth=\": \"BuildingHealth={{server.build.env.BUILDING_HEALTH}}\",\r\n            \"CompanionHealth=\": \"CompanionHealth={{server.build.env.COMPANION_HEALTH}}\",\r\n            \"CompanionDmg=\": \"CompanionDmg={{server.build.env.COMPANION_DMG}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"LogKaiHelper: Session created!\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -71,7 +71,7 @@
         {
             "name": "Server Name",
             "description": "Name of the server",
-            "env_variable": "ServerName",
+            "env_variable": "SERVER_NAME",
             "default_value": "My HumanitZ Server",
             "user_viewable": true,
             "user_editable": true,
@@ -81,7 +81,7 @@
         {
             "name": "Server Password",
             "description": "Server password (if any)",
-            "env_variable": "Password",
+            "env_variable": "PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -91,7 +91,7 @@
         {
             "name": "Save Name",
             "description": "Name of the save-file for the server",
-            "env_variable": "SaveName",
+            "env_variable": "SAVE_NAME",
             "default_value": "DedicatedSaveMP",
             "user_viewable": true,
             "user_editable": true,
@@ -101,7 +101,7 @@
         {
             "name": "Admin Password",
             "description": "Password for the admin",
-            "env_variable": "AdminPass",
+            "env_variable": "ADMIN_PASS",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -111,7 +111,7 @@
         {
             "name": "Max Players",
             "description": "Maximum number of players allowed",
-            "env_variable": "MaxPlayers",
+            "env_variable": "MAX_PLAYERS",
             "default_value": "32",
             "user_viewable": true,
             "user_editable": true,
@@ -121,7 +121,7 @@
         {
             "name": "Only Allowed Players",
             "description": "Restrict server to allowed players only",
-            "env_variable": "OnlyAllowedPlayers",
+            "env_variable": "ONLY_ALLOWED_PLAYERS",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
@@ -131,7 +131,7 @@
         {
             "name": "Saving World Interval",
             "description": "Save game every X seconds",
-            "env_variable": "SaveIntervalSec",
+            "env_variable": "SAVE_INTERVAL_SEC",
             "default_value": "300",
             "user_viewable": true,
             "user_editable": true,
@@ -141,7 +141,7 @@
         {
             "name": "Permanent Death",
             "description": "0=Off, 1=Individual, 2=All",
-            "env_variable": "PermaDeath",
+            "env_variable": "PERMA_DEATH",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
@@ -151,7 +151,7 @@
         {
             "name": "On Death",
             "description": "0=Only lose backpack and weapon in hand, 1=Previous + pockets and backpack, 2=All previous + Equipment",
-            "env_variable": "OnDeath",
+            "env_variable": "ON_DEATH",
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
@@ -171,7 +171,7 @@
         {
             "name": "Clear Infection",
             "description": "0=Respawning does not rid you of the infection, 1=You lose it upon respawning",
-            "env_variable": "ClearInfection",
+            "env_variable": "CLEAR_INFECTION",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -181,7 +181,7 @@
         {
             "name": "Eagle Eye",
             "description": "1=Able to purchase the eagle eye skill, 0=You can't",
-            "env_variable": "EagleEye",
+            "env_variable": "EAGLE_EYE",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -191,7 +191,7 @@
         {
             "name": "Air Drop",
             "description": "1=Enabled, 0=Disabled",
-            "env_variable": "AirDrop",
+            "env_variable": "AIR_DROP",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -201,7 +201,7 @@
         {
             "name": "Weapon Durability",
             "description": "1=Weapons break when reaching 0% durability except crow bar, 0=Only improvised break at 0% durability",
-            "env_variable": "WeaponBreak",
+            "env_variable": "WEAPON_BREAK",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -211,7 +211,7 @@
         {
             "name": "Multiplayer Sleep",
             "description": "1=Time passes if everyone performs the sleep emote at the same time, 0=Passing time is disabled",
-            "env_variable": "MultiplayerSleep",
+            "env_variable": "MULTIPLAYER_SLEEP",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
@@ -221,7 +221,7 @@
         {
             "name": "Building Health",
             "description": "Nothing provided in docs regarding this variable. Default value is \"1\".",
-            "env_variable": "BuildingHealth",
+            "env_variable": "BUILDING_HEALTH",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -231,7 +231,7 @@
         {
             "name": "Loot Respawn",
             "description": "If loot respawns, how long does it take in seconds",
-            "env_variable": "LootRespawnTimer",
+            "env_variable": "LOOT_RESPAWN_TIMER",
             "default_value": "90",
             "user_viewable": true,
             "user_editable": true,
@@ -241,7 +241,7 @@
         {
             "name": "Loot Rarity",
             "description": "0=Scarce, 1=Low, 2=Default, 3=Plentiful, 4=Abundant",
-            "env_variable": "LootRarity",
+            "env_variable": "LOOT_RARITY",
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
@@ -251,7 +251,7 @@
         {
             "name": "Air Drop Interval",
             "description": "Air drop every X day",
-            "env_variable": "AirDropInterval",
+            "env_variable": "AIR_DROP_INTERVAL",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -261,7 +261,7 @@
         {
             "name": "Zombie Difficulty (Health)",
             "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
-            "env_variable": "ZombieDiffHealth",
+            "env_variable": "ZOMBIE_DIFF_HEALTH",
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
@@ -271,7 +271,7 @@
         {
             "name": "Zombie Difficulty (Speed)",
             "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
-            "env_variable": "ZombieDiffSpeed",
+            "env_variable": "ZOMBIE_DIFF_SPEED",
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
@@ -281,7 +281,7 @@
         {
             "name": "Zombie Difficulty (Damage)",
             "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
-            "env_variable": "ZombieDiffDamage",
+            "env_variable": "ZOMBIE_DIFF_DAMAGE",
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
@@ -291,7 +291,7 @@
         {
             "name": "Human Difficulty",
             "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
-            "env_variable": "HumanDifficulty",
+            "env_variable": "HUMAN_DIFFICULTY",
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
@@ -301,7 +301,7 @@
         {
             "name": "Zombie Amount Multiplier",
             "description": "Zombie spawn count multiplier",
-            "env_variable": "ZombieAmountMulti",
+            "env_variable": "ZOMBIE_AMOUNT_MULTI",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -311,7 +311,7 @@
         {
             "name": "Human Amount Multiplier",
             "description": "Hostile humans spawn count multiplier",
-            "env_variable": "HumanAmountMulti",
+            "env_variable": "HUMAN_AMOUNT_MULTI",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -321,7 +321,7 @@
         {
             "name": "Zombie Dog Multiplier",
             "description": "Zombie dog spawn count multiplier",
-            "env_variable": "ZombieDogMulti",
+            "env_variable": "ZOMBIE_DOG_MULTI",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -331,7 +331,7 @@
         {
             "name": "Zombie Respawn Timer",
             "description": "Time in minutes for zombies to respawn",
-            "env_variable": "ZombieRespawnTimer",
+            "env_variable": "ZOMBIE_RESPAWN_TIMER",
             "default_value": "90",
             "user_viewable": true,
             "user_editable": true,
@@ -341,7 +341,7 @@
         {
             "name": "Human Respawn Timer",
             "description": "Time in minutes for hostile humans to respawn",
-            "env_variable": "HumanRespawnTimer",
+            "env_variable": "HUMAN_RESPAWN_TIMER",
             "default_value": "90",
             "user_viewable": true,
             "user_editable": true,
@@ -351,7 +351,7 @@
         {
             "name": "Animal Respawn Timer",
             "description": "Time in minutes for animals to respawn",
-            "env_variable": "AnimalRespawnTimer",
+            "env_variable": "ANIMAL_RESPAWN_TIMER",
             "default_value": "90",
             "user_viewable": true,
             "user_editable": true,
@@ -361,7 +361,7 @@
         {
             "name": "Starting Season",
             "description": "0=Summer, 1=Autum, 2=Winter, 3=Spring",
-            "env_variable": "StartingSeason",
+            "env_variable": "STARTING_SEASON",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -371,7 +371,7 @@
         {
             "name": "Days Per Season",
             "description": "How many days each season lasts",
-            "env_variable": "DaysPerSeason",
+            "env_variable": "DAYS_PER_SEASON",
             "default_value": "5",
             "user_viewable": true,
             "user_editable": true,
@@ -381,7 +381,7 @@
         {
             "name": "Day Duration",
             "description": "Day duration in minutes",
-            "env_variable": "DayDur",
+            "env_variable": "DAY_DUR",
             "default_value": "40",
             "user_viewable": true,
             "user_editable": true,
@@ -391,7 +391,7 @@
         {
             "name": "Night Duration",
             "description": "Night duration in minutes",
-            "env_variable": "NightDur",
+            "env_variable": "NIGHT_DUR",
             "default_value": "20",
             "user_viewable": true,
             "user_editable": true,
@@ -401,7 +401,7 @@
         {
             "name": "Vital Drain",
             "description": "How fast your vitals drain 0=Slow, 1=Normal, 2=Fast",
-            "env_variable": "VitalDrain",
+            "env_variable": "VITAL_DRAIN",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -411,7 +411,7 @@
         {
             "name": "Dog Companions Enabled",
             "description": "Enable finding dog companions you can recruit",
-            "env_variable": "DogEnabled",
+            "env_variable": "DOG_ENABLED",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -421,7 +421,7 @@
         {
             "name": "Dog Companion Amount",
             "description": "Number of companion dogs that could spawn randomly",
-            "env_variable": "DogNum",
+            "env_variable": "DOG_NUM",
             "default_value": "4",
             "user_viewable": true,
             "user_editable": true,
@@ -431,7 +431,7 @@
         {
             "name": "Recruit Companion Dogs",
             "description": "Allow players to recruit companion dog",
-            "env_variable": "RecruitDog",
+            "env_variable": "RECRUIT_DOG",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -441,7 +441,7 @@
         {
             "name": "Companion Health",
             "description": "Dog companion health - 0=Low 1=Default 2=High",
-            "env_variable": "CompanionHealth",
+            "env_variable": "COMPANION_HEALTH",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -451,7 +451,7 @@
         {
             "name": "Companion Damage",
             "description": "Dog companion damage - 0=Low 1=Default 2=High",
-            "env_variable": "CompanionDmg",
+            "env_variable": "COMPANION_DMG",
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
@@ -461,7 +461,7 @@
         {
             "name": "No Death Feedback",
             "description": "0 to enable player died notification in chat - 1 to disable player died notification in chat.",
-            "env_variable": "NoDeathFeedback",
+            "env_variable": "NO_DEATH_FEEDBACK",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
