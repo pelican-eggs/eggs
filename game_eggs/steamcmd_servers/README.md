@@ -106,6 +106,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Holdfast: Nations At War](holdfast)
 
+## HumanitZ
+
+[HumanitZ](humanitz)
+
 ## Hurtworld
 
 [Hurtworld](hurtworld)

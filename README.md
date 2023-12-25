@@ -267,6 +267,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [HLDS Vanilla](game_eggs/steamcmd_servers/hlds_server/vanilla)
   * [ReHLDS](game_eggs/steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](game_eggs/steamcmd_servers/holdfast)
+* [HumanitZ](game_eggs/steamcmd_servers/humanitz)
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Icarus](game_eggs/steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
