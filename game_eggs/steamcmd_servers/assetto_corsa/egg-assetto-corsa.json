@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-20T19:03:46+01:00",
+    "exported_at": "2023-12-27T17:14:48+01:00",
     "name": "Assetto Corsa",
     "author": "admin@softwarenoob.com",
     "description": "Assetto Corsa (Italian for \"Race Setup\") is a sim racing video game developed by the Italian video game developer Kunos Simulazioni. It is designed with an emphasis on a realistic racing experience with support for extensive customization and moddability",
@@ -94,10 +94,10 @@
             "name": "HTTP Port",
             "description": "HTTP Port",
             "env_variable": "HTTP_PORT",
-            "default_value": "8081",
+            "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|int",
+            "rules": "nullable|int",
             "field_type": "text"
         },
         {
@@ -121,7 +121,7 @@
             "field_type": "text"
         },
         {
-            "name": "Windows param",
+            "name": "Windows Install",
             "description": "Required to always install and update the correct version of the game.",
             "env_variable": "WINDOWS_INSTALL",
             "default_value": "1",

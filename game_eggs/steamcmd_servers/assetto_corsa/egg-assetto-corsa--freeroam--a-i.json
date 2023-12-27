@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-20T18:56:45+01:00",
+    "exported_at": "2023-12-27T17:12:44+01:00",
     "name": "Assetto Corsa (Freeroam + AI)",
     "author": "josdekurk@gmail.com",
     "description": "Custom Assetto Corsa server with focus on freeroam",
@@ -22,22 +22,12 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl git jq tar\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/compujuckel\/AssettoServer\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/compujuckel\/AssettoServer\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i linux | head -1)\r\n    fi\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o assetto-server-linux.tar.gz ${DOWNLOAD_URL}\r\n\r\ntar xvf assetto-server-linux.tar.gz\r\nrm assetto-server-linux.tar.gz\r\nchmod +x AssettoServer\r\n\r\nmkdir cfg\/\r\ncd cfg\/\r\n[ -f \"server_cfg.ini\" ] || curl -sSL -o \"server_cfg.ini\" \"https:\/\/pteropaste.com\/plk8mjfcqt4m\"\r\n[ -f \"extra_cfg.yml\" ] || curl -sSL -o \"extra_cfg.yml\" \"https:\/\/pteropaste.com\/ocd58cq39z0z\"\r\n[ -f \"entry_list.ini\" ] || touch entry_list.ini\r\n\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl git jq tar\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/compujuckel\/AssettoServer\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/compujuckel\/AssettoServer\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\nVERSION=latest\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i linux | head -1)\r\n    fi\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o assetto-server-linux.tar.gz ${DOWNLOAD_URL}\r\n\r\ntar xvf assetto-server-linux.tar.gz\r\nrm assetto-server-linux.tar.gz\r\nchmod +x AssettoServer\r\n\r\nmkdir cfg\/\r\ncd cfg\/\r\n[ -f \"server_cfg.ini\" ] || curl -sSL -o \"server_cfg.ini\" \"https:\/\/pteropaste.com\/plk8mjfcqt4m\"\r\n[ -f \"extra_cfg.yml\" ] || curl -sSL -o \"extra_cfg.yml\" \"https:\/\/pteropaste.com\/ocd58cq39z0z\"\r\n[ -f \"entry_list.ini\" ] || touch entry_list.ini\r\n\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
-        {
-            "name": "Version",
-            "description": "The version to install",
-            "env_variable": "VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:30",
-            "field_type": "text"
-        },
         {
             "name": "Server name",
             "description": "The name off the server",
@@ -65,7 +55,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric|",
+            "rules": "nullable|numeric|",
             "field_type": "text"
         },
         {
