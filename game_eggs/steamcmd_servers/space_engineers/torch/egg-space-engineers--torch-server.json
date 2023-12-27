@@ -6,7 +6,7 @@
     },
     "exported_at": "2022-11-26T17:31:15+01:00",
     "name": "Space Engineers - Torch Server",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "Torch is the successor to SE Server Extender and gives server admins the tools they need to keep their Space Engineers servers running smoothly. It features a user interface with live management tools and a plugin system so you can run your server exactly how you'd like. Torch is still in early development so there may be bugs and incomplete features.\r\n\r\n!!!!! DO NOT CANCEL THE FIRST START, OR YOU NEED TO DELETE THE SERVER AND CREATE FROM SCRATCH !!!!",
     "features": [
         "steam_disk_space"

@@ -1,24 +1,24 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-07-02T04:29:47+03:00",
+    "exported_at": "2023-01-07T09:58:40-05:00",
     "name": "Don't Starve Together",
     "author": "parker@parkervcp.com",
     "description": "Don\u2019t Starve Together is an uncompromising wilderness survival game full of science and magic.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_source"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+    },
     "file_denylist": [],
-    "startup": "cd bin && coproc caves ( .\/dontstarve_dedicated_server_nullrenderer -console -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Caves ); .\/dontstarve_dedicated_server_nullrenderer -bind_ip 0.0.0.0 -port 10999 -console -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Master && echo 'c_shutdown()' >&\"${caves[1]}\"",
+    "startup": "cd bin64 && coproc caves ( .\/dontstarve_dedicated_server_nullrenderer_x64 -bind_ip 0.0.0.0 -port 11000 -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Caves ); .\/dontstarve_dedicated_server_nullrenderer_x64 -bind_ip 0.0.0.0 -port {{SERVER_PORT}} -persistent_storage_root \/home\/container\/DoNotStarveTogether -conf_dir config -cluster server -players {{MAX_PLAYERS}} -shard Master && echo 'c_shutdown()' >&\"${caves[1]}\"",
     "config": {
         "files": "{\r\n    \"DoNotStarveTogether\/config\/server\/cluster.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"GAMEPLAY.game_mode\": \"{{server.build.env.GAME_MODE}}\",\r\n            \"GAMEPLAY.max_players\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"NETWORK.cluster_name\": \"{{server.build.env.CLUSTER_NAME}}\",\r\n            \"NETWORK.cluster_description\": \"{{server.build.env.CLUSTER_DESC}}\",\r\n            \"SHARD.shard_enabled\": \"true\",\r\n            \"SHARD.bind_ip\": \"127.0.0.1\",\r\n            \"SHARD.master_ip\": \"127.0.0.1\",\r\n            \"SHARD.master_port\": \"11001\"\r\n        }\r\n    },\r\n    \"DoNotStarveTogether\/config\/server\/Master\/server.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.server_port\": \"{{server.build.default.port}}\",\r\n            \"SHARD.is_master\": \"true\"\r\n        }\r\n    },\r\n    \"DoNotStarveTogether\/config\/server\/Caves\/server.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"NETWORK.server_port\": \"11000\",\r\n            \"SHARD.is_master\": \"false\",\r\n            \"SHARD.name\": \"Caves\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID\"\r\n}",
         "logs": "{}",
         "stop": "c_shutdown()"
     },
@@ -36,8 +36,9 @@
             "env_variable": "MAX_PLAYERS",
             "default_value": "16",
             "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|integer|between:1,31"
+            "user_editable": true,
+            "rules": "required|integer|between:1,31",
+            "field_type": "text"
         },
         {
             "name": "Server Token",
@@ -46,7 +47,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "App ID",
@@ -55,7 +57,8 @@
             "default_value": "343050",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Auto-update server",
@@ -64,7 +67,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean"
+            "rules": "required|boolean",
+            "field_type": "text"
         },
         {
             "name": "Game mode",
@@ -73,7 +77,8 @@
             "default_value": "survival",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Cluster Name",
@@ -82,7 +87,8 @@
             "default_value": "A Pterodactyl Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Cluster Description",
@@ -91,7 +97,8 @@
             "default_value": "A Pterodactyl Hosted Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Master Worldgen Override",
@@ -100,7 +107,8 @@
             "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/dont_starve\/worldgenoverride.master.lua",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Master Worldgen Override",
@@ -109,7 +117,8 @@
             "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/dont_starve\/worldgenoverride.caves.lua",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }

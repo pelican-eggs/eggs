@@ -1,6 +1,6 @@
 SiiNunit
 {
-server_config : _nameless.44c.eab0 {
+server_config : _nameless.54e.4440 {
  lobby_name: ""
  description: ""
  welcome_message: ""
@@ -20,6 +20,7 @@ server_config : _nameless.44c.eab0 {
  hide_colliding: true
  force_speed_limiter: false
  mods_optioning: false
+ timezones: 0
  service_no_collision: false
  in_menu_ghosting: false
  name_tags: true

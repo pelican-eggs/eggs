@@ -1,0 +1,112 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-09-12T11:04:11+02:00",
+    "name": "Meilisearch",
+    "author": "josdekurk@gmail.com",
+    "description": "A lightning-fast search engine that fits effortlessly into your apps, websites, and workflow.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/meilisearch --http-addr \"0.0.0.0:{{SERVER_PORT}}\"  --max-indexing-memory=\"{{SERVER_MEMORY}}mb\" $([ \"$NO_ANALYTICS\" -eq 1 ] && echo \"--no-analytics\")",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Actix runtime found; starting in Actix runtime\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/meilisearch\/meilisearch\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/meilisearch\/meilisearch\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-amd64\" || echo \"linux-aarch64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## Config file\r\nFILE=\/mnt\/server\/config.toml\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"Config file exits\"\r\nelse \r\n    echo \"Config does not exist. Making one\"\r\n    curl -sSL -o config.toml https:\/\/raw.githubusercontent.com\/meilisearch\/meilisearch\/latest\/config.toml\r\nfi\r\n\r\ncurl -sSL -o meilisearch ${DOWNLOAD_URL}\r\nchmod +x meilisearch\r\n\r\n# Make the needed directory's \r\nmkdir -p \/mnt\/server\/dumps\r\nmkdir -p \/mnt\/server\/data.ms\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Master key",
+            "description": "In production, a Master key of at least 16 bytes is mandatory\r\nSets the instance's master key, automatically protecting all routes except GET \/health. This means you will need a valid API key to access all other endpoints.",
+            "env_variable": "MEILI_MASTER_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Environment",
+            "description": "Configures the instance's environment. Value must be either production or development.",
+            "env_variable": "MEILI_ENV",
+            "default_value": "development",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:development,production",
+            "field_type": "text"
+        },
+        {
+            "name": "Disable analytics",
+            "description": "Deactivates Meilisearch's built-in telemetry when provided.",
+            "env_variable": "NO_ANALYTICS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Dumps dir",
+            "description": "Sets the directory where Meilisearch will create dump files.",
+            "env_variable": "MEILI_DUMP_DIR",
+            "default_value": "\/home\/container\/dumps",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "DB PATH",
+            "description": "Designates the location where database files will be created and retrieved.",
+            "env_variable": "MEILI_DB_PATH",
+            "default_value": "\/home\/container\/data.ms",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Log level",
+            "description": "Defines how much detail should be present in Meilisearch's logs.",
+            "env_variable": "MEILI_LOG_LEVEL",
+            "default_value": "INFO",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:INFO,WARN,ERROR,TRACE",
+            "field_type": "text"
+        },
+        {
+            "name": "Config Path",
+            "description": "Designates the location of the configuration file to load at launch.",
+            "env_variable": "MEILI_CONFIG_FILE_PATH",
+            "default_value": "\/home\/container\/config.toml",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Max threads",
+            "description": "Sets the maximum number of threads Meilisearch can use during indexing",
+            "env_variable": "MEILI_MAX_INDEXING_THREADS",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer",
+            "field_type": "text"
+        }
+    ]
+}

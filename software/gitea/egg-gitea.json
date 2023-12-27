@@ -1,29 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-05-16T16:53:24+02:00",
+    "exported_at": "2023-02-24T16:18:35+01:00",
     "name": "Gitea",
     "author": "mario.franze@gmail.com",
     "description": "Gitea is a community managed lightweight code hosting solution written in Go. It is published under the MIT license.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
     "file_denylist": [],
     "startup": ".\/gitea web -p {{SERVER_PORT}} -c .\/app.ini",
     "config": {
         "files": "{\r\n    \"custom\/app.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISABLE_SSH\": \"DISABLE_SSH: {{server.build.env.DISABLE_SSH}}\",\r\n            \"SSH_PORT\": \"SSH_PORT: {{server.build.env.SSH_PORT}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Listen: \",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Listen: \"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "apt update\r\napt install -y wget\r\n\r\ncd \/mnt\/server\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\n\r\nwget -O gitea https:\/\/dl.gitea.io\/gitea\/main\/gitea-main-linux-${ARCH}\r\nchmod +x gitea\r\n\r\nmkdir custom\r\n\r\necho \"[server]\r\nLOCAL_ROOT_URL = http:\/\/localhost:${SERVER_PORT}\/\r\nDOMAIN           = ${SERVER_IP}\r\nHTTP_PORT        = ${SERVER_PORT}\r\nDISABLE_SSH      = ${DISABLE_SSH}\r\nSSH_PORT         = ${SSH_PORT}\" > \/mnt\/server\/custom\/app.ini\r\n\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+            "script": "## Gitea Installscript\r\n\r\n## update system\r\napt update\r\napt -y install --no-install-recommends jq curl ca-certificates\r\n\r\n## Variables\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\nLATEST=$(curl -sSL https:\/\/dl.gitea.io\/gitea\/version.json | jq -r .latest.version)\r\n\r\n\r\ncd \/mnt\/server\r\n\r\n## install gitea\r\necho -e \"Download url: https:\/\/dl.gitea.io\/gitea\/${LATEST}\/gitea-${LATEST}-linux-${ARCH}\"\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo -e \"downloading Gitea $LATEST\"\r\n    curl -sSL -o gitea https:\/\/dl.gitea.io\/gitea\/${LATEST}\/gitea-${LATEST}-linux-${ARCH}\r\nelif [ \"${VERSION}\" == \"nightly\" ]; then\r\n    echo -e \"downloading Gitea nightly\"\r\n    curl -sSL -o gitea https:\/\/dl.gitea.io\/gitea\/main\/gitea-main-linux-${ARCH}\r\nelse\r\n    curl -sSL -o gitea https:\/\/dl.gitea.io\/gitea\/${VERSION}\/gitea-${VERSION}-linux-${ARCH}\r\n    echo -e \"downloading Gitea $VERSION\"\r\nfi\r\n\r\nchmod +x gitea\r\n\r\nmkdir -p custom\r\n\r\nif [ -f \"\/mnt\/server\/custom\/app.ini\" ]; then\r\n    echo \"config file exists\"\r\nelse\r\n    echo \"[server]\r\n    LOCAL_ROOT_URL = http:\/\/${SERVER_IP}:${SERVER_PORT}\/\r\n    DOMAIN           = ${SERVER_IP}\r\n    HTTP_PORT        = ${SERVER_PORT}\r\n    ROOT_URL         = http:\/\/${SERVER_IP}:${SERVER_PORT}\/\r\n    DISABLE_SSH      = ${DISABLE_SSH}\r\n    SSH_PORT         = ${SSH_PORT}\" > \/mnt\/server\/custom\/app.ini\r\nfi\r\n\r\necho -e \"-------------------------------------------------\"\r\necho -e \"Installation completed\"\r\necho -e \"-------------------------------------------------\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "SSH Port",
@@ -44,7 +45,18 @@
             "default_value": "2020",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|integer|between:1024,65535"
+            "rules": "required|integer|between:1024,65535",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "you can use latest, nightly or version (e.g. 1.18.1)",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-06T11:14:23+01:00",
+    "exported_at": "2023-08-05T10:50:21+02:00",
     "name": "Red",
     "author": "parker@parkervcp.com",
     "description": "A multifunction Discord bot \r\n\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# red-discordbot install script\r\n\r\n## install deps\r\nmkdir -p \/usr\/share\/man\/man1\r\napt update\r\napt -y install git ca-certificates dnsutils iproute2 make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libgdbm-dev uuid-dev git openjdk-11-jre\r\n\r\n## config folder layouts\r\necho -e \"generating config folder layout\"\r\nmkdir -p \/mnt\/server\/.config\/{Red-DiscordBot,share}\/ \/mnt\/server\/.local\/share\/Red-DiscordBot\/data\/pterodactyl\/\r\ncd \/mnt\/server\/\r\nln -s .local\/share\/Red-DiscordBot\/data\/pterodactyl\/ .\/configs\r\n\r\n## install red\r\necho -e \"add container user to install\"\r\nln -s \/mnt\/server\/ \/home\/container\r\nuseradd -m -d \/home\/container container\r\nchown -R container \/mnt\/server\/\r\necho -e \"install red locally as user\"\r\nsu - container -c 'pip install -U Red-DiscordBot'\r\n\r\n## ensure the config is in place if it doesn't exist\r\nif [ ! -f \/mnt\/server\/.config\/Red-DiscordBot\/config.json ]; then\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/redbot\/config.json -o \/mnt\/server\/.config\/Red-DiscordBot\/config.json\r\nfi\r\n\r\necho -e \"install finished\"",
-            "container": "python:3.8-slim",
+            "script": "#!\/bin\/bash\r\n# red-discordbot install script\r\n\r\n## install deps\r\nmkdir -p \/usr\/share\/man\/man1\r\napt update\r\napt -y install git ca-certificates dnsutils iproute2 make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libgdbm-dev uuid-dev git openjdk-17-jre-headless\r\n\r\n## config folder layouts\r\necho -e \"generating config folder layout\"\r\nmkdir -p \/mnt\/server\/.config\/{Red-DiscordBot,share}\/ \/mnt\/server\/.local\/share\/Red-DiscordBot\/data\/pterodactyl\/\r\ncd \/mnt\/server\/\r\nln -s .local\/share\/Red-DiscordBot\/data\/pterodactyl\/ .\/configs\r\n\r\n## install red\r\necho -e \"add container user to install\"\r\nln -s \/mnt\/server\/ \/home\/container\r\nuseradd -m -d \/home\/container container\r\nchown -R container \/mnt\/server\/\r\necho -e \"install red locally as user\"\r\npip install --upgrade pip\r\nsu - container -c 'pip install -U pip wheel'\r\nsu - container -c 'pip install -U Red-DiscordBot'\r\n\r\n## ensure the config is in place if it doesn't exist\r\nif [ ! -f \/mnt\/server\/.config\/Red-DiscordBot\/config.json ]; then\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/redbot\/config.json -o \/mnt\/server\/.config\/Red-DiscordBot\/config.json\r\nfi\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-------------------------------------------------------\"",
+            "container": "python:3.11-slim",
             "entrypoint": "bash"
         }
     },
@@ -46,6 +46,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Owner",
+            "description": "Owner of the Bot to use special commands",
+            "env_variable": "OWNER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:30",
             "field_type": "text"
         }
     ]

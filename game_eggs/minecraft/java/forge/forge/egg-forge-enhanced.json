@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-31T16:27:58+01:00",
+    "exported_at": "2023-05-17T23:20:29+01:00",
     "name": "Forge Enhanced",
     "author": "parker@parkervcp.com",
     "description": "Minecraft Forge Server. Minecraft Forge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other.",
@@ -14,10 +14,11 @@
         "pid_limit"
     ],
     "docker_images": {
-        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
-        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
         "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8"
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true $( [[  ! -f unix_args.txt ]] && printf %s \"-jar {{SERVER_JARFILE}}\" || printf %s \"@unix_args.txt\" )",

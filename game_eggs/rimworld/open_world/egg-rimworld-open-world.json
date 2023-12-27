@@ -1,0 +1,113 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-05-27T13:03:41+03:00",
+    "name": "Rimworld: Open World",
+    "author": "kyle@williquette.us",
+    "description": "The Open World mod allows you to create and join servers to play with people all around the world, it introduces plenty of new features including trading, gifting, bartering, PvP and so much more!\r\n\r\nhttps:\/\/github.com\/D12-Dev\/OpenWorld",
+    "features": null,
+    "docker_images": {
+        "Dotnet 3.1": "ghcr.io\/parkervcp\/yolks:dotnet_3.1",
+        "Dotnet 6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
+    },
+    "file_denylist": [],
+    "startup": ".\/OpenWorldServer",
+    "config": {
+        "files": "{\r\n    \"Data\/Config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"LocalAddress\": \"0.0.0.0\",\r\n            \"ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"EnforceMods\": \"{{server.build.env.ENFORCE_MODS}}\",\r\n            \"UseModBlacklist\": \"{{server.build.env.USE_MOD_BLACKLIST}}\",\r\n            \"UseCustomDifficulty\": \"{{server.build.env.USE_CUSTOM_DIFF}}\",\r\n            \"UseWhitelist\": \"{{server.build.env.WHITELIST}}\",\r\n            \"AllowCustomScenarios\": \"{{server.build.env.CUSTOM_SCEN}}\",\r\n            \"PlayerVersion\": \"{{server.build.env.PLAYER_VERSION}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \" Server Launched\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n#Create the server directory\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\napt update\r\napt -y install curl jq unzip git\r\n\r\n\r\n#Check for latest release & download URLs\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/D12-Dev\/OpenWorld\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/D12-Dev\/OpenWorld\/releases\")\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCH} | head -1)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${ARCH} | head -1)\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCH}| head -1)\r\n    fi\r\nfi\r\n\r\n\r\n#Download the Rimworld Open World server\r\necho -e \"Running curl -sSL ${DOWNLOAD_URL} -o ${ARCH}.zip\"\r\ncurl -sSL ${DOWNLOAD_URL} -o ${ARCH}.zip\r\necho -e \"Unzipping ${ARCH}.zip\"\r\nunzip -o ${ARCH}.zip\r\nmv ${ARCH}\/* \/mnt\/server\r\nchmod +x \"OpenWorldServer\"\r\nrm -rf ${ARCH}.zip ${ARCH}\/\r\n\r\n\r\n\r\ncd \/mnt\/server\r\nFILE=\/mnt\/server\/Data\/Config.json\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"config already exists.\"\r\nelse \r\n    echo \"Config does not exist, making one\"\r\n    mkdir -p \/mnt\/server\/Data\r\n    cd \/mnt\/server\/Data\r\ncat << EOF > \"Config.json\"\r\n{\r\n  \"LocalAddress\": \"0.0.0.0\",\r\n  \"ServerPort\": 25555,\r\n  \"MaxPlayers\": 10,\r\n  \"PlayerVersion\": \"1.2\",\r\n  \"EnforceMods\": false,\r\n  \"UseModBlacklist\": false,\r\n  \"UseCustomDifficulty\": false,\r\n  \"UseWhitelist\": false,\r\n  \"AllowCustomScenarios\": false\r\n}\r\nEOF\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Open World Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:8",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "sets the maximum number of players allowed to connect at once.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int",
+            "field_type": "text"
+        },
+        {
+            "name": "Enforce Mods",
+            "description": "This forces players to use the mods listed in the the \"Mods Enforced\" folder, with this disabled it will allow players to join with any mods they would like",
+            "env_variable": "ENFORCE_MODS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Use Mod Blacklist",
+            "description": "enabled you to blacklist mods from being used, usually used when enforced mods are disabled.",
+            "env_variable": "USE_MOD_BLACKLIST",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Use Custom Difficulty",
+            "description": "forces all players to use the difficulty setting set in the \"Difficulty\" file. MAKE SURE YOU GIVE A VALUE TO EVERYTHING OR IT WILL BE AT 0%",
+            "env_variable": "USE_CUSTOM_DIFF",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Use Whitelist",
+            "description": "allows only the usernames listed in the \"Whitelist\" file to join the server.",
+            "env_variable": "WHITELIST",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Allow Custom Scenarios",
+            "description": "allows people to create custom scenarios when creating their save on the server.",
+            "env_variable": "CUSTOM_SCEN",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Player Version",
+            "description": "version the server will accept clients joining in with.\r\n\r\nTO see the latest:\r\nhttps:\/\/discord.com\/channels\/992806266109964319\/992881103071354890\r\n\r\nfor example for v1.12 you would write 1.12",
+            "env_variable": "PLAYER_VERSION",
+            "default_value": "1.2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:10",
+            "field_type": "text"
+        }
+    ]
+}

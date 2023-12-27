@@ -1,0 +1,124 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-03-11T19:59:13+01:00",
+    "name": "Operation Harsh Doorstop",
+    "author": "josdekurk@gmail.com",
+    "description": "Operation: Harsh Doorstop is an Unreal Engine powered shooter sandbox similar to mod-friendly games like Ravenfield and Garry's Mod but with roots in tactical shooters like Squad and Arma III. Our game is entirely donation funded, completely free, and has full Steam workshop support!",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/HarshDoorstop\/Binaries\/Linux\/HarshDoorstopServer-Linux-Shipping HarshDoorstop AAS-TestMap?MaxPlayers={{MAX_PLAYERS}} -SteamServerName=\"{{SERVER_NAME}}\" -Port={{SERVER_PORT}} -MULTIHOME=0.0.0.0 -QueryPort={{QUERY_PORT}} -RCONPort={{RCON_PORT}} -EnableRCON -RCONMaxAuthAttempts={{RCON_MAX_AUTH_ATTEMPTS}} -RCONPassword=\"{{RCON_PASSWORD}}\" -RCONMaxActiveConnections={{RCON_MAX_CONNECTIONS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"LogRCON: RCON server listening on\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\nmkdir -p \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/\r\ncd \/mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/\r\ntouch Game.ini\r\ntee -a mnt\/server\/HarshDoorstop\/Saved\/Config\/LinuxServer\/Game.ini << END\r\n[\/Script\/RCON.RCONServerSystem]\r\nbEnabled=True\r\nListenPort=7779\r\nPassword=\"LetMeIn\"\r\nMaxActiveConnections=5\r\nMaxAuthAttempts=3\r\n\r\n[\/Script\/Engine.GameSession]\r\nMaxPlayers=32\r\nServerName=\"My Awesome Server\"\r\nPassword=\"cookies\"\r\nEND\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Autop update",
+            "description": "Auto update the server on startup",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "app id",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "950900",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:950900",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players allowed by this server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "32",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Server name",
+            "description": "Defines the display or host name of the game server when listed in a server browser",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Harsh Doorstop Dedicated Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "Query port",
+            "description": "Defines port for Steam master server traffic",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27005",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon Port",
+            "description": "Defines port for RCON server traffic",
+            "env_variable": "RCON_PORT",
+            "default_value": "7779",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon Max Auth Attempts",
+            "description": "Defines the maximum number of authentication attempts an RCON connection can make before being forcibly disconnected",
+            "env_variable": "RCON_MAX_AUTH_ATTEMPTS",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon Password",
+            "description": "Defines the password used for authenticating with the RCON server",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon Max Connections",
+            "description": "Maximum number of concurrent RCON connections",
+            "env_variable": "RCON_MAX_CONNECTIONS",
+            "default_value": "5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        }
+    ]
+}

@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-15T18:36:23+01:00",
+    "exported_at": "2023-04-24T17:19:01+02:00",
     "name": "Euro Truck Simulator 2 Dedicated server",
     "author": "josdekurk@gmail.com",
     "description": "Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/games:source": "ghcr.io\/parkervcp\/games:source"
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
     "startup": ".\/bin\/linux_x64\/eurotrucks2_server",
@@ -32,7 +32,7 @@
     "variables": [
         {
             "name": "Auto update",
-            "description": "",
+            "description": "Auto update the server on startup",
             "env_variable": "AUTO_UPDATE",
             "default_value": "1",
             "user_viewable": true,
@@ -51,26 +51,6 @@
             "field_type": "text"
         },
         {
-            "name": "Steam password",
-            "description": "",
-            "env_variable": "STEAM_PASS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:64",
-            "field_type": "text"
-        },
-        {
-            "name": "Steam username",
-            "description": "",
-            "env_variable": "STEAM_USER",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:32",
-            "field_type": "text"
-        },
-        {
             "name": "Query port",
             "description": "By there readme of the game the query port must be between 27015-27020, but from our testing this port can be any port",
             "env_variable": "QUERY_PORT",
@@ -82,12 +62,12 @@
         },
         {
             "name": "Steam Auth token",
-            "description": "Acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required).",
+            "description": "By default, whenever a dedicated server is launched it is using an anonymous account. For such an account non-persistent server id is generated (used for direct search). To avoid this you can acquire a logon token on https:\/\/steamcommunity.com\/dev\/managegameservers (game ownership is required)",
             "env_variable": "STEAM_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32",
+            "rules": "nullable|string|max:32",
             "field_type": "text"
         },
         {

@@ -1,0 +1,93 @@
+{
+    "announce": true,
+    "artwork": {
+        "cdn": "",
+        "enable": true,
+        "models_path": "models"
+    },
+    "chat_input_filter": true,
+    "enable_query": true,
+    "game": {
+        "allow_interior_weapons": true,
+        "chat_radius": 200.0,
+        "death_drop_amount": 0,
+        "gravity": 0.008,
+        "group_player_objects": false,
+        "lag_compensation_mode": 1,
+        "map": "",
+        "mode": "",
+        "nametag_draw_radius": 70.0,
+        "player_marker_draw_radius": 250.0,
+        "player_marker_mode": 1,
+        "time": 12,
+        "use_all_animations": false,
+        "use_chat_radius": false,
+        "use_entry_exit_markers": true,
+        "use_instagib": false,
+        "use_manual_engine_and_lights": false,
+        "use_nametag_los": true,
+        "use_nametags": true,
+        "use_player_marker_draw_radius": false,
+        "use_player_ped_anims": false,
+        "use_stunt_bonuses": true,
+        "use_vehicle_friendly_fire": false,
+        "use_zone_names": false,
+        "vehicle_respawn_time": 10000,
+        "weather": 10
+    },
+    "language": "",
+    "logging": {
+        "enable": true,
+        "log_chat": true,
+        "log_cookies": false,
+        "log_deaths": true,
+        "log_queries": false,
+        "log_sqlite": false,
+        "log_sqlite_queries": false,
+        "timestamp_format": "[%Y-%m-%dT%H:%M:%S%z]",
+        "use_prefix": true,
+        "use_timestamp": true
+    },
+    "max_bots": 0,
+    "max_players": 50,
+    "name": "open.mp server",
+    "network": {
+        "acks_limit": 3000,
+        "aiming_sync_rate": 30,
+        "allow_037_clients": true,
+        "bind": "",
+        "cookie_reseed_time": 300000,
+        "in_vehicle_sync_rate": 30,
+        "limits_ban_time": 60000,
+        "message_hole_limit": 3000,
+        "messages_limit": 500,
+        "minimum_connection_time": 0,
+        "mtu": 576,
+        "multiplier": 10,
+        "on_foot_sync_rate": 30,
+        "player_marker_sync_rate": 2500,
+        "player_timeout": 10000,
+        "port": 7777,
+        "public_addr": "",
+        "stream_radius": 200.0,
+        "stream_rate": 1000,
+        "time_sync_rate": 30000,
+        "use_lan_mode": false
+    },
+    "password": "",
+    "pawn": {
+        "legacy_plugins": [],
+        "main_scripts": [
+            "test 1"
+        ],
+        "side_scripts": []
+    },
+    "rcon": {
+        "allow_teleport": false,
+        "enable": false,
+        "password": "changeme"
+    },
+    "sleep": 5.0,
+    "use_dyn_ticks": true,
+    "website": "open.mp"
+}

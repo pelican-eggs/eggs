@@ -1,0 +1,164 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-03-05T17:26:48+01:00",
+    "name": "Portal Knights",
+    "author": "josdekurk@gmail.com",
+    "description": "The world of Elysia needs YOU! Join this cooperative, 3D sandbox action RPG to level up your character, craft epic weapons, conquer enemies in real-time, and build almost anything! Craft your adventure. Forge your hero. Become the ultimate Portal Knight!",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "cd \/home\/container\/dedicated_server; xvfb-run --auto-servernum wine pk_dedicated_server.exe -config server_config.json -log server.log",
+    "config": {
+        "files": "{\r\n    \"dedicated_server\/server_config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"basicServerData.name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"basicServerData.ipv4\": \"0.0.0.0\",\r\n            \"basicServerData.port\": \"{{server.build.default.port}}\",\r\n            \"basicServerData.saveFolderPath\": \".\/savedata\",\r\n            \"admins.credentials.password\": \"{{server.build.env.ADMIN_PASS}}\",\r\n            \"users.credentials.password\": \"{{server.build.env.USER_PASS}}\",\r\n            \"guests.credentials.password\": \"{{server.build.env.GUEST_PASS}}\",\r\n            \"gameplayMode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"universeSize\": \"{{server.build.env.UNIVERSE_SIZE}}\",\r\n            \"hideConsoleWindow\": \"true\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n  \"done\":[\r\n    \"Listening on\",\r\n    \"ReadyToServe\",\r\n    \"has started\"\r\n  ]\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\ndir=\/mnt\/server\/dedicated_server\r\nif [[ ! -e $dir ]]; then\r\n    mkdir -p $dir\r\nfi\r\n\r\ncd \/mnt\/server\/dedicated_server\r\nunzip -o ..\/dedicated_server.zip\r\ncurl -sSL -o server_config.json https:\/\/pteropaste.com\/f8p6yx0yj07d\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam user",
+            "description": "",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam password",
+            "description": "",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Install windows version",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "App id",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "374040",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:374040",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto update",
+            "description": "Auto update server on startup.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:win32,win64",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name off the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Servername",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin password",
+            "description": "",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "admin_password_please_change",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "User password",
+            "description": "",
+            "env_variable": "USER_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Guest password",
+            "description": "",
+            "env_variable": "GUEST_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Game mode",
+            "description": "The game play mode for the dedicated server.",
+            "env_variable": "GAMEMODE",
+            "default_value": "Adventure",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Adventure,Creative",
+            "field_type": "text"
+        },
+        {
+            "name": "Universe size",
+            "description": "The universe size for the dedicated server.",
+            "env_variable": "UNIVERSE_SIZE",
+            "default_value": "Normal",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:Small,Normal,Large",
+            "field_type": "text"
+        }
+    ]
+}

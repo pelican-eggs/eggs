@@ -1,20 +1,21 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-05-05T19:37:05+02:00",
+    "exported_at": "2023-02-04T23:01:25+01:00",
     "name": "Code-Server",
     "author": "mario.franze@gmail.com",
     "description": "Run VS Code on any machine anywhere and access it in the browser.",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:nodejs_17",
-        "ghcr.io\/parkervcp\/yolks:nodejs_16",
-        "ghcr.io\/parkervcp\/yolks:nodejs_14",
-        "ghcr.io\/parkervcp\/yolks:nodejs_12"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:nodejs_18": "ghcr.io\/parkervcp\/yolks:nodejs_18",
+        "ghcr.io\/parkervcp\/yolks:nodejs_17": "ghcr.io\/parkervcp\/yolks:nodejs_17",
+        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16",
+        "ghcr.io\/parkervcp\/yolks:nodejs_14": "ghcr.io\/parkervcp\/yolks:nodejs_14",
+        "ghcr.io\/parkervcp\/yolks:nodejs_12": "ghcr.io\/parkervcp\/yolks:nodejs_12"
+    },
     "file_denylist": [],
     "startup": "sh .local\/lib\/code-server-{{VERSION}}\/bin\/code-server",
     "config": {
@@ -38,7 +39,8 @@
             "default_value": "changeme",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:32"
+            "rules": "required|string|max:32",
+            "field_type": "text"
         },
         {
             "name": "Version",
@@ -47,7 +49,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string|max:20"
+            "rules": "string|max:20",
+            "field_type": "text"
         }
     ]
 }

@@ -1,0 +1,128 @@
+# ################################
+# #                              #
+# # Ree6 Config File             #
+# # by Presti                    #
+# #                              #
+# ################################
+# 
+
+# Do not change this!
+config:
+  version: 3.0.0
+  creation: 1686731674683
+
+# HikariCP Configuration
+hikari:
+  
+  # SQL Configuration
+  sql:
+    user: root
+    db: root
+    pw: yourpw
+    host: localhost
+    port: 3306
+  
+  # Misc Configuration
+  misc:
+    storage: sqlite # Possible entries: sqlite, mariadb, postgresql, h2, h2-server
+    storageFile: storage/Ree6.db
+    createEmbeddedServer: false # Should an instance of an embedded Server be created? Only used for H2-Server.
+    poolSize: 10
+
+# Discord Application and overall Bot Configuration, used for OAuth, Bot Authentication and customization.
+bot:
+  tokens:
+    release: ReleaseTokenhere # Token used when set to release build.
+    beta: BetaTokenhere # Token used when set to beta build.
+    dev: DevTokenhere # Token used when set to dev build.
+  
+  # Configuration for the Bot itself.
+  misc:
+    status: ree6.de | %guilds% Servers. (%shard%) # The Status of the Bot.
+    feedbackChannelId: 0 # The Channel used for Feedback.
+    ownerId: <YOUR DISCORD ID> # The ID of the Bot Owner. Change this to yours!
+    predefineInformation: | # Predefined Information for the AI.
+      You are Ree6 a Discord bot.
+    invite: https://invite.ree6.de # The Invite Link of the Bot.
+    support: https://support.ree6.de # The Support Server Link of the Bot.
+    github: https://github.ree6.de # The GitHub Link of the Bot.
+    website: https://ree6.de # The Website Link of the Bot.
+    webinterface: https://cp.ree6.de # The Webinterface Link of the Bot.
+    recording: https://cp.ree6.de/external/recording # The Recording Link of the Bot.
+    twitchAuth: https://cp.ree6.de/external/twitch # The Twitch Authentication Link of the Bot.
+    advertisement: powered by Tube-hosting # The Advertisement in Embed Footers and the rest.
+    name: Ree6 # The Name of the Bot.
+    shards: 1 # The shard amount of the Bot. Check out https://anidiots.guide/understanding/sharding/#sharding for more information.
+    
+    # Customize the active modules in Ree6.
+    modules:
+      moderation: true # Enable the moderation module.
+      music: true # Enable the music module.
+      fun: true # Enable the fun commands.
+      community: true # Enable the community commands.
+      economy: true # Enable the economy commands.
+      level: true # Enable the level module.
+      nsfw: true # Enable the nsfw module.
+      info: true # Enable the info commands.
+      hidden: true # Enable the hidden commands.
+      logging: true # Enable the logging module.
+      notifier: true # Enable the notifier module.
+      streamtools: true # Enable the Stream-tools module.
+      temporalvoice: true # Enable the Temporal-voice module.
+      tickets: true # Enable the Tickets module.
+      suggestions: true # Enable the suggestions module.
+      customcommands: true # Enable the custom Commands module.
+      customevents: true # Enable the custom Events module.
+      ai: true # Enable the AI module.
+      addons: false # Enable the Addons module.
+      news: true # Enable the news command/module.
+      games: true # Enable the Games module.
+      reactionroles: true # Enable the reaction-roles module.
+      slashcommands: true # Enable the slash-commands support.
+      messagecommands: true # Enable the message-commands support.
+
+# Heartbeat Configuration, for status reporting
+heartbeat:
+  url: none # The URL to the Heartbeat-Server
+  interval: 60
+
+dagpi:
+  apitoken: DAGPI.xyz API-Token # Your Dagpi.xyz API-Token, for tweet image generation!
+
+amari:
+  apitoken: Amari API-Token # Your Amari API-Token, for Amari Level imports!
+
+openai:
+  apiToken: OpenAI API-Token # Your OpenAI API-Token, for ChatGPT!
+  apiUrl: https://api.openai.com/v1/chat/completions # The URL to the OpenAI API.
+  model: gpt-3.5-turbo-0301 # The Model used for the OpenAI API.
+
+sentry:
+  dsn: yourSentryDSNHere # Your Sentry DSN, for error reporting!
+
+# Spotify Application Configuration, used to parse Spotify Tracks/Playlists to YouTube search queries.
+spotify:
+  client:
+    id: yourspotifyclientid
+    secret: yourspotifyclientsecret
+
+# Twitch Application Configuration, used for the StreamTools and Twitch Notifications.
+twitch:
+  client:
+    id: yourtwitchclientidhere
+    secret: yourtwitchclientsecrethere
+
+# Twitter Application Configuration, used for the Twitter Notifications.
+twitter:
+  bearer: yourTwitterBearerToken
+
+# Reddit Application Configuration, used for the Reddit Notification.
+reddit:
+  client:
+    id: yourredditclientid
+    secret: yourredditclientsecret
+
+# Instagram Application Configuration, used for the Instagram Notification.
+instagram:
+  username: yourInstagramUsername
+  password: yourInstagramPassword

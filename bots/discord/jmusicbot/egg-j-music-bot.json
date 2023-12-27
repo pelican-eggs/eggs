@@ -1,16 +1,17 @@
 {
-    "_comment": "Pterodactyl JMusicBot Egg ~ parkervcp, Software-Noob, Proxymiity, and Red-Thirten ~ 2021-11-29",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
+    "exported_at": "2023-09-20T21:17:10+02:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "features": null,
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_16"
-    ],
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+    },
     "file_denylist": [],
     "startup": "java -Dnogui=true -jar JMusicBot.jar",
     "config": {
@@ -21,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE and VERSION\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\n\r\napt update\r\napt install -y jq curl\r\n\r\nGITHUB_PACKAGE=\"jagrosh\/MusicBot\"\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/config.txt\"\r\nPLAYLIST_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/example_playlist.txt\"\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"No Github user set. Using anonymous API call...\"\r\nelse\r\n    echo -e \"User and OAuth token set.\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n# get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i config)\r\n    else\r\n        echo -e \"Defaulting to the latest release.\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n## JMusicBot Setup\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating JMusicBot...\\n\"\r\n\r\nif [ -f JMusicBot.jar ]; then\r\n    echo -e \"Updating JMusicBot.jar to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"JMusicBot.jar-old\")'\r\n    mv -f JMusicBot.jar JMusicBot.jar-old\r\nfi\r\necho -e \"Running: curl -sSLo JMusicBot.jar ${DOWNLOAD_LINK}\\n\"\r\ncurl -sSLo JMusicBot.jar ${DOWNLOAD_LINK}\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"Updating config.txt to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"config.txt-old\")'\r\n    mv -f config.txt config.txt-old\r\nfi\r\necho -e \"Running: curl -sSLo config.txt ${CONFIG_LINK}\\n\"\r\ncurl -sSLo config.txt ${CONFIG_LINK}\r\n\r\n[ ! -d Playlists ] && mkdir Playlists\r\ncd Playlists\r\nif [ -f example_playlist.txt ]; then\r\n    echo -e \"example_playlist.txt already exists. Skipping default download.\"\r\nelse\r\n    echo -e \"example_playlist.txt not found. Downloading default example_playlist...\"\r\n    echo -e \"Running: curl -sSLo example_playlist.txt ${PLAYLIST_LINK}\"\r\n    curl -sSLo example_playlist.txt ${PLAYLIST_LINK}\r\nfi\r\n\r\necho -e \"\\nJMusicBot Successfully Installed!\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y jq curl\r\n\r\nCONFIG_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/config.txt\"\r\nPLAYLIST_LINK=\"https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/bots\/discord\/jmusicbot\/example_playlist.txt\"\r\n\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/jagrosh\/MusicBot\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/jagrosh\/MusicBot\/releases\")\r\nMATCH=JMusicBot\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n## JMusicBot Setup\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating JMusicBot...\\n\"\r\n\r\nif [ -f JMusicBot.jar ]; then\r\n    echo -e \"Updating JMusicBot.jar to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"JMusicBot.jar-old\")'\r\n    mv -f JMusicBot.jar JMusicBot.jar-old\r\nfi\r\n\r\necho -e \"Running: curl -sSLo JMusicBot.jar ${DOWNLOAD_URL}\\n\"\r\ncurl -sSLo JMusicBot.jar ${DOWNLOAD_URL}\r\n\r\nif [ -f config.txt ]; then\r\n    echo -e \"Updating config.txt to latest version...\"\r\n    echo -e '\\t(Old version can be found at \"config.txt-old\")'\r\n    mv -f config.txt config.txt-old\r\nfi\r\necho -e \"Running: curl -sSLo config.txt ${CONFIG_LINK}\\n\"\r\ncurl -sSLo config.txt ${CONFIG_LINK}\r\n\r\n[ ! -d Playlists ] && mkdir Playlists\r\ncd Playlists\r\nif [ -f example_playlist.txt ]; then\r\n    echo -e \"example_playlist.txt already exists. Skipping default download.\"\r\nelse\r\n    echo -e \"example_playlist.txt not found. Downloading default example_playlist...\"\r\n    echo -e \"Running: curl -sSLo example_playlist.txt ${PLAYLIST_LINK}\"\r\n    curl -sSLo example_playlist.txt ${PLAYLIST_LINK}\r\nfi\r\n\r\necho -e \"\\nJMusicBot Successfully Installed!\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
     },
@@ -31,10 +32,11 @@
             "name": "[REQUIRED] Discord Bot Token",
             "description": "The token for your Discord bot. Learn how to obtain a token and configure your bot application properly here: https:\/\/jmusicbot.com\/getting-a-bot-token\/",
             "env_variable": "BOT_TOKEN",
-            "default_value": "You need to get a token",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "[REQUIRED] Bot Owner ID",
@@ -43,7 +45,8 @@
             "default_value": "Change This To Your Discord User ID",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|digits:18"
+            "rules": "required|digits_between:17,18",
+            "field_type": "text"
         },
         {
             "name": "Bot Prefix",
@@ -52,7 +55,8 @@
             "default_value": "@mention",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20"
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Bot Alternate Prefix",
@@ -61,7 +65,8 @@
             "default_value": "NONE",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Bot Default Game",
@@ -70,7 +75,8 @@
             "default_value": "DEFAULT",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20"
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Bot Default Status",
@@ -79,7 +85,8 @@
             "default_value": "ONLINE",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:ONLINE,IDLE,DND,INVISIBLE"
+            "rules": "required|string|in:ONLINE,IDLE,DND,INVISIBLE",
+            "field_type": "text"
         },
         {
             "name": "Bot Show Song in Status",
@@ -88,7 +95,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "Bot Show Images for \"Now Playing\"",
@@ -97,7 +105,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "Bot Stay In Channel",
@@ -106,7 +115,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "Bot Alone Time Until Disconnect",
@@ -115,7 +125,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         },
         {
             "name": "Bot Max Song Length",
@@ -124,7 +135,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         }
     ]
 }

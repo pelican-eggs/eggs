@@ -1,10 +1,10 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-12-09T13:30:15-05:00",
+    "exported_at": "2023-05-17T23:20:29+01:00",
     "name": "VanillaCord",
     "author": "support@pterodactyl.io",
     "description": "Minecraft is a game about placing blocks and going on adventures. Explore randomly generated worlds and build amazing things from the simplest of homes to the grandest of castles. Play in Creative Mode with unlimited resources or mine deep in Survival Mode, crafting weapons and armor to fend off dangerous mobs. Do all this alone or with friends.\r\n\r\nVanillaCord adds support for BungeeCord's ip_forward setting.",
@@ -13,12 +13,13 @@
         "java_version",
         "pid_limit"
     ],
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_17",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_8"
-    ],
+    "docker_images": {
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
+    },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {

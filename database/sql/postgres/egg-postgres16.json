@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-12T15:33:25+01:00",
+    "name": "Postgres 16",
+    "author": "parker@parkervcp.com",
+    "description": "A default Postgres install that is not really editable.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:postgres_16": "ghcr.io\/parkervcp\/yolks:postgres_16"
+    },
+    "file_denylist": [],
+    "startup": "postgres  -D \/home\/container\/postgres_db\/",
+    "config": {
+        "files": "{\r\n    \"postgres_db\/postgresql.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#port =\": \"port = {{server.build.default.port}}\",\r\n            \"#external_pid_file =\": \"external_pid_file = '\/home\/container\/postgres_db\/run\/postgres.pid'\",\r\n            \"#unix_socket_directories =\": \"unix_socket_directories = '\/home\/container\/postgres_db\/run\/'\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"database system is ready to accept connections\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#! \/bin\/ash\r\nadduser -D -h \/home\/container container\r\n\r\nchown -R container: \/mnt\/server\/\r\n\r\nsu container -c 'initdb -D \/mnt\/server\/postgres_db\/ -A md5 -U \"$PGUSER\" --pwfile=<(echo \"$PGPASSWORD\")'\r\n\r\nmkdir -p \/mnt\/server\/postgres_db\/run\/\r\n\r\n## Add default \"allow from all\" auth rule to pg_hba\r\nif ! grep -q \"# Custom rules\" \"\/mnt\/server\/postgres_db\/pg_hba.conf\"; then\r\n    echo -e \"# Custom rules\\nhost    all             all             0.0.0.0\/0               md5\" >> \"\/mnt\/server\/postgres_db\/pg_hba.conf\"\r\nfi\r\n\r\necho -e \"Done\"",
+            "container": "postgres:16-alpine",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Superuser Name",
+            "description": "The username for the postgres superuser",
+            "env_variable": "PGUSER",
+            "default_value": "pterodactyl",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Superuser Password",
+            "description": "The postgres super user password with a strong default.\r\nYou should be generating new ones for each server.\r\nIf you don't then users can hit other users DB's",
+            "env_variable": "PGPASSWORD",
+            "default_value": "Pl3453Ch4n63M3!",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

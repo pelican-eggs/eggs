@@ -6,7 +6,7 @@ Adds variables to wipe files based on a list you set. Reinstall to perform the w
 
 The variable `REGEN_SERVER` was added, default 0, set to 1 to generate a random seed and remove old files on reinstall.
 
-Files listed in the `REMOVE_FILES` variabe, space separated, will be removed.
+Files listed in the `REMOVE_FILES` variable, space separated, will be removed.
 
 ## Minimum RAM warning
 

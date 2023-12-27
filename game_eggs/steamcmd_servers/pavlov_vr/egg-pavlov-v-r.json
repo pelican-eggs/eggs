@@ -1,31 +1,31 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-07-02T04:21:26+03:00",
+    "exported_at": "2023-07-02T17:55:48+02:00",
     "name": "Pavlov VR",
     "author": "admin@devil.wtf",
     "description": "Pavlov VR is a multiplayer shooter in VR with heavy focus on community features. Realistic reloading features and fast paced combat as part of the core experience. Play the #1 most popular VR shooter on PC today.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_source"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:ubuntu": "ghcr.io\/parkervcp\/steamcmd:ubuntu"
+    },
     "file_denylist": [],
-    "startup": ".\/Pavlov\/Binaries\/Linux\/PavlovServer -PORT={{SERVER_PORT}}",
+    "startup": ".\/Pavlov\/Binaries\/Linux\/PavlovServer-Linux-Shipping  Pavlov -PORT={{SERVER_PORT}} -KEY=\"{{API_KEY}}\"",
     "config": {
         "files": "{\r\n    \"Pavlov\/Saved\/Config\/RconSettings.txt\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Password=\": \"Password={{env.RCON_PASSWORD}}\",\r\n            \"Port=\": \"Port={{env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"PavlovLog: StartPlay was called\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Starting Server Status Helper on Port\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'debian:buster-slim'\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id ffound here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# EXTRA_FLAGS - when a server has extra glas for things like beta installs or updates.\r\n#\r\n##\r\napt -y update\r\napt -y --no-install-recommends install wget gdb curl lib32gcc1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [ \"${STEAM_USER}\" == \"\" ]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +force_install_dir \/mnt\/server +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\nchmod +x \"\/mnt\/server\/Pavlov\/Binaries\/Linux\/PavlovServer\"\r\n\r\n# Install Configuration Files\r\nmkdir -p \/mnt\/server\/Pavlov\/Saved\/Logs\r\nmkdir -p \/mnt\/server\/Pavlov\/Saved\/Config\/LinuxServer\r\n\r\ncd \/mnt\/server\/Pavlov\/Saved\/Config\/LinuxServer\r\nif [ ! -f Game.ini ]; then\r\n    echo -e \"Downloading Pavlov VR Game.ini\"\r\n    curl -ssL -o Game.ini https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/pavlov_vr\/Game.ini\r\nfi\r\n\r\ncd \/mnt\/server\/Pavlov\/Saved\/Config\r\nif [ ! -f RconSettings.txt ]; then\r\n    echo -e \"Downloading Pavlov VR RconSettings.txt\"\r\n    curl -ssL -o RconSettings.txt https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/pavlov_vr\/RconSettings.txt\r\nfi\r\n\r\ncd \/mnt\/server\/\r\nif [ -f PavlovServer.sh ]; then\r\n    rm PavlovServer.sh\r\nfi",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nchmod +x \"\/mnt\/server\/Pavlov\/Binaries\/Linux\/PavlovServer-Linux-Shipping\"\r\n\r\n# Install Configuration Files\r\nmkdir -p \/mnt\/server\/Pavlov\/Saved\/Logs\r\nmkdir -p \/mnt\/server\/Pavlov\/Saved\/Config\/LinuxServer\r\nmkdir -p \/mnt\/server\/Pavlov\/Saved\/maps\r\n\r\n\r\ncd \/mnt\/server\/Pavlov\/Saved\/Config\/LinuxServer\r\nif [ ! -f Game.ini ]; then\r\n    echo -e \"Downloading Pavlov VR Game.ini\"\r\n    curl -ssL -o Game.ini https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/pavlov_vr\/Game.ini\r\nfi\r\n\r\ncd \/mnt\/server\/Pavlov\/Saved\/Config\r\nif [ ! -f RconSettings.txt ]; then\r\n    echo -e \"Downloading Pavlov VR RconSettings.txt\"\r\n    curl -ssL -o RconSettings.txt https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/pavlov_vr\/RconSettings.txt\r\nfi\r\n\r\ncd \/mnt\/server\/\r\nif [ -f PavlovServer.sh ]; then\r\n    rm PavlovServer.sh\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -37,16 +37,8 @@
             "default_value": "622970",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|numeric"
-        },
-        {
-            "name": "Server Type",
-            "description": "Choose Between Beta or Shack (-beta shack) or (-beta beta_server). Leave blank for the normal build.",
-            "env_variable": "EXTRA_FLAGS",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:20"
+            "rules": "required|numeric|in:622970",
+            "field_type": "text"
         },
         {
             "name": "RCON Password",
@@ -55,7 +47,8 @@
             "default_value": "CHANGE_ME",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "RCON Port",
@@ -64,16 +57,38 @@
             "default_value": "8188",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric"
+            "rules": "required|numeric",
+            "field_type": "text"
         },
         {
             "name": "Auto-update server",
             "description": "This is to enable auto-updating for servers.\r\n\r\nDefault is 0. Set to 1 to update",
             "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean"
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta id",
+            "description": "Beta branch of a steam app",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|in:,beta_server",
+            "field_type": "text"
+        },
+        {
+            "name": "Api key",
+            "description": "For your server to show up in the server list, there is now a requirement to have an ApiKey issued by vankrupt. This is to prevent DOS attacks against the master server.\r\nGet it here: https:\/\/pavlov-ms.vankrupt.com\/servers\/v1\/key",
+            "env_variable": "API_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
         }
     ]
 }

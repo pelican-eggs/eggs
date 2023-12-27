@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-03T16:22:48+02:00",
+    "name": "Spacestation 14",
+    "author": "josdekurk@gmail.com",
+    "description": "Space Station 14 tells the story of an ordinary shift on a space station gone wrong. Immerse yourself into your role, tinker with detailed systems, and survive the chaos in this round-based multiplayer role playing game.",
+    "features": null,
+    "docker_images": {
+        "Dotnet 7": "ghcr.io\/parkervcp\/yolks:dotnet_7"
+    },
+    "file_denylist": [],
+    "startup": ".\/Robust.Server",
+    "config": {
+        "files": "{\r\n    \"server_config.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"hostname\": \"hostname = \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"tickrate\": \"tickrate = {{server.build.env.SERVER_TICK}}\",\r\n            \"max_connections\": \"max_connections = {{server.build.env.SERVER_MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server Version\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl unzip\r\n\r\nV=$(curl -sSL https:\/\/central.spacestation14.io\/builds\/wizards\/builds.html | grep \"The version is\"  | sed -n 's\/.*<span class=\"versionNumber\">\\([^<]*\\)<\\\/span>.*\/\\1\/p')\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Running: curl -sSL -o server_linux.zip https:\/\/cdn.centcomm.spacestation14.com\/builds\/wizards\/builds\/${V}\/SS14.Server_${ARCH}.zip\"\r\ncurl -sSL -o server_linux.zip \"https:\/\/cdn.centcomm.spacestation14.com\/builds\/wizards\/builds\/${V}\/SS14.Server_${ARCH}.zip\"\r\nunzip -o server_linux.zip\r\nrm server_linux.zip\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server name",
+            "description": "The server hostname",
+            "env_variable": "SERVER_NAME",
+            "default_value": "MyServer",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:48",
+            "field_type": "text"
+        },
+        {
+            "name": "Server tickrate",
+            "description": "The tickrate of the server. Default is 60",
+            "env_variable": "SERVER_TICK",
+            "default_value": "60",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:1,80",
+            "field_type": "text"
+        },
+        {
+            "name": "Max players",
+            "description": "",
+            "env_variable": "SERVER_MAX_PLAYERS",
+            "default_value": "256",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|between:1,256",
+            "field_type": "text"
+        }
+    ]
+}

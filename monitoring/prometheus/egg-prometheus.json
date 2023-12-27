@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-08T15:58:56+02:00",
+    "exported_at": "2023-01-05T11:04:39+01:00",
     "name": "Prometheus",
     "author": "p.zarrad@outlook.de",
     "description": "The Prometheus monitoring system and time series database.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/prometheus --web.listen-address=0.0.0.0:{{SERVER_PORT}} --config.file=\/home\/container\/prometheus.yml --storage.tsdb.path=\/home\/container\/data --web.console.templates=\/home\/container\/consoles --web.console.libraries=\/home\/container\/console_libraries --web.config.file=\/home\/container\/prometheus.web.yml",
+    "startup": ".\/prometheus --web.listen-address=0.0.0.0:{{SERVER_PORT}} --config.file=\/home\/container\/prometheus.yml --storage.tsdb.path=\/home\/container\/data --web.console.templates=\/home\/container\/consoles --web.console.libraries=\/home\/container\/console_libraries --web.config.file=\/home\/container\/prometheus.web.yml --storage.tsdb.retention.time={{DATA_SAVE_TIME}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server is ready to receive web requests.\"\r\n}",
@@ -36,6 +36,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Data Save time in Days",
+            "description": "How long the data is being saved",
+            "env_variable": "DATA_SAVE_TIME",
+            "default_value": "15d",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:10",
             "field_type": "text"
         }
     ]

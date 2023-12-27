@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-09T19:06:53+02:00",
+    "name": "Uptime Kuma",
+    "author": "eggs@goover.dev",
+    "description": "Uptime Kuma is an easy-to-use self-hosted monitoring tool.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/apps:uptimekuma": "ghcr.io\/parkervcp\/apps:uptimekuma"
+    },
+    "file_denylist": [],
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then npm run setup; fi; \/usr\/local\/bin\/node \/home\/container\/server\/server.js --port={{SERVER_PORT}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"[SERVER] INFO: Listening on \"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Uptime Kuma App Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk update\r\napk add --no-cache git curl jq file unzip make gcc g++ python3 python3-dev libtool\r\napk add --no-cache git-lfs --repository=https:\/\/dl-cdn.alpinelinux.org\/alpine\/latest-stable\/community\r\n\r\n## npm update to latest\r\necho -e \"Updating npm to latest....\\n\"\r\nif [ -d \"\/mnt\/server\/node_modules\" ]; then\r\n    rm -fR \/mnt\/server\/node_modules\r\n    npm cache verify\r\nfi\r\nnpm install -g npm@latest\r\n\r\n## Uptime Kuma install & update\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\ngit config --global --add safe.directory \/mnt\/server\r\n\r\nif [ -d .git ]; then\r\n    echo -e \"Updating Uptime Kuma....\\n \"\r\n    npm run setup\r\nelse\r\n    echo -e \"Download and installing Uptime Kuma...\\n\"   \r\n    git clone https:\/\/github.com\/louislam\/uptime-kuma.git .\r\n    npm run setup\r\nfi\r\n\r\n## only create dir, when .git is present to prevent errors\r\nif [ -d .git ]; then\r\n    mkdir -p \/mnt\/server\/data\r\nfi\r\n\r\nif [ ! -f \"\/mnt\/server\/data\/kuma.db\" ]; then\r\n    cp \/mnt\/server\/db\/kuma.db \/mnt\/server\/data\/kuma.db\r\nfi\r\n\r\n## install end\r\necho -e \"-----------------------------------------\"\r\necho -e \"Installation completed...\"\r\necho -e \"-----------------------------------------\"\r\nexit 0",
+            "container": "node:18-alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Git Repo Address",
+            "description": "GitHub Repo to clone\r\n\r\nI.E. https:\/\/github.com\/parkervcp\/repo_name",
+            "env_variable": "GIT_ADDRESS",
+            "default_value": "https:\/\/github.com\/louislam\/uptime-kuma",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "JS file",
+            "description": "The file that starts the app",
+            "env_variable": "JS_FILE",
+            "default_value": "server\/server.js",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}

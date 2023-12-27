@@ -6,5 +6,5 @@ OpenTTD is a business simulation game in which players try to earn money via tra
 
 | Port    | Default |
 |---------|---------|
-| Game    | 3797    |
+| Game    | 3979    |
 | Admin   | 3977    |

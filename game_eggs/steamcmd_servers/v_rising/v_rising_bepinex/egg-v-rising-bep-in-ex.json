@@ -1,0 +1,304 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-11-10T17:55:31+01:00",
+    "name": "V Rising BepInEx",
+    "author": "rehlmgaming@gmail.com",
+    "description": "Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": "WINEDLLOVERRIDES=\"winhttp=n,b\"; xvfb-run wine .\/VRisingServer.exe -persistentDataPath save-data -address 0.0.0.0",
+    "config": {
+        "files": "{\r\n    \"save-data\/Settings\/ServerHostSettings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"Description\": \"{{server.build.env.DESCRIPTION}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"QueryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"MaxConnectedUsers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MaxConnectedAdmins\": \"{{server.build.env.MAX_ADMINS}}\",\r\n            \"ServerFps\": \"{{server.build.env.FPS}}\",\r\n            \"SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"Password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"Secure\": \"{{server.build.env.SERVER_SECURE}}\",\r\n            \"ListOnSteam\": \"{{server.build.env.SERVER_LIST}}\",\r\n            \"ListOnEOS\": \"{{server.build.env.SERVER_LIST}}\",\r\n            \"AutoSaveCount\": \"{{server.build.env.SAVE_COUNT}}\",\r\n            \"AutoSaveInterval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"GameSettingsPreset\": \"{{server.build.env.GAME_SETTINGS_PRESET}}\",\r\n            \"AdminOnlyDebugEvents\": \"{{server.build.env.ADMIN_ONLY_DEBUG_EVENTS}}\",\r\n            \"DisableDebugEvents\": \"{{server.build.env.DEBUG_EVENTS}}\",\r\n            \"Rcon.Enabled\": \"{{server.build.env.RCON}}\",\r\n            \"Rcon.Password\": \"{{server.build.env.RCON_PASS}}\",\r\n            \"Rcon.Port\": \"{{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Loaded ServerGameSettings\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl V Rising Egg - egg-v-rising.json\r\n## Authors: David Wolfe (Red-Thirten), Kapatheus\r\n## Date: 2022\/05\/28\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\nclear\r\nRED='\\033[0;31m'\r\nGREEN='\\033[0;32m'\r\nYELLOW='\\033[1;33m'\r\nBLUE='\\033[0;34m'\r\nNC='\\033[0m'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl jq unzip wget\r\n# Download and install SteamCMD\r\necho -e \"${YELLOW}download and install steamcmd${NC}\"\r\n\r\nexport HOME=\/mnt\/server\r\ncd \/tmp\r\nmkdir -p $HOME\/steamcmd $HOME\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C $HOME\/steamcmd\r\ncd $HOME\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\n# Install game server using SteamCMD\r\necho -e \"${YELLOW}install V Rising with SteamCMD${NC}\"\r\n\r\n.\/steamcmd.sh +force_install_dir $HOME +login anonymous $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p $HOME\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so $HOME\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so $HOME\/.steam\/sdk64\/steamclient.so\r\n\r\n# Enable BEPINEX (Credits to: https:\/\/github.com\/ricin\/vrising-bepinex-linux\/blob\/main\/scripts\/start-server.sh)\r\necho -e \"${YELLOW}installing BepInex${NC}\"\r\n\r\n#variables\r\nBEPINEX_VR_TS_URL=https:\/\/v-rising.thunderstore.io\/package\/BepInEx\/BepInExPack_V_Rising\/\r\nCUR_V=\"$(find ${HOME} -maxdepth 1 -name \"BepInEx-*\" | cut -d '-' -f2)\"\r\nBEPINEX_VR_API_DATA=\"$(curl -s -X GET https:\/\/thunderstore.io\/c\/v-rising\/api\/v1\/package\/b86fcaaf-297a-45c8-82a0-fcbd7806fdc4\/ -H \"accept: application\/json\")\"\r\nLAT_V=\"$(echo ${BEPINEX_VR_API_DATA} | jq -r '.versions[0].version_number')\"\r\n\r\nif [ -z \"${LAT_V}\" ] && [ -z \"${CUR_V}\" ]; then\r\n    echo -e \"${RED}Can't get latest version of BepInEx for V Rising!${NC}\"\r\n    echo -e \"${RED}Please try to run without BepInEx for V Rising. Exiting.${NC}\"\r\n    exit 1\r\nfi\r\n\r\nif [ -f ${HOME}\/BepInEx.zip ]; then\r\n    rm -rf ${HOME}\/BepInEx.zip\r\nfi\r\nif [ -f ${HOME}\/doorstop_config.ini ]; then\r\n    sed -i \"\/enabled=false\/c\\enabled=true\" ${HOME}\/doorstop_config.ini\r\nfi\r\n\r\necho -e \"${YELLOW}BepInEx for V Rising Version Check${NC}\"\r\necho -e \"${YELLOW}More info: ${BEPINEX_VR_TS_URL}${NC}\"\r\n\r\nBEPINEX_VR_TS_DOWNLOAD_URL=\"$(echo ${BEPINEX_VR_API_DATA} | jq -r '.versions[0].download_url')\"\r\nif [ -z \"${CUR_V}\" ]; then\r\n    echo -e \"${YELLOW}BepInEx for V Rising not found, downloading and installing v${LAT_V} ...${NC}\"\r\n    \r\n    cd ${HOME}\r\n    rm -rf ${HOME}\/BepInEx-*\r\n    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${HOME}\/BepInEx.zip --user-agent=Mozilla --content-disposition -E -c \"${BEPINEX_VR_TS_DOWNLOAD_URL}\" ; then\r\n        echo -e \"${GREEN}Successfully downloaded BepInEx for V Rising v${LAT_V}${NC}\"\r\n    else\r\n        echo -e \"${RED}Something went wrong, can't download BepInEx for V Rising v${LAT_V}. Exiting.${NC}\"\r\n        exit 1\r\n    fi\r\n    \r\n    mkdir -p \/tmp\/BepInEx\r\n    unzip -o ${HOME}\/BepInEx.zip -d \/tmp\/BepInEx\r\n    if [ $? -eq 0 ];then\r\n        touch ${HOME}\/BepInEx-${LAT_V}\r\n        cp -rf \/tmp\/BepInEx\/BepInEx*\/* ${HOME}\/\r\n        cp \/tmp\/BepInEx\/README* ${HOME}\/README_BepInEx_for_VRising.txt\r\n        rm -rf ${HOME}\/BepInEx.zip \/tmp\/BepInEx\r\n    else\r\n        echo -e \"${RED}Unable to unzip BepInEx archive! Exiting.${NC}\"\r\n        exit 1\r\n    fi\r\nelif [ \"$CUR_V\" != \"${LAT_V}\" ]; then\r\n    echo -e \"${YELLOW}Version missmatch, BepInEx v$CUR_V installed, downloading and installing v${LAT_V}  ...${NC}\"\r\n    \r\n    cd ${HOME}\r\n    rm -rf ${HOME}\/BepInEx-$CUR_V\r\n    mkdir \/tmp\/Backup\r\n    cp -R ${HOME}\/BepInEx\/config \/tmp\/Backup\/\r\n    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${HOME}\/BepInEx.zip --user-agent=Mozilla --content-disposition -E -c \"${BEPINEX_VR_TS_DOWNLOAD_URL}\" ; then\r\n        echo -e \"${GREEN}Successfully downloaded BepInEx for V Rising v${LAT_V}${NC}\"\r\n    else\r\n        echo -e \"${RED}Unable to download BepInEx for V Rising v${LAT_V}. Exiting.${NC}\"\r\n        exit 1\r\n    fi\r\n    \r\n    unzip -o ${HOME}\/BepInEx.zip -d \/tmp\/BepInEx \r\n    \r\n    if [ $? -eq 0 ];then\r\n        cp -rf \/tmp\/BepInEx\/BepInEx*\/* ${HOME}\/\r\n        cp \/tmp\/BepInEx\/README* ${HOME}\/README_BepInEx_for_VRising.txt\r\n        touch ${HOME}\/BepInEx-${LAT_V}\r\n        cp -R \/tmp\/Backup\/config ${HOME}\/BepInEx\/\r\n        rm -rf ${HOME}\/BepInEx.zip \/tmp\/BepInEx \/tmp\/Backup\r\n    else\r\n        echo -e \"${RED}Unable to unzip BepInEx archive! Exiting.${NC}\"\r\n        exit 1\r\n    fi\r\nelif [ \"${CUR_V}\" == \"${LAT_V}\" ]; then\r\n    echo -e \"${GREEN}BepInEx v$CUR_V up-to-date!${NC}\"\r\nfi\r\n\r\n## V Rising Setup\r\nmkdir -p $HOME\/save-data\/Settings && cd \"$_\"\r\ncat > ServerHostSettings.json << EOF\r\n{\r\n  \"Name\": \"${SERVER_NAME}\",\r\n  \"Description\": \"${DESCRIPTION}\",\r\n  \"Port\": ${SERVER_PORT},\r\n  \"QueryPort\": ${QUERY_PORT},\r\n  \"MaxConnectedUsers\": ${MAX_PLAYERS},\r\n  \"MaxConnectedAdmins\": ${MAX_ADMINS},\r\n  \"ServerFps\": ${FPS},\r\n  \"SaveName\": \"${SAVE_NAME}\",\r\n  \"Password\": \"${SERVER_PASSWORD}\",\r\n  \"Secure\": ${SERVER_SECURE},\r\n  \"ListOnMasterServer\": ${SERVER_LIST},\r\n  \"AutoSaveCount\": ${SAVE_COUNT},\r\n  \"AutoSaveInterval\": ${SAVE_INTERVAL},\r\n  \"GameSettingsPreset\": \"${GAME_SETTINGS_PRESET}\",\r\n  \"AdminOnlyDebugEvents\": ${ADMIN_ONLY_DEBUG_EVENTS},\r\n  \"DisableDebugEvents\": ${DEBUG_EVENTS},\r\n  \"Rcon\": {\r\n    \"Enabled\": ${RCON},\r\n    \"Password\": \"${RCON_PASS}\",\r\n    \"Port\": ${RCON_PORT}\r\n  }\r\n}\r\nEOF\r\n\r\necho -e \"${BLUE}-----------------------${NC}\"\r\necho -e \"${GREEN}Installation completed${NC}\"\r\necho -e \"${BLUE}-----------------------${NC}\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Server Query Port",
+            "description": "UDP port for Steam server list features.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "9877",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "Automatic Updates",
+            "description": "Quickly checks for any server updates on startup, and updates if necessary.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Settings Preset",
+            "description": "What preset of game settings the server should run. Some settings may not apply after the save file is first created. Leave empty\/null if you are using a single-player uploaded save or a custom ServerGameSettings.json file in the `~\/save-data\/Settings\/` directory.",
+            "env_variable": "GAME_SETTINGS_PRESET",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|in:,DuoPvP,HardcorePvP,Level30PvE,Level30PvP,Level50PvE,Level50PvP,Level70PvE,Level70PvP,SoloPvP,StandardPvE_Easy,StandardPvE_Hard,StandardPvE,StandardPvP_Easy,StandardPvP_Hard,StandardPVP",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server that will appear in the server list.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "V Rising Dedicated Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "Short description of server purpose, rules, and the message of the day.",
+            "env_variable": "DESCRIPTION",
+            "default_value": "Welcome to the server!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Connected Users",
+            "description": "Max number of concurrent players on the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "40",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Connected Admins",
+            "description": "Max number of admins to allow connection even when the server is full.",
+            "env_variable": "MAX_ADMINS",
+            "default_value": "4",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password required to join the server. Leave blank to have no password.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Save Name",
+            "description": "Name of save file \/ directory.",
+            "env_variable": "SAVE_NAME",
+            "default_value": "world1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save Count",
+            "description": "Number of autosaves to keep.",
+            "env_variable": "SAVE_COUNT",
+            "default_value": "50",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save Interval",
+            "description": "Interval in seconds between each autosave.",
+            "env_variable": "SAVE_INTERVAL",
+            "default_value": "600",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "List On Master Server",
+            "description": "Set to true to list on the server list, else set to false.",
+            "env_variable": "SERVER_LIST",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Repair] Validate Server Files",
+            "description": "Leave empty (no value) for OFF or type \"true\" or \"1\" for ON. Validates all server files when Automatic Updates is enabled. Note: This will significantly increase server startup times, so it is recommended to only enable this when needed.",
+            "env_variable": "VALIDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Server FPS",
+            "description": "How often the server refreshes. (Default: 30)",
+            "env_variable": "FPS",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Enable RCON",
+            "description": "See the following link for info on how to connect and use RCON: https:\/\/github.com\/StunlockStudios\/vrising-dedicated-server-instructions#rcon",
+            "env_variable": "RCON",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] RCON Password",
+            "description": "Password required to connect to RCON if it is enabled.",
+            "env_variable": "RCON_PASS",
+            "default_value": "somepassword",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] RCON Port",
+            "description": "Port used to connect to RCON. Must be allocated to the server for RCON to work.",
+            "env_variable": "RCON_PORT",
+            "default_value": "25575",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Secure Server",
+            "description": "(true or false)",
+            "env_variable": "SERVER_SECURE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Admin Only Debug Events",
+            "description": "(true or false)",
+            "env_variable": "ADMIN_ONLY_DEBUG_EVENTS",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Disable Debug Events",
+            "description": "(true or false)",
+            "env_variable": "DEBUG_EVENTS",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] V Rising Dedicated Server App ID",
+            "description": "Used for installation and updates. Rarely needs to be changed.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1829350",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "[Advanced] Use Windows Branch",
+            "description": "Tells the installer\/updater to only download the Windows branch of the server (the only branch currently available) so that it can run on Wine. Cannot be changed.",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:1",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "XVFB",
+            "description": "",
+            "env_variable": "XVFB",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "mono vcrun2022",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
