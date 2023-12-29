@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-29T13:41:08-08:00",
+    "name": "NATS",
+    "author": "pterodactyl@geosk.xyz",
+    "description": "NATS is a simple, secure and performant communications system for digital systems, services and devices. NATS is part of the Cloud Native Computing Foundation (CNCF). NATS has over 40 client language implementations, and its server can run on-premise, in the cloud, at the edge, and even on a Raspberry Pi. NATS can secure and simplify design and operation of modern distributed systems.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/nats-server -p {{SERVER_PORT}} `if [ ! -z $CONFIG_FILE ]; then echo \"-c $CONFIG_FILE\"; fi`;",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server is ready\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "# NATS Server installer.\r\n# Authored by Geosskk\r\n#! \/bin\/bash\r\n\r\napt update\r\napt install -y curl unzip\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\ncd \/mnt\/server\r\n\r\nVERSION_RESPONSE=$(curl -sLI -o \/dev\/null -w '%{http_code}' https:\/\/github.com\/nats-io\/nats-server\/releases\/tag\/v${NATS_VERSION})\r\n\r\nif [[ \"$VERSION_RESPONSE\" -ne 200 ]]; then\r\n    echo \"Specified version not found, using latest.\"\r\n\r\n    LATEST_TAG=$(curl -s https:\/\/api.github.com\/repos\/nats-io\/nats-server\/releases\/latest | grep \"tag_name\" | cut -d : -f 2,3 | tr -d \"v[:blank:]\\\",\")\r\n    # FILE_URL=$(curl -s https:\/\/api.github.com\/repos\/nats-io\/nats-server\/releases\/latest | grep \"browser_download_url\" | cut -d : -f 2,3 | tr -d \"[:blank:]\\\",\" | grep \"linux-${ARCH}.zip\")\r\n\r\n    if [ -z \"$LATEST_TAG\" ]; then\r\n        echo \"Unable to get the latest release's info.\"\r\n        exit 1\r\n    fi\r\n\r\n    echo \"Found latest tag v$LATEST_TAG\"\r\n\r\n    NATS_VERSION=$LATEST_TAG\r\n\r\n    FILE_URL=\"https:\/\/github.com\/nats-io\/nats-server\/releases\/download\/v${NATS_VERSION}\/nats-server-v${NATS_VERSION}-linux-${ARCH}.zip\"\r\nelse\r\n    echo \"Version $NATS_VERSION found.\"\r\n\r\n    FILE_URL=\"https:\/\/github.com\/nats-io\/nats-server\/releases\/download\/v${NATS_VERSION}\/nats-server-v${NATS_VERSION}-linux-${ARCH}.zip\"\r\nfi\r\n\r\necho \"The file URL is $FILE_URL\"\r\n\r\nFILE_URL_RESPONSE=$(curl -sLI -o \/dev\/null -w '%{http_code}' $FILE_URL)\r\n\r\nif [[ \"$FILE_URL_RESPONSE\" -ne 200 ]]; then\r\n    echo \"The file URL failed to respond with status code 200, responded with $FILE_URL_RESPONSE.\"\r\n    exit 1\r\nfi\r\n\r\ncurl -L ${FILE_URL} -o nats-server.zip\r\nunzip nats-server.zip\r\nrm nats-server.zip\r\ncp nats-server-v${NATS_VERSION}-linux-${ARCH}\/* .\/\r\nrm -R nats-server-v${NATS_VERSION}-linux-${ARCH}\/\r\n\r\nchmod +x nats-server",
+            "container": "debian:buster-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Version",
+            "description": "The version of NATS to install, if not found will try to get the latest release.",
+            "env_variable": "NATS_VERSION",
+            "default_value": "2.10.7",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Configuration",
+            "description": "The file to use for NATS configuration.",
+            "env_variable": "CONFIG_FILE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
