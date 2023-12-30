@@ -13,10 +13,10 @@
         "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
-    "startup": "wine HogWarpServer.exe",
+    "startup": "export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine HogWarpServer.exe",
     "config": {
         "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ApiKey\": \"{{env.API_KEY}}\",\r\n            \"Name\": \"{{env.SERV_NAME}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"Description\": \"{{env.SERV_DESC}}\",\r\n            \"MaxPlayer\": \"{{env.MAX_PLAYERS}}\",\r\n            \"IconUrl\": \"{{env.SERV_ICON}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \" [HogWarpServer] \"\r\n}",
+        "startup": "{\r\n    \"done\": \"Server started on port \"\r\n}",
         "logs": "{}",
         "stop": "^^C"
     },
@@ -32,7 +32,7 @@
             "name": "Wine Tricks",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "",
+            "default_value": "dotnet7",
             "user_viewable": false,
             "user_editable": false,
             "rules": "nullable|string",

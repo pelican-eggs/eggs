@@ -275,6 +275,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
 * [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
+* [Longvinter](game_eggs/steamcmd_servers/longvinter)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [Mount & Blade II: Bannerlord](game_eggs/steamcmd_servers/mount_blade_II_bannerlord)
