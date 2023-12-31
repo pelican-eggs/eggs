@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-30T05:00:38-05:00",
+    "exported_at": "2023-12-30T14:42:14-05:00",
     "name": "Hogwarp",
     "author": "imkringle@proton.me",
     "description": "A Pterodactyl egg for the Hogwarts Legacy mod Hogwarp - For more info see their Nexus: https:\/\/www.nexusmods.com\/hogwartslegacy\/mods\/1378",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
     "startup": "export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine HogWarpServer.exe",
