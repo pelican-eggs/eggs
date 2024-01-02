@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-09T04:34:42+02:00",
+    "exported_at": "2024-01-02T03:12:07+02:00",
     "name": "tModloader",
     "author": "parker@parkervcp.com",
     "description": "tModLoader is essentially a mod that provides a way to load your own mods without having to work directly with Terraria's source code itself. This means you can easily make mods that are compatible with other people's mods, save yourself the trouble of having to decompile and recompile Terraria.exe, and escape from having to understand all of the obscure \"intricacies\" of Terraria's source code. It is made to work for Terraria 1.3+.",
@@ -90,22 +90,22 @@
         },
         {
             "name": "Difficulty",
-            "description": "Sets the difficulty of the world when using auto-create 0(normal), 1(expert). Toggle to choose expert (1).",
+            "description": "Sets the difficulty of the world when using auto-create. Options: 0(normal), 1(expert), 2(master), 3(journey)",
             "env_variable": "DIFFICULTY",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean",
+            "rules": "required|string|in:0,1,2,3",
             "field_type": "text"
         },
         {
             "name": "Server Password",
-            "description": "Server password for users to connect to your server",
+            "description": "Server password for users to connect to your server(leave empty if no password!! no spaces)",
             "env_variable": "SERVER_PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "nullable|string|max:20",
             "field_type": "text"
         },
         {
