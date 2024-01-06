@@ -4,8 +4,9 @@ Project Zomboid is the ultimate in zombie survival. Alone or in MP: you loot, bu
 
 ## Configuration
 
-Project Zomboid creates Backup on Server Start by copying its SaveData into Temp and then zipping it up, after a few days these files are so large that your Server will fail on Startup with Error: `java.util.concurrent.ExecutionException: java.io.IOException: No space left on device.
-`. Either disable Backups in the Project Zomboid Server Settings via `BackupsOnStart=false` or increase the `tmpfs_size` in your wings-docker configuration.
+Project Zomboid creates Backup on Server Start by copying its SaveData into Temp and then zipping it up, after a few days these files are so large that your Server will fail on Startup with Error: `java.util.concurrent.ExecutionException: java.io.IOException: No space left on device`. 
+
+Either disable Backups in the Project Zomboid Server Settings via `BackupsOnStart=false` or increase the `tmpfs_size` in your wings config.yml configuration file.
 
 ## Server Ports
 
