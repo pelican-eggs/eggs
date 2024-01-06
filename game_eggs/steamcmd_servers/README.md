@@ -229,6 +229,10 @@ This is a collection of servers that use SteamCMD to install.
   * [dedicated](scpsl/dedicated)
   * [exiled](scpsl/exiled)
 
+## SCP: Escape Together
+
+[SCP: Escape Together](scp_escape_together)
+
 ## Solace Crafting
 
 [Solace Crafting](solace_crafting)

@@ -1,0 +1,66 @@
+{
+    "ConfigVersion": 28,
+    "ServerName": "Unknown server",
+    "ServerIp": "auto",
+    "Port": 27015,
+    "ServerInfoPastebinId": "",
+    "MaxPlayers": 16,
+    "RandomMap": true,
+    "MapPath": "",
+    "RespectGameBans": true,
+    "PublicServer": false,
+    "LobbyStartType": 0,
+    "MinPlayers": 2,
+    "RoundStartTimerTime": 60,
+    "RoundEndTime": 10,
+    "StartVotingPercentage": 75,
+    "DoorsOpenChance": 10,
+    "DeathChatMessage": true,
+    "DeathSoundEffect": true,
+    "OfflineMode": false,
+    "RespawnItems": false,
+    "Scp008Settings": {
+      "MinDamage": 7,
+      "MaxDamage": 20
+    },
+    "Scp106Settings": {
+      "MinSpawnTimer": 240,
+      "MaxSpawnTimer": 480,
+      "FollowTimer": 60,
+      "PocketDimension": {
+        "DamageInterval": 1.0,
+        "DamagePerInterval": 0.1
+      }
+    },
+    "Scp294Settings": {
+      "DisabledDrinkFlags": [],
+      "DisabledDrinks": []
+    },
+    "Scp939Settings": {
+      "BaseDamagePerBite": 20.0,
+      "RandomDamage": 20.0
+    },
+    "BodyInfoSettings": {
+      "Enabled": true,
+      "DisplayName": true,
+      "DisplayCauseOfDeath": true
+    },
+    "AutoRestartSettings": {
+      "Enabled": false,
+      "RestartTime": 1800,
+      "RestartAnnounceInterval": 200,
+      "RestartAnnounceFormat": "The round will restart in %SECONDS% seconds."
+    },
+    "NoHolidays": false,
+    "ReportingEnabled": false,
+    "ReportWebhookUrl": "",
+    "ReportWebhookAvatarUrl": "https://scpetgame.com/files/scpetlogo.jpg",
+    "ReportWebhookNickname": "Server report",
+    "ReportWebhookMessageContent": "",
+    "ReportWebhookEmbedDescription": "Player has been reported",
+    "EnableIdleMode": false,
+    "IdleTickrate": 1,
+    "Tickrate": 60,
+    "ServerTags": [],
+    "EnableDebugLogs": false
+}
