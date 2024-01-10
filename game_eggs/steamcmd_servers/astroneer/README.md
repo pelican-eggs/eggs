@@ -36,5 +36,5 @@ To be able to connect to the server you need to edit Engine.ini (located at %Loc
 
 ```
 [SystemSettings]
-net.AllowEncryption=false
+net.AllowEncryption=False
 ```
