@@ -13,3 +13,6 @@ Mindustry requires a single port
 | Port    | Default |
 |---------|---------|
 | Game    | 6567    |
+
+## Note
+You can't use hostname/alias to connect your mindustry server. IPv4 must be used to connect.
