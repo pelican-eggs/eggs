@@ -14,4 +14,4 @@ For a graceful shutdown, please follow these steps:
 
 After completing the manual shutdown, you can safely click the 'stop' button or type 'exit' in supervisorctl.
 
-Note: If you don't do so, the last unsaved day in game will be lost.
+**Note: If you don't do so, the last unsaved day in game will be lost.**
