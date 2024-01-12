@@ -1,0 +1,17 @@
+ 
+ 
+---------------------------------------
+!!! Warning: Game Exit Procedure !!!
+ 
+Attention:
+Due to a design limitation of the game, it cannot exit gracefully using standard Linux signals.
+ 
+For a graceful shutdown, please follow these steps:
+1. Use the 'fg caves' and 'fg master' commands to access each shard's process within supervisorctl.
+2. Manually type 'c_shutdown()' in each process to initiate a graceful shutdown.
+ 
+After completing the manual shutdown, you can safely click the 'stop' button or type 'exit' to exit supervisorctl.
+ 
+---------------------------------------
+ 
+ 
