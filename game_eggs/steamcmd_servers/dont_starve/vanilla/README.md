@@ -8,15 +8,11 @@ You play as Wilson, an intrepid Gentleman Scientist who has been trapped by a de
 
 Enter a strange and unexplored world full of strange creatures, dangers, and surprises. Gather resources to craft items and structures that match your survival style. Play your way as you unravel the mysteries of this strange land.
 
-## [Vanilla Server](/game_eggs/steamcmd_servers/dont_starve/vanilla)
-
-## [Modded Server](/game_eggs/steamcmd_servers/dont_starve/modded)
-
-### Minimum RAM warning
+## Minimum RAM warning
 
 Minimum required memory to run the server is around 512mb for a single user..
 
-### Server Ports
+## Server Ports
 
 Don't Starve Together only requires a single port to run. All network communications are proxied through the master. The default is 10999
 
@@ -24,4 +20,4 @@ Don't Starve Together only requires a single port to run. All network communicat
 |---------|---------|
 | Game    | 10999   |
 
-#### Mods/Plugins may require ports to be added to the server
+### Mods/Plugins may require ports to be added to the server
