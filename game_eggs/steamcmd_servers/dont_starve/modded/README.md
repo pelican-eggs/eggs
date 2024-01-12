@@ -2,7 +2,7 @@
 
 ## Reason for a Separate Egg
 
-Vanilla egg works fine when no mod added, while some mods are added to the server, "coproc" command will not start the server correctly. Thus this egg uses Supervisord to properly manage the process.
+Vanilla egg works fine when no mod added, while some mods are added to the server, "coproc" command will not start the server within it correctly. Thus this egg uses Supervisord to properly manage the processes.
 
 ## Warning for Stopping Servers
 
