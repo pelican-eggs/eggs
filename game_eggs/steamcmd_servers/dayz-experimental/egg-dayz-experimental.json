@@ -1,18 +1,19 @@
 {
-    "_comment": "Pterodactyl DayZ (Experimental) Egg ~ David Wolfe (Red-Thirten) ~ 2022-05-26",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
+    "exported_at": "2024-01-13T21:15:35+01:00",
     "name": "DayZ (Experimental)",
     "author": "rehlmgaming@gmail.com",
     "description": "How long can you survive a post-apocalyptic world? A land overrun with an infected \"zombie\" population, where you compete with other survivors for limited resources. Will you team up with strangers and stay strong together? Or play as a lone wolf to avoid betrayal? This is DayZ \u2013 this is your story.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/games:dayz"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:dayz": "ghcr.io\/parkervcp\/games:dayz"
+    },
     "file_denylist": [],
     "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -BEpath=.\/ -config=serverDZ.cfg -mod=\\\"{{CLIENT_MODS}}\\\" -serverMod=\\\"{{SERVERMODS}}\\\" \\\"{{STARTUP_PARAMS}}\\\"",
     "config": {
@@ -23,7 +24,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl DayZ (Experimental) Egg - egg-dayz-experimental.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/26\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl DayZ (Experimental) Egg - egg-dayz-experimental.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/26\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
@@ -36,7 +37,8 @@
             "default_value": "anonymous",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Steam Password",
@@ -45,7 +47,8 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Disable Mod Downloads\/Updates",
@@ -54,7 +57,8 @@
             "default_value": "0",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Number of SteamCMD Retry Attempts",
@@ -63,7 +67,8 @@
             "default_value": "3",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -72,7 +77,8 @@
             "default_value": "DayZ Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Max Players",
@@ -81,7 +87,8 @@
             "default_value": "64",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|gt:0"
+            "rules": "required|integer|gt:0",
+            "field_type": "text"
         },
         {
             "name": "Server Password",
@@ -90,7 +97,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Admin Password",
@@ -99,7 +107,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Automatic Updates",
@@ -108,7 +117,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Modlist File (Exported from DayZ Launcher)",
@@ -117,7 +127,8 @@
             "default_value": "modlist.html",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Additional Mods",
@@ -126,7 +137,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Verify Signatures",
@@ -135,7 +147,8 @@
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:0,2"
+            "rules": "required|string|in:0,2",
+            "field_type": "text"
         },
         {
             "name": "Enforce Game Version",
@@ -144,7 +157,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Disable VoN",
@@ -153,7 +167,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "VoN Quality",
@@ -162,7 +177,8 @@
             "default_value": "20",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|between:0,30"
+            "rules": "required|integer|between:0,30",
+            "field_type": "text"
         },
         {
             "name": "Disable Third Person",
@@ -171,7 +187,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Disable Crosshair",
@@ -180,7 +197,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Disable Personal Light",
@@ -189,7 +207,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Darker Nights",
@@ -198,7 +217,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Persistent Time",
@@ -207,7 +227,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Time Multiplier",
@@ -216,7 +237,8 @@
             "default_value": "12",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|between:0,24"
+            "rules": "required|integer|between:0,24",
+            "field_type": "text"
         },
         {
             "name": "Night Multiplier",
@@ -225,7 +247,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric|between:0.1,64"
+            "rules": "required|numeric|between:0.1,64",
+            "field_type": "text"
         },
         {
             "name": "[Repair] Make Mod Files Lowercase",
@@ -234,7 +257,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "[Repair] Validate Server Files",
@@ -243,7 +267,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Server-Side Only Mods",
@@ -252,7 +277,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Extra Startup Parameters",
@@ -261,7 +287,8 @@
             "default_value": "-doLogs -limitFPS=120",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Server Binary",
@@ -270,7 +297,8 @@
             "default_value": "DayZServer",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|in:DayZServer"
+            "rules": "required|string|in:DayZServer",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] DayZ SA Dedicated Server App ID",
@@ -279,7 +307,8 @@
             "default_value": "1042420",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         }
     ]
 }
