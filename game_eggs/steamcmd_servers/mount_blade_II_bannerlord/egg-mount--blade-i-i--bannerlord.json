@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-10T09:46:32+01:00",
+    "exported_at": "2024-01-15T15:51:23+01:00",
     "name": "Mount & Blade II: Bannerlord",
     "author": "josdekurk@gmail.com",
     "description": "A strategy\/action RPG. Create a character, engage in diplomacy, craft, trade and conquer new lands in a vast medieval sandbox. Raise armies to lead into battle and command and fight alongside your troops in massive real-time battles using a deep but intuitive skill-based combat system.",
@@ -13,7 +13,7 @@
         "Dotnet_6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
     },
     "file_denylist": [],
-    "startup": "cd \/home\/container\/bin\/Linux64_Shipping_Server\/ && dotnet TaleWorlds.Starter.DotNetCore.Linux.dll \/port {{SERVER_PORT}}  \/dedicatedcustomserverauthtoken \"{{AUTH_TOKEN}}\" \/dedicatedcustomserverconfigfile tdm_config.txt _MODULES_*Native*Multiplayer*DedicatedCustomServerHelper*_MODULES_",
+    "startup": "cd \/home\/container\/bin\/Linux64_Shipping_Server\/ && dotnet TaleWorlds.Starter.DotNetCore.Linux.dll \/port {{SERVER_PORT}}  \/dedicatedcustomserverauthtoken \"{{AUTH_TOKEN}}\" \/dedicatedcustomserverconfigfile tdm_config.txt _MODULES_{{MODULES}}_MODULES_",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Custom Game server is ready! You can now enter console commands\"\r\n}",
@@ -56,6 +56,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Modules",
+            "description": "The modules that the server will be running. Ensure that it's in the format of *module1*module2*module3* etc.",
+            "env_variable": "MODULES",
+            "default_value": "*Native*Multiplayer*DedicatedCustomServerHelper*",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
             "field_type": "text"
         }
     ]
