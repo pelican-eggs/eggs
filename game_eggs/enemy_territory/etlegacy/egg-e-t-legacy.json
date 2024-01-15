@@ -1,24 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2019-04-29T22:08:18+08:00",
+    "exported_at": "2024-01-15T19:24:56+01:00",
     "name": "ET Legacy",
     "author": "parker@parkervcp.com",
     "description": "Welcome to Enemy Territory: Legacy, an open source project that aims to create a fully compatible client and server for the popular online FPS game Wolfenstein: Enemy Territory - whose gameplay is still considered unmatched by many, despite its great age.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
-    "startup": ".\/etlded +set net_port {{SERVER_PORT}} +map {{MAP}}",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/etlded +set net_port {{SERVER_PORT}} +map {{MAP}} +set omnibot_enable {{OMNIBOT}}  $(if [ \"${OMNIBOT}\" == \"1\" ]; then echo '+set omnibot_path \".\/legacy\/omni-bot\"'; fi) + exec etl_server.cfg",
     "config": {
-        "files": "{\r\n    \"etmain\/etl_server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"\/\/set net_ip \\\"\\\"\": \"set net_ip \\\"0.0.0.0\\\"\",\r\n            \"\/\/set net_port \\\"27960\\\"\": \"set net_port \\\"{{server.build.env.SERVER_PORT}}\\\"\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"------ Server Initialization ------\",\r\n    \"userInteraction\": []\r\n}",
+        "files": "{\r\n    \"etmain\/etl_server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"\/\/set net_ip \\\"\\\"\": \"set net_ip \\\"0.0.0.0\\\"\",\r\n            \"\/\/set net_port \\\"27960\\\"\": \"set net_port \\\"{{server.build.default.port}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Game Initialization completed in\"\r\n}",
         "logs": "{}",
         "stop": "quit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt-get update\r\napt-get -y install wget curl zip unzip\r\n\r\ncd \/tmp\/\r\n\r\necho \"Downloading $ET_VERSION bit ET Legacy version\"\r\n\r\nif [ $ET_VERSION == \"32\" ];then \r\n    wget `curl https:\/\/www.etlegacy.com\/download | grep \"Linux 32-bit bin\" | grep -Eoi '<a [^>]+>' |  grep -Eo 'href=\"[^\\\"]+\"' |  grep -Eo '(http|https):\/\/[^\"]+'` -O etlegacy.tar.gz\r\nelse\r\n    wget `curl https:\/\/www.etlegacy.com\/download | grep \"Linux 64-bit bin\" | grep -Eoi '<a [^>]+>' |  grep -Eo 'href=\"[^\\\"]+\"' |  grep -Eo '(http|https):\/\/[^\"]+'` -O etlegacy.tar.gz\r\nfi\r\n\r\necho \"Unpacking ET: Legacy\"\r\ntar --strip-components=1 -xzvf etlegacy.tar.gz -C \/mnt\/server\/\r\n\r\necho \"Downloading latest enemy territory files\"\r\nwget `curl https:\/\/www.splashdamage.com\/games\/wolfenstein-enemy-territory\/ | grep .x86_full | grep -Eoi '<a [^>]+>' |  grep -Eo 'href=\"[^\\\"]+\"' |  grep -Eo --color=never '(http|https):\/\/[^\"]+'` -O enemy_territory.zip\r\n\r\necho \"Unpacking enemy territory files\"\r\nunzip enemy_territory.zip\r\n\r\necho \"Copying enemy territory assets\"\r\n.\/*.x86_keygen_V03.run --tar xvf .\/etmain\/\r\ncp etmain\/pak*.pk3 \/mnt\/server\/etmain\/\r\n\r\n# Create .etlegacy as the server doesn't correctly create it\r\nmkdir -p \/mnt\/server\/.etlegacy",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Downloading $ET_VERSION bit ET Legacy version\"\r\n\r\nif [ $ET_VERSION == \"32\" ];then \r\n    DOWNLOAD_URL=$(curl -s https:\/\/www.etlegacy.com\/download | grep \"Linux 32-bit bin\" | grep -Eoi '<a [^>]+>' |  grep -Eo 'href=\"[^\\\"]+\"' |  grep -Eo '(http|https):\/\/[^\"]+')\r\n    EXTENTION=i386\r\nelse\r\n    DOWNLOAD_URL=$(curl -s https:\/\/www.etlegacy.com\/download | grep \"Linux 64-bit bin\" | grep -Eoi '<a [^>]+>' |  grep -Eo 'href=\"[^\\\"]+\"' |  grep -Eo '(http|https):\/\/[^\"]+')\r\n    EXTENTION=x86_64\r\nfi\r\n\r\necho \"Download URL: ${DOWNLOAD_URL}\"\r\ncurl -sSL -o etlegacy.tar.gz ${DOWNLOAD_URL}\r\n\r\necho \"Unpacking ET: Legacy\"\r\ntar xvf etlegacy.tar.gz --strip-components=1 \r\nrm etlegacy.tar.gz\r\n\r\n\r\nE_DOWNLOAD_URL=$(curl -s https:\/\/www.splashdamage.com\/games\/wolfenstein-enemy-territory\/ | grep .x86_full | grep -Eoi '<a [^>]+>' |  grep -Eo 'href=\"[^\\\"]+\"' |  grep -Eo --color=never '(http|https):\/\/[^\"]+')\r\n\r\necho \"Downloading latest enemy territory files from: ${E_DOWNLOAD_URL}\"\r\ncurl -sSL -o enemy_territory.zip ${E_DOWNLOAD_URL}\r\n\r\necho \"Unpacking enemy territory files\"\r\nunzip -o enemy_territory.zip\r\nrm enemy_territory.zip\r\n\r\necho \"Copying enemy territory assets\"\r\n.\/*.x86_keygen_V03.run --tar xvf .\/etmain\/\r\n#cp etmain\/pak*.pk3 \/mnt\/server\/etmain\/\r\n\r\n# Create .etlegacy as the server doesn't correctly create it\r\nmkdir -p \/mnt\/server\/.etlegacy\r\n\r\nrm *.run\r\n\r\nmv etlded.${EXTENTION} etlded\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -28,18 +33,30 @@
             "description": "What version of the server to install. 32 or 64 bit version.",
             "env_variable": "ET_VERSION",
             "default_value": "32",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|integer|in:32, 64"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|in:32,64",
+            "field_type": "text"
         },
         {
             "name": "Default Map",
             "description": "The default map to use when starting the server.",
             "env_variable": "MAP",
             "default_value": "oasis",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Omnibot",
+            "description": "",
+            "env_variable": "OMNIBOT",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
         }
     ]
 }
