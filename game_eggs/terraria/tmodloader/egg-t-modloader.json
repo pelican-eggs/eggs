@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-09T04:34:42+02:00",
+    "exported_at": "2024-01-02T11:03:56+01:00",
     "name": "tModloader",
     "author": "parker@parkervcp.com",
     "description": "tModLoader is essentially a mod that provides a way to load your own mods without having to work directly with Terraria's source code itself. This means you can easily make mods that are compatible with other people's mods, save yourself the trouble of having to decompile and recompile Terraria.exe, and escape from having to understand all of the obscure \"intricacies\" of Terraria's source code. It is made to work for Terraria 1.3+.",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Vanilla tModloader Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y curl jq file unzip\r\n\r\n\r\nif [ -z \"$GITHUB_USER\" ] && [ -z \"$GITHUB_OAUTH_TOKEN\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u $GITHUB_USER:$GITHUB_OAUTH_TOKEN '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/tmodloader\/tmodloader\/releases\" | jq -c '.[]' | head -1)\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/tmodloader\/tmodloader\/releases\" | jq '.[]')\r\n\r\n\r\nif [ -z \"$VERSION\" ] || [ \"$VERSION\" == \"latest\" ]; then\r\n    echo -e \"defaulting to latest release\"\r\n    DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url | grep -i tmodloader.zip)\r\nelse\r\n    VERSION_CHECK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"$VERSION\" == \"$VERSION_CHECK\" ]; then\r\n        if [[ \"$VERSION\" == v0* ]]; then\r\n            DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i linux | grep -i zip)\r\n        else\r\n            DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i tmodloader.zip)\r\n        fi\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url | grep -i tmodloader.zip)\r\n    fi\r\nfi\r\n\r\n## mkdir and cd to \/mnt\/server\/\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server || exit 5\r\n\r\n## download release\r\necho -e \"running: curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip -o ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    exit 2\r\nfi\r\n\r\nif [[ \"$VERSION\" == v0* ]]; then\r\n    chmod +x tModLoaderServer.bin.x86_64\r\n    chmod +x tModLoaderServer\r\nelse\r\n    #tiny startup script for backward compatibility\r\n    echo 'dotnet tModLoader.dll -server \"$@\"' > tModLoaderServer\r\n    chmod +x tModLoaderServer\r\nfi\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf terraria-server-*.zip rm ${DOWNLOAD_LINK##*\/}\r\nif [[ \"$VERSION\" != v0* ]]; then\r\n    rm -rf DedicatedServerUtils LaunchUtils PlatformVariantLibs tModPorter RecentGitHubCommits.txt *.bat *.sh\r\nfi\r\n\r\n## using config for difficulty as the startup parameter does not work -> config parser\r\nmv \/mnt\/server\/serverconfig.txt \/mnt\/server\/config.txt\r\nsed 's\/#difficulty\/difficulty\/' \/mnt\/server\/config.txt > \/mnt\/server\/serverconfig.txt\r\nrm \/mnt\/server\/config.txt\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:bullseye-slim",
+            "script": "#!\/bin\/bash\r\n# Vanilla tModloader Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y file \r\n\r\nif [ -z \"$GITHUB_USER\" ] && [ -z \"$GITHUB_OAUTH_TOKEN\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u $GITHUB_USER:$GITHUB_OAUTH_TOKEN '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/tmodloader\/tmodloader\/releases\" | jq -c '.[]' | head -1)\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/tmodloader\/tmodloader\/releases\" | jq '.[]')\r\n\r\n\r\nif [ -z \"$VERSION\" ] || [ \"$VERSION\" == \"latest\" ]; then\r\n    echo -e \"defaulting to latest release\"\r\n    DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url | grep -i tmodloader.zip)\r\nelse\r\n    VERSION_CHECK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"$VERSION\" == \"$VERSION_CHECK\" ]; then\r\n        if [[ \"$VERSION\" == v0* ]]; then\r\n            DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i linux | grep -i zip)\r\n        else\r\n            DOWNLOAD_LINK=$(echo $RELEASES | jq -r --arg VERSION \"$VERSION\" '. | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i tmodloader.zip)\r\n        fi\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo $LATEST_JSON | jq .assets | jq -r .[].browser_download_url | grep -i tmodloader.zip)\r\n    fi\r\nfi\r\n\r\n## mkdir and cd to \/mnt\/server\/\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server || exit 5\r\n\r\n## download release\r\necho -e \"running: curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*\/}\r\n\r\nFILETYPE=$(file -F ',' ${DOWNLOAD_LINK##*\/} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${DOWNLOAD_LINK##*\/}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip -o ${DOWNLOAD_LINK##*\/}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    exit 2\r\nfi\r\n\r\nif [[ \"$VERSION\" == v0* ]]; then\r\n    chmod +x tModLoaderServer.bin.x86_64\r\n    chmod +x tModLoaderServer\r\nelse\r\n    #tiny startup script for backward compatibility\r\n    echo 'dotnet tModLoader.dll -server \"$@\"' > tModLoaderServer\r\n    chmod +x tModLoaderServer\r\nfi\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf terraria-server-*.zip rm ${DOWNLOAD_LINK##*\/}\r\nif [[ \"$VERSION\" != v0* ]]; then\r\n    rm -rf DedicatedServerUtils LaunchUtils PlatformVariantLibs tModPorter RecentGitHubCommits.txt *.bat *.sh\r\nfi\r\n\r\n## using config for difficulty as the startup parameter does not work -> config parser\r\nmv \/mnt\/server\/serverconfig.txt \/mnt\/server\/config.txt\r\nsed 's\/#difficulty\/difficulty\/' \/mnt\/server\/config.txt > \/mnt\/server\/serverconfig.txt\r\nrm \/mnt\/server\/config.txt\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -90,22 +90,22 @@
         },
         {
             "name": "Difficulty",
-            "description": "Sets the difficulty of the world when using auto-create 0(normal), 1(expert). Toggle to choose expert (1).",
+            "description": "Sets the difficulty of the world when using auto-create. Options: 0(normal), 1(expert), 2(master), 3(journey)",
             "env_variable": "DIFFICULTY",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|boolean",
+            "rules": "required|string|in:0,1,2,3",
             "field_type": "text"
         },
         {
             "name": "Server Password",
-            "description": "Server password for users to connect to your server",
+            "description": "Server password for users to connect to your server.\r\nCan be empty for no password.",
             "env_variable": "SERVER_PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "nullable|string|max:20",
             "field_type": "text"
         },
         {

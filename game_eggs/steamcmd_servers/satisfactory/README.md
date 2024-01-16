@@ -99,11 +99,11 @@ ___
 ___
 
 ### Installation/System Requirements
-*Note (9/20/22): Update 6 drastically increased RAM requirement. Servers given less than minimum have a high chance of crashing.*
+
 |  | Bare Minimum | Recommended |
 |---------|---------|---------|
 | Processor | Recent x86/64 (AMD/Intel) processor. No 32 bit or ARM support. | Favours higher single-core performance over multiple cores. |
-| RAM | 10240-12288 MiB | 16384-24576 MiB (especially for 4 players or large save files) |
+| RAM | 1536-2048 MiB | 6144-12288 MiB (especially for 4 players or large save files) |
 | Storage | 5 GB | 7-10 GB (or more, depending on save size or frequency) |
 | Network | 0.512 Mbit/s | 1-5 Mbit/s ([may require server *and* client config tweaks](https://satisfactory.fandom.com/wiki/Multiplayer#Temporary_lag_solution)) |
 | Host OS | Most stable Linux OS branches should work | Using the latest kernel version for your installed OS can prevent some edge-case installation/boot issues. |

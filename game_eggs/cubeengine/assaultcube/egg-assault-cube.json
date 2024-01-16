@@ -1,0 +1,112 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-30T10:56:35+02:00",
+    "name": "AssaultCube",
+    "author": "holeintheseat@gmail.com",
+    "description": "AssaultCube is a FREE, multiplayer, first-person shooter game, based on the CUBE engine.\r\n\r\nTaking place in realistic environments, with fast, arcade gameplay, it's addictive and fun!",
+    "features": null,
+    "docker_images": {
+        "Debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin_unix\/linux_64_server -Y{{ASSAULT_SERVER_KEY}} -n\"{{ASSAULT_SERVER_DESCRIPTION}}\" -o\"{{ASSAULT_SERVER_MOTD}}\" -c{{ASSAULT_SERVER_MAXPLAYERS}} -x{{ASSAULT_SERVER_ADMINPASSWORD}} -f{{SERVER_PORT}} -p{{ASSAULT_SERVER_PLAYERPASSWORD}} -m{{ASSAULT_SERVER_MASTERSERVER}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"dedicated server started, waiting for clients...\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# AssaultCube Server Egg (By HoleInTheSeat) <|-|> (https:\/\/assault.cubers.net\/)\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n#######-|Dependencies|-#######\r\napt update\r\napt -y install tar make bzip2 build-essential clang libclang-dev libclang1 llvm llvm-dev clang-tools libz-dev curl jq\r\n\r\n#######-|Downloading files|-#######\r\ncd \/mnt\/server\r\n## get release info and download links\r\n\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/assaultcube\/AC\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/assaultcube\/AC\/releases\")\r\nMATCH=tar.bz2\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | head -1)\r\n    fi\r\nfi\r\n\r\n\r\ncurl -sSL -o AssaultCube.tar.bz2 ${DOWNLOAD_URL}\r\ntar -xf AssaultCube.tar.bz2\r\nrm AssaultCube.tar.bz2\r\n\r\n#######-|Setting Up Server|-#######\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nrm -rf bin_win32\/ *.sh\r\n\r\nif [ \"$(uname -m)\" = \"x86_64\" ]; then\r\n    echo -e \"x86 System\"\r\nelse\r\n    cd \/mnt\/server\/source\/src\r\n    make server_install\r\nfi\r\n#######-|Insert Server Authkey|-#######\r\ncd \/mnt\/server\r\nsed -i 's\/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\/{{ASSAULT_SERVER_KEY}}\/' .\/config\/servercmdline.txt\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Auth Key",
+            "description": "You must provide your own key for the server to register on the masterserver.\r\nTo generate a key you can run the client and issue the command:\r\n\r\n            authkey new server \r\n        \r\nSee: (https:\/\/assault.cubers.net\/docs\/server.html)",
+            "env_variable": "ASSAULT_SERVER_KEY",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "",
+            "env_variable": "ASSAULT_SERVER_DESCRIPTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Message of the Day",
+            "description": "",
+            "env_variable": "ASSAULT_SERVER_MOTD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Set the limit on amount of players able to join (MAX 16)",
+            "env_variable": "ASSAULT_SERVER_MAXPLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|integer|max:16",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "",
+            "env_variable": "ASSAULT_SERVER_ADMINPASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:512|min:5",
+            "field_type": "text"
+        },
+        {
+            "name": "Player Password",
+            "description": "Password need to join the server.",
+            "env_variable": "ASSAULT_SERVER_PLAYERPASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Master Server",
+            "description": "Forces the server to register with the hostname or IP address of a different masterserver.\r\nThe default is ms.cubers.net\r\nIf you want your server to be hidden and not report to the masterserver, use -mlocalhost",
+            "env_variable": "ASSAULT_SERVER_MASTERSERVER",
+            "default_value": "ms.cubers.net",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "The version of the engine you want to download.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-15T14:46:32+01:00",
+    "exported_at": "2023-11-10T17:55:31+01:00",
     "name": "V Rising BepInEx",
     "author": "rehlmgaming@gmail.com",
     "description": "Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.",
@@ -17,7 +17,7 @@
     "file_denylist": [],
     "startup": "WINEDLLOVERRIDES=\"winhttp=n,b\"; xvfb-run wine .\/VRisingServer.exe -persistentDataPath save-data -address 0.0.0.0",
     "config": {
-        "files": "{\r\n    \"save-data\/Settings\/ServerHostSettings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"Description\": \"{{server.build.env.DESCRIPTION}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"QueryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"MaxConnectedUsers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MaxConnectedAdmins\": \"{{server.build.env.MAX_ADMINS}}\",\r\n            \"ServerFps\": \"{{server.build.env.FPS}}\",\r\n            \"SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"Password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"Secure\": \"{{server.build.env.SERVER_SECURE}}\",\r\n            \"ListOnMasterServer\": \"{{server.build.env.SERVER_LIST}}\",\r\n            \"AutoSaveCount\": \"{{server.build.env.SAVE_COUNT}}\",\r\n            \"AutoSaveInterval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"GameSettingsPreset\": \"{{server.build.env.GAME_SETTINGS_PRESET}}\",\r\n            \"AdminOnlyDebugEvents\": \"{{server.build.env.ADMIN_ONLY_DEBUG_EVENTS}}\",\r\n            \"DisableDebugEvents\": \"{{server.build.env.DEBUG_EVENTS}}\",\r\n            \"Rcon.Enabled\": \"{{server.build.env.RCON}}\",\r\n            \"Rcon.Password\": \"{{server.build.env.RCON_PASS}}\",\r\n            \"Rcon.Port\": \"{{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"save-data\/Settings\/ServerHostSettings.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"Name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"Description\": \"{{server.build.env.DESCRIPTION}}\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"QueryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"MaxConnectedUsers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MaxConnectedAdmins\": \"{{server.build.env.MAX_ADMINS}}\",\r\n            \"ServerFps\": \"{{server.build.env.FPS}}\",\r\n            \"SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"Password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"Secure\": \"{{server.build.env.SERVER_SECURE}}\",\r\n            \"ListOnSteam\": \"{{server.build.env.SERVER_LIST}}\",\r\n            \"ListOnEOS\": \"{{server.build.env.SERVER_LIST}}\",\r\n            \"AutoSaveCount\": \"{{server.build.env.SAVE_COUNT}}\",\r\n            \"AutoSaveInterval\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"GameSettingsPreset\": \"{{server.build.env.GAME_SETTINGS_PRESET}}\",\r\n            \"AdminOnlyDebugEvents\": \"{{server.build.env.ADMIN_ONLY_DEBUG_EVENTS}}\",\r\n            \"DisableDebugEvents\": \"{{server.build.env.DEBUG_EVENTS}}\",\r\n            \"Rcon.Enabled\": \"{{server.build.env.RCON}}\",\r\n            \"Rcon.Password\": \"{{server.build.env.RCON_PASS}}\",\r\n            \"Rcon.Port\": \"{{server.build.env.RCON_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Loaded ServerGameSettings\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -284,10 +284,10 @@
             "name": "WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2019 dotnet48",
+            "default_value": "mono vcrun2022",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string|max:50",
             "field_type": "text"
         },
         {

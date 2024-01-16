@@ -4,19 +4,19 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-16T17:24:48+01:00",
+    "exported_at": "2023-04-25T19:31:11+02:00",
     "name": "Empyrion: Galactic Survival",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "Empyrion: Galactic Survival dedicated server",
     "features": null,
     "docker_images": {
         "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
     },
     "file_denylist": [],
-    "startup": "cd empyrion; WINEDLLOVERRIDES=\"mscoree,mshtml=\" wine  .\/DedicatedServer\/EmpyrionDedicated.exe -batchmode -log -logFile .\/logs\/current.log \"$@\" &> .\/logs\/wine.log | tail -f .\/logs\/current.log",
+    "startup": "cd empyrion; WINEDLLOVERRIDES=\"mscoree,mshtml=\" wine .\/DedicatedServer\/EmpyrionDedicated.exe -batchmode -log -logFile .\/logs\/current.log & echo -e \"Checking on telnet connection\" && until nc -z 127.0.0.1 ${TELNET_PORT}; do echo -e \"Waiting on telnet connection...\"; sleep 5; done && $( [[ -z ${TELNET_PWD} ]] && printf %s \"telnet -E 127.0.0.1 ${TELNET_PORT}\")",
     "config": {
-        "files": "{\r\n    \"empyrion\/dedicated.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"ServerConfig.Srv_Port\": \"{{server.build.default.port}}\",\r\n            \"ServerConfig.Srv_Name\": \"{{env.SRV_NAME}}\",\r\n            \"ServerConfig.Srv_Password\": \"{{env.SRV_PWD}}\",\r\n            \"ServerConfig.Srv_MaxPlayers\": \"{{env.MAX_PLAYERS}}\",\r\n            \"ServerConfig.Tel_Enabled\": \"{{env.TELNET_ENABLED}}\",\r\n            \"ServerConfig.Tel_Port\": \"{{env.TELNET_PORT}}\",\r\n            \"ServerConfig.Tel_Pwd\": \"{{env.TELNET_PWD}}\",\r\n            \"ServerConfig.Srv_Description\": \"{{env.SRV_DESC}}\",\r\n            \"GameConfig.Seed\": \"{{env.SEED}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"-LOG- Start Game\"\r\n}",
+        "files": "{\r\n    \"empyrion\/dedicated.yaml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"ServerConfig.Srv_Port\": \"{{server.build.default.port}}\",\r\n            \"ServerConfig.Srv_Name\": \"{{env.SRV_NAME}}\",\r\n            \"ServerConfig.Srv_Password\": \"{{env.SRV_PWD}}\",\r\n            \"ServerConfig.Srv_MaxPlayers\": \"{{env.MAX_PLAYERS}}\",\r\n            \"ServerConfig.Tel_Enabled\": \"{{env.TELNET_ENABLED}}\",\r\n            \"ServerConfig.Tel_Port\": \"{{env.TELNET_PORT}}\",\r\n            \"ServerConfig.Srv_Description\": \"{{env.SRV_DESC}}\",\r\n            \"GameConfig.Seed\": \"{{env.SEED}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Connected to 127.0.0.1.\"\r\n}",
         "logs": "{}",
         "stop": "saveandexit 0"
     },
@@ -76,16 +76,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|numeric",
-            "field_type": "text"
-        },
-        {
-            "name": "Telnet Password",
-            "description": "Telnet server password.",
-            "env_variable": "TELNET_PWD",
-            "default_value": "Abc",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string|max:20",
             "field_type": "text"
         },
         {

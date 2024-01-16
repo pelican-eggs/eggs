@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-06T17:07:59+00:00",
+    "exported_at": "2023-08-04T08:40:49+02:00",
     "name": "Lavalink",
     "author": "damuffin36@gmail.com",
     "description": "A standalone audio sending node based on Lavaplayer and Koe. Allows for sending audio without it ever reaching any of your shards.\r\nDescription taken from https:\/\/github.com\/freyacodes\/Lavalink",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
+        "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -jar Lavalink.jar",
@@ -22,10 +22,41 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# NodeJS Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -L -o Lavalink.jar https:\/\/github.com\/freyacodes\/Lavalink\/releases\/latest\/download\/Lavalink.jar\r\n\r\ncurl -L -o application.yml https:\/\/raw.githubusercontent.com\/freyacodes\/Lavalink\/master\/LavalinkServer\/application.yml.example\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "script": "## this is a simple script to use the github API for release versions.\r\n## this requires the egg has a variable for GITHUB_PACKAGE, VERSION and MATCH (match is to match the filename in some way)\r\n## this supports using oauth\/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)\r\n## if you are getting hit with GitHub API limit issues then you need to have the user and token set.\r\napt update\r\napt install -y curl jq git\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -L -o Lavalink.jar ${DOWNLOAD_URL}\r\ncurl -L -o application.yml https:\/\/raw.githubusercontent.com\/freyacodes\/Lavalink\/master\/LavalinkServer\/application.yml.example\r\n\r\necho \"-------------------------------------------------------\"\r\necho \"Installation completed\"\r\necho \"-------------------------------------------------------\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "GITHUB_PACKAGE",
+            "description": "",
+            "env_variable": "GITHUB_PACKAGE",
+            "default_value": "lavalink-devs\/Lavalink",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Match",
+            "description": "",
+            "env_variable": "MATCH",
+            "default_value": "Lavalink.jar",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
 }

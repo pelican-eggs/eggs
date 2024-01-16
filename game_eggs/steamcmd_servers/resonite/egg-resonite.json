@@ -1,0 +1,112 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-11-11T08:33:24-05:00",
+    "name": "Resonite",
+    "author": "espeon@espeon.dev",
+    "description": "Enter a novel digital universe with infinite possibilities. Whether you resonate with people around the world in a casual conversation, playing games and socializing or you riff off each other when creating anything from art to programming complex games, you'll find your place here.",
+    "features": null,
+    "docker_images": {
+        "Mono": "ghcr.io\/parkervcp\/yolks:mono_latest"
+    },
+    "file_denylist": [],
+    "startup": "mono Headless\/Resonite.exe -c .\/Config\/Config.json -l .\/Logs $(if {{ENABLE_MODLOADER}}; then echo \"-LoadAssembly \".\/Libraries\/ResoniteModLoader.dll\"\"; fi)",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"World running...\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\necho -e \"steam user is not set.\\n\"\r\necho -e \"Using anonymous user.\\n\"\r\nSTEAM_USER=anonymous\r\nSTEAM_PASS=\"\"\r\nSTEAM_AUTH=\"\"\r\nelse\r\necho -e \"user set to ${STEAM_USER}\"\r\nfi\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) -betapassword ${SRCDS_BETAPASS} ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n## check if config file exists\r\necho \"Looking for existing config file...\"\r\nif ! [ -f \"\/mnt\/server\/Headless\/Config\/Config.json\" ]; then\r\necho \"Config does not exist, creating new config.\"\r\n## create default config\r\nmkdir -p \/mnt\/server\/Headless\/Config\r\ncurl -sSL -o \/mnt\/server\/Headless\/Config\/Config.json https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/resonite\/Config.json\r\nelse\r\n## leave existing config\r\necho \"Config already exists, leaving it as is.\"\r\nfi\r\n## check if mod loader is enabled\r\necho \"Checking if mod loader needs to be installed...\"\r\nif [ \"$ENABLE_MODLOADER\" = true ]; then\r\necho \"Installing\/Updating mod loader as its enabled.\"\r\nmkdir -p \/mnt\/server\/Libraries\r\nmkdir -p \/mnt\/server\/rml_libs\r\nmkdir -p \/mnt\/server\/rml_mods\r\ncurl -sSL -o \/mnt\/server\/Libraries\/ResoniteModLoader.dll https:\/\/github.com\/resonite-modding-group\/ResoniteModLoader\/releases\/latest\/download\/ResoniteModLoader.dll\r\ncurl -sSL -o \/mnt\/server\/rml_libs\/0Harmony.dll https:\/\/github.com\/resonite-modding-group\/ResoniteModLoader\/releases\/latest\/download\/0Harmony.dll\r\nelse\r\necho \"Skipping installing mod loader as its not enabled.\"\r\nfi\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam Account User",
+            "description": "The username for your Steam account.",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Account Password",
+            "description": "The password for your Steam account.",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Account Token\/Code",
+            "description": "The Steam Guard code or Login Token emailed to you.",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Mod Loader",
+            "description": "See: https:\/\/github.com\/resonite-modding-group\/ResoniteModLoader for more information on Resonite Mod Loader.",
+            "env_variable": "ENABLE_MODLOADER",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta Password",
+            "description": "This is the \"Beta Password\" that is only acquired by going to the Resonite Patreon, subscribing to the tier with Headless access, and then after your Resonite account shows \"Patreon Supporter\", message the Resonite bot in game with \/headlessCode, and paste that code here.",
+            "env_variable": "SRCDS_BETAPASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:30",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta branch name",
+            "description": "",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "headless",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto update",
+            "description": "Auto update the server on startup",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2519830",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}

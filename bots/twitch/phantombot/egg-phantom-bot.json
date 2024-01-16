@@ -4,13 +4,14 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-02T18:28:42+02:00",
+    "exported_at": "2023-09-02T23:24:58+00:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
+        "Java 16 [DEPRECATED]": "ghcr.io\/parkervcp\/yolks:java_16",
+        "Java 19": "ghcr.io\/parkervcp\/yolks:java_19"
     },
     "file_denylist": [],
     "startup": "java --add-opens java.base\/java.lang=ALL-UNNAMED -Djava.security.policy=config\/security -Dinteractive -Xms1m -Dfile.encoding=UTF-8 -jar PhantomBot.jar",
@@ -30,7 +31,7 @@
     "variables": [
         {
             "name": "Version",
-            "description": "latest = Latest Stable\r\nmaster = latest Github",
+            "description": "latest = Latest Stable\r\nmaster = latest Github\r\n3.9.0.7 = Latest known working with Java 16",
             "env_variable": "RELEASE_VERSION",
             "default_value": "latest",
             "user_viewable": true,

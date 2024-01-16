@@ -1,36 +1,192 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-11-02T22:59:26-05:00",
+    "exported_at": "2023-12-29T18:52:14+01:00",
     "name": "Minetest",
     "author": "support@pterodactyl.io",
     "description": "An open source voxel game engine. Play one of our many games, mod a game to your liking, make your own game, or play on a multiplayer server.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_ubuntu",
-    "startup": ".\/bin\/minetestserver --port {{SERVER_PORT}} --terminal",
+    "features": null,
+    "docker_images": {
+        "Minetest": "ghcr.io\/parkervcp\/games:minetest"
+    },
+    "file_denylist": [],
+    "startup": "minetest --server --port {{SERVER_PORT}} --gameid {{DEFAULT_GAME}} --world \/home\/container\/.minetest\/worlds\/{{WORLD_NAME}} --terminal --config \/home\/container\/.minetest\/minetest.conf --logfile \/home\/container\/server.log",
     "config": {
-        "files": "{}",
-        "startup": "{\r\n    \"done\": \" Server for gameid\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"debug.txt\"\r\n}",
+        "files": "{\r\n    \".minetest\/minetest.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"name\": \"name = {{server.build.env.SERVER_ADMIN_NAME}}\",\r\n            \"server_name\": \"server_name = {{server.build.env.SERVER_NAME}}\",\r\n            \"server_description\": \"server_description = {{server.build.env.SERVER_DESC}}\",\r\n            \"server_address\": \"server_address = {{server.build.env.SERVER_DOMAIN}}\",\r\n            \"server_url\": \"server_url = {{server.build.env.SERVER_URL}}\",\r\n            \"server_announce\": \"server_announce = {{server.build.env.SERVER_ANNOUNCE}}\",\r\n            \"serverlist_url\": \"serverlist_url = {{server.build.env.SERVER_LIST_URL}}\",\r\n            \"motd\": \"motd = {{server.build.env.SERVER_MOTD}}\",\r\n            \"max_users\": \"max_users = {{server.build.env.SERVER_MAX_USERS}}\",\r\n            \"bind_address\": \"bind_address = 0.0.0.0\",\r\n            \"default_password\": \"default_password = {{server.build.env.SERVER_PASSWORD}}\",\r\n            \"default_game\": \"default_game = {{server.build.env.DEFAULT_GAME}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \" Server for gameid\"\r\n}",
+        "logs": "{}",
         "stop": "\/shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Minetest Installation Script\r\ncd \/mnt\/server &&\r\n\r\n# Install installation dependencies\r\napt update &&\r\napt -y install unzip wget build-essential libirrlicht-dev cmake libbz2-dev libjpeg-dev libxxf86vm-dev libsqlite3-dev libopenal-dev libcurl4-gnutls-dev libfreetype6-dev zlib1g-dev libgmp-dev libjsoncpp-dev luajit libncurses5-dev &&\r\n#touch test &&\r\n\r\n# Download, compile and prepare the engine\r\nwget -Osrc.zip https:\/\/github.com\/minetest\/minetest\/archive\/\"${MTVERSION}\".zip &&\r\nunzip .\/src.zip &&\r\nrm .\/src.zip &&\r\ncd .\/minetest-\"${MTVERSION}\" &&\r\ncmake . -DRUN_IN_PLACE=TRUE -DBUILD_CLIENT=FALSE -DBUILD_SERVER=TRUE -DENABLE_GLES=OFF -DENABLE_POSTGRESQL=OFF -DENABLE_REDIS=OFF -DENABLE_SOUND=OFF -DENABLE_LEVELDB=OFF -DENABLE_SPATIAL=OFF &&\r\nmake -j$(nproc) &&\r\nmake package &&\r\nmv .\/minetest-\"${MTVERSION}\"-linux.tar.gz ..\/ &&\r\ncd .. &&\r\nrm -rf .\/minetest-\"${MTVERSION}\" &&\r\ntar xfz .\/minetest-\"${MTVERSION}\"-linux.tar.gz &&\r\nrm minetest-\"${MTVERSION}\"-linux.tar.gz &&\r\nmv .\/minetest-\"${MTVERSION}\"-linux\/* .\/ &&\r\nrm -rf minetest-\"${MTVERSION}\"-linux &&\r\ntouch .\/minetest.conf &&\r\n\r\n# Download and prepare the game\r\ncd .\/games &&\r\nwget -Ominetest_game.zip https:\/\/github.com\/minetest\/minetest_game\/archive\/\"${MTVERSION}\".zip &&\r\nunzip minetest_game.zip &&\r\n#rm minetest_game.zip &&\r\nmv minetest_game-\"${MTVERSION}\" minetest_game &&\r\ncd .. &&\r\n\r\n# Clean up a bit\r\nrm -rf clientmods unix doc client fonts textures &&\r\n\r\n# Done!\r\necho \"Installation was successfully completed!\"",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\n# Minetest Installation Script\r\nmkdir -p \/mnt\/server\/.minetest\r\n\r\napt update\r\napt -y install curl unzip\r\n\r\n# Create server.log\r\nLOG_FILE=\/mnt\/server\/server.log\r\nif [ -f \"$LOG_FILE\" ]; then\r\n  echo \"Log file already exists.\"\r\nelse \r\n  echo \"Log file does not exist. Making one...\"\r\n  touch \"$LOG_FILE\"\r\nfi\r\n\r\n# Create minetest.conf\r\nCONFIG_FILE=\/mnt\/server\/.minetest\/minetest.conf\r\nif [ -f \"$CONFIG_FILE\" ]; then\r\n  echo \"Config file already exists.\"\r\nelse \r\n  echo \"Config file does not exist. Making one...\"\r\n  curl -sSL -o \/mnt\/server\/.minetest\/minetest.conf.example https:\/\/raw.githubusercontent.com\/minetest\/minetest\/master\/minetest.conf.example\r\n  echo -e \"## Server settings generated by pterodactyl\\nname\\nserver_name\\nserver_description\\nserver_address\\nserver_url\\nserver_announce\\nserverlist_url\\nmotd\\nmax_users\\nbind_address\\ndefault_password\\ndefault_game\\n\\n## Custom server settings\\n\" >> \"$CONFIG_FILE\"\r\nfi\r\n\r\n# Create games folder\r\nGAMES_FOLDER=\/mnt\/server\/.minetest\/games\r\nif [ -d \"$GAMES_FOLDER\" ]; then\r\n  echo \"GAMES folder already exists.\"\r\nelse \r\n  echo \"GAMES folder does not exist. Making one...\"\r\n  mkdir -p $GAMES_FOLDER\r\nfi\r\n\r\n# Create mods folder\r\nMOD_FOLDER=\/mnt\/server\/.minetest\/mods\r\nif [ -d \"$MOD_FOLDER\" ]; then\r\n  echo \"Mods folder already exists.\"\r\nelse \r\n  echo \"Mods folder does not exist. Making one...\"\r\n  mkdir -p $MOD_FOLDER\r\n  curl -sSL -o \"$MOD_FOLDER\"\/mods_here.txt https:\/\/raw.githubusercontent.com\/minetest\/minetest\/master\/mods\/mods_here.txt\r\nfi\r\n\r\n# Install Gamemode\r\nif [ \"$COMMUNITY_DOWNLOAD\" == \"1\" ]; then\r\n    if ! [ -z \"$COMMUNITY_GAME_NAME\" ]; then\r\n\t\t  if ! [ -z \"$COMMUNITY_GAME_AUTOR\" ]; then\r\n\t\t  \techo \"Download $COMMUNITY_GAME_NAME\"\r\n\t\t\t\tD_URL=$(curl -s https:\/\/content.minetest.net\/packages\/$COMMUNITY_GAME_AUTOR\/$COMMUNITY_GAME_NAME\/ | grep -i download | grep packages | grep download | grep -o 'href=\".*\"' |  cut -d \"=\" -f2- | egrep title= | awk -F' ' '{print $1}' | tr -d '\"')\r\n\t\t\t\tcurl -sSL -o \/mnt\/server\/.minetest\/games.zip https:\/\/content.minetest.net\/$D_URL >\/dev\/null 2>&1\r\n\t\t\t\tunzip -o \/mnt\/server\/.minetest\/games.zip -d \/mnt\/server\/.minetest\/games >\/dev\/null 2>&1\r\n\t\t\t\trm \/mnt\/server\/.minetest\/games.zip\r\n\t\t  else\r\n\t\t    echo \"The COMMUNITY_GAME_AUTOR variable is required to download a community game\"\r\n\t\t  fi\r\n    else\r\n      echo \"The COMMUNITY_GAME_NAME variable is required to download a community game\"\r\n    fi\r\nfi\r\n\r\n# Done!\r\necho \"Installation was successfully completed!\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Version",
-            "description": "The version of MT to install. Releases only",
-            "env_variable": "MTVERSION",
-            "default_value": "5.4.1",
-            "user_viewable": false,
+            "name": "Name of the admin player.",
+            "description": "When running a server, clients connecting with this name are admins.",
+            "env_variable": "SERVER_ADMIN_NAME",
+            "default_value": "",
+            "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:10"
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Server name",
+            "description": "Name of the server, to be displayed when players join and in the serverlist.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Minetest server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Description of the server",
+            "description": "Description of server, to be displayed when players join and in the serverlist.",
+            "env_variable": "SERVER_DESC",
+            "default_value": "mine here",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Domain name of the server",
+            "description": "Domain name of server, to be displayed in the serverlist.",
+            "env_variable": "SERVER_DOMAIN",
+            "default_value": "game.minetest.net",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Server url",
+            "description": "Homepage of server, to be displayed in the serverlist.",
+            "env_variable": "SERVER_URL",
+            "default_value": "https:\/\/minetest.net",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Show in server list",
+            "description": "Automatically report to the serverlist.",
+            "env_variable": "SERVER_ANNOUNCE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Announce serverlist",
+            "description": "Announce to this serverlist.",
+            "env_variable": "SERVER_LIST_URL",
+            "default_value": "servers.minetest.net",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "message of the day",
+            "description": "Message of the day displayed to players connecting.",
+            "env_variable": "SERVER_MOTD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players that can be connected simultaneously.",
+            "env_variable": "SERVER_MAX_USERS",
+            "default_value": "15",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|min:0|max:65535",
+            "field_type": "text"
+        },
+        {
+            "name": "Server password",
+            "description": "New users need to input this password.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "World name",
+            "description": "The name of the world",
+            "env_variable": "WORLD_NAME",
+            "default_value": "world",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Game name",
+            "description": "Default game when creating a new world. Only change if you have already uploaded the game!",
+            "env_variable": "DEFAULT_GAME",
+            "default_value": "minetest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Community download",
+            "description": "Download a community game.\r\nNeeds COMMUNITY_GAME_NAME and COMMUNITY_GAME_AUTOR",
+            "env_variable": "COMMUNITY_DOWNLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Community game name",
+            "description": "Case sensitive!\r\nExample: https:\/\/content.minetest.net\/packages\/Wuzzy\/mineclone2\/\r\nthen this should be mineclone2",
+            "env_variable": "COMMUNITY_GAME_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Community game author",
+            "description": "Case-sensitive!\r\nExample: https:\/\/content.minetest.net\/packages\/Wuzzy\/mineclone2\/\r\nthen this should be Wuzzy",
+            "env_variable": "COMMUNITY_GAME_AUTOR",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Game PATH",
+            "description": "",
+            "env_variable": "MINETEST_SUBGAME_PATH",
+            "default_value": "\/home\/container\/.minetest\/games",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:64",
+            "field_type": "text"
         }
     ]
 }

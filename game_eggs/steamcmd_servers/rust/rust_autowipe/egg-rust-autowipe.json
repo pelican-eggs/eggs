@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-03T13:00:17+08:00",
+    "exported_at": "2023-06-17T16:29:22+03:00",
     "name": "Rust Autowipe",
     "author": "support@pterodactyl.io",
     "description": "The only aim in Rust is to survive. To do this you will need to overcome struggles such as hunger, thirst and cold. Build a fire. Build a shelter. Kill animals for meat. Protect yourself from other players, and kill them for meat. Create alliances with other players and form a town. Do whatever it takes to survive.",
@@ -15,7 +15,7 @@
         "ghcr.io\/pterodactyl\/games:rust": "ghcr.io\/pterodactyl\/games:rust"
     },
     "file_denylist": [],
-    "startup": "\".\/RustDedicated -batchmode +server.port {{SERVER_PORT}} +server.queryport {{QUERY_PORT}} +server.identity \"rust\" +rcon.ip 0.0.0.0 +rcon.port {{RCON_PORT}} +rcon.web true +server.hostname \\\"{{HOSTNAME}}\\\" +server.level \\\"{{LEVEL}}\\\" +server.description \\\"{{DESCRIPTION}}\\\" +server.url \\\"{{SERVER_URL}}\\\" +server.headerimage \\\"{{SERVER_IMG}}\\\" +server.worldsize \\\"{{WORLD_SIZE}}\\\" +server.seed \\\"$( if [ -f seed.txt ] && [[ ${WORLD_SEED} == \"0\" ]]; then printf %s $(cat seed.txt); else printf %s '${WORLD_SEED}'; fi )\\\" +server.maxplayers {{MAX_PLAYERS}} +rcon.password \\\"{{RCON_PASS}}\\\" +app.port {{APP_PORT}} +server.saveinterval {{SAVEINTERVAL}} {{ADDITIONAL_ARGS}}\"",
+    "startup": "\".\/RustDedicated -batchmode +server.port {{SERVER_PORT}} +server.queryport {{QUERY_PORT}} +server.identity \"rust\" +rcon.ip 0.0.0.0 +rcon.port {{RCON_PORT}} +rcon.web true +server.hostname \\\"{{HOSTNAME}}\\\" +server.level \\\"{{LEVEL}}\\\" +server.description \\\"{{DESCRIPTION}}\\\" +server.url \\\"{{SERVER_URL}}\\\" +server.headerimage \\\"{{SERVER_IMG}}\\\" +server.maxplayers {{MAX_PLAYERS}} +rcon.password \\\"{{RCON_PASS}}\\\" +app.port {{APP_PORT}} +server.saveinterval {{SAVEINTERVAL}} $( [ -z ${MAP_URL} ] && printf %s \"+server.worldsize \\\"{{WORLD_SIZE}}\\\" +server.seed \\\"$( if [ -f seed.txt ] && [[ ${WORLD_SEED} == \"0\" ]]; then printf %s $(cat seed.txt); else printf %s ${WORLD_SEED}; fi )\\\"\"|| printf %s \"+server.levelurl {{MAP_URL}}\" ) {{ADDITIONAL_ARGS}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Server startup complete\"\r\n}",
@@ -208,6 +208,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer",
+            "field_type": "text"
+        },
+        {
+            "name": "Custom Map URL",
+            "description": "Overwrites the map with the one from the direct download URL. Invalid URLs will cause the server to crash.",
+            "env_variable": "MAP_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|url",
             "field_type": "text"
         }
     ]

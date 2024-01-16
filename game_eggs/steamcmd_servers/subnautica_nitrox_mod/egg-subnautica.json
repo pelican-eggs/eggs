@@ -1,19 +1,19 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-04-23T15:20:19+02:00",
+    "exported_at": "2023-05-21T09:59:37-07:00",
     "name": "Subnautica",
     "author": "tueye@tuworld.de",
-    "description": "Subnautica is an open world survival action-adventure video game developed and published by Unknown Worlds Entertainment. In it, players are free to explore the ocean on an alien planet, known as planet 4546B, after their spaceship, the Aurora, crashes on the planet's surface.\r\n\r\nNote: NitroxMod version >=1.5.0.0 is required",
+    "description": "Subnautica is an open world survival action-adventure video game developed and published by Unknown Worlds Entertainment. In it, players are free to explore the ocean on an alien planet, known as planet 4546B, after their spaceship, the Aurora, crashes on the planet's surface.\r\n\r\nNote: NitroxMod version >=1.7.0.0 is required",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:mono_latest"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:mono_latest": "ghcr.io\/parkervcp\/yolks:mono_latest"
+    },
     "file_denylist": [],
     "startup": "mono .\/nitrox\/NitroxServer-Subnautica.exe",
     "config": {
@@ -37,7 +37,8 @@
             "default_value": "264710",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,6"
+            "rules": "required|numeric|digits_between:1,6",
+            "field_type": "text"
         },
         {
             "name": "Steam-Username",
@@ -46,7 +47,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Steam-Password",
@@ -55,7 +57,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Steam-GuardCode",
@@ -64,7 +67,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:6"
+            "rules": "nullable|string|max:6",
+            "field_type": "text"
         },
         {
             "name": "Nitrox Version",
@@ -73,7 +77,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|between:3,12"
+            "rules": "required|string|between:3,12",
+            "field_type": "text"
         },
         {
             "name": "Auto Save Interval",
@@ -82,7 +87,8 @@
             "default_value": "120000",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric|digits_between:6,7"
+            "rules": "required|numeric|digits_between:6,7",
+            "field_type": "text"
         },
         {
             "name": "Disable Auto Save",
@@ -91,7 +97,8 @@
             "default_value": "False",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:True,False"
+            "rules": "required|string|in:True,False",
+            "field_type": "text"
         },
         {
             "name": "Save Name",
@@ -100,7 +107,8 @@
             "default_value": "world",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "alpha_dash|between:1,100"
+            "rules": "alpha_dash|between:1,100",
+            "field_type": "text"
         },
         {
             "name": "Server Password",
@@ -109,7 +117,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|between:3,12"
+            "rules": "nullable|string|between:3,12",
+            "field_type": "text"
         },
         {
             "name": "Admin Password",
@@ -118,7 +127,8 @@
             "default_value": "PleaseChangeMe",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|between:3,16"
+            "rules": "required|string|between:3,16",
+            "field_type": "text"
         },
         {
             "name": "Game Mode",
@@ -127,7 +137,8 @@
             "default_value": "SURVIVAL",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:SURVIVAL,FREEDOM,HARDCORE,CREATIVE"
+            "rules": "required|string|in:SURVIVAL,FREEDOM,HARDCORE,CREATIVE",
+            "field_type": "text"
         },
         {
             "name": "Auto Portforward via UPnP",
@@ -136,7 +147,8 @@
             "default_value": "False",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|in:True,False"
+            "rules": "required|string|in:True,False",
+            "field_type": "text"
         },
         {
             "name": "Serializer Mode",
@@ -145,7 +157,18 @@
             "default_value": "JSON",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|in:PROTOBUF,JSON"
+            "rules": "required|string|in:PROTOBUF,JSON",
+            "field_type": "text"
+        },
+        {
+            "name": "Extra Flags",
+            "description": "Extra flags for steamcmd download. Do not edit",
+            "env_variable": "EXTRA_FLAGS",
+            "default_value": "-beta legacy",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

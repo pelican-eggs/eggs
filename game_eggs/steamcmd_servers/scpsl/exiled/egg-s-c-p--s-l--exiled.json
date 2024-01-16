@@ -6,7 +6,7 @@
     },
     "exported_at": "2023-01-09T14:18:18+01:00",
     "name": "SCP:SL - Exiled",
-    "author": "info@goover.de",
+    "author": "eggs@goover.dev",
     "description": "Egg for SCP: Secret Laboratory Dedicated Linux Server with Exiled Plugin Framework",
     "features": [
         "steam_disk_space"

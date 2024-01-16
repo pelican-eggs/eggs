@@ -20,6 +20,9 @@ alt:V Multiplayer a third-party multiplayer modification for Grand Theft Auto: V
 [GTA SA:MP](https://www.sa-mp.com/)
 SA-MP is a free Massively Multiplayer Online game mod for the PC version of Rockstar Games Grand Theft Auto: San Andreas (tm).
 
+[OpenMp](https://www.open.mp/)
+A multiplayer mod for Grand Theft Auto: San Andreas that is fully backwards compatible with San Andreas Multiplayer.
+
 [MTA SA](https://mtasa.com/)
 What more could you want? Multi Theft Auto provides the best online Grand Theft Auto experience there is. Read on to find out more.
 

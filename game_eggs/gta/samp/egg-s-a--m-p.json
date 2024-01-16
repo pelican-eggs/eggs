@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-08T14:50:39+01:00",
+    "exported_at": "2023-10-19T18:53:04+02:00",
     "name": "SA-MP",
     "author": "bl4ckspr4y@protonmail.com",
     "description": "SA-MP is a free Massively Multiplayer Online game mod for the PC version of Rockstar Games Grand Theft Auto: San Andreas (tm).",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\ncd \/tmp || exit\r\necho \"running: curl -sSL -o samp.tar.gz http:\/\/files.sa-mp.com\/samp037svr_${VERSION}.tar.gz\"\r\ncurl -sSL -o samp.tar.gz http:\/\/files.sa-mp.com\/samp037svr_\"${VERSION}\".tar.gz\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf samp.tar.gz --strip-components=1 -C \/mnt\/server\/\r\n\r\ncd \/mnt\/server || exit\r\n\r\nsed -i '3d' \/mnt\/server\/server.cfg\r\necho \"rcon_password ${RCON_PASS}\" >> \/mnt\/server\/server.cfg\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\n# Check if VERSION is set and starts with an uppercase \"R\"\r\nif [[ -n \"$VERSION\" && \"$VERSION\" == R* ]]; then\r\n    VERSION=\"0.3.7\"\r\n    echo \"Updated VERSION: $VERSION\"\r\nfi\r\n\r\ncd \/tmp || exit\r\necho \"running: curl -sSL -o samp.tar.gz https:\/\/sampcenter.com\/download\/server\/linux\/${VERSION}.tar.gz\"\r\ncurl -sSL -o samp.tar.gz https:\/\/sampcenter.com\/download\/server\/linux\/${VERSION}.tar.gz\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf samp.tar.gz --strip-components=1 -C \/mnt\/server\/\r\n\r\ncd \/mnt\/server || exit\r\n\r\nsed -i '3d' \/mnt\/server\/server.cfg\r\necho \"rcon_password ${RCON_PASS}\" >> \/mnt\/server\/server.cfg\r\n\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -30,9 +30,9 @@
     "variables": [
         {
             "name": "Version",
-            "description": "example: if the download url is http:\/\/files.sa-mp.com\/samp037svr_R2-1.tar.gz then the variable should be: `R2-1`",
+            "description": "Example: if the download url is https:\/\/sampcenter.com\/download\/server\/linux\/0.3.7.tar.gz then the variable should be: `0.3.7`",
             "env_variable": "Version",
-            "default_value": "R2-1",
+            "default_value": "0.3.7",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:32",

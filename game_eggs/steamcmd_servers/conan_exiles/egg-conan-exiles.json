@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-23T13:08:22+02:00",
+    "exported_at": "2023-08-17T16:55:04+02:00",
     "name": "Conan Exiles",
     "author": "brycea@terrahost.cloud",
     "description": "Conan Exiles is an open-world survival game set in the brutal lands of Conan the Barbarian. Survive in a savage world, build your kingdom, and dominate your enemies in brutal combat and epic warfare.",
@@ -12,15 +12,15 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "Wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "export WINEDEBUG=-all; xvfb-run --auto-servernum wine \/home\/container\/ConanSandboxServer.exe ConanSandbox?listen?PVPEnabled={{PVP}}?Port={{SERVER_PORT}}?QueryPort={{QUERY_PORT}} -ServerName=\"{{SRV_NAME}}\" -ServerPassword={{SRV_PW}}  -console -log",
+    "startup": "xvfb-run --auto-servernum wine \/home\/container\/ConanSandbox\/Binaries\/Win64\/ConanSandboxServer-Win64-Shipping.exe -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -RconPort={{RCON_PORT}} -ServerName=\"{{SRV_NAME}}\" -ServerPassword=\"{{SRV_PW}}\" -console -log",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Started SourceServerQueries\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "^^C"
     },
     "scripts": {
         "installation": {
@@ -31,33 +31,13 @@
     },
     "variables": [
         {
-            "name": "Game ID",
+            "name": "App id",
             "description": "The ID corresponding to the game to download.",
             "env_variable": "SRCDS_APPID",
             "default_value": "443030",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:7",
-            "field_type": "text"
-        },
-        {
-            "name": "XVFB Enable",
-            "description": "MUST BE 1",
-            "env_variable": "XVFB",
-            "default_value": "1",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|numeric|min:0|max:1",
-            "field_type": "text"
-        },
-        {
-            "name": "Windows install variable",
-            "description": "Required for windows applications to install with steam.\r\n\r\n1 to enable auto-updates",
-            "env_variable": "WINDOWS_INSTALL",
-            "default_value": "1",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|boolean",
+            "rules": "required|string|in:443030",
             "field_type": "text"
         },
         {
@@ -101,13 +81,53 @@
             "field_type": "text"
         },
         {
-            "name": "PvP Enabled",
+            "name": "WINEDEBUG",
             "description": "",
-            "env_variable": "PVP",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2013 vcrun2015 corefonts",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Windows",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
             "default_value": "1",
-            "user_viewable": true,
-            "user_editable": true,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Rcon port",
+            "description": "Remote administrative access",
+            "env_variable": "RCON_PORT",
+            "default_value": "25575",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
             "field_type": "text"
         }
     ]

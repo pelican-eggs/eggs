@@ -1,0 +1,82 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-01T12:47:31+02:00",
+    "name": "DDRaceNetwork",
+    "author": "diedyesterdaywashere@gmail.com",
+    "description": "DDraceNetwork (DDNet) is an actively maintained version of DDRace, a Teeworlds modification with a unique cooperative gameplay.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/DDNet-Server",
+    "config": {
+        "files": "{\r\n    \"data\/autoexec_server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_port\": \"sv_port {{server.build.default.port}}\",\r\n            \"sv_name\": \"sv_name \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"password\": \"password \\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"sv_map\": \"sv_map \\\"{{server.build.env.SERVER_MAP}}\\\"\",\r\n            \"sv_register\": \"sv_register {{server.build.env.SERVER_REGISTER}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \" server name is \"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl xz-utils tar\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | head -1)\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nelse\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | grep -i ${VERSION})\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o ddnet_linux_x86_64.tar.xz ${DOWNLOAD_URL}\r\ntar -xf ddnet_linux_x86_64.tar.xz --strip-components=1\r\nrm ddnet_linux_x86_64.tar.xz\r\n\r\ncd \/mnt\/server\/data\r\nsed -i 's\/#\\(sv_port [0-9]\\+\\)\/\\1\/' autoexec_server.cfg\r\n\r\ncd \/mnt\/server\r\necho \"# Check \/data\/autoexec_config.cfg for more info!\" >> myServerconfig.cfg\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game Version",
+            "description": "Latest is the default, put \"nightly\" for beta, or enter the version number, for example \"17.0\".",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Server name",
+            "description": "The name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "My DDNet server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server password",
+            "description": "Password for joining the server, empty for no password",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server map",
+            "description": "Map to start server with",
+            "env_variable": "SERVER_MAP",
+            "default_value": "Tutorial",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Register server",
+            "description": "Register the server to the server list.\r\n0 is disabled\r\nipv4 is enabled listening ipv4",
+            "env_variable": "SERVER_REGISTER",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:0,ipv4",
+            "field_type": "text"
+        }
+    ]
+}

@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-29T16:30:15+01:00",
+    "exported_at": "2023-12-13T14:45:01-05:00",
     "name": "Grafana",
     "author": "p.zarrad@outlook.de",
     "description": "The open and composable observability and data visualization platform.\r\nVisualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/bin\/grafana-server web",
+    "startup": ".\/bin\/grafana server web",
     "config": {
         "files": "{\r\n    \"conf\/defaults.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"server.http_port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"HTTP Server Listen\"\r\n}",

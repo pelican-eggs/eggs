@@ -1,0 +1,244 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-18T15:46:21+02:00",
+    "name": "The Front",
+    "author": "eggs@goover.dev",
+    "description": "The Front is a survival open-world crafting shooter. You play the role of a resistance fighter sent back in time to stop the rise of a tyrannical empire.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/ProjectWar\/Binaries\/Linux\/TheFrontServer  ProjectWar_Start?DedicatedServer -server -game -log -ServerTags=\"{{SRV_TAGS}}\" -UseSteamSocket={{STEAMSOCKET}} -Port=\"{{SERVER_PORT}}\" -BeaconPort=\"{{BEACON_PORT}}\" -ShutDownServicePort=\"{{SHUTDOWN_PORT}}\" -QueryPort=\"{{QUERY_PORT}}\" -ConfigServerName=\"{{CFG_NAME}}\" -OutIPAddress={{SERVER_IP}} -UserDir=\"\/home\/container\/TheFrontManager\/{{CFG_NAME}}\/\" -ServerName=\"{{SRV_NAME}}\" -EnableParallelCharacterMovementTickFunction -EnableParallelCharacterTickFunction -UseDynamicPhysicsScene -Game.PhysicsVehicle=false -ansimalloc -Game.MaxFrameRate=35 -MaxQueueSize=50 -QueueValidTime=120 -QueueThreshold={{MAX_PLAYERS}} -ServerFightModeType={{GAMEMODE}} -IsCanSelfDamage={{SELFDMG}} -IsCanFriendDamage={{DMGALLIES}} -SaveWorldInterval={{SRV_SAVETIME}} -GMOverlapRatio=2 -GreenHand={{GREENHAND}} -SensitiveWords={{SENSITIVE_WORDS}} -UseACE={{ANTI_CHEAT}} -ServerAdminAccounts={{SRV_ADMIN}} -IsShowGmTitle={{ADMIN_LABEL}} -ServerPassword={{SRV_PW}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"LogLoad: (Engine Initialization) \"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\nclear\r\nRED='\\033[0;31m'\r\nGREEN='\\033[0;32m'\r\nYELLOW='\\033[1;33m'\r\nBLUE='\\033[0;34m'\r\nNC='\\033[0m'\r\n\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}The Front  Installscript${NC}\"\r\necho -e \"${YELLOW}Egg by gOOvER | https:\/\/goover.dev${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates jq dos2unix\r\n\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}download and install steamcmd. please wait...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## install game using steamcmd\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}install game using steamcmd. please wait...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update 1007 +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## install end\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${GREEN}Installation completed...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[SERVER] Server Name",
+            "description": "no spaces und special signs",
+            "env_variable": "SRV_NAME",
+            "default_value": "Pterodactyl hosted Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Max Players",
+            "description": "The max number of players on your server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1,80",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Config Name",
+            "description": "Name of the savefile. NO SPACE or SPECIAL signs",
+            "env_variable": "CFG_NAME",
+            "default_value": "new",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Server Password",
+            "description": "",
+            "env_variable": "SRV_PW",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] PvE",
+            "description": "off = PvP; on = PvE",
+            "env_variable": "GAMEMODE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Use Steam Socket",
+            "description": "Use Steam servers for network penetration. Enable this if you don't have a public IP but you want to allow players from outside your network to join your server. If disabled, only you and other players on your LAN can join. If you have a public IP, you do not need to enable this. Enabling this feature will affect latency. When Steam servers are busy, you may not be able to join this server.",
+            "env_variable": "STEAMSOCKET",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Damage self?",
+            "description": "Allows players to damage themselves.",
+            "env_variable": "SELFDMG",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Damage allies?",
+            "description": "Allows squadmates to damage each other.",
+            "env_variable": "DMGALLIES",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Server Admins",
+            "description": "Enter a 17-digit Steam ID. Use semicolons between each ID. GM level defaults to highest level (Lv. 25)",
+            "env_variable": "SRV_ADMIN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[ADVANCED] Label admin",
+            "description": "Toggles special admin icon.",
+            "env_variable": "ADMIN_LABEL",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[ADVANCED] Server save interval",
+            "description": "Server archive interval (in seconds)",
+            "env_variable": "SRV_SAVETIME",
+            "default_value": "300",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:150,600",
+            "field_type": "text"
+        },
+        {
+            "name": "[ADVANCED] Enable novice protection?",
+            "description": "When enabled, new characters will receive novice protection.",
+            "env_variable": "GREENHAND",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[ADVANCED] Server Tags",
+            "description": "MAX 5 -> \r\n\r\n0= PVP |   \r\n1= PVE | \r\n2= EXP Multiplikator |  \r\n3= GatheringRate |  \r\n4= KeepInventory |  \r\n5= 45d wipe |  \r\n6= 15d wipe |  \r\n7= 30d wipe |  \r\n8= 60d wipe |",
+            "env_variable": "SRV_TAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "[ADVANCED] Enable anticheat?",
+            "description": "Toggles anticheat.",
+            "env_variable": "ANTI_CHEAT",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[ADVANCED] Enable profanity?",
+            "description": "When disable, profanity will be blocked.",
+            "env_variable": "SENSITIVE_WORDS",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Auto Update",
+            "description": "Autoupdate your Server on start\/restart",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] SRCDS_APPID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2334200",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] BeaconPort",
+            "description": "port+1",
+            "env_variable": "BEACON_PORT",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] QueryPort",
+            "description": "port+2",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27017",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] ShutDownServicePort",
+            "description": "port +3",
+            "env_variable": "SHUTDOWN_PORT",
+            "default_value": "27017",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "WINDOWS_INSTALL",
+            "description": "DO NOT REMOVE !!!",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}

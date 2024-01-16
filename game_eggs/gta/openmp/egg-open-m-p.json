@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-07-01T11:37:31+02:00",
+    "name": "OpenMP",
+    "author": "vedrancappone@gmail.com",
+    "description": "A multiplayer mod for Grand Theft Auto: San Andreas that is fully backwards compatible with San Andreas Multiplayer.",
+    "features": null,
+    "docker_images": {
+        "Samp": "ghcr.io\/parkervcp\/games:samp"
+    },
+    "file_denylist": [],
+    "startup": ".\/omp-server",
+    "config": {
+        "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"network.port\": \"{{server.build.default.port}}\",\r\n            \"rcon.password\": \"{{server.build.env.RCON_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"started on port\"\r\n}",
+        "logs": "{}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt -y install curl git jq tar\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/openmultiplayer\/open.mp\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/openmultiplayer\/open.mp\/releases\")\r\nMATCH=open.mp-linux-x86-dynssl\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -linux-x86 | head -1)\r\n    fi\r\nfi\r\n\r\necho \"running: curl -sSL -o openmp.tar.gz ${DOWNLOAD_URL}\"\r\ncurl -sSL -o openmp.tar.gz ${DOWNLOAD_URL}\r\n\r\nmkdir -p \/mnt\/server\r\ntar -xzvf openmp.tar.gz --strip-components=1 -C \/mnt\/server\/\r\n\r\ncd \/mnt\/server || exit\r\n\r\necho \"creating default config\"\r\n\r\nif [ -e config.json ]; then\r\n    echo \"server config file exists\"\r\nelse\r\n    echo \"Downloading default OpenMp config\"\r\n    curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/gta\/openmp\/config.json >> config.json\r\nfi\r\n\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "RCON Password",
+            "description": "The password for RCON",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "The version you want to install",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
