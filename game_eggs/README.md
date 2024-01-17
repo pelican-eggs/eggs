@@ -98,6 +98,7 @@
 
 * [Proxies](minecraft/proxy) Minecraft Server Proxies
   * [Java](minecraft/proxy/java)
+    * [Gate](minecraft/proxy/java/gate)
     * [Travertine](minecraft/proxy/java/travertine)
     * [Velocity](minecraft/proxy/java/velocity)
     * [Waterfall](minecraft/proxy/java/waterfall)
