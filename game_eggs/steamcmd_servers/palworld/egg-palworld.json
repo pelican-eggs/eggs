@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-19T13:50:56+01:00",
+    "exported_at": "2024-01-19T19:39:44+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -15,7 +15,7 @@
     "file_denylist": [
         "PalServer.sh"
     ],
-    "startup": "\/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Test Pal  -port={{SERVER_PORT}} -players={{MAX_PLAYERS}} -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -publicip {{SERVER_IP}} -publicport {{SERVER_PORT}}   EpicApp=PalServer -servername=\"{{SRV_NAME}}\" -serverpassword=\"{{SRV_PASSWORD}}\" adminpassword=\"{{ADMIN_PASSWORD}}\"",
+    "startup": "\/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Test Pal  -port={{SERVER_PORT}} -players={{MAX_PLAYERS}} -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -publicip {{SERVER_IP}} -publicport {{SERVER_PORT}}   EpicApp=PalServer -servername=\"{{SRV_NAME}}\" -serverpassword=\"{{SRV_PASSWORD}}\" -adminpassword=\"{{ADMIN_PASSWORD}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID = 2394010\"\r\n}",
