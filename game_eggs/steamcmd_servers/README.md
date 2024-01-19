@@ -176,6 +176,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Operation Harsh Doorstop](operation_harsh_doorstop)
 
+## Palworld
+
+[Palworld](palworld)
+
 ## Pavlov VR
 
 [Pavlov VR](pavlov_vr)
