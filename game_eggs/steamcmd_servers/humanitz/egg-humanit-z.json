@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-20T12:21:36+01:00",
+    "exported_at": "2024-01-20T12:41:59+01:00",
     "name": "HumanitZ",
     "author": "admin@marx.ps",
     "description": "HumanitZ is a co-op, isometric, open world survival game in a world ended by the zombie outbreak. As one of the few human survivors, try to last as long as \u201chumanly\u201d possible. The past can\u2019t be changed, but you can make a difference today for the future of humanity.",
@@ -235,7 +235,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|boolean",
             "field_type": "text"
         },
         {
@@ -485,7 +485,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|boolean",
             "field_type": "text"
         },
         {
@@ -495,7 +495,7 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric",
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
