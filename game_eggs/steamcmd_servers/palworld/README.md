@@ -62,19 +62,31 @@ Fight, farm, build and work alongside mysterious creatures called "Pals" in this
 ## Known Issues / FAQ
 
 1) The server won't show up in the Community-Server tab.<br>
--> As there are so many people creating dedicated servers you might load a few times more servers (Press the load 200 next servers).<br>
--> You might press the button for a while until you are able to find the server with your name!
+-> As there are so many people creating dedicated servers you might load a few times more servers (Press the "show next 200 server" button).<br>
+-> You might press the button for a while until you are able to find your server.<br>
+-> Temporary workaround: Start your server without password and join via IP. After that set a password and restart it.<br>
+   Now you should able to find your server in the recent tab.
 
-2) As of now (release day - January 19th 2024) you are not able to join a password protected server by IP. 
+2) When joining a password protected server by IP i can't enter a password.<br>
+-> As of now (release day - January 19th 2024) you are not able to join a password protected server by IP.<br>
+-> This will be fixed in a upcoming patch/update.
 
 3) The server does not show up in the steam server list.<br>
 -> This is currently and might never be supported.
+
+4) The server has a huge memory leak.<br>
+-> Seems to be an issue that they are aware of.<br>
+-> Workaround: Schedule a server restart every 6h. You might edit the value according to your system!
 
 ## Recommended server settings
 
 ### RAM
 
-Referring to the [official documentation](https://tech.palworldgame.com/dedicated-server-guide) you should use at least 8GB of RAM for your server to run.<br>
+Referring to the [official documentation](https://tech.palworldgame.com/dedicated-server-guide) you should use at least 16GB of RAM for your server to run smoothly.<br>
+
+### CPU
+
+Intel / AMD processor with at least 4 cores.
 
 ### Storage
 
@@ -87,7 +99,7 @@ You can enable it inside the cofig (/home/container/Pal/Saved/Config/LinuxServer
 
 | Port            | Default |
 | --------------- | ------- |
-| Game            | 8221    |
+| Game            | 8211    |
 | RCON (optional) | 25575   |
 
 The ports can be changed. Dont forget to edit your config file...
