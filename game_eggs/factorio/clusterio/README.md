@@ -1,7 +1,5 @@
 # Clusterio
 
-*A Note on terminology. The developers of Clustorio are using the rather outdated Master/Slave terms for Primary/Secondary or Management/Processing nodes. We will use them in this guide and egg to avoid confusion, but would prefer a more modern set of terminology.*
-
 ## Introduction
 
 Clusterio (https://github.com/clusterio/clusterio) is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio.
@@ -23,19 +21,19 @@ Plugins do the work of modding in the visible changes into the game, see the [Pl
 
 ## Setup
 
-Clusterio uses a Master/Slave system setup, with the Master server running the Web UI and controlling which Slaves run which Instances.
+Clusterio uses a Controller/Host system setup, with the Controller server running the Web UI and controlling which Hosts run which Instances.
 
-The Master server runs a web server that needs to be reachable for cluster management by the user, and by the other nodes to manage them.
+The Controller server runs a web server that needs to be reachable for cluster management by the user, and by the other nodes to manage them.
 
-The Slave server runs the factorio server, and will need any mods manually importing at this time, including the Factorio mods for the Clustorio Library(https://mods.factorio.com/mod/clusterio_lib) and Subspace Storage(https://mods.factorio.com/mod/subspace_storage).
+The Host server runs the factorio server, and will need any mods manually importing at this time, including the Factorio mods for the Clustorio Library(https://mods.factorio.com/mod/clusterio_lib) and Subspace Storage(https://mods.factorio.com/mod/subspace_storage).
 
 Both only require a single port each.
 
-Server Mode controls if the server is a master or slave, and each varaible is labeled as required for Master, Slave or All. Please ensure you fill in all required variables.
+Server Mode controls if the server is a Controller or Host, and each varaible is labeled as required for Controller, Host or All. Please ensure you fill in all required variables.
 
-Set up the master server first, and from there you can generate the Master URL and Master Token required for the slave servers to connect.
+Set up the Controller server first, and from there you can generate the Controller URL and Controller Token required for the Host servers to connect.
 
-Additional configuration options can be found in config-master.json and config-slave.json as relevant.
+Additional configuration options can be found in config-Controller.json and config-Host.json as relevant.
 
 Changes to the Cluster will only be written out to the database on a graceful stop.
 
@@ -45,5 +43,5 @@ Clusterio requires a single port
 
 | Port       | default    |
 |------------|------------|
-| Master HTTP| 8081       |
-| Slave Game | 34197      |
+| Controller HTTP| 8081       |
+| Host Game | 34197      |
