@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-21T21:55:07+00:00",
+    "exported_at": "2024-01-22T08:32:24+00:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
     "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.",
@@ -53,7 +53,7 @@
         },
         {
             "name": "Server Admin",
-            "description": "Superadmin account name\r\n\r\nRequired on:\r\nMaster",
+            "description": "Superadmin account name\r\n\r\nRequired on:\r\nController",
             "env_variable": "ADMIN_STRING",
             "default_value": "",
             "user_viewable": true,
@@ -63,7 +63,7 @@
         },
         {
             "name": "Host Name",
-            "description": "Slave name in the Master Web UI\r\n\r\nRequired on:\r\nHost",
+            "description": "Host name in the Controller Web UI\r\n\r\nRequired on:\r\nHost",
             "env_variable": "HOST_NAME",
             "default_value": "Your Sub-Server",
             "user_viewable": true,
@@ -73,7 +73,7 @@
         },
         {
             "name": "Controller URL",
-            "description": "Connection URL to the Controller server, can be an internal address if you have allocated an additional internal port to the Master Server.\r\nExample: http:\/\/yourip:yourport\r\nRequired on:\r\nHost",
+            "description": "Connection URL to the Controller server, can be an internal address if you have allocated an additional internal port to the Controller Server.\r\nExample: http:\/\/yourip:yourport\r\nRequired on:\r\nHost",
             "env_variable": "CONTROLLER_URL",
             "default_value": "",
             "user_viewable": true,
@@ -83,7 +83,7 @@
         },
         {
             "name": "Controller Token",
-            "description": "Authentication token used to connect to the Master server, generated through the Master Web UI.\r\n\r\nRequired on:\r\nHost",
+            "description": "Authentication token used to connect to the Controller server, generated through the Controller Web UI.\r\n\r\nRequired on:\r\nHost",
             "env_variable": "CONTROLLER_TOKEN",
             "default_value": "",
             "user_viewable": true,
@@ -103,7 +103,7 @@
         },
         {
             "name": "Cluster Name",
-            "description": "The Name of your Master server cluster.\r\n\r\nRequired:\r\nController",
+            "description": "The Name of your Controller server cluster.\r\n\r\nRequired:\r\nController",
             "env_variable": "CLUSTER_NAME",
             "default_value": "Your Cluster",
             "user_viewable": true,
