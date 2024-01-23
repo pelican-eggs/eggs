@@ -1,0 +1,134 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-01-23T14:18:32-05:00",
+    "name": "Enshrouded-Dedicated",
+    "author": "vapokrocks@gmail.com",
+    "description": "Enshrouded is a survival game currently in beta",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "Wine Latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "wine64 .\/enshrouded_server.exe",
+    "config": {
+        "files": "{\r\n    \"enshrouded_server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"slotCount\": \"{{server.build.env.SLOT_COUNT}}\",\r\n            \"gamePort\": \"{{server.build.default.port}}\",\r\n            \"password\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"HostOnline\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nFILE=\/mnt\/server\/enshrouded_server.json\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"Config already exist skipping\"\r\nelse \r\n    echo \"Config does not yet exist, making one\"\r\n    cd \/mnt\/server\r\n    touch enshrouded_server.json\r\n    echo \"{\" >> enshrouded_server.json\r\n    echo '\t\"name\": \"Enshrouded Server\",' >> enshrouded_server.json\r\n    echo '\t\"password\": \"\",' >> enshrouded_server.json\r\n    echo '\t\"saveDirectory\": \".\/savegame\",' >> enshrouded_server.json\r\n    echo '\t\"logDirectory\": \".\/logs\",' >> enshrouded_server.json\r\n    echo '\t\"ip\": \"0.0.0.0\",' >> enshrouded_server.json\r\n    echo '\t\"gamePort\": 15636,' >> enshrouded_server.json\r\n    echo '\t\"queryPort\": 15637,' >> enshrouded_server.json\r\n    echo '\t\"slotCount\": 16' >> enshrouded_server.json\r\n    echo '}' >> enshrouded_server.json\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "\/bin\/bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Server Query Port",
+            "description": "UDP port for Steam server list features.",
+            "env_variable": "QUERY_PORT",
+            "default_value": "15637",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Slot Count",
+            "description": "Number of Slots for Players.",
+            "env_variable": "SLOT_COUNT",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1,16",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Dedicated Enshrouded Pterodactyl Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Windows Install Flag",
+            "description": "Required for windows game server installs",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "WINETRICKS_RUN",
+            "description": "Run installs on software that is required by the server",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2022",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:vcrun2022",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS_APPID",
+            "description": "steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2278520",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:2278520",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:win64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Password for Server Access",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:64",
+            "field_type": "text"
+        }
+    ]
+}
