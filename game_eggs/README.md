@@ -156,6 +156,7 @@
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
 * [Empyrion - Galactic Survival](steamcmd_servers/empyrion)
+* [Enshrouded](steamcmd_servers/enshrouded)
 * [Fistful of Frags](steamcmd_servers/fof)
 * [Frozen Flame](steamcmd_servers/frozen_flame)
 * [Ground Branch](steamcmd_servers/ground_branch)
