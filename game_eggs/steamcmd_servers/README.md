@@ -84,6 +84,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Empyrion - Galactic Survival](empyrion)
 
+## Enshrouded
+
+[Enshrouded](enshrouded)
+
 ## Fistful of Frags
 
 [Fistful of Frags](fof)
