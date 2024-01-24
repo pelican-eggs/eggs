@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-11T11:41:50-06:00",
+    "exported_at": "2024-01-24T17:14:26+01:00",
     "name": "Squad",
     "author": "brycea@terrahost.cloud",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
+    "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}} -beaconport={{BEACON_PORT}}",
     "config": {
         "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.servername}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.maxplayers}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.allowteamchange}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.advertise}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.reservedslots}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.ptciu}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.teambal}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.recorddemos}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -36,7 +36,7 @@
             "env_variable": "QUERY_PORT",
             "default_value": "27165",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|numeric",
             "field_type": "text"
         },
@@ -138,6 +138,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Beacon Port",
+            "description": "Beacon port for your Squad server.",
+            "env_variable": "BEACON_PORT",
+            "default_value": "15000",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
             "field_type": "text"
         }
     ]
