@@ -24,7 +24,7 @@ Discord: https://discord.gg/enshrouded
 ### Configuration
 
 When browsing to the installation path of the dedicated server in Windows as described in the article [Multiplayer and Server Hosting](https://enshrouded.zendesk.com/hc/en-us/sections/16050842957085-Multiplayer-and-Server-Hosting) and after starting the enshrouded\_server.exe once, a new file is created called “enshrouded\_server.json”. It contains the following entries:
-
+```json
 {
 
                 "name": "Enshrouded Server",
@@ -44,7 +44,7 @@ When browsing to the installation path of the dedicated server in Windows as des
                 "slotCount": 16
 
 }
-
+```
 *   Under “name” the name of the dedicated server can be defined as it will appear in the server list for players of Enshrouded.
     *   Note: as all players can see the names of the servers, please use a non-offensive name for the server.
 *   In the entry “password” a password can be defined that players need to enter before being allowed to join the server.
