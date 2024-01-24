@@ -17,6 +17,7 @@ Discord: https://discord.gg/enshrouded
 | Name        | Github Profile  | Buy me a Coffee |
 | ------------- |-------------|-------------|
 |   Vapok   | https://github.com/Vapok | https://www.buymeacoffee.com/vapok |
+|   QuintenQVD0   | https://github.com/QuintenQVD0 |  |
 
 
 
