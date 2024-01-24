@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}}",
+    "startup": "\/home\/container\/SquadGame\/Binaries\/Linux\/SquadGameServer SquadGame Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}} -beaconport={{BEACON_PORT}}",
     "config": {
         "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.servername}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.maxplayers}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.allowteamchange}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.advertise}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.reservedslots}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.ptciu}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.teambal}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.recorddemos}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -138,6 +138,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Beacon Port",
+            "description": "Beacon port for your Squad server.",
+            "env_variable": "BEACON_PORT",
+            "default_value": "15000",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
             "field_type": "text"
         }
     ]
