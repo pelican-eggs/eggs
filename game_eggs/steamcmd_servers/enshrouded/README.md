@@ -27,21 +27,14 @@ When browsing to the installation path of the dedicated server in Windows as des
 ```json
 {
 
-                "name": "Enshrouded Server",
-
-                "password": "",
-
-                "saveDirectory": "./savegame",
-
-                "logDirectory": "./logs",
-
-                "ip": "0.0.0.0",
-
-                "gamePort": 15636,
-
-                "queryPort": 15637,
-
-                "slotCount": 16
+    "name": "Enshrouded Server",
+    "password": "",
+    "saveDirectory": "./savegame",
+    "logDirectory": "./logs",
+    "ip": "0.0.0.0",
+    "gamePort": 15636,
+    "queryPort": 15637,
+    "slotCount": 16
 
 }
 ```
