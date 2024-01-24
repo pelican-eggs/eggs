@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-23T12:23:42+01:00",
+    "exported_at": "2024-01-24T09:13:36+01:00",
     "name": "Enshrouded",
     "author": "josdekurk@gmail.com",
     "description": "You are Flameborn, last ember of hope of a dying race. Awaken, survive the terror of a corrupting fog, and reclaim the lost beauty of your kingdom. Venture into a vast world, vanquish punishing bosses, build grand halls and forge your path in this co-op survival action RPG for up to 16 players.",
@@ -18,7 +18,7 @@
     "startup": "wine \/home\/container\/enshrouded_server.exe",
     "config": {
         "files": "{\r\n    \"enshrouded_server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"gamePort\": \"{{server.build.default.port}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"slotCount\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"ip\": \"0.0.0.0\",\r\n            \"logDirectory\": \".\/logs\",\r\n            \"saveDirectory\": \".\/savegame\",\r\n            \"password\": \"{{server.build.env.SRV_PASSWORD}}\",\r\n            \"name\": \"{{server.build.env.SRV_NAME}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"This is not yet done\/set\"\r\n}",
+        "startup": "{\r\n    \"done\": \"HostOnline\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
@@ -107,7 +107,7 @@
             "default_value": "15637",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric",
+            "rules": "required|numeric|between:1024,65536",
             "field_type": "text"
         },
         {
@@ -115,6 +115,16 @@
             "description": "",
             "env_variable": "WINETRICKS_RUN",
             "default_value": "vcrun2022 corefonts",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|",
