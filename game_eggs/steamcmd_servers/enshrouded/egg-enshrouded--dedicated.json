@@ -54,7 +54,7 @@
             "name": "Server Name",
             "description": "",
             "env_variable": "SERVER_NAME",
-            "default_value": "Dedicated Enshrouded Pterodactyl Server",
+            "default_value": "Enshrouded Server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:32",
