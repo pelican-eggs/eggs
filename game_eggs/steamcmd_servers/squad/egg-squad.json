@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-11T11:41:50-06:00",
+    "exported_at": "2024-01-24T17:14:26+01:00",
     "name": "Squad",
     "author": "brycea@terrahost.cloud",
     "description": "Squad is a 50 vs 50 multiplayer first-person shooter that aims to capture combat realism through communication and teamplay. Major features include vehicle-based combined arms gameplay, large scale environments, base building, and integrated positional VoIP for proximity talking & radio.",
@@ -36,7 +36,7 @@
             "env_variable": "QUERY_PORT",
             "default_value": "27165",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|numeric",
             "field_type": "text"
         },
@@ -146,7 +146,7 @@
             "env_variable": "BEACON_PORT",
             "default_value": "15000",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|numeric",
             "field_type": "text"
         }
