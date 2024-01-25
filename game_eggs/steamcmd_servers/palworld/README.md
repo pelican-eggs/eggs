@@ -62,27 +62,27 @@ Fight, farm, build and work alongside mysterious creatures called "Pals" in this
 ## Known Issues / FAQ
 
 1) The server won't show up in the Community-Server tab.<br>
--> As there are so many people creating dedicated servers you might load a few times more servers (Press the "show next 200 server" button).<br>
--> You might press the button for a while until you are able to find your server.<br>
--> Temporary workaround: Start your server without password and join via IP. After that set a password and restart it.<br>
-   Now you should able to find your server in the recent tab.
+-> This is a known problem and the devs will hopefully fix that asap. Best choice is to connect by IP and Password.
 
-2) When joining a password protected server by IP i can't enter a password.<br>
--> As of now (release day - January 19th 2024) you are not able to join a password protected server by IP.<br>
--> This will be fixed in a upcoming patch/update.
+2) The server has a memory leak.<br>
+-> This is also an issue that they are aware of.<br>
+-> The `bEnableInvaderEnemy` option seems to have a huge impact on the current RAM usage. Disabling it might be choice.<br>
+-> Tip: Schedule a server restart every 6h. You might adjust the value according to your system!<br>
 
 3) The server does not show up in the steam server list.<br>
 -> This is currently and might never be supported.
 
-4) The server has a huge memory leak.<br>
--> Seems to be an issue that they are aware of.<br>
--> Workaround: Schedule a server restart every 6h. You might edit the value according to your system!
+4) The config file gets deleted / reset on server restart.<br>
+-> If your server ports is different than the default port (8211) you need to adjust the port inside the config.<br>
+-> Before editing the config file always make sure to fully stop the server first. Otherwise all changes wont be saved.
 
 ## Recommended server settings
 
 ### RAM
 
-Referring to the [official documentation](https://tech.palworldgame.com/dedicated-server-guide) you should use at least 16GB of RAM for your server to run smoothly.<br>
+Due to at least one memory leak the server requires about 16-32GB RAM.<br>
+Referring to the [official documentation](https://tech.palworldgame.com/dedicated-server-guide) you can start the server with 8GB but you will run out of memory very quickly.<br>
+The minimum should be 16GB but 32GB are fairly recommended for now.<br>
 
 ### CPU
 
