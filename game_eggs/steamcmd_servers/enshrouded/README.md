@@ -18,6 +18,7 @@ Discord: https://discord.gg/enshrouded
 | ------------- |-------------|-------------|
 |   Vapok   | https://github.com/Vapok | https://www.buymeacoffee.com/vapok |
 |   QuintenQVD0   | https://github.com/QuintenQVD0 |  |
+|   gOOvER   | https://github.com/gOOvER |  |
 
 
 
