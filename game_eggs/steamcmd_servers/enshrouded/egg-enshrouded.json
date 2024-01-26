@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-26T14:15:08+01:00",
+    "exported_at": "2024-01-26T17:20:16+01:00",
     "name": "Enshrouded",
     "author": "vapokrocks@gmail.com",
     "description": "Enshrouded is a game of survival, crafting, and Action RPG combat, set within a sprawling voxel-based continent. As you journey across the mountains and deserts of an open world, you are free to choose your path and shape your destiny.  Credit to gOOvER for the help with the proton image which seems to be performing better over the wine egg.",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/goover\/steam:proton": "ghcr.io\/goover\/steam:proton"
+        "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
     "startup": "proton run  .\/enshrouded_server.exe",
@@ -98,6 +98,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] Validate",
+            "description": "Validate the serverfiles through Steam",
+            "env_variable": "VALIDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
