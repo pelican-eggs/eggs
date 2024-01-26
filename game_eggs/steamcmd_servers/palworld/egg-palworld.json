@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-26T12:59:39+01:00",
+    "exported_at": "2024-01-26T13:12:06+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -17,7 +17,7 @@
     "file_denylist": [
         "PalServer.sh"
     ],
-    "startup": "\/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Test Pal EpicApp=PalServer -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -publicip={{PUBLIC_IP}} -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SRV_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SRV_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\"",
+    "startup": "\/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Test Pal EpicApp=PalServer -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -publicip={{PUBLIC_IP}} -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID = 2394010\"\r\n}",
@@ -65,7 +65,7 @@
         {
             "name": "Server Name",
             "description": "",
-            "env_variable": "SRV_NAME",
+            "env_variable": "SERVER_NAME",
             "default_value": "A Pterodactyl hosted Palword Server",
             "user_viewable": true,
             "user_editable": true,
@@ -75,7 +75,7 @@
         {
             "name": "Server Password",
             "description": "If specified, players must provide this password to join the server.",
-            "env_variable": "SRV_PASSWORD",
+            "env_variable": "SERVER_PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
