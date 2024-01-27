@@ -18,9 +18,16 @@ Discord: https://discord.gg/enshrouded
 | ------------- |-------------|-------------|
 |   Vapok   | https://github.com/Vapok | https://www.buymeacoffee.com/vapok |
 |   QuintenQVD0   | https://github.com/QuintenQVD0 |  |
-|   gOOvER   | https://github.com/gOOvER |  |
+|   gOOvER   | https://github.com/gOOvER | ![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B351D0Q)  |
 
+### Server Ports
 
+Enshrouded requires up to 2 ports. Queryport must be GAMEPORT +1 
+
+| Port    | default       |
+|---------|---------------|
+| Game    |     15636     |
+| Query   |     15637     |
 
 ### Configuration
 
@@ -58,3 +65,10 @@ When browsing to the installation path of the dedicated server in Windows as des
 | Processor | Recent x86/64 (AMD/Intel) processor. | You need min 4 Cores for the Server. |
 | RAM       |  4-6 GB     |
 | Storage   |  30 GB (or more, depending on save size or frequency) |
+
+### Server not showing in Serverlist?
+
+The fact that the server is not displayed in the server list is a known problem.
+
+As a workaround, you can add the server as a favourite via IP:port in the Steam server browser.
+The server should then be at the top of the ingame server list
