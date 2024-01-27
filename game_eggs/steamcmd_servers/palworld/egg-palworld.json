@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-26T13:12:06+01:00",
+    "exported_at": "2024-01-27T23:37:16+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -66,7 +66,7 @@
             "name": "Server Name",
             "description": "",
             "env_variable": "SERVER_NAME",
-            "default_value": "A Pterodactyl hosted Palword Server",
+            "default_value": "A Pterodactyl hosted Palworld Server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:64",
