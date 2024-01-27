@@ -20,7 +20,14 @@ Discord: https://discord.gg/enshrouded
 |   QuintenQVD0   | https://github.com/QuintenQVD0 |  |
 |   gOOvER   | https://github.com/gOOvER | ![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B351D0Q)  |
 
+### Server Ports
 
+Enshrouded requires up to 2 ports. Queryport must be GAMEPORT +1 
+
+| Port    | default       |
+|---------|---------------|
+| Game    |     15636     |
+| Query   |     15637     |
 
 ### Configuration
 
