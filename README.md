@@ -280,6 +280,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [Mount & Blade II: Bannerlord](game_eggs/steamcmd_servers/mount_blade_II_bannerlord)
+* [Necesse](game_eggs/steamcmd_servers/necesse)
 * [Neos VR](game_eggs/steamcmd_servers/neosvr)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [No One Survived](game_eggs/steamcmd_servers/no_one_survived)

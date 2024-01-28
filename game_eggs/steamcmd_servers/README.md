@@ -157,6 +157,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mount & Blade II: Bannerlord](mount_blade_II_bannerlord)
 
+## Necesse
+
+[Necesse](necesse)
+
 ## Neos VR
 [Neos VR](neosvr)
 
