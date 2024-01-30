@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-30T16:11:09+01:00",
+    "exported_at": "2024-01-30T16:25:23+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -22,7 +22,7 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID = 2394010\"\r\n}",
         "logs": "{}",
-        "stop": "^C"
+        "stop": "doexit"
     },
     "scripts": {
         "installation": {
