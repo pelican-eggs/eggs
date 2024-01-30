@@ -73,7 +73,6 @@ Fight, farm, build and work alongside mysterious creatures called "Pals" in this
 -> This is currently and might never be supported.
 
 4) The config file gets deleted / reset on server restart.<br>
--> If your server ports is different than the default port (8211) you need to adjust the port inside the config.<br>
 -> Before editing the config file always make sure to fully stop the server first. Otherwise all changes wont be saved.
 
 ## Recommended server settings
@@ -94,12 +93,9 @@ As of January 19th 2024 the server requires about 5GB of storage capacity. This 
 
 ## Server Ports
 
-Note: RCON is disabled by default.<br>
-You can enable it inside the cofig (/home/container/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini)<br>
-
 | Port            | Default |
 | --------------- | ------- |
 | Game            | 8211    |
 | RCON (optional) | 25575   |
 
-The ports can be changed. Dont forget to edit your config file...
+The RCON port does not need to be allocated.
