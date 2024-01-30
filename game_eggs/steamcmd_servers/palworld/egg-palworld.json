@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-30T16:34:07+01:00",
+    "exported_at": "2024-01-30T17:49:20+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -130,6 +130,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:True,False",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "The description of the server.",
+            "env_variable": "SERVER_DESCRIPTION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
             "field_type": "text"
         }
     ]
