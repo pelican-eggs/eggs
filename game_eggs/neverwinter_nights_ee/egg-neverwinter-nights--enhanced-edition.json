@@ -1,0 +1,232 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-01-30T23:02:22-08:00",
+    "name": "Neverwinter Nights: Enhanced Edition",
+    "author": "git@robsti.dev",
+    "description": "Return to the Forgotten Realms in this bestselling Dungeons & Dragons roleplaying game. Combines all the content of Neverwinter Nights Diamond Edition with all-new enhanced features. Includes 100+ hours of award-winning adventures and the tools to create your own!",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": "cd bin\/linux-x86 && .\/nwserver-linux -port $SERVER_PORT -userdirectory '\/home\/container\/user' -servername \"${SERVER_NAME}\" -module \"${MODULE_NAME}\" -publicserver \"${IS_PUBLIC}\" -maxclients \"${MAX_CLIENTS}\" -minlevel \"${MIN_LEVEL}\" -maxlevel \"${MAX_LEVEL}\" -pauseandplay \"${PAUSE_AND_PLAY}\" -pvp \"${PVP}\" -servervault \"${SERVER_VAULT}\" -elc \"${ELC}\" -ilr \"${ILR}\" -gametype \"${GAME_TYPE}\" -oneparty \"${ONE_PARTY}\" -difficulty \"${DIFFICULTY}\" -autosaveinterval \"${AUTO_SAVE_INTERVAL}\" -playerpassword \"${PLAYER_PASSWORD}\" -dmpassword \"${DM_PASSWORD}\" -reloadwhenempty \"${RELOAD_WHEN_EMPTY}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server: Module loaded\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Neverwinter Nights Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n# Download the latest version from the Beamdog website\r\nif [ -z \"$NWN_VERSION\" ] || [ \"$NWN_VERSION\" == \"latest\" ]; then\r\n    NWN_VERSION=$(curl -L -s 'https:\/\/registry.hub.docker.com\/v2\/repositories\/beamdog\/nwserver\/tags' | jq -r '[.\"results\"[][\"name\"] | select(test(\"\\\\d*\\\\.\\\\d*$\"))][0]')\r\nfi\r\n\r\ncd \/mnt\/server\r\ncurl -o nwnee.zip -L https:\/\/nwn.beamdog.net\/downloads\/nwnee-dedicated-${NWN_VERSION}.zip\r\nunzip -u nwnee.zip -d .\r\n\r\n# Run the server once to generate default files and directories\r\ncd bin\/linux-x86 && .\/nwserver-linux\r\n\r\n# Copy generated files into the volume and update relevant paths\r\nmv \/root\/.local\/share\/Neverwinter\\ Nights \/mnt\/server\/user\r\nsed -i 's\/\\\/root\\\/.local\\\/share\\\/Neverwinter Nights\/\\\/home\\\/container\\\/user\/g' \/mnt\/server\/user\/nwn.ini\r\nsed -i 's\/\\\/root\\\/.local\\\/share\\\/Neverwinter Nights\/\\\/home\\\/container\\\/user\/g' \/mnt\/server\/user\/nwnplayer.ini\r\nsed -i 's\/\\\/root\\\/.local\\\/share\\\/Neverwinter Nights\/\\\/home\\\/container\\\/user\/g' \/mnt\/server\/user\/settings.tml\r\n\r\necho \"Installation complete.\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game Version",
+            "description": "Version of the game to install",
+            "env_variable": "NWN_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Module Name",
+            "description": "Name of the module we want to load. Official modules are stored in `~\/data` and custom modules need to be stored in `~\/user`. Must match the file name exactly without the extension.",
+            "env_variable": "MODULE_NAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Load Slot #",
+            "description": "Save game slot number to load on boot.",
+            "env_variable": "SAVE_SLOT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Number Of Clients",
+            "description": "Maximum number of connections to the game server.",
+            "env_variable": "MAX_CLIENTS",
+            "default_value": "96",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Minimum Level",
+            "description": "Minimum character level required to access the game server.",
+            "env_variable": "MIN_LEVEL",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Maximum Level",
+            "description": "Maximum character level required to access the game server.",
+            "env_variable": "MAX_LEVEL",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Pause And Play",
+            "description": "Toggle game pausing permissions.\r\n0 = game can only be paused by DM\r\n1 = game can by paused by players",
+            "env_variable": "PAUSE_AND_PLAY",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "PvP Mode",
+            "description": "The mode of PvP enabled.\r\n0 = none\r\n1 = party\r\n2 = full",
+            "env_variable": "PVP",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1,2",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Vault Mode",
+            "description": "0 = local characters only\r\n1 = server characters only",
+            "env_variable": "SERVER_VAULT",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:0,1",
+            "field_type": "text"
+        },
+        {
+            "name": "Enforce Legal Characters",
+            "description": "Toggle enforcement of legal characters.",
+            "env_variable": "ELC",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Enforce Item Level Restrictions",
+            "description": "Toggle enforcement of item level restrictions.",
+            "env_variable": "ILR",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Type",
+            "description": "Set which game room to post the game to. This only applies if the game is public.",
+            "env_variable": "GAME_TYPE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Toggle Single Parties",
+            "description": "Toggle if multiple parties are allowed.",
+            "env_variable": "ONE_PARTY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Game difficulty selection.\r\n1 = easy\r\n2 = normal\r\n3 = D&D hardcore\r\n4 = very difficult",
+            "env_variable": "DIFFICULTY",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|in:1,2,3,4",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Save Interval",
+            "description": "Interval between autosaves in minutes.",
+            "env_variable": "AUTO_SAVE_INTERVAL",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Player Password",
+            "description": "Password needed to join the server as a player.",
+            "env_variable": "PLAYER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "DM Password",
+            "description": "Password needed to join the server as a DM.",
+            "env_variable": "DM_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server as shown on the server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl hosted server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Is Public Game",
+            "description": "Toggle indicating if this is a public or private game.",
+            "env_variable": "IS_PUBLIC",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Reload When Empty",
+            "description": "Determines if the module state is persistent when the server is empty.",
+            "env_variable": "RELOAD_WHEN_EMPTY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}
