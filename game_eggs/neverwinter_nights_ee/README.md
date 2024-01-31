@@ -40,8 +40,8 @@ The table below shows the different file types that you could potentially find i
 
 | File type | Folder | Purpose |
 | --- | --- | --- |
-| `.mod` | user/modules | Module master file |
-| `.hak` | user/hak | Extra game resources |
-| `.tlk` | user/tlk | Talk-tables (descriptions, names, etc.) |
-| `.bic` | user/localvault | Character files |
-| `.wav` / `.bmu` | user/hak | Music files |
+| `.mod` | `user/modules` | Module master file |
+| `.hak` | `user/hak` | Extra game resources |
+| `.tlk` | `user/tlk` | Talk-tables (descriptions, names, etc.) |
+| `.bic` | `user/localvault` | Character files |
+| `.wav` / `.bmu` | `user/music` | Music files |
