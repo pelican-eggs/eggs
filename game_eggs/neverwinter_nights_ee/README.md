@@ -32,7 +32,11 @@ Official modules will be found at: `data/mod/`
 
 ### Installing custom modules
 
-After retrieving your desired module from the vault, you will upload the corresponding files to the server in their respective folder in the `user` directory.
+Custom modules are modules made my other players and distributed for consumption. They come in all shapes and sizes, and can be found readily on in the internet. The most popular community for this is the [Neverwinter Vault](https://neverwintervault.org/project/nwnee/module/land-thuul).
+
+Assuming you are using the [Neverwinter Vault](https://neverwintervault.org/project/nwnee/module/land-thuul), find the module you want to download. Download the corresponding files and upload them to the appropriate directories on your server. All custom modules (and custom data in general) lives in the `user` directory.
+
+The table below shows the different file types that you could potentially find in a custom module and which directory they need to be placed. Some modules may deviate and require that some files be place into the `override` folder. Be sure to read the description of the modules and any README files to ensure these are place appropriately.
 
 | File type | Folder | Purpose |
 | --- | --- | --- |
@@ -41,5 +45,3 @@ After retrieving your desired module from the vault, you will upload the corresp
 | `.tlk` | user/tlk | Talk-tables (descriptions, names, etc.) |
 | `.bic` | user/localvault | Character files |
 | `.wav` / `.bmu` | user/hak | Music files |
-
-Some modules may deviate and require that some files be place into the `override` folder. Be sure to read the description of the modules and any README files to ensure these are place appropriately.
