@@ -5,7 +5,7 @@ Return to the Forgotten Realms in this bestselling Dungeons & Dragons roleplayin
 Be mindful that this is a very old 32-bit application. Documentation and support is limited.
 
 > [!IMPORTANT]
-> Due to a bug in the current Pterodactyl Wings daemon ([git issue here](https://github.com/pterodactyl/panel/issues/3830)) your Wings daemon must be configured to use UID 1000 when running this server. If not, then the server will crash upon opening. TLDR; The game expects the current user to exists as it builts working directory paths, and the user created for the container has a UID of 1000.
+> Due to a bug in the current Pterodactyl Wings daemon ([git issue here](https://github.com/pterodactyl/panel/issues/3830)) your Wings daemon **must** be configured to use UID `1000`` when running this server. If not, then the server will crash upon opening. TLDR; The game expects the current user to exist as it uses it to build working directory paths, and by default the user created for the container has a UID of 1000.
 
 ### Server Ports
 
@@ -32,11 +32,11 @@ Official modules will be found at: `data/mod/`
 
 ### Installing custom modules
 
-Custom modules are modules made my other players and distributed for consumption. They come in all shapes and sizes, and can be found readily on in the internet. The most popular community for this is the [Neverwinter Vault](https://neverwintervault.org/project/nwnee/module/land-thuul).
+Custom modules are modules made my other players and distributed for consumption. They come in all shapes and sizes, and can be found readily on the internet. The most popular community for this is the [Neverwinter Vault](https://neverwintervault.org/project/nwnee/module/land-thuul).
 
-Assuming you are using the [Neverwinter Vault](https://neverwintervault.org/project/nwnee/module/land-thuul), find the module you want to download. Download the corresponding files and upload them to the appropriate directories on your server. All custom modules (and custom data in general) lives in the `user` directory.
+Assuming you are using the [Neverwinter Vault](https://neverwintervault.org/project/nwnee/module/land-thuul), find the module you want to download. Download the corresponding files and upload them to the appropriate directories on your server. All custom modules (and custom data in general) live in the `user` directory.
 
-The table below shows the different file types that you could potentially find in a custom module and which directory they need to be placed. Some modules may deviate and require that some files be place into the `override` folder. Be sure to read the description of the modules and any README files to ensure these are place appropriately.
+The table below shows the different file types that you could potentially find in a custom module and in which directory they need to be placed. Some modules may deviate and require that some files be place into the `override` folder. Be sure to read the description of the modules and any README files to ensure these are place appropriately.
 
 | File type | Folder | Purpose |
 | --- | --- | --- |
