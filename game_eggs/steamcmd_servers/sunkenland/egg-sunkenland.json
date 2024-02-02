@@ -4,11 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-02T21:39:17+01:00",
+    "exported_at": "2024-02-02T22:12:13+01:00",
     "name": "Sunkenland",
     "author": "engels74@marx.ps",
     "description": "Sunkenland is a Waterworld-themed survival game. Explore sunken cities, build your base, craft items, trade, and fight pirates as you struggle to survive in an aquatic post-apocalypse world plagued by hunger and violence.",
-    "features": null,
+    "features": [
+        "steam_disk_space"
+    ],
     "docker_images": {
         "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
@@ -53,8 +55,8 @@
             "description": "Steam Query Port",
             "env_variable": "QUERY_PORT",
             "default_value": "27015",
-            "user_viewable": true,
-            "user_editable": true,
+            "user_viewable": false,
+            "user_editable": false,
             "rules": "required|numeric",
             "field_type": "text"
         },
@@ -105,7 +107,7 @@
             "default_value": "asia",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|in:asia,cn,jp,eu,sa,kr,us,usw",
             "field_type": "text"
         },
         {
@@ -122,7 +124,7 @@
             "name": "[SYSTEM] WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "mono vcrun2019",
+            "default_value": "vcrun2022",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string",
@@ -146,16 +148,6 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|in:\/home\/container",
-            "field_type": "text"
-        },
-        {
-            "name": "[SYSTEM] WINEARCH",
-            "description": "",
-            "env_variable": "WINEARCH",
-            "default_value": "win64",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|in:win64",
             "field_type": "text"
         },
         {
