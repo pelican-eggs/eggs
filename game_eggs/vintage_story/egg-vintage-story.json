@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-10T18:09:03+02:00",
+    "exported_at": "2024-01-19T10:09:42-05:00",
     "name": "Vintage Story",
     "author": "mail@wuffy.eu",
     "description": "Vintage Story is an uncompromising wilderness survival sandbox game inspired by lovecraftian horror themes. Find yourself in a ruined world reclaimed by nature and permeated by unnerving temporal disturbances. Relive the advent of human civilization, or take your own path.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl jq\r\n\r\n#!\/bin\/bash\r\n\r\ndeclare -A API_URLS=(\r\n  [\"stable\"]=\"http:\/\/api.vintagestory.at\/stable.json\"\r\n  [\"unstable\"]=\"http:\/\/api.vintagestory.at\/unstable.json\"\r\n  [\"pre\"]=\"http:\/\/api.vintagestory.at\/pre.json\"\r\n)\r\n\r\ndeclare -A DOWNLOAD_URLS=(\r\n  [\"stable\"]=\"https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_${RELEASE_VERSION}.tar.gz\"\r\n  [\"unstable\"]=\"https:\/\/account.vintagestory.at\/files\/unstable\/vs_server_${RELEASE_VERSION}.tar.gz\"\r\n  [\"pre\"]=\"https:\/\/cdn.vintagestory.at\/gamefiles\/pre\/vs_server_${RELEASE_VERSION}.tar.gz\"\r\n)\r\n\r\nBRANCH=\"${FILES_BRANCH}\"\r\n\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n  API_URL=\"${API_URLS[$BRANCH]}\"\r\n  DOWNLOAD_URL=$(curl -SsL \"$API_URL\" | jq -r 'if ([.[]] | .[0].linuxserver.urls.cdn) != null then [.[]] | .[0].linuxserver.urls.cdn else [.[]] | .[0].linuxserver.urls.local end')\r\nelse\r\n  API_URL=\"${API_URLS[$BRANCH]}\"\r\n  DOWNLOAD_URL=\"${DOWNLOAD_URLS[$BRANCH]}\"\r\nfi\r\n\r\n# Fallback to stable API URL if the branch is not recognized\r\nif [ -z \"$API_URL\" ]; then\r\n  echo \"Invalid stage; fallback to stable\"\r\n  API_URL=\"${API_URLS[\"stable\"]}\"\r\nfi\r\n\r\necho \"API URL: $API_URL\"\r\necho \"Download URL: $DOWNLOAD_URL\"\r\n\r\n\r\ncd \/mnt\/server\/ || exit\r\n\r\ncurl -o vs_server.tar.gz \"${DOWNLOAD_URL}\"\r\ntar -xzf vs_server.tar.gz\r\n\r\nrm vs_server.tar.gz\r\nrm server.sh\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n# Vintage Story Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl jq\r\n\r\ndeclare -A API_URLS=(\r\n  [\"stable\"]=\"http:\/\/api.vintagestory.at\/stable.json\"\r\n  [\"unstable\"]=\"http:\/\/api.vintagestory.at\/unstable.json\"\r\n)\r\n\r\ndeclare -A DOWNLOAD_URLS=(\r\n  [\"stable\"]=\"https:\/\/cdn.vintagestory.at\/gamefiles\/stable\/vs_server_linux-x64_${RELEASE_VERSION}.tar.gz\"\r\n  [\"unstable\"]=\"https:\/\/cdn.vintagestory.at\/gamefiles\/unstable\/vs_server_linux-x64_${RELEASE_VERSION}.tar.gz\"\r\n  [\"pre\"]=\"https:\/\/cdn.vintagestory.at\/gamefiles\/pre\/vs_server_linux-x64_${RELEASE_VERSION}.tar.gz\"\r\n)\r\n\r\nBRANCH=\"${FILES_BRANCH}\"\r\n\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ] && [ \"${BRANCH}\" == \"pre\" ]; then\r\n  echo \"-----------------------------------------\"\r\n  echo \"Installation failed...\"\r\n  echo \"Please specify the version when using RELEASE BRANCH: pre\"\r\n  echo \"-----------------------------------------\"  \r\n  exit\r\nfi\r\n\r\nif [ -z \"${RELEASE_VERSION}\" ] || [ \"${RELEASE_VERSION}\" == \"latest\" ]; then\r\n  API_URL=\"${API_URLS[$BRANCH]}\"\r\n  echo \"API URL: $API_URL\"\r\n  DOWNLOAD_URL=$(curl -SsL \"$API_URL\" | jq -r 'if ([.[]] | .[0].linuxserver.urls.cdn) != null then [.[]] | .[0].linuxserver.urls.cdn else [.[]] | .[0].linuxserver.urls.local end')\r\nelse\r\n  DOWNLOAD_URL=\"${DOWNLOAD_URLS[$BRANCH]}\"\r\nfi\r\n\r\necho \"Download URL: $DOWNLOAD_URL\"\r\n\r\ncd \/mnt\/server\/ || exit\r\n\r\n# make sure to cleanup the prior installation else this might cause issue with old asset files that do not exist in the new version\r\nif [ -d \"assets\" ]; then\r\n  echo \"Removing old installation files\"\r\n  rm -rf assets\/\r\n  rm -rf Lib\/\r\nfi\r\ncurl -o vs_server.tar.gz \"${DOWNLOAD_URL}\"\r\ntar -xzf vs_server.tar.gz\r\n\r\nif [ $? -ne 0 ]; then\r\n  echo \"-----------------------------------------\"\r\n  echo \"Installation failed...\"\r\n  echo \"Please make sure the specified version exists: $RELEASE_VERSION\"\r\n  echo \"-----------------------------------------\"\r\n  rm vs_server.tar.gz\r\n  exit\r\nfi\r\n\r\nrm vs_server.tar.gz\r\nrm server.sh\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
@@ -66,6 +66,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "Sqlite temporary files directory",
+            "description": "Defines the location for the temporary files in sqlite. This is needed for the \"\/db vacuum\" command (added in 1.19) since else it will use the \/tmp folder which by default only has 100MB and is in memory.",
+            "env_variable": "SQLITE_TMPDIR",
+            "default_value": "\/home\/container\/data\/Backups",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:40",
             "field_type": "text"
         }
     ]
