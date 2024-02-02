@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-08-27T01:20:58-04:00",
+    "exported_at": "2024-01-13T21:17:09+01:00",
     "name": "ClassiCube(MGC)",
     "author": "panel@qoutsy.33mail.com",
     "description": "Debian based MCGalaxy Egg.",
     "features": null,
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:debian_mono-5-complete"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:mono_latest": "ghcr.io\/parkervcp\/yolks:mono_latest"
+    },
     "file_denylist": [],
     "startup": "mono MCGalaxyCLI.exe",
     "config": {
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt update \r\napt -y install curl jq unzip\r\n\r\nMATCH=mcgalaxy_\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"Specified install version not found. Defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n\r\necho -e \"Downloading ClassiCube version ${VERSION}\"\r\necho -e \"Download URL is ${DOWNLOAD_URL}\"\r\ncurl -ssL -o mcgalaxy.zip ${DOWNLOAD_URL}\r\nunzip -j mcgalaxy.zip\r\nrm mcgalaxy.zip\r\nchmod +X *.dll *.exe\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n\r\nMATCH=mcgalaxy_\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n\r\necho -e \"Downloading ClassiCube version ${VERSION}\"\r\necho -e \"Download URL is ${DOWNLOAD_URL}\"\r\n\r\ncurl -ssL -o mcgalaxy.zip ${DOWNLOAD_URL}\r\n\r\nunzip -j mcgalaxy.zip\r\nrm mcgalaxy.zip\r\nchmod +X *.dll *.exe\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -44,7 +45,8 @@
             "default_value": "Pterodactyl Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:30"
+            "rules": "required|string|max:30",
+            "field_type": "text"
         },
         {
             "name": "MOTD",
@@ -53,7 +55,8 @@
             "default_value": "Welcome to the server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:64",
+            "field_type": "text"
         }
     ]
 }
