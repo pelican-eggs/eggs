@@ -318,6 +318,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Stationeers BepInEx](game_eggs/steamcmd_servers/stationeers/stationeers_bepinex)
 * [Stormworks: Build and Rescue](game_eggs/steamcmd_servers/stormworks)
 * [Subnautica: Nitrox Mod](game_eggs/steamcmd_servers/subnautica_nitrox_mod)
+* [Sunkenland](game_eggs/steamcmd_servers/sunkenland)
 * [Sven Co-op](game_eggs/steamcmd_servers/svencoop)
 * [Swords 'n Magic and Stuff](game_eggs/steamcmd_servers/swords_'n_Magic_and_Stuff)
 * [The Forest](game_eggs/steamcmd_servers/the_forest)

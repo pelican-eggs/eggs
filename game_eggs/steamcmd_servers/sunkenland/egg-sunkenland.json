@@ -1,0 +1,172 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-02-02T21:39:17+01:00",
+    "name": "Sunkenland",
+    "author": "engels74@marx.ps",
+    "description": "Sunkenland is a Waterworld-themed survival game. Explore sunken cities, build your base, craft items, trade, and fight pirates as you struggle to survive in an aquatic post-apocalypse world plagued by hunger and violence.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "wine .\/Sunkenland-DedicatedServer.exe -nographics -batchmode -port \"{{SERVER_PORT}}\" -publicport \"{{QUERY_PORT}}\" -worldGuid \"{{WORLD_GUID}}\" -password \"{{SERVER_PASSWORD}}\" -region \"{{SERVER_REGION}}\"  -maxPlayerCapacity \"{{MAX_PLAYERS}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Game Logics Initiated\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# SRCDS_BETAID - beta branch of a steam app. Leave blank to install normal branch\r\n# SRCDS_BETAPASS - password for a beta branch should one be required during private or closed testing phases.. Leave blank for no password.\r\n# INSTALL_FLAGS - Any additional SteamCMD  flags to pass during install.. Keep in mind that steamcmd auto update process in the docker image might overwrite or ignore these when it performs update on server boot.\r\n# AUTO_UPDATE - Adding this variable to the egg allows disabling or enabling automated updates on boot. Boolean value. 0 to disable and 1 to enable.\r\n#\r\n ##\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## Setup World folder\r\n# Create a temporary directory\r\nmkdir -p \/tmp\/world_files\r\n\r\n# Clone the repository\r\ngit clone --depth 1 --filter=blob:none --sparse https:\/\/github.com\/parkervcp\/eggs \/tmp\/world_files\/pterodactyl-eggs\r\ncd \/tmp\/world_files\/pterodactyl-eggs\r\n\r\n# Initialize sparse-checkout\r\ngit sparse-checkout init --cone\r\n\r\n# Adding \"world-files\" path to pull\r\ngit sparse-checkout set game_eggs\/steamcmd_servers\/sunkenland\/world_files\r\n\r\n# Pull only the specified folder\r\ngit pull origin master\r\n\r\n# Move the contents the required location\r\nmkdir -p \"\/mnt\/server\/.wine\/drive_c\/users\/container\/AppData\/LocalLow\/Vector3 Studio\/Sunkenland\"\r\nmv \/tmp\/world_files\/pterodactyl-eggs\/game_eggs\/steamcmd_servers\/sunkenland\/world_files\/* \"\/mnt\/server\/.wine\/drive_c\/users\/container\/AppData\/LocalLow\/Vector3 Studio\/Sunkenland\"\r\n\r\n## Rename the folder to include SERVER_NAME\r\n# Define the original and new folder names\r\nORIGINAL_FOLDER=\"\/mnt\/server\/.wine\/drive_c\/users\/container\/AppData\/LocalLow\/Vector3 Studio\/Sunkenland\/Worlds\/Pterodactyl World~76c82b71-6e5b-43e1-96af-6d6024a0b756\"\r\nNEW_FOLDER=\"\/mnt\/server\/.wine\/drive_c\/users\/container\/AppData\/LocalLow\/Vector3 Studio\/Sunkenland\/Worlds\/${SERVER_NAME}~76c82b71-6e5b-43e1-96af-6d6024a0b756\"\r\n\r\n# Check if the original folder exists\r\nif [ -d \"$ORIGINAL_FOLDER\" ]; then\r\n    # Rename the folder\r\n    mv \"$ORIGINAL_FOLDER\" \"$NEW_FOLDER\"\r\n    echo \"Server has been renamed from \"Pterodactyl World\" to \"${SERVER_NAME}\", with World GUID: 76c82b71-6e5b-43e1-96af-6d6024a0b756\"\r\nelse\r\n    echo \"Original folder does not exist. Cannot rename.\"\r\nfi\r\n\r\n# Clean up the temporary directory\r\nrm -rf \/tmp\/world_files\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Steam App ID",
+            "description": "Steam App ID of Sunkenland Server",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2667530",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:2667530",
+            "field_type": "text"
+        },
+        {
+            "name": "[OPTIONAL] Steam Beta Branch",
+            "description": "If you want to use a specific branch",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Steam Query Port",
+            "description": "Steam Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Enable automatic updates on boot",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] World GUID",
+            "description": "The world GUID is the later part of the world save file, for example, in this save file 'YourWorldName~11223344-5566-7788-99AA-BBCCDDEEF F00', the part after '~' symbol is the guid, i.e. '11223344-5566-7788-99AA-BBCCDDEEFF00'. Specify which World to start the game, if the world save file with entered GUID cannot be found, the server will fail to start and shut down itself.",
+            "env_variable": "WORLD_GUID",
+            "default_value": "76c82b71-6e5b-43e1-96af-6d6024a0b756",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl World",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password (if any)",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Region",
+            "description": "Set the custom Server Region. Default is ASIA. Possible values: asia, cn, jp, eu, sa, kr, us, usw",
+            "env_variable": "SERVER_REGION",
+            "default_value": "asia",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Set the Max Player Count. The minimum value is 3 and the maximum value is 15. Default is 3.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|integer|min:3",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] WINETRICKS_RUN",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "mono vcrun2019",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] WINEDEBUG",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] WINEPATH",
+            "description": "",
+            "env_variable": "WINEPATH",
+            "default_value": "\/home\/container",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:\/home\/container",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] WINEARCH",
+            "description": "",
+            "env_variable": "WINEARCH",
+            "default_value": "win64",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:win64",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] Windows Install Flag",
+            "description": "Required for windows game server installs",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}

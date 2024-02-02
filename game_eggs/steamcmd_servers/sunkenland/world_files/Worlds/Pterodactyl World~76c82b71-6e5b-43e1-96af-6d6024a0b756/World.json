@@ -1,0 +1,743 @@
+{
+	"ApplicationVersion" : {
+		"__type" : "string",
+		"value" : "0.2.0"
+	},
+	"Enemy" : {
+		"__type" : "EnemySaveData,Assembly-CSharp",
+		"value" : {
+		"nextSiegeDay" : 1,
+		"revengeCD" : 500,
+		"roamingAttackCD" : 10201
+	}
+	},
+	"EnviroTime" : {
+		"__type" : "EnviroTimeData,Assembly-CSharp",
+		"value" : {
+		"year" : 2023,
+		"dayOfYear" : 365,
+		"days" : 1,
+		"hour" : 8,
+		"minute" : 6,
+		"seconds" : 14
+	}
+	},
+	"Weather" : {
+		"__type" : "string",
+		"value" : "Cloudy 4"
+	},
+	"ItemSpawners" : {
+		"__type" : "System.Collections.Generic.Dictionary`2[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ItemSpawnerSaveData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : {0:{
+			"amount" : 20,
+			"timer" : 0
+		},9089502279289951706:{
+			"amount" : 4,
+			"timer" : 8
+		},6498082830874993386:{
+			"amount" : 4,
+			"timer" : 8
+		},4833402833142214426:{
+			"amount" : 6,
+			"timer" : 8
+		},230128404411877422:{
+			"amount" : 6,
+			"timer" : 8
+		},6116544835760074061:{
+			"amount" : 5,
+			"timer" : 8
+		},3230871462224099604:{
+			"amount" : 3,
+			"timer" : 8
+		},665572432318179597:{
+			"amount" : 3,
+			"timer" : 8
+		},8541554865674308451:{
+			"amount" : 8,
+			"timer" : 8
+		},7310576064803777137:{
+			"amount" : 3,
+			"timer" : 8
+		},2592791917921899291:{
+			"amount" : 3,
+			"timer" : 8
+		},24867291227097788:{
+			"amount" : 20,
+			"timer" : 8
+		},4251713257158676635:{
+			"amount" : 6,
+			"timer" : 8
+		},2346791456525716917:{
+			"amount" : 4,
+			"timer" : 8
+		},115861447310527445:{
+			"amount" : 10,
+			"timer" : 8
+		},4486603863485232864:{
+			"amount" : 3,
+			"timer" : 8
+		},4490846050937931976:{
+			"amount" : 16,
+			"timer" : 8
+		},6543633992099681899:{
+			"amount" : 5,
+			"timer" : 8
+		},3644022315067405618:{
+			"amount" : 3,
+			"timer" : 8
+		},7282857729445564318:{
+			"amount" : 4,
+			"timer" : 8
+		},5390681382000962871:{
+			"amount" : 10,
+			"timer" : 8
+		},1683794405021959285:{
+			"amount" : 3,
+			"timer" : 8
+		},6751915367223788269:{
+			"amount" : 3,
+			"timer" : 8
+		},7185975692523554559:{
+			"amount" : 6,
+			"timer" : 8
+		},7701324716787826908:{
+			"amount" : 5,
+			"timer" : 8
+		},1892666204427171121:{
+			"amount" : 6,
+			"timer" : 8
+		},5069390385702401946:{
+			"amount" : 3,
+			"timer" : 8
+		},7014338403041941207:{
+			"amount" : 3,
+			"timer" : 8
+		},8080420323910558702:{
+			"amount" : 7,
+			"timer" : 8
+		},6179543599492632565:{
+			"amount" : 5,
+			"timer" : 8
+		},2399428355005997441:{
+			"amount" : 3,
+			"timer" : 8
+		},8393128418548501696:{
+			"amount" : 13,
+			"timer" : 8
+		},3862050124437239726:{
+			"amount" : 3,
+			"timer" : 8
+		},671827947192502640:{
+			"amount" : 3,
+			"timer" : 8
+		},6394537095716413834:{
+			"amount" : 3,
+			"timer" : 8
+		},6194099075105056437:{
+			"amount" : 6,
+			"timer" : 8
+		},7000811315402476818:{
+			"amount" : 25,
+			"timer" : 8
+		},7431282792956642253:{
+			"amount" : 50,
+			"timer" : 8
+		},6322639543943145101:{
+			"amount" : 150,
+			"timer" : 8
+		},6011281907697289600:{
+			"amount" : 2,
+			"timer" : 8
+		},7880613421731702727:{
+			"amount" : 3,
+			"timer" : 8
+		},577582072544613651:{
+			"amount" : 4,
+			"timer" : 8
+		},2580729064325084868:{
+			"amount" : 3,
+			"timer" : 8
+		},1384266102940774792:{
+			"amount" : 2,
+			"timer" : 8
+		},8116046045139527056:{
+			"amount" : 4,
+			"timer" : 8
+		},757757744158031655:{
+			"amount" : 3,
+			"timer" : 8
+		},7208448015709560947:{
+			"amount" : 25,
+			"timer" : 8
+		},453001082964150584:{
+			"amount" : 3,
+			"timer" : 8
+		},6459668515788669895:{
+			"amount" : 8,
+			"timer" : 8
+		},5693313975744187644:{
+			"amount" : 4,
+			"timer" : 8
+		},6239530748924361937:{
+			"amount" : 3,
+			"timer" : 8
+		},2943307083604176974:{
+			"amount" : 4,
+			"timer" : 8
+		},2758138561111042124:{
+			"amount" : 3,
+			"timer" : 8
+		},2439310734546983057:{
+			"amount" : 2,
+			"timer" : 8
+		},2127419785472520839:{
+			"amount" : 4,
+			"timer" : 8
+		},6115176940143190222:{
+			"amount" : 1,
+			"timer" : 8
+		},3244511331880481237:{
+			"amount" : 3,
+			"timer" : 8
+		},2697993547544598447:{
+			"amount" : 5,
+			"timer" : 8
+		},8691825898800490311:{
+			"amount" : 30,
+			"timer" : 8
+		},2846362588298799830:{
+			"amount" : 25,
+			"timer" : 8
+		},2492361255545647434:{
+			"amount" : 30,
+			"timer" : 8
+		},7471013255633030181:{
+			"amount" : 5,
+			"timer" : 8
+		},279519856126387054:{
+			"amount" : 8,
+			"timer" : 8
+		},3036501988357057785:{
+			"amount" : 2,
+			"timer" : 8
+		},8370352015394269434:{
+			"amount" : 2,
+			"timer" : 8
+		},5310511263491552563:{
+			"amount" : 3,
+			"timer" : 8
+		},7000546635053414597:{
+			"amount" : 25,
+			"timer" : 8
+		},2991171896769267585:{
+			"amount" : 25,
+			"timer" : 8
+		},6193282468744973164:{
+			"amount" : 4,
+			"timer" : 8
+		},2521626007632763455:{
+			"amount" : 20,
+			"timer" : 8
+		},2695020519472748781:{
+			"amount" : 2,
+			"timer" : 8
+		},8182332639432793261:{
+			"amount" : 4,
+			"timer" : 8
+		},5993163202141193243:{
+			"amount" : 6,
+			"timer" : 8
+		},299165605095990708:{
+			"amount" : 3,
+			"timer" : 8
+		},4229196950961893041:{
+			"amount" : 6,
+			"timer" : 8
+		},2516499214639347657:{
+			"amount" : 6,
+			"timer" : 8
+		},6297197963526914861:{
+			"amount" : 15,
+			"timer" : 8
+		},3511888522870492314:{
+			"amount" : 4,
+			"timer" : 8
+		},8285386246121547567:{
+			"amount" : 3,
+			"timer" : 8
+		},4796072999474246460:{
+			"amount" : 3,
+			"timer" : 8
+		},3840126349505694120:{
+			"amount" : 7,
+			"timer" : 8
+		},3415504338553443443:{
+			"amount" : 5,
+			"timer" : 8
+		},2917237080054278187:{
+			"amount" : 20,
+			"timer" : 8
+		},8454311607390946679:{
+			"amount" : 15,
+			"timer" : 8
+		},119989752457614695:{
+			"amount" : 4,
+			"timer" : 8
+		},3150606131317057093:{
+			"amount" : 3,
+			"timer" : 8
+		},6686456266224326150:{
+			"amount" : 10,
+			"timer" : 8
+		},244220223323552069:{
+			"amount" : 15,
+			"timer" : 8
+		},6757480123237677446:{
+			"amount" : 15,
+			"timer" : 8
+		},984526843852846404:{
+			"amount" : 5,
+			"timer" : 8
+		},2981720113832475983:{
+			"amount" : 4,
+			"timer" : 8
+		},3590946391054570124:{
+			"amount" : 5,
+			"timer" : 8
+		},3164105254944451701:{
+			"amount" : 8,
+			"timer" : 8
+		},2496348649128303416:{
+			"amount" : 8,
+			"timer" : 8
+		},7796031455709349314:{
+			"amount" : 3,
+			"timer" : 8
+		},570179385099086634:{
+			"amount" : 15,
+			"timer" : 8
+		},2149804425558490560:{
+			"amount" : 6,
+			"timer" : 8
+		},4053130291940502765:{
+			"amount" : 3,
+			"timer" : 8
+		},8371829534939269334:{
+			"amount" : 3,
+			"timer" : 8
+		},8107643449996726971:{
+			"amount" : 4,
+			"timer" : 8
+		},956450488621875304:{
+			"amount" : 6,
+			"timer" : 8
+		},7268917092667497202:{
+			"amount" : 25,
+			"timer" : 8
+		},3606756446960121899:{
+			"amount" : 6,
+			"timer" : 8
+		},3239564729458899847:{
+			"amount" : 6,
+			"timer" : 8
+		},1523848932727218515:{
+			"amount" : 6,
+			"timer" : 8
+		},2630495558067605169:{
+			"amount" : 5,
+			"timer" : 8
+		},9147695366800162529:{
+			"amount" : 2,
+			"timer" : 8
+		},4231650558158930430:{
+			"amount" : 5,
+			"timer" : 8
+		},7165153787907877947:{
+			"amount" : 15,
+			"timer" : 8
+		},8195172256965701103:{
+			"amount" : 20,
+			"timer" : 8
+		}
+	}
+	},
+	"FishSpawners" : {
+		"__type" : "System.Collections.Generic.Dictionary`2[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[FishSpawnerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : {6225267190291749742:{
+			"Amount" : 1,
+			"Timer" : 8
+		},2912653272416394554:{
+			"Amount" : 1,
+			"Timer" : 8
+		},5587833235190290320:{
+			"Amount" : 4,
+			"Timer" : 8
+		},4587064347087452734:{
+			"Amount" : 3,
+			"Timer" : 8
+		},2449082857242818831:{
+			"Amount" : 2,
+			"Timer" : 8
+		},1342686903013302450:{
+			"Amount" : 2,
+			"Timer" : 8
+		},2839681851063541153:{
+			"Amount" : 2,
+			"Timer" : 8
+		},5561324054922159982:{
+			"Amount" : 2,
+			"Timer" : 8
+		},6200216199898015709:{
+			"Amount" : 3,
+			"Timer" : 8
+		},1621877678487016105:{
+			"Amount" : 1,
+			"Timer" : 8
+		},7650314915214801995:{
+			"Amount" : 2,
+			"Timer" : 8
+		},7896769260950161511:{
+			"Amount" : 2,
+			"Timer" : 8
+		},7200239591543821883:{
+			"Amount" : 2,
+			"Timer" : 8
+		},8072306794835924191:{
+			"Amount" : 3,
+			"Timer" : 8
+		},1179181279936222695:{
+			"Amount" : 3,
+			"Timer" : 8
+		},6694438785393046901:{
+			"Amount" : 0,
+			"Timer" : 8
+		},1677800573961990093:{
+			"Amount" : 1,
+			"Timer" : 8
+		},6775056927754909674:{
+			"Amount" : 1,
+			"Timer" : 8
+		},6511411715400366868:{
+			"Amount" : 1,
+			"Timer" : 8
+		},2138733193120265167:{
+			"Amount" : 3,
+			"Timer" : 8
+		},6062479714000079910:{
+			"Amount" : 3,
+			"Timer" : 8
+		},8781034219481726844:{
+			"Amount" : 2,
+			"Timer" : 8
+		},4313669248474582613:{
+			"Amount" : 2,
+			"Timer" : 8
+		},5818038754101369811:{
+			"Amount" : 2,
+			"Timer" : 8
+		},2654981735290926615:{
+			"Amount" : 1,
+			"Timer" : 8
+		},6346248551658735421:{
+			"Amount" : 1,
+			"Timer" : 8
+		},8689033041176045420:{
+			"Amount" : 1,
+			"Timer" : 8
+		},5062618249153926883:{
+			"Amount" : 2,
+			"Timer" : 8
+		},1402507957304333063:{
+			"Amount" : 2,
+			"Timer" : 8
+		},2922438230332720013:{
+			"Amount" : 3,
+			"Timer" : 8
+		},2150881096791243176:{
+			"Amount" : 1,
+			"Timer" : 8
+		},3665515487662580321:{
+			"Amount" : 1,
+			"Timer" : 8
+		},5293404538601203430:{
+			"Amount" : 2,
+			"Timer" : 8
+		}
+	}
+	},
+	"Army" : {
+		"__type" : "System.Collections.Generic.Dictionary`2[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[ArmySaveData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : {1198526763731270861:{
+			"amount" : 3
+		},7797524139696941256:{
+			"amount" : 6
+		},5564307308715826562:{
+			"amount" : 5
+		},683744809766616885:{
+			"amount" : 14
+		},6118483006530980103:{
+			"amount" : 2
+		},2585590580992298007:{
+			"amount" : 6
+		},8617668129566332086:{
+			"amount" : 16
+		},2282664188982394146:{
+			"amount" : 4
+		},6318485354842389779:{
+			"amount" : 15
+		},1510824213903976869:{
+			"amount" : 3
+		},7460775551608290812:{
+			"amount" : 14
+		},1150021662455940515:{
+			"amount" : 12
+		},6276437389287249673:{
+			"amount" : 13
+		},4385790972895302863:{
+			"amount" : 8
+		},3519904273505865862:{
+			"amount" : 14
+		},8157506646844800989:{
+			"amount" : 13
+		},6602023180719173357:{
+			"amount" : 14
+		},4946926818005375629:{
+			"amount" : 10
+		},4187163471321782254:{
+			"amount" : 5
+		},7177038713447503116:{
+			"amount" : 4
+		},4010486272995302970:{
+			"amount" : 5
+		},7720823962184742665:{
+			"amount" : 6
+		},5643165707830472:{
+			"amount" : 13
+		},459769908055817340:{
+			"amount" : 15
+		},1041743541357677283:{
+			"amount" : 4
+		},677959973995711183:{
+			"amount" : 15
+		},5577768441831619496:{
+			"amount" : 13
+		},8580749993957332044:{
+			"amount" : 29
+		},6951260433395137734:{
+			"amount" : 14
+		},841940486425347384:{
+			"amount" : 2
+		},4884679350967023270:{
+			"amount" : 7
+		},6983957558238104673:{
+			"amount" : 13
+		},6659683987156779385:{
+			"amount" : 10
+		},6277257289792746631:{
+			"amount" : 10
+		},6948358123570535197:{
+			"amount" : 5
+		},3770967192642378774:{
+			"amount" : 3
+		},9145181928453194692:{
+			"amount" : 15
+		},3633360940492322912:{
+			"amount" : 16
+		}
+	}
+	},
+	"CanSleep" : {
+		"__type" : "bool",
+		"value" : false
+	},
+	"SleepHour" : {
+		"__type" : "int",
+		"value" : 0
+	},
+	"SleepMinute" : {
+		"__type" : "int",
+		"value" : 0
+	},
+	"DestroyedObjects" : {
+		"__type" : "System.Collections.Generic.List`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],mscorlib",
+		"value" : [
+		
+	]
+	},
+	"LearnedItems" : {
+		"__type" : "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],mscorlib",
+		"value" : [
+		
+	]
+	},
+	"UnlockItems" : {
+		"__type" : "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],mscorlib",
+		"value" : [
+		
+	]
+	},
+	"ResearchLevel" : {
+		"__type" : "int",
+		"value" : 1
+	},
+	"DiscardItems" : {
+		"__type" : "System.Collections.Generic.List`1[[DiscardedItemData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : [
+		
+	]
+	},
+	"DropBags" : {
+		"__type" : "System.Collections.Generic.List`1[[DroppedBagData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : [
+		
+	]
+	},
+	"Collectables" : {
+		"__type" : "System.Collections.Generic.List`1[[CollectableData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : [
+		
+	]
+	},
+	"WorldLocations" : {
+		"__type" : "System.Collections.Generic.List`1[[LocationData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],mscorlib",
+		"value" : [
+		{
+			"ID" : 1518484736226618671,
+			"FactionType" : 8
+		},{
+			"ID" : 5954632081223343456,
+			"FactionType" : 6
+		},{
+			"ID" : 845485320647761336,
+			"FactionType" : 6
+		},{
+			"ID" : 5783076294691706568,
+			"FactionType" : 2
+		},{
+			"ID" : 8565324596333705997,
+			"FactionType" : 8
+		},{
+			"ID" : 3246512265697067933,
+			"FactionType" : 13
+		},{
+			"ID" : 2246022674251843039,
+			"FactionType" : 4
+		},{
+			"ID" : 5360963719893734222,
+			"FactionType" : 13
+		},{
+			"ID" : 3231707177795240913,
+			"FactionType" : 13
+		},{
+			"ID" : 3712943840098470031,
+			"FactionType" : 4
+		},{
+			"ID" : 7434706431722753326,
+			"FactionType" : 13
+		},{
+			"ID" : 4897102158648239545,
+			"FactionType" : 13
+		},{
+			"ID" : 353148506269889260,
+			"FactionType" : 4
+		},{
+			"ID" : 1031033779851944512,
+			"FactionType" : 13
+		},{
+			"ID" : 6861703178489995584,
+			"FactionType" : 13
+		},{
+			"ID" : 5935396406126784988,
+			"FactionType" : 13
+		},{
+			"ID" : 8716479432774915709,
+			"FactionType" : 13
+		},{
+			"ID" : 5856695685748321935,
+			"FactionType" : 9
+		},{
+			"ID" : 3250183035483142818,
+			"FactionType" : 2
+		},{
+			"ID" : 5102573272838740384,
+			"FactionType" : 13
+		},{
+			"ID" : 6926917204620028831,
+			"FactionType" : 13
+		},{
+			"ID" : 5246541003819412609,
+			"FactionType" : 2
+		},{
+			"ID" : 3762763686944550590,
+			"FactionType" : 6
+		},{
+			"ID" : 7124979230175538260,
+			"FactionType" : 13
+		},{
+			"ID" : 1047017869027258261,
+			"FactionType" : 13
+		},{
+			"ID" : 7828419080954883661,
+			"FactionType" : 7
+		},{
+			"ID" : 2180895173475506593,
+			"FactionType" : 4
+		},{
+			"ID" : 8299119732507347794,
+			"FactionType" : 8
+		},{
+			"ID" : 7549393970831898472,
+			"FactionType" : 4
+		},{
+			"ID" : 5488153754598642730,
+			"FactionType" : 2
+		},{
+			"ID" : 5395516929090525598,
+			"FactionType" : 7
+		},{
+			"ID" : 7722264267570418519,
+			"FactionType" : 13
+		},{
+			"ID" : 4602818154174838013,
+			"FactionType" : 6
+		},{
+			"ID" : 2685643263686291823,
+			"FactionType" : 9
+		},{
+			"ID" : 3807551551988383207,
+			"FactionType" : 2
+		},{
+			"ID" : 6989531925477700762,
+			"FactionType" : 13
+		},{
+			"ID" : 2283763105358139756,
+			"FactionType" : 6
+		},{
+			"ID" : 8417386305634022788,
+			"FactionType" : 8
+		},{
+			"ID" : 8413700654374255127,
+			"FactionType" : 7
+		},{
+			"ID" : 5810672662808766566,
+			"FactionType" : 13
+		},{
+			"ID" : 9038532660897685216,
+			"FactionType" : 8
+		},{
+			"ID" : 931100494609600311,
+			"FactionType" : 8
+		}
+	]
+	},
+	"TutorialIndex" : {
+		"__type" : "int",
+		"value" : 0
+	},
+	"Holders" : {
+		"__type" : "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],mscorlib",
+		"value" : [
+		
+	]
+	}
+}
