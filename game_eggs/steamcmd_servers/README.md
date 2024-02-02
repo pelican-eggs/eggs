@@ -241,6 +241,10 @@ This is a collection of servers that use SteamCMD to install.
   * [dedicated](scpsl/dedicated)
   * [exiled](scpsl/exiled)
 
+## Smalland: Survive the Wilds
+
+[Smalland: Survive the Wilds](smalland_survive_the_wilds)
+
 ## Solace Crafting
 
 [Solace Crafting](solace_crafting)
