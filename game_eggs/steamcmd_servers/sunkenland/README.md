@@ -17,6 +17,7 @@ To locate your save files on Windows, go to the following directory:
 On the server, you can find the map here:
 `/.wine/drive_c/users/container/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds` 
 
+**Remember** to change the `WORLD_GUID` variable, if you upload a new world to your server! Otherwise the server will crash upon launching it.
 
 ## Installation/System Requirements
 <!--Make changes to reflect the server minimum/recommended hardware specs-->
