@@ -1,27 +1,31 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-11-20T13:09:52+01:00",
+    "exported_at": "2024-01-12T15:34:50+01:00",
     "name": "Quake Live",
     "author": "patz.michael@gmail.com",
     "description": "Quake Live is a first-person shooter video game by id Software. It is an updated version of Quake III Arena that was originally designed as a free-to-play game launched via a web browser plug-in. On September 17, 2014, the game was re-launched as a standalone title on Steam.",
     "features": [
         "steam_disk_space"
     ],
-    "image": "quay.io\/parkervcp\/pterodactyl-images:ubuntu_source",
-    "startup": ".\/qzeroded.x64  +set net_port \"{{SERVER_PORT}}\" +set sv_hostname \"{{SERVER_NAME}}\" +set sv_serverType \"{{SERVER_TYPE}}\" +set g_password \"{{PASSWORD}}\" +sv_fps \"{{FPS}}\"",
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/qzeroded.x64  +set net_port {{SERVER_PORT}} +set sv_hostname \"{{SERVER_NAME}}\" +set sv_serverType \"{{SERVER_TYPE}}\" +set g_password \"{{PASSWORD}}\" +sv_fps \"{{FPS}}\"",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"zmq stats and rcon passwords updated\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"zmq stats and rcon passwords updated\"\r\n}",
+        "logs": "{}",
         "stop": "quit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Quake Live Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates libstdc++6 libz1\r\n\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz http:\/\/media.steampowered.com\/installer\/steamcmd_linux.tar.gz\r\n\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/logs\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\n\r\nexport HOME=\/mnt\/server\r\n.\/steamcmd.sh +login anonymous +force_install_dir \/mnt\/server +app_update 349090 +quit\r\n\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so",
-            "container": "ubuntu:18.04",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -33,7 +37,8 @@
             "default_value": ".\/linux64",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -42,7 +47,8 @@
             "default_value": "A Quake Live Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:70"
+            "rules": "required|string|max:70",
+            "field_type": "text"
         },
         {
             "name": "Server Type",
@@ -51,7 +57,8 @@
             "default_value": "2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric|max:2"
+            "rules": "required|numeric|max:2",
+            "field_type": "text"
         },
         {
             "name": "Server Password",
@@ -60,7 +67,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20"
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "FPS",
@@ -69,7 +77,28 @@
             "default_value": "40",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|numeric"
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "App ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "349090",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:349090",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto update the server on startup",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
         }
     ]
 }
