@@ -12,11 +12,8 @@ For CS2 Valve has decided to merge the game and server files. There will not be 
 |  | Minimum | Recommended |
 |---------|---------|---------|
 | Processor | minim x86-64-v2 (with popcnt) | --- |
-| RAM | 2 GB | 4 GB or better |
-| Storage | 33 GB | 50 GB (using Workshop Maps etc.) |
-| Packages | Glibc 2.31 | --- |
-
-The Glibc requirement means a minimum of Ubuntu 20.04, Debian 11, or Enterprise Linux 9 is required.
+| RAM | 2 GB | --- |
+| Storage | 33 GB | --- |
 
 ## Server Ports
 
