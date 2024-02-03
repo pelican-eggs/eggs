@@ -149,6 +149,7 @@
 * [Conan Exiles](steamcmd_servers/conan_exiles)
 * [Core Keeper](steamcmd_servers/core_keeper)
 * [Counter-Strike](steamcmd_servers/counter_strike/)
+  * [Counter-Strike 2](steamcmd_servers/counter_strike/counter_strike_2/)
   * [Counter-Strike: Source](steamcmd_servers/counter_strike/counter_strike_source/)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [CryoFall](steamcmd_servers/cryofall)

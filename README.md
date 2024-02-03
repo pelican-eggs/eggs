@@ -253,6 +253,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Counter-Strike](game_eggs/steamcmd_servers/counter_strike/)
+  * [Counter-Strike 2](game_eggs/steamcmd_servers/counter_strike/counter_strike_2/)
   * [Counter-Strike: Source](game_eggs/steamcmd_servers/counter_strike/counter_strike_source/)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
