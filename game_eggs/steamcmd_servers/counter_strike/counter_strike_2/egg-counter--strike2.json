@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-03T13:55:40+01:00",
+    "exported_at": "2024-02-05T09:07:13+01:00",
     "name": "Counter-Strike 2",
     "author": "admin@ballaual.de",
     "description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:sniper": "ghcr.io\/parkervcp\/steamcmd:sniper"
     },
     "file_denylist": [],
-    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated $( [ \"$VAC_ENABLED\" == \"1\" ] || printf %s ' -insecure' ) -ip 0.0.0.0 -port {{SERVER_PORT}} -tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} $( [ \"$RCON_ENABLED\" == \"0\" ] || printf %s ' -usercon' ) +net_public_adr {{SERVER_IP}} +game_alias {{GAMEMODE}} +map {{SRCDS_MAP}} +sv_setsteamaccount {{STEAM_GSLT}",
+    "startup": ".\/game\/bin\/linuxsteamrt64\/cs2 -dedicated $( [ \"$VAC_ENABLED\" == \"1\" ] || printf %s ' -insecure' ) -ip 0.0.0.0 -port {{SERVER_PORT}} -tv_port {{TV_PORT}} -maxplayers {{MAX_PLAYERS}} $( [ \"$RCON_ENABLED\" == \"0\" ] || printf %s ' -usercon' ) +game_alias {{GAMEMODE}} +map {{SRCDS_MAP}} +hostname \"{{SERVER_NAME}}\" +sv_password \"{{SERVER_PASSWORD}}\" +rcon_password \"{{RCON_PASSWORD}}\" +sv_setsteamaccount {{STEAM_GSLT}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\"\r\n}",
@@ -24,7 +24,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nif [ -f \"\/mnt\/server\/game\/csgo\/cfg\/server.cfg\" ]; then\r\n    echo \"Server config already exsits, backing up and overwriting with a new one\"\r\n    mv \/mnt\/server\/game\/csgo\/cfg\/server.cfg \/mnt\/server\/game\/csgo\/cfg\/server_$(date +\"%Y%m%d%H%M%S\").cfg\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o server.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/server.cfg\r\nelse \r\n    echo \"server.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o server.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/server.cfg\r\nfi\r\n\r\nif [ -f \"\/mnt\/server\/game\/csgo\/cfg\/sourcetv.cfg\" ]; then\r\n    echo \"Source TV config already exsits, backing up and overwriting with a new one\"\r\n    mv \/mnt\/server\/game\/csgo\/cfg\/sourcetv.cfg \/mnt\/server\/game\/csgo\/cfg\/sourcetv_$(date +\"%Y%m%d%H%M%S\").cfg\r\n    cd \/mnt\/server\/game\/csgo\/cfg\r\n    curl -sSL -o sourcetv.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/sourcetv.cfg\r\nelse \r\n    echo \"sourcetv.cfg does not yet exist, downloading template\"\r\n    cd \/mnt\/server\/game\/csgo\/cfg\/\r\n    curl -sSL -o sourcetv.cfg https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/counter_strike\/counter_strike_2\/sourcetv.cfg\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## Install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} +app_update ${SRCDS_APPID} ${EXTRA_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -112,12 +112,42 @@
         },
         {
             "name": "Enable RCON",
-            "description": "Enable \/ Disable RCON for using RCON commands by external tools. By default this will be disabled.",
+            "description": "Enable \/ Disable RCON for using RCON commands with external tools. By default this will be disabled.",
             "env_variable": "RCON_ENABLED",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Sets the server name listed in the steam server browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl hosted CS2 Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "If specified, players must provide this password to join the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|alpha_dash|between:1,30",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Password",
+            "description": "To gain access to administrator commands on the server.",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|alpha_dash|between:1,30",
             "field_type": "text"
         }
     ]

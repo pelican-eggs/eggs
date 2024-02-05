@@ -33,9 +33,4 @@ If possible always use the Pterodactyl console to use your commands like ``map d
 
 ## Notes
 
-As the default server.cfg is empty this egg ships a very basic configuration file, which is downloaded within the install script.<br>
-The config comes with the most common cvars, suitable for most users. Experienced users can add their own cvars to the file.<br>
-This egg also provides a config for Source TV (sourcetv.cfg). By default the Source TV will be disabled.<br>
-Please keep in mind that using Source TV might lead to higher CPU and RAM usage!<br>
-<br>
 Further install instructions can be found at the official [Documentation](https://developer.valvesoftware.com/wiki/Counter-Strike_2/Dedicated_Servers).
