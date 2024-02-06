@@ -207,6 +207,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
+    * [Infrared](game_eggs/minecraft/proxy/java/infrared)
   * [Bedrock](game_eggs/minecraft/proxy/bedrock)
     * [Waterdog PE](game_eggs/minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](game_eggs/minecraft/proxy/cross_platform)

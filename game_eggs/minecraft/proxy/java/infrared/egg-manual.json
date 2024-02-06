@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-02-05T22:39:14+01:00",
+    "name": "Basic - Manual Configuation",
+    "author": "oulieu.lucas@gmail.com",
+    "description": "The base to run Infrared, however you will need to manually set the proxies in the `proxies` directory. cf : https://infrared.dev/config/proxies",
+    "features": null,
+    "docker_images": {
+        "shadowner\/infrared-egg:latest": "shadowner\/infrared-egg:latest"
+    },
+    "file_denylist": [],
+    "startup": "infrared",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"bind\": \"0.0.0.0:{{server.build.default.port}}\",\r\n            \"keepAliveTimeout\": \"{{env.keepAliveTimeout}}s\",\r\n            \"filters.rateLimiter.requestLimit\": \"{{env.rateLimiterMaxRequests}}\",\r\n            \"filters.rateLimiter.windowLength\": \"{{env.rateLimiterTimeWindow}}s\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"System is online\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Keep Alive Timeout",
+            "description": "Maximum duration between packets before the client gets timed out.",
+            "env_variable": "keepAliveTimeout",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int",
+            "field_type": "text"
+        },
+        {
+            "name": "Rate Limiter - Request Limit",
+            "description": "Request Limit is the amount of times an IP address can create a new connection before it gets blocked.",
+            "env_variable": "rateLimiterMaxRequests",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int",
+            "field_type": "text"
+        },
+        {
+            "name": "Rate Limiter - Window Length",
+            "description": "Windows Length is the time frame for the Request Limit.",
+            "env_variable": "rateLimiterTimeWindow",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|int",
+            "field_type": "text"
+        }
+    ]
+}

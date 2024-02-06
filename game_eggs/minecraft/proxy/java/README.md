@@ -15,3 +15,7 @@ Velocity is a Minecraft server proxy with unparalleled server support, scalabili
 #### Waterfall
 [Waterfall](https://papermc.io/downloads#Waterfall)
 Paper fork of the BungeeCord software, with improved Forge support and more features.
+
+#### Infrared
+[Infrared](https://https://infrared.dev/)
+Infrared is a reverse proxy for Minecraft servers, that allow you to map server by domain name.
