@@ -23,5 +23,5 @@ Urban Terror can be described as a Hollywood tactical shooter; somewhat realism 
 | Game    | 27960   |
 
 
-##Game Modes
+## Game Modes
 0 = Free For All, 1 = Last Man Standing, 3 = Team DeathMatch, 4 = Team Survivor, 5 = Follow The Leader, 6 = Capture And Hold, 7 = Capture The Flag, 8 = Bomb Mode, 9 = Jump, 10 = Freeze Tag, 11 = Gun Game
