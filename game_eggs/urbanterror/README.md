@@ -26,15 +26,3 @@ Urban Terror can be described as a Hollywood tactical shooter; somewhat realism 
 ## Game Infos
 Gamemodes: 0 = Free For All, 1 = Last Man Standing, 3 = Team DeathMatch, 4 = Team Survivor, 5 = Follow The Leader, 6 = Capture And Hold, 7 = Capture The Flag, 8 = Bomb Mode, 9 = Jump, 10 = Freeze Tag, 11 = Gun Game
 You can edit the Server.cfg in /home/container/q3ut4/server.cfg as you wish after creating the server. 
-
-## Known Errors
-Updater will crash when not having enough RAM or SWAP available (at least 1024MiB RAM or 512MiB RAM with 512MiB SWAP)
-
-## Docker Infos
-quay.io/pterodactyl/core:glibc
-
-## Script Container
-debian:buster-slim
-
-## Script Entrypoint Command
-bash
