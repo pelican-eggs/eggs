@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-20T12:41:59+01:00",
+    "exported_at": "2024-02-09T20:19:30+01:00",
     "name": "HumanitZ",
-    "author": "admin@marx.ps",
+    "author": "engels74@marx.ps",
     "description": "HumanitZ is a co-op, isometric, open world survival game in a world ended by the zombie outbreak. As one of the few human survivors, try to last as long as \u201chumanly\u201d possible. The past can\u2019t be changed, but you can make a difference today for the future of humanity.",
     "features": null,
     "docker_images": {
@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": ".\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping TSSGame -log -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -steamservername=\"{{SERVER_NAME}}\"",
     "config": {
-        "files": "{\r\n    \"TSSGame\/GameServerSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName=\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"Password=\\\"\\\"\": \"Password=\\\"{{server.build.env.PASSWORD}}\\\"\",\r\n            \"SaveName=\\\"\\\"\": \"SaveName=\\\"{{server.build.env.SAVE_NAME}}\\\"\",\r\n            \"AdminPass=\\\"\\\"\": \"AdminPass=\\\"{{server.build.env.ADMIN_PASS}}\\\"\",\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"OnlyAllowedPlayers=\": \"OnlyAllowedPlayers={{server.build.env.ONLY_ALLOWED_PLAYERS}}\",\r\n            \"SaveIntervalSec=\": \"SaveIntervalSec={{server.build.env.SAVE_INTERVAL_SEC}}\",\r\n            \"NoDeathFeedback=\": \"NoDeathFeedback={{server.build.env.NO_DEATH_FEEDBACK}}\",\r\n            \"PermaDeath=\": \"PermaDeath={{server.build.env.PERMA_DEATH}}\",\r\n            \"OnDeath=\": \"OnDeath={{server.build.env.ON_DEATH}}\",\r\n            \"PVP=\": \"PVP={{server.build.env.PVP}}\",\r\n            \"ClearInfection=\": \"ClearInfection={{server.build.env.CLEAR_INFECTION}}\",\r\n            \"EagleEye=\": \"EagleEye={{server.build.env.EAGLE_EYE}}\",\r\n            \"AirDrop=\": \"AirDrop={{server.build.env.AIR_DROP}}\",\r\n            \"WeaponBreak=\": \"WeaponBreak={{server.build.env.WEAPON_BREAK}}\",\r\n            \"MultiplayerSleep=\": \"MultiplayerSleep={{server.build.env.MULTIPLAYER_SLEEP}}\",\r\n            \"LootRespawn=\": \"LootRespawn={{server.build.env.LOOT_RESPAWN}}\",\r\n            \"LootRespawnTimer=\": \"LootRespawnTimer={{server.build.env.LOOT_RESPAWN_TIMER}}\",\r\n            \"LootRarity=\": \"LootRarity={{server.build.env.LOOT_RARITY}}\",\r\n            \"AirDropInterval=\": \"AirDropInterval={{server.build.env.AIR_DROP_INTERVAL}}\",\r\n            \"ZombieDiffHealth=\": \"ZombieDiffHealth={{server.build.env.ZOMBIE_DIFF_HEALTH}}\",\r\n            \"ZombieDiffSpeed=\": \"ZombieDiffSpeed={{server.build.env.ZOMBIE_DIFF_SPEED}}\",\r\n            \"ZombieDiffDamage=\": \"ZombieDiffDamage={{server.build.env.ZOMBIE_DIFF_DAMAGE}}\",\r\n            \"HumanDifficulty=\": \"HumanDifficulty={{server.build.env.HUMAN_DIFFICULTY}}\",\r\n            \"ZombieAmountMulti=\": \"ZombieAmountMulti={{server.build.env.ZOMBIE_AMOUNT_MULTI}}\",\r\n            \"HumanAmountMulti=\": \"HumanAmountMulti={{server.build.env.HUMAN_AMOUNT_MULTI}}\",\r\n            \"ZombieDogMulti=\": \"ZombieDogMulti={{server.build.env.ZOMBIE_DOG_MULTI}}\",\r\n            \"ZombieRespawnTimer=\": \"ZombieRespawnTimer={{server.build.env.ZOMBIE_RESPAWN_TIMER}}\",\r\n            \"HumanRespawnTimer=\": \"HumanRespawnTimer={{server.build.env.HUMAN_RESPAWN_TIMER}}\",\r\n            \"AnimalRespawnTimer=\": \"AnimalRespawnTimer={{server.build.env.ANIMAL_RESPAWN_TIMER}}\",\r\n            \"StartingSeason=\": \"StartingSeason={{server.build.env.STARTING_SEASON}}\",\r\n            \"DaysPerSeason=\": \"DaysPerSeason={{server.build.env.DAYS_PER_SEASON}}\",\r\n            \"DayDur=\": \"DayDur={{server.build.env.DAY_DUR}}\",\r\n            \"NightDur=\": \"NightDur={{server.build.env.NIGHT_DUR}}\",\r\n            \"VitalDrain=\": \"VitalDrain={{server.build.env.VITAL_DRAIN}}\",\r\n            \"DogEnabled=\": \"DogEnabled={{server.build.env.DOG_ENABLED}}\",\r\n            \"DogNum=\": \"DogNum={{server.build.env.DOG_NUM}}\",\r\n            \"RecruitDog=\": \"RecruitDog={{server.build.env.RECRUIT_DOG}}\",\r\n            \"BuildingHealth=\": \"BuildingHealth={{server.build.env.BUILDING_HEALTH}}\",\r\n            \"CompanionHealth=\": \"CompanionHealth={{server.build.env.COMPANION_HEALTH}}\",\r\n            \"CompanionDmg=\": \"CompanionDmg={{server.build.env.COMPANION_DMG}}\",\r\n            \"AllowDismantle=\": \"AllowDismantle={{server.build.env.ALLOW_DISMANTLE}}\",\r\n            \"AllowHouseDismantle=\": \"AllowHouseDismantle={{server.build.env.ALLOW_HOUSE_DISMANTLE}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"TSSGame\/GameServerSettings.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName=\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"Password=\\\"\\\"\": \"Password=\\\"{{server.build.env.PASSWORD}}\\\"\",\r\n            \"SaveName=\\\"\\\"\": \"SaveName=\\\"{{server.build.env.SAVE_NAME}}\\\"\",\r\n            \"AdminPass=\\\"\\\"\": \"AdminPass=\\\"{{server.build.env.ADMIN_PASS}}\\\"\",\r\n            \"MaxPlayers=\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"OnlyAllowedPlayers=\": \"OnlyAllowedPlayers={{server.build.env.ONLY_ALLOWED_PLAYERS}}\",\r\n            \"SaveIntervalSec=\": \"SaveIntervalSec={{server.build.env.SAVE_INTERVAL_SEC}}\",\r\n            \"NoDeathFeedback=\": \"NoDeathFeedback={{server.build.env.NO_DEATH_FEEDBACK}}\",\r\n            \"PermaDeath=\": \"PermaDeath={{server.build.env.PERMA_DEATH}}\",\r\n            \"OnDeath=\": \"OnDeath={{server.build.env.ON_DEATH}}\",\r\n            \"PVP=\": \"PVP={{server.build.env.PVP}}\",\r\n            \"ClearInfection=\": \"ClearInfection={{server.build.env.CLEAR_INFECTION}}\",\r\n            \"EagleEye=\": \"EagleEye={{server.build.env.EAGLE_EYE}}\",\r\n            \"AirDrop=\": \"AirDrop={{server.build.env.AIR_DROP}}\",\r\n            \"WeaponBreak=\": \"WeaponBreak={{server.build.env.WEAPON_BREAK}}\",\r\n            \"MultiplayerSleep=\": \"MultiplayerSleep={{server.build.env.MULTIPLAYER_SLEEP}}\",\r\n            \"LootRespawn=\": \"LootRespawn={{server.build.env.LOOT_RESPAWN}}\",\r\n            \"LootRespawnTimer=\": \"LootRespawnTimer={{server.build.env.LOOT_RESPAWN_TIMER}}\",\r\n            \"LootRarity=\": \"LootRarity={{server.build.env.LOOT_RARITY}}\",\r\n            \"AirDropInterval=\": \"AirDropInterval={{server.build.env.AIR_DROP_INTERVAL}}\",\r\n            \"ZombieDiffHealth=\": \"ZombieDiffHealth={{server.build.env.ZOMBIE_DIFF_HEALTH}}\",\r\n            \"ZombieDiffSpeed=\": \"ZombieDiffSpeed={{server.build.env.ZOMBIE_DIFF_SPEED}}\",\r\n            \"ZombieDiffDamage=\": \"ZombieDiffDamage={{server.build.env.ZOMBIE_DIFF_DAMAGE}}\",\r\n            \"HumanDifficulty=\": \"HumanDifficulty={{server.build.env.HUMAN_DIFFICULTY}}\",\r\n            \"ZombieAmountMulti=\": \"ZombieAmountMulti={{server.build.env.ZOMBIE_AMOUNT_MULTI}}\",\r\n            \"HumanAmountMulti=\": \"HumanAmountMulti={{server.build.env.HUMAN_AMOUNT_MULTI}}\",\r\n            \"ZombieDogMulti=\": \"ZombieDogMulti={{server.build.env.ZOMBIE_DOG_MULTI}}\",\r\n            \"ZombieRespawnTimer=\": \"ZombieRespawnTimer={{server.build.env.ZOMBIE_RESPAWN_TIMER}}\",\r\n            \"HumanRespawnTimer=\": \"HumanRespawnTimer={{server.build.env.HUMAN_RESPAWN_TIMER}}\",\r\n            \"AnimalRespawnTimer=\": \"AnimalRespawnTimer={{server.build.env.ANIMAL_RESPAWN_TIMER}}\",\r\n            \"StartingSeason=\": \"StartingSeason={{server.build.env.STARTING_SEASON}}\",\r\n            \"DaysPerSeason=\": \"DaysPerSeason={{server.build.env.DAYS_PER_SEASON}}\",\r\n            \"DayDur=\": \"DayDur={{server.build.env.DAY_DUR}}\",\r\n            \"NightDur=\": \"NightDur={{server.build.env.NIGHT_DUR}}\",\r\n            \"VitalDrain=\": \"VitalDrain={{server.build.env.VITAL_DRAIN}}\",\r\n            \"DogEnabled=\": \"DogEnabled={{server.build.env.DOG_ENABLED}}\",\r\n            \"DogNum=\": \"DogNum={{server.build.env.DOG_NUM}}\",\r\n            \"RecruitDog=\": \"RecruitDog={{server.build.env.RECRUIT_DOG}}\",\r\n            \"BuildingHealth=\": \"BuildingHealth={{server.build.env.BUILDING_HEALTH}}\",\r\n            \"CompanionHealth=\": \"CompanionHealth={{server.build.env.COMPANION_HEALTH}}\",\r\n            \"CompanionDmg=\": \"CompanionDmg={{server.build.env.COMPANION_DMG}}\",\r\n            \"AllowDismantle=\": \"AllowDismantle={{server.build.env.ALLOW_DISMANTLE}}\",\r\n            \"AllowHouseDismantle=\": \"AllowHouseDismantle={{server.build.env.ALLOW_HOUSE_DISMANTLE}}\",\r\n            \"Territory=\": \"Territory={{server.build.env.TERRITORY}}\",\r\n            \"Decay=\": \"Decay={{server.build.env.DECAY}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"LogKaiHelper: Session created!\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -29,7 +29,7 @@
     },
     "variables": [
         {
-            "name": "Steam App ID",
+            "name": "[REQUIRED] Steam App ID",
             "description": "Steam App ID of HumanitZ Server",
             "env_variable": "SRCDS_APPID",
             "default_value": "2728330",
@@ -496,6 +496,26 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Territory",
+            "description": "1 = Enabled. In PVE you are not allowed to build in someone's spawn point area. Only non recruit clan members can. 0 = Disable",
+            "env_variable": "TERRITORY",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Decay",
+            "description": "By default 3600, the spawn point loses 1 durability every 1 hour. Used to deal with territory build restrictions, so you have to repair your spawn point.",
+            "env_variable": "DECAY",
+            "default_value": "3600",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
             "field_type": "text"
         }
     ]
