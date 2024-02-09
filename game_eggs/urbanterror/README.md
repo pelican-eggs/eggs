@@ -11,7 +11,7 @@ Urban Terror can be described as a Hollywood tactical shooter; somewhat realism 
 |---------|---------|---------|
 | Processor | Almost any proccessor will work | - |
 | RAM | 256 MiB | 512 MiB |
-| SWAP| 512 MiB | 512 MiB (Swap not needed if RAM is 1024MB)|
+| SWAP| 512 MiB | 512 MiB (Swap not needed if RAM is 1024MiB)|
 | Storage | 1500 MiB | 2000 MiB |
 | Network | Any reasonable speed |- |
 | Game Ownership | Not needed | The game is free, and server doesn't need the game to work. |   
@@ -23,9 +23,9 @@ Urban Terror can be described as a Hollywood tactical shooter; somewhat realism 
 | Game    | 27960   |
 
 
-## Game Modes
-0 = Free For All, 1 = Last Man Standing, 3 = Team DeathMatch, 4 = Team Survivor, 5 = Follow The Leader, 6 = Capture And Hold, 7 = Capture The Flag, 8 = Bomb Mode, 9 = Jump, 10 = Freeze Tag, 11 = Gun Game
-
+## Game Infos
+Gamemodes: 0 = Free For All, 1 = Last Man Standing, 3 = Team DeathMatch, 4 = Team Survivor, 5 = Follow The Leader, 6 = Capture And Hold, 7 = Capture The Flag, 8 = Bomb Mode, 9 = Jump, 10 = Freeze Tag, 11 = Gun Game
+You can edit the Server.cfg in /home/container/q3ut4/server.cfg as you wish after creating the server. 
 
 ## Known Errors
-Updater crash when not having enough RAM or SWAP available (1024MB RAM | 512MB RAM with 512MB SWAP)
+Updater will crash when not having enough RAM or SWAP available (at least 1024MiB RAM or 512MiB RAM with 512MiB SWAP)
