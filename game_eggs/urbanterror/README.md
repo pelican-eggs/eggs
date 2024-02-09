@@ -29,3 +29,12 @@ You can edit the Server.cfg in /home/container/q3ut4/server.cfg as you wish afte
 
 ## Known Errors
 Updater will crash when not having enough RAM or SWAP available (at least 1024MiB RAM or 512MiB RAM with 512MiB SWAP)
+
+## Docker Infos
+quay.io/pterodactyl/core:glibc
+
+## Script Container
+debian:buster-slim
+
+## Script Entrypoint Command
+bash
