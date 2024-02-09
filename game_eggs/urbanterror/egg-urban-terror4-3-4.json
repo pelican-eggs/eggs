@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-09T19:34:16+00:00",
+    "exported_at": "2024-02-09T20:56:42+00:00",
     "name": "Urban Terror 4.3.4",
     "author": "Juli199696@web.de",
     "description": "Urban Terror started as a realism based \"total conversion\" mod for Quake III Arena. Nowadays, Urban Terror is played using the free, stand-alone, ioquake3 engine modified, which doesn't require Quake III Arena, in addition to being an add-on to id Software's Quake III Arena.",
@@ -16,14 +16,14 @@
     "startup": ".\/Quake3-UrT-Ded.{{EXE}}  +exec \"server.cfg\" +set fs_game \"q3ut4\" +set fs_basepath \"\/home\/container\" +set fs_homepath \"\/home\/container\" +set dedicated \"2\" +set com_hunkmegs \"{{HUNKMEGS}}\" +set net_port \"{{SERVER_PORT}}\"",
     "config": {
         "files": "{\r\n    \"q3ut4\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"set  sv_hostname\": \"set  sv_hostname \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"set  sv_joinmessage\": \"set  sv_joinmessage \\\"{{server.build.env.JOIN_MESSAGE}}\\\"\",\r\n            \"set  sv_maxclients\": \"set  sv_maxclients \\\"{{server.build.env.SERVER_MAXCLIENTS}}\\\"\",\r\n            \"set  rconpassword\": \"set  rconpassword \\\"{{server.build.env.RCON_PASSWORD}}\\\"\",\r\n            \"set  g_password\": \"set  g_password \\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"set  g_friendlyfire\": \"set  g_friendlyfire \\\"{{server.build.env.SERVER_FRIENDLYFIRE}}\\\"\",\r\n            \"set  g_gametype\": \"set  g_gametype \\\"{{server.build.env.SERVER_GAMETYPE}}\\\"\",\r\n            \"set  timelimit\": \"set  timelimit \\\"{{server.build.env.SERVER_TIMELIMIT}}\\\"\",\r\n            \"set  bot_enable\": \"set  bot_enable 1\",\r\n            \"set  bot_minplayers\": \"set  bot_minplayers \\\"{{server.build.env.BOT_MINPLAYERS}}\\\"\",\r\n            \"map  ut4_casa\": \"map  \\\"{{server.build.env.SERVER_MAP}}\\\"\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"------- Game Initialization -------\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"\/home\/container\/q3ut4\/games.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"------- Game Initialization -------\"\r\n}",
+        "logs": "{\r\n}",
         "stop": "quit"
     },
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\ncd \/tmp\r\napt-get update && apt-get -y install libxml2-utils wget curl sed #Install needed dependencies for the official Urban Terror Updater (Not for the Gameserver itself)\r\n\r\nmkdir UrbanTerror43\r\ncd UrbanTerror43\r\n\r\necho \"Downloading Urban Terror 4.3\"\r\nwget https:\/\/github.com\/FrozenSand\/UrTUpdater\/releases\/download\/v4.0.3-RC1\/UrTUpdater-v4.0.3-Ded.sh #Download from Github because the Webpage does not allow \"direct Downloads\"\r\n\r\necho \"Updating Urban Terror\" #Accept the EULA and input the needed variables to download the latest version of the Serverfiles (4.3.4 for now)\r\nbash \/tmp\/UrbanTerror43\/UrTUpdater-v4.0.3-Ded.sh << EOF\r\ny\r\n1\r\n1\r\n1\r\nn\r\ny\r\nn\r\nEOF\r\n\r\n# Copy files to destination\r\ncp -r \/tmp\/UrbanTerror43\/* \/mnt\/server\/\r\n\r\n# Set up default configs\r\nmv \/mnt\/server\/q3ut4\/server_example.cfg \/mnt\/server\/q3ut4\/server.cfg\r\nmv \/mnt\/server\/q3ut4\/mapcycle_example.txt \/mnt\/server\/q3ut4\/mapcycle.txt\r\n\r\nchmod 744 \/mnt\/server\/Quake3-UrT-Ded.x86_64\r\nchmod 744 \/mnt\/server\/Quake3-UrT-Ded.i386\r\n\r\n# Use sed to insert extra config options as many people ask for Bots ingame\r\nsed -i '\/\\\/\\\/pb_sv_enable\/a\\set  bot_enable 1\\nset  bot_minplayers 0' \/mnt\/server\/q3ut4\/server.cfg",
-            "container": "debian:buster-slim",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -55,12 +55,12 @@
             "default_value": "My Awesome Pterodactyl Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:30",
+            "rules": "required|string|max:55",
             "field_type": "text"
         },
         {
             "name": "Join Message",
-            "description": "The message the player will receive when joining the server",
+            "description": "The message the player will receive when joining the server.",
             "env_variable": "JOIN_MESSAGE",
             "default_value": "Welcome to this Server, have fun!",
             "user_viewable": true,
@@ -70,7 +70,7 @@
         },
         {
             "name": "Max Players",
-            "description": "Maximum players that can connect to the server",
+            "description": "Maximum players that can connect to the server.",
             "env_variable": "SERVER_MAXCLIENTS",
             "default_value": "16",
             "user_viewable": true,
@@ -80,12 +80,12 @@
         },
         {
             "name": "RCON Password",
-            "description": "Set the Rcon Password for Admin commands",
+            "description": "Set the Rcon Password for Admin commands.\r\nCan be empty to disable RCON.",
             "env_variable": "RCON_PASSWORD",
-            "default_value": "PleaseChangeMe!",
+            "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "nullable|string|max:20",
             "field_type": "text"
         },
         {
@@ -95,7 +95,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "max:20",
+            "rules": "nullable|string|max:20",
             "field_type": "text"
         },
         {
@@ -110,12 +110,12 @@
         },
         {
             "name": "Gametype \/ Gamemode",
-            "description": "Sets the Gamemode you want to play. \r\n0 = Free For All, \r\n1 = Last Man Standing, \r\n3 = Team DeathMatch, \r\n4 = Team Survivor, \r\n5 = Follow The Leader, \r\n6 = Capture And Hold, \r\n7 = Capture The Flag, \r\n8 = Bomb Mode, \r\n9 = Jump, \r\n10 = Freeze Tag, \r\n11 = Gun Game",
+            "description": "Sets the Gamemode you want to play. \r\n1 = Last Man Standing, \r\n2 = Free For All, \r\n3 = Team DeathMatch, \r\n4 = Team Survivor, \r\n5 = Follow The Leader, \r\n6 = Capture And Hold, \r\n7 = Capture The Flag, \r\n8 = Bomb Mode, \r\n9 = Jump, \r\n10 = Freeze Tag, \r\n11 = Gun Game",
             "env_variable": "SERVER_GAMETYPE",
             "default_value": "3",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|max:11",
+            "rules": "required|integer|in:1,2,3,4,5,6,7,8,9,10,11",
             "field_type": "text"
         },
         {
