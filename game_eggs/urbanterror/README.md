@@ -11,7 +11,7 @@ Urban Terror can be described as a Hollywood tactical shooter; somewhat realism 
 |---------|---------|---------|
 | Processor | Almost any proccessor will work | - |
 | RAM | 256 MiB | 512 MiB |
-| SWAP| 512 MiB | 512 MiB |
+| SWAP| 512 MiB | 512 MiB (Swap not needed if RAM is 1024MB)|
 | Storage | 1500 MiB | 2000 MiB |
 | Network | Any reasonable speed |- |
 | Game Ownership | Not needed | The game is free, and server doesn't need the game to work. |   
@@ -25,3 +25,7 @@ Urban Terror can be described as a Hollywood tactical shooter; somewhat realism 
 
 ## Game Modes
 0 = Free For All, 1 = Last Man Standing, 3 = Team DeathMatch, 4 = Team Survivor, 5 = Follow The Leader, 6 = Capture And Hold, 7 = Capture The Flag, 8 = Bomb Mode, 9 = Jump, 10 = Freeze Tag, 11 = Gun Game
+
+
+## Known Errors
+Updater crash when not having enough RAM or SWAP available (1024MB RAM | 512MB RAM with 512MB SWAP)
