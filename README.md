@@ -354,6 +354,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [OpenRCT2](game_eggs/tycoon_games/openrct2)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
 
+[UrbanTerror](game_eggs/urbanterror)
+
 [Veloren](game_eggs/veloren)
 
 [Vintage Story](game_eggs/vintage_story)
