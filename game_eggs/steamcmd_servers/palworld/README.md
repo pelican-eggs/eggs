@@ -99,3 +99,20 @@ As of January 19th 2024 the server requires about 5GB of storage capacity. This 
 | RCON (optional) | 25575   |
 
 The RCON port does not need to be allocated.
+
+### Updating
+
+1. Update your egg
+2. Update the startup of all already made servers to the one that now comes with the egg
+3. Then hit reinstall because the parser application has to be downloaded
+
+### Variable Parsing
+
+The parser application that is currently being shipped is capable of editing all variables that are present in the Palworld configuration file as of February 1, 2024.
+
+However, only the most basic and necessary variables are present in the egg.
+Those who need more variables will have to add them themselves.
+
+See a list of what key matches with what variable [Here](https://github.com/QuintenQVD0/Palword-server-config-parser?tab=readme-ov-file#key-with-variables)
+
+**Variables that do not exist will automatically be skipped parsing so you do not have to worry about it emptying your config file**
