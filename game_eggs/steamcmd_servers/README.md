@@ -84,6 +84,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Empyrion - Galactic Survival](empyrion)
 
+## Enshrouded
+
+[Enshrouded](enshrouded)
+
 ## Fistful of Frags
 
 [Fistful of Frags](fof)
@@ -153,6 +157,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mount & Blade II: Bannerlord](mount_blade_II_bannerlord)
 
+## Necesse
+
+[Necesse](necesse)
+
 ## Neos VR
 [Neos VR](neosvr)
 
@@ -175,6 +183,10 @@ This is a collection of servers that use SteamCMD to install.
 ## Operation Harsh Doorstop
 
 [Operation Harsh Doorstop](operation_harsh_doorstop)
+
+## Palworld
+
+[Palworld](palworld)
 
 ## Pavlov VR
 
@@ -232,6 +244,11 @@ This is a collection of servers that use SteamCMD to install.
 ## SCP: Escape Together
 
 [SCP: Escape Together](scp_escape_together)
+
+## Smalland: Survive the Wilds
+
+[Smalland: Survive the Wilds](smalland_survive_the_wilds)
+
 
 ## Solace Crafting
 

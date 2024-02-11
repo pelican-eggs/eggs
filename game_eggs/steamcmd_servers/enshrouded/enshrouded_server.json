@@ -1,0 +1,10 @@
+{
+    "gamePort": 27015,
+    "ip": "0.0.0.0",
+    "logDirectory": "./logs",
+    "name": "My Server",
+    "password": "",
+    "queryPort": 27016,
+    "saveDirectory": "./savegame",
+    "slotCount": 10
+}

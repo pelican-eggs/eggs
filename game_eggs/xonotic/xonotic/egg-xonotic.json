@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-11-24T07:45:11+00:00",
+    "exported_at": "2024-01-13T21:03:27+01:00",
     "name": "Xonotic",
     "author": "parker@parkervcp.com",
     "description": "This is for the default xonotic setup.",
     "features": null,
-    "images": [
-        "ghcr.io\/pterodactyl\/games:source"
-    ],
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/steamcmd:debian": "ghcr.io\/pterodactyl\/steamcmd:debian"
+    },
     "file_denylist": [],
     "startup": ".\/xonotic-linux64-dedicated +log_file latest.log +net_address 0.0.0.0 +port {{SERVER_PORT}} +maxplayers {{MAX_PLAYERS}}",
     "config": {
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Vanilla Xonotic Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add rsync --no-cache\r\n\r\ncd \/mnt\/server\r\n\r\nwget http:\/\/dl.xonotic.org\/xonotic-0.8.2.zip\r\n\r\nunzip xonotic-0.8.2.zip\r\n\r\nmv Xonotic\/* .\/\r\n\r\n.\/misc\/tools\/rsync-updater\/update-to-autobuild.sh\r\n\r\n# create initial folder structure to copy the default config to, because it only gets created on first startup\r\nmkdir -p .xonotic\/data\r\ncp-n server\/server.cfg .xonotic\/data\/server.cfg || true # do not overwrite existing config file\r\n\r\nrm -rf COPYING Makefile *glx* *glx *sdl* *sdl *linux32* *exe *.app *.sh bin* GPL* Docs\/ gmqcc\/ source\/ misc\/ Xonotic\/ xonotic-0.8.2.zip",
-            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "script": "#!\/bin\/ash\r\n# Vanilla Xonotic Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add rsync --no-cache\r\n\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget -O xonotic.zip http:\/\/dl.xonotic.org\/xonotic-${VERSION}.zip\r\n\r\nunzip -o xonotic.zip\r\n\r\nmv Xonotic\/* .\/\r\n\r\n.\/misc\/tools\/rsync-updater\/update-to-autobuild.sh\r\n\r\n# create initial folder structure to copy the default config to, because it only gets created on first startup\r\nmkdir -p .xonotic\/data\r\ncp -n server\/server.cfg .xonotic\/data\/server.cfg || true # do not overwrite existing config file\r\n\r\nrm -rf COPYING Makefile *glx* *glx *sdl* *sdl *linux32* *exe *.app *.sh bin* GPL* Docs\/ gmqcc\/ source\/ misc\/ Xonotic\/ xonotic.zip\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },
@@ -35,7 +35,18 @@
             "default_value": "16",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|numeric|digits_between:1,2"
+            "rules": "required|numeric|digits_between:1,2",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "",
+            "env_variable": "VERSION",
+            "default_value": "0.8.6",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }
