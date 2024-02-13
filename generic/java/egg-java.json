@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-24T19:20:23+02:00",
+    "exported_at": "2024-02-13T17:26:13+0000",
     "name": "Generic Java",
     "author": "sneaky@sneakyhub.com",
     "description": "Creates a container that runs java.",
@@ -14,7 +14,8 @@
         "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11",
         "ghcr.io\/parkervcp\/yolks:java_16": "ghcr.io\/parkervcp\/yolks:java_16",
         "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17",
-        "ghcr.io\/parkervcp\/yolks:java_19": "ghcr.io\/parkervcp\/yolks:java_19"
+        "ghcr.io\/parkervcp\/yolks:java_19": "ghcr.io\/parkervcp\/yolks:java_19",
+        "ghcr.io\/parkervcp\/yolks:java_21": "ghcr.io\/parkervcp\/yolks:java_21"
     },
     "file_denylist": [],
     "startup": "java -Dterminal.jline=false -Dterminal.ansi=true -jar {{JARFILE}}",
