@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-14T09:40:16+01:00",
+    "exported_at": "2024-02-14T09:59:30+01:00",
     "name": "Counter-Strike 2",
     "author": "admin@ballaual.de",
     "description": "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2.",
@@ -32,12 +32,12 @@
     "variables": [
         {
             "name": "Map",
-            "description": "The default map for the server.",
+            "description": "The default map for the server.\r\nExamples:\r\n\r\nBomb:\r\nde_dust2, de_mirage, de_nuke, de_overpass, de_inferno, de_ancient, de_vertigo, de_anubis\r\n\r\nHostage:\r\ncs_italy, cs_office\r\n\r\nArms Race:\r\nar_baggage, ar_shoots",
             "env_variable": "SRCDS_MAP",
             "default_value": "de_dust2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:de_dust2,de_mirage,de_nuke,de_overpass,de_inferno,de_ancient,de_vertigo,de_anubis,cs_italy,cs_office",
+            "rules": "required|string",
             "field_type": "text"
         },
         {
@@ -144,7 +144,7 @@
             "name": "Gamemode",
             "description": "Defines the Gamemode and Gametype to be set at the start of the next round.\r\nExamples:\r\n\r\nCompetitive:\r\ngame_mode 1\r\ngame_type 0\r\n\r\nWingman:\r\ngame_mode 2\r\ngame_type 0\r\n\r\nCasual:\r\ngame_mode 0\r\ngame_type 0\r\n\r\nDeathmatch:\r\ngame_mode 2\r\ngame_type 1\r\n\r\nArms Race:\r\ngame_mode 0\r\ngame_type 1\r\n\r\nCustom:\r\ngame_mode 0\r\ngame_type 3",
             "env_variable": "GAME_MODE",
-            "default_value": "",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
@@ -154,7 +154,7 @@
             "name": "Gametype",
             "description": "Defines the Gamemode and Gametype to be set at the start of the next round.\r\nExamples:\r\n\r\nCompetitive:\r\ngame_mode 1\r\ngame_type 0\r\n\r\nWingman:\r\ngame_mode 2\r\ngame_type 0\r\n\r\nCasual:\r\ngame_mode 0\r\ngame_type 0\r\n\r\nDeathmatch:\r\ngame_mode 2\r\ngame_type 1\r\n\r\nArms Race:\r\ngame_mode 0\r\ngame_type 1\r\n\r\nCustom:\r\ngame_mode 0\r\ngame_type 3",
             "env_variable": "GAME_TYPE",
-            "default_value": "",
+            "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
