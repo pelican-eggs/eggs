@@ -7,7 +7,7 @@
     "exported_at": "2024-02-14T21:28:58+01:00",
     "name": "NeoForge",
     "author": "mail@invalidpanda.dev",
-    "description": "A new fork of the Minecraft modding platform Forge. NeoForge provides support for many Forge mods, but some newer mods are NeoForge-exclusive. NeoForge supports Minecraft version 1.20.2 and newer.",
+    "description": "A new fork of the Minecraft modding platform Forge. NeoForge provides support for many Forge mods, but some newer mods are NeoForge-exclusive. NeoForge supports Minecraft version 1.20.1 and newer.",
     "features": null,
     "docker_images": {
         "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17"
@@ -30,7 +30,7 @@
     "variables": [
         {
             "name": "Minecraft Version",
-            "description": "The version of Minecraft you want to use. NeoForge supports 1.20.2+",
+            "description": "The version of Minecraft you want to use. NeoForge supports 1.20.1+",
             "env_variable": "MC_VERSION",
             "default_value": "",
             "user_viewable": true,
