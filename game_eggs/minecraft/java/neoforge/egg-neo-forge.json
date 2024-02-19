@@ -8,7 +8,9 @@
     "name": "NeoForge",
     "author": "mail@invalidpanda.dev",
     "description": "A new fork of the Minecraft modding platform Forge. NeoForge provides support for many Forge mods, but some newer mods are NeoForge-exclusive. NeoForge supports Minecraft version 1.20.1 and newer.",
-    "features": null,
+    "features": [
+        "eula"
+    ],
     "docker_images": {
         "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17"
     },
