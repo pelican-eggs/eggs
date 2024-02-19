@@ -2,7 +2,7 @@
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
         "version": "PTDL_v2",
-        "update_url": "https://mirror.invalidpanda.dev/neoforge/egg-neo-forge.json"
+        "update_url": null
     },
     "exported_at": "2024-02-14T21:28:58+01:00",
     "name": "NeoForge",
