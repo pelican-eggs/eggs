@@ -184,6 +184,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Feather](game_eggs/minecraft/java/feather)
   * [Feed The Beast](game_eggs/minecraft/java/ftb)
   * [Forge](game_eggs/minecraft/java/forge)
+  * [NeoForge](game_eggs/minecraft/java/neoforge)
   * [Glowstone](game_eggs/minecraft/java/glowstone)
   * [Limbo](game_eggs/minecraft/java/limbo)
   * [Magma](game_eggs/minecraft/java/magma)
