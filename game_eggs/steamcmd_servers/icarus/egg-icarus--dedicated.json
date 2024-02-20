@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-09-03T21:07:28+02:00",
+    "exported_at": "2024-02-20T00:05:03+01:00",
     "name": "Icarus-Dedicated",
-    "author": "bolverblitz@ebg.pw",
+    "author": "jeremiejt38@gmail.com",
     "description": "Icarus is a survival game that with dedicated servers as a public beta",
     "features": [
         "steam_disk_space"
@@ -15,16 +15,16 @@
         "Wine Staging": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "wine64 .\/Icarus\/Binaries\/Win64\/IcarusServer-Win64-Shipping.exe -Log -SteamServerName=${SERVER_NAME} -PORT=\"${SERVER_PORT}\" -QueryPort=\"${QUERY_PORT}\"",
+    "startup": "wine64 .\/Icarus\/Binaries\/Win64\/IcarusServer-Win64-Shipping.exe -Log -SteamServerName=\"${SERVER_NAME}\" -PORT=\"${SERVER_PORT}\" -QueryPort=\"${QUERY_PORT}\"",
     "config": {
-        "files": "{}",
+        "files": "{\r\n    \"Icarus\/Saved\/Config\/WindowsServer\/ServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].SessionName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].JoinPassword\": \"{{server.build.env.JOINPASSWORD}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].MaxPlayers\": \"{{server.build.env.MAXPLAYERS}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].AdminPassword\": \"{{server.build.env.ADMINPASSWORD}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].ShutdownIfNotJoinedFor\": \"{{server.build.env.SHUTDOWNIFNOTJOINEDFOR}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].ShutdownIfEmptyFor\": \"{{server.build.env.SHUTDOWNIFEMPTYFOR}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].AllowNonAdminsToLaunchProspects\": \"{{server.build.env.ALLOWNONADMINSTOLAUNCHPROSPECTS}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].AllowNonAdminsToDeleteProspects\": \"{{server.build.env.ALLOWNONADMINSTODELETEPROSPECTS}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].LoadProspect\": \"{{server.build.env.LOADPROSPECT}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].CreateProspect\": \"{{server.build.env.CREATEPROSPECT}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].ResumeProspect\": \"{{server.build.env.RESUMEPROSPECT}}\",\r\n            \"[\/Script\/Icarus.DedicatedServerSettings].LastProspectName\": \"{{server.build.env.LASTPROSPECTNAME}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"(Engine Initialization) Total time:\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nFILE=\/mnt\/server\/Icarus\/Saved\/Config\/ServerSettings.ini\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"Config already exist skipping\"\r\nelse \r\n    echo \"Config does not yet exist, making one\"\r\n    mkdir -p \/mnt\/server\/Icarus\/Saved\/Config\/\r\n    cd \/mnt\/server\/Icarus\/Saved\/Config\/\r\n    curl -sSL -o ServerSettings.ini https:\/\/raw.githubusercontent.com\/RocketWerkz\/IcarusDedicatedServer\/main\/ServerSettings.ini\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\nFILE=\/mnt\/server\/Icarus\/Saved\/Config\/WindowsServer\/ServerSettings.ini\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"Config already exist skipping\"\r\nelse \r\n    echo \"Config does not yet exist, making one\"\r\n    mkdir -p \/mnt\/server\/Icarus\/Saved\/Config\/WindowsServer\r\n    cd \/mnt\/server\/Icarus\/Saved\/Config\/WindowsServer\r\n    curl -sSL -o ServerSettings.ini https:\/\/raw.githubusercontent.com\/RocketWerkz\/IcarusDedicatedServer\/main\/ServerSettings.ini\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/pterodactyl\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
@@ -42,12 +42,122 @@
         },
         {
             "name": "Server Name",
-            "description": "",
+            "description": "Ingame server name to display",
             "env_variable": "SERVER_NAME",
-            "default_value": "IcarusEGG",
+            "default_value": "Pterodactyl Hosted Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Join Password",
+            "description": "Password required to join the server (Leave empty to not use a password)",
+            "env_variable": "JOINPASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Max Players",
+            "description": "Max Players that can be on the server at once",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "8",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|between:1,8",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password required for using admin RCON commands. If left empty just using the RCON \/AdminLogin will give admin privilege's to a player (effectively an empty password)",
+            "env_variable": "ADMINPASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Load Prospect",
+            "description": "Prospect name to load on startup",
+            "env_variable": "LOADPROSPECT",
+            "default_value": "OpenWorld_Styx Styx",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "in:OpenWorld_Styx Styx, Outpost002_Forest ARCWOOD: Outpost, Outpost003_Arctic ICEHOLM: Outpost, Outpost005_Forest HOLDFAST: Outpost, Outpost006_Olympus Olympus, STYX_A_Construction HIGHRISE: Construction, STYX_A_Expedition OMPHALOS: Expedition, STYX_A_Exploration HEADLONG: Exploration, STYX_A_Extermination HUSK: Extermination, STYX_B_Expedition MAELSTROM: Expedition, STYX_B_Exploration ADAGIO: Exploration, STYX_B_Extermination HALCYON: Extermination, STYX_B_Extermination2 ENCROACHMENT: Extermination, STYX_B_Research IRONCLAD: Research, STYX_B_Stockpile OPULENCE: Stockpile, STYX_C_Construction ALCAZAR: Construction, STYX_C_Expedition RICOCHET: Expedition, STYX_C_Exploration KISMET: Exploration, STYX_C_Extermination BALLISTIC: Extermination, STYX_C_Extermination2 AUGMENTATION: Extermination, STYX_D_Delivery RENDEZVOUS: Delivery, STYX_D_Expedition ZEPHYR: Expedition, STYX_D_Exploration CAVALCADE: Exploration, STYX_D_Extermination LUPINE: Extermination, STYX_D_Research GOSSAMER: Research, STYX_D_Research_2 ABYSS: Research, STYX_E_Expedition VERTIGO: Expedition, STYX_E_Exploration DUST: Exploration, STYX_E_Extraction REMNANT: Extraction, STYX_E_Research FLATLINE: Research, STYX_E_Survey CRESCENDO: Survey, Tier1_Farming AGRICULTURE: Hydroponics, Tier1_Forest_Construction HOMESTEAD: Construction, Tier1_Forest_Defence FORSAKEN: Recovery, Tier1_Forest_Exploration_0 ARGOS: Exploration, Tier1_Forest_Extermination_0 KILL LIST: Extermination, Tier1_Forest_Range POTSHOT: Training, Tier1_Forest_Recon_0 BEACHHEAD: Recon, Tier1_Forest_Research_0 STRANGE HARVEST: Bio-Research, Tier1_Forest_Scan_0 LIVEWIRE: Terrain Scan, Tier1_Forest_Stockpile AGRICULTURE: Supply Stockpile, Tier1_Forest_Survey_0 HEADSTONE: Geo-Survey, Tier1_Forest_WS_Stockpile SPELUNKING: Assisted Stockpile, Tier2_Canyon_Construction_0 PYRAMID: Construction, Tier2_Canyon_Expedition_0 DRY RUN: Expedition, Tier2_Canyon_Exploration_0 SANDBLAST: Exploration, Tier2_Canyon_LongSurvey_0 SANDY BRIDGES: Extended Survey, Tier2_Canyon_Recovery_0 FIELD TEST: Recovery, Tier2_Canyon_Research_0 BIOSHOCK: Bio-Research, Tier2_Canyon_Scan_0 DEATH RAY: Scan, Tier2_Canyon_Stockpile SOLID METAL: Hard Stockpile, Tier2_Canyon_Stockpile2 PRESERVATION: Stockpile, Tier2_Canyon_Survey_0 SPIRIT LEVEL: Survey, Tier2_Glacier_Construction_0 INFLUX: Construction, Tier2_Glacier_Expedition_0 ICESTORM: Expedition, Tier2_Glacier_Exploration_0 HIGH WIRE: Exploration, Tier2_Glacier_Extraction_0 DEEP VEIN: Extraction, Tier2_Glacier_Recovery_0 BROKEN ARROW: Recovery, Tier2_Glacier_Research_0 RESURGENCE: Bio-Research, Tier2_Glacier_Scan_0 SEARCHLIGHT: Scan, Tier2_Glacier_Survey_0 ICE LINE: Survey, Tier3_RiverLands_Construction LIFE LINE: Construction, Tier3_RiverLands_Delivery FIRE WALK: Delivery, Tier3_RiverLands_Expedition_0 WATERFALL: Expedition, Tier3_RiverLands_Exploration_0 EDELWEISS: Exploration, Tier3_RiverLands_Extermination_0 WET WORK: Extermination, Tier3_RiverLands_Extraction MERIDIAN: Extraction, Tier3_RiverLands_Research_0 UPLIFT: Bio-Research, Tier3_RiverLands_Scan_0 INCURSION: Scan, Tier3_RiverLands_Stockpile_0 RAMP UP: Stockpile, Tier3_RiverLands_Stockpile_2 BIG SHOT: Stockpile, Tier3_RiverLands_Survey_0 CLUSTERED: Extended Survey, Tier4_Arctic_Expedition_0 AVALANCHE: Expedition, Tier4_Arctic_Exploration_0 TUNDRA: Exploration, Tier4_Arctic_Extermination_0 CLEAN UP: Extermination, Tier4_Arctic_Extraction_0 PAYDAY: Extraction, Tier4_Arctic_Recovery_0 SNOWCRASH: Recovery, Tier4_Arctic_Scan_0 SNOWBLIND: Scan, Tier4_Arctic_Stockpile ADVANCED ORDER: Stockpile, Tier4_Arctic_Survey_0 STATION TO STATION: Extended Survey, Tier4_Desert_Construction_0 SANDBOX: Construction, Tier4_Desert_Expedition_0 EL CAMINO: Expedition, Tier4_Desert_Exploration_0 PROMISED LAND: Exploration, Tier4_Desert_Extermination_0 DUST UP: Extermination, Tier4_Desert_Extermination_2 LOOSE ENDS: Extermination, Tier4_Desert_Recovery CONCEALMENT: Recovery, Tier4_Desert_Research_0 NIGHTWATCH: Geo-Research, Tier4_Desert_Research_2 CARAPACE: Research, Tier4_Desert_Scan_0 SEVEN PILLARS: Scan, Tier4_Desert_Survey MIGRATING SANDS: Survey, Tier5_Omni_Exploration_0 SPIRIT WALK: Exploration, Tier5_Omni_Olympus NIGHTFALL: Survey, Tier5_Omni_Recovery VOYAGER : Recovery, Tier5_Omni_Research UNEARTHED: Research, Tier5_Omni_Research_2 CRYOGENIC: Research",
+            "field_type": "text"
+        },
+        {
+            "name": "Create Prospect",
+            "description": "Create and launch a prospect on start up",
+            "env_variable": "CREATEPROSPECT",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|in:False,True",
+            "field_type": "text"
+        },
+        {
+            "name": "Resume Propect",
+            "description": "If true, automatically resume the last prospect on startup. True by default.",
+            "env_variable": "RESUMEPROSPECT",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|in:False,True",
+            "field_type": "text"
+        },
+        {
+            "name": "Last Prospect Name",
+            "description": "Last propect Hexa Name (without .json)",
+            "env_variable": "LASTPROSPECTNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Shutdown if empty for",
+            "description": "When the server starts up, if no players join within this time, the server will shutdown and return to lobby. During this window the game will be paused.",
+            "env_variable": "SHUTDOWNIFNOTJOINEDFOR",
+            "default_value": "300",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Shutdown empty for",
+            "description": "When the server becomes empty the server will shutdown and return to lobby after this time (in seconds). During this window the game will be paused.",
+            "env_variable": "SHUTDOWNIFEMPTYFOR",
+            "default_value": "300",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Allow Create Prospect",
+            "description": "If true anyone who joins the lobby can create a new prospect or load an existing one. If false players will be required to login as admin in order to create or load a prospect.",
+            "env_variable": "ALLOWNONADMINSTOLAUNCHPROSPECTS",
+            "default_value": "True",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "in:True,False",
+            "field_type": "text"
+        },
+        {
+            "name": "Allow Delete Prospect",
+            "description": "If true anyone who joins the lobby can delete prospects from the server. If false players will be required to login as admin in order to delete a prospect.",
+            "env_variable": "ALLOWNONADMINSTODELETEPROSPECTS",
+            "default_value": "False",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "in:True,False",
             "field_type": "text"
         },
         {
