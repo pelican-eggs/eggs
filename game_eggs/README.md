@@ -150,6 +150,7 @@
 * [Core Keeper](steamcmd_servers/core_keeper)
 * [Counter-Strike](steamcmd_servers/counter_strike/)
   * [Counter-Strike: Source](steamcmd_servers/counter_strike/counter_strike_source/)
+  * [Counter-Strike 2](steamcmd_servers/counter_strike/counter_strike_2/)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [CryoFall](steamcmd_servers/cryofall)
 * [DayZ (Experimental)](steamcmd_servers/dayz-experimental)

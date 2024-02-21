@@ -60,6 +60,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Core Keeper](core_keeper)
 
+## Counter-Strike
+
+[Counter-Strike](counter_strike)
+
 ## Craftopia
 
 [Craftopia](craftopia)

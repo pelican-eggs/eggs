@@ -254,6 +254,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Counter-Strike](game_eggs/steamcmd_servers/counter_strike/)
   * [Counter-Strike: Source](game_eggs/steamcmd_servers/counter_strike/counter_strike_source/)
+  * [Counter-Strike 2](game_eggs/steamcmd_servers/counter_strike/counter_strike_2/)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
