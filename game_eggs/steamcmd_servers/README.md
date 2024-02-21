@@ -62,7 +62,7 @@ This is a collection of servers that use SteamCMD to install.
 
 ## Counter-Strike
 
-[Counter-Strike](counter-strike)
+[Counter-Strike](counter_strike)
 
 ## Craftopia
 
