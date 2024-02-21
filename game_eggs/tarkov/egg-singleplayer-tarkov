@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-02-21T03:47:21-05:00",
+    "name": "Singleplayer Tarkov",
+    "author": "dino@papertots.page",
+    "description": "The Stay in Tarkov project was born due to Battlestate Games' (BSG) reluctance to create the pure PvE version of Escape from Tarkov. The project's aim is simple, create a Cooperation PvE experience that retains progression.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/pterodactyl\/yolks:debian": "ghcr.io\/pterodactyl\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/Aki.Server.exe",
+    "config": {
+        "files": "{\r\n    \"Aki_Data\/Server\/configs\/http.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ip\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server is running, do not close while playing SPT, Happy playing!!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Singleplayer Tarkov Server Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n# Working directory for build requirements\r\ncd $HOME\r\n\r\n# Install git-lfs python3\r\napt update && apt install -yq git-lfs python3 unzip jq\r\n\r\n# Install Node Version Manager and NodeJS\r\ngit clone https:\/\/github.com\/nvm-sh\/nvm.git $HOME\/.nvm\r\nif [ -z \"$NODE_VERSION\" ] || [ \"$NODE_VERSION\" == \"LTS\" ]; then\r\n  NODE_VERSION=$(curl -sSL https:\/\/nodejs.org\/download\/release\/index.json | jq -r '.[] | select(.lts!=false) | .version' | head -n1)\r\nfi\r\n. $HOME\/.nvm\/nvm.sh && nvm install $NODE_VERSION\r\n\r\n# Clone the SPT AKI repo\r\ngit clone https:\/\/dev.sp-tarkov.com\/SPT-AKI\/Server.git server\r\ncd $HOME\/server && git checkout $SPT_VERSION\r\n\r\n# Obtaining server files\r\ncd $HOME\/server\/project\/\r\ngit-lfs fetch --all && git-lfs pull\r\n\r\n# Install npm dependencies and build\r\n. $HOME\/.nvm\/nvm.sh && npm install && npm run build:release\r\nmv $HOME\/server\/project\/build\/* \/mnt\/server\/\r\n\r\n# Obtain SIT Coop mod\r\ngit clone https:\/\/github.com\/stayintarkov\/SIT.Aki-Server-Mod \/mnt\/server\/user\/mods\/SITCoop\r\ncd \/mnt\/server\/user\/mods\/SITCoop && git checkout $SIT_VERSION",
+            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SPT-AKI Version",
+            "description": "Version of the SPT-AKI version to use.\r\nUse \"latest\" for the latest tag on the master branch.\r\n\r\nSPT-AKI: https:\/\/dev.sp-tarkov.com\/SPT-AKI\/Server",
+            "env_variable": "SPT_VERSION",
+            "default_value": "40b999d04c68f1f52ab152d163c086a1c50f489b",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SITCoop Version",
+            "description": "Version of the SIT co-op mod for the server to use, by git hash.\r\n\r\nSITCoop: https:\/\/github.com\/stayintarkov\/SIT.Aki-Server-Mod",
+            "env_variable": "SIT_VERSION",
+            "default_value": "022caac252205e1b9ca30b3610884ad1b05d0dc1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "NodeJS Version",
+            "description": "Version of NodeJS to use to build the server.\r\nUse \"LTS\" for latest LTS version, or \"20.10.0\" for the recommended version.",
+            "env_variable": "NODE_VERSION",
+            "default_value": "20.10.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
