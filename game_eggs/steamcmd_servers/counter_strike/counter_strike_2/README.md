@@ -22,9 +22,7 @@ Ports required to run the server in a table format.
 | Port    | default |
 |---------|---------|
 | Game    | 27015   |
-| Source TV | 27020 |
-| Client  | 27005   |
-| Steam   | 26900   |
+| Source TV (Optional) | 27020 |
 
 ## RCON
 
