@@ -1,7 +1,7 @@
 {
 	"ApplicationVersion" : {
 		"__type" : "string",
-		"value" : "0.2.0"
+		"value" : "0.2.03"
 	},
 	"WorldSettingProfile" : {
 		"__type" : "WorldSettingProfile,Assembly-CSharp",
