@@ -177,6 +177,7 @@
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
 * [Mount & Blade II: Bannerlord](steamcmd_servers/mount_blade_II_bannerlord)
+* [Myth of Empires](steamcmd_servers/myth_of_empires)
 * [Necesse](steamcmd_servers/necesse)
 * [Neos VR](steamcmd_servers/neosvr)
 * [No More Room in Hell](steamcmd_servers/nmrih)
