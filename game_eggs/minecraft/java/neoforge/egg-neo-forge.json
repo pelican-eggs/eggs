@@ -1,44 +1,58 @@
-{
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
-    "meta": {
-        "version": "PTDL_v2",
-        "update_url": null
-    },
-    "exported_at": "2024-02-14T21:28:58+01:00",
-    "name": "NeoForge",
-    "author": "mail@invalidpanda.dev",
-    "description": "NeoForge is a new fork of Forge, supporting Minecraft version 1.20.1 and newer.",
-    "features": [
-        "eula"
-    ],
-    "docker_images": {
-        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17"
-    },
-    "file_denylist": [],
-    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true $( [[  ! -f unix_args.txt ]] && printf %s \"-jar {{SERVER_JARFILE}}\" || printf %s \"@unix_args.txt\" )",
-    "config": {
-        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
-        "logs": "{}",
-        "stop": "stop"
-    },
-    "scripts": {
-        "installation": {
-            "script": "#!\/bin\/bash\r\n#\r\n# NeoForge Installation script\r\n#\r\n# Files kindly mirrored by invalidpandaa\r\n# Inspired by orginal Forge install script by parkervcp (c)\r\n#\r\n# Server files: \/mnt\/server\r\n\r\napt update\r\napt install -y curl jq\r\n\r\nif [[ ! -d \/mnt\/server ]]; then\r\n  mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nDOWNLOAD_LINK=https:\/\/mirror.invalidpanda.dev\/neoforge\/${MC_VERSION}\/installer.jar\r\n\r\n# Download the installer\r\necho -e \"Downloading NeoForge installer with Minecraft version ${MC_VERSION} \\nDownload link is ${DOWNLOAD_LINK}\\n\"\r\nif curl --output \/dev\/null --silent --head --fail \"${DOWNLOAD_LINK}\"; then\r\n    curl -LO ${DOWNLOAD_LINK}\r\n\r\n    # Check if file exists\r\n    if [ -e \"installer.jar\" ]; then\r\n        echo -e \"Successfully downloaded installer.jar\"\r\n    else\r\n        echo -e \"Failed to download installer.jar. Exiting now! \\n\"\r\n        exit 1\r\n    fi\r\nelse\r\n    echo -e \"Couldn't reach the download server! If this error persists, please contact mail@invalidpanda.dev. \\n\"\r\n    exit 1\r\nfi\r\n\r\nfunction  unix_args {\r\n  echo -e \"Detected Forge 1.17 or newer version. Setting up forge unix args. \\n\"\r\n  ln -sf libraries\/net\/neoforged\/neoforge\/*\/unix_args.txt unix_args.txt\r\n}\r\n\r\n# Delete args to support downgrading\/upgrading\r\nrm -rf libraries\/net\/neoforged\/neoforge\r\nrm unix_args.txt\r\n\r\n\r\n# Installing NeoForge\r\necho -e \"Installing NeoForge server \\n\"\r\njava -jar installer.jar --installServer || { echo -e \"\\nFailed to install NeoForge server with Minecraft version ${MC_VERSION}! \\nMake sure to allocate enough memory and disk space.\"; exit 4; }\r\n\r\n# Check if we need a symlink for 1.17+ Forge JPMS args\r\nif [[ $MC_VERSION =~ ^1\\.(17|18|19|20|21|22|23) || $FORGE_VERSION =~ ^1\\.(17|18|19|20|21|22|23) ]]; then\r\n  unix_args\r\nfi  \r\n  \r\necho -e \"Deleting installer.jar file.\\n\"\r\nrm -rf installer.jar\r\necho -e \"Installation process is completed.\"",
-            "container": "openjdk:8-jdk-slim",
-            "entrypoint": "bash"
-        }
-    },
-    "variables": [
-        {
-            "name": "Minecraft Version",
-            "description": "The version of Minecraft you want to use. NeoForge supports 1.20.1+",
-            "env_variable": "MC_VERSION",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:6",
-            "field_type": "text"
-        }
-    ]
+#!/bin/bash
+#
+# NeoForge Installation script
+#
+# Files kindly mirrored by invalidpandaa
+# The install script contains parts of the orginal forge egg by parkervcp (c)
+#
+# Server files: /mnt/server
+apt update
+apt install -y curl jq
+if [[ ! -d /mnt/server ]]; then
+mkdir /mnt/server
+fi
+cd /mnt/server
+DOWNLOAD_LINK=https://mirror.invalidpanda.dev/neoforge/${MC_VERSION}/installer.jar
+# Download the installer
+echo -e "Downloading NeoForge installer with Minecraft version ${MC_VERSION} \nDownload link is ${DOWNLOAD_LINK}\n"
+if curl --output /dev/null --silent --head --fail "${DOWNLOAD_LINK}"; then
+curl -LO ${DOWNLOAD_LINK}
+# Check if file exists
+if [ -e "installer.jar" ]; then
+echo -e "Successfully downloaded installer.jar"
+else
+echo -e "Failed to download installer.jar. Exiting now! \n"
+exit 1
+fi
+else
+echo -e "Couldn't reach the download server! If this error persists, please contact mail@invalidpanda.dev. \n"
+exit 1
+fi
+function unix_args {
+echo -e "Setting up Unix args..."
+if [ "$MC_VERSION" = "1.20.1" ]; then
+ln -sf libraries/net/neoforged/forge/*/unix_args.txt unix_args.txt
+else
+ln -sf libraries/net/neoforged/neoforge/*/unix_args.txt unix_args.txt
+fi
 }
+# Delete args to support downgrading/upgrading
+rm -rf libraries/net/neoforged/neoforge
+rm -rf libraries/net/neoforged/forge # if on 1.20.1
+rm unix_args.txt
+# Installing NeoForge
+echo -e "Installing NeoForge server \n"
+java -jar installer.jar --installServer || { echo -e "\nFailed to install NeoForge server with Minecraft version ${MC_VERSION}! \nMake sure to allocate enough memory and disk space."; exit 4; }
+# Check if we need a symlink for 1.17+ Forge JPMS args
+if [[ $MC_VERSION =~ ^1\.(17|18|19|20|21|22|23) || $FORGE_VERSION =~ ^1\.(17|18|19|20|21|22|23) ]]; then
+unix_args
+fi
+echo -e "Deleting installer.jar file.\n"
+rm -rf installer.jar
+echo "--------------------------------------------------------------------------------------
+
+Installation complete!
+
+If any issues occured during install, please contact mail@invalidpanda.dev.
+
+--------------------------------------------------------------------------------------"
