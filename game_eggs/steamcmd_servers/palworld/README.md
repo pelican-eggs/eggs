@@ -119,3 +119,9 @@ Those who need more variables will have to add them themselves.
 See a list of what key matches with what variable [Here](https://github.com/QuintenQVD0/Palword-server-config-parser?tab=readme-ov-file#key-with-variables)
 
 **Variables that do not exist will automatically be skipped parsing so you do not have to worry about it emptying your config file**
+
+### Proton
+
+There is a special egg that uses proton instad of the native linux version what shipes with `winmm.dll` and `RE-UE4SS` so for they who want to run mods then that is possible.
+
+Keep in mind this eggs console output is broken (thanks proton / wine) so you will only see the parser output. The RCON console does still work.
