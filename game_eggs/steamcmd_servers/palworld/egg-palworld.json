@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-30T17:49:20+01:00",
+    "exported_at": "2024-02-27T15:23:38+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -17,7 +17,7 @@
     "file_denylist": [
         "PalServer.sh"
     ],
-    "startup": ".\/PalworldServerConfigParser; (while read cmd; do rcon -s -a \"localhost:$RCON_PORT\" -p \"$ADMIN_PASSWORD\" \"$cmd\";done) < \/dev\/stdin & \/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Test Pal EpicApp=PalServer -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -publicip={{PUBLIC_IP}} -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\"",
+    "startup": ".\/PalworldServerConfigParser; (while read cmd; do rcon -s -a \"localhost:$RCON_PORT\" -p \"$ADMIN_PASSWORD\" \"$cmd\";done) < \/dev\/stdin & \/home\/container\/Pal\/Binaries\/Linux\/PalServer-Linux-Test Pal -publiclobby -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\" -rcon",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Setting breakpad minidump AppID = 2394010\"\r\n}",
@@ -94,12 +94,12 @@
         },
         {
             "name": "Public IP",
-            "description": "Set this to the servers public ip address.",
+            "description": "Set this to the server public ip address.\r\nOnly needed if the allocation is a local ip, else the allocate ip will be used automatically",
             "env_variable": "PUBLIC_IP",
             "default_value": "",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string",
+            "rules": "nullable|string",
             "field_type": "text"
         },
         {
