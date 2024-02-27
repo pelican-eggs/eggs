@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-23T09:19:46+01:00",
+    "exported_at": "2024-02-27T16:19:43+01:00",
     "name": "Myth of Empires",
     "author": "josdekurk@gmail.com",
     "description": "Myth of Empires is a multiplayer war sandbox game featuring a high degree of freedom. Players must survive, craft, create, and lead troops in their quest to conquer territory and build their own empire.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "export PROTON_USE_WINED3D=1; export PROTON_NO_ESYNC=1; proton run MOE\/Binaries\/Win64\/MOEServer.exe {{MAP_NAME}} -game -server -DataLocalFile -NotCheckServerSteamAuth -LOCALLOGTIMES -PrivateServer -MultiHome=0.0.0.0 -OutAddress={{SERVER_IP}} -SessionName=\"{{SERVER_NAME}}\" -GameServerPVPType={{PVP}} -MaxPlayers={{MAX_PLAYERS}} -MapDifficultyRate=1 -UseACE -EnableVACBan=1 -ServerId=100 -ClusterId=1 -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -bStartShutDownServiceInPrivateServer={{SHUTDOWN_SERVICE}} -ShutDownServiceIP=127.0.0.1 -ShutDownServicePort={{RCON_PORT}} -ShutDownServiceKey=\"{{RCON_PASSWORD}}\" -ServerAdminAccounts=\"{{ADMIN_IDS}}\" {{EXTRA_FLAGS}}",
+    "startup": "export PROTON_USE_WINED3D=1; export PROTON_NO_ESYNC=1; proton run MOE\/Binaries\/Win64\/MOEServer.exe {{MAP_NAME}} -game -server -DataLocalFile -NotCheckServerSteamAuth -LOCALLOGTIMES -PrivateServer -MultiHome=0.0.0.0 -OutAddress={{SERVER_IP}} -SessionName=\"{{SERVER_NAME}}\" -GameServerPVPType={{PVP}} -MaxPlayers={{MAX_PLAYERS}} -MapDifficultyRate=1 -UseACE -EnableVACBan=1 -ServerId={{SERVER_ID}} -ClusterId={{CLUSTER_ID}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -bStartShutDownServiceInPrivateServer={{SHUTDOWN_SERVICE}} -ShutDownServiceIP=127.0.0.1 -ShutDownServicePort={{RCON_PORT}} -ShutDownServiceKey=\"{{RCON_PASSWORD}}\" -ServerAdminAccounts=\"{{ADMIN_IDS}}\" {{EXTRA_FLAGS}}",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"LogInit: Display: Starting Game.\"\r\n}",
@@ -156,6 +156,26 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Cluster ID",
+            "description": "",
+            "env_variable": "CLUSTER_ID",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Server ID",
+            "description": "",
+            "env_variable": "SERVER_ID",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
             "field_type": "text"
         }
     ]
