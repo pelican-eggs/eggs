@@ -105,6 +105,9 @@ The RCON port does not need to be allocated.
 1. Update your egg
 2. Update the startup of all already made servers to the one that now comes with the egg
 3. Then hit reinstall because the parser application has to be downloaded
+4. Because the Palworld devs forgot with the v0.1.5.0 to add the new `bShowPlayerList` key to the config you will need to add it yourself. This maybe fixt in the future. Its default value is False
+
+Example of the end of the config: `bUseAuth=True,BanListURL="https://api.palworldgame.com/api/banlist.txt",bShowPlayerList=False)`
 
 ### Variable Parsing
 
