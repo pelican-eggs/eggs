@@ -1,0 +1,182 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-02-27T16:19:43+01:00",
+    "name": "Myth of Empires",
+    "author": "josdekurk@gmail.com",
+    "description": "Myth of Empires is a multiplayer war sandbox game featuring a high degree of freedom. Players must survive, craft, create, and lead troops in their quest to conquer territory and build their own empire.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
+    },
+    "file_denylist": [],
+    "startup": "export PROTON_USE_WINED3D=1; export PROTON_NO_ESYNC=1; proton run MOE\/Binaries\/Win64\/MOEServer.exe {{MAP_NAME}} -game -server -DataLocalFile -NotCheckServerSteamAuth -LOCALLOGTIMES -PrivateServer -MultiHome=0.0.0.0 -OutAddress={{SERVER_IP}} -SessionName=\"{{SERVER_NAME}}\" -GameServerPVPType={{PVP}} -MaxPlayers={{MAX_PLAYERS}} -MapDifficultyRate=1 -UseACE -EnableVACBan=1 -ServerId={{SERVER_ID}} -ClusterId={{CLUSTER_ID}} -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -bStartShutDownServiceInPrivateServer={{SHUTDOWN_SERVICE}} -ShutDownServiceIP=127.0.0.1 -ShutDownServicePort={{RCON_PORT}} -ShutDownServiceKey=\"{{RCON_PASSWORD}}\" -ServerAdminAccounts=\"{{ADMIN_IDS}}\" {{EXTRA_FLAGS}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"LogInit: Display: Starting Game.\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n ##\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "App ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1794810",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:1794810",
+            "field_type": "text"
+        },
+        {
+            "name": "Install Windows version",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|in:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto update the server on startup",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Map Name",
+            "description": "",
+            "env_variable": "MAP_NAME",
+            "default_value": "LargeTerrain_Central_Main",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:LargeTerrain_Central_Main,LargeTerrain_Central2_Main",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl hosted server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:80",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable PVP",
+            "description": "Enable or disable PVP",
+            "env_variable": "PVP",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "25",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:1,150",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "12888",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Shutdown Service",
+            "description": "",
+            "env_variable": "SHUTDOWN_SERVICE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Port",
+            "description": "",
+            "env_variable": "RCON_PORT",
+            "default_value": "13888",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|int",
+            "field_type": "text"
+        },
+        {
+            "name": "RCON Password",
+            "description": "",
+            "env_variable": "RCON_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|alpha_dash|min:5|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin ID's",
+            "description": "Steam admin ID list",
+            "env_variable": "ADMIN_IDS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Extra Flags",
+            "description": "Extra flags.All starting with a -\r\nexample: -ServerLevelAddMul=1.01",
+            "env_variable": "EXTRA_FLAGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|",
+            "field_type": "text"
+        },
+        {
+            "name": "Cluster ID",
+            "description": "",
+            "env_variable": "CLUSTER_ID",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Server ID",
+            "description": "",
+            "env_variable": "SERVER_ID",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        }
+    ]
+}

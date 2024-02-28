@@ -161,6 +161,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Mount & Blade II: Bannerlord](mount_blade_II_bannerlord)
 
+## Myth of Empires
+
+[Myth of Empires](myth_of_empires)
+
 ## Necesse
 
 [Necesse](necesse)
