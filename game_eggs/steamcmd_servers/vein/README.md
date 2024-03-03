@@ -22,8 +22,8 @@ Ports required to run the server in a table format.
 
 | Port    | default |
 |---------|---------|
-| Game    | 27015   |
-| Query    | 7777   |
+| Game    | 7777    |
+| Query   | 27015   |
 
 ## Config
 
