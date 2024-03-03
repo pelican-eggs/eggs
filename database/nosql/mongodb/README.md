@@ -25,9 +25,9 @@ security:
 
 > :closed_lock_with_key: To learn more about MongoDB security, you can read the [MongoDB Security Checklist](https://www.mongodb.com/docs/manual/administration/security-checklist/#security-checklist)
 
-### Notes specific to the MongoDB 6 egg
+### Notes specific to the MongoDB 6 or 7 egg
 
-**The [MongoDB 6 egg](./egg-mongo-d-b6.json) enables access control by default** in the `mongod.conf` file, meaning that even if people will be able to connect to your database as guests, [they will not be able to perform any operation, apart from nonhazardous commands](https://dba.stackexchange.com/a/292175)
+**The [MongoDB 6 egg](./egg-mongo-d-b6.json) or [MongoDB 7 egg](./egg-mongo-d-b7.json)  enables access control by default** in the `mongod.conf` file, meaning that even if people will be able to connect to your database as guests, [they will not be able to perform any operation, apart from nonhazardous commands](https://dba.stackexchange.com/a/292175)
 
 ### Disabling authentication
 

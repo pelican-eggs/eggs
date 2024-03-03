@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-29T17:46:23+02:00",
+    "exported_at": "2024-02-23T20:05:07+01:00",
     "name": "Magma",
     "author": "support@pterodactyl.io",
-    "description": "Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability.",
+    "description": "Magma is most powerful Forge server providing you with Forge mods and Bukkit Plugins using Spigot and Paper for Performance Optimization and Stability. Using: https:\/\/github.com\/magmamaintained",
     "features": [
         "eula",
         "java_version",
@@ -21,7 +21,7 @@
         "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
     },
     "file_denylist": [],
-    "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
@@ -30,8 +30,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl git jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\/\r\n\r\n# Hard coded latest version as the magma API doesn't have an endpoint to query for it\r\nLATEST_VERSION=\"1.18.2\"\r\n\r\n# Default TAG_VERSION if empty\r\nif [[ -z \"${TAG_VERSION}\" ]]; then\r\n    TAG_VERSION=\"latest\"\r\nfi\r\n\r\n\r\nif [[ -z \"${MC_VERSION}\" ]] || [[ \"${MC_VERSION}\" == \"latest\" ]]; then\r\n    echo -e \"Version not set. Defaulting to latest\"\r\n    MC_VERSION=${LATEST_VERSION}\r\nfi\r\n\r\necho \"Attempting to install Magma - Version ${MC_VERSION} - Tag ${TAG_VERSION}\"\r\n\r\nif [[ \"${TAG_VERSION}\" == \"latest\" ]]; then\r\n    # Didn't ask for a specific tag\r\n    VERSION_JSON=$(curl --silent \"https:\/\/api.magmafoundation.org\/api\/v2\/${MC_VERSION}\/latest\")\r\nelse\r\n    # Asked for a specific tag\r\n    VERSION_JSON=$(curl --silent \"https:\/\/api.magmafoundation.org\/api\/v2\/${MC_VERSION}\/latest\/${TAG_VERSION}\")\r\nfi\r\n\r\nDOWNLOAD_LINK=$(echo ${VERSION_JSON} | jq -r .link)\r\necho \"Download Link: '${DOWNLOAD_LINK}'\"\r\n\r\n# Check we found a download link\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then\r\n    \r\n    # Validate that link works\r\n    echo -e \"Validating download link\"\r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_LINK}\r\n    else\r\n        echo -e \"Download URL ${DOWNLOAD_LINK} is invalid. Terminating install.\"\r\n        exit 2\r\n    fi\r\nelse\r\n    echo -e \"No download URL found. Terminating install.\"\r\n    exit 2\r\nfi\r\n\r\n\r\n# Download server.jar\r\necho -e \"running: curl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\"\r\ncurl -sSL -o ${SERVER_JARFILE} -sSL ${DOWNLOAD_LINK}\r\necho -e \"Install Complete\"",
-            "container": "debian:bullseye-slim",
+            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/magmamaintained\/Magma-${MC_VERSION}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/magmamaintained\/Magma-${MC_VERSION}\/releases\")\r\n\r\nif [ -z \"${TAG_VERSION}\" ] || [ \"${TAG_VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url )\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${TAG_VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${TAG_VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${TAG_VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url')\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_LINK}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_LINK}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n\r\necho \"Download Link: '${DOWNLOAD_LINK}'\"\r\n\r\n# Check we found a download link\r\n\r\n# Download server.jar\r\necho -e \"running: curl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\"\r\ncurl -sSL -o ${SERVER_JARFILE} -sSL ${DOWNLOAD_LINK}\r\necho -e \"Install Complete\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -48,22 +48,22 @@
         },
         {
             "name": "Minecraft Version",
-            "description": "Optional.\r\n\r\nSpecify the version to install, such as 1.16 or 1.12. Leave empty or set latest to install latest",
+            "description": "",
             "env_variable": "MC_VERSION",
-            "default_value": "latest",
+            "default_value": "1.20.1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20",
+            "rules": "nullable|string|in:1.20.1,1.19.3,1.18.2,1.12.2",
             "field_type": "text"
         },
         {
             "name": "Tag Version",
-            "description": "Optional.\r\n\r\nSpecify the tag version to install. Leave empty or set latest to install latest",
+            "description": "Optional.\r\n\r\nSpecify the tag version to install. Set latest to install latest",
             "env_variable": "TAG_VERSION",
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20",
+            "rules": "required|string|max:32",
             "field_type": "text"
         }
     ]

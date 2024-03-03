@@ -1,13 +1,18 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2019-11-06T18:52:33-05:00",
-    "name": "MariaDB",
+    "exported_at": "2023-12-19T09:54:17+01:00",
+    "name": "MariaDB 10.3",
     "author": "parker@parkervcp.com",
     "description": "One of the most popular database servers. Made by the original developers of MySQL. Guaranteed to stay open source.",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:db_mariadb",
+    "features": null,
+    "docker_images": {
+        "MariaDB 10.3": "ghcr.io\/parkervcp\/yolks:mariadb_10.3"
+    },
+    "file_denylist": [],
     "startup": "{ \/usr\/sbin\/mysqld & } && sleep 5 && mysql -u root",
     "config": {
         "files": "{\r\n    \".my.cnf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"bind-address\": \"bind-address=0.0.0.0\"\r\n        }\r\n    }\r\n}",

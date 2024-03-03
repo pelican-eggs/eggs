@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-17T23:20:29+01:00",
+    "exported_at": "2023-08-13T19:49:14+02:00",
     "name": "Mohist",
     "author": "alex.chang-lam@protonmail.com",
     "description": "Spigot fork with performance optimizations.",
@@ -14,24 +14,24 @@
         "pid_limit"
     ],
     "docker_images": {
-        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
         "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
         "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
     },
     "file_denylist": [],
-    "startup": "java -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} pause",
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
         "logs": "{}",
         "stop": "stop"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y curl\r\n\r\n#Go into main direction\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ ! -z ${BUILD_VERSION} ]; then\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/${BUILD_VERSION}\/download\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/${BUILD_TYPE}\/download\r\nfi\r\n\r\n#Downloading jars\r\necho -e \"Download link is ${DOWNLOAD_LINK}\"\r\necho -e \"Downloading build version ${BUILD_VERSION}\"\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --fail ${DOWNLOAD_LINK}; then\r\n        echo -e \"Download link is valid.\"\r\n    else\r\n        echo -e \"Link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\ncurl -s -o server.jar -sS ${DOWNLOAD_LINK}\r\n\r\n#Checking if downloaded jars exist\r\nif [ ! -f .\/server.jar ]; then\r\n    echo \"!!! Error downloading build version ${BUILD_VERSION} !!!\"\r\n    exit\r\nfi",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl\r\n\r\n#Go into main direction\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ ! -z ${BUILD_VERSION} ]; then\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/${BUILD_VERSION}\/download\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/latest\/download\r\nfi\r\n\r\n#Downloading jars\r\necho -e \"Download link is ${DOWNLOAD_LINK}\"\r\necho -e \"Downloading build version ${BUILD_VERSION}\"\r\n\r\ncurl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\r\n\r\n#Checking if downloaded jars exist\r\nif [ ! -f .\/${SERVER_JARFILE} ]; then\r\n    echo \"!!! Error downloading build version ${BUILD_VERSION} !!!\"\r\n    exit\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "debian:bullseye-slim",
             "entrypoint": "bash"
         }
     },
@@ -43,16 +43,18 @@
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Minecraft Version",
             "description": "The version of Minecraft to download.",
             "env_variable": "MC_VERSION",
-            "default_value": "1.16.5",
+            "default_value": "1.19.4",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Build Number",
@@ -61,16 +63,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:20"
-        },
-        {
-            "name": "Build Type",
-            "description": "The type of server jar to download from Mohist.\r\n\r\nValid types are \"recommended\" and \"latest\".",
-            "env_variable": "BUILD_TYPE",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         }
     ]
 }

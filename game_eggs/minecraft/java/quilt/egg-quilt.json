@@ -4,19 +4,20 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-08T19:05:09+03:00",
+    "exported_at": "2023-11-25T16:40:11+01:00",
     "name": "Quilt",
     "author": "diedyesterdaywashere@gmail.com",
     "description": "The Quilt project is an open-source, community-driven modding toolchain designed primarily for Minecraft. By focusing on speed, ease of use and modularity, Quilt aims to provide a sleek and modern modding toolchain with an open ecosystem.",
     "features": null,
     "docker_images": {
-        "Java 8: 1.14 - 1.16.5": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "Java 16: 1.17 - 1.17.1": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "Java 17: 1.18 - Newest": "ghcr.io\/pterodactyl\/yolks:java_17",
-        "Java 18: Newest": "ghcr.io\/pterodactyl\/yolks:java_18"
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
     },
     "file_denylist": [],
-    "startup": "java -jar {{SERVER_JARFILE}} nogui -Xms128M -XX:MaxRAMPercentage=95.0",
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}} nogui",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! For help, type \",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
@@ -33,9 +34,9 @@
     "variables": [
         {
             "name": "Minecraft Version",
-            "description": "Version of Minecraft that will be installed. You can only choose the exact version number, for example \"1.19.2\", \"latest\" won't work!",
+            "description": "Version of Minecraft that will be installed. You can only choose the exact version number, for example \"1.20.2\", \"latest\" won't work!",
             "env_variable": "MC_VERSION",
-            "default_value": "1.19.2",
+            "default_value": "1.20.2",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|between:3,15",

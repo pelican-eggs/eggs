@@ -28,11 +28,13 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 **Note:** these are actual Discord bot eggs, NOT language eggs. The old language eggs (discord-js-generic, discord-py-generic, etc) have been moved to the [generic languages section](#generic-languages).
 
+* [Aoede](/bots/discord/aoede) Rust
 * [ATL Bot](/bots/discord/atlbot) Node JS
 * [Bastion](/bots/discord/bastion) Node JS
 * [CorpBot](/bots/discord/corpbot) Python
 * [Dynamica](/bots/discord/dynamica) Node JS
 * [fragbot](/bots/discord/fragbot) Golang
+* [Game Server Watcher](/bots/discord/game-server-watcher) Node JS
 * [JMusicBot](/bots/discord/jmusicbot) Java
 * [Muse](/bots/discord/muse) Node JS
 * [parkertron](/bots/discord/parkertron) Golang
@@ -153,6 +155,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * GTA
   * [GTAC](game_eggs/gta/gtac)
 
+[Hogwarp](game_eggs/hogwarp)
+
 [Kerbal Space Program](game_eggs/ksp)
 
 [League Sandbox](game_eggs/leaguesandbox)
@@ -161,11 +165,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Mindustry](game_eggs/mindustry)
 
-* [Mindustry](game_eggs/mindustry/mindustry)
-
 [Minetest](game_eggs/minetest) (including MTG)
-
-* [Minetest](game_eggs/minetest)
 
 [Minecraft](game_eggs/minecraft)
 
@@ -236,27 +236,32 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [SteamCMD Servers](game_eggs/steamcmd_servers) These eggs use SteamCMD to install
 
 * [7 Days to Die](game_eggs/steamcmd_servers/7_days_to_die)
+* [ARK: Survival Ascended](game_eggs/steamcmd_servers/ark_survival_ascended)
 * [ARK: Survival Evolved](game_eggs/steamcmd_servers/ark_survival_evolved)
 * [Arma](game_eggs/steamcmd_servers/arma)
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
   * [Arma Reforger](game_eggs/steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
+* [Astro Colony](game_eggs/steamcmd_servers/astro_colony)
 * [Astroneer](game_eggs/steamcmd_servers/astroneer)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [BATTALION: Legacy](game_eggs/steamcmd_servers/battalion_legacy)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
+* [Colony Survival](game_eggs/steamcmd_servers/colony_survival)
 * [Conan Exiles](game_eggs/steamcmd_servers/conan_exiles)
 * [Core Keeper](game_eggs/steamcmd_servers/core_keeper)
 * [Counter-Strike](game_eggs/steamcmd_servers/counter_strike/)
   * [Counter-Strike: Source](game_eggs/steamcmd_servers/counter_strike/counter_strike_source/)
+  * [Counter-Strike 2](game_eggs/steamcmd_servers/counter_strike/counter_strike_2/)
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
 * [Empyrion - Galactic Survival](game_eggs/steamcmd_servers/empyrion)
+* [Enshrouded](game_eggs/steamcmd_servers/enshrouded)
 * [Fistful of Frags](game_eggs/steamcmd_servers/fof)
 * [Frozen Flame](game_eggs/steamcmd_servers/frozen_flame)
 * [Ground Branch](game_eggs/steamcmd_servers/ground_branch)
@@ -264,6 +269,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [HLDS Vanilla](game_eggs/steamcmd_servers/hlds_server/vanilla)
   * [ReHLDS](game_eggs/steamcmd_servers/hlds_server/rehlds)
 * [Holdfast: Nations At War](game_eggs/steamcmd_servers/holdfast)
+* [HumanitZ](game_eggs/steamcmd_servers/humanitz)
 * [Hurtworld](game_eggs/steamcmd_servers/hurtworld)
 * [Icarus](game_eggs/steamcmd_servers/icarus)
 * [Insurgency: Sandstorm](game_eggs/steamcmd_servers/insurgency_sandstorm)
@@ -271,31 +277,37 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Killing Floor 2](game_eggs/steamcmd_servers/killing_floor_2)
 * [Left 4 Dead](game_eggs/steamcmd_servers/left4dead)
 * [Left 4 Dead 2](game_eggs/steamcmd_servers/left4dead_2)
+* [Longvinter](game_eggs/steamcmd_servers/longvinter)
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
+* [Mount & Blade II: Bannerlord](game_eggs/steamcmd_servers/mount_blade_II_bannerlord)
+* [Myth of Empires](game_eggs/steamcmd_servers/myth_of_empires)
+* [Necesse](game_eggs/steamcmd_servers/necesse)
 * [Neos VR](game_eggs/steamcmd_servers/neosvr)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [No One Survived](game_eggs/steamcmd_servers/no_one_survived)
 * [Onset](game_eggs/steamcmd_servers/onset)
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Operation Harsh Doorstop](game_eggs/steamcmd_servers/operation_harsh_doorstop)
+* [Palworld](game_eggs/steamcmd_servers/palworld)
 * [Pavlov VR](game_eggs/steamcmd_servers/pavlov_vr)
 * [PixARK](game_eggs/steamcmd_servers/pixark)
 * [Portal Knights](game_eggs/steamcmd_servers/portal_knights)
 * [Post Scriptum](game_eggs/steamcmd_servers/post_scriptum)
 * [Project Zomboid](game_eggs/steamcmd_servers/project_zomboid)
 * [Quake Live](game_eggs/steamcmd_servers/quake_live)
+* [Resonite](game_eggs/steamcmd_servers/resonite)
 * [Rising World](game_eggs/steamcmd_servers/rising_world)
 * [Risk Of Rain 2](game_eggs/steamcmd_servers/risk_of_rain_2)
 * [Rust](game_eggs/steamcmd_servers/rust)
   * [Autowipe](game_eggs/steamcmd_servers/rust/rust_autowipe)
   * [Staging](game_eggs/steamcmd_servers/rust/rust_staging)
 * [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
-* [Solace Crafting](game_eggs/steamcmd_servers/solace_crafting)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
   * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
-  * [multiadmin](game_eggs/steamcmd_servers/scpsl/multiadmin)
+* [Smalland: Survive the Wilds](game_eggs/steamcmd_servers/smalland_survive_the_wilds)
+* [Solace Crafting](game_eggs/steamcmd_servers/solace_crafting)
 * [Soldat](game_eggs/steamcmd_servers/soldat)
 * [Sons of the Forest](game_eggs/steamcmd_servers/sonsoftheforest)
 * [Space Engineers](game_eggs/steamcmd_servers/space_engineers)
@@ -304,6 +316,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Squad](game_eggs/steamcmd_servers/squad)
 * [Starbound](game_eggs/steamcmd_servers/starbound)
 * [Stationeers](game_eggs/steamcmd_servers/stationeers)
+  * [Stationeers Vanilla](game_eggs/steamcmd_servers/stationeers/stationeers_vanilla)
+  * [Stationeers BepInEx](game_eggs/steamcmd_servers/stationeers/stationeers_bepinex)
 * [Stormworks: Build and Rescue](game_eggs/steamcmd_servers/stormworks)
 * [Subnautica: Nitrox Mod](game_eggs/steamcmd_servers/subnautica_nitrox_mod)
 * [Sven Co-op](game_eggs/steamcmd_servers/svencoop)
@@ -326,6 +340,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Valheim BepInEx](game_eggs/steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
 * [VEIN](game_eggs/steamcmd_servers/vein)
+* [Wurm Unlimited](game_eggs/steamcmd_servers/wurm_unlimited/)
 
 [Teeworlds](game_eggs/teeworlds)
 

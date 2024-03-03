@@ -22,3 +22,6 @@ Additionally the server can be configured with an RCON port.  RCON will be disab
 ## RCON
 
 If you plan to use RCON it currently needs to be manually configured in the server.ini file.  At some point server variables will be added.
+
+## Updating
+Because with an update to this egg, the startup command changed, so if you update this egg, you will manually have to update the startup command for every server that was already made.

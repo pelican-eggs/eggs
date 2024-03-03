@@ -1,0 +1,184 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-01-29T20:58:28-08:00",
+    "name": "Smalland: Survive the Wilds",
+    "author": "git@robsti.dev",
+    "description": "Experience a big adventure on a tiny scale! Enjoy multiplayer survival in a vast, hazardous world. Preparation is key when you're this small & at the bottom of the food chain. Craft weapons & armour, tame & ride creatures, build encampments & explore a strange new land.\r\n\r\nSteam: https:\/\/store.steampowered.com\/app\/768200\/Smalland_Survive_the_Wilds\/",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/SMALLAND\/Binaries\/Linux\/SMALLANDServer-Linux-Shipping SMALLAND \/Game\/Maps\/WorldGame\/WorldGame_Smalland?SERVERNAME=\\\"$SERVERNAME\\\"?WORLDNAME=\\\"$WORLDNAME\\\"$( [ -z \"${PASSWORD}\" ] || echo \"?PASSWORD=\\\"$PASSWORD\\\"\" )$( [ \"$FRIENDLYFIRE\" == \"0\" ] || echo \"?FRIENDLYFIRE\" )$( [ \"$PEACEFULMODE\" == \"0\" ] || echo \"?PEACEFULMODE\" )$( [ \"$KEEPINVENTORY\" == \"0\" ] || echo \"?KEEPINVENTORY\" )$( [ \"$DETERIORATION\" == \"1\" ] || echo \"?NODETERIORATION\" )$( [ \"$PRIVATE\" == \"0\" ] || echo \"?PRIVATE\" )?lengthofdayseconds=$LENGTHOFDAYSECONDS?lengthofseasonseconds=$LENGTHOFSEASONSECONDS?creaturehealthmodifier=$CREATUREHEALTHMODIFIER?creaturedamagemodifier=$CREATUREDAMAGEMODIFIER?nourishmentlossmodifier=$NOURISHMENTLOSSMODIFIER?falldamagemodifier=$FALLDAMAGEMODIFIER -ini:Engine:[EpicOnlineServices]:DeploymentId=50f2b148496e4cbbbdeefbecc2ccd6a3 -ini:Engine:[EpicOnlineServices]:DedicatedServerClientId=xyza78918KT08TkA6emolUay8yhvAAy2 -ini:Engine:[EpicOnlineServices]:DedicatedServerClientSecret=aN2GtVw7aHb6hx66HwohNM+qktFaO3vtrLSbGdTzZWk -ini:Engine:[EpicOnlineServices]:DedicatedServerPrivateKey= -port=$SERVER_PORT -NOSTEAM -log",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Session 'GameSession' is being set as 'listening'\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# SRCDS_BETAID - beta branch of a steam app. Leave blank to install normal branch\r\n# SRCDS_BETAPASS - password for a beta branch should one be required during private or closed testing phases.. Leave blank for no password.\r\n# INSTALL_FLAGS - Any additional SteamCMD  flags to pass during install.. Keep in mind that steamcmd auto update process in the docker image might overwrite or ignore these when it performs update on server boot.\r\n# AUTO_UPDATE - Adding this variable to the egg allows disabling or enabling automated updates on boot. Boolean value. 0 to disable and 1 to enable.\r\n#\r\n ##\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name displayed in the server browser.",
+            "env_variable": "SERVERNAME",
+            "default_value": "My Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Check for updates on server boot",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "World Name",
+            "description": "Name of the save game file.",
+            "env_variable": "WORLDNAME",
+            "default_value": "World",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password required to access the server.",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|min:3",
+            "field_type": "text"
+        },
+        {
+            "name": "Is Private Game",
+            "description": "Flag indicating if this game is private.",
+            "env_variable": "PRIVATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Friendly Fire Enabled",
+            "description": "Enable\/disable friendly fire.",
+            "env_variable": "FRIENDLYFIRE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Peaceful Mode Enabled",
+            "description": "Enable\/disable peaceful mode.",
+            "env_variable": "PEACEFULMODE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Keep Inventory Enabled",
+            "description": "Enable\/disable keep inventory.",
+            "env_variable": "KEEPINVENTORY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Deterioration Enabled",
+            "description": "Enable\/disable deterioration.",
+            "env_variable": "DETERIORATION",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Length Of Day",
+            "description": "Length of day in seconds. (ie. 1800 = 30 min.)",
+            "env_variable": "LENGTHOFDAYSECONDS",
+            "default_value": "1800",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Length of Seasons",
+            "description": "Length of seasons in seconds. (ie. 1800 = 30 min.)",
+            "env_variable": "LENGTHOFSEASONSECONDS",
+            "default_value": "10800",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Creature Health Modifier",
+            "description": "Creature health percentage modifier.",
+            "env_variable": "CREATUREHEALTHMODIFIER",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:20|max:300",
+            "field_type": "text"
+        },
+        {
+            "name": "Creature Damage Modifier",
+            "description": "Creature damage percentage modifier.",
+            "env_variable": "CREATUREDAMAGEMODIFIER",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:20|max:300",
+            "field_type": "text"
+        },
+        {
+            "name": "Nourishment Loss Modifier",
+            "description": "Nourishment loss percentage modifier.",
+            "env_variable": "NOURISHMENTLOSSMODIFIER",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam App ID",
+            "description": "DO NOT EDIT",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "808040",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:808040",
+            "field_type": "text"
+        }
+    ]
+}

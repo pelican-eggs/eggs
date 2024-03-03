@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-15T17:53:50-04:00",
+    "exported_at": "2023-11-10T17:55:31+01:00",
     "name": "V Rising BepInEx",
     "author": "rehlmgaming@gmail.com",
     "description": "Awaken as a vampire. Hunt for blood in nearby settlements to regain your strength and evade the scorching sun to survive. Raise your castle and thrive in an ever-changing open world full of mystery. Gain allies online and conquer the land of the living.",
@@ -284,7 +284,7 @@
             "name": "WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2019 dotnet48 dotnet6",
+            "default_value": "mono vcrun2022",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:50",

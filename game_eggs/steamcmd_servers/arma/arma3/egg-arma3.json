@@ -1,18 +1,19 @@
 {
-    "_comment": "Pterodactyl Arma 3 Egg ~ David Wolfe (Red-Thirten) ~ 2022-05-22",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
+    "exported_at": "2024-01-13T21:10:57+01:00",
     "name": "Arma 3",
     "author": "rehlmgaming@gmail.com",
     "description": "Experience true combat gameplay in a massive military sandbox. Deploying a wide variety of single and multiplayer content, over 20 vehicles and 40 weapons, and limitless opportunities for content creation, this is the PC's premier military game. Authentic, diverse, open - Arma 3 sends you to war.",
     "features": [
         "steam_disk_space"
     ],
-    "images": [
-        "ghcr.io\/parkervcp\/games:arma3"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/games:arma3": "ghcr.io\/parkervcp\/games:arma3"
+    },
     "file_denylist": [],
     "startup": ".\/{{SERVER_BINARY}} -ip=0.0.0.0 -port={{SERVER_PORT}} -profiles=.\/serverprofile -bepath=.\/ -cfg=basic.cfg -config=server.cfg -mod=\\\"{{CLIENT_MODS}}\\\" -serverMod=\\\"{{SERVERMODS}}\\\" \\\"{{STARTUP_PARAMS}}\\\"",
     "config": {
@@ -23,7 +24,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Arma 3 Egg - egg-arma3.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/22\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Check for valid Steam credentials to download Arma 3 with (requires valid Steam account)\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_USER}\" == \"anonymous\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"INSTALLATION ERROR: A valid REAL Steam account is required to download the Arma 3 Dedicated Server.\"\r\n    echo -e \"\\t(\\\"anonymous\\\" account cannot be used. Game ownership is not required.)\"\r\n    exit 1\r\nfi\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n# Arma 3 setup\r\ncd \/mnt\/server\/\r\n[[ -f basic.cfg ]] || curl -sSLO ${BASIC_URL}\r\n[[ -f server.cfg ]] || curl -sSLO ${BASIC_URL%\/*}\/server.cfg\r\nchmod 644 basic.cfg server.cfg",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Arma 3 Egg - egg-arma3.json\r\n## Author: David Wolfe (Red-Thirten)\r\n## Date: 2022\/05\/22\r\n## License: MIT License\r\n## Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n# Install packages. Default packages below are skipped if using image noted above, thus speeding up the install process.\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n# Check for valid Steam credentials to download Arma 3 with (requires valid Steam account)\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_USER}\" == \"anonymous\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"INSTALLATION ERROR: A valid REAL Steam account is required to download the Arma 3 Dedicated Server.\"\r\n    echo -e \"\\t(\\\"anonymous\\\" account cannot be used. Game ownership is not required.)\"\r\n    exit 1\r\nfi\r\n\r\n# Download and install SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd \/mnt\/server\/steamapps\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Install game server using SteamCMD\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server \"+login \\\"${STEAM_USER}\\\" \\\"${STEAM_PASS}\\\"\" +app_update ${STEAMCMD_APPID} ${STEAMCMD_EXTRA_FLAGS} validate +quit\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n# Arma 3 setup\r\ncd \/mnt\/server\/\r\n[[ -f basic.cfg ]] || curl -sSLO ${BASIC_URL}\r\n[[ -f server.cfg ]] || curl -sSLO ${BASIC_URL%\/*}\/server.cfg\r\nchmod 644 basic.cfg server.cfg\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "\/bin\/bash"
         }
@@ -36,7 +37,8 @@
             "default_value": "your_steam_username",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "[REQUIRED] Steam Password",
@@ -45,7 +47,8 @@
             "default_value": "your_steam_password",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Number of SteamCMD Retry Attempts",
@@ -54,7 +57,8 @@
             "default_value": "3",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         },
         {
             "name": "Server Binary",
@@ -63,7 +67,8 @@
             "default_value": "arma3server_x64",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:arma3server,arma3server_x64,arma3serverprofiling,arma3serverprofiling_x64"
+            "rules": "required|string|in:arma3server,arma3server_x64,arma3serverprofiling,arma3serverprofiling_x64",
+            "field_type": "text"
         },
         {
             "name": "Extra Startup Parameters",
@@ -72,7 +77,8 @@
             "default_value": "-noLogs",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string|nullable"
+            "rules": "string|nullable",
+            "field_type": "text"
         },
         {
             "name": "Max Players",
@@ -81,7 +87,8 @@
             "default_value": "32",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|gt:0"
+            "rules": "required|integer|gt:0",
+            "field_type": "text"
         },
         {
             "name": "Server Password",
@@ -90,7 +97,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Automatic Updates",
@@ -99,7 +107,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Disable Mod Downloads\/Updates",
@@ -108,7 +117,8 @@
             "default_value": "0",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Download Creator DLCs",
@@ -117,7 +127,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "Modlist File (Exported from A3 Launcher)",
@@ -126,7 +137,8 @@
             "default_value": "modlist.html",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Additional Mods",
@@ -135,7 +147,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "[Repair] Make Mod Files Lowercase",
@@ -144,7 +157,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "[Repair] Validate Server Files",
@@ -153,7 +167,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Server-Side Only Mods",
@@ -162,7 +177,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Optional Client-Side Mods",
@@ -171,7 +187,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Extra Flags for SteamCMD",
@@ -180,7 +197,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Headless Clients (HC)",
@@ -189,7 +207,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|integer|between:0,5"
+            "rules": "required|integer|between:0,5",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] HC Hide Console Output",
@@ -198,7 +217,8 @@
             "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Clear HC Profiles Cache on Startup",
@@ -207,7 +227,8 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "boolean"
+            "rules": "boolean",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] Arma 3 Dedicated Server App ID",
@@ -216,7 +237,8 @@
             "default_value": "233780",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|integer"
+            "rules": "required|integer",
+            "field_type": "text"
         },
         {
             "name": "[Advanced] basic.cfg URL",
@@ -225,7 +247,8 @@
             "default_value": "https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/arma\/arma3\/egg-arma3-config\/basic.cfg",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|url"
+            "rules": "required|url",
+            "field_type": "text"
         }
     ]
 }

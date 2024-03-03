@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-26T11:59:47+01:00",
+    "exported_at": "2023-12-29T18:52:14+01:00",
     "name": "Minetest",
     "author": "support@pterodactyl.io",
     "description": "An open source voxel game engine. Play one of our many games, mod a game to your liking, make your own game, or play on a multiplayer server.",
@@ -13,7 +13,7 @@
         "Minetest": "ghcr.io\/parkervcp\/games:minetest"
     },
     "file_denylist": [],
-    "startup": "minetest --server --port {{SERVER_PORT}} --world \/home\/container\/.minetest\/worlds\/{{WORLD_NAME}} --terminal --config \/home\/container\/.minetest\/minetest.conf --logfile \/home\/container\/server.log",
+    "startup": "minetest --server --port {{SERVER_PORT}} --gameid {{DEFAULT_GAME}} --world \/home\/container\/.minetest\/worlds\/{{WORLD_NAME}} --terminal --config \/home\/container\/.minetest\/minetest.conf --logfile \/home\/container\/server.log",
     "config": {
         "files": "{\r\n    \".minetest\/minetest.conf\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"name\": \"name = {{server.build.env.SERVER_ADMIN_NAME}}\",\r\n            \"server_name\": \"server_name = {{server.build.env.SERVER_NAME}}\",\r\n            \"server_description\": \"server_description = {{server.build.env.SERVER_DESC}}\",\r\n            \"server_address\": \"server_address = {{server.build.env.SERVER_DOMAIN}}\",\r\n            \"server_url\": \"server_url = {{server.build.env.SERVER_URL}}\",\r\n            \"server_announce\": \"server_announce = {{server.build.env.SERVER_ANNOUNCE}}\",\r\n            \"serverlist_url\": \"serverlist_url = {{server.build.env.SERVER_LIST_URL}}\",\r\n            \"motd\": \"motd = {{server.build.env.SERVER_MOTD}}\",\r\n            \"max_users\": \"max_users = {{server.build.env.SERVER_MAX_USERS}}\",\r\n            \"bind_address\": \"bind_address = 0.0.0.0\",\r\n            \"default_password\": \"default_password = {{server.build.env.SERVER_PASSWORD}}\",\r\n            \"default_game\": \"default_game = {{server.build.env.DEFAULT_GAME}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \" Server for gameid\"\r\n}",

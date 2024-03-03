@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-12T20:05:05+00:00",
+    "name": "Aoede",
+    "author": "contact@bldy.ovh",
+    "description": "Aoede is a Discord music bot that directly streams from Spotify to Discord. The only interface is Spotify itself.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:ubuntu": "ghcr.io\/parkervcp\/yolks:ubuntu"
+    },
+    "file_denylist": [],
+    "startup": ".\/aoede",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Invite me with\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "## Credits: Red-Thirten (https:\/\/github.com\/lilkingjr1) for providing most of the installation script\r\n## Credits to TubaApollo & QuintenQVD0 for the Muse egg that helped build most of this one\r\napt-get update\r\napt-get install git curl jq cmake -y -qq\r\n\r\nGITHUB_PACKAGE=\"codetheweb\/aoede\"\r\n\r\n# Find GitHub download URL for Muse for specified version\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Could not find version \\\"${VERSION}\\\" of Muse. Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\n    fi\r\nfi\r\n\r\n# Download Aoede from GitHub & Extract\r\ncd \/mnt\/server\r\necho -e \"Downloading Aoede from GitHub...\"\r\ncurl -L ${DOWNLOAD_URL} -o aoede.tar.gz\r\necho -e \"Extracting Aoede from tarball...\"\r\ntar -xvzf aoede.tar.gz --strip-components=1\r\nrm aoede.tar.gz\r\n\r\n# Verify and clean up Aoede installation\r\nif [ ! -f Cargo.toml ]; then\r\n    echo -e \"\\nFailed to download release: ${DOWNLOAD_URL}\\n\"\r\n    exit 1\r\nfi\r\nrm -rf .dockerignore Dockerfile .gitignore .github\/\r\ncargo build --release\r\nmv target\/release\/aoede .\r\ncargo clean\r\n\r\n\r\necho -e \"\\nAoede Successfully Installed!\"",
+            "container": "rust:1.74-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Token",
+            "description": "Discord Bot Token",
+            "env_variable": "DISCORD_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Username",
+            "description": "Spotify Username",
+            "env_variable": "SPOTIFY_USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Password",
+            "description": "Spotify Password",
+            "env_variable": "SPOTIFY_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Discord User ID",
+            "description": "Discord user ID of the user you want Aoede to follow",
+            "env_variable": "DISCORD_USER_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Autoplay",
+            "description": "Autoplay similar songs when your music ends \r\nValue : true\/false",
+            "env_variable": "SPOTIFY_BOT_AUTOPLAY",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "Specify a version, for example: \"v0.7.0\"\r\nFor the latest version, type \"latest\"",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}

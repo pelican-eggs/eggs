@@ -1,0 +1,164 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-11-13T18:49:35+01:00",
+    "name": "Longvinter",
+    "author": "tueye@tuworld.de",
+    "description": "Longvinter is a multiplayer, third-person sandbox game that implements Crafting, Farming, Building, Trading, and PVP.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": "\/home\/container\/longvinter-linux-server\/Longvinter\/Binaries\/Linux\/LongvinterServer-Linux-Shipping Longvinter -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}}",
+    "config": {
+        "files": "{\r\n    \"longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName={{server.build.env.SERVER_NAME}}\",\r\n            \"ServerTag\": \"ServerTag={{server.build.env.SERVER_TAG}}\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAX_PLAYERS}}\",\r\n            \"ServerMOTD\": \"ServerMOTD={{server.build.env.SERVER_MOTD}}\",\r\n            \"Password\": \"Password={{server.build.env.SERVER_PASSWORD}}\",\r\n            \"CommunityWebsite\": \"CommunityWebsite={{server.build.env.COMMUNITY_WEBSITE}}\",\r\n            \"AdminSteamID\": \"AdminSteamID={{server.build.env.ADMIN_ID}}\",\r\n            \"PVP\": \"PVP={{server.build.env.ENABLE_PVP}}\",\r\n            \"TentDecay\": \"TentDecay={{server.build.env.ENABLE_TENTDECAY}}\",\r\n            \"MaxTents\": \"MaxTents={{server.build.env.MAX_TENTS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"CreateSession: Successfully created session\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# File: Pterodactyl Longvinter Egg - egg-longvinter.json\r\n# Authors: TuEye\r\n# Date: 2022\/05\/15\r\n# License: MIT License\r\n\r\n\r\n## Install Git LFS\r\ncurl -s https:\/\/packagecloud.io\/install\/repositories\/github\/git-lfs\/script.deb.sh | bash\r\napt -y install git-lfs\r\n\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit\r\n\r\n\r\n# Set up 32 and 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk{32,64}\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so\r\n\r\n## Longvinter setup\r\n# If not using auto update and gamedir exist, remove it\r\nif [ ! \"${AUTO_UPDATE}\" ] && [ -d \"$HOME\/longvinter-linux-server\" ]; then\r\n    echo -e \"\\nDelete game dir\\n\"\r\n    rm -r $HOME\/longvinter-linux-server\r\nfi\r\n\r\n# Clone Longvinter Dedicated Server repo or do auto update if activated\r\ncd $HOME\r\nif [ ! -d \"$HOME\/longvinter-linux-server\" ]; then\r\n    git clone \"https:\/\/github.com\/Uuvana-Studios\/longvinter-linux-server.git\"\r\nelif [ \"${AUTO_UPDATE}\" ]; then\r\n    echo -e \"\\nUpdating gamefiles\\n\"\r\n    cd $HOME\/longvinter-linux-server\r\n    git config pull.rebase false\r\n    git restore .\r\n    git stash\r\n    git pull \"https:\/\/github.com\/Uuvana-Studios\/longvinter-linux-server.git\" main\r\nfi\r\nchmod -R ugo+rwx $HOME\/longvinter-linux-server\/\r\n\r\n\r\n# Create base config if not exist\r\nif [ ! -f $HOME\/longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini ]; then\r\n    echo -e \"\\nCreating game config\\n\"\r\n    cp $HOME\/longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini.default $HOME\/longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini\r\n    if ! grep -q \"ServerTag=\" \"$HOME\/longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini\"; then\r\n        sed -i '\/^ServerName=.*\/a ServerTag=Default' $HOME\/longvinter-linux-server\/Longvinter\/Saved\/Config\/LinuxServer\/Game.ini\r\n    fi\r\nfi\r\n\r\necho -e \"\\nLongvinter Dedicated Server successfully installed!\\n\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "Name of the server, appears in Game browser.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl Longvinter Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Tag",
+            "description": "It's the tag that allows for easier search of the server. Please don't use the word OFFICIAL on it. \r\nAnd only place one tag.",
+            "env_variable": "SERVER_TAG",
+            "default_value": "Pterodactyl",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum allowed players that can connect at any given time.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "32",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Server MOTD",
+            "description": "Server message that is on a signs around the island.",
+            "env_variable": "SERVER_MOTD",
+            "default_value": "Welcome to Pterodactyl Island!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Add you password here. Use only number and letters. If left empty there is no password on the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|alpha_num|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Community Website",
+            "description": "Allows you to promote a website on a same place where the server message is shown. This link can be opened in-game.",
+            "env_variable": "COMMUNITY_WEBSITE",
+            "default_value": "pterodactyl.io",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin EOS Account ID",
+            "description": "Here you can add all the admins that you want to have in the server. If you want to add multiple separate the ID's with single space.\r\nThe ID is found in-game under Options > General.",
+            "env_variable": "ADMIN_ID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|regex:\/^([a-z0-9]{32} ?)*$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable PVP",
+            "description": "Here you write true or false if you want to enable\/disable Player versus Player fights.",
+            "env_variable": "ENABLE_PVP",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Tent Decay",
+            "description": "Here you write true or false if you want to enable\/disable tent decay to make sure there isn't an abundant number of abandoned tents in the server.",
+            "env_variable": "ENABLE_TENTDECAY",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Tents",
+            "description": "Maximum allowed of tents that players that can place in the server",
+            "env_variable": "MAX_TENTS",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Updates gamefiles when reinstalling. Otherwise the server is freshly installed and you will loose your savegames.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "Query port used by steam",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65536",
+            "field_type": "text"
+        },
+        {
+            "name": "App ID",
+            "description": "",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "1007",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:1007",
+            "field_type": "text"
+        }
+    ]
+}

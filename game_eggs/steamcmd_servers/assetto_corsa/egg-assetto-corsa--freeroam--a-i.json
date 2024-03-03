@@ -1,0 +1,82 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-12-27T17:12:44+01:00",
+    "name": "Assetto Corsa (Freeroam + AI)",
+    "author": "josdekurk@gmail.com",
+    "description": "Custom Assetto Corsa server with focus on freeroam",
+    "features": null,
+    "docker_images": {
+        "Dotnet_8": "ghcr.io\/parkervcp\/yolks:dotnet_8"
+    },
+    "file_denylist": [],
+    "startup": ".\/AssettoServer",
+    "config": {
+        "files": "{\r\n    \"cfg\/server_cfg.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"SERVER.NAME\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"SERVER.PASSWORD\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"SERVER.ADMIN_PASSWORD\": \"{{server.build.env.ADMIN_PASSWORD}}\",\r\n            \"SERVER.HTTP_PORT\": \"{{server.build.env.HTTP_PORT}}\",\r\n            \"SERVER.MAX_CLIENTS\": \"{{server.build.env.MAX_CLIENTS}}\",\r\n            \"SERVER.UDP_PORT\": \"{{server.build.default.port}}\",\r\n            \"SERVER.TCP_PORT\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Starting update loop with an update rate of\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl git jq tar\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/compujuckel\/AssettoServer\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/compujuckel\/AssettoServer\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\nVERSION=latest\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i linux | head -1)\r\n    fi\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o assetto-server-linux.tar.gz ${DOWNLOAD_URL}\r\n\r\ntar xvf assetto-server-linux.tar.gz\r\nrm assetto-server-linux.tar.gz\r\nchmod +x AssettoServer\r\n\r\nmkdir cfg\/\r\ncd cfg\/\r\n[ -f \"server_cfg.ini\" ] || curl -sSL -o \"server_cfg.ini\" \"https:\/\/pteropaste.com\/plk8mjfcqt4m\"\r\n[ -f \"extra_cfg.yml\" ] || curl -sSL -o \"extra_cfg.yml\" \"https:\/\/pteropaste.com\/ocd58cq39z0z\"\r\n[ -f \"entry_list.ini\" ] || touch entry_list.ini\r\n\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server name",
+            "description": "The name off the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "AC_Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Http port",
+            "description": "",
+            "env_variable": "HTTP_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "nullable|numeric|",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "",
+            "env_variable": "ADMIN_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Max clients",
+            "description": "",
+            "env_variable": "MAX_CLIENTS",
+            "default_value": "18",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:2,25",
+            "field_type": "text"
+        }
+    ]
+}

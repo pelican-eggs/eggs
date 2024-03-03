@@ -1,0 +1,552 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-02-26T18:43:46+01:00",
+    "name": "HumanitZ",
+    "author": "engels74@marx.ps",
+    "description": "HumanitZ is a co-op, isometric, open world survival game in a world ended by the zombie outbreak. As one of the few human survivors, try to last as long as \u201chumanly\u201d possible. The past can\u2019t be changed, but you can make a difference today for the future of humanity.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/steamcmd:debian": "ghcr.io\/parkervcp\/steamcmd:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping TSSGame -log -port={{SERVER_PORT}} -queryport={{QUERY_PORT}} -steamservername=\"{{SERVER_NAME}}\"",
+    "config": {
+        "files": "{\r\n    \"TSSGame\/GameServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[Host Settings].ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"[Host Settings].Password\": \"{{server.build.env.PASSWORD}}\",\r\n            \"[Host Settings].SaveName\": \"{{server.build.env.SAVE_NAME}}\",\r\n            \"[Host Settings].AdminPass\": \"{{server.build.env.ADMIN_PASS}}\",\r\n            \"[Host Settings].MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"[Host Settings].OnlyAllowedPlayers\": \"{{server.build.env.ONLY_ALLOWED_PLAYERS}}\",\r\n            \"[World Settings].SaveIntervalSec\": \"{{server.build.env.SAVE_INTERVAL_SEC}}\",\r\n            \"[World Settings].NoDeathFeedback\": \"{{server.build.env.NO_DEATH_FEEDBACK}}\",\r\n            \"[World Settings].PermaDeath\": \"{{server.build.env.PERMA_DEATH}}\",\r\n            \"[World Settings].OnDeath\": \"{{server.build.env.ON_DEATH}}\",\r\n            \"[World Settings].PVP\": \"{{server.build.env.PVP}}\",\r\n            \"[World Settings].ClearInfection\": \"{{server.build.env.CLEAR_INFECTION}}\",\r\n            \"[World Settings].EagleEye\": \"{{server.build.env.EAGLE_EYE}}\",\r\n            \"[World Settings].AirDrop\": \"{{server.build.env.AIR_DROP}}\",\r\n            \"[World Settings].WeaponBreak\": \"{{server.build.env.WEAPON_BREAK}}\",\r\n            \"[World Settings].MultiplayerSleep\": \"{{server.build.env.MULTIPLAYER_SLEEP}}\",\r\n            \"[World Settings].LootRespawn\": \"{{server.build.env.LOOT_RESPAWN}}\",\r\n            \"[World Settings].LootRespawnTimer\": \"{{server.build.env.LOOT_RESPAWN_TIMER}}\",\r\n            \"[World Settings].PickupRespawnTimer\": \"{{server.build.env.PICKUP_RESPAWN_TIMER}}\",\r\n            \"[World Settings].LootRarity\": \"{{server.build.env.LOOT_RARITY}}\",\r\n            \"[World Settings].AirDropInterval\": \"{{server.build.env.AIR_DROP_INTERVAL}}\",\r\n            \"[World Settings].ZombieDiffHealth\": \"{{server.build.env.ZOMBIE_DIFF_HEALTH}}\",\r\n            \"[World Settings].ZombieDiffSpeed\": \"{{server.build.env.ZOMBIE_DIFF_SPEED}}\",\r\n            \"[World Settings].ZombieDiffDamage\": \"{{server.build.env.ZOMBIE_DIFF_DAMAGE}}\",\r\n            \"[World Settings].HumanDifficulty\": \"{{server.build.env.HUMAN_DIFFICULTY}}\",\r\n            \"[World Settings].ZombieAmountMulti\": \"{{server.build.env.ZOMBIE_AMOUNT_MULTI}}\",\r\n            \"[World Settings].HumanAmountMulti\": \"{{server.build.env.HUMAN_AMOUNT_MULTI}}\",\r\n            \"[World Settings].ZombieDogMulti\": \"{{server.build.env.ZOMBIE_DOG_MULTI}}\",\r\n            \"[World Settings].ZombieRespawnTimer\": \"{{server.build.env.ZOMBIE_RESPAWN_TIMER}}\",\r\n            \"[World Settings].HumanRespawnTimer\": \"{{server.build.env.HUMAN_RESPAWN_TIMER}}\",\r\n            \"[World Settings].AnimalRespawnTimer\": \"{{server.build.env.ANIMAL_RESPAWN_TIMER}}\",\r\n            \"[World Settings].StartingSeason\": \"{{server.build.env.STARTING_SEASON}}\",\r\n            \"[World Settings].DaysPerSeason\": \"{{server.build.env.DAYS_PER_SEASON}}\",\r\n            \"[World Settings].DayDur\": \"{{server.build.env.DAY_DUR}}\",\r\n            \"[World Settings].NightDur\": \"{{server.build.env.NIGHT_DUR}}\",\r\n            \"[World Settings].VitalDrain\": \"{{server.build.env.VITAL_DRAIN}}\",\r\n            \"[World Settings].DogEnabled\": \"{{server.build.env.DOG_ENABLED}}\",\r\n            \"[World Settings].DogNum\": \"{{server.build.env.DOG_NUM}}\",\r\n            \"[World Settings].RecruitDog\": \"{{server.build.env.RECRUIT_DOG}}\",\r\n            \"[World Settings].BuildingHealth\": \"{{server.build.env.BUILDING_HEALTH}}\",\r\n            \"[World Settings].CompanionHealth\": \"{{server.build.env.COMPANION_HEALTH}}\",\r\n            \"[World Settings].CompanionDmg\": \"{{server.build.env.COMPANION_DMG}}\",\r\n            \"[World Settings].AllowDismantle\": \"{{server.build.env.ALLOW_DISMANTLE}}\",\r\n            \"[World Settings].AllowHouseDismantle\": \"{{server.build.env.ALLOW_HOUSE_DISMANTLE}}\",\r\n            \"[World Settings].Territory\": \"{{server.build.env.TERRITORY}}\",\r\n            \"[World Settings].Decay\": \"{{server.build.env.DECAY}}\",\r\n            \"[World Settings].PickupCleanup\": \"{{server.build.env.PICKUP_CLEANUP}}\",\r\n            \"[World Settings].FakeBuildingCleanup\": \"{{server.build.env.FAKE_BUILDING_CLEANUP}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"LogKaiHelper: Session created!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# SRCDS_BETAID - beta branch of a steam app. Leave blank to install normal branch\r\n# SRCDS_BETAPASS - password for a beta branch should one be required during private or closed testing phases.. Leave blank for no password.\r\n# INSTALL_FLAGS - Any additional SteamCMD  flags to pass during install.. Keep in mind that steamcmd auto update process in the docker image might overwrite or ignore these when it performs update on server boot.\r\n# AUTO_UPDATE - Adding this variable to the egg allows disabling or enabling automated updates on boot. Boolean value. 0 to disable and 1 to enable.\r\n#\r\n ##\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit \r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## making server files executable\r\nchmod +x \/mnt\/server\/TSSGame\/Binaries\/Linux\/TSSGameServer-Linux-Shipping\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "[REQUIRED] Steam App ID",
+            "description": "Steam App ID of HumanitZ Server",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2728330",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:2728330",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Enable automatic updates on boot",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Steam Beta Branch",
+            "description": "This ensures the script will grab the Linux version of the server",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "linuxbranch",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:linuxbranch",
+            "field_type": "text"
+        },
+        {
+            "name": "[REQUIRED] Steam Query Port",
+            "description": "Steam Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27015",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Name of the server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "HumanitZ [Dedicated]",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "Server password (if any)",
+            "env_variable": "PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Save Name",
+            "description": "Name of the save-file for the server",
+            "env_variable": "SAVE_NAME",
+            "default_value": "DedicatedSaveMP",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin Password",
+            "description": "Password for the admin",
+            "env_variable": "ADMIN_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Maximum number of players allowed",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "16",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Only Allowed Players",
+            "description": "Restrict server to allowed players only",
+            "env_variable": "ONLY_ALLOWED_PLAYERS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Saving World Interval",
+            "description": "Save game every x seconds.",
+            "env_variable": "SAVE_INTERVAL_SEC",
+            "default_value": "300",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Permanent Death",
+            "description": "0=Off, 1=Individual perma-death, 2=All players experience perma-death",
+            "env_variable": "PERMA_DEATH",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "On Death",
+            "description": "0=Only lose backpack, and weapon in hand, 1=Previous + pockets, and backpack, 2=All previous + Equipment",
+            "env_variable": "ON_DEATH",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "PvP",
+            "description": "0\/1 Off\/On. Enable or disable Player vs Player.",
+            "env_variable": "PVP",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Clear Infection",
+            "description": "0=Respawning does not rid you of the infection, 1=You lose it upon respawning",
+            "env_variable": "CLEAR_INFECTION",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Eagle Eye",
+            "description": "1=Able to purchase the eagle eye skill, 0=You can't",
+            "env_variable": "EAGLE_EYE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Air Drop",
+            "description": "1=Enabled, 0=Disabled. Controls whether air drops are enabled.",
+            "env_variable": "AIR_DROP",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Weapon Durability",
+            "description": "1=Weapons break when reaching 0% durability except crowbar, 0=Only improvised weapons break at 0% durability",
+            "env_variable": "WEAPON_BREAK",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Multiplayer Sleep",
+            "description": "1=Time passes if everyone performs the sleep emote at the same time, 0=Passing time is disabled",
+            "env_variable": "MULTIPLAYER_SLEEP",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Building Health",
+            "description": "Health multiplier of player placed buildings. By default set to \"1\".",
+            "env_variable": "BUILDING_HEALTH",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Loot Respawn",
+            "description": "1=Loot does respawn, 0=Never respawn",
+            "env_variable": "LOOT_RESPAWN",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Loot Respawn Timer",
+            "description": "If loot respawns how long does it take in minutes",
+            "env_variable": "LOOT_RESPAWN_TIMER",
+            "default_value": "60",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Pickup Respawn Timer",
+            "description": "Time in minutes it takes to respawn pickups, 0 to disable.",
+            "env_variable": "PICKUP_RESPAWN_TIMER",
+            "default_value": "90",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Loot Rarity",
+            "description": "0=Scarce, 1=Low, 2=Default, 3=Plentiful, 4=Abundant",
+            "env_variable": "LOOT_RARITY",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Air Drop Interval",
+            "description": "Air drop every X day",
+            "env_variable": "AIR_DROP_INTERVAL",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Zombie Difficulty (Health)",
+            "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
+            "env_variable": "ZOMBIE_DIFF_HEALTH",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Zombie Difficulty (Speed)",
+            "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
+            "env_variable": "ZOMBIE_DIFF_SPEED",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Zombie Difficulty (Damage)",
+            "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
+            "env_variable": "ZOMBIE_DIFF_DAMAGE",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Human Difficulty",
+            "description": "0=Very Easy, 1=Easy, 2=Default, 3=Hard, 4=Very Hard, 5=Nightmare",
+            "env_variable": "HUMAN_DIFFICULTY",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Zombie Amount Multiplier",
+            "description": "Zombie spawn count multiplier",
+            "env_variable": "ZOMBIE_AMOUNT_MULTI",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Human Amount Multiplier",
+            "description": "Hostile humans spawn count multiplier",
+            "env_variable": "HUMAN_AMOUNT_MULTI",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Zombie Dog Multiplier",
+            "description": "Zombie dog spawn count multiplier",
+            "env_variable": "ZOMBIE_DOG_MULTI",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Zombie Respawn Timer",
+            "description": "Time in minutes for zombies to respawn",
+            "env_variable": "ZOMBIE_RESPAWN_TIMER",
+            "default_value": "90",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Human Respawn Timer",
+            "description": "Time in minutes for hostile humans to respawn",
+            "env_variable": "HUMAN_RESPAWN_TIMER",
+            "default_value": "90",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Animal Respawn Timer",
+            "description": "Time in minutes for animals to respawn",
+            "env_variable": "ANIMAL_RESPAWN_TIMER",
+            "default_value": "90",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Starting Season",
+            "description": "0=Summer, 1=Autum, 2=Winter, 3=Spring",
+            "env_variable": "STARTING_SEASON",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Days Per Season",
+            "description": "How many days each season lasts",
+            "env_variable": "DAYS_PER_SEASON",
+            "default_value": "5",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Day Duration",
+            "description": "Day duration in minutes",
+            "env_variable": "DAY_DUR",
+            "default_value": "40",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Night Duration",
+            "description": "Night duration in minutes",
+            "env_variable": "NIGHT_DUR",
+            "default_value": "20",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Vital Drain",
+            "description": "How fast your vitals drain 0=Slow, 1=Normal, 2=Fast",
+            "env_variable": "VITAL_DRAIN",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Dog Companions Enabled",
+            "description": "Enable finding dog companions you can recruit",
+            "env_variable": "DOG_ENABLED",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Dog Companion Amount",
+            "description": "Number of companion dogs that could spawn randomly",
+            "env_variable": "DOG_NUM",
+            "default_value": "8",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Recruit Companion Dogs",
+            "description": "Allow players to recruit companion dog",
+            "env_variable": "RECRUIT_DOG",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Companion Health",
+            "description": "Dog companion health - 0=Low 1=Default 2=High",
+            "env_variable": "COMPANION_HEALTH",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Companion Damage",
+            "description": "Dog companion damage - 0=Low 1=Default 2=High",
+            "env_variable": "COMPANION_DMG",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "No Death Feedback",
+            "description": "0 to enable player died notification in chat - 1 to disable player died notification in chat.",
+            "env_variable": "NO_DEATH_FEEDBACK",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Allow Dismantle",
+            "description": "1 = Enable players to dismantle their own buildings, 0 = Disable",
+            "env_variable": "ALLOW_DISMANTLE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Allow House Dismantle",
+            "description": "1 = Players are able to dismantle house props, 0 = Disable",
+            "env_variable": "ALLOW_HOUSE_DISMANTLE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Territory",
+            "description": "1 = Enabled. In PVE you are not allowed to build in someone's spawn point area. Only non recruit clan members can. 0 = Disable",
+            "env_variable": "TERRITORY",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Decay",
+            "description": "By default 3600, the crafted \"Spawn Point\" loses 1 durability every 1 hour. This is used to deal with territory build restrictions, so players have to repair their spawn point.",
+            "env_variable": "DECAY",
+            "default_value": "3600",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Pickup Cleanup",
+            "description": "How long in minutes it takes for dropped pickups to be destroyed (Pickups part of the world will not be considered), a value of 0 means no cleanup is done.",
+            "env_variable": "PICKUP_CLEANUP",
+            "default_value": "3000",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Fake Building Cleanup",
+            "description": "How long in minutes it takes for the white blueprint building to be destroyed, a value of 0 means no cleanup is done.",
+            "env_variable": "FAKE_BUILDING_CLEANUP",
+            "default_value": "3000",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        }
+    ]
+}
