@@ -152,7 +152,7 @@
         },
         {
             "name": "Download Workshops Items",
-            "description": "Workshop file ids separated by a comma \",\" (1111111,222222)",
+            "description": "Workshop file ids separated by a comma \",\" (1111111,222222) Reinstall Required to install mods",
             "env_variable": "WORKSHOP_ITEMS",
             "default_value": "",
             "user_viewable": true,
