@@ -258,6 +258,4 @@
 
 [Xonotic](xonotic/xonotic)
 
-[YuzuEmu](yuzu-emu)
-
 [FoundryVTT](FoundryVTT)
