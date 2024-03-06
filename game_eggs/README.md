@@ -84,6 +84,7 @@
   * [Magma](minecraft/java/magma)
   * [Mohist](minecraft/java/mohist)
   * [NanoLimbo](minecraft/java/nanolimbo)
+  * [NeoForge](minecraft/java/neoforge)
   * [Paper](minecraft/java/paper)
   * [Folia](minecraft/java/folia)
   * [Purpur](minecraft/java/purpur)
