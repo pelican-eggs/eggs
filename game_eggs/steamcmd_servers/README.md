@@ -345,5 +345,9 @@ This is a collection of servers that use SteamCMD to install.
   * [Valheim BepInEx](valheim/valheim_bepinex)
   * [Valheim Plus Mod](valheim/valheim_plus)
 
+## VEIN
+
+[VEIN](vein)
+
 ## Wurm Unlimited
-* [Wurm Unlimited](wurm_unlimited/)
+[Wurm Unlimited](wurm_unlimited/)
