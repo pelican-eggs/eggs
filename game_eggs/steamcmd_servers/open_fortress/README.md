@@ -12,3 +12,7 @@ Open Fortress servers require 1 port to be open, the SourceTV port can also be o
 |-----------|---------|
 | Game/rcon | 27015   |
 | SourceTV  | 27020   |
+
+## Beans
+
+Because they now use Beans to download the needed files you need increase the tempfs_size in the wings config.yml to at least a value above 6000 else the install will fail.
