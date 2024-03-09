@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-26T17:31:15+01:00",
+    "exported_at": "2024-03-09T10:48:45+01:00",
     "name": "Space Engineers - Torch Server",
     "author": "eggs@goover.dev",
     "description": "Torch is the successor to SE Server Extender and gives server admins the tools they need to keep their Space Engineers servers running smoothly. It features a user interface with live management tools and a plugin system so you can run your server exactly how you'd like. Torch is still in early development so there may be bugs and incomplete features.\r\n\r\n!!!!! DO NOT CANCEL THE FIRST START, OR YOU NEED TO DELETE THE SERVER AND CREATE FROM SCRATCH !!!!",
@@ -12,10 +12,10 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:wine_staging": "ghcr.io\/parkervcp\/yolks:wine_staging"
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "winetricks sound=disabled; export WINEARCH=\"win64\"; export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/Torch.Server.exe -noupdate -nogui -console",
+    "startup": "export WINEDLLOVERRIDES=\"mscoree=n,b;mshtml=n,b\"; wine \/home\/container\/Torch.Server.exe -noupdate -nogui -console",
     "config": {
         "files": "{\r\n    \"Instance\/SpaceEngineers-Dedicated.cfg\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\",\r\n            \"MyConfigDedicated.LoadWorld\": \"Z:\\\\home\\\\container\\\\Instance\\\\Saves\\\\{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerPort\": \"{{server.build.default.port}}\",\r\n            \"MyConfigDedicated.SteamPort\": \"{{server.build.env.STEAM_PORT}}\",\r\n            \"MyConfigDedicated.ServerName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"MyConfigDedicated.WorldName\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"MyConfigDedicated.ServerDescription\": \"{{server.build.env.SERVER_DESC}}\",\r\n            \"MyConfigDedicated.RemoteApiEnabled\": \"{{server.build.env.REMOTEAPI_ENABLE}}\",\r\n            \"MyConfigDedicated.RemoteApiPort\": \"{{server.build.env.REMOTEAPI_PORT}}\"\r\n        }\r\n    },\r\n    \"config\/Saves\/World\/Sandbox.sbc\": {\r\n        \"parser\": \"xml\",\r\n        \"find\": {\r\n            \"MyConfigDedicated.SessionSettings.GameMode\": \"{{server.build.env.SERVER_MODE}}\",\r\n            \"MyConfigDedicated.SessionSettings.MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"MyConfigDedicated.SessionSettings.AutoSaveInMinutes\": \"{{server.build.env.SAVE_INTERVAL}}\",\r\n            \"MyConfigDedicated.SessionSettings.EnableSaving\": \"{{server.build.env.SAVE_ENABLED}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Game ready...\"\r\n}",
@@ -37,7 +37,7 @@
             "default_value": "298740",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|numeric|digits_between:1,6",
+            "rules": "required|numeric|in:298740",
             "field_type": "text"
         },
         {
@@ -116,7 +116,7 @@
             "env_variable": "STEAM_PORT",
             "default_value": "8766",
             "user_viewable": true,
-            "user_editable": true,
+            "user_editable": false,
             "rules": "required|numeric|max:65535",
             "field_type": "text"
         },
@@ -154,7 +154,7 @@
             "name": "WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2013 vcrun2017 corefonts dotnet48",
+            "default_value": "vcrun2022 corefonts dotnet48",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string",
