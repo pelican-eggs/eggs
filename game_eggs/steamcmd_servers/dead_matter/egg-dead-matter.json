@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-12T18:30:54+01:00",
+    "exported_at": "2024-03-12T18:44:35+01:00",
     "name": "Dead Matter",
     "author": "josdekurk@gmail.com",
     "description": "After a rampant viral outbreak causes global society to collapse, you must survive the harsh wilderness of the Canadian Rockies amidst vast hordes of Infected and rival survivors.",
@@ -66,6 +66,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update",
+            "description": "Auto Update the server on start",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
             "field_type": "text"
         }
     ]
