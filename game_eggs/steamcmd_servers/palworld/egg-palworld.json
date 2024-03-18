@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-27T15:23:38+01:00",
+    "exported_at": "2024-03-18T22:04:10+01:00",
     "name": "Palworld",
     "author": "admin@ballaual.de",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -26,7 +26,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## add below your custom commands if needed\r\n## copy template config file\r\necho \"Copy template config file into config folder!\"\r\n\r\nif [ -f \"\/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini\" ]; then\r\n    echo \"Config file already exitis, backing up and overwriting with a new one\"\r\n    mv \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings_$(date +\"%Y%m%d%H%M%S\").ini\r\n    cp \/mnt\/server\/DefaultPalWorldSettings.ini \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini\r\nelse \r\n    echo \"Creating new config file\"\r\n    mkdir -p \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\r\n    cp \/mnt\/server\/DefaultPalWorldSettings.ini \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini\r\nfi\r\n\r\ncd \/mnt\/server\r\n# Download self made replace tool\r\necho \"Downloading config parser aplication\"\r\ncurl -sSL -o PalworldServerConfigParser https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/palworld\/PalworldServerConfigParser-linux-amd64\r\nchmod +x PalworldServerConfigParser\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/parkervcp\/installers:debian'\r\n\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n## add below your custom commands if needed\r\n\r\n## copy template config file\r\necho \"Copy template config file into config folder!\"\r\nif [ -f \"\/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini\" ]; then\r\n    echo \"Config file already exitis, backing up and overwriting with a new one\"\r\n    mv \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings_$(date +\"%Y%m%d%H%M%S\").ini\r\n    cp \/mnt\/server\/DefaultPalWorldSettings.ini \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini\r\nelse\r\n    echo \"Creating new config file\"\r\n    mkdir -p \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\r\n    cp \/mnt\/server\/DefaultPalWorldSettings.ini \/mnt\/server\/Pal\/Saved\/Config\/LinuxServer\/PalWorldSettings.ini\r\nfi\r\n\r\ncd \/mnt\/server\r\n# Download self made replace tool\r\necho \"Downloading config parser application\"\r\ncurl -sSL -o PalworldServerConfigParser https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/steamcmd_servers\/palworld\/PalworldServerConfigParser-linux-amd64\r\nchmod +x PalworldServerConfigParser\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -63,26 +63,6 @@
             "field_type": "text"
         },
         {
-            "name": "Server Name",
-            "description": "",
-            "env_variable": "SERVER_NAME",
-            "default_value": "A Pterodactyl hosted Palworld Server",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:64",
-            "field_type": "text"
-        },
-        {
-            "name": "Server Password",
-            "description": "If specified, players must provide this password to join the server.",
-            "env_variable": "SERVER_PASSWORD",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|alpha_dash|between:1,30",
-            "field_type": "text"
-        },
-        {
             "name": "Admin Password",
             "description": "If specified, players must provide this password (via the in-game chat or RCON) to gain access to administrator commands on the server.",
             "env_variable": "ADMIN_PASSWORD",
@@ -100,6 +80,26 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "",
+            "env_variable": "SERVER_NAME",
+            "default_value": "A Pterodactyl hosted Palworld Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Password",
+            "description": "If specified, players must provide this password to join the server.",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|alpha_dash|between:1,30",
             "field_type": "text"
         },
         {
