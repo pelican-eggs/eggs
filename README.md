@@ -404,6 +404,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Folding@Home](/software/foldingathome)
 
+### Forgejo
+
+* [Forgejo](/software/forgejo)
+
 ### Gitea
 
 * [Gitea](/software/gitea)
