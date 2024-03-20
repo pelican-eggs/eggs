@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-20T04:56:47+00:00",
+    "exported_at": "2024-03-20T08:45:50+01:00",
     "name": "Forgejo",
     "author": "seaswimmerthefsh@gmail.com",
     "description": "Forgejo is a community managed lightweight code hosting solution written in Go. It is published under the MIT license, and is a fork of Gitea.",
@@ -12,7 +12,9 @@
     "docker_images": {
         "Debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
-    "file_denylist": [],
+    "file_denylist": [
+        "forgejo"
+    ],
     "startup": ".\/forgejo web -p {{SERVER_PORT}} -c .\/app.ini",
     "config": {
         "files": "{\r\n    \"custom\/app.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISABLE_SSH\": \"DISABLE_SSH: {{server.build.env.DISABLE_SSH}}\",\r\n            \"SSH_PORT\": \"SSH_PORT: {{server.build.env.SSH_PORT}}\"\r\n        }\r\n    }\r\n}",
