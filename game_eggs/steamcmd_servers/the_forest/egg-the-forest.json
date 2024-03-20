@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-28T11:38:05+01:00",
+    "exported_at": "2024-03-20T08:55:56+01:00",
     "name": "The Forest",
     "author": "admin@softwarenoob.com",
     "description": "As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive against a society of cannibalistic mutants. Build, explore, survive in this terrifying first-person survival horror simulator.",
@@ -15,9 +15,9 @@
         "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "winetricks sound=disabled; xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine .\/TheForestDedicatedServer.exe -batchmode -nographics -nosteamclient -savefolderpath \/home\/container\/TheForestDedicatedServer_Data -configfilepath \/home\/container\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg |grep -v 'RenderTexture.Create failed: format unsupported - 2.'",
+    "startup": "winetricks sound=disabled; xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine .\/TheForestDedicatedServer.exe -batchmode -nographics -inittype {{INIT_TYPE}} -nosteamclient -savefolderpath \/home\/container\/TheForestDedicatedServer_Data -configfilepath \/home\/container\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg |grep -v 'RenderTexture.Create failed: format unsupported - 2.'",
     "config": {
-        "files": "{\r\n    \"\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"serverIP\": \"serverIP 0.0.0.0\",\r\n            \"serverSteamPort\": \"serverSteamPort {{server.build.env.STEAM_PORT}}\",\r\n            \"serverGamePort\": \"serverGamePort {{server.build.default.port}}\",\r\n            \"serverQueryPort\": \"serverQueryPort {{server.build.env.QUERY_PORT}}\",\r\n            \"serverName\": \"serverName {{server.build.env.SERVER_NAME}}\",\r\n            \"serverPlayers\": \"serverPlayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"serverPassword\": \"serverPassword {{server.build.env.SERVER_PASS}}\",\r\n            \"serverPasswordAdmin\": \"serverPasswordAdmin {{server.build.env.ADMIN_PASS}}\",\r\n            \"serverSteamAccount\": \"serverSteamAccount {{server.build.env.STEAM_ACC}}\",\r\n            \"enableVAC\": \"enableVAC {{server.build.env.VAC}}\",\r\n            \"difficulty\": \"difficulty {{server.build.env.SERVER_DIFFICULTY}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"\/TheForestDedicatedServer_Data\/forest\/config\/config.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"serverIP\": \"serverIP 0.0.0.0\",\r\n            \"serverSteamPort\": \"serverSteamPort {{server.build.env.STEAM_PORT}}\",\r\n            \"serverGamePort\": \"serverGamePort {{server.build.default.port}}\",\r\n            \"serverQueryPort\": \"serverQueryPort {{server.build.env.QUERY_PORT}}\",\r\n            \"serverName\": \"serverName {{server.build.env.SERVER_NAME}}\",\r\n            \"serverPlayers\": \"serverPlayers {{server.build.env.MAX_PLAYERS}}\",\r\n            \"serverPassword\": \"serverPassword {{server.build.env.SERVER_PASS}}\",\r\n            \"serverPasswordAdmin\": \"serverPasswordAdmin {{server.build.env.ADMIN_PASS}}\",\r\n            \"serverSteamAccount\": \"serverSteamAccount {{server.build.env.STEAM_ACC}}\",\r\n            \"enableVAC\": \"enableVAC {{server.build.env.VAC}}\",\r\n            \"initType\": \"initType {{server.build.env.INIT_TYPE}}\",\r\n            \"difficulty\": \"difficulty {{server.build.env.SERVER_DIFFICULTY}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Game autosave started\"\r\n}",
         "logs": "{}",
         "stop": "^^C"
@@ -168,6 +168,16 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Init Type",
+            "description": "Init Type when starting server. \r\nNew to start fresh or Continue to preload the saved game",
+            "env_variable": "INIT_TYPE",
+            "default_value": "New",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:New,Continue",
             "field_type": "text"
         }
     ]
