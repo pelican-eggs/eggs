@@ -1,0 +1,64 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-03-20T08:45:50+01:00",
+    "name": "Forgejo",
+    "author": "seaswimmerthefsh@gmail.com",
+    "description": "Forgejo is a community managed lightweight code hosting solution written in Go. It is published under the MIT license, and is a fork of Gitea.",
+    "features": null,
+    "docker_images": {
+        "Debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [
+        "forgejo"
+    ],
+    "startup": ".\/forgejo web -p {{SERVER_PORT}} -c .\/app.ini",
+    "config": {
+        "files": "{\r\n    \"custom\/app.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISABLE_SSH\": \"DISABLE_SSH: {{server.build.env.DISABLE_SSH}}\",\r\n            \"SSH_PORT\": \"SSH_PORT: {{server.build.env.SSH_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Listen: \"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "## Forgejo Installscript\r\n## Modified version of the Gitea installscript, see https:\/\/github.com\/parkervcp\/eggs\/blob\/master\/software\/gitea\/egg-gitea.json\r\n\r\n## update system\r\napt update\r\napt -y install --no-install-recommends jq curl ca-certificates dnsutils\r\n\r\n## Variables\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\nLATEST=$(dig +short release.forgejo.org TXT | grep -oE '([0-9]+\\.){2}[0-9]+(-[a-zA-Z0-9]+)*')\r\n\r\n\r\ncd \/mnt\/server\r\n\r\n## install forgejo\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    echo -e \"Downloading Forgejo $LATEST (latest)\"\r\n    URL=https:\/\/codeberg.org\/forgejo\/forgejo\/releases\/download\/v${LATEST}\/forgejo-${LATEST}-linux-${ARCH}\r\nelse\r\n    echo -e \"Downloading Forgejo $VERSION\"\r\n    URL=https:\/\/codeberg.org\/forgejo\/forgejo\/releases\/download\/v${VERSION}\/forgejo-${VERSION}-linux-${ARCH}\r\nfi\r\n\r\necho -e \"Download URL: $URL\"\r\n\r\ncurl -sSL -o forgejo $URL\r\n\r\nchmod +x forgejo\r\n\r\nmkdir -p custom\r\n\r\nif [ -f \"\/mnt\/server\/custom\/app.ini\" ]; then\r\n    echo \"Config file exists\"\r\nelse\r\n    echo \"[server]\r\n    LOCAL_ROOT_URL = http:\/\/${SERVER_IP}:${SERVER_PORT}\/\r\n    DOMAIN           = ${SERVER_IP}\r\n    HTTP_PORT        = ${SERVER_PORT}\r\n    ROOT_URL         = http:\/\/${SERVER_IP}:${SERVER_PORT}\/\r\n    DISABLE_SSH      = ${DISABLE_SSH}\r\n    SSH_PORT         = ${SSH_PORT}\" > \/mnt\/server\/custom\/app.ini\r\nfi\r\n\r\necho -e \"-------------------------------------------------\"\r\necho -e \"Installation completed\"\r\necho -e \"-------------------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/yolks:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Disable SSH",
+            "description": "Disable the SSH feature when it\u2019s not available.",
+            "env_variable": "DISABLE_SSH",
+            "default_value": "false",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "SSH Port",
+            "description": "SSH port displayed in clone URL.",
+            "env_variable": "SSH_PORT",
+            "default_value": "2020",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65535",
+            "field_type": "text"
+        },
+        {
+            "name": "Version",
+            "description": "Use either `latest` or a specific version, such as `1.21.7-0`.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:15",
+            "field_type": "text"
+        }
+    ]
+}
