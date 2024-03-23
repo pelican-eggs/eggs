@@ -107,7 +107,7 @@ The RCON port does not need to be allocated.
 3. Then hit reinstall because the parser application has to be downloaded
 4. Because the Palworld devs forgot with the v0.1.5.0 to add the new `bShowPlayerList` key to the config you will need to add it yourself. This maybe fixt in the future. Its default value is False
 
-Example of the end of the config: `bUseAuth=True,BanListURL="https://api.palworldgame.com/api/banlist.txt",bShowPlayerList=False)`
+Example of the end of the config: `bUseAuth=True,bShowPlayerList=False,BanListURL="https://api.palworldgame.com/api/banlist.txt")`
 
 ### Variable Parsing
 
@@ -120,6 +120,6 @@ See a list of what key matches with what variable [Here](https://github.com/Quin
 
 **Variables that do not exist will automatically be skipped parsing so you do not have to worry about it emptying your config file**
 
-### My config isn't being applied after changing it? Why?
+### Config
 
-If you have already started a server and wish to change settings after the fact, updating `DefaultPalWorldSettings.ini` won't do anything. To update config for a pre-existing game, you need to edit the following path: `Pal/Saved/Config/LinuxServer/PalWorldSettings.ini`, then restart your server.
+The config is found at the following path: `Pal/Saved/Config/LinuxServer/PalWorldSettings.ini`
