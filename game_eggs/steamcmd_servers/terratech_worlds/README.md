@@ -10,7 +10,7 @@ Ports required to run the server in a table format.
 
 | Port    | default |
 |---------|---------|
-| Game    | ?????   |
+| Game    | 7777    |
 
 ## Known Issues
 
