@@ -232,6 +232,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Rimworld](game_eggs/rimworld)
 
 * [Open World](game_eggs/rimworld/open_world)
+* [Rimworld Together](game_eggs/rimworld/together)
 
 [SteamCMD Servers](game_eggs/steamcmd_servers) These eggs use SteamCMD to install
 

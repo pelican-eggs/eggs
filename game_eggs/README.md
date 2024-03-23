@@ -126,6 +126,7 @@
 [Rimworld](rimworld)
 
 * [Open World](rimworld/open_world)
+* [Rimworld Together](rimworld/together)
 
 [Starmade](starmade)
 
