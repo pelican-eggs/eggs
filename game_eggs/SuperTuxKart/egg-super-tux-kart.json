@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-03-23T19:32:36-04:00",
+    "name": "SuperTuxKart",
+    "author": "mattamn107@github.com",
+    "description": "Egg for hosting a SuperTuxKart Server. \r\nhttps:\/\/supertuxkart.net\/Main_Page\r\n\r\nFirst install will take a while because the games source code and assets will be downloaded and the games executable will have to be compiled.\r\n\r\nTo change server settings, stop the server then edit the 'config.xml' file in the root of the container. When done save the file and start the server.\r\n\r\nTo update the server (only should have to be done when the games code or assets are updated) in panel go to Servers > SuperTuxKart Server > Manage > Reinstall. This will download the updated code\/assets (should exclude anything that didn't change) and recompile the executable.\r\n\r\nCurrently this is setup to run a local lan server. To make this a wan server (available in the SuperTuxKart online lobby list) read the document at this link and make the necessary changes to the startup command: https:\/\/github.com\/supertuxkart\/stk-code\/blob\/master\/NETWORKING.md",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin\/supertuxkart --server-config=config.xml --lan-server=Pterodactyl_Server --network-console",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Available command:\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Install build tools\r\necho \"deb http:\/\/deb.debian.org\/debian bullseye-backports main\" >> \/etc\/apt\/sources.list && \\\r\napt-get update && apt-get -y full-upgrade && \\\r\n    apt-get install -y build-essential cmake libbluetooth-dev libsdl2-dev \\\r\n    libcurl4-openssl-dev libenet-dev libfreetype6-dev libharfbuzz-dev \\\r\n    libjpeg-dev libogg-dev libopenal-dev libpng-dev \\\r\n    libssl-dev libvorbis-dev libmbedtls-dev pkg-config zlib1g-dev subversion\r\n\r\nif [ ! -d \"\/mnt\/server\/stk-code\" ] && [ ! -d \"\/mnt\/server\/stk-assets\" ]; then\r\n    \r\n    #clone code repo\r\n    git clone https:\/\/github.com\/supertuxkart\/stk-code \/mnt\/server\/stk-code\r\n    \r\n    #get assets\r\n    svn co https:\/\/svn.code.sf.net\/p\/supertuxkart\/code\/stk-assets \/mnt\/server\/stk-assets\r\n    \r\n    # go into the stk-code directory\r\n    cd \/mnt\/server\/stk-code\r\n    \r\n    # create and enter the cmake_build directory\r\n    mkdir cmake_build\r\n    \r\nelse\r\n\r\n    #update existing stuff\r\n    cd \/mnt\/server\/stk-assets\r\n    svn up\r\n    \r\n    cd \/mnt\/server\/stk-code\r\n    git pull\r\n\r\n\r\nfi\r\n\r\n#build the server\r\ncd cmake_build\r\ncmake .. -DSERVER_ONLY=ON\r\nmake\r\n\r\n#copy binary to root\/bin and make it executable\r\nmkdir \/mnt\/server\/bin\r\ncp \/mnt\/server\/stk-code\/cmake_build\/bin\/supertuxkart \/mnt\/server\/bin\/supertuxkart\r\nchmod +x \/mnt\/server\/bin\/supertuxkart\r\n\r\n#copy data folder\r\ncp -r \/mnt\/server\/stk-code\/data \/mnt\/server\/data\r\n\r\n#copy extra assets to data folder\r\nmv \/mnt\/server\/stk-assets\/library \/mnt\/server\/data\/library\r\nmv \/mnt\/server\/stk-assets\/models \/mnt\/server\/data\/models\r\nmv \/mnt\/server\/stk-assets\/music \/mnt\/server\/data\/music\r\nmv \/mnt\/server\/stk-assets\/sfx \/mnt\/server\/data\/sfx\r\nmv \/mnt\/server\/stk-assets\/textures \/mnt\/server\/data\/textures\r\nmv \/mnt\/server\/stk-assets\/tracks \/mnt\/server\/data\/tracks\r\nmv \/mnt\/server\/stk-assets\/karts \/mnt\/server\/data\/karts\r\n\r\n# Delete repo's to save disk space.\r\n#rm -rf \/mnt\/server\/stk-code && rm -rf \/mnt\/server\/stk-assets",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
