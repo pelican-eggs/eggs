@@ -309,6 +309,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [Team Fortress 2 Classic](team_fortress_2_classic)
 
+## TerraTech Worlds
+
+[TerraTech Worlds](terratech_worlds)
+
 ## The Forest
 
 [The Forest](the_forest)

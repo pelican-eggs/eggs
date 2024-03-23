@@ -222,6 +222,7 @@
 * [Sven Co-op](steamcmd_servers/svencoop)
 * [Swords 'n Magic and Stuff](steamcmd_servers/swords_'n_Magic_and_Stuff)
 * [Team Fortress 2 Classic](steamcmd_servers/team_fortress_2_classic)
+* [TerraTech Worlds](steamcmd_servers/terratech_worlds)
 * [The Forest](steamcmd_servers/the_forest)
 * [The Front](steamcmd_servers/thefront)
 * [The Isle](steamcmd_servers/the_isle)

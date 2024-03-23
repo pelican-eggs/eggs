@@ -328,6 +328,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [The Isle](game_eggs/steamcmd_servers/the_isle)
   * [Evrima](game_eggs/steamcmd_servers/the_isle/evrima)
 * [Team Fortress 2 Classic](game_eggs/steamcmd_servers/team_fortress_2_classic)
+* [TerraTech Worlds](game_eggs/steamcmd_servers/terratech_worlds)
 * [Tower Unite](game_eggs/steamcmd_servers/tower_unite)
 * [Truck Sim](game_eggs/steamcmd_servers/truck-simulator/)
   * [American Truck Simulator](game_eggs/steamcmd_servers/truck-simulator/american-truck-simulator/)
