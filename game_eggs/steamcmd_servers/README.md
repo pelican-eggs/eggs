@@ -76,6 +76,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [DayZ (Experimental)](dayz-experimental)
 
+## Dead Matter
+
+[Dead Matter](dead_matter)
+
 ## Don't Starve Together
 
 [Don't Starve Together](dont_starve)
@@ -160,6 +164,10 @@ This is a collection of servers that use SteamCMD to install.
 ## Mount & Blade II: Bannerlord
 
 [Mount & Blade II: Bannerlord](mount_blade_II_bannerlord)
+
+## Myth of Empires
+
+[Myth of Empires](myth_of_empires)
 
 ## Necesse
 
@@ -341,5 +349,9 @@ This is a collection of servers that use SteamCMD to install.
   * [Valheim BepInEx](valheim/valheim_bepinex)
   * [Valheim Plus Mod](valheim/valheim_plus)
 
+## VEIN
+
+[VEIN](vein)
+
 ## Wurm Unlimited
-* [Wurm Unlimited](wurm_unlimited/)
+[Wurm Unlimited](wurm_unlimited/)

@@ -258,6 +258,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
+* [Dead Matter](game_eggs/steamcmd_servers/dead_matter)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
 * [Empyrion - Galactic Survival](game_eggs/steamcmd_servers/empyrion)
@@ -281,6 +282,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Modiverse](game_eggs/steamcmd_servers/modiverse)
 * [Mordhau](game_eggs/steamcmd_servers/mordhau)
 * [Mount & Blade II: Bannerlord](game_eggs/steamcmd_servers/mount_blade_II_bannerlord)
+* [Myth of Empires](game_eggs/steamcmd_servers/myth_of_empires)
 * [Necesse](game_eggs/steamcmd_servers/necesse)
 * [Neos VR](game_eggs/steamcmd_servers/neosvr)
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
@@ -338,6 +340,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Valheim Vanilla](game_eggs/steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim BepInEx](game_eggs/steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](game_eggs/steamcmd_servers/valheim/valheim_plus)
+* [VEIN](game_eggs/steamcmd_servers/vein)
 * [Wurm Unlimited](game_eggs/steamcmd_servers/wurm_unlimited/)
 
 [Teeworlds](game_eggs/teeworlds)
@@ -355,6 +358,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [OpenRCT2](game_eggs/tycoon_games/openrct2)
 * [OpenTTD](game_eggs/tycoon_games/openttd)
 
+[UrbanTerror](game_eggs/urbanterror)
+
 [Veloren](game_eggs/veloren)
 
 [Vintage Story](game_eggs/vintage_story)
@@ -362,8 +367,6 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Wine Generic](game_eggs/wine/generic)
 
 [Xonotic](game_eggs/xonotic/xonotic)
-
-[YuzuEmu](game_eggs/yuzu-emu)
 
 [FoundryVTT](game_eggs/FoundryVTT)
 
@@ -400,6 +403,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 ### Folding@Home
 
 * [Folding@Home](/software/foldingathome)
+
+### Forgejo
+
+* [Forgejo](/software/forgejo)
 
 ### Gitea
 

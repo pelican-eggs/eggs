@@ -107,7 +107,7 @@ The RCON port does not need to be allocated.
 3. Then hit reinstall because the parser application has to be downloaded
 4. Because the Palworld devs forgot with the v0.1.5.0 to add the new `bShowPlayerList` key to the config you will need to add it yourself. This maybe fixt in the future. Its default value is False
 
-Example of the end of the config: `bUseAuth=True,BanListURL="https://api.palworldgame.com/api/banlist.txt",bShowPlayerList=False)`
+Example of the end of the config: `bUseAuth=True,bShowPlayerList=False,BanListURL="https://api.palworldgame.com/api/banlist.txt")`
 
 ### Variable Parsing
 
@@ -125,3 +125,9 @@ See a list of what key matches with what variable [Here](https://github.com/Quin
 There is a special egg that uses proton instad of the native linux version what shipes with `winmm.dll` and `RE-UE4SS` so for they who want to run mods then that is possible.
 
 Keep in mind this eggs console output is broken (thanks proton / wine) so you will only see the parser output. The RCON console does still work.
+
+
+### Config
+
+The config is found at the following path: `Pal/Saved/Config/LinuxServer/PalWorldSettings.ini` or if you are running the proton egg `Pal/Saved/Config/WindowsServer/PalWorldSettings.ini`
+

@@ -154,6 +154,7 @@
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [CryoFall](steamcmd_servers/cryofall)
 * [DayZ (Experimental)](steamcmd_servers/dayz-experimental)
+* [Dead Matter](steamcmd_servers/dead_matter)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
 * [Empyrion - Galactic Survival](steamcmd_servers/empyrion)
@@ -177,6 +178,7 @@
 * [Modiverse](steamcmd_servers/modiverse)
 * [Mordhau](steamcmd_servers/mordhau)
 * [Mount & Blade II: Bannerlord](steamcmd_servers/mount_blade_II_bannerlord)
+* [Myth of Empires](steamcmd_servers/myth_of_empires)
 * [Necesse](steamcmd_servers/necesse)
 * [Neos VR](steamcmd_servers/neosvr)
 * [No More Room in Hell](steamcmd_servers/nmrih)
@@ -236,6 +238,7 @@
   * [Valheim Vanilla](steamcmd_servers/valheim/valheim_vanilla)
   * [Valheim BepInEx](steamcmd_servers/valheim/valheim_bepinex)
   * [Valheim Plus Mod](steamcmd_servers/valheim/valheim_plus)
+* [VEIN](steamcmd_servers/vein)
 * [Wurm Unlimited](steamcmd_servers/wurm_unlimited/)
 
 [Teeworlds](teeworlds)
@@ -256,7 +259,5 @@
 [Vintage Story](vintage_story)
 
 [Xonotic](xonotic/xonotic)
-
-[YuzuEmu](yuzu-emu)
 
 [FoundryVTT](FoundryVTT)
