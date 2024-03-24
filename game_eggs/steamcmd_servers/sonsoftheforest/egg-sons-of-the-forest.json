@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-18T18:00:26+02:00",
+    "exported_at": "2024-03-24T15:18:00+01:00",
     "name": "Sons Of The Forest",
     "author": "eggs@goover.dev",
     "description": "Sons of the Forest is a horror survival game and sequel to The Forest by Endnight Games, Ltd.. Sent to find a missing billionaire on a remote island, you find yourself in a cannibal-infested hellscape. Craft, build, and struggle to survive, alone or with friends.",
@@ -15,9 +15,9 @@
         "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "wine .\/SonsOfTheForestDS.exe -userdatapath \"\/home\/container\/serverconfig\" -dedicatedserver.IpAddress \"0.0.0.0\" -dedicatedserver.GamePort \"{{SERVER_PORT}}\" -dedicatedserver.QueryPort \"{{QUERY_PORT}}\" -dedicatedserver.BlobSyncPort \"{{BLOBSYNC_PORT}}\" -dedicatedserver.MaxPlayers \"{{MAX_PLAYERS}}\" -dedicatedserver.Password \"{{SRV_PW}}\" -dedicatedserver.GameMode \"{{GAME_MODE}}\" -dedicatedserver.SkipNetworkAccessibilityTest \"{{SKIP_TESTS}}\" -dedicatedserver.LogFilesEnabled \"true\" -dedicatedserver.TimestampLogFilenames \"true\"",
+    "startup": "wine .\/SonsOfTheForestDS.exe -userdatapath \"\/home\/container\/serverconfig\" -dedicatedserver.IpAddress \"0.0.0.0\" -dedicatedserver.GamePort \"{{SERVER_PORT}}\" -dedicatedserver.QueryPort \"{{QUERY_PORT}}\" -dedicatedserver.BlobSyncPort \"{{BLOBSYNC_PORT}}\" -dedicatedserver.MaxPlayers \"{{MAX_PLAYERS}}\" -dedicatedserver.Password \"{{SRV_PW}}\" -dedicatedserver.GameMode \"{{GAME_MODE}}\" -dedicatedserver.SkipNetworkAccessibilityTest \"{{SKIP_TESTS}}\" -dedicatedserver.SaveSlot \"{{SAVE_SLOT}}\" -dedicatedserver.LogFilesEnabled \"true\" -dedicatedserver.TimestampLogFilenames \"true\"",
     "config": {
-        "files": "{\r\n    \"serverconfig\/dedicatedserver.cfg\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ServerName\": \"{{server.build.env.SRV_NAME}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"serverconfig\/dedicatedserver.cfg\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ServerName\": \"{{server.build.env.SRV_NAME}}\",\r\n            \"SaveSlot\": \"{{server.build.env.SAVE_SLOT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"#DSL Dedicated server loaded.\"\r\n}",
         "logs": "{}",
         "stop": "^^C"
@@ -157,7 +157,7 @@
             "default_value": "1",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:1",
             "field_type": "text"
         },
         {
@@ -168,6 +168,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Save Slot",
+            "description": "If you uploaded an existing save from your PC you can enter the save slot number here.",
+            "env_variable": "SAVE_SLOT",
+            "default_value": "0000000001",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:30",
             "field_type": "text"
         }
     ]
