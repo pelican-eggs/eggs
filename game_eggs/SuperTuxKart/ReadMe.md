@@ -28,6 +28,6 @@ To change server settings, stop the server then edit the 'config.xml' file in th
 
 2759 is the default port, but any port can be used. You will have to manually change it in the config.xml file.
 
-To update the server (only should have to be done when the games code or assets are updated) in panel as an admin go to Servers > SuperTuxKart Server > Manage > Reinstall. If you are a standard user go to SuperTuxKart Server > Settings > Reinstall Sever. This will download the updated code/assets (should exclude anything that didn't change) and recompile the executable.
+To update the server (only should have to be done when the games code or assets are updated) in panel as an admin go to Servers > SuperTuxKart Server > Manage > Reinstall. If you are a standard user go to SuperTuxKart Server > Settings > Reinstall Server. This will download the updated code/assets (should exclude anything that didn't change) and recompile the executable.
 
 Currently this is setup to run a local lan server. To make this a wan server (available in the SuperTuxKart online lobby list) read the document at this link and make the necessary changes to the [startup command](https://github.com/supertuxkart/stk-code/blob/master/NETWORKING.md).
