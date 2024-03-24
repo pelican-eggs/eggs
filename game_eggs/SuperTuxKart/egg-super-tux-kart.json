@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-24T14:11:16-04:00",
+    "exported_at": "2024-03-24T19:19:23+01:00",
     "name": "SuperTuxKart",
     "author": "mattamn107@github.com",
     "description": "Egg for hosting a SuperTuxKart Server.",
@@ -45,7 +45,7 @@
             "default_value": "config.xml",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.xml)$\/",
             "field_type": "text"
         },
         {
@@ -55,7 +55,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:0,1,2,3,4,5",
             "field_type": "text"
         },
         {
@@ -65,7 +65,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|string|in:0,1,2,3",
             "field_type": "text"
         },
         {
@@ -75,7 +75,7 @@
             "default_value": "8",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20",
+            "rules": "required|numeric|between:1,24",
             "field_type": "text"
         },
         {
