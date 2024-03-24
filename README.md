@@ -344,6 +344,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [VEIN](game_eggs/steamcmd_servers/vein)
 * [Wurm Unlimited](game_eggs/steamcmd_servers/wurm_unlimited/)
 
+[SuperTuxKart](game_eggs/SuperTuxKart)
+
 [Teeworlds](game_eggs/teeworlds)
 
 * [Teeworlds](game_eggs/teeworlds/teeworlds)
