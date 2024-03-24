@@ -2,10 +2,6 @@
 
 SuperTuxKart is a 3D open-source arcade racer with a variety characters, tracks, and modes to play.
 
-## Files downloaded from their [Github](https://github.com/supertuxkart/stk-code) and [SourceForge](https://svn.code.sf.net/p/supertuxkart/code/stk-assets)
-
-To compile the executable as outlined in their [building instruction](https://github.com/supertuxkart/stk-code/blob/master/INSTALL.md) and [source control documentation](https://supertuxkart.net/Source_control) files from both of these sources is required to be downloaded.
-
 ## [Documentation](https://github.com/supertuxkart/stk-code/blob/master/NETWORKING.md)
 
 Essentially this is a standard build of the regular SuperTuxKart client but with a special flag when being compiled that produces a GUI-less binary optimized for size and memory usage.
