@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-23T21:35:53-04:00",
+    "exported_at": "2024-03-24T14:11:16-04:00",
     "name": "SuperTuxKart",
     "author": "mattamn107@github.com",
     "description": "Egg for hosting a SuperTuxKart Server.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/bin\/supertuxkart --server-config=config.xml --lan-server=test --network-console",
+    "startup": ".\/bin\/supertuxkart --server-config={{CONFIG_NAME}} --lan-server={{SERVER_NAME}} --network-console --port=\"{{SERVER_PORT}}\" --difficulty={{DIFFICULTY}} --mode={{MODE}} --max-players={{MAX_PLAYERS}} --motd=\"{{MOTD}}\"",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Available command:\"\r\n}",
@@ -27,5 +27,66 @@
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The Name of the Server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl_Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Config File Name",
+            "description": "Name of the Config File.",
+            "env_variable": "CONFIG_NAME",
+            "default_value": "config.xml",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Mode",
+            "description": "0 = Normal Race\r\n1 = Time Trial\r\n2 = Battle\r\n3 = Soccer\r\n4 = Follow The Leader\r\n5 = Capture the Flag",
+            "env_variable": "MODE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Speed of the carts and AI difficulty\r\n0 = Beginner\r\n1 = Intermediate\r\n2 = Expert\r\n3 = SuperTux",
+            "env_variable": "DIFFICULTY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "How many players can there be in the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "8",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Message of the Day",
+            "description": "Message of the Day displayed in the server.",
+            "env_variable": "MOTD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        }
+    ]
 }
