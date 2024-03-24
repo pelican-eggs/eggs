@@ -8,7 +8,7 @@ To compile the executable as outlined in their [building instruction](https://gi
 
 ## [Documentation](https://github.com/supertuxkart/stk-code/blob/master/NETWORKING.md)
 
-Essentailly this is a standard build of the regular SuperTuxKart client but with a special flag when being compiled that produces a GUI-less binary optimized for size and memory usage.
+Essentially this is a standard build of the regular SuperTuxKart client but with a special flag when being compiled that produces a GUI-less binary optimized for size and memory usage.
 
 ## Install notes
 
