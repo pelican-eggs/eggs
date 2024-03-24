@@ -4,12 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-07-02T19:22:35+02:00",
+    "exported_at": "2024-03-24T14:29:09+01:00",
     "name": "Generic C#",
     "author": "josdekurk@gmail.com",
     "description": "A generic C# (dotnet) egg that runs your C# project.",
     "features": null,
     "docker_images": {
+        "Dotnet_8": "ghcr.io\/parkervcp\/yolks:dotnet_8",
         "Dotnet_7": "ghcr.io\/parkervcp\/yolks:dotnet_7",
         "Dotnet_6": "ghcr.io\/parkervcp\/yolks:dotnet_6",
         "Dotnet_5": "ghcr.io\/parkervcp\/yolks:dotnet_5",
