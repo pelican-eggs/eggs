@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-26T17:20:16+01:00",
+    "exported_at": "2024-03-25T17:55:50+01:00",
     "name": "Enshrouded",
     "author": "vapokrocks@gmail.com",
     "description": "Enshrouded is a game of survival, crafting, and Action RPG combat, set within a sprawling voxel-based continent. As you journey across the mountains and deserts of an open world, you are free to choose your path and shape your destiny.  Credit to gOOvER for the help with the proton image which seems to be performing better over the wine egg.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "proton run  .\/enshrouded_server.exe",
+    "startup": "rm .\/logs\/enshrouded_server.log; proton run .\/enshrouded_server.exe & ENS_PID=$! ; tail -c0 -F .\/logs\/enshrouded_server.log --pid=$ENS_PID",
     "config": {
         "files": "{\r\n    \"enshrouded_server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SRV_NAME}}\",\r\n            \"password\": \"{{server.build.env.SRV_PW}}\",\r\n            \"slotCount\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"gamePort\": \"{{server.build.default.port}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[Session] 'HostOnline' (up)!\"\r\n}",
