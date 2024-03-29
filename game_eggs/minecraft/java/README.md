@@ -37,6 +37,11 @@ This is a direct fork of the default forge service
 [CurseForge Generic Website](https://www.curseforge.com)
 A generic service to pull forge mod packs from the curseforge site.
 
+### [NeoForge](neoforge)
+
+[NeoForge Website](https://neoforged.net)
+A fork of Minecraft Forge that supports Minecraft versions 1.20.1 and newer.
+
 ## Glowstone 
 [Glowstone](https://glowstone.net/)
 Glowstone is an open-source replacement for CraftBukkit, Spigot, and Paper.

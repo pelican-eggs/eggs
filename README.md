@@ -190,6 +190,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Modrinth](game_eggs/minecraft/java/modrinth)
   * [Mohist](game_eggs/minecraft/java/mohist)
   * [NanoLimbo](game_eggs/minecraft/java/nanolimbo)
+  * [NeoForge](game_eggs/minecraft/java/neoforge)
   * [Paper](game_eggs/minecraft/java/paper)
   * [Folia](game_eggs/minecraft/java/folia)
   * [Purpur](game_eggs/minecraft/java/purpur)
