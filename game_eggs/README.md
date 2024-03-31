@@ -157,6 +157,7 @@
 * [CryoFall](steamcmd_servers/cryofall)
 * [DayZ (Experimental)](steamcmd_servers/dayz-experimental)
 * [Dead Matter](steamcmd_servers/dead_matter)
+* [DDNet](steamcmd_servers/ddnet)
 * [Don't Starve Together](steamcmd_servers/dont_starve)
 * [ECO](steamcmd_servers/eco)
 * [Empyrion - Galactic Survival](steamcmd_servers/empyrion)
