@@ -76,6 +76,9 @@ This is a collection of servers that use SteamCMD to install.
 
 [DayZ (Experimental)](dayz-experimental)
 
+## DDNet
+[DDNet](ddnet)
+
 ## Dead Matter
 
 [Dead Matter](dead_matter)
