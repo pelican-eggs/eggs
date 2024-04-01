@@ -17,7 +17,7 @@
         "Dart_2.17": "ghcr.io\/parkervcp\/yolks:dart_2.17"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ -d .git ]] && [[ {{AUTO_RESET}} == \"1\" ]]; then git reset --hard; fi; dart pub get; dart run",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_RESET}} == \"1\" ]]; then git reset --hard; fi; if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; dart pub get; dart run",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
@@ -74,7 +74,7 @@
         },
         {
             "name": "Auto Reset",
-            "description": "Git reset the latest files on startup when using a GitHub repo.",
+            "description": "Hard reset the latest files on startup when using a GitHub repo.",
             "env_variable": "AUTO_RESET",
             "default_value": "0",
             "user_viewable": true,
