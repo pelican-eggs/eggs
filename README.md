@@ -260,6 +260,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Craftopia](game_eggs/steamcmd_servers/craftopia)
 * [Cryofall](game_eggs/steamcmd_servers/cryofall)
 * [DayZ (Experimental)](game_eggs/steamcmd_servers/dayz-experimental)
+* [DDNet](game_eggs/steamcmd_servers/ddnet)
 * [Dead Matter](game_eggs/steamcmd_servers/dead_matter)
 * [Don't Starve Together](game_eggs/steamcmd_servers/dont_starve)
 * [ECO](game_eggs/steamcmd_servers/eco)
