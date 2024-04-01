@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-11-11T08:33:24-05:00",
+    "exported_at": "2024-04-01T09:52:45+00:00",
     "name": "Resonite",
     "author": "espeon@espeon.dev",
     "description": "Enter a novel digital universe with infinite possibilities. Whether you resonate with people around the world in a casual conversation, playing games and socializing or you riff off each other when creating anything from art to programming complex games, you'll find your place here.",
@@ -13,7 +13,7 @@
         "Mono": "ghcr.io\/parkervcp\/yolks:mono_latest"
     },
     "file_denylist": [],
-    "startup": "mono Headless\/Resonite.exe -c .\/Config\/Config.json -l .\/Logs $(if {{ENABLE_MODLOADER}}; then echo \"-LoadAssembly \".\/Libraries\/ResoniteModLoader.dll\"\"; fi)",
+    "startup": "mono Headless\/Resonite.exe -HeadlessConfig Headless\/Config\/Config.json -Logs Headless\/Logs $(if {{ENABLE_MODLOADER}}; then echo \"-LoadAssembly \"Libraries\/ResoniteModLoader.dll\"\"; fi)",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"World running...\"\r\n}",
