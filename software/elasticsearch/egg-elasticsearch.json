@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Elasticsearch Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## Install Requirements\r\n\r\napt update\r\napt install -y jq ca-certificates gnupg2 wget tar curl\r\n\r\ncd \/mnt\/server\r\n\r\n## Install Elasticsearch\r\nwget https:\/\/artifacts.elastic.co\/downloads\/elasticsearch\/elasticsearch-$VERSION-linux-x86_64.tar.gz\r\ntar -zxf elasticsearch-*-linux-x86_64.tar.gz --directory \/mnt\/server\r\nmv elasticsearch*\/* \/mnt\/server\r\nrm elasticsearch-*-linux-x86_64.tar.gz\r\nrm -R elasticsearch-*\r\n\r\n## Finish command\r\necho \"All done! Just start it up :)\"",
-             "container": "ghcr.io\/parkervcp\/installers:debian",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

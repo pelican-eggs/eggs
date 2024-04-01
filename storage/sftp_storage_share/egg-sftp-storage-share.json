@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "# Pterodactyl SFTP Storage Share Egg ~ David Wolfe (Red-Thirten) ~ 2023-01-27",
-            "container": "alpine:3.4",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },
