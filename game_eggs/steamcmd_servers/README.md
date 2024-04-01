@@ -191,6 +191,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [No One Survived](no_one_survived)
 
+## Nova-Life: Amboise
+
+[Nova-Life: Amboise](novalife_amboise)
+
 ## Onset
 
 [Onset](onset)

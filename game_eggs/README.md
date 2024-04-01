@@ -187,6 +187,7 @@
 * [No More Room in Hell](steamcmd_servers/nmrih)
 * [No Love Lost](steamcmd_servers/no_love_lost)
 * [No One Survived](steamcmd_servers/no_one_survived)
+* [Nova-Life: Amboise](steamcmd_servers/novalife_amboise)
 * [Onset](steamcmd_servers/onset)
 * [Open Fortress](steamcmd_servers/open_fortress)
 * [Operation Harsh Doorstop](steamcmd_servers/operation_harsh_doorstop)

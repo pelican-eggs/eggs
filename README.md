@@ -291,6 +291,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [No More Room in Hell](game_eggs/steamcmd_servers/nmrih)
 * [No Love Lost](game_eggs/steamcmd_servers/no_love_lost)
 * [No One Survived](game_eggs/steamcmd_servers/no_one_survived)
+* [Nova-Life: Amboise](game_eggs/steamcmd_servers/novalife_amboise)
 * [Onset](game_eggs/steamcmd_servers/onset)
 * [Open Fortress](game_eggs/steamcmd_servers/open_fortress)
 * [Operation Harsh Doorstop](game_eggs/steamcmd_servers/operation_harsh_doorstop)
