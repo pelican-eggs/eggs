@@ -120,6 +120,14 @@ See a list of what key matches with what variable [Here](https://github.com/Quin
 
 **Variables that do not exist will automatically be skipped parsing so you do not have to worry about it emptying your config file**
 
+### Proton
+
+There is a special egg that uses proton instad of the native linux version what shipes with `winmm.dll` and `RE-UE4SS` so for they who want to run mods then that is possible.
+
+Keep in mind this eggs console output is broken (thanks proton / wine) so you will only see the parser output. The RCON console does still work.
+
+
 ### Config
 
-The config is found at the following path: `Pal/Saved/Config/LinuxServer/PalWorldSettings.ini`
+The config is found at the following path: `Pal/Saved/Config/LinuxServer/PalWorldSettings.ini` or if you are running the proton egg `Pal/Saved/Config/WindowsServer/PalWorldSettings.ini`
+
