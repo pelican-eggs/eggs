@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/mnt\/server\r\n\r\n\r\nif [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=https:\/\/gtaconnected.com\/downloads\/server\/latest\/linux\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/gtaconnected.com\/downloads\/GTAC-Server-Linux-${DL_VERSION}.tar.gz\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail --location ${DOWNLOAD_LINK}; then\r\n        echo -e \"Chosen server version is valid.\"\r\n    else\r\n        echo -e \"Chosen server version is invalid, tried $DOWNLOAD_LINK. Exiting installation\"\r\n        exit 2\r\n    fi\r\nelse\r\n    echo -e \"no download link, stopping installation\"\r\n    exit 3\r\nfi\r\n\r\necho -e \"Downloading ${DL_VERSION} version of the server\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o GTAC.tar.gz\r\necho \"Extracting files\"\r\ntar -xf GTAC.tar.gz\r\n\r\nchmod +x Server\r\nrm GTAC.tar.gz\r\n\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

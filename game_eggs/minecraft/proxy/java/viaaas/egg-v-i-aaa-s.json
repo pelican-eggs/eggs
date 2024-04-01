@@ -30,7 +30,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# VIAaaS Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\nwget -O ${SERVER_JARFILE} \"https:\/\/jitpack.io\/com\/github\/ViaVersion\/VIAaaS\/master-SNAPSHOT\/VIAaaS-master-SNAPSHOT-all.jar\"",
-            "container": "ghcr.io/pterodactyl/installers:alpine",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },

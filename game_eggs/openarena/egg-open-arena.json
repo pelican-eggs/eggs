@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# dirty install script for openarena\r\n# will get updated more later\r\n\r\napt update -y\r\napt install -y wget unzip\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n\tmkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nwget http:\/\/www.openarena.ws\/request.php?4 -O openarena.zip\r\n\r\nunzip -o openarena.zip openarena-*\/oa_ded.x86_64 openarena-*\/missionpack\/* openarena-*\/baseoa\/*\r\n\r\nmv -f openarena-*\/* \/mnt\/server\/\r\n\r\nrm -rf openarena-*\/ openarena.zip",
-            "container": "debian:buster-slim",
+             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

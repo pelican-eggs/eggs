@@ -23,7 +23,7 @@
   "scripts": {
     "installation": {
       "script": "#!\/bin\/bash\r\napt-get update\r\napt-get install -y git curl wget jq file tar unzip zip openssl\r\nmkdir -p \/mnt\/server\/ # Not required. Only here for parkervcp's local test setup\r\ncd \/mnt\/server || exit 1\r\nUPGRADE=\"no\"\r\nif [ -d \".\/java\" ]; then\r\nUPGRADE=\"yes\"\r\nfi\r\nwget https:\/\/github.com\/PowerNukkitX\/PNX-CLI\/releases\/download\/0.1.6\/PNX-CLI-Linux-x86.zip -O pnx.zip\r\nwget https:\/\/raw.githubusercontent.com\/PowerNukkitX\/PowerNukkitX\/master\/src\/main\/resources\/default-nukkit.yml -O nukkit.yml\r\nunzip pnx.zip\r\nrm -fr pnx.zip 2>&1 >\/dev\/null\r\nmv .\/target\/linux-x86\/pnx .\/ 2>&1 >\/dev\/null\r\nrm -fr target 2>&1 >\/dev\/null\r\nrm -fr java 2>&1 >\/dev\/null\r\nchmod +x pnx\r\n.\/pnx jvm install=GraalVM\r\nif [ \"$UPGRADE\" == \"no\" ]; then\r\nif [ \"$VERSION\" == \"latest\" ]; then\r\n.\/pnx server install --latest\r\nelse\r\n.\/pnx server install --dev\r\nfi\r\nelse\r\nrm -fr libs 2>&1 >\/dev\/null\r\nif [ \"$VERSION\" == \"latest\" ]; then\r\n.\/pnx server update --latest\r\nelse\r\n.\/pnx server update --dev\r\nfi\r\nfi\r\nrm -fr tmp-GraalVM.tar.gz 2>&1 >\/dev\/null\r\ncat <<EOF\r\n----------------------------------------\r\n| |\r\n| PowerNukkitX Installation Done |\r\n| |\r\n----------------------------------------\r\nEOF",
-      "container": "debian:bullseye-slim",
+       "container": "ghcr.io\/parkervcp\/installers:debian",
       "entrypoint": "bash"
     }
   },

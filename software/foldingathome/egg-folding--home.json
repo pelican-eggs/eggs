@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n#\r\n# Folding@Home install script\r\n#\r\n# Created by Fuggschen\r\n\r\nexport DEBIAN_FRONTEND=noninteractive\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"64bit\" || echo \"arm64\")\r\ncd \/tmp\r\n\r\necho \"Removing previous Version\"\r\nmv \/mnt\/server\/config.xml \/tmp\/config.xml\r\nrm -rf \/mnt\/server\/*\r\n\r\necho \"Installing dependencies\"\r\napt update && apt upgrade -y && apt install curl bzip2 -y\r\n\r\necho \"Downloading FAHClient\"\r\ncurl -sSL -o fahclient.tar.bz2 https:\/\/download.foldingathome.org\/releases\/public\/release\/fahclient\/debian-stable-${ARCH}\/${FAH_VERSION}\/latest.tar.bz2\r\n\r\necho \"Installing FAHClient\"\r\ntar -xjf fahclient.tar.bz2 -C \/mnt\/server --strip-components=1\r\n\r\necho \"Cleaning up..\"\r\nrm -f fahclient.tar.bz2\r\nrm -f \/mnt\/server\/sample-config.xml\r\nmv \/tmp\/config.xml \/mnt\/server\/config.xml\r\n\r\nFILE=\/mnt\/server\/config.xml\r\nif [[ ! -f  $FILE ]]\r\nthen\r\necho \"Setting up config.xml\"\r\ncat > $FILE << EOF\r\n<config>\r\n  <!-- Folding Slots -->\r\n  <slot id='0' type='CPU'\/>\r\n  <!-- Maximum CPU Cores to use. Can't be more than 64 -->\r\n  <cpus v='64'\/>\r\n<\/config>\r\nEOF\r\nfi\r\n\r\necho \"Done!\"",
-            "container": "debian",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

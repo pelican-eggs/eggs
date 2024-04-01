@@ -18,7 +18,7 @@
     "scripts": {
         "installation": {
             "script": "apk add --no-cache openssl git\r\n\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/ATLauncher\/discord-bot.git .  \r\nfi\r\n\r\necho '{}' > config\/local.json\r\n\r\nnpm install --production\r\n\r\nnpm run build\r\n\r\nrm Dockerfile\r\nrm CONTRIBUTING.md\r\nrm README.md\r\nrm \/config\/.gitignore\r\nrm CODE_OF_CONDUCT.md",
-            "container": "node:10-alpine",
+            "container": "node:16-alpine",
             "entrypoint": "ash"
         }
     },

@@ -30,7 +30,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\n# Adding '.jar' if it isn't part of the file name\r\nif [[ \"${SERVER_JARFILE}\" == \"*\\.jar\" ]]; then\r\n    echo -e \"adding.jar to server file name\"\r\n    SERVER_JARFILE=\"${SERVER_JARFILE}.jar\"\r\nfi\r\n\r\nif [ -z \"${WATERDOG_VERSION}\" ] || [ \"${WATERDOG_VERSION}\" == \"latest\" ]; then\r\n    echo -e \"downloading latest waterdog pe build\\n\"\r\n    curl -sSL -o ${SERVER_JARFILE} https:\/\/jenkins.waterdog.dev\/job\/Waterdog\/job\/WaterdogPE\/job\/release\/lastSuccessfulBuild\/artifact\/target\/Waterdog.jar\r\nelse \r\n    echo -e \"downloading waterdog pe build ${WATERDOG_VERSION}\\n\"\r\n    curl -sSL -o ${SERVER_JARFILE} https:\/\/jenkins.waterdog.dev\/job\/Waterdog\/job\/WaterdogPE\/job\/release\/${WATERDOG_VERSION}\/artifact\/target\/Waterdog.jar\r\nfi\r\n\r\nif [ ! -f config.yml ]; then\r\n    echo -e \"Downloading waterdog pe config.yml\"\r\n   curl -o config.yml https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/proxy\/bedrock\/waterdog_pe\/config.yml\r\nelse\r\n    echo -e \"Waterfall config.yml exists. Will not pull a new file\"\r\nfi",
-            "container": "debian:buster-slim",
+             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
