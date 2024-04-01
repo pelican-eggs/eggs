@@ -7,10 +7,12 @@
     "exported_at": "2024-03-31T18:27:28-04:00",
     "name": "DDNet",
     "author": "imkringle@proton.me",
-    "description": null,
-    "features": null,
+    "description": "Want to play the hardest cooperative 2D platformer ever? Want to finish no map ever? Want to be in pain for hours and cry, getting nothing in return? Come play DDNet with a large community of other sufferers!",
+    "features": [
+        "steam_disk_space"
+    ],
     "docker_images": {
-        "Source": "ghcr.io\/parkervcp\/games:source"
+        "Debian": "ghcr.io\/parkervcp\/steamcmd:debian"
     },
     "file_denylist": [],
     "startup": ".\/ddnet\/DDNet-Server",
@@ -45,12 +47,12 @@
             "default_value": "412220",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string",
+            "rules": "required|string|in:412220",
             "field_type": "text"
         },
         {
             "name": "Steam User",
-            "description": "",
+            "description": "Required for File Installation",
             "env_variable": "STEAM_USER",
             "default_value": "",
             "user_viewable": false,
@@ -60,7 +62,7 @@
         },
         {
             "name": "Steam Password",
-            "description": "",
+            "description": "Required for File Installation",
             "env_variable": "STEAM_PASS",
             "default_value": "",
             "user_viewable": false,
@@ -115,7 +117,7 @@
             "default_value": "64",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:64",
+            "rules": "required|string|between:1,64",
             "field_type": "text"
         }
     ]
