@@ -8,6 +8,7 @@
     "name": "dart generic",
     "author": "alden@knoban.com",
     "description": "A generic dart CLI egg.\r\n\r\nThis will clone a dart CLI application. it defaults to master if no branch is specified.\r\n\r\nInstalls the pubspec.yaml packages on run. If you set user_upload then I assume you know what you are doing.",
+    "features": null,
     "docker_images": {
         "Dart_stable": "ghcr.io\/knoapp\/yolks:dart_stable",
         "Dart_3.3": "ghcr.io\/knoapp\/yolks:dart_3.3",
