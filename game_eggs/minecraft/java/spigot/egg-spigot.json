@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-17T23:20:29+01:00",
+    "exported_at": "2024-03-31T14:10:53+02:00",
     "name": "Spigot",
     "author": "support@pterodactyl.io",
     "description": "Spigot is the most widely-used modded Minecraft server software in the world. It powers many of the top Minecraft server networks around to ensure they can cope with their huge player base and ensure the satisfaction of their players. Spigot works by reducing and eliminating many causes of lag, as well as adding in handy features and settings that help make your job of server administration easier.",
@@ -30,7 +30,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nmkdir -p \/usr\/share\/man\/man1\r\n\r\nfunction install_java() {\r\n  curl -L $1 -o java.tar.gz\r\n  tar xzf java.tar.gz\r\n  export PATH=$PWD\/$2\/bin:$PATH\r\n  java -version\r\n}\r\n\r\nfunction build_spigot()\r\n{\r\n  java -Xms$1M -jar BuildTools.jar --rev ${DL_VERSION} || { echo -e \"\\n install failed! Attempted to install ${DL_VERSION} with memory of ${SERVER_MEMORY} and Java version of:\"; java -version; exit 1; }\r\n}\r\n\r\n# Detect the required Java version for building Spigot. Currently temurin only provides archives of their releases, and adoptopenjdk is deprecated. Update this when packages are released.\r\nif [[ $DL_VERSION =~ ^1\\.(18|19|20|21|22|23) || $DL_VERSION == \"latest\" ]]; then\r\n    install_java \"https:\/\/github.com\/adoptium\/temurin17-binaries\/releases\/download\/jdk-17.0.1%2B12\/OpenJDK17U-jdk_x64_linux_hotspot_17.0.1_12.tar.gz\" jdk-17.0.1+12\r\nelif [[ $DL_VERSION =~ ^1\\.(17) ]]; then\r\n    install_java \"https:\/\/github.com\/adoptium\/temurin16-binaries\/releases\/download\/jdk-16.0.2%2B7\/OpenJDK16U-jdk_x64_linux_hotspot_16.0.2_7.tar.gz\" jdk-16.0.2+7\r\nelse\r\n    install_java \"https:\/\/github.com\/adoptium\/temurin8-binaries\/releases\/download\/jdk8u312-b07\/OpenJDK8U-jdk_x64_linux_hotspot_8u312b07.tar.gz\" jdk8u312-b07\r\nfi\r\n\r\n\r\n## Only download if a path is provided, otherwise continue.\r\nif [ ! -z \"${DL_PATH}\" ]; then\r\n    cd \/mnt\/server\r\n    MODIFIED_DOWNLOAD=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\n    echo -e \"Using custom provided download link ${MODIFIED_DOWNLOAD}\"\r\n    curl -L ${MODIFIED_DOWNLOAD} -o ${SERVER_JARFILE}\r\nelse\r\n    mkdir -p \/srv\/\r\n    cd \/srv\/\r\n    curl -L https:\/\/hub.spigotmc.org\/jenkins\/job\/BuildTools\/lastSuccessfulBuild\/artifact\/target\/BuildTools.jar -o BuildTools.jar\r\n\r\n    # Force the minimum Wings install container memory should someone provide less or 0 as it will break the Java build process\r\n    if [ $SERVER_MEMORY -lt 1024 ]; then\r\n        echo -e \"Do not use 0 for memory with Java applications. Defaulting to 1024MB.\\n WARNING! 1024MB might not be enough to build 1.17+ releases.\"\r\n        SERVER_MEMORY=1024\r\n        build_spigot ${SERVER_MEMORY}\r\n    else\r\n        build_spigot ${SERVER_MEMORY}\r\n    fi\r\n    mv spigot-*.jar \/mnt\/server\/${SERVER_JARFILE}\r\nfi",
+            "script": "#!\/bin\/bash\r\n# Spigot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nmkdir -p \/usr\/share\/man\/man1\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"x64\" || echo \"aarch64\")\r\n    \r\nfunction install_java() {\r\n  echo \"ARCH: ${ARCH}\\nDownload URl: $1\"\r\n  curl -L $1 -o java.tar.gz\r\n  tar xzf java.tar.gz\r\n  export PATH=$PWD\/$2\/bin:$PATH\r\n  java -version\r\n}\r\n\r\nfunction build_spigot()\r\n{\r\n  java -Xms$1M -jar BuildTools.jar --rev ${DL_VERSION} || { echo -e \"\\n install failed! Attempted to install ${DL_VERSION} with memory of ${SERVER_MEMORY} and Java version of:\"; java -version; exit 1; }\r\n}\r\n\r\n# Detect the required Java version for building Spigot. Currently temurin only provides archives of their releases, and adoptopenjdk is deprecated. Update this when packages are released.\r\nif [[ $DL_VERSION =~ ^1\\.(18|19|20|21|22|23) || $DL_VERSION == \"latest\" ]]; then\r\n    install_java \"https:\/\/github.com\/adoptium\/temurin17-binaries\/releases\/download\/jdk-17.0.10%2B7\/OpenJDK17U-jdk_${ARCH}_linux_hotspot_17.0.10_7.tar.gz\" jdk-17.0.10+7\r\nelif [[ $DL_VERSION =~ ^1\\.(17) ]]; then\r\n    install_java \"https:\/\/github.com\/adoptium\/temurin16-binaries\/releases\/download\/jdk-16.0.2%2B7\/OpenJDK16U-jdk_${ARCH}_linux_hotspot_16.0.2_7.tar.gz\" jdk-16.0.2+7\r\nelse\r\n    install_java \"https:\/\/github.com\/adoptium\/temurin8-binaries\/releases\/download\/jdk8u312-b07\/OpenJDK8U-jdk_${ARCH}_linux_hotspot_8u312b07.tar.gz\" jdk8u312-b07\r\nfi\r\n\r\n\r\n## Only download if a path is provided, otherwise continue.\r\nif [ ! -z \"${DL_PATH}\" ]; then\r\n    cd \/mnt\/server\r\n    MODIFIED_DOWNLOAD=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\n    echo -e \"Using custom provided download link ${MODIFIED_DOWNLOAD}\"\r\n    curl -L ${MODIFIED_DOWNLOAD} -o ${SERVER_JARFILE}\r\nelse\r\n    mkdir -p \/srv\/\r\n    cd \/srv\/\r\n    curl -L https:\/\/hub.spigotmc.org\/jenkins\/job\/BuildTools\/lastSuccessfulBuild\/artifact\/target\/BuildTools.jar -o BuildTools.jar\r\n\r\n    # Force the minimum Wings install container memory should someone provide less or 0 as it will break the Java build process\r\n    if [ $SERVER_MEMORY -lt 1024 ]; then\r\n        echo -e \"Do not use 0 for memory with Java applications. Defaulting to 1024MB.\\n WARNING! 1024MB might not be enough to build 1.17+ releases.\"\r\n        SERVER_MEMORY=1024\r\n        build_spigot ${SERVER_MEMORY}\r\n    else\r\n        build_spigot ${SERVER_MEMORY}\r\n    fi\r\n    mv spigot-*.jar \/mnt\/server\/${SERVER_JARFILE}\r\nfi\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -43,7 +43,8 @@
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
         },
         {
             "name": "Download Path",
@@ -52,7 +53,8 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Spigot Version",
@@ -61,7 +63,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|between:3,10"
+            "rules": "required|string|between:3,10",
+            "field_type": "text"
         }
     ]
 }
