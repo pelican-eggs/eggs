@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-04-23T18:47:53+02:00",
+    "exported_at": "2024-04-02T14:27:18+02:00",
     "name": "SogeBot",
     "author": "eggs@goover.dev",
     "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
@@ -18,12 +18,12 @@
         "files": "{\r\n    \".env\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"PORT\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"WebPanel is available at\"\r\n}",
         "logs": "{}",
-        "stop": "^^C"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
             "script": "#\/bin\/bash\r\n# Installscript for sogeBot | Author: eggs@goover.dev\r\n\r\nexport DEBIAN_FRONTEND=noninteractive\r\n\r\napt -y update\r\napt install -y curl unzip jq  python3 build-essential ca-certificates\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\nexport NODE_OPTIONS=--max-old-space-size=8192\r\nchown -R root:root \/mnt\r\n\r\n#Backup database & config\r\nmkdir -p .backup\r\ncp -f .env \/mnt\/server\/.backup\r\ncp -f sogebot.db \/mnt\/server\/.backup\r\n\r\n#delete old dir's to prevent errors on update\r\nrm -fR dest\r\nrm -fR public\r\nrm -fR node-modules\r\nrm -fR tools\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/sogebot\/sogeBot\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/sogebot\/sogeBot\/releases\")\r\nMATCH=sogeBot\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"Downloading from $DOWNLOAD_LINK\"\r\ncurl -sSL -o sogeBot.zip ${DOWNLOAD_LINK}\r\n\r\nunzip -o sogeBot.zip\r\nrm -rf sogeBot.zip\r\n\r\n\r\necho \"--------------------------------------------------------------------------\"\r\necho \"Installing dependencies, this will take some time so sit back and relax...\"\r\necho \"IGNORE WARNINGS. THESE ARE NOT ERRORS !!!\"\r\necho \"--------------------------------------------------------------------------\"\r\n\r\nnpm install -g npm@8\r\n\r\nnpm install --verbose --force\r\n\r\necho -e \"install completed\"\r\nexit 0",
-            "container": "node:18-bullseye-slim",
+            "container": "node:18-bookworm-slim",
             "entrypoint": "bash"
         }
     },

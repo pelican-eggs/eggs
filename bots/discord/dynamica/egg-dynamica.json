@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-18T17:01:43+02:00",
+    "exported_at": "2024-04-02T14:13:31+02:00",
     "name": "Dynamica",
     "author": "sebastian.pietschner@gmail.com",
     "description": "An easy-to-use dynamic voice channel bot.",
@@ -18,12 +18,12 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"Bot logged in as \"\r\n}",
         "logs": "{}",
-        "stop": "^^C"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install tar curl jq git\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nGITHUB_PACKAGE=\"DynamicaBot\/Dynamica-V2\"\r\n\r\n# Find GitHub download URL for Muse for specified version\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Could not find version \\\"${VERSION}\\\" of Muse. Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\n    fi\r\nfi\r\n\r\ncurl -sSL -o dynamica.tar.gz ${DOWNLOAD_URL}\r\ntar xvf dynamica.tar.gz --strip-components=1\r\nrm dynamica.tar.gz\r\n\r\n#curl -sSL -o tsconfig.json https:\/\/pteropaste.com\/xqhjja443pbm\r\n\r\nyarn add tsup --dev\r\nyarn install  --frozen-lockfile\r\n\r\nyarn generate\r\nyarn build\r\n\r\nrm -rf .github\/ .vscode\/ Dockerfile partial.Dockerfile entrypoint.sh dynamica-egg.json\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "node:18-bullseye-slim",
+            "container": "node:18-bookworm-slim",
             "entrypoint": "bash"
         }
     },

@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-03-29T10:33:50+02:00",
+    "exported_at": "2024-04-02T14:04:19+02:00",
     "name": "Bastion",
     "author": "parker@parkervcp.com",
     "description": "Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from administration and moderation to keeping the members active through various incentives, games and other fun activities",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Bastion Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## Move to install folder\r\napt update\r\napt install -y build-essential libtool python3 git tar\r\n\r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\/\r\n\r\nif [ -d \"\/mnt\/server\/mongodb\" ]\r\nthen\r\n    cd \/mnt\/server\/\r\n    echo \"backing up mongodb\"\r\n    REINSTALL=true\r\n    tar -czf mongodb_backup.tar.gz mongodb\/\r\n    mv mongodb_backup.tar.gz \/tmp\r\nfi\r\n\r\ncd \/mnt\/server\r\nrm -rf * .git\/ .github\/ .env.example .eslintrc.yml .gitattributes .gitignore .npm\/\r\n\r\n\r\n## Clone repo\r\necho \"cloning Bastion bot\"\r\ngit clone -q --depth 1 https:\/\/github.com\/TheBastionBot\/Bastion.git .\/\r\n\r\necho \"updating npm\"\r\nnpm install -g npm@latest\r\necho \"npm install --no-package-lock\"\r\nnpm install --no-package-lock\r\necho \"npm run build\"\r\nnpm run build\r\n\r\n## Move config files.\r\nmv settings.example.yaml settings.yaml\r\nrm -rf bastion.cmd .env.example bastion.sh scrips\/\r\n\r\n\r\nmkdir -p mongodb\/\r\nif [ \"$REINSTALL\" == \"true\" ]\r\nthen\r\n    cd \/mnt\/server\r\n    echo \"reinstall\"\r\n    mv \/tmp\/mongodb_backup.tar.gz \/mnt\/server\r\n    tar xf mongodb_backup.tar.gz\r\n    rm mongodb_backup.tar.gz\r\nelse\r\n    echo \"fresh install\"\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "node:18-bullseye",
+            "container": "node:20-bookworm",
             "entrypoint": "bash"
         }
     },

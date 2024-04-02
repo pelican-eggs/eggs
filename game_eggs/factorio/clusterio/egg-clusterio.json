@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-22T08:32:24+00:00",
+    "exported_at": "2024-04-02T14:24:51+02:00",
     "name": "Clusterio",
     "author": "psychoalex@thevcbc.com",
     "description": "Clusterio is a clustered Factorio server manager that provides the tooling for implementing cross server interactions in Factorio. It was previously best known for implementing cross server transfer and cloud storage of items via teleporter chests. But this functionality has been pulled out of Clusterio into its own plugin for Clusterio named Subspace Storage.\r\n\r\nBy itself Clusterio doesn't change the gameplay in any way, you could even use Clusterio to manage completely vanilla Factorio servers. Plugins do the work of modding in the visible changes into the game, see the Plugins section for ready-made plugins you can install into a Clusterio cluster.",
@@ -21,12 +21,12 @@
         "files": "{\r\n    \"config-controller.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"controller~1http_port\": \"{{server.build.default.port}}\",\r\n            \"controller~1name\": \"{{server.build.env.CLUSTER_NAME}}\"\r\n        }\r\n    },\r\n    \"config-host.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"host~1controller_url\": \"{{server.build.env.CONTROLLER_URL}}\",\r\n            \"host~1controller_token\": \"{{server.build.env.CONTROLLER_TOKEN}}\",\r\n            \"host~1public_address\": \"{{server.build.default.ip}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Started\"\r\n}",
         "logs": "{}",
-        "stop": "^c"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Clusterio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\ncase \"${SERVER_MODE}\" in\r\n\r\n  \"controller\")\r\n    echo -e \"Initialising Clustorio In Controller mode\"\r\n        npm init \"@clusterio\" -y -- --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --admin \"${ADMIN_STRING}\" --public-address \"${SERVER_IP}\":\"${SERVER_PORT}\" --plugins ${PLUGINS}\r\n\t;;\r\n\r\n  \"host\")\r\n    echo -e \"Initialising Clustorio In Host mode\"\r\n\tnpm init \"@clusterio\" -y -- --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --host-name \"${HOST_NAME}\" --public-address \"${SERVER_IP}\" --controller-url \"${CONTROLLER_URL}\" --controller-token \"${CONTROLLER_TOKEN}\" --plugins ${PLUGINS}\r\n    ;;\r\n    \r\nesac\r\n\r\necho -e \"install complete\"\r\nexit 0",
-            "container": "node:21-bullseye-slim",
+            "script": "#!\/bin\/bash\r\n# Clusterio Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python3 python3-dev libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"assuming user knows what they are doing have a good day.\"\r\n    exit 0\r\nfi\r\n\r\ncase \"${SERVER_MODE}\" in\r\n\r\n  \"controller\")\r\n    echo -e \"Initialising Clustorio In Controller mode\"\r\n        npm init \"@clusterio\" -y -- --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --admin \"${ADMIN_STRING}\" --public-address \"${SERVER_IP}\":\"${SERVER_PORT}\" --plugins ${PLUGINS}\r\n\t;;\r\n\r\n  \"host\")\r\n    echo -e \"Initialising Clustorio In Host mode\"\r\n\tnpm init \"@clusterio\" -y -- --allow-install-as-root --mode \"${SERVER_MODE}\" --download-headless --log-level \"${LOG_LEVEL}\" --host-name \"${HOST_NAME}\" --public-address \"${SERVER_IP}\" --controller-url \"${CONTROLLER_URL}\" --controller-token \"${CONTROLLER_TOKEN}\" --plugins ${PLUGINS}\r\n    ;;\r\n    \r\nesac\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "node:21-bookworm-slim",
             "entrypoint": "bash"
         }
     },
