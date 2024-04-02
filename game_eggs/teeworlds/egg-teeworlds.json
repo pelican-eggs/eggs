@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-01-22T05:44:04-05:00",
+    "exported_at": "2024-04-02T11:44:15+02:00",
     "name": "Teeworlds",
     "author": "parker@parkervcp.com",
     "description": "Teeworlds is a free online multiplayer game, available for all major operating systems. Battle with up to 16 players in a variety of game modes, including Team Deathmatch and Capture The Flag. You can even design your own maps!",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
     "file_denylist": [],
     "startup": ".\/teeworlds_srv",
     "config": {
@@ -35,7 +35,8 @@
             "default_value": "A Pterodactyl Hosted Teeworlds Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Server MotD",
@@ -44,7 +45,8 @@
             "default_value": "A Pterodactyl Hosted Teeworlds Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }
