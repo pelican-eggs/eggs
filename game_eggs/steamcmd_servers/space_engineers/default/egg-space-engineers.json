@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-09T11:25:43+01:00",
+    "exported_at": "2024-04-03T18:32:09+02:00",
     "name": "Space Engineers",
     "author": "eggs@goover.dev",
     "description": "Space Engineers is a voxel-based sandbox game set in space and on planets.",
@@ -194,7 +194,7 @@
             "name": "WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2022 dotnet48 corefonts",
+            "default_value": "win11 vcrun2022 mono corefonts",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string",
