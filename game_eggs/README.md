@@ -247,6 +247,8 @@
 * [VEIN](steamcmd_servers/vein)
 * [Wurm Unlimited](steamcmd_servers/wurm_unlimited/)
 
+[SuperTuxKart](SuperTuxKart)
+
 [Teeworlds](teeworlds)
 
 [Terraria](terraria)
