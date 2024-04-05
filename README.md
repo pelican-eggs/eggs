@@ -452,6 +452,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Reposilite](/software/reposilite)
 
+### Synctube
+
+* [Synctube](/software/Synctube)
+
 ### Uptime Kuma
 
 * [Uptime Kuma](/software/uptime-kuma)
