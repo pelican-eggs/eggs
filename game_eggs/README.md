@@ -27,6 +27,8 @@
 [Doom](doom)
 * [Zandronum](doom/zandronum)
 
+[Escape from Tarkov](eft)
+
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)
