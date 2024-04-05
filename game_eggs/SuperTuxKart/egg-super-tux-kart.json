@@ -6,7 +6,7 @@
     },
     "exported_at": "2024-03-24T19:19:23+01:00",
     "name": "SuperTuxKart",
-    "author": "mattamn107@github.com",
+    "author": "mattman107@github.com",
     "description": "Egg for hosting a SuperTuxKart Server.",
     "features": null,
     "docker_images": {
