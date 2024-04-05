@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-12-30T11:39:51+01:00",
+    "exported_at": "2024-04-05T01:19:24+02:00",
     "name": "Stationeers",
     "author": "eggs@goover.dev",
     "description": "Stationeers Server",
@@ -42,12 +42,12 @@
         },
         {
             "name": "World Name",
-            "description": "Available Maps: moon, mars, europa, europa2, mimas, vulcan, vulcan2, space, loulan, venus",
+            "description": "Available Maps: Moon, Mars, Europa, Europa2, Mimas, Vulcan, Vulcan2, Space, Loulan, Venus",
             "env_variable": "WORLD_NAME",
             "default_value": "moon",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|in:,moon,mars,europa,europa2,mimas,vulcan,vulcan2,space,loulan,venus",
+            "rules": "nullable|string|in:,Moon,Mars,Europa,Europa2,Mimas,Vulcan,Vulcan2,Space,Loulan,Venus",
             "field_type": "text"
         },
         {
