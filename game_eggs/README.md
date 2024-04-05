@@ -61,6 +61,8 @@
 
 [League Sandbox](leaguesandbox)
 
+[Neverwinter Nights: Enhanced Edition](neverwinter_nights_ee)
+
 [Mindustry](mindustry)
 
 [Minecraft](minecraft)

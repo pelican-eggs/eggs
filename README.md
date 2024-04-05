@@ -163,6 +163,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Los Angeles Crimes](game_eggs/losangelescrimes)
 
+[Neverwinter Nights: Enhanced Edition](game_eggs/neverwinter_nights_ee)
+
 [Mindustry](game_eggs/mindustry)
 
 [Minetest](game_eggs/minetest) (including MTG)
