@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-05T23:27:52-04:00",
+    "name": "Battle for Wesnoth",
+    "author": "mattman107@github.com",
+    "description": "Egg for hosting a Battle for Wesnoth Server.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/battleForWesnoth\/build\/wesnothd",
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Install build tools\r\necho \"deb http:\/\/deb.debian.org\/debian bullseye-backports main\" >> \/etc\/apt\/sources.list && \\\r\napt-get update && apt-get -y full-upgrade && \\\r\n    apt-get install -y libboost-filesystem-dev libboost-iostreams-dev libboost-locale-dev libboost-random-dev libboost-regex-dev libboost-program-options-dev libboost-system-dev libboost-coroutine-dev libboost-graph-dev \\\r\n    libsdl2-dev libcurl4-openssl-dev libcairo2-dev libvorbis-dev libbz2-dev zlib1g-dev libssl-dev libcrypto++-dev openssl cmake g++ libsdl2-image-dev libsdl2-mixer-dev libsdl-pango-dev\r\n\r\nif [ ! -d \"\/mnt\/server\/battleForWesnoth\" ]; then\r\n    \r\n    #clone code repo\r\n    git clone --recurse-submodules https:\/\/github.com\/wesnoth\/wesnoth \/mnt\/server\/battleForWesnoth\r\n    \r\n    # go into the stk-code directory\r\n    cd \/mnt\/server\/battleForWesnoth\r\n    \r\n    # create the build directory\r\n    #mkdir build\r\n    \r\nelse\r\n    git config --global --add safe.directory \/mnt\/server\/battleForWesnoth\r\n    #update existing stuff\r\n    cd \/mnt\/server\/battleForWesnoth\r\n    git pull\r\n    git submodule update --init --recursive\r\n\r\n\r\nfi\r\n\r\n#build the server\r\n#cd build\r\ncmake . -DCMAKE_BUILD_TYPE=Release\r\nsed -i 's\/ENABLE_GAME:BOOL=ON\/ENABLE_GAME:BOOL=OFF\/' \/mnt\/server\/battleForWesnoth\/CMakeCache.txt\r\nmake\r\nchmod +x .\/wesnothd",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
