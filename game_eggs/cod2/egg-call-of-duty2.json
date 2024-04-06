@@ -1,0 +1,102 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-05T12:31:07+02:00",
+    "name": "Call of Duty 2",
+    "author": "sebastijantkalcec@gmail.com",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "bacacro\/cod2pterodactyl:latest": "bacacro\/cod2pterodactyl:latest"
+    },
+    "file_denylist": [],
+    "startup": "export LD_LIBRARY_PATH=\/home\/container; export LD_PRELOAD=\"libcod.so\"; .\/cod2_lnxded +set sv_cracked {{IS_CRACKED}} +set sv_pure {{IS_PURE}} +set sv_punkbuster {{PUNKBUSTER}} +set dedicated {{IS_DEDICATED}} +set net_ip 0.0.0.0 +set net_port {{SERVER_PORT}} +set sv_maxclients {{MAX_PLAYERS}} +set g_gametype {{GAMETYPE}} +map {{DEFAULT_MAP}} +exec server.cfg;",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"------- Game Initialization -------\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\napt install -y xz-utils tar\r\n\r\nmkdir -p \/mnt\/server\r\n\r\nif ! test -f cod2_lnxded; then\r\n        echo \"Downloading CoD2 Server Files\"\r\n        wget https:\/\/dl.baca-cro.com\/cod2\/cod2-lnxded-1.3-full.tar.xz\r\n        tar -xf cod2-lnxded-1.3-full.tar.xz -C \/mnt\/server\/\r\n        chmod +x \/mnt\/server\/cod2_lnxded\r\n        wget https:\/\/dl.baca-cro.com\/cod2\/server.cfg -O \/mnt\/server\/main\/server.cfg\r\n        echo \"Succesfully downloaded and extracted server files!\"\r\n  else\r\n        echo \"CoD2 Server Files already downloaded!\"\r\nfi\r\n\r\nif ! test -f libcod2_1_3_nomysql.so; then\r\n        echo \"Downloading libcod\"\r\n        wget https:\/\/dl.baca-cro.com\/cod2\/libcod2_1_3.so -O \/mnt\/server\/libcod.so\r\n        wget https:\/\/dl.baca-cro.com\/cod2\/libmysqlclient.so -O \/mnt\/server\/libmysqlclient.so.18\r\n        chmod +x \/mnt\/server\/libcod.so \/mnt\/server\/libmysqlclient.so.18\r\n        echo \"libcod successfully downloaded!\"\r\n  else\r\n        echo \"libcod already downloaded!\"\r\nfi\r\n\r\necho \"Successful installation!\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "sv_cracked",
+            "description": "Using libcod to enable cracked clients to connect",
+            "env_variable": "IS_CRACKED",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:1",
+            "field_type": "text"
+        },
+        {
+            "name": "sv_pure",
+            "description": "",
+            "env_variable": "IS_PURE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable Punkbuster",
+            "description": "",
+            "env_variable": "PUNKBUSTER",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Dedicated",
+            "description": "dedicated 0 = Listen server\r\ndedicated 1 = LAN server\r\ndedicated 2 = Internet server",
+            "env_variable": "IS_DEDICATED",
+            "default_value": "2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:2",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|integer|max:100",
+            "field_type": "text"
+        },
+        {
+            "name": "Gametype",
+            "description": "",
+            "env_variable": "GAMETYPE",
+            "default_value": "dm",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:3",
+            "field_type": "text"
+        },
+        {
+            "name": "Map",
+            "description": "",
+            "env_variable": "DEFAULT_MAP",
+            "default_value": "mp_leningrad",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
