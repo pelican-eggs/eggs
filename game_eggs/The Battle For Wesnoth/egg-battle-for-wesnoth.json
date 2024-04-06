@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
     },
     "file_denylist": [],
-    "startup": ".\/battleForWesnoth\/build\/wesnothd",
+    "startup": ".\/battleForWesnoth\/wesnothd",
     "config": {
         "files": "{}",
         "startup": "{}",
