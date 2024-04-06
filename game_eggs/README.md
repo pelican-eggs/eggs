@@ -10,7 +10,7 @@
 * [BeamMP Server](beamng/beammp)
 * [KissMP](beamng/kissmp)
 
-[CoD2 Server with libcod](cod2)
+[Call of Duty 2 Server](cod2)
 
 [ClassiCube](classicube)
 
