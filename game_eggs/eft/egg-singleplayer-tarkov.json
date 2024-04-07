@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-02-21T09:23:22-05:00",
+    "name": "Singleplayer Tarkov",
+    "author": "dino@papertots.page",
+    "description": "The Stay in Tarkov project was born due to Battlestate Games' (BSG) reluctance to create the pure PvE version of Escape from Tarkov. The project's aim is simple, create a Cooperation PvE experience that retains progression.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/Aki.Server.exe",
+    "config": {
+        "files": "{\r\n    \"Aki_Data\/Server\/configs\/http.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"ip\": \"0.0.0.0\",\r\n            \"port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server is running, do not close while playing SPT, Happy playing!!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Singleplayer Tarkov Server Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nNODE_VERSION=lts\r\n\r\n# Working directory for build requirements\r\ncd ${HOME}\r\n\r\n# Install git-lfs python3\r\napt update && apt install -yq git-lfs python3 jq\r\n\r\n# Install NodeJS\r\ncurl -fsSL https:\/\/deb.nodesource.com\/setup_${NODE_VERSION}.x | bash - && apt-get install -y nodejs\r\n\r\n# Clone the SPT AKI repo\r\ngit clone https:\/\/dev.sp-tarkov.com\/SPT-AKI\/Server.git server\r\ncd ${HOME}\/server && git checkout ${SPT_VERSION}\r\n\r\n# Obtaining server files\r\ncd ${HOME}\/server\/project\/\r\ngit-lfs fetch --all && git-lfs pull\r\n\r\n# Install npm dependencies and build\r\nnpm install && npm run build:release\r\nmv ${HOME}\/server\/project\/build\/* \/mnt\/server\/\r\n\r\n# Obtain SIT coop mod\r\nmkdir \/mnt\/server\/user \r\nmkdir \/mnt\/server\/user\/mods \r\ncd \/mnt\/server\/user\/mods\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## Get SIT coop mod release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${SIT_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${SIT_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${SIT_VERSION}\" ] || [ \"${SIT_VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${SIT_NAME})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${SIT_VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${SIT_VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${SIT_VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${SIT_NAME})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\nwget ${DOWNLOAD_URL} -O ${SIT_NAME}\r\nunzip -o ${SIT_NAME}\r\nrm ${SIT_NAME}",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "SPT-AKI Version",
+            "description": "Version of the SPT-AKI version to use, by git hash\/tag\r\n\r\nSPT-AKI: https:\/\/dev.sp-tarkov.com\/SPT-AKI\/Server",
+            "env_variable": "SPT_VERSION",
+            "default_value": "40b999d04c68f1f52ab152d163c086a1c50f489b",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SITCoop Version",
+            "description": "Version of the SIT co-op mod for the server. Use \"latest\" for latest release, or the github release\/tag\/hash.\r\n\r\nSITCoop: https:\/\/github.com\/stayintarkov\/SIT.Aki-Server-Mod",
+            "env_variable": "SIT_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SIT Mod Github Package",
+            "description": "Github package for the SIT Aki server co-op mod. \r\n\r\nSITCoop: https:\/\/github.com\/stayintarkov\/SIT.Aki-Server-Mod",
+            "env_variable": "SIT_PACKAGE",
+            "default_value": "stayintarkov\/SIT.Aki-Server-Mod",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SIT Mod asset name",
+            "description": "SIT mod release file's asset name.",
+            "env_variable": "SIT_NAME",
+            "default_value": "SITCoop.zip",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Github Username",
+            "description": "Optional, a github username to use to avoid Github API rate limit",
+            "env_variable": "GITHUB_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": true,
+            "rules": "present",
+            "field_type": "text"
+        },
+        {
+            "name": "Github OAuth token",
+            "description": "Optional, A Github OAuth token to use to avoid API rate limit.",
+            "env_variable": "GITHUB_OAUTH_TOKEN",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": true,
+            "rules": "present",
+            "field_type": "text"
+        }
+    ]
+}

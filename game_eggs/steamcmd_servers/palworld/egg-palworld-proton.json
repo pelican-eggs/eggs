@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-01T13:53:42+01:00",
+    "exported_at": "2024-04-04T09:33:27+02:00",
     "name": "Palworld Proton",
     "author": "josdekurk@gmail.com",
     "description": "Fight, farm, build and work alongside mysterious creatures called \"Pals\" in this completely new multiplayer, open world survival and crafting game!",
@@ -15,7 +15,7 @@
         "Proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": ".\/PalworldServerConfigParser; (while read cmd; do rcon -s -a \"localhost:$RCON_PORT\" -p \"$ADMIN_PASSWORD\" \"$cmd\";done) < \/dev\/stdin & proton run \/home\/container\/Pal\/Binaries\/Win64\/PalServer-Win64-Test.exe -publiclobby -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\" -rcon",
+    "startup": ".\/PalworldServerConfigParser; (while read cmd; do rcon -s -a \"localhost:$RCON_PORT\" -p \"$ADMIN_PASSWORD\" \"$cmd\";done) < \/dev\/stdin & proton run \/home\/container\/Pal\/Binaries\/Win64\/PalServer-Win64-Shipping.exe -publiclobby -useperfthreads -NoAsyncLoadingThread -UseMultithreadForDS -port={{SERVER_PORT}} -publicport={{SERVER_PORT}} -servername=\"{{SERVER_NAME}}\" -players={{MAX_PLAYERS}} $(if [ -n \"$SERVER_PASSWORD\" ]; then echo \"-serverpassword=\\\"${SERVER_PASSWORD}\\\"\"; fi) -adminpassword=\"{{ADMIN_PASSWORD}}\" -rcon",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"up and running.\"\r\n}",

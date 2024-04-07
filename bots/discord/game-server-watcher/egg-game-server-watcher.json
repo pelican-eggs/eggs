@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt-get update && apt-get install ca-certificates git -yq --no-install-suggests --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages\r\n\r\n\r\ncd \/mnt\/server\r\n\r\ngit config --global --add safe.directory \/mnt\/server\r\ngit clone https:\/\/github.com\/a-sync\/game-server-watcher.git . || git pull\r\n\r\n\r\nnpm install && npm update gamedig && npm run build\r\nnpm prune --omit=dev\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\napt-get update && apt-get install ca-certificates git -yq --no-install-suggests --no-install-recommends --allow-downgrades --allow-remove-essential --allow-change-held-packages\r\n\r\n\r\ncd \/mnt\/server\r\n\r\ngit config --global --add safe.directory \/mnt\/server\r\ngit clone https:\/\/github.com\/a-sync\/game-server-watcher.git . || git pull\r\n\r\n\r\nnpm install --no-save && npm update gamedig && npm run build\r\nnpm prune --omit=dev\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "node:20-bookworm-slim",
             "entrypoint": "bash"
         }

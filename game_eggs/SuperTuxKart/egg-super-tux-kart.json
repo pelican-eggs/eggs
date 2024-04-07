@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-03-24T19:19:23+01:00",
+    "name": "SuperTuxKart",
+    "author": "mattamn107@github.com",
+    "description": "Egg for hosting a SuperTuxKart Server.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin\/supertuxkart --server-config={{CONFIG_NAME}} --lan-server={{SERVER_NAME}} --network-console --port=\"{{SERVER_PORT}}\" --difficulty={{DIFFICULTY}} --mode={{MODE}} --max-players={{MAX_PLAYERS}} --motd=\"{{MOTD}}\"",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Available command:\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Install build tools\r\necho \"deb http:\/\/deb.debian.org\/debian bullseye-backports main\" >> \/etc\/apt\/sources.list && \\\r\napt-get update && apt-get -y full-upgrade && \\\r\n    apt-get install -y build-essential cmake libbluetooth-dev libsdl2-dev \\\r\n    libcurl4-openssl-dev libenet-dev libfreetype6-dev libharfbuzz-dev \\\r\n    libjpeg-dev libogg-dev libopenal-dev libpng-dev \\\r\n    libssl-dev libvorbis-dev libmbedtls-dev pkg-config zlib1g-dev subversion\r\n\r\nif [ ! -d \"\/mnt\/server\/stk-code\" ] && [ ! -d \"\/mnt\/server\/stk-assets\" ]; then\r\n    \r\n    #clone code repo\r\n    git clone https:\/\/github.com\/supertuxkart\/stk-code \/mnt\/server\/stk-code\r\n    \r\n    #get assets\r\n    svn co https:\/\/svn.code.sf.net\/p\/supertuxkart\/code\/stk-assets \/mnt\/server\/stk-assets\r\n    \r\n    # go into the stk-code directory\r\n    cd \/mnt\/server\/stk-code\r\n    \r\n    # create and enter the cmake_build directory\r\n    mkdir cmake_build\r\n    \r\nelse\r\n\r\n    #update existing stuff\r\n    cd \/mnt\/server\/stk-assets\r\n    svn up\r\n    \r\n    cd \/mnt\/server\/stk-code\r\n    git pull\r\n\r\n\r\nfi\r\n\r\n#build the server\r\ncd cmake_build\r\ncmake .. -DSERVER_ONLY=ON\r\nmake\r\n\r\n#copy binary to root\/bin and make it executable\r\nmkdir \/mnt\/server\/bin\r\ncp \/mnt\/server\/stk-code\/cmake_build\/bin\/supertuxkart \/mnt\/server\/bin\/supertuxkart\r\nchmod +x \/mnt\/server\/bin\/supertuxkart\r\n\r\n#copy data folder\r\ncp -r \/mnt\/server\/stk-code\/data \/mnt\/server\/data\r\n\r\n#copy extra assets to data folder\r\ncd \/mnt\/server\/stk-assets\r\ncp -r library models music sfx textures tracks karts \/mnt\/server\/data\/\r\n\r\n# Delete repo's to save disk space.\r\n#rm -rf \/mnt\/server\/stk-code && rm -rf \/mnt\/server\/stk-assets",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The Name of the Server",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl_Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:50",
+            "field_type": "text"
+        },
+        {
+            "name": "Config File Name",
+            "description": "Name of the Config File.",
+            "env_variable": "CONFIG_NAME",
+            "default_value": "config.xml",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.xml)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "Mode",
+            "description": "0 = Normal Race\r\n1 = Time Trial\r\n2 = Battle\r\n3 = Soccer\r\n4 = Follow The Leader\r\n5 = Capture the Flag",
+            "env_variable": "MODE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:0,1,2,3,4,5",
+            "field_type": "text"
+        },
+        {
+            "name": "Difficulty",
+            "description": "Speed of the carts and AI difficulty\r\n0 = Beginner\r\n1 = Intermediate\r\n2 = Expert\r\n3 = SuperTux",
+            "env_variable": "DIFFICULTY",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:0,1,2,3",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "How many players can there be in the server.",
+            "env_variable": "MAX_PLAYERS",
+            "default_value": "8",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:1,24",
+            "field_type": "text"
+        },
+        {
+            "name": "Message of the Day",
+            "description": "Message of the Day displayed in the server.",
+            "env_variable": "MOTD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:100",
+            "field_type": "text"
+        }
+    ]
+}
