@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\nshopt -s extglob\r\n\r\n# Switch to mounted directory\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# Update installation system and install curl\r\napt-get update\r\napt-get install -y curl\r\n\r\n# Cleanup previous install if available\r\nif [ -d \"conf\" ]; then mv conf conf.bak; fi\r\nrm -rfv !(conf.bak|data)\r\n\r\n# Download and extract Grafana\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\nversion=${GRAFANA_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/grafana\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl https:\/\/dl.grafana.com\/oss\/release\/grafana-${version}.linux-${ARCH}.tar.gz --output grafana.tar.gz\r\ntar -zxvf grafana.tar.gz\r\nmv -n grafana-*\/* .\/\r\nrm -rf grafana.tar.gz grafana-*\/\r\n\r\n# Restore configuration if necessary\r\nif [ -d \"conf.bak\" ]; then rm -rf conf && mv conf.bak conf && rm -rf conf.bak; fi\r\n\r\n# Update existing plugins and install Grafana plugins\r\nif [ ! -z \"${GRAFANA_PLUGINS}\" ]; then\r\nfor v in $(tr ',' '\\n' <<< \"${GRAFANA_PLUGINS}\") ; do .\/bin\/grafana-cli --pluginsDir=\"\/mnt\/server\/data\/plugins\" plugins install \"$v\" ; done\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

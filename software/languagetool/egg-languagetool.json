@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\napk add --no-cache unzip # to make shure the unzipper is working properly\r\nmkdir -p \/mnt\/server\r\nmkdir -p \/mnt\/server\/models\r\ntouch config.properties\r\n\r\n# if TRAIN_MODELS has content install them\r\nif [ -n TRAIN_MODELS ]; then\r\n\r\n    content=$(curl -L https:\/\/languagetool.org\/download\/ngram-data\/)\r\n\r\n    links=$(echo \"$content\" | grep -o '<a href=\"[^\"]*\\.zip\">' | sed 's\/<a href=\"\/\/' | sed 's\/\">\/\/')\r\n    echo $links\r\n\r\n    cd \/mnt\/server\/models\r\n    for model in $TRAIN_MODELS; do\r\n        echo \"$model\"\r\n        for link in $links; do\r\n            # echo \"    $link\"\r\n            if [[ $link == *\"-$model-\"* ]]; then\r\n                fullLink=\"https:\/\/languagetool.org\/download\/ngram-data\/$link\"\r\n                echo \"Downloading $fullLink\"\r\n                echo \"this could take some while\"\r\n                curl $fullLink --output $model.zip\r\n                echo \"unziping $model.zip\"\r\n                unzip $model.zip\r\n                rm $model.zip\r\n            fi\r\n        done\r\n    done\r\nfi\r\n\r\n# main languagetool install\r\ncd \/mnt\/server\r\n\r\necho \"downloading languagetool\"\r\ncurl https:\/\/languagetool.org\/download\/LanguageTool-stable.zip --output download.zip\r\necho unziping\r\nunzip download.zip\r\necho moving files\r\n\r\ncp -r LanguageTool-*\/* .\r\n\r\nrm -rf LanguageTool-*\r\nrm download.zip -rf\r\n\r\necho Finished install",
-            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },

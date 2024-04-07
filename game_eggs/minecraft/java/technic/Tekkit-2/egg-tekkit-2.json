@@ -27,7 +27,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Tekkit Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl zip unzip\r\n\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sSL https:\/\/servers.technicpack.net\/Technic\/servers\/tekkit-2\/Tekkit-2_Server_$MODPACK_VERSION.zip -o Tekkit-2_Server_$MODPACK_VERSION.zip\r\n\r\nunzip -o Tekkit-2_Server_$MODPACK_VERSION.zip\r\n\r\nrm -rf Tekkit-2_Server_$MODPACK_VERSION.zip\r\n\r\nrm RestoreBackup.bat\r\n\r\nrm LaunchServer.bat\r\n\r\nrm LaunchServer.sh\r\n\r\nrm RestoreBackup.sh\r\n\r\nmv forge-1.12.2-*.jar forge.jar\r\n\r\nif [ ! -f server.properties ]; then\r\n    echo -e \"Downloading MC server.properties\"\r\n    curl -o server.properties https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/java\/server.properties\r\nfi\r\n\r\necho \"done\"",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

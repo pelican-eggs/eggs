@@ -31,7 +31,7 @@
   "scripts": {
     "installation": {
       "script": "#!\/bin\/bash\r\n#\r\n# Krypton installation script for Pterodactyl\r\n# Created by BomBardyGamer\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt-get update\r\napt-get install -y curl jq unzip\r\n\r\ncd \/mnt\/server\r\nif [ -z \"${KRYPTON_VERSION}\" ] || [ \"${KRYPTON_VERSION}\" == \"latest\" ]; then\r\n    KRYPTON_VERSION=\"lastSuccessfulBuild\"\r\nfi\r\n\r\nBASE_URL=\"https:\/\/ci.kryptonmc.org\/job\/Krypton\/${KRYPTON_VERSION}\"\r\nARTIFACT=`curl \"${BASE_URL}\/api\/json?tree=artifacts%5BrelativePath%5D\" | jq '.artifacts[0].relativePath' | sed 's\/\"\/\/g'`\r\n\r\ncurl -o ${SERVER_JAR} ${BASE_URL}\/artifact\/${ARTIFACT}\r\nunzip ${SERVER_JAR} \"config.conf\"",
-      "container": "debian:buster-slim",
+       "container": "ghcr.io\/parkervcp\/installers:debian",
       "entrypoint": "bash"
     }
   },

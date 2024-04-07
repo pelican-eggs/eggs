@@ -27,6 +27,8 @@
 [Doom](doom)
 * [Zandronum](doom/zandronum)
 
+[Escape from Tarkov](eft)
+
 [ET Legacy](enemy_territory/etlegacy)
 
 [Factorio](factorio)
@@ -60,6 +62,8 @@
 [Los Angeles Crimes](losangelescrimes)
 
 [League Sandbox](leaguesandbox)
+
+[Neverwinter Nights: Enhanced Edition](neverwinter_nights_ee)
 
 [Mindustry](mindustry)
 

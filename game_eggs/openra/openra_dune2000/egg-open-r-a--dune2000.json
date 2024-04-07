@@ -1,24 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-09-13T17:40:31+02:00",
+    "exported_at": "2024-04-01T13:19:37+02:00",
     "name": "OpenRA - Dune2000",
     "author": "patz.michael@gmail.com",
     "description": "OpenRA is a project that recreates and modernizes the classic Command & Conquer real time strategy games. We have developed a flexible open source game engine (the OpenRA engine) that provides a common platform for rebuilding and reimagining classic 2D and 2.5D RTS games (the OpenRA mods).",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_mono-6-complete",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:mono_latest": "ghcr.io\/parkervcp\/yolks:mono_latest"
+    },
+    "file_denylist": [],
     "startup": ".\/squashfs-root\/AppRun --server Server.Name=\"{{SERVER_NAME}}\" Server.ListenPort={{SERVER_PORT}} Server.AdvertiseOnline={{PUBLIC}} Server.EnableSingleplayer={{SINGLEPLAYER}} Server.Password=\"{{PASSWORD}}\" Server.EnableGeoIP={{GEOIP}} Server.ShareAnonymizedIPs={{ANONYMOUS}}",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Master server communication established.\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Master server communication established.\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Vanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y curl wget file jq\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\nwget $DOWNLOAD_LINK\r\n\r\n#wget https:\/\/github.com\/OpenRA\/OpenRA\/releases\/download\/release-20200503\/OpenRA-Red-Alert-x86_64.AppImage\r\nchmod +x $MATCH\r\n.\/$MATCH --appimage-extract\r\nrm $MATCH\r\nrm *.zsync\r\ncd squashfs-root\r\nchmod +x AppRun",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\n# Vanilla Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n## install packages to get version and download links\r\napt update\r\napt install -y curl wget file jq\r\n\r\ncd \/mnt\/server\/\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/OpenRA\/OpenRA\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/OpenRA\/OpenRA\/releases\")\r\nMATCH=OpenRA-Dune-2000-x86_64.AppImage\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\nwget $DOWNLOAD_LINK\r\n\r\n#wget https:\/\/github.com\/OpenRA\/OpenRA\/releases\/download\/release-20200503\/OpenRA-Red-Alert-x86_64.AppImage\r\nchmod +x $MATCH\r\n.\/$MATCH --appimage-extract\r\nrm $MATCH\r\nrm *.zsync\r\ncd squashfs-root\r\nchmod +x AppRun\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -30,7 +35,8 @@
             "default_value": "OpenRAServer",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Public Server",
@@ -39,7 +45,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Enable Singleplayer",
@@ -48,7 +55,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Require Authentification",
@@ -57,7 +65,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "PASSWORD",
@@ -66,7 +75,8 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable:string"
+            "rules": "nullable:string",
+            "field_type": "text"
         },
         {
             "name": "GEOIP",
@@ -75,7 +85,8 @@
             "default_value": "false",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string|max:20"
+            "rules": "string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Anonymized IPs",
@@ -84,25 +95,8 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "string|max:20"
-        },
-        {
-            "name": "GITHUB_PACKAGE",
-            "description": "GITHUB_PACKAGE",
-            "env_variable": "GITHUB_PACKAGE",
-            "default_value": "OpenRA\/OpenRA",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:20"
-        },
-        {
-            "name": "MATCH",
-            "description": "MATCH",
-            "env_variable": "MATCH",
-            "default_value": "OpenRA-Dune-2000-x86_64.AppImage",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|max:50"
+            "rules": "string|max:20",
+            "field_type": "text"
         },
         {
             "name": "VERSION",
@@ -111,7 +105,8 @@
             "default_value": "latest",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-09-20T20:25:51+02:00",
+    "exported_at": "2024-04-02T14:42:04+02:00",
     "name": "Muse",
     "author": "hello@apollo.moe",
     "description": "\ud83c\udfa7 a self-hosted midwestern Discord music bot that doesn't suck",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16"
+        "ghcr.io\/parkervcp\/yolks:nodejs_20": "ghcr.io\/parkervcp\/yolks:nodejs_20"
     },
     "file_denylist": [],
     "startup": "npm start",
@@ -18,12 +18,12 @@
         "files": "{\r\n    \".env\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISCORD_TOKEN\": \"DISCORD_TOKEN={{env.discord_token}}\",\r\n            \"DATA_DIR\": \"DATA_DIR={{env.data_dir}}\",\r\n            \"YOUTUBE_API_KEY\": \"YOUTUBE_API_KEY={{env.api_key}}\",\r\n            \"SPOTIFY_CLIENT_ID\": \"SPOTIFY_CLIENT_ID={{env.client_id}}\",\r\n            \"SPOTIFY_CLIENT_SECRET\": \"SPOTIFY_CLIENT_SECRET={{env.client_secret}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Running version \"\r\n}",
         "logs": "{}",
-        "stop": "^^C"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "## Credits: Red-Thirten (https:\/\/github.com\/lilkingjr1) for providing most of the installation script\r\napt-get update\r\napt-get install git curl jq -y -qq\r\n\r\nGITHUB_PACKAGE=\"codetheweb\/muse\"\r\n\r\n# Find GitHub download URL for Muse for specified version\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Could not find version \\\"${VERSION}\\\" of Muse. Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\n    fi\r\nfi\r\n\r\n# Download Muse from GitHub & Extract\r\ncd \/mnt\/server\r\necho -e \"Downloading Muse from GitHub...\"\r\ncurl -L ${DOWNLOAD_URL} -o muse.tar.gz\r\necho -e \"Extracting Muse from tarball...\"\r\ntar -xvzf muse.tar.gz --strip-components=1\r\nrm muse.tar.gz\r\n\r\n# Verify and clean up Muse installation\r\nif [ ! -f .env.example ]; then\r\n    echo -e \"\\nFailed to download release: ${DOWNLOAD_URL}\\n\"\r\n    exit 1\r\nfi\r\ncp .env.example .env\r\nrm -rf .dockerignore Dockerfile .gitignore .github\/\r\nyarn install --prod #--frozen-lockfile\r\n#sed -i 's\/of filterWrapper[)]\/of filterWrapper|| [])\/g' \/mnt\/server\/node_modules\/ytsr\/lib\/utils.js\r\n\r\necho -e \"\\nMuse Successfully Installed!\"",
-            "container": "node:lts-bullseye-slim",
+            "script": "## Credits: Red-Thirten (https:\/\/github.com\/lilkingjr1) for providing most of the installation script\r\napt-get update\r\napt-get install git curl jq -y python3 python3-pip make build-essential -qq\r\n\r\nGITHUB_PACKAGE=\"codetheweb\/muse\"\r\n\r\n# Find GitHub download URL for Muse for specified version\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Could not find version \\\"${VERSION}\\\" of Muse. Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\n    fi\r\nfi\r\n\r\n# Download Muse from GitHub & Extract\r\ncd \/mnt\/server\r\necho -e \"Downloading Muse from GitHub...\"\r\ncurl -L ${DOWNLOAD_URL} -o muse.tar.gz\r\necho -e \"Extracting Muse from tarball...\"\r\ntar -xvzf muse.tar.gz --strip-components=1\r\nrm muse.tar.gz\r\n\r\n# Verify and clean up Muse installation\r\nif [ ! -f .env.example ]; then\r\n    echo -e \"\\nFailed to download release: ${DOWNLOAD_URL}\\n\"\r\n    exit 1\r\nfi\r\ncp .env.example .env\r\nrm -rf .dockerignore Dockerfile .gitignore .github\/\r\nyarn install --prod #--frozen-lockfile\r\n#sed -i 's\/of filterWrapper[)]\/of filterWrapper|| [])\/g' \/mnt\/server\/node_modules\/ytsr\/lib\/utils.js\r\n\r\necho -e \"\\nMuse Successfully Installed!\"",
+            "container": "node:lts-bookworm-slim",
             "entrypoint": "bash"
         }
     },

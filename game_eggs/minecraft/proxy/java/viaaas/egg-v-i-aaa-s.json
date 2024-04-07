@@ -1,10 +1,10 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-10-16T11:26:14-03:00",
+    "exported_at": "2024-04-02T11:26:33+02:00",
     "name": "VIAaaS",
     "author": "regulad@outlook.com",
     "description": "VIAaaS - ViaVersion as a Service - Standalone ViaVersion proxy",
@@ -13,24 +13,24 @@
         "java_version",
         "pid_limit"
     ],
-    "images": [
-        "ghcr.io\/pterodactyl\/yolks:java_17",
-        "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_8"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17",
+        "ghcr.io\/parkervcp\/yolks:java_16": "ghcr.io\/parkervcp\/yolks:java_16",
+        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11",
+        "ghcr.io\/parkervcp\/yolks:java_8": "ghcr.io\/parkervcp\/yolks:java_8"
+    },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}} -sslPort={{WEBSERVER_PORT}}",
     "config": {
         "files": "{\r\n    \"config\/viaaas.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"bind-address\": \"0.0.0.0\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Application started in \"\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{}",
         "stop": "end"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# VIAaaS Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\nwget -O ${SERVER_JARFILE} \"https:\/\/jitpack.io\/com\/github\/ViaVersion\/VIAaaS\/master-SNAPSHOT\/VIAaaS-master-SNAPSHOT-all.jar\"",
-            "container": "ghcr.io/pterodactyl/installers:alpine",
+            "script": "#!\/bin\/ash\r\n# VIAaaS Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\ncd \/mnt\/server\r\nwget -O ${SERVER_JARFILE} \"https:\/\/jitpack.io\/com\/github\/ViaVersion\/VIAaaS\/master-SNAPSHOT\/VIAaaS-master-SNAPSHOT-all.jar\"\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },
@@ -42,7 +42,8 @@
             "default_value": "VIAaaS-all.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Web Server Port",
@@ -51,7 +52,8 @@
             "default_value": "25543",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         }
     ]
 }

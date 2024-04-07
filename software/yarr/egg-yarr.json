@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-10-17T22:24:46-04:00",
+    "exported_at": "2024-04-02T14:06:20+02:00",
     "name": "Yarr",
     "author": "sotoluis90@gmail.com",
     "description": "Yarr is a selfhosted feed aggregator",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\ncd \/mnt\/server\r\n\r\nmkdir yarr_source\r\ngit clone https:\/\/github.com\/nkanaev\/yarr yarr_source\r\n\r\ncd yarr_source\r\n\r\nmake build_default  # -> _output\/yarr\r\n\r\ncp _output\/yarr ..\/yarr\r\ncd ..\/\r\n\r\nrm -rf yarr_source\r\n\r\nchmod +x yarr\r\n\r\necho \"Install complete\"",
-            "container": "golang:1.19.2-bullseye",
+            "container": "golang:1.19.13-bookworm",
             "entrypoint": "bash"
         }
     },

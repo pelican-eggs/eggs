@@ -1,25 +1,30 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2019-06-23T10:00:12-04:00",
+    "exported_at": "2024-04-01T11:14:53+02:00",
     "name": "ATLBot",
     "author": "jfeldt19@gmail.com",
     "description": "ATLbot in ptero\r\n\r\nhttps:\/\/github.com\/ATLauncher\/discord-bot\/",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:alpine_nodejs-10",
+    "features": null,
+    "docker_images": {
+        "Nodejs 16": "ghcr.io\/parkervcp\/yolks:node_16"
+    },
+    "file_denylist": [],
     "startup": "npm run start",
     "config": {
         "files": "{\r\n    \"config\/local.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"discord.client_token\": \"{{server.build.env.CLIENT_TOKEN}}\",\r\n            \"logging.level\": \"debug\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Bot started\"\r\n}",
-        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "apk add --no-cache openssl git\r\n\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/ATLauncher\/discord-bot.git .  \r\nfi\r\n\r\necho '{}' > config\/local.json\r\n\r\nnpm install --production\r\n\r\nnpm run build\r\n\r\nrm Dockerfile\r\nrm CONTRIBUTING.md\r\nrm README.md\r\nrm \/config\/.gitignore\r\nrm CODE_OF_CONDUCT.md",
-            "container": "node:10-alpine",
-            "entrypoint": "ash"
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install git openssl\r\n\r\ncd \/mnt\/server\r\nif [[ -d .git\/ ]]; then\r\n    git pull\r\nelse\r\n    git clone https:\/\/github.com\/ATLauncher\/discord-bot.git .  \r\nfi\r\n\r\necho '{}' > config\/local.json\r\n\r\nnpm install --production\r\n\r\nnpm run build\r\n\r\nrm Dockerfile\r\nrm CONTRIBUTING.md\r\nrm README.md\r\nrm \/config\/.gitignore\r\nrm CODE_OF_CONDUCT.md\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "node:16-bookworm",
+            "entrypoint": "bash"
         }
     },
     "variables": [
@@ -28,18 +33,20 @@
             "description": "Get a discord token at https:\/\/discordapp.com\/developers\/",
             "env_variable": "CLIENT_TOKEN",
             "default_value": "get_your_own_token_from_discord_",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:75"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:75",
+            "field_type": "text"
         },
         {
             "name": "Node Environment",
             "description": "The node environment variable.\r\n\r\nNeeds to stay at \"development\" to log to console.",
             "env_variable": "NODE_ENV",
             "default_value": "development",
-            "user_viewable": 1,
-            "user_editable": 0,
-            "rules": "required|string|max:20"
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

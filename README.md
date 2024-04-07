@@ -129,6 +129,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [Doom](game_eggs/doom)
 * [Zandronum](game_eggs/doom/zandronum)
 
+[Escape from Tarkov](game_eggs/eft)
+
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
 [FTL: Tachyon](game_eggs/ftl/tachyon)
@@ -162,6 +164,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [League Sandbox](game_eggs/leaguesandbox)
 
 [Los Angeles Crimes](game_eggs/losangelescrimes)
+
+[Neverwinter Nights: Enhanced Edition](game_eggs/neverwinter_nights_ee)
 
 [Mindustry](game_eggs/mindustry)
 

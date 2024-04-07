@@ -27,7 +27,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Find latest Reposilite version, if needed\r\nif [ \"$REPOSILITE_VERSION\" == \"latest\" ]; then\r\n    REPOSILITE_VERSION=$(grep -oPm1 \"(?<=<latest>)[^<]+\" <<< \"$(curl -s https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/maven-metadata.xml)\")\r\nfi\r\n# Check if -all suffixed jar is available\r\nstatus_code=$(curl --write-out '%{http_code}' -X HEAD -s -o \/dev\/null https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar)\r\n# Download new Reposilite\r\nif [ \"$status_code\" == 200 ]; then\r\n    curl -o reposilite.jar https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}-all.jar\r\nelse\r\n    curl -o reposilite.jar https:\/\/maven.reposilite.com\/releases\/com\/reposilite\/reposilite\/${REPOSILITE_VERSION}\/reposilite-${REPOSILITE_VERSION}.jar\r\nfi",
-            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
