@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2021-04-24T18:59:07+03:00",
+    "exported_at": "2024-04-01T11:32:04+02:00",
     "name": "Grand Theft Auto Connected",
     "author": "admin@softwarenoob.com",
     "description": "Grand Theft Auto Connected is a custom scriptable multiplayer modification for multiple Grand Theft Auto games.",
     "features": null,
-    "images": [
-        "quay.io\/parkervcp\/pterodactyl-images:base_debian"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
     "file_denylist": [],
     "startup": ".\/Server",
     "config": {
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\napt -y update\r\napt -y --no-install-recommends install curl lib32gcc1 ca-certificates\r\n\r\ncd \/mnt\/server\r\n\r\n\r\nif [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=https:\/\/gtaconnected.com\/downloads\/server\/latest\/linux\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/gtaconnected.com\/downloads\/GTAC-Server-Linux-${DL_VERSION}.tar.gz\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail --location ${DOWNLOAD_LINK}; then\r\n        echo -e \"Chosen server version is valid.\"\r\n    else\r\n        echo -e \"Chosen server version is invalid, tried $DOWNLOAD_LINK. Exiting installation\"\r\n        exit 2\r\n    fi\r\nelse\r\n    echo -e \"no download link, stopping installation\"\r\n    exit 3\r\nfi\r\n\r\necho -e \"Downloading ${DL_VERSION} version of the server\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o GTAC.tar.gz\r\necho \"Extracting files\"\r\ntar -xf GTAC.tar.gz\r\n\r\nchmod +x Server\r\nrm GTAC.tar.gz\r\n\r\necho \"Install complete\"",
-            "container": "debian:buster-slim",
+            "script": "#!\/bin\/bash\r\ncd \/mnt\/server\r\n\r\n\r\nif [ \"${DL_VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=https:\/\/gtaconnected.com\/downloads\/server\/latest\/linux\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/gtaconnected.com\/downloads\/GTAC-Server-Linux-${DL_VERSION}.tar.gz\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_LINK}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail --location ${DOWNLOAD_LINK}; then\r\n        echo -e \"Chosen server version is valid.\"\r\n    else\r\n        echo -e \"Chosen server version is invalid, tried $DOWNLOAD_LINK. Exiting installation\"\r\n        exit 2\r\n    fi\r\nelse\r\n    echo -e \"no download link, stopping installation\"\r\n    exit 3\r\nfi\r\n\r\necho -e \"Downloading ${DL_VERSION} version of the server\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o GTAC.tar.gz\r\necho \"Extracting files\"\r\ntar -xf GTAC.tar.gz\r\n\r\nchmod +x Server\r\nrm GTAC.tar.gz\r\n\r\necho \"Install complete\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "gta:iv",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:gta:iii,gta:vc,gta:sa,gta:ug,gta:iv,gta:eflc"
+            "rules": "required|string|in:gta:iii,gta:vc,gta:sa,gta:ug,gta:iv,gta:eflc",
+            "field_type": "text"
         },
         {
             "name": "Server Name",
@@ -44,7 +45,8 @@
             "default_value": "Pterodactyl Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:60"
+            "rules": "required|string|max:60",
+            "field_type": "text"
         },
         {
             "name": "serverbrowser",
@@ -53,7 +55,8 @@
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|in:true,false"
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
         },
         {
             "name": "Server Version",
@@ -62,7 +65,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         }
     ]
 }

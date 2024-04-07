@@ -1,23 +1,28 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-05-26T08:59:34-04:00",
+    "exported_at": "2024-04-01T11:27:47+02:00",
     "name": "Big Brother Bot",
     "author": "parker@parkervcp.com",
     "description": "Big Brother Bot B3 is a complete and total server administration package for online games. B3 is designed primarily to keep your server free from the derelicts of online gaming, but offers more, much more.\r\n\r\nhttps:\/\/github.com\/BigBrotherBot\/big-brother-bot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:debian_python-2.7",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:python_2.7": "ghcr.io\/parkervcp\/yolks:python_2.7"
+    },
+    "file_denylist": [],
     "startup": "python b3_run.py",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"No idea what to put here\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"No idea what to put here\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Pixel Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install git\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/BigBrotherBot\/big-brother-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target \/mnt\/server -r requirements.txt\r\npip install -U --target \/mnt\/server paramiko",
+            "script": "#!\/bin\/bash\r\n# Pixel Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install git\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/BigBrotherBot\/big-brother-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target \/mnt\/server -r requirements.txt\r\npip install -U --target \/mnt\/server paramiko\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "python:2.7-slim",
             "entrypoint": "bash"
         }

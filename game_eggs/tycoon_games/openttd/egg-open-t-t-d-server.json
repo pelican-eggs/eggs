@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\napk add --no-cache xz curl tar unzip\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho -e \"\\ncurl -SsL -o openttd-linux.tar.xz https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-generic-amd64.tar.xz\"\r\ncurl -SsL -o openttd-linux.tar.xz https:\/\/cdn.openttd.org\/openttd-releases\/${OPENTTD_VERSION}\/openttd-${OPENTTD_VERSION}-linux-generic-amd64.tar.xz \r\n\r\necho -e \"\\nUnpacking tar\"\r\ntar -xf openttd-linux.tar.xz --strip-components=1\r\nrm openttd-linux.tar.xz\r\nchmod +x openttd\r\n\r\necho -e \"\\nRunning curl -sSL -o opengfx.zip https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip\"\r\ncurl -sSL -o opengfx.zip https:\/\/cdn.openttd.org\/opengfx-releases\/${OPENGFX_VERSION}\/opengfx-${OPENGFX_VERSION}-all.zip\r\nunzip opengfx.zip \r\n\r\ntar --strip-components=1 -C baseset\/ -xvf opengfx*.tar\r\nrm -fR open*zip open*tar open*gz\r\n\r\n[ -f \/home\/container\/openttd.cfg  ] || curl https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/tycoon_games\/openttd\/openttd.cfg > openttd.cfg\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "alpine:latest",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },

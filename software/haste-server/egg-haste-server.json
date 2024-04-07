@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-28T18:11:27+01:00",
+    "exported_at": "2024-04-02T14:08:10+02:00",
     "name": "haste-server",
     "author": "eggs@harryw.link",
     "description": "Haste is an open-source pastebin software written in node.js, which is easily installable in any network. It can be backed by either redis or filesystem, and has a very easy adapter interface for other stores. A publicly available version can be found at hastebin.com",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16"
+        "ghcr.io\/parkervcp\/yolks:nodejs_18": "ghcr.io\/parkervcp\/yolks:nodejs_18"
     },
     "file_denylist": [],
     "startup": "npm start",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y git curl\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ngit clone https:\/\/github.com\/toptal\/haste-server\r\ncd haste-server\r\nmv * \/mnt\/server\r\ncd ..\r\nrm -rf haste-server\r\nnpm install\r\n\r\nexit 0",
-            "container": "node:16-bullseye-slim",
+            "container": "node:18-bookworm-slim",
             "entrypoint": "bash"
         }
     },

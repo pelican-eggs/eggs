@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-11-04T19:18:22+01:00",
+    "exported_at": "2024-04-02T14:35:12+02:00",
     "name": "rethinkdb",
     "author": "josdekurk@gmail.com",
     "description": "The open-source database for the realtime web",
@@ -22,8 +22,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y wget tar binutils xz-utils\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/tmp\r\nwget https:\/\/download.rethinkdb.com\/repository\/debian-bullseye\/pool\/r\/rethinkdb\/rethinkdb_${VERSION}~0bullseye_${ARCH}.deb -O rethinkdb.deb\r\n\r\nar xv rethinkdb.deb\r\n\r\ntar xvf data.tar.xz\r\n\r\nmv \/tmp\/usr\/bin\/rethinkdb \/mnt\/server\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:bullseye-slim",
+            "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y wget tar binutils xz-utils\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/tmp\r\nwget https:\/\/download.rethinkdb.com\/repository\/debian-bookworm\/pool\/r\/rethinkdb\/rethinkdb_${VERSION}~0bookworm_${ARCH}.deb -O rethinkdb.deb\r\n\r\nar xv rethinkdb.deb\r\n\r\ntar xvf data.tar.xz\r\n\r\nmv \/tmp\/usr\/bin\/rethinkdb \/mnt\/server\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -32,7 +32,7 @@
             "name": "Version",
             "description": "",
             "env_variable": "VERSION",
-            "default_value": "2.4.2",
+            "default_value": "2.4.4",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20",

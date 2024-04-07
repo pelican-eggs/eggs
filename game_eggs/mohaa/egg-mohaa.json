@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n\r\napk --no-cache add curl\r\n\r\nif [[ ! -d \/mnt\/server\/ ]]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\/\r\n\r\nDOWNLOAD_URL=http:\/\/linuxgsm.download\/MedalofHonorAlliedAssault\/moh_revival_v1.12_RC3.5.1.tar.xz\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\" ]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\necho -e \"running 'curl -sSL ${DOWNLOAD_LINK} -o mohaaserver.tar.xz'\" \r\ncurl -sSL ${DOWNLOAD_LINK} -o mohaaserver.tar.xz\r\n\r\necho -e \"Unpacking server files\"\r\ntar xvf mohaaserver.tar.xz\r\n\r\nrm mohaaserver.tar.xz\r\n\r\necho -e \"checking for default server.cfg\"\r\n[[ -f main\/server.cfg ]] || curl -sSL ${CONFIG_URL} -o main\/server.cfg\r\n\r\necho -e \"running 'chmod +x .\/mohaa_lnxded'\"\r\nchmod +x .\/mohaa_lnxded\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "alpine:latest",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },

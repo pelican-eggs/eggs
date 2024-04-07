@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-02-19T13:09:14+01:00",
+    "exported_at": "2024-04-02T14:23:14+02:00",
     "name": "parkertron",
     "author": "parker@parkervcp.com",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# parkertron Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nexport GOPATH=$HOME\/go\r\nexport PATH=$GOROOT\/bin:$GOPATH\/bin:$PATH\r\n\r\ncd\r\n\r\napt update\r\n\r\napt install -y tesseract-ocr tesseract-ocr-eng libtesseract-dev\r\n\r\necho \"pulling the parkertron git repo\"\r\n\r\ngit clone https:\/\/github.com\/parkervcp\/parkertron.git\r\n\r\ncd parkertron\/\r\n\r\necho \"building parkertron\"\r\n\r\ngo build \r\n\r\necho \"build complete copying parkertron and example configs over\"\r\n\r\ncp parkertron \/mnt\/server\/\r\n\r\nif [ -d \/mnt\/server\/configs ]; then\r\n    echo \"Files exist already\"\r\nelse\r\n    cp -r \/root\/parkertron\/configs\/ \/mnt\/server\/\r\nfi\r\n\r\necho \"Install complete. If you watched this. Congrats.\"",
-            "container": "golang:1.19-bullseye",
+            "container": "golang:1.19-bookworm",
             "entrypoint": "bash"
         }
     },

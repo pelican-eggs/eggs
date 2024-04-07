@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n#\r\napt update\r\napt install -y wget\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\ncd \/mnt\/server\r\nwget https:\/\/dl.min.io\/server\/minio\/release\/linux-${ARCH}\/minio\r\nchmod +x minio\r\nmkdir data\r\nmkdir keys\r\n\r\nwget https:\/\/github.com\/\/parkervcp\/eggs\/raw\/master\/storage\/minio\/minio.sh\r\nchmod +x minio.sh\r\nexport MINIO_ACCESS_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_ACCESS_KEY > keys\/key.txt\r\nexport MINIO_SECRET_KEY=$(cat \/dev\/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)\r\necho $MINIO_SECRET_KEY > keys\/secret.txt\r\necho done",
-            "container": "debian:buster-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

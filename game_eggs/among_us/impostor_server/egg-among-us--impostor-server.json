@@ -24,7 +24,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\napt update\r\napt -y install curl jq tar\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/Impostor\/Impostor\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/Impostor\/Impostor\/releases\")\r\nMATCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-arm64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\necho -e \"\\nDownloading from $DOWNLOAD_URL\"\r\ncurl -sSL -o imposter-server.tar.gz $DOWNLOAD_URL\r\n\r\n\r\necho -e \"\\nUnpacking .tar.gz\"\r\ntar xvf imposter-server.tar.gz\r\n\r\nrm imposter-server.tar.gz\r\nchmod +x Impostor.Server\r\n\r\necho -e \"\\nInstall completed\"",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

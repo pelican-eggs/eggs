@@ -1,24 +1,29 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2020-01-19T11:11:24-05:00",
+    "exported_at": "2024-04-01T11:25:50+02:00",
     "name": "pixel-bot",
     "author": "parker@parkervcp.com",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:alpine_python-3",
-    "startup": "python bot.py",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:python_3.7": "ghcr.io\/parkervcp\/yolks:python_3.7"
+    },
+    "file_denylist": [],
+    "startup": "\/usr\/local\/bin\/python bot.py",
     "config": {
         "files": "{\r\n    \"config\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"owner\": \"{{server.build.env.OWNER_UID}}\",\r\n            \"token\": \"{{server.build.env.BOT_TOKEN}}\",\r\n            \"bot_name\": \"{{server.build.env.BOT_NAME}}\",\r\n            \"log_file\": \"latest.log\"\r\n        }\r\n    },\r\n    \"plugins\/settings\/imgur.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"client_id\": \"{{server.build.env.IMGUR_KEY}}\",\r\n            \"client_secret\": \"{{server.build.env.IMGUR_SECRET}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Logged in as\",\r\n    \"userInteraction\": []\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Logged in as\"\r\n}",
+        "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Pixel Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache git gcc g++ libffi-dev make\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/Ispira\/pixel-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target $(pwd) discord imgurpython xkcd pynacl",
-            "container": "python:3.6-alpine3.7",
+            "script": "#!\/bin\/ash\r\n# Pixel Bot Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache git gcc g++ libffi-dev make\r\n\r\ncd \/mnt\/server\r\n\r\necho \"Cloning pixel-bot repo\"\r\ngit clone https:\/\/github.com\/Ispira\/pixel-bot.git .\r\n\r\necho \"Installing python requirements into folder\"\r\npip install -U --target $(pwd) discord imgurpython xkcd pynacl\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "python:3.7-alpine",
             "entrypoint": "ash"
         }
     },
@@ -28,45 +33,50 @@
             "description": "The Discord UID of the bot owner.",
             "env_variable": "OWNER_UID",
             "default_value": "copy from discord",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:32"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
+            "field_type": "text"
         },
         {
             "name": "Discord Bot Token",
             "description": "Get the app token from https:\/\/discordapp.com\/developers\/applications\/me",
             "env_variable": "BOT_TOKEN",
             "default_value": "get from discord developers",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:64"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
         },
         {
             "name": "Bot Name",
             "description": "The name that you want set for the bot",
             "env_variable": "BOT_NAME",
             "default_value": "Ispyra",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:20"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "Imgur API ID",
             "description": "Add your Imgur API client_id if you want. \r\n\r\nhttps:\/\/api.imgur.com\/oauth2\/addclient",
             "env_variable": "IMGUR_KEY",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "nullable|string|max:64"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
         },
         {
             "name": "Imgur Secret",
             "description": "Add your Imgur API client_secret if you want. \r\n\r\nhttps:\/\/api.imgur.com\/oauth2\/addclient",
             "env_variable": "IMGUR_SECRET",
             "default_value": "",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "nullable|string|max:20"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:20",
+            "field_type": "text"
         }
     ]
 }

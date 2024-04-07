@@ -1,17 +1,22 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2019-04-27T21:33:33-04:00",
+    "exported_at": "2024-04-01T11:21:19+02:00",
     "name": "fragbot",
     "author": "parker@parkervcp.com",
     "description": "The fragforce discord bot.\r\n\r\nlocated at https:\/\/github.com\/fragforce\/fragbot",
-    "image": "quay.io\/parkervcp\/pterodactyl-images:base_alpine",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:alpine": "ghcr.io\/parkervcp\/yolks:alpine"
+    },
+    "file_denylist": [],
     "startup": ".\/fragbot",
     "config": {
         "files": "{\r\n    \"config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"token\": \"{{server.build.env.DISCORD_TOKEN}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Bot is now running\",\r\n    \"userInteraction\": []\r\n}",
+        "startup": "{\r\n    \"done\": \"Bot is now running\"\r\n}",
         "logs": "{}",
         "stop": "shutdown"
     },
@@ -28,9 +33,10 @@
             "description": "The token that is to be used for the bot.",
             "env_variable": "DISCORD_TOKEN",
             "default_value": "ThisNeedsToBeChanged",
-            "user_viewable": 1,
-            "user_editable": 1,
-            "rules": "required|string|max:64"
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
         }
     ]
 }
