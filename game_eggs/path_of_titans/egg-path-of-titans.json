@@ -1,0 +1,103 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-07T19:39:38+00:00",
+    "name": "Path Of Titans",
+    "author": "danielivanvladimir.revin@gmail.com",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:ubuntu": "ghcr.io\/parkervcp\/yolks:ubuntu",
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/AlderonGamesCmd-Linux --game path-of-titans --server true --beta-branch {{BETA_BRANCH}} --auth-token {{AG_AUTH_TOKEN}} --install-dir .\/server\/ && .\/server\/PathOfTitansServer.sh {{SERVER_MAP}}?listen?MaxPlayers={{SERVER_MAX_PLAYERS}} -nullRHI -ServerName={{SERVER_NAME}} -ServerGUID={{SERVER_GUID}} -BranchKey={{BETA_BRANCH}} -Database={{SERVER_DB}} -log",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server ready\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt-get update && apt-get install -y --no-install-recommends apt-utils apt-transport-https ca-certificates libunwind8 icu-devtools openssl libkrb5-3 zlib1g libuuid1 dos2unix gnupg gnupg2 debian-archive-keyring gcc g++ lib32gcc-s1 lib32z1 lib32stdc++6 iproute2 gdb libsdl1.2debian libfontconfig libcurl4\r\napt-get autoremove --purge -y\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server && curl -o AlderonGamesCmd-Linux https:\/\/launcher-cdn.alderongames.com\/AlderonGamesCmd-Linux-x64\r\nchmod +x \/mnt\/server\/AlderonGamesCmd-Linux\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Map",
+            "description": "",
+            "env_variable": "SERVER_MAP",
+            "default_value": "Island",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "SERVER_MAX_PLAYERS",
+            "default_value": "100",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "Server name",
+            "description": "",
+            "env_variable": "SERVER_NAME",
+            "default_value": "YoutServerName",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:25",
+            "field_type": "text"
+        },
+        {
+            "name": "GUID",
+            "description": "Use https:\/\/guidgenerator.com\/",
+            "env_variable": "SERVER_GUID",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:40",
+            "field_type": "text"
+        },
+        {
+            "name": "Branch",
+            "description": "Choose between production or demo-public-test",
+            "env_variable": "BETA_BRANCH",
+            "default_value": "production",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:15",
+            "field_type": "text"
+        },
+        {
+            "name": "Database mode",
+            "description": "Server can use a Local or Remote Database. Specified using Local or Remote. We recommend using a Local Database unless you plan on connecting shared character data between servers.",
+            "env_variable": "SERVER_DB",
+            "default_value": "Local",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:8",
+            "field_type": "text"
+        },
+        {
+            "name": "Auth Token",
+            "description": "",
+            "env_variable": "AG_AUTH_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:1500",
+            "field_type": "text"
+        }
+    ]
+}
