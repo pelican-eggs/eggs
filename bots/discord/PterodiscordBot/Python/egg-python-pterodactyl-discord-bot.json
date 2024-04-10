@@ -1,0 +1,68 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-10T11:43:27+02:00",
+    "name": "Python Pterodactyl Discord Bot",
+    "author": "parker@parkervcp.com",
+    "description": "A egg that installs a Pterodactyl Discord Bot\r\n\r\nThis egg is build on the python egg from parkervcp",
+    "features": null,
+    "docker_images": {
+        "Python 3.12": "ghcr.io\/parkervcp\/yolks:python_3.12",
+        "Python 3.11": "ghcr.io\/parkervcp\/yolks:python_3.11",
+        "Python 3.10": "ghcr.io\/parkervcp\/yolks:python_3.10",
+        "Python 3.9": "ghcr.io\/parkervcp\/yolks:python_3.9",
+        "Python 3.8": "ghcr.io\/parkervcp\/yolks:python_3.8",
+        "Python 3.7": "ghcr.io\/parkervcp\/yolks:python_3.7",
+        "Python 2.7": "ghcr.io\/parkervcp\/yolks:python_2.7"
+    },
+    "file_denylist": [],
+    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ ! -z \"{{PY_PACKAGES}}\" ]]; then pip install -U --prefix .local {{PY_PACKAGES}}; fi; if [[ -f \/home\/container\/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; \/usr\/local\/bin\/python \/home\/container\/{{PY_FILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Pterodactyl Python Bot Install Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Cloning files from GitHub...\"\r\ngit clone https:\/\/github.com\/Poseidon281\/Pterodactyl-Discord-Bot.git \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assuming user knows what they are doing. Have a good day.\"\r\n    exit 0\r\nfi\r\n\r\nexport HOME=\/mnt\/server\r\n\r\necho \"Installing Python requirements into folder...\"\r\nif [[ ! -z ${PY_PACKAGES} ]]; then\r\n    pip install -U --prefix .local ${PY_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/requirements.txt ]; then\r\n    pip install -U --prefix .local -r \/mnt\/server\/requirements.txt\r\nfi\r\n\r\necho -e \"Installation complete.\"\r\nexit 0",
+            "container": "python:3.8-slim-bookworm",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "App py file",
+            "description": "The file that starts the App.",
+            "env_variable": "PY_FILE",
+            "default_value": "bot\/start.py",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Additional Python packages",
+            "description": "Install additional python packages.\r\n\r\nUse spaces to separate",
+            "env_variable": "PY_PACKAGES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "User upload",
+            "description": "DO you want to upload all other files manualy?",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}
