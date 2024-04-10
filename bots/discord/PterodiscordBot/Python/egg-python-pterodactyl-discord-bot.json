@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-10T11:43:27+02:00",
+    "exported_at": "2024-04-10T17:24:46+02:00",
     "name": "Python Pterodactyl Discord Bot",
     "author": "parker@parkervcp.com",
     "description": "A egg that installs a Pterodactyl Discord Bot\r\n\r\nThis egg is build on the python egg from parkervcp",
@@ -28,7 +28,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Pterodactyl Python Bot Install Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Cloning files from GitHub...\"\r\ngit clone https:\/\/github.com\/Poseidon281\/Pterodactyl-Discord-Bot.git \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assuming user knows what they are doing. Have a good day.\"\r\n    exit 0\r\nfi\r\n\r\nexport HOME=\/mnt\/server\r\n\r\necho \"Installing Python requirements into folder...\"\r\nif [[ ! -z ${PY_PACKAGES} ]]; then\r\n    pip install -U --prefix .local ${PY_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/requirements.txt ]; then\r\n    pip install -U --prefix .local -r \/mnt\/server\/requirements.txt\r\nfi\r\n\r\necho -e \"Installation complete.\"\r\nexit 0",
+            "script": "#!\/bin\/bash\r\n# Pterodactyl Python Bot Install Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\necho \"Installing Dependencies\"\r\npip install python-json-config\r\npip install py-dactyl\r\npip install pytz\r\npip install py-cord[voice]\r\n\r\necho \"Getting bot from GitHub...\"\r\ngit clone https:\/\/github.com\/Poseidon281\/Pterodactyl-Discord-Bot.git \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\r\n    echo -e \"Assuming user knows what they are doing. Have a good day.\"\r\n    exit 0\r\nfi\r\n\r\nexport HOME=\/mnt\/server\r\n\r\necho \"Installing Python requirements into folder...\"\r\nif [[ ! -z ${PY_PACKAGES} ]]; then\r\n    pip install -U --prefix .local ${PY_PACKAGES}\r\nfi\r\n\r\nif [ -f \/mnt\/server\/requirements.txt ]; then\r\n    pip install -U --prefix .local -r \/mnt\/server\/requirements.txt\r\nfi\r\n\r\necho -e \"Installation complete.\"\r\nexit 0",
             "container": "python:3.8-slim-bookworm",
             "entrypoint": "bash"
         }
@@ -56,7 +56,7 @@
         },
         {
             "name": "User upload",
-            "description": "DO you want to upload all other files manualy?",
+            "description": "Do you want to upload all other files manualy?",
             "env_variable": "USER_UPLOAD",
             "default_value": "0",
             "user_viewable": false,
