@@ -42,6 +42,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Redbot](/bots/discord/redbot) Python
 * [Ree6](/bots/discord/ree6) Java
 * [SinusBot](/bots/discord/sinusbot)
+* [PteroDiscord](/bots/discord/PterodiscordBot/Python) Python
 
 [Other](/bots/other)
 
