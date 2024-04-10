@@ -33,5 +33,5 @@ This egg supports the following Python versions:
 
 ## Authors
 - parkervcp - Original author of the Python egg.
-- Poseidon281 - Customizations for this Discord bot egg.
+- [Poseidon](https://github.com/Poseidon281) - Customizations for this Discord bot egg and the making of the [Bot](https://github.com/Poseidon281/Pterodactyl-Discord-Bot).
 
