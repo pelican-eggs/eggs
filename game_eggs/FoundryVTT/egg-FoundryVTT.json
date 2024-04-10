@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# FoundryVTT install script\r\n#\r\n# Server Files: \/mnt\/server\r\ndeclare -r DIR_ROOT=\"\/mnt\/server\"\r\ndeclare -r DIR_APP=\"${DIR_ROOT}\/app\"\r\ndeclare -r DIR_DATA=\"${DIR_ROOT}\/data\"\r\ndeclare -r ZIP_FILE_NAME=\"foundryvtt.zip\"\r\n\r\nmain() {\r\n  apt update\r\n  apt install -y unzip\r\n\r\n  printf \"\\nBuilding directory structure...\\n\"\r\n  mkdir -p \"${DIR_ROOT}\/data\/Config\"\r\n  mkdir -p \"${DIR_ROOT}\/app\"\r\n  # shellcheck disable=SC2164\r\n  cd \"${DIR_APP}\"\r\n  printf \"\\nDownloading FoundryVTT files...\\n\"\r\n  wget \"${TIMED_URL}\" -O \"${ZIP_FILE_NAME}\"\r\n  printf \"\\nunzipping FoundryVTT files...\\n\"\r\n  unzip \"${ZIP_FILE_NAME}\" -d \"${DIR_APP}\"\r\n  #rm \"${ZIP_FILE_NAME}\"\r\n\r\n  printf \"\\nGenerating default configuration...\\n\"\r\n  cat <<EOF >\"${DIR_DATA}\/Config\/options.json\"\r\n{\r\n  \"port\": 30000,\r\n  \"upnp\": false,\r\n  \"fullscreen\": false,\r\n  \"hostname\": null,\r\n  \"localHostname\": null,\r\n  \"routePrefix\": null,\r\n  \"sslCert\": null,\r\n  \"sslKey\": null,\r\n  \"awsConfig\": null,\r\n  \"dataPath\": \"\/home\/container\/data\",\r\n  \"passwordSalt\": null,\r\n  \"proxySSL\": false,\r\n  \"proxyPort\": null,\r\n  \"minifyStaticFiles\": true,\r\n  \"updateChannel\": \"release\",\r\n  \"language\": \"en.core\",\r\n  \"upnpLeaseDuration\": null,\r\n  \"world\": null\r\n} \r\nEOF\r\n  printf \"Installation Done.\\n\"\r\n}\r\nmain \"@\"",
-            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

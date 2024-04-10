@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Switch to mounted working install directory\r\ncd \/mnt\/server\r\n\r\napt update\r\napt install -y zip unzip wget curl git file\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"amd64\" || echo \"arm64\")\r\n# Download and extract Loki\r\n\r\nif [ \"$LOKI_VERSION\" = \"latest\" ]; then LOKI_VERSION=$(curl --silent \"https:\/\/api.github.com\/repos\/grafana\/loki\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\necho -e \"running curl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${LOKI_VERSION}\/loki-linux-${ARCH}.zip --output loki-linux-amd64.zip\"\r\ncurl -L https:\/\/github.com\/grafana\/loki\/releases\/download\/v${LOKI_VERSION}\/loki-linux-${ARCH}.zip --output loki-linux-${ARCH}.zip\r\nunzip loki-linux-${ARCH}.zip\r\nrm -rf loki-linux-${ARCH}.zip\r\ncurl -L https:\/\/raw.githubusercontent.com\/grafana\/loki\/v${LOKI_VERSION}\/cmd\/loki\/loki-docker-config.yaml --output loki-docker-config.yaml\r\nmv loki-linux-* loki-linux\r\necho -e \"installation completed\"",
-            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

@@ -27,7 +27,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Update and install xz\r\napk update\r\napk add xz\r\n# Cleanup previous install if available but leave etc untouched\r\nfind . -maxdepth 1 ! -name \"etc\" ! -name . -exec rm -rf {} \\;\r\n# Download and extract RabbitMQ\r\nversion=${RABBITMQ_VERSION}\r\nif [ \"$version\" = \"latest\" ]; then version=$(curl --silent \"https:\/\/api.github.com\/repos\/rabbitmq\/rabbitmq-server\/releases\/latest\" | grep '\"tag_name\":' | sed -E 's\/.*\"([^\"]+)\".*\/\\1\/' | cut -c2-); fi\r\ncurl -L https:\/\/github.com\/rabbitmq\/rabbitmq-server\/releases\/download\/v${version}\/rabbitmq-server-generic-unix-${version}.tar.xz --output rabbitmq.tar.xz\r\nxz -v -d rabbitmq.tar.xz && tar -xvf rabbitmq.tar\r\nmv -n rabbitmq_server-*\/* .\/\r\nrm -rf rabbitmq.tar rabbitmq_server-*\/\r\n# If there is no config, download default one\r\nif [ ! -f \"etc\/rabbitmq\/rabbitmq.conf\" ]; then mkdir -p etc\/rabbitmq\/ && curl -L https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/software\/rabbitmq\/rabbitmq.conf --output etc\/rabbitmq\/rabbitmq.conf; fi",
-            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },

@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# AssaultCube Server Egg (By HoleInTheSeat) <|-|> (https:\/\/assault.cubers.net\/)\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\napt update \r\n#######-|Dependencies|-#######\r\napt -y install tar curl bzip2\r\n#######-|Downloading files|-#######\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\n\"\r\necho -e \"\\n\"\r\necho -e \"###############################################\"\r\necho -e \"##  Downloading and unarchiving Sauerbraten  ##\"\r\necho -e \"## THIS WILL TAKE A WHILE. PLEASE BE PATIENT ##\"\r\necho -e \"###############################################\"\r\necho -e \"\\n\"\r\necho -e \"\\n\"\r\ncurl -sSL -o sauerbraten_2020_12_29_linux.tar.bz2 https:\/\/cfhcable.dl.sourceforge.net\/project\/sauerbraten\/sauerbraten\/2020_11_29\/sauerbraten_2020_12_29_linux.tar.bz2\r\ntar -xf sauerbraten_2020_12_29_linux.tar.bz2 -strip-components=1\r\nrm sauerbraten_2020_12_29_linux.tar.bz2\r\nchmod +x bin_unix\/linux_64_server\r\n\r\n#######-|Alert Completion|-#######\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:stable",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

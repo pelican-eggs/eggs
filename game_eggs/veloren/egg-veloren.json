@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n\r\napt update\r\napt install -y curl wget unzip git jq\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"x86_64\" || echo \"aarch64\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"weekly\" ]; then\r\n    echo -e \"weekly\"\r\n    DOWNLOAD_URL=https:\/\/download.veloren.net\/latest\/linux\/${ARCH}\/weekly\r\nelif [ \"${VERSION}\" == \"nightly\" ]; then\r\n    echo -e \"nightly\"\r\n    DOWNLOAD_URL=https:\/\/download.veloren.net\/latest\/linux\/${ARCH}\/nightly\r\nelse\r\n    echo -e  \"something went wrong\"\r\nfi\r\n\r\necho -e \"download url: ${DOWNLOAD_URL}\"\r\nwget ${DOWNLOAD_URL} -O files.zip\r\n\r\nunzip -o files.zip\r\nrm files.zip\r\n\r\nchmod +x veloren-server-cli\r\n\r\n## generate config because there is no better way to get it.\r\nmkdir -p \/mnt\/server\/userdata\/server\/server_config\/\r\nif [ ! -f \/mnt\/server\/userdata\/server\/server_config\/settings.ron ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/veloren\/settings.ron -O \/tmp\/settings.ron\r\n    sed \"s\/14004\/${SERVER_PORT}\/g\" \/tmp\/settings.ron > \/mnt\/server\/userdata\/server\/server_config\/settings.ron\r\n    rm \/tmp\/settings.ron\r\n    echo \"config file pulled\"\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

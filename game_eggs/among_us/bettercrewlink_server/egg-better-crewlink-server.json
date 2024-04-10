@@ -4,13 +4,13 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-25T23:48:33+02:00",
+    "exported_at": "2024-04-02T13:58:58+02:00",
     "name": "BetterCrewlink Server",
     "author": "tobiornotto@gmail.com",
     "description": "An egg designed to allow support for Proximity Chat in Among Us using BetterCrewLink Server",
     "features": null,
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:nodejs_12": "ghcr.io\/parkervcp\/yolks:nodejs_12"
+        "ghcr.io\/parkervcp\/yolks:nodejs_16": "ghcr.io\/parkervcp\/yolks:nodejs_16"
     },
     "file_denylist": [],
     "startup": "yarn start",
@@ -18,12 +18,12 @@
         "files": "{}",
         "startup": "{\r\n    \"done\": \"<info> BetterCrewLink Server started\"\r\n}",
         "logs": "{}",
-        "stop": "^c"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nINSTALL_REPO=\"https:\/\/github.com\/OhMyGuus\/BetterCrewLink-server.git\"\r\necho -e Install repo set to ${INSTALL_REPO}\r\necho -e \"\/mnt\/server is empty.\\ncloning files from repo\"\r\necho -e \"running 'git clone --single-branch --branch ${BRANCH} ${INSTALL_REPO} .'\"\r\ngit clone --single-branch --branch ${BRANCH} ${INSTALL_REPO} .\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/yarn install\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
-            "container": "node:12-buster-slim",
+            "script": "#!\/bin\/bash\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git python3 python3-pip build-essential\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nINSTALL_REPO=\"https:\/\/github.com\/OhMyGuus\/BetterCrewLink-server.git\"\r\necho -e Install repo set to ${INSTALL_REPO}\r\necho -e \"\/mnt\/server is empty.\\ncloning files from repo\"\r\necho -e \"running 'git clone --single-branch --branch ${BRANCH} ${INSTALL_REPO} .'\"\r\ngit clone --single-branch --branch ${BRANCH} ${INSTALL_REPO} .\r\n\r\nif [ -f \/mnt\/server\/package.json ]; then\r\n    \/usr\/local\/bin\/yarn install\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "node:16-bookworm",
             "entrypoint": "bash"
         }
     },

@@ -1,17 +1,17 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "version": "PTDL_v1",
+        "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-01-22T05:44:04-05:00",
+    "exported_at": "2024-04-02T11:44:15+02:00",
     "name": "Teeworlds",
     "author": "parker@parkervcp.com",
     "description": "Teeworlds is a free online multiplayer game, available for all major operating systems. Battle with up to 16 players in a variety of game modes, including Team Deathmatch and Capture The Flag. You can even design your own maps!",
     "features": null,
-    "images": [
-        "ghcr.io\/parkervcp\/yolks:debian"
-    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
     "file_denylist": [],
     "startup": ".\/teeworlds_srv",
     "config": {
@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "## teeworlds pterodactyl installer\r\napt update\r\napt upgrade -y\r\napt install -y curl jq file\r\n\r\nGITHUB_PACKAGE=\"teeworlds\/teeworlds\"\r\nMATCH=\"linux_x86_64\"\r\n\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\nif [ ! -z \"${DOWNLOAD_URL}\"]; then \r\n    if curl --output \/dev\/null --silent --head --fail ${DOWNLOAD_URL}; then\r\n        echo -e \"link is valid. setting download link to ${DOWNLOAD_URL}\"\r\n        DOWNLOAD_LINK=${DOWNLOAD_URL}\r\n    else        \r\n        echo -e \"link is invalid closing out\"\r\n        exit 2\r\n    fi\r\nfi\r\n\r\n## setting variable names for later\r\nFILE_NAME=${DOWNLOAD_LINK##*\/}\r\nFOLDER_NAME=${FILE_NAME%.tar.gz}\r\n\r\necho -e \"running 'curl -sSL ${DOWNLOAD_LINK} -o ${FILE_NAME}'\"\r\ncurl -sSL ${DOWNLOAD_LINK} -o ${FILE_NAME}\r\n\r\nFILETYPE=$(file -F ',' ${FILE_NAME} | cut -d',' -f2 | cut -d' ' -f2)\r\nif [ \"$FILETYPE\" == \"gzip\" ]; then\r\n    tar xzvf ${FILE_NAME}\r\nelif [ \"$FILETYPE\" == \"Zip\" ]; then\r\n    unzip ${FILE_NAME}\r\nelif [ \"$FILETYPE\" == \"XZ\" ]; then\r\n    tar xvf ${FILE_NAME}\r\nelse\r\n    echo -e \"unknown filetype. Exiting\"\r\n    # exit 2 \r\nfi\r\n\r\n## cleanup old files\r\nmv ${FOLDER_NAME}\/* .\/\r\n\r\nrm -rf ${FILE_NAME} ${FOLDER_NAME}\r\n\r\n## download default config\r\nif [ ! -f \/mnt\/server\/autoexec.cfg ]; then\r\n    curl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/teeworlds\/autoexec.cfg > \/mnt\/server\/autoexec.cfg\r\nfi\r\n\r\n## download safe storage file\r\n## overwrites any that exists.\r\ncurl -sSL https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/teeworlds\/storage.cfg > \/mnt\/server\/storage.cfg\r\n\r\necho -e \"Install complete.\"",
-            "container": "debian:buster-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },
@@ -35,7 +35,8 @@
             "default_value": "A Pterodactyl Hosted Teeworlds Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         },
         {
             "name": "Server MotD",
@@ -44,7 +45,8 @@
             "default_value": "A Pterodactyl Hosted Teeworlds Server",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string"
+            "rules": "nullable|string",
+            "field_type": "text"
         }
     ]
 }

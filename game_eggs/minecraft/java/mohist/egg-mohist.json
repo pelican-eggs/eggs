@@ -31,7 +31,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt -y install curl\r\n\r\n#Go into main direction\r\nif [ ! -d \/mnt\/server ]; then\r\n    mkdir -p \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nif [ ! -z ${BUILD_VERSION} ]; then\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/${BUILD_VERSION}\/download\r\nelse\r\n    DOWNLOAD_LINK=https:\/\/mohistmc.com\/api\/${MC_VERSION}\/latest\/download\r\nfi\r\n\r\n#Downloading jars\r\necho -e \"Download link is ${DOWNLOAD_LINK}\"\r\necho -e \"Downloading build version ${BUILD_VERSION}\"\r\n\r\ncurl -sSL -o ${SERVER_JARFILE} ${DOWNLOAD_LINK}\r\n\r\n#Checking if downloaded jars exist\r\nif [ ! -f .\/${SERVER_JARFILE} ]; then\r\n    echo \"!!! Error downloading build version ${BUILD_VERSION} !!!\"\r\n    exit\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

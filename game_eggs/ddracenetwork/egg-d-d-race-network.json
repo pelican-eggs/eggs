@@ -23,7 +23,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl xz-utils tar\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | head -1)\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nelse\r\n    A=$(curl -sSL https:\/\/ddnet.org\/downloads\/ | grep -io '<a href=['\"'\"'\"][^\"'\"'\"']*['\"'\"'\"]' | grep linux_x86_64.tar.xz | awk '{print $2}' |cut -c7- | sed 's\/.$\/\/' | grep -i ${VERSION})\r\n    DOWNLOAD_URL=https:\/\/ddnet.org\/downloads\/${A}\r\nfi\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\ncurl -sSL -o ddnet_linux_x86_64.tar.xz ${DOWNLOAD_URL}\r\ntar -xf ddnet_linux_x86_64.tar.xz --strip-components=1\r\nrm ddnet_linux_x86_64.tar.xz\r\n\r\ncd \/mnt\/server\/data\r\nsed -i 's\/#\\(sv_port [0-9]\\+\\)\/\\1\/' autoexec_server.cfg\r\n\r\ncd \/mnt\/server\r\necho \"# Check \/data\/autoexec_config.cfg for more info!\" >> myServerconfig.cfg\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
-            "container": "debian:bullseye-slim",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
     },

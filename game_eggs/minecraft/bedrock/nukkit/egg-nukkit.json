@@ -4,30 +4,29 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-01T16:48:52+01:00",
+    "exported_at": "2024-04-01T11:38:42+02:00",
     "name": "Nukkit",
     "author": "parker@parkervcp.com",
     "description": "Nukkit is a Nuclear-Powered Server Software For Minecraft: Pocket Edition\r\n\r\nhttps:\/\/cloudburstmc.org",
     "features": null,
     "docker_images": {
-        "quay.io\/pterodactyl\/core:java-glibc": "quay.io\/pterodactyl\/core:java-glibc",
-        "ghcr.io\/pterodactyl\/yolks:java_11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "ghcr.io\/pterodactyl\/yolks:java_16": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "ghcr.io\/pterodactyl\/yolks:java_8": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11",
+        "ghcr.io\/parkervcp\/yolks:java_16": "ghcr.io\/parkervcp\/yolks:java_16",
+        "ghcr.io\/parkervcp\/yolks:java_8": "ghcr.io\/parkervcp\/yolks:java_8",
+        "ghcr.io\/parkervcp\/yolks:java_17": "ghcr.io\/parkervcp\/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \")! \"\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{}",
         "stop": "stop"
     },
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Nukkit Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napk add --no-cache curl openssl\r\n\r\ncd \/mnt\/server\r\n\r\n## Only download if a path is provided, otherwise continue.\r\nif [ ! -z \"${DL_PATH}\" ]; then\r\n    MODIFIED_DOWNLOAD=`eval echo $(echo ${DL_PATH} | sed -e 's\/{{\/${\/g' -e 's\/}}\/}\/g')`\r\n    wget ${MODIFIED_DOWNLOAD} -O ${SERVER_JARFILE}\r\nelif [ -z \"${NUKKIT_VERSION}\" ] || [ \"${NUKKIT_VERSION}\" == \"latest\" ]; then\r\n    wget https:\/\/ci.opencollab.dev\/job\/NukkitX\/job\/Nukkit\/job\/master\/lastSuccessfulBuild\/artifact\/target\/nukkit-1.0-SNAPSHOT.jar -O ${SERVER_JARFILE}\r\nelse\r\n    wget https:\/\/ci.opencollab.dev\/job\/NukkitX\/job\/Nukkit\/job\/master\/${NUKKIT_VERSION}\/artifact\/target\/nukkit-1.0-SNAPSHOT.jar -O ${SERVER_JARFILE}\r\nfi\r\n\r\nif [ ! -f nukkit.yml ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/bedrock\/nukkit\/nukkit.yml\r\nfi\r\n\r\nif [ ! -f server.properties ]; then\r\n    wget https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/game_eggs\/minecraft\/bedrock\/nukkit\/server.properties\r\nfi\r\n\r\necho -s \"Install completed!\"",
-            "container": "alpine:3.10",
+            "container": "ghcr.io\/parkervcp\/installers:alpine",
             "entrypoint": "ash"
         }
     },
