@@ -31,6 +31,6 @@ Add `-beaconport=15000` to your commandline if you have more than one (1) server
  - [@Fakhry](https://github.com/fakhry7050)
  - [@Rectofen](https://github.com/Cloud9OS)
  - [@ghoti](https://github.com/sergelouie6)
- - [@Cartitarul]([https://github.com/fakhry7050](https://github.com/Cartitarul))
+ - [@Cartitarul](https://github.com/Cartitarul)
 
 These individuals have contributed to the development of this project either by direct code contributions, testing, or providing insights and documentation help.
