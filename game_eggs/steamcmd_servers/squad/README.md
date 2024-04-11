@@ -13,7 +13,7 @@ Squad requires 5 ports
 For additional servers please increase the beacon port by 1
 
 ## Overview
-The Squad-egg-pterodactyl project provides the necessary configurations to deploy and manage a Squad game server on the Pterodactyl platform using Windows compatibility layers provided by Wine. This setup is particularly useful for supporting mods and ensuring that the Squad server operates seamlessly in a Windows-emulated environment on Linux servers.
+### The Squad-egg-pterodactyl project provides the necessary configurations to deploy and manage a Squad game server on the Pterodactyl platform using Windows compatibility layers provided by Wine. This setup is particularly useful for supporting mods and ensuring that the Squad server operates seamlessly in a Windows-emulated environment on Linux servers.
 ---
 ## Features
  - [Wine Integration: Runs Squad servers through Wine, allowing you to leverage Windows-based server executables on Linux platforms.
