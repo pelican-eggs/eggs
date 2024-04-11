@@ -4,8 +4,8 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-11T14:59:42+01:00",
-    "name": "Wine Generic",
+    "exported_at": "2024-04-11T17:26:20+01:00",
+    "name": "Squad Wine",
     "author": "parker@parkervcp.com",
     "description": "Squad is a realism-based military tactical first-person shooter video game developed and published by Canadian indie developer Offworld Industries exclusively through the Steam distribution platform. It is a spiritual successor to the Project Reality modification for Battlefield 2.",
     "features": null,
@@ -15,14 +15,14 @@
     "file_denylist": [],
     "startup": ".\/start.sh",
     "config": {
-        "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.servername}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.maxplayers}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.allowteamchange}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.advertise}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.reservedslots}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.ptciu}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.teambal}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.recorddemos}}\",\r\n            \"TKAutoKickEnabled\": \"TKAutoKickEnabled={{server.build.env.TKAutoKickEnabled}}\"\r\n        }\r\n    },\r\n    \"SquadGame\/ServerConfig\/Rcon.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"Password\": \"Password=\\\"{{server.build.env.rconpassword}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.SERVERNAME}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAXPLAYERS}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.ALLOWTEAMCHANGE}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.ADVERTISE}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.RESERVEDSLOTS}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.PTCIU}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.TEAMBAL}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.RECORDDEMOS}}\",\r\n            \"TKAutoKickEnabled\": \"TKAutoKickEnabled={{server.build.env.TKAUTOKICKENABLED}}\"\r\n        }\r\n    },\r\n    \"start.sh\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"FIXEDMAXTICKRATE\": \"FIXEDMAXTICKRATE=\\\"{{server.build.env.FIXEDMAXTICKRATE}}\\\"\",\r\n            \"QueryPort\": \"QueryPort={{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Everything Done\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# This script installs the Squad game server using Wine and SteamCMD, as well as creates a start.sh script.\r\n\r\n# Navigate to the temporary directory and setup SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\n# Create a directory to prevent SteamCMD disk write errors\r\nmkdir -p \/mnt\/server\/steamapps\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# Install the Squad server for Windows using SteamCMD\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +login anonymous +app_update 403240 validate +quit\r\n\r\n# Remove the Steam workshop file to prevent conflict with mods specified in the variables tab\r\nrm \/mnt\/server\/steamapps\/workshop\/appworkshop_393380.acf\r\n\r\n# Address ownership issues which can cause SteamCMD to fail, especially when running as root\r\nchown -R root:root \/mnt\r\n\r\n# Set the HOME environment variable to the server directory\r\nexport HOME=\/mnt\/server\r\n\r\n# Download specified workshop items using a list from the `WORKSHOP_ITEMS` environment variable\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +login anonymous \\\r\n$(IFS=','; for item in $WORKSHOP_ITEMS; do echo \"+workshop_download_item 393380 ${item}\"; done) \\\r\n+quit\r\n\r\n# Move downloaded mods to the appropriate directory\r\nmv -f \/mnt\/server\/steamapps\/workshop\/content\/393380\/* \/mnt\/server\/SquadGame\/Plugins\/Mods\/\r\n\r\n# Create or Download 'start.sh' in the server directory\r\necho \"Creating start.sh script in the server directory...\"\r\ncat << 'EOF' > \/mnt\/server\/start.sh\r\n#!\/bin\/bash\r\n# Startup command to run the Squad game server and tail logs.\r\n\r\n# Ensure the server executable variable is replaced correctly\r\nSERVER_EXEC=\"\/home\/container\/SquadGame\/Binaries\/Win64\/${SERVER_EXECUTABLE}\"\r\nLOG_PATH=\"\/home\/container\/SquadGame\/Saved\/Logs\/SquadGame.log\"\r\n\r\n# Output startup details\r\necho \"Starting the Squad game server...\"\r\necho \"Executable: $SERVER_EXEC\"\r\necho \"Logs will be tailed from: $LOG_PATH\"\r\n\r\n# Start the Squad server in the background\r\nwine \"$SERVER_EXEC\" Port=${SERVER_PORT} QueryPort=${QUERY_PORT} beaconport=${BEACON_PORT} FIXEDMAXTICKRATE=${FIXEDMAXTICKRATE} -log &\r\n\r\n# Tail the log file\r\ntail -f \"$LOG_PATH\"\r\nEOF\r\n\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\n# Inform user of installation completion\r\necho \"-----------------------------------------\"\r\necho \"Installation and script setup completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n# This script installs the Squad game server using Wine and SteamCMD, as well as creates a start.sh script.\r\n\r\n# Navigate to the temporary directory and setup SteamCMD\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\n# Create a directory to prevent SteamCMD disk write errors\r\nmkdir -p \/mnt\/server\/steamapps\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# Install the Squad server for Windows using SteamCMD\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +login anonymous +app_update 403240 validate +quit\r\n\r\n# Remove the Steam workshop file to prevent conflict with mods specified in the variables tab\r\nrm \/mnt\/server\/steamapps\/workshop\/appworkshop_393380.acf\r\n\r\n# Address ownership issues which can cause SteamCMD to fail, especially when running as root\r\nchown -R root:root \/mnt\r\n\r\n# Set the HOME environment variable to the server directory\r\nexport HOME=\/mnt\/server\r\n\r\n# Download specified workshop items using a list from the `WORKSHOP_ITEMS` environment variable\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +login anonymous \\\r\n$(IFS=','; for item in $WORKSHOP_ITEMS; do echo \"+workshop_download_item 393380 ${item}\"; done) \\\r\n+quit\r\n\r\n# Move downloaded mods to the appropriate directory\r\nmv -f \/mnt\/server\/steamapps\/workshop\/content\/393380\/* \/mnt\/server\/SquadGame\/Plugins\/Mods\/\r\n\r\n# Create or Download 'start.sh' in the server directory\r\necho \"Creating start.sh script in the server directory...\"\r\ncat << 'EOF' > \/mnt\/server\/start.sh\r\n#!\/bin\/bash\r\n# Startup command to run the Squad game server and tail logs.\r\n\r\n# Ensure the server executable variable is replaced correctly\r\nSERVER_EXEC=\"\/home\/container\/SquadGame\/Binaries\/Win64\/${SERVER_EXECUTABLE}\"\r\nLOG_PATH=\"\/home\/container\/SquadGame\/Saved\/Logs\/SquadGame.log\"\r\n\r\n# Output startup details\r\necho \"Starting the Squad game server...\"\r\necho \"Executable: $SERVER_EXEC\"\r\necho \"Logs will be tailed from: $LOG_PATH\"\r\nFIXEDMAXTICKRATE=\"50\"\r\nQueryPort=27165\r\n# Start the Squad server in the background\r\nwine \"$SERVER_EXEC\" Port=${SERVER_PORT} QueryPort=${QUERY_PORT} beaconport=${BEACON_PORT} FIXEDMAXTICKRATE=${FIXEDMAXTICKRATE} -log &\r\n# Create the necessary directories if they do not exist\r\nmkdir -p \/home\/container\/SquadGame\/Saved\/Logs\r\n\r\n# Create the log file if it does not exist\r\ntouch \"$LOG_PATH\"\r\n# Tail the log file\r\n\r\ntail -f \"$LOG_PATH\"\r\nEOF\r\n\r\nchmod +x \/mnt\/server\/start.sh\r\n\r\n# Inform user of installation completion\r\necho \"-----------------------------------------\"\r\necho \"Installation and script setup completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/parkervcp\/installers:debian",
             "entrypoint": "bash"
         }
@@ -36,16 +36,6 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "sub directory to install into",
-            "description": "for example is the server needs to get installed into \/home\/container\/server\/bin\/\r\n\r\nuse server\/bin\/",
-            "env_variable": "INSTALL_DIR",
-            "default_value": "",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "nullable|string",
             "field_type": "text"
         },
         {
@@ -71,7 +61,7 @@
         {
             "name": "Max Players",
             "description": "Sets the maximum number of players.",
-            "env_variable": "maxplayers",
+            "env_variable": "MAXPLAYERS",
             "default_value": "80",
             "user_viewable": true,
             "user_editable": false,
@@ -81,7 +71,7 @@
         {
             "name": "Server Name",
             "description": "The name for the server in the server list",
-            "env_variable": "servername",
+            "env_variable": "SERVERNAME",
             "default_value": "Squad Server",
             "user_viewable": true,
             "user_editable": true,
@@ -91,7 +81,7 @@
         {
             "name": "Allowteamchange",
             "description": "Allow players to change teams ( true \\\/ false )",
-            "env_variable": "allowteamchange",
+            "env_variable": "ALLOWTEAMCHANGE",
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
@@ -101,7 +91,7 @@
         {
             "name": "TKAutoKick",
             "description": "teamkill system if you like enable by ( true \\\/ false )",
-            "env_variable": "TKAutoKickEnabled",
+            "env_variable": "TKAUTOKICKENABLED",
             "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
@@ -109,10 +99,70 @@
             "field_type": "text"
         },
         {
-            "name": "tickrate",
+            "name": "Tickrate",
             "description": "your numbers of max tickrate",
             "env_variable": "FIXEDMAXTICKRATE",
-            "default_value": "50",
+            "default_value": "60",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27165",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Advertise Server",
+            "description": "Have the server report to the public server list ( true \/ false )",
+            "env_variable": "ADVERTISE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Reserved Slots",
+            "description": "The number of reserved slots for admins \/ mods",
+            "env_variable": "RESERVEDSLOTS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Prevent Team Change If Unbalanced",
+            "description": "This will prevent players from changing teams if they're already unbalanced ( true \/ false )",
+            "env_variable": "PTCIU",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Enforce Team Balance",
+            "description": "This will FORCE team balance if the teams are too uneven ( true \/ false )",
+            "env_variable": "TEAMBAL",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Record Demos",
+            "description": "This will record demos of the players ( true \/ false )",
+            "env_variable": "RECORDDEMOS",
+            "default_value": "true",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
