@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-11T17:42:26+01:00",
+    "exported_at": "2024-04-11T19:42:46+01:00",
     "name": "Squad Wine",
     "author": "parker@parkervcp.com",
     "description": "Squad is a realism-based military tactical first-person shooter video game developed and published by Canadian indie developer Offworld Industries exclusively through the Steam distribution platform. It is a spiritual successor to the Project Reality modification for Battlefield 2.",
@@ -13,7 +13,7 @@
         "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": ".\/start.sh",
+    "startup": "rm \/home\/container\/SquadGame\/Saved\/Logs\/SquadGame.log; wine \/home\/container\/SquadGame\/Binaries\/Win64\/SquadGameServer.exe Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}} beaconport={{BEACON_PORT}} FIXEDMAXTICKRATE={{FIXEDMAXTICKRATE}} -log & SQD_PID=$!; tail -c0 -F \/home\/container\/SquadGame\/Saved\/Logs\/SquadGame.log --pid=$SQD_PID",
     "config": {
         "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.SERVERNAME}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAXPLAYERS}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.ALLOWTEAMCHANGE}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.ADVERTISE}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.RESERVEDSLOTS}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.PTCIU}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.TEAMBAL}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.RECORDDEMOS}}\",\r\n            \"TKAutoKickEnabled\": \"TKAutoKickEnabled={{server.build.env.TKAUTOKICKENABLED}}\"\r\n        }\r\n    },\r\n    \"start.sh\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"FIXEDMAXTICKRATE\": \"FIXEDMAXTICKRATE=\\\"{{server.build.env.FIXEDMAXTICKRATE}}\\\"\",\r\n            \"QueryPort\": \"QueryPort={{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Everything Done\"\r\n}",
