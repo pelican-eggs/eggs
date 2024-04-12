@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-01-17T14:53:01+01:00",
+    "name": "Gate",
+    "author": "mrspacecarrotdev@gmail.com",
+    "description": "High-Performance, Low-Memory, Lightweight, Extensible Minecraft Reverse Proxy with Excellent Multi-Protocol Version Support - Velocity\/Bungee Replacement - Ready for dev and large deploy! (Description from Github)",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:debian": "ghcr.io\/parkervcp\/yolks:debian"
+    },
+    "file_denylist": [],
+    "startup": ".\/gate",
+    "config": {
+        "files": "{\r\n    \"config.yml\": {\r\n        \"parser\": \"yaml\",\r\n        \"find\": {\r\n            \"config.bind\": \"0.0.0.0:{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"listening\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Create \/mnt\/server directory if it doesn't exist\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\r\n\r\nif [ -f \/mnt\/server\/gate.old ]; then\r\n    rm gate.old\r\nfi\r\n\r\nif [ -f \/mnt\/server\/gate ]; then\r\n    mv gate gate.old\r\nfi\r\n\r\n# Determine latest version and get download link\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/minekube\/gate\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/minekube\/gate\/releases\")\r\n\r\n# Determine CPU architecture, in order to get correct package\r\nARCHITECTURE=$( [[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux_amd64\" || echo \"linux_arm64\" )\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCHITECTURE})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${ARCHITECTURE})\r\n    else\r\n        echo -e \"Specified version not found, defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${ARCHITECTURE})\r\n    fi\r\nfi\r\n\r\n# Download the Gate binary from GitHub releases\r\necho \"Download URL: ${DOWNLOAD_URL}\"\r\ncurl -sSL -o gate ${DOWNLOAD_URL}\r\n\r\n# Ensure the downloaded binary is executable\r\nchmod +x \/mnt\/server\/gate\r\n\r\n# Create config file if it doesn't already exist\r\nif [ ! -f \/mnt\/server\/config.yml ]; then\r\n  cat <<EOL > \/mnt\/server\/config.yml\r\n  config:\r\n    bind: 0.0.0.0:25565\r\n    servers:\r\n      server1: localhost:25566\r\n      server2: localhost:25567\r\n    try:\r\n      - server1\r\n      - server2\r\nEOL\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Gate Version",
+            "description": "Version of Gate to download, eg 'v0.36.4'. Set to 'latest' to download the latest version",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
