@@ -106,6 +106,7 @@
     * [Travertine](minecraft/proxy/java/travertine)
     * [Velocity](minecraft/proxy/java/velocity)
     * [Waterfall](minecraft/proxy/java/waterfall)
+    * [Infrared](minecraft/proxy/java/infrared)
   * [Bedrock](minecraft/proxy/bedrock)
     * [Waterdog PE](minecraft/proxy/bedrock/waterdog_pe)
   * [Cross Platform](minecraft/proxy/cross_platform)
