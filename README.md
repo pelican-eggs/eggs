@@ -111,6 +111,10 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [BeamMP Server](game_eggs/beamng/beammp)
 * [KissMP](game_eggs/beamng/kissmp)
 
+[Call of Duty 4X](game_eggs/cod/cod4x)
+
+[Cryofall](game_eggs/cryofall/cryofall)
+
 [ClassiCube](game_eggs/classicube)
 
 * [MCGalaxy](game_eggs/classicube/mcgalaxy)
@@ -133,6 +137,11 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [ET Legacy](game_eggs/enemy_territory/etlegacy)
 
+[Eugen games](game_eggs/eugen)
+* [Steel Division 2](game_eggs/eugen/steel-division-2)
+* [Wargame: Red Dragon](game_eggs/eugen/wargame-red-dragon)
+* [Wargame: Red Dragon - patched](game_eggs/eugen/wargame-red-dragon-patched)
+* 
 [FTL: Tachyon](game_eggs/ftl/tachyon)
 
 [Factorio](game_eggs/factorio)
