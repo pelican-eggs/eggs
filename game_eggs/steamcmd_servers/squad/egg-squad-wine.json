@@ -161,6 +161,16 @@
             "field_type": "text"
         },
         {
+            "name": "WINDOWS INSTALL",
+            "description": "Set specific SteamCMD platform type\r\n1 For WIndows\r\n2 For linux",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:1",
+            "field_type": "text"
+        },
+        {
             "name": "STEAM USER",
             "description": "Specify Steam User or leave it Blank for anonymous",
             "env_variable": "STEAM_USER",
