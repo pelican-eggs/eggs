@@ -10,7 +10,8 @@
     "description": "Standalone server program Limbo.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/pterodactyl\/yolks:java_17": "ghcr.io\/pterodactyl\/yolks:java_17"
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 21": "ghcr.io\/pterodactyl\/yolks:java_21"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
