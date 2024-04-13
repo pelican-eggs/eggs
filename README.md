@@ -253,6 +253,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 * [Avorion](game_eggs/steamcmd_servers/avorion)
 * [Barotrauma](game_eggs/steamcmd_servers/barotrauma)
 * [BATTALION: Legacy](game_eggs/steamcmd_servers/battalion_legacy)
+* [BattleBit Remastered](game_eggs/steamcmd_servers/battlebit_remastered)
 * [Black Mesa](game_eggs/steamcmd_servers/black_mesa)
 * [Citadel: Forged with Fire](game_eggs/steamcmd_servers/citadel)
 * [Colony Survival](game_eggs/steamcmd_servers/colony_survival)
