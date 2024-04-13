@@ -1,4 +1,3 @@
-
 # Squad
 
 ## Steam Description
@@ -17,10 +16,7 @@ Squad requires 5 ports
 | game +1  | 7788    |
 | Query    | 27165   |
 | Query +1 | 27166   |
-| Beacon   | 15000  |
-| Beacon   | 15000+  |
-
-Add `-beaconport=15000` to your commandline if you have more than one (1) server, increase this number by five (5).
+| Beacon   | 15000   |
 
 ## Features
  - Wine Integration: Runs Squad servers through Wine, allowing you to leverage Windows-based server executables on Linux platforms.
