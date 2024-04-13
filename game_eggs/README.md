@@ -268,6 +268,8 @@
 
 [Veloren](veloren)
 
+[Venice Unleashed](venice_unleashed)
+
 [Vintage Story](vintage_story)
 
 [Xonotic](xonotic/xonotic)

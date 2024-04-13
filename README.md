@@ -374,7 +374,9 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 [Veloren](game_eggs/veloren)
 
-[Vintage Story](game_eggs/vintage_story)
+[Venice Unleashed](game_eggs/venice_unleashed)
+
+[Vintage Story](game_eggs/vintage_story/vintage_story)
 
 [Wine Generic](game_eggs/wine/generic)
 
