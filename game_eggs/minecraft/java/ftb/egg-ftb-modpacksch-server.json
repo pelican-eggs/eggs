@@ -18,7 +18,8 @@
         "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
         "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
         "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
-        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
+        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18",
+		"Java 21": "ghcr.io\/pterodactyl\/yolks:java_21"
     },
     "file_denylist": [],
     "startup": "java -javaagent:log4jfix\/Log4jPatcher-1.0.0.jar -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true $( [[  ! -f unix_args.txt ]] && printf %s \"-jar start-server.jar\" || printf %s \"@unix_args.txt\" )",
