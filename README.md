@@ -248,6 +248,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Arma 3](game_eggs/steamcmd_servers/arma/arma3)
   * [Arma Reforger](game_eggs/steamcmd_servers/arma/arma_reforger)
 * [Assetto Corsa](game_eggs/steamcmd_servers/assetto_corsa)
+* [Assetto Corsa Competizione](game_eggs/steamcmd_servers/assetto_corsa_competizione)
 * [Astro Colony](game_eggs/steamcmd_servers/astro_colony)
 * [Astroneer](game_eggs/steamcmd_servers/astroneer)
 * [Avorion](game_eggs/steamcmd_servers/avorion)
