@@ -211,6 +211,8 @@
   * [Autowipe](steamcmd_servers/rust/rust_autowipe)
   * [Staging](steamcmd_servers/rust/rust_staging)
 * [Satisfactory](steamcmd_servers/satisfactory)
+* [SCP: Escape Together](steamcmd_servers/scp_escape_together)
+* [Solace Crafting](steamcmd_servers/solace_crafting)
 * [SCP: Secret Laboratory](steamcmd_servers/scpsl)
   * [Dedicated](steamcmd_servers/scpsl/dedicated)
   * [Exiled](steamcmd_servers/scpsl/exiled)

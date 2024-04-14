@@ -264,9 +264,14 @@ This is a collection of servers that use SteamCMD to install.
   * [dedicated](scpsl/dedicated)
   * [exiled](scpsl/exiled)
 
+## SCP: Escape Together
+
+[SCP: Escape Together](scp_escape_together)
+
 ## Smalland: Survive the Wilds
 
 [Smalland: Survive the Wilds](smalland_survive_the_wilds)
+
 
 ## Solace Crafting
 

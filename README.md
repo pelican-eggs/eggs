@@ -313,6 +313,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
   * [Autowipe](game_eggs/steamcmd_servers/rust/rust_autowipe)
   * [Staging](game_eggs/steamcmd_servers/rust/rust_staging)
 * [Satisfactory](game_eggs/steamcmd_servers/satisfactory)
+* [SCP: Escape Together](game_eggs/steamcmd_servers/scp_escape_together)
+* [Solace Crafting](game_eggs/steamcmd_servers/solace_crafting)
 * [SCP: Secret Laboratory](game_eggs/steamcmd_servers/scpsl)
   * [dedicated](game_eggs/steamcmd_servers/scpsl/dedicated)
   * [exiled](game_eggs/steamcmd_servers/scpsl/exiled)
