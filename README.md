@@ -209,6 +209,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 * [Proxies](game_eggs/minecraft/proxy) Minecraft Server Proxies
   * [Java](game_eggs/minecraft/proxy/java)
+    * [BungeeCord](game_eggs/minecraft/proxy/java/bungeecord)
     * [Travertine](game_eggs/minecraft/proxy/java/travertine)
     * [Velocity](game_eggs/minecraft/proxy/java/velocity)
     * [Waterfall](game_eggs/minecraft/proxy/java/waterfall)
