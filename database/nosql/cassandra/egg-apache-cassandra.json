@@ -1,0 +1,60 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1",
+        "update_url": null
+    },
+    "exported_at": "2021-08-03T22:11:40+02:00",
+    "name": "Apache Cassandra",
+    "author": "p.zarrad@outlook.de",
+    "description": "Apache Cassandra is an open source NoSQL distributed database trusted by thousands of companies for scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data.",
+    "features": null,
+    "images": [
+        "ghcr.io\/parkervcp\/yolks:cassandra_java11_python3",
+        "ghcr.io\/parkervcp\/yolks:cassandra_java8_python2"
+    ],
+    "file_denylist": [],
+    "startup": ".\/start.sh",
+    "config": {
+        "files": "{\r\n    \"conf\/jvm-server.options\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#-Xms\": \"-Xms128M\",\r\n            \"#-Xmx\": \"-Xmx{{server.build.memory}}M\"\r\n        }\r\n    },\r\n    \"conf\/jvm11-server.options\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#-Xms\": \"-Xms128M\",\r\n            \"#-Xmx\": \"-Xmx{{server.build.memory}}M\"\r\n        }\r\n    },\r\n    \"conf\/jvm8-server.options\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"#-Xms\": \"-Xms128M\",\r\n            \"#-Xmx\": \"-Xmx{{server.build.memory}}M\"\r\n        }\r\n    },\r\n    \"conf\/cassandra.yaml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"native_transport_port\": \"native_transport_port: {{server.build.default.port}}\",\r\n            \"# rpc_address\": \"rpc_address: 0.0.0.0\",\r\n            \"rpc_address\": \"rpc_address: 0.0.0.0\",\r\n            \"# broadcast_rpc_address\": \"broadcast_rpc_address: {{server.build.default.ip}}\",\r\n            \"broadcast_rpc_address\": \"broadcast_rpc_address: {{server.build.default.ip}}\",\r\n            \"authenticator: AllowAllAuthenticator\": \"authenticator: PasswordAuthenticator\",\r\n            \"authorizer: AllowAllAuthorizer\": \"authorizer: CassandraAuthorizer\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Connected to\"\r\n}",
+        "logs": "{}",
+        "stop": "EXIT;"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\n# Switch to mounted directory\r\ncd \/mnt\/server\r\n# Cleanup previous install if available\r\nfind . -maxdepth 1 ! -name \"conf\" ! -name \"data\" ! -name . -exec rm -rf {} \\;\r\nif [ -d \"conf\" ]; then mv conf conf.bak; fi\r\n# Download and extract Cassandra\r\ncurl -L https:\/\/mirrors.ae-online.de\/apache\/cassandra\/${CASSANDRA_VERSION}\/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz --output cassandra.tar.gz\r\ntar -zxvf cassandra.tar.gz\r\nmv -n apache-cassandra-*\/* .\/\r\nrm -rf cassandra.tar.gz apache-cassandra*\r\n# Create startup script\r\ncurl -L https:\/\/raw.githubusercontent.com\/parkervcp\/eggs\/master\/database\/nosql\/cassandra\/start.sh --output start.sh\r\nchmod 755 start.sh\r\n# Restore custom config\r\nif [ -d \"conf.bak\" ]; then rm -rf conf; mv conf.bak conf; rm -rf conf.bak; fi",
+            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Cassandra Version",
+            "description": "The version of Cassandra to install. By default the latest version is being installed.",
+            "env_variable": "CASSANDRA_VERSION",
+            "default_value": "4.0.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20"
+        },
+        {
+            "name": "Cassandra Username",
+            "description": "The username used when connecting to the started Cassandra, to make a CQLSH available in the Pterodactyl console. This value must be set to an existing user for the egg to work properly. You can create a custom user and enter it here instead of using the default one.",
+            "env_variable": "CASSANDRA_USER",
+            "default_value": "cassandra",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32"
+        },
+        {
+            "name": "Cassandra Password",
+            "description": "The password used when connecting to the started Cassandra, to make a CQLSH available in the Pterodactyl console. This value must be set to the password of the user specified using the \"Cassandra Username\" variable. It is highly recommended to change the password of the default Cassandra user right after the first start. After updating the password on the server, update this variable too for the egg to work properly!",
+            "env_variable": "CASSANDRA_PASSWORD",
+            "default_value": "cassandra",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128"
+        }
+    ]
+}

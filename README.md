@@ -1,4 +1,4 @@
-# Parkers Pterodactyl eggs repo
+﻿# Parkers Pterodactyl eggs repo
 
 I am working on adding a large collection of public eggs for the Pterodactyl community.
 
@@ -83,7 +83,8 @@ If you are reading this it looks like you are looking to add an egg to your serv
 
 ### noSQL
 
-* [MongoDB](/database/nosql/mongodb)
+* [mongoDB](/database/nosql/mongodb)
+* [cassandra](/database/nosql/cassandra)
 * [rethinkdb](/database/nosql/rethinkdb)
 
 ### SQL Databases
