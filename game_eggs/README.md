@@ -128,6 +128,8 @@
 
 [Spacestation 14](spacestation_14)
 
+[Sonic Robo Blast 2](srb2)
+
 [Rimworld](rimworld)
 
 * [Open World](rimworld/open_world)
