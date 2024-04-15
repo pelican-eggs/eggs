@@ -14,6 +14,7 @@ It’s set in infinitely-generated worlds of wide open terrain - icy mountains, 
 
 ## [Java](java) Servers for Java Minecraft
 
+* [Crucible](java/crucible)
 * [Cuberite](java/cuberite)
 * [CurseForge](java/curseforge)
 * [Fabric](java/fabric)
