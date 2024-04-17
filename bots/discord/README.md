@@ -53,6 +53,10 @@ The bot that runs as the pterodactyl `@Support Bot`
 No longer actively developed.
 Was used to test python services.
 
+### [PterodiscordBot](https://github.com/Poseidon281/Pterodactyl-Discord-Bot/tree/main)
+A Python Discord bot with which you can control your Pterodactyl Panel from Discord
+Still being updated. BETA fase right now
+
 ### [RedBot](redbot)
 
 [Cog-Creators/Red-DiscordBot](https://github.com/Cog-Creators/Red-DiscordBot)
