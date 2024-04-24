@@ -22,10 +22,11 @@ To install the SIT client:
 
 Ports required to run the server in a table format.
 
-| Port              | default |
-|-------------------|---------|
-| Game              | 6969    |
-| SIT Mod Websocket | 6970    |
+| Port                 | default |
+|----------------------|---------|
+| Game                 | 6969    |
+| SIT Mod Websocket    | 6970    |
+| Nat Helper WebSocket | 6971    |
 
 ## Server components
 
