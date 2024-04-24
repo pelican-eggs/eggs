@@ -12,20 +12,10 @@ Run the server once to generate the necessary config files for the coop mod, the
 
 An Escape From Tarkov BepInEx module designed to be used with the SIT.Aki-Server-Mod with the ultimate goal of "Offline" Coop
 
-Installation instructions are provided in [the project's README.md file](https://github.com/stayintarkov/StayInTarkov.Client#client-install).
-
-**2024-02-05 Note, please read**:
-> NOTE: As of 05/02/2024 the downgraders used by the manager and in the link provided for the manual install will not downgrade to the correct version and/or fail. Please check the SIT Discord for the latest EFT downgrader
-
-What this means: the user needs to manually downgrade EFT's version with a patch matching the live game's version from ([the SIT discord linked in the SIT repo](https://github.com/stayintarkov/StayInTarkov.Client#support)) in the #downgrade-eft channel.
-
 To install the SIT client:
 - Install the live Escape from Tarkov game from the official launcher.
-- Install the [SIT Manager](https://github.com/stayintarkov/SIT.Manager) from the repo.
-- Copy the live EFT installation to a different location. This copy will be used in the following steps as the SIT game client.
-- Obtain the downgrade patcher from the discord, and extract the contents (`Aki_Patches` directory and `patcher.exe`) to the root folder of the game copy.
-- Run `patcher.exe` to downgrade EFT.
-- Afterwards, follow the instructions after the second bullet point under [`SIT Manager Method`](https://github.com/stayintarkov/StayInTarkov.Client?tab=readme-ov-file#sit-manager-method), where the `SIT\game` directory will be the game copy previously made.
+- Install the [SIT Manager](https://github.com/stayintarkov/SIT.Manager.avalonia) from the repo.
+- Afterwards, follow the instructions here [`SIT Manager Method`](https://docs.stayintarkov.com/en/install.html#).
 
 
 ## Server Ports
