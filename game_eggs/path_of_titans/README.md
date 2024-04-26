@@ -7,7 +7,7 @@
 ## Install notes
 This could be a little buggy or not well tested because made on the fast hand.
 
-You need to open these ports before running the server `7777, 7778, 7779, 7780`. They are require for RCON, seeing your servr on the list and etc.
+You need to open these ports before running the server `7777, 7778, 7779, 7780, 7781`. They are require for RCON, seeing your servr on the list and etc.
 
 # Other documentation
 
@@ -21,10 +21,16 @@ Ports required to run the server in a table format.
 | Port    | default |
 |---------|---------|
 | Game    | 7777    |
+| Query   | 7778    |
+| Rcon    | 7779    |
+| Stats   | 7780    |
 
 ### Notes
 
 <!--Notes about the server ports.-->
 `7777` is the default port, but any port can be used.
+You need to assign to network port `7779` if you want to use RCON
+Also you need to open port `7778` and `7781` for the query, so it can appear on the server list.
+`7780` is Stats port.
 
 
