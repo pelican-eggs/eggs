@@ -18,12 +18,13 @@ If you are experienced the I could reccomend using this documentation website on
 
 Ports required to run the server in a table format.
 
-| Port    | default |
-|---------|---------|
-| Game    | 7777    |
-| Query   | 7778    |
-| Rcon    | 7779    |
-| Stats   | 7780    |
+| Port          | default |
+|---------------|---------|
+| Game          | 7777    |
+| Reserved port | 7778    |
+| Rcon          | 7779    |
+| Stats         | 7780    |
+| Query         | 7781    |
 
 ### Notes
 
@@ -32,5 +33,8 @@ Ports required to run the server in a table format.
 You need to assign to network port `7779` if you want to use RCON
 Also you need to open port `7778` and `7781` for the query, so it can appear on the server list.
 `7780` is Stats port.
+
+`7777, 7781` open for UDP
+`7778, 7779, 7780` both protocols
 
 
