@@ -1,10 +1,10 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT IF YOU DO NOT KNOW WHAT YOU ARE DOING!",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-07T19:39:38+00:00",
+    "exported_at": "2024-04-26T06:39:41+00:00",
     "name": "Path Of Titans",
     "author": "danielivanvladimir.revin@gmail.com",
     "description": null,
@@ -15,10 +15,10 @@
     "file_denylist": [],
     "startup": ".\/AlderonGamesCmd-Linux --game path-of-titans --server true --beta-branch {{BETA_BRANCH}} --auth-token {{AG_AUTH_TOKEN}} --install-dir .\/server\/ && .\/server\/PathOfTitansServer.sh {{SERVER_MAP}}?listen?MaxPlayers={{SERVER_MAX_PLAYERS}} -nullRHI -ServerName={{SERVER_NAME}} -ServerGUID={{SERVER_GUID}} -BranchKey={{BETA_BRANCH}} -Database={{SERVER_DB}} -log",
     "config": {
-        "files": "{}",
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"7778\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server ready\"\r\n}",
         "logs": "{}",
-        "stop": "quit"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
