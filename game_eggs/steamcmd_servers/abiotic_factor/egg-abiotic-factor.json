@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-05-03T22:34:46-07:00",
+    "exported_at": "2024-05-04T00:00:54-07:00",
     "name": "Abiotic Factor",
     "author": "git@robsti.dev",
     "description": "Abiotic Factor is a survival crafting experience for 1-6 players set in the depths of an underground research facility. Caught between paranormal containment failure, a military crusade, and chaos from a dozen realms, the world\u2019s greatest minds must survive against the universe\u2019s biggest threats.",
@@ -15,7 +15,7 @@
         "ghcr.io\/parkervcp\/steamcmd:proton": "ghcr.io\/parkervcp\/steamcmd:proton"
     },
     "file_denylist": [],
-    "startup": "cd \/home\/container\/AbioticFactor\/Binaries\/Win64 ; proton run .\/AbioticFactorServer-Win64-Shipping.exe -log -useperfthreads -NoAsyncLoadingThread -MaxServerPlayers=6 -PORT=${SERVER_PORT} -QueryPort=${QUERY_PORT} -ServerPassword=\"${SERVER_PASSWORD}\" -SteamServerName=\"${SERVER_NAME}\" & tail -c0 -F \/home\/container\/AbioticFactor\/Saved\/Logs\/AbioticFactor.log",
+    "startup": "cd \/home\/container\/AbioticFactor\/Binaries\/Win64 ; proton run .\/AbioticFactorServer-Win64-Shipping.exe -log -useperfthreads -NoAsyncLoadingThread -MaxServerPlayers=${NUM_PLAYERS} -PORT=${SERVER_PORT} -QueryPort=${QUERY_PORT} -ServerPassword=\"${SERVER_PASSWORD}\" -SteamServerName=\"${SERVER_NAME}\" & tail -c0 -F \/home\/container\/AbioticFactor\/Saved\/Logs\/AbioticFactor.log",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"LogInit: Display: Engine is initialized.\"\r\n}",
@@ -67,7 +67,7 @@
             "default_value": "1",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|boolean",
+            "rules": "required|boolean|in:1",
             "field_type": "text"
         },
         {
@@ -88,6 +88,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "[SERVER] Number of Players",
+            "description": "Numbers of allowed player connections",
+            "env_variable": "NUM_PLAYERS",
+            "default_value": "6",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
             "field_type": "text"
         }
     ]
