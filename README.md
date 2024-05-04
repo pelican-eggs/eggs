@@ -236,6 +236,7 @@ If you are reading this it looks like you are looking to add an egg to your serv
 [SteamCMD Servers](game_eggs/steamcmd_servers) These eggs use SteamCMD to install
 
 * [7 Days to Die](game_eggs/steamcmd_servers/7_days_to_die)
+* [Abiotic Factor](game_eggs/steamcmd_servers/abiotic_factor)
 * [ARK: Survival Ascended](game_eggs/steamcmd_servers/ark_survival_ascended)
 * [ARK: Survival Evolved](game_eggs/steamcmd_servers/ark_survival_evolved)
 * [Arma](game_eggs/steamcmd_servers/arma)

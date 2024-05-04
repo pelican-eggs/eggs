@@ -6,6 +6,10 @@ This is a collection of servers that use SteamCMD to install.
 
 [7 Days To Die](7_days_to_die)
 
+## Abiotic Factor
+
+[Abiotic Factor](abiotic_factor/)
+
 ## ARK: Survival Ascended
 
 [ARK: Survival Ascended](ark_survival_ascended)
