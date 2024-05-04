@@ -4,8 +4,6 @@ Abiotic Factor is a survival crafting experience for 1-6 players set in the dept
 
 Official server documentation: https://github.com/DFJacob/AbioticFactorDedicatedServer/wiki
 
-## Configuration
-
 ### Configuration files
 
 |   File    |  Purpose  |   Path  |
