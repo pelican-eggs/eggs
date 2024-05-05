@@ -14,7 +14,8 @@
         "pid_limit"
     ],
     "docker_images": {
-        "ghcr.io\/parkervcp\/yolks:java_8": "ghcr.io\/parkervcp\/yolks:java_8"
+        "ghcr.io\/parkervcp\/yolks:java_8": "ghcr.io\/parkervcp\/yolks:java_8",
+        "ghcr.io\/parkervcp\/yolks:java_11": "ghcr.io\/parkervcp\/yolks:java_11"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
