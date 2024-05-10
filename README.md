@@ -1,6 +1,6 @@
 # Parkers eggs repo
 
-## End of Line / Continuation Message
+## End of Life / Continuation Message
 
 **Important Notice:** This repository will transition to read-only mode starting on May 13, 2024.
 
