@@ -13,8 +13,12 @@
         "java_version"
     ],
     "docker_images": {
-        "Java8": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "Java11": "ghcr.io\/pterodactyl\/yolks:java_11"
+        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
+        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
+        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
+        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
+        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18",
+		"Java 21": "ghcr.io\/pterodactyl\/yolks:java_21"
     },
     "file_denylist": [],
     "startup": "java -server  -Xms128M -Xmx{{SERVER_MEMORY}}M -Dfml.queryResult=confirm -jar forge.jar nogui",
