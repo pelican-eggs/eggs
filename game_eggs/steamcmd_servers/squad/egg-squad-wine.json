@@ -1,0 +1,244 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-13T13:14:46+02:00",
+    "name": "Squad Wine",
+    "author": "parker@parkervcp.com",
+    "description": "Squad is a realism-based military tactical first-person shooter video game developed and published by Canadian indie developer Offworld Industries exclusively through the Steam distribution platform. It is a spiritual successor to the Project Reality modification for Battlefield 2.",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:wine_latest": "ghcr.io\/parkervcp\/yolks:wine_latest"
+    },
+    "file_denylist": [],
+    "startup": "rm \/home\/container\/SquadGame\/Saved\/Logs\/SquadGame.log; wine \/home\/container\/SquadGame\/Binaries\/Win64\/SquadGameServer.exe Port={{SERVER_PORT}} QueryPort={{QUERY_PORT}} beaconport={{BEACON_PORT}} FIXEDMAXTICKRATE={{FIXEDMAXTICKRATE}} -log & SQD_PID=$!; tail -c0 -F \/home\/container\/SquadGame\/Saved\/Logs\/SquadGame.log --pid=$SQD_PID",
+    "config": {
+        "files": "{\r\n    \"SquadGame\/ServerConfig\/Server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"ServerName\": \"ServerName=\\\"{{server.build.env.SERVERNAME}}\\\"\",\r\n            \"MaxPlayers\": \"MaxPlayers={{server.build.env.MAXPLAYERS}}\",\r\n            \"AllowTeamChanges\": \"AllowTeamChanges={{server.build.env.ALLOWTEAMCHANGE}}\",\r\n            \"ShouldAdvertise\": \"ShouldAdvertise={{server.build.env.ADVERTISE}}\",\r\n            \"NumReservedSlots\": \"NumReservedSlots={{server.build.env.RESERVEDSLOTS}}\",\r\n            \"PreventTeamChangeIfUnbalanced\": \"PreventTeamChangeIfUnbalanced={{server.build.env.PTCIU}}\",\r\n            \"EnforceTeamBalance\": \"EnforceTeamBalance={{server.build.env.TEAMBAL}}\",\r\n            \"RecordDemos\": \"RecordDemos={{server.build.env.RECORDDEMOS}}\",\r\n            \"TKAutoKickEnabled\": \"TKAutoKickEnabled={{server.build.env.TKAUTOKICKENABLED}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Everything Done\"\r\n}",
+        "logs": "{}",
+        "stop": "^^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# This script installs the Squad game server using Wine and SteamCMD, as well as creates a start.sh script.\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n\r\nif test -f \"\/mnt\/server\/steamapps\/workshop\/appworkshop_393380.acf\"; then\r\n    # Remove the Steam workshop file to prevent conflict with mods specified in the variables tab\r\n    rm \/mnt\/server\/steamapps\/workshop\/appworkshop_393380.acf\r\nfi\r\n\r\n\r\n# Address ownership issues which can cause SteamCMD to fail, especially when running as root\r\nchown -R root:root \/mnt\r\n\r\n# Set the HOME environment variable to the server directory\r\nexport HOME=\/mnt\/server\r\n\r\n# Just to be safe\r\nmkdir -p \/mnt\/server\/SquadGame\/Plugins\/Mods\/\r\n\r\n# Download specified workshop items using a list from the `WORKSHOP_ITEMS` environment variable\r\n.\/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \/mnt\/server +login anonymous $(IFS=','; for item in $WORKSHOP_ITEMS; do echo \"+workshop_download_item 393380 ${item}\"; done) +quit\r\n# Move downloaded mods to the appropriate directory\r\nmv -f \/mnt\/server\/steamapps\/workshop\/content\/393380\/* \/mnt\/server\/SquadGame\/Plugins\/Mods\/\r\n\r\n\r\n\r\n# Inform user of installation completion\r\necho \"-----------------------------------------\"\r\necho \"Installation and script setup completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/parkervcp\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Download Workshops Items",
+            "description": "Workshop file ids separated by a comma \",\" (1111111,222222) \r\nReinstall Required to install mods",
+            "env_variable": "WORKSHOP_ITEMS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Beacon Port",
+            "description": "Beacon port for your Squad server.",
+            "env_variable": "BEACON_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "Sets the maximum number of players.",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "80",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric|between:1,100",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "The name for the server in the server list",
+            "env_variable": "SERVERNAME",
+            "default_value": "Squad Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Allowteamchange",
+            "description": "Allow players to change teams ( true \\\/ false )",
+            "env_variable": "ALLOWTEAMCHANGE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "TKAutoKick",
+            "description": "teamkill system if you like enable by ( true \\\/ false )",
+            "env_variable": "TKAUTOKICKENABLED",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Tickrate",
+            "description": "your numbers of max tickrate",
+            "env_variable": "FIXEDMAXTICKRATE",
+            "default_value": "50",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27165",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "Advertise Server",
+            "description": "Have the server report to the public server list ( true \/ false )",
+            "env_variable": "ADVERTISE",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Reserved Slots",
+            "description": "The number of reserved slots for admins \/ mods",
+            "env_variable": "RESERVEDSLOTS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Prevent Team Change If Unbalanced",
+            "description": "This will prevent players from changing teams if they're already unbalanced ( true \/ false )",
+            "env_variable": "PTCIU",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Enforce Team Balance",
+            "description": "This will FORCE team balance if the teams are too uneven ( true \/ false )",
+            "env_variable": "TEAMBAL",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|in:true,false",
+            "field_type": "text"
+        },
+        {
+            "name": "Record Demos",
+            "description": "This will record demos of the players ( true \/ false )",
+            "env_variable": "RECORDDEMOS",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "WINDOWS INSTALL",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:1",
+            "field_type": "text"
+        },
+        {
+            "name": "STEAM USER",
+            "description": "Specify Steam User or leave it Blank for anonymous",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "STEAM PASSWORD",
+            "description": "Specify Steam Password or leave it Blank for anonymous",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "STEAM AUTH",
+            "description": "Specify Steam AUTH for 2FA if enabled or leave it Blank for anonymous",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:30|nullable",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS APPID",
+            "description": "steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "403240",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:403240",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS BETAID",
+            "description": "Beta branch of a steam app. Leave blank to install normal branch",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "SRCDS BETAPASS",
+            "description": "password for a beta branch should one be required during private or closed testing phases.. Leave blank for no password.",
+            "env_variable": "SRCDS_BETAPASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "INSTALL FLAGS",
+            "description": "Any additional SteamCMD  flags to pass during install.. Keep in mind that steamcmd auto update process in the docker image might overwrite or ignore these when it performs update on server boot.",
+            "env_variable": "INSTALL_FLAGS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|max:30",
+            "field_type": "text"
+        }
+    ]
+}
