@@ -34,6 +34,14 @@ ___
             <a href="https://github.com/parkervcp/eggs/commits?author=IAmSilK" title="Contributor">💡</a>
         </td>
         <td align="center">
+            <a href="https://github.com/Moondarker">
+                <img src="https://avatars.githubusercontent.com/u/4098364" width="50px;" alt=""/><br /><sub><b>Moondarker</b></sub>
+            </a>
+            <br />
+            <a href="https://github.com/parkervcp/eggs/commits?author=Moondarker" title="Codes">💻</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=Moondarker" title="Contributor">💡</a>
+        </td>
+        <td align="center">
             <a href="https://github.com/Yomanz">
                 <img src="https://avatars.githubusercontent.com/u/5119107" width="50px;" alt=""/><br /><sub><b>Daave</b></sub>
             </a>
